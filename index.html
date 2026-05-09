@@ -237,6 +237,162 @@
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
             transition-duration: 150ms;
         }
+        .fcg-dropdown-nav {
+            background: rgba(255, 255, 255, 0.86);
+            border-color: rgba(15, 17, 20, 0.1);
+            box-shadow: 0 18px 45px rgba(15, 17, 20, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        html[data-theme="dark"] .fcg-dropdown-nav {
+            background: rgba(8, 8, 5, 0.82);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
+        }
+        .fcg-nav-shell {
+            background: rgba(15, 17, 20, 0.04);
+            border: 1px solid rgba(15, 17, 20, 0.08);
+            border-radius: 999px;
+            padding: 3px;
+        }
+        html[data-theme="dark"] .fcg-nav-shell {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .fcg-nav-trigger {
+            color: var(--color-muted);
+            border-radius: 999px;
+            position: relative;
+            transition: color 240ms ease, background-color 240ms ease;
+        }
+        .fcg-dropdown-item::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 12px;
+        }
+        .fcg-dropdown-item:hover .fcg-nav-trigger {
+            color: var(--color-fg);
+            background: rgba(249, 115, 22, 0.1);
+        }
+        .fcg-nav-chevron {
+            transition: transform 180ms ease;
+        }
+        .fcg-dropdown-item:hover .fcg-nav-chevron {
+            transform: rotate(180deg);
+        }
+        .fcg-dropdown-panel {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px) scale(0.98);
+            transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 28px 70px rgba(15, 17, 20, 0.18);
+            min-width: max-content;
+        }
+        html[data-theme="dark"] .fcg-dropdown-panel {
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.36);
+        }
+        .fcg-dropdown-item:hover .fcg-dropdown-panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .fcg-menu-icon {
+            border-color: var(--color-border);
+            color: var(--color-fg);
+            transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+        }
+        .fcg-menu-link:hover .fcg-menu-icon {
+            background: #F97316;
+            border-color: #F97316;
+            color: #ffffff;
+        }
+        .fcg-menu-link p {
+            color: var(--color-fg);
+        }
+        .fcg-menu-link span {
+            color: var(--color-muted);
+            transition: color 180ms ease;
+        }
+        .fcg-menu-link:hover span {
+            color: var(--color-fg);
+        }
+        .fcg-products-mega {
+            width: min(92vw, 980px);
+            max-width: calc(100vw - 48px);
+            padding: 28px;
+        }
+        .fcg-products-mega-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
+        }
+        .fcg-products-group {
+            min-width: 0;
+        }
+        .fcg-products-group-heading {
+            color: var(--color-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        .fcg-products-group-title {
+            color: var(--color-fg);
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .fcg-products-list {
+            display: grid;
+            gap: 16px;
+        }
+        .fcg-products-link {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            min-width: 0;
+            text-decoration: none;
+        }
+        .fcg-products-link p {
+            color: var(--color-fg);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.25;
+            margin: 0 0 3px;
+        }
+        .fcg-products-link span {
+            color: var(--color-muted);
+            display: block;
+            font-size: 12px;
+            line-height: 1.35;
+            max-width: 210px;
+            transition: color 180ms ease;
+        }
+        .fcg-products-link:hover span {
+            color: var(--color-fg);
+        }
+        .fcg-products-link:hover .fcg-menu-icon {
+            background: #F97316;
+            border-color: #F97316;
+            color: #ffffff;
+        }
+        @media (max-width: 900px) {
+            .fcg-products-mega {
+                width: min(92vw, 680px);
+            }
+            .fcg-products-mega-grid {
+                grid-template-columns: 1fr;
+            }
+        }
         @keyframes marine-pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
@@ -993,24 +1149,157 @@
     </script>
 
     <!-- ===== MARINE HEADER SECTION ===== -->
-    <nav class="marine-header-section fixed top-0 z-50 w-full border-b" style="border-color: var(--color-border); background-color: var(--color-bg);">
-        <div class="w-full px-6 md:px-12 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-12">
+    <nav class="marine-header-section fcg-dropdown-nav fixed top-0 z-50 w-full border-b">
+        <div class="w-full px-4 md:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-8">
                 <!-- Logo -->
                 <div class="flex items-center" style="color: var(--color-fg);">
                     <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 28px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="currentColor"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="currentColor"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="currentColor"/></svg>
                 </div>
 
-                <!-- Desktop Navigation Links -->
-                <div class="hidden md:flex items-center gap-8 text-sm font-normal" style="color: var(--color-fg);">
-                    <a href="#services" class="transition-colors" style="color: var(--color-fg);" onmouseover="this.style.color='var(--color-muted)'" onmouseout="this.style.color='var(--color-fg)'">About</a>
-                    <a href="#experience" class="transition-colors" style="color: var(--color-fg);" onmouseover="this.style.color='var(--color-muted)'" onmouseout="this.style.color='var(--color-fg)'">Our Products</a>
-                    <a href="#process" class="transition-colors" style="color: var(--color-fg);" onmouseover="this.style.color='var(--color-muted)'" onmouseout="this.style.color='var(--color-fg)'">Technology</a>
-                </div>
+                <!-- Desktop Dropdown Navigation -->
+                <ul class="fcg-nav-shell hidden md:flex items-center gap-0 text-sm font-normal">
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>About</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
+                            <div class="flex gap-9 overflow-hidden">
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">FCG Group</h3>
+                                    <div class="space-y-6">
+                                        <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:global-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Asian travel network</p><span class="text-xs">Supply depth across key regional markets</span></div>
+                                        </a>
+                                        <a href="#h-scroll-section" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Operator infrastructure</p><span class="text-xs">Tools built around real travel workflows</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Markets</h3>
+                                    <div class="space-y-6">
+                                        <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Regional coverage</p><span class="text-xs">Singapore, Hong Kong, Shenzhen and more</span></div>
+                                        </a>
+                                        <a href="#expansion-container" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:compass-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Expansion model</p><span class="text-xs">How FCG scales supply and operations</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>Products</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel fcg-products-mega absolute left-0 top-full mt-2 rounded-2xl">
+                            <div class="fcg-products-mega-grid">
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For TMCs & operators</h3>
+                                    <div class="fcg-products-group-title">Connect</div>
+                                    <div class="fcg-products-list">
+                                        <a href="#capabilities" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:cpu-bolt-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>AgreeEase</p><span>AI hotel sourcing and RFP workflows</span></div>
+                                        </a>
+                                        <a href="#h-scroll-section" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Atlas</p><span>TMC operating system for bookings and service</span></div>
+                                        </a>
+                                        <a href="#h-scroll-section" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:case-round-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Allbon</p><span>Corporate booking platform for business travel</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For travel suppliers</h3>
+                                    <div class="fcg-products-group-title">Operate</div>
+                                    <div class="fcg-products-list">
+                                        <a href="#capabilities" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:box-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Travakey</p><span>Resource APIs and supplier connectivity</span></div>
+                                        </a>
+                                        <a href="#expansion-container" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:chart-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Smart Distribution</p><span>Rate control and marketplace access</span></div>
+                                        </a>
+                                        <a href="#capabilities" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:card-transfer-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Payment Solutions</p><span>Secure settlement and processing tools</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For mapping & optimization</h3>
+                                    <div class="fcg-products-group-title">Experience</div>
+                                    <div class="fcg-products-list">
+                                        <a href="#capabilities" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Hotel Mapping</p><span>Clean, standardized property records</span></div>
+                                        </a>
+                                        <a href="#h-scroll-section" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:bed-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Room Mapping</p><span>Full clarity across room types and suppliers</span></div>
+                                        </a>
+                                        <a href="#expansion-container" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:magic-stick-3-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Content Optimization</p><span>Enrich, standardize, and improve conversion</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>Technology</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
+                            <div class="flex gap-9 overflow-hidden">
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Platform</h3>
+                                    <div class="space-y-6">
+                                        <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:shield-check-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Reliable workflows</p><span class="text-xs">Structured processes for sourcing teams</span></div>
+                                        </a>
+                                        <a href="#h-scroll-section" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:eye-scan-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Data visibility</p><span class="text-xs">See where requests and supply stand</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Automation</h3>
+                                    <div class="space-y-6">
+                                        <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:rocket-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Faster responses</p><span class="text-xs">Reduce manual sourcing and follow-ups</span></div>
+                                        </a>
+                                        <a href="#expansion-container" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:palette-round-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Custom workflows</p><span class="text-xs">Adapt the system around real teams</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
 
             <!-- Right: Status & Toggle -->
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-4 md:gap-6">
                 <!-- System Status Badge -->
                 <div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono tracking-tight" style="background-color: rgba(249, 115, 22, 0.1); border: 1px solid rgba(249, 115, 22, 0.2); color: #F97316;">
                     <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background-color: #F97316;"></span>
@@ -1026,6 +1315,9 @@
                         <div class="absolute left-1 top-1 w-3 h-3 bg-zinc-500 rounded-full peer-checked:translate-x-5 peer-checked:bg-orange-500 transition-all shadow-[0_0_8px_rgba(249,115,22,0.4)] peer-checked:shadow-[0_0_12px_rgba(249,115,22,0.8)]"></div>
                     </div>
                 </label>
+                <a href="#capabilities" class="md:hidden w-10 h-10 rounded-full border flex items-center justify-center" style="border-color: var(--color-border); color: var(--color-fg);" aria-label="Open page sections">
+                    <iconify-icon icon="solar:hamburger-menu-linear" width="20" height="20"></iconify-icon>
+                </a>
             </div>
         </div>
     </nav>
