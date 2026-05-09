@@ -898,7 +898,7 @@
         };
 
         const CarCard = ({ name, brand, image, price, hp, mileage, location }) => (
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: "-50px" }} className="min-w-[320px] md:min-w-[400px] w-full md:w-[400px] h-[520px] relative rounded-[2rem] overflow-hidden group cursor-pointer shrink-0 snap-center border border-white/10" style={{backgroundColor: '#050505'}}>
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: "-50px" }} className="min-w-[320px] md:min-w-[400px] w-full md:w-[400px] h-[520px] relative rounded-[2rem] overflow-hidden group cursor-pointer shrink-0 snap-center" style={{backgroundColor: 'var(--color-card, #18181b)'}}>
                 <div className="absolute inset-0 flex items-start justify-center pt-8 group-hover:scale-105 transition-transform duration-700 ease-out" dangerouslySetInnerHTML={{__html: image}} />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" style={{background: 'linear-gradient(to top, var(--color-bg) 30%, transparent 70%)'}}></div>
                 <div className="absolute top-6 left-6 right-6 flex justify-between items-center z-10">
