@@ -889,6 +889,26 @@
             background-color: rgba(0, 0, 0, 0.04) !important;
         }
 
+        .partner-plus::before,
+        .partner-plus::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            background: #0F1114;
+            transform: translate(-50%, -50%);
+        }
+
+        .partner-plus::before {
+            width: 18px;
+            height: 1px;
+        }
+
+        .partner-plus::after {
+            width: 1px;
+            height: 18px;
+        }
+
         /* ===== END GLOBAL LIGHT MODE OVERRIDES ===== */
     </style>
 </head>
@@ -953,6 +973,64 @@
                 <span className="text-accent uppercase text-xs tracking-wider font-normal">{text}</span>
             </div>
         );
+
+        const PartnerPlus = ({ className = "" }) => (
+            <span className={`partner-plus absolute z-10 h-6 w-6 pointer-events-none ${className}`} aria-hidden="true"></span>
+        );
+
+        const PartnerLogoCard = ({ logo, className = "", children }) => (
+            <div className={`relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 ${className}`}>
+                <img
+                    alt={logo.alt}
+                    className="pointer-events-none max-h-6 max-w-[140px] select-none object-contain md:max-h-7"
+                    src={logo.src}
+                />
+                {children}
+            </div>
+        );
+
+        const PartnerGrid = () => {
+            const logos = [
+                { src: "https://svgl.app/library/nvidia-wordmark-light.svg", alt: "Nvidia Logo" },
+                { src: "https://svgl.app/library/supabase_wordmark_light.svg", alt: "Supabase Logo" },
+                { src: "https://svgl.app/library/github_wordmark_light.svg", alt: "GitHub Logo" },
+                { src: "https://svgl.app/library/openai_wordmark_light.svg", alt: "OpenAI Logo" },
+                { src: "https://svgl.app/library/turso-wordmark-light.svg", alt: "Turso Logo" },
+                { src: "https://svgl.app/library/clerk-wordmark-light.svg", alt: "Clerk Logo" },
+                { src: "https://svgl.app/library/claude-ai-wordmark-icon_light.svg", alt: "Claude AI Logo" },
+                { src: "https://svgl.app/library/vercel_wordmark.svg", alt: "Vercel Logo" }
+            ];
+
+            return (
+                <section className="relative z-10 -mt-24 bg-white pt-10 pb-10 text-[#0F1114] md:-mt-36 md:pt-12 md:pb-16">
+                    <div className="px-6 pb-8 text-center md:px-12 md:pb-10">
+                        <h2 className="text-2xl font-medium tracking-tight text-neutral-500 md:text-3xl">
+                            Companies we <span className="text-[#0F1114]">collaborate</span> with.
+                        </h2>
+                    </div>
+
+                    <div className="border-y border-[#DADDE1]">
+                        <div className="relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x md:border-[#DADDE1]">
+                            <PartnerLogoCard logo={logos[0]} className="border-r border-b border-[#DADDE1] bg-[#F4F4F4]">
+                                <PartnerPlus className="-right-3 -bottom-3" />
+                            </PartnerLogoCard>
+                            <PartnerLogoCard logo={logos[1]} className="border-b border-[#DADDE1] md:border-r" />
+                            <PartnerLogoCard logo={logos[2]} className="border-r border-b border-[#DADDE1] bg-[#F4F4F4]">
+                                <PartnerPlus className="-right-3 -bottom-3" />
+                                <PartnerPlus className="-left-3 -bottom-3 hidden md:block" />
+                            </PartnerLogoCard>
+                            <PartnerLogoCard logo={logos[3]} className="border-b border-[#DADDE1]" />
+                            <PartnerLogoCard logo={logos[4]} className="border-r border-b border-[#DADDE1] md:border-b-0">
+                                <PartnerPlus className="-right-3 -bottom-3 md:hidden" />
+                            </PartnerLogoCard>
+                            <PartnerLogoCard logo={logos[5]} className="border-b border-[#DADDE1] bg-[#F4F4F4] md:border-r md:border-b-0" />
+                            <PartnerLogoCard logo={logos[6]} className="border-r border-[#DADDE1]" />
+                            <PartnerLogoCard logo={logos[7]} className="bg-[#F4F4F4]" />
+                        </div>
+                    </div>
+                </section>
+            );
+        };
 
         const Navbar = () => (
             <motion.nav
@@ -1136,6 +1214,7 @@
         function App() {
             return (
                 <div className="min-h-screen bg-background flex flex-col">
+                    <PartnerGrid />
                     <Hero />
                     <About />
                     <FeaturedModels />
