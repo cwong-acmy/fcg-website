@@ -1,0 +1,2613 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Booking Tool - Connect AI to Live Inventory | FCG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Marine Header Fonts (system monospace, no external import needed) -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#080805',
+                        foreground: '#ffffff',
+                        accent: '#F97316',
+                        card: '#121212',
+                        border: '#2A2A2A',
+                        muted: '#888888'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Sora', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --color-bg: #080805;
+            --color-fg: #ffffff;
+            --color-card: #121212;
+            --color-border: #2A2A2A;
+            --color-muted: #888888;
+        }
+
+        html[data-theme="light"] {
+            --color-bg: #FFFFFF;
+            --color-fg: #0F1114;
+            --color-accent: #F97316;
+            --color-card: #F3F4F6;
+            --color-border: #D1D5DB;
+            --color-muted: #6B7280;
+        }
+
+        ::selection {
+            background: rgba(249, 115, 22, 0.15);
+            color: inherit;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Theme-aware color overrides */
+        html[data-theme="light"] .text-white {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-400 {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-500 {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-300 {
+            color: var(--color-fg) !important;
+        }
+
+        /* Logo theme styling */
+        img[alt="agreeease"] {
+            filter: brightness(1);
+        }
+
+        html[data-theme="light"] img[alt="agreeease"] {
+            filter: brightness(0) saturate(100%);
+        }
+
+        html[data-theme="light"] .bg-white {
+            background-color: var(--color-bg) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-950 {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .bg-zinc-200 {
+            background-color: var(--color-card) !important;
+        }
+
+        html[data-theme="light"] .bg-black\/5 {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .font-mono-jb {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            animation: gridMove 20s linear infinite;
+        }
+        .bg-grid-small {
+            background-size: 10px 10px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .text-shimmer {
+            background: linear-gradient(to right, #64748b 20%, #ffffff 40%, #ffffff 60%, #64748b 80%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+        .anim-bar-1 { animation: barPulse1 2s ease-in-out infinite alternate; }
+        .anim-bar-2 { animation: barPulse2 2.5s ease-in-out infinite alternate; }
+        .anim-bar-3 { animation: barPulse3 1.8s ease-in-out infinite alternate; }
+        .anim-bar-4 { animation: barPulse4 2.2s ease-in-out infinite alternate; }
+        .anim-bar-5 { animation: barPulse5 2.7s ease-in-out infinite alternate; }
+        @keyframes barPulse1 { 0% { height: 30%; } 100% { height: 70%; } }
+        @keyframes barPulse2 { 0% { height: 60%; } 100% { height: 95%; } }
+        @keyframes barPulse3 { 0% { height: 40%; } 100% { height: 80%; } }
+        @keyframes barPulse4 { 0% { height: 75%; } 100% { height: 45%; } }
+        @keyframes barPulse5 { 0% { height: 50%; } 100% { height: 85%; } }
+        .layer-float-1 { animation: floatLayer 4s ease-in-out infinite; }
+        .layer-float-2 { animation: floatLayer 4s ease-in-out infinite 0.5s; }
+        .layer-float-3 { animation: floatLayer 4s ease-in-out infinite 1s; }
+        @keyframes floatLayer {
+            0%, 100% { transform: translateY(0) rotateX(45deg) rotateZ(-45deg); }
+            50% { transform: translateY(-10px) rotateX(45deg) rotateZ(-45deg); }
+        }
+        .dot-grid {
+            background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 12px 12px;
+        }
+
+        /* ===== MARINE HEADER SECTION STYLES ===== */
+        .marine-header-section {
+            font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+        }
+        .marine-header-section .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .surface-glass {
+            background: rgba(24, 24, 27, 0.3);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+        html[data-theme="light"] .surface-glass {
+            background: rgba(243, 244, 246, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.05), 0 20px 40px -15px rgba(0, 0, 0, 0.12);
+        }
+        .marine-transition-colors {
+            transition-property: color, background-color, border-color;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        .marine-transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        .fcg-dropdown-nav {
+            background: rgba(255, 255, 255, 0.86);
+            border-color: rgba(15, 17, 20, 0.1);
+            box-shadow: 0 18px 45px rgba(15, 17, 20, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        html[data-theme="dark"] .fcg-dropdown-nav {
+            background: rgba(8, 8, 5, 0.82);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
+        }
+        .fcg-nav-shell {
+            background: rgba(15, 17, 20, 0.04);
+            border: 1px solid rgba(15, 17, 20, 0.08);
+            border-radius: 999px;
+            padding: 3px;
+        }
+        html[data-theme="dark"] .fcg-nav-shell {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .fcg-nav-trigger {
+            color: var(--color-muted);
+            border-radius: 999px;
+            position: relative;
+            transition: color 240ms ease, background-color 240ms ease;
+        }
+        .fcg-dropdown-item::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 12px;
+        }
+        .fcg-dropdown-item:hover .fcg-nav-trigger {
+            color: var(--color-fg);
+            background: rgba(249, 115, 22, 0.1);
+        }
+        .fcg-nav-chevron {
+            transition: transform 180ms ease;
+        }
+        .fcg-dropdown-item:hover .fcg-nav-chevron {
+            transform: rotate(180deg);
+        }
+        .fcg-dropdown-panel {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px) scale(0.98);
+            transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 28px 70px rgba(15, 17, 20, 0.18);
+            min-width: max-content;
+        }
+        html[data-theme="dark"] .fcg-dropdown-panel {
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.36);
+        }
+        .fcg-dropdown-item:hover .fcg-dropdown-panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .fcg-menu-icon {
+            border-color: var(--color-border);
+            color: var(--color-fg);
+            transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+        }
+        .fcg-menu-link:hover .fcg-menu-icon {
+            background: #F97316;
+            border-color: #F97316;
+            color: #ffffff;
+        }
+        .fcg-menu-link p {
+            color: var(--color-fg);
+        }
+        .fcg-menu-link span {
+            color: var(--color-muted);
+            transition: color 180ms ease;
+        }
+        .fcg-menu-link:hover span {
+            color: var(--color-fg);
+        }
+        .fcg-products-mega {
+            width: min(92vw, 980px);
+            max-width: calc(100vw - 48px);
+            padding: 28px;
+        }
+        .fcg-products-mega-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
+        }
+        .fcg-products-group {
+            min-width: 0;
+        }
+        .fcg-products-group-heading {
+            color: var(--color-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        .fcg-products-group-title {
+            color: var(--color-fg);
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .fcg-products-list {
+            display: grid;
+            gap: 16px;
+        }
+        .fcg-products-link {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            min-width: 0;
+            text-decoration: none;
+        }
+        .fcg-products-link p {
+            color: var(--color-fg);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.25;
+            margin: 0 0 3px;
+        }
+        .fcg-products-link span {
+            color: var(--color-muted);
+            display: block;
+            font-size: 12px;
+            line-height: 1.35;
+            max-width: 210px;
+            transition: color 180ms ease;
+        }
+        .fcg-products-link:hover span {
+            color: var(--color-fg);
+        }
+        .fcg-products-link:hover .fcg-menu-icon {
+            background: #F97316;
+            border-color: #F97316;
+            color: #ffffff;
+        }
+        @media (max-width: 900px) {
+            .fcg-products-mega {
+                width: min(92vw, 680px);
+            }
+            .fcg-products-mega-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @keyframes marine-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .marine-animate-pulse {
+            animation: marine-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        /* ===== END MARINE HEADER SECTION STYLES ===== */
+
+        /* ===== MARINE DATA STREAM STYLES ===== */
+        .marine-animate-marquee {
+            animation: marquee 20s linear infinite;
+            will-change: transform;
+        }
+        /* ===== END MARINE DATA STREAM STYLES ===== */
+
+        /* ===== MARINE HERO SECTION STYLES ===== */
+        .marine-hero-section {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+        }
+        .marine-hero-section .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        @keyframes sweep {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes ping-slow {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(2); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; will-change: transform; }
+        .animate-sweep { animation: sweep 4s linear infinite; transform-origin: center; will-change: transform; }
+        .animate-ping-slow { animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite; will-change: transform, opacity; }
+        /* ===== END MARINE HERO SECTION STYLES ===== */
+
+        /* ===== GLOBAL LIGHT MODE OVERRIDES ===== */
+
+        /* --- 1. CORE BACKGROUND & TEXT PRIMITIVES --- */
+        html[data-theme="light"] .marine-hero-section,
+        html[data-theme="light"] .bg-background {
+            background-color: var(--color-bg) !important;
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .bg-\[\#000\],
+        html[data-theme="light"] .bg-\[\#0a0a0a\],
+        html[data-theme="light"] .bg-\[\#050505\],
+        html[data-theme="light"] .bg-black {
+            background-color: #FFFFFF !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-900 {
+            background-color: #F3F4F6 !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-950\/40 {
+            background-color: rgba(243, 244, 246, 0.5) !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-900\/90 {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-950\/80 {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-900\/30 {
+            background-color: rgba(243, 244, 246, 0.4) !important;
+        }
+
+        html[data-theme="light"] .bg-white\/5,
+        html[data-theme="light"] .bg-white\/\[0\.01\],
+        html[data-theme="light"] .bg-white\/\[0\.02\],
+        html[data-theme="light"] .bg-white\/\[0\.03\],
+        html[data-theme="light"] .bg-white\/\[0\.04\],
+        html[data-theme="light"] .bg-white\/\[0\.05\] {
+            background-color: rgba(0, 0, 0, 0.06) !important;
+        }
+
+        html[data-theme="light"] .bg-black\/50,
+        html[data-theme="light"] .bg-black\/80,
+        html[data-theme="light"] .bg-black\/45 {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        /* Text color overrides: white -> dark */
+        html[data-theme="light"] .text-white {
+            color: #111827 !important;
+        }
+
+        html[data-theme="light"] .text-zinc-950 {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-400,
+        html[data-theme="light"] .text-zinc-500 {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .text-zinc-300 {
+            color: #374151 !important;
+        }
+
+        html[data-theme="light"] .text-neutral-100,
+        html[data-theme="light"] .text-neutral-200,
+        html[data-theme="light"] .text-neutral-300 {
+            color: #111827 !important;
+        }
+
+        html[data-theme="light"] .text-neutral-400 {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .text-neutral-500 {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .text-neutral-600 {
+            color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .text-neutral-800 {
+            color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] .text-white\/10,
+        html[data-theme="light"] .text-white\/20 {
+            color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        html[data-theme="light"] .text-white\/30 {
+            color: rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .text-white\/50 {
+            color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .text-white\/80 {
+            color: #4B5563 !important;
+        }
+
+        html[data-theme="light"] .text-white\/90 {
+            color: #374151 !important;
+        }
+
+        /* --- 2. BORDER OVERRIDES --- */
+        html[data-theme="light"] .border-white\/5,
+        html[data-theme="light"] .border-white\/10,
+        html[data-theme="light"] .border-white\/\[0\.05\],
+        html[data-theme="light"] .border-white\/\[0\.08\],
+        html[data-theme="light"] .border-white\/15,
+        html[data-theme="light"] .border-white\/20 {
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .border-neutral-800,
+        html[data-theme="light"] .border-neutral-800\/50,
+        html[data-theme="light"] .border-neutral-800\/60,
+        html[data-theme="light"] .border-neutral-900,
+        html[data-theme="light"] .border-neutral-700 {
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .hover\:border-white\/20:hover,
+        html[data-theme="light"] .hover\:border-white\/30:hover {
+            border-color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .border-t.border-white\/10 {
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .border-b.border-white\/10 {
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .border-b.border-white\/5 {
+            border-color: #E5E7EB !important;
+        }
+
+        /* --- 3. GLASS PANELS --- */
+        html[data-theme="light"] .glass-panel {
+            background: rgba(0, 0, 0, 0.05) !important;
+            border: 1px solid rgba(0, 0, 0, 0.12) !important;
+        }
+
+        html[data-theme="light"] .surface-glass {
+            background: rgba(243, 244, 246, 0.9) !important;
+            border: 1px solid rgba(0, 0, 0, 0.12) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 20px 40px -15px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        /* --- 4. GRID PATTERNS --- */
+        html[data-theme="light"] .bg-grid {
+            background-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px) !important;
+        }
+
+        html[data-theme="light"] .bg-grid-small {
+            background-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px) !important;
+        }
+
+        html[data-theme="light"] .dot-grid {
+            background-image: radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px) !important;
+        }
+
+        /* --- 5. TEXT SHIMMER --- */
+        html[data-theme="light"] .text-shimmer {
+            background: linear-gradient(to right, #94a3b8 20%, #0F1114 40%, #0F1114 60%, #94a3b8 80%) !important;
+            background-size: 200% auto !important;
+            color: transparent !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+        }
+
+        /* --- 6. MARINE HERO: GLOBE LIGHT MODE (colors inverted via JS) --- */
+
+        /* --- 7. MARINE DATA STREAM --- */
+        html[data-theme="light"] .from-zinc-950 {
+            --tw-gradient-from: #F9FAFB !important;
+        }
+
+        /* --- 8. NAVBAR BUTTONS --- */
+        html[data-theme="light"] button.bg-white {
+            background-color: #111827 !important;
+            color: #FFFFFF !important;
+        }
+
+        html[data-theme="light"] button.hover\:bg-neutral-200:hover,
+        html[data-theme="light"] button.hover\:bg-zinc-200:hover {
+            background-color: #374151 !important;
+        }
+
+        html[data-theme="light"] .hover\:text-white\/70:hover {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .hover\:bg-white\/10:hover {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        /* --- 9. SHADOWS --- */
+        html[data-theme="light"] .shadow-2xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .shadow-xl {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        html[data-theme="light"] .shadow-inner {
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_0_30px_rgba\(255\,255\,255\,0\.2\)\] {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_0_32px_rgba\(255\,255\,255\,0\.1\)\] {
+            box-shadow: 0 0 32px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_0_10px_\#fff\] {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_0_20px_rgba\(255\,255\,255\,0\.2\)\] {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_10px_30px_rgba\(0\,0\,0\,0\.5\)\] {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[-30px_30px_50px_rgba\(0\,0\,0\,0\.8\)\] {
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        /* --- 10. SCHEMA CARD ENHANCED (HORIZONTAL SCROLL) --- */
+        html[data-theme="light"] .schema-card-enhanced {
+            background-color: #FFFFFF !important;
+            background-image: linear-gradient(#FFFFFF, #FFFFFF), linear-gradient(to bottom right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.06)) !important;
+        }
+
+        html[data-theme="light"] .schema-card-enhanced:hover {
+            background-color: #F9FAFB !important;
+            background-image: linear-gradient(#F9FAFB, #F9FAFB), linear-gradient(to bottom right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.12)) !important;
+        }
+
+        html[data-theme="light"] .schema-card-enhanced > span.text-6xl {
+            color: rgba(0, 0, 0, 0.06) !important;
+        }
+
+        html[data-theme="light"] .schema-card-enhanced:hover > span.text-6xl {
+            color: rgba(0, 0, 0, 0.12) !important;
+        }
+
+        html[data-theme="light"] #h-scroll-section,
+        html[data-theme="light"] #h-scroll-section > .sticky {
+            background-color: #FFFFFF !important;
+        }
+
+        html[data-theme="light"] #h-scroll-progress {
+            background-color: #111827 !important;
+        }
+
+        /* --- 11. SCHEMA ANIMATION COLORS --- */
+        html[data-theme="light"] .schema-vignette {
+            background: radial-gradient(circle at center,
+                rgba(255, 255, 255, 0) 30%,
+                rgba(255, 255, 255, 0.18) 58%,
+                rgba(255, 255, 255, 0.42) 80%,
+                rgba(255, 255, 255, 0.72) 100%) !important;
+        }
+
+        html[data-theme="light"] .schema-node-clean {
+            background: rgba(15, 17, 20, 0.8) !important;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .schema-pulse-dot,
+        html[data-theme="light"] .schema-pulse-dot-pos {
+            background: #374151 !important;
+        }
+
+        /* --- 12. BACKGROUND COLOR UTILITIES --- */
+        html[data-theme="light"] .bg-white\/10 {
+            background-color: rgba(0, 0, 0, 0.07) !important;
+        }
+
+        html[data-theme="light"] .bg-white\/20 {
+            background-color: #E5E7EB !important;
+        }
+
+        html[data-theme="light"] .bg-white\/40 {
+            background-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .bg-white\/60 {
+            background-color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .bg-white\/80 {
+            background-color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-800 {
+            background-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-800\/50 {
+            background-color: rgba(209, 213, 219, 0.5) !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-800\/30 {
+            background-color: #E5E7EB !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-500 {
+            background-color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-600 {
+            background-color: #D1D5DB !important;
+        }
+
+        /* --- 13. ORBITAL FEATURE SECTION --- */
+        html[data-theme="light"] .border-white\/15 {
+            border-color: #D1D5DB !important;
+        }
+
+        /* SVG path strokes */
+        html[data-theme="light"] path[stroke="rgba(255,255,255,0.4)"],
+        html[data-theme="light"] path[stroke="rgba(255,255,255,0.6)"] {
+            stroke: rgba(0, 0, 0, 0.25) !important;
+        }
+
+        /* --- 14. PROGRESSIVE GRID EXPANSION --- */
+        html[data-theme="light"] #expansion-container {
+            border-color: #D1D5DB !important;
+            background-color: rgba(243, 244, 246, 0.5) !important;
+        }
+
+        html[data-theme="light"] svg.text-neutral-800,
+        html[data-theme="light"] svg.text-neutral-700 {
+            color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] #hero-badge {
+            background-color: #F3F4F6 !important;
+            border-color: #D1D5DB !important;
+            color: #6B7280 !important;
+        }
+
+        /* --- 15. TYPEWRITER / BLINK CURSOR --- */
+        html[data-theme="light"] .typewriter-text {
+            border-right-color: #0F1114 !important;
+            color: #111827 !important;
+        }
+
+        /* --- 16. CTA & FOOTER --- */
+        html[data-theme="light"] footer.bg-\[\#000\] {
+            background-color: #FFFFFF !important;
+        }
+
+        html[data-theme="light"] footer.bg-black {
+            background-color: #F3F4F6 !important;
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] footer.bg-black .text-textsec,
+        html[data-theme="light"] footer.bg-black a {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] footer.bg-black a:hover {
+            color: #111827 !important;
+        }
+
+        html[data-theme="light"] footer.bg-black .text-white\/30 {
+            color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] footer.bg-black svg path {
+            fill: #000000 !important;
+        }
+
+        /* --- 17. GRADIENT OVERRIDES --- */
+        html[data-theme="light"] .bg-gradient-to-t.from-background\/90 {
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3), transparent) !important;
+        }
+
+        html[data-theme="light"] .bg-gradient-to-b.from-background\/40 {
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.9)) !important;
+        }
+
+        html[data-theme="light"] .bg-gradient-to-t.from-neutral-950\/40 {
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent) !important;
+        }
+
+        html[data-theme="light"] .bg-gradient-to-l.from-white\/5 {
+            background-image: linear-gradient(to left, rgba(0, 0, 0, 0.02), transparent) !important;
+        }
+
+        /* --- 18. SELECTION COLORS --- */
+        html[data-theme="light"] .selection\:bg-neutral-800 *::selection {
+            background: rgba(249, 115, 22, 0.15) !important;
+            color: inherit !important;
+        }
+
+        /* --- 19. MARQUEE TEXT STROKE --- */
+        html[data-theme="light"] h2[style*="-webkit-text-stroke: 1px rgba(255,255,255"] {
+            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* --- 20. PROJECT CARD OVERLAYS --- */
+        html[data-theme="light"] .bg-gradient-to-t.from-black {
+            background-image: linear-gradient(to top, #FFFFFF, rgba(255, 255, 255, 0.4), transparent) !important;
+        }
+
+        /* --- 21. COUNTER SPAN COLOR --- */
+        html[data-theme="light"] .counter span {
+            color: #9CA3AF !important;
+        }
+
+        /* --- 22. RADIAL GRADIENT OVERLAYS --- */
+        html[data-theme="light"] .bg-\[radial-gradient\(circle_at_top_right\,rgba\(255\,255\,255\,0\.05\)\,transparent_50\%\)\] {
+            background: radial-gradient(circle at top right, rgba(0, 0, 0, 0.03), transparent 50%) !important;
+        }
+
+        html[data-theme="light"] .bg-\[radial-gradient\(circle_at_center\,rgba\(255\,255\,255\,0\.06\)\,transparent_42\%\)\] {
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.03), transparent 42%) !important;
+        }
+
+        /* --- 23. ANIMATED BAR OVERRIDES --- */
+        html[data-theme="light"] .group:hover .group-hover\:bg-white {
+            background-color: #374151 !important;
+        }
+
+        html[data-theme="light"] .group-hover\:bg-white\/\[0\.04\]:hover {
+            background-color: rgba(249, 250, 251, 0.5) !important;
+        }
+
+        html[data-theme="light"] .group:hover .group-hover\:bg-white\/10 {
+            background-color: rgba(0, 0, 0, 0.04) !important;
+        }
+
+        .partner-plus::before,
+        .partner-plus::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            background: #0F1114;
+            transform: translate(-50%, -50%);
+        }
+
+        .partner-plus::before {
+            width: 18px;
+            height: 1px;
+        }
+
+        .partner-plus::after {
+            width: 1px;
+            height: 18px;
+        }
+
+        /* ===== END GLOBAL LIGHT MODE OVERRIDES ===== */
+    </style>
+</head>
+<body class="bg-background text-foreground antialiased">
+    <nav class="marine-header-section fcg-dropdown-nav fixed top-0 z-50 w-full border-b">
+        <div class="w-full px-4 md:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <!-- Logo -->
+                <div class="flex items-center" style="color: var(--color-fg);">
+                    <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 28px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="currentColor"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="currentColor"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="currentColor"/></svg>
+                </div>
+
+                <!-- Desktop Dropdown Navigation -->
+                <ul class="fcg-nav-shell hidden md:flex items-center gap-0 text-sm font-normal">
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>About</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
+                            <div class="flex gap-9 overflow-hidden">
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">FCG Group</h3>
+                                    <div class="space-y-6">
+                                        <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:global-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Asian travel network</p><span class="text-xs">Supply depth across key regional markets</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Operator infrastructure</p><span class="text-xs">Tools built around real travel workflows</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Markets</h3>
+                                    <div class="space-y-6">
+                                        <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Regional coverage</p><span class="text-xs">Singapore, Hong Kong, Shenzhen and more</span></div>
+                                        </a>
+                                        <a href="#decision-paths" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:compass-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Expansion model</p><span class="text-xs">How FCG scales supply and operations</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>Products</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel fcg-products-mega absolute left-0 top-full mt-2 rounded-2xl">
+                            <div class="fcg-products-mega-grid">
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For TMCs & operators</h3>
+                                    <div class="fcg-products-group-title">Connect</div>
+                                    <div class="fcg-products-list">
+                                        <a href="agreeease.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:cpu-bolt-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>AgreeEase</p><span>AI hotel sourcing and RFP workflows</span></div>
+                                        </a>
+                                        <a href="atlas.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Atlas</p><span>TMC operating system for bookings and service</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:case-round-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Allbon</p><span>Corporate booking platform for business travel</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For travel suppliers</h3>
+                                    <div class="fcg-products-group-title">Operate</div>
+                                    <div class="fcg-products-list">
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:box-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Travakey</p><span>Resource APIs and supplier connectivity</span></div>
+                                        </a>
+                                        <a href="#decision-paths" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:chart-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Smart Distribution</p><span>Rate control and marketplace access</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:card-transfer-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Payment Solutions</p><span>Secure settlement and processing tools</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For mapping & optimization</h3>
+                                    <div class="fcg-products-group-title">Experience</div>
+                                    <div class="fcg-products-list">
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Hotel Mapping</p><span>Clean, standardized property records</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:bed-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Room Mapping</p><span>Full clarity across room types and suppliers</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:magic-stick-3-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Content Optimization</p><span>Enrich, standardize, and improve conversion</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>Technology</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
+                            <div class="flex gap-9 overflow-hidden">
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Platform</h3>
+                                    <div class="space-y-6">
+                                        <a href="#product-map" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:shield-check-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Reliable workflows</p><span class="text-xs">Structured processes for sourcing teams</span></div>
+                                        </a>
+                                        <a href="#decision-paths" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:eye-scan-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Data visibility</p><span class="text-xs">See where requests and supply stand</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Automation</h3>
+                                    <div class="space-y-6">
+                                        <a href="#product-map" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:rocket-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Faster responses</p><span class="text-xs">Reduce manual sourcing and follow-ups</span></div>
+                                        </a>
+                                        <a href="#decision-paths" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:palette-round-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Custom workflows</p><span class="text-xs">Adapt the system around real teams</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right: Status & Toggle -->
+            <div class="flex items-center gap-4 md:gap-6">
+                <!-- System Status Badge -->
+                <div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono tracking-tight" style="background-color: rgba(249, 115, 22, 0.1); border: 1px solid rgba(249, 115, 22, 0.2); color: #F97316;">
+                    <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background-color: #F97316;"></span>
+                    LIVE.NETWORK
+                </div>
+
+                <!-- Custom Toggle Switch -->
+                <label class="flex items-center gap-3 cursor-pointer group">
+                    <span class="text-xs font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors hidden sm:block uppercase">MODE</span>
+                    <div class="relative">
+                        <input type="checkbox" id="themeToggle" class="sr-only peer" checked>
+                        <div class="w-10 h-5 rounded-full peer peer-checked:bg-orange-900/40 border transition-all bg-zinc-800 border-white/10"></div>
+                        <div class="absolute left-1 top-1 w-3 h-3 bg-zinc-500 rounded-full peer-checked:translate-x-5 peer-checked:bg-orange-500 transition-all shadow-[0_0_8px_rgba(249,115,22,0.4)] peer-checked:shadow-[0_0_12px_rgba(249,115,22,0.8)]"></div>
+                    </div>
+                </label>
+                <a href="#capabilities" class="md:hidden w-10 h-10 rounded-full border flex items-center justify-center" style="border-color: var(--color-border); color: var(--color-fg);" aria-label="Open page sections">
+                    <iconify-icon icon="solar:hamburger-menu-linear" width="20" height="20"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </nav>
+<style>
+  .fcg-hero2 {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #030303;
+    color: #fff;
+  }
+  .fcg-hero2 * { color: inherit; }
+  .fcg-hero2-glow {
+    position: absolute;
+    right: -18rem;
+    top: -4rem;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    filter: blur(24px);
+    pointer-events: none;
+  }
+  .fcg-hero2-glow span {
+    display: block;
+    height: 10rem;
+    border-radius: 999px;
+    filter: blur(6rem);
+    opacity: .78;
+  }
+  .fcg-hero2-glow span:nth-child(1) { width: 60rem; background: linear-gradient(to bottom, #f97316, #0ea5e9); }
+  .fcg-hero2-glow span:nth-child(2) { width: 90rem; background: linear-gradient(to bottom, #be123c, #facc15); }
+  .fcg-hero2-glow span:nth-child(3) { width: 60rem; background: linear-gradient(to bottom, #f59e0b, #06b6d4); }
+  .fcg-hero2::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: .18;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,.38) 1px, transparent 0),
+      linear-gradient(to bottom, rgba(3,3,3,0), rgba(3,3,3,.92));
+    background-size: 18px 18px, 100% 100%;
+  }
+  .fcg-hero2-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    border-radius: 999px;
+    padding: 0 28px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  }
+  .fcg-hero2-button:hover { transform: translateY(-1px); }
+  .fcg-hero2-button-primary {
+    background: #fff;
+    color: #050505;
+  }
+  .fcg-hero2-button-secondary {
+    border: 1px solid rgba(255,255,255,.22);
+    color: #fff;
+    background: rgba(255,255,255,.04);
+  }
+  .fcg-hero2-button-secondary:hover { background: rgba(255,255,255,.1); }
+  .fcg-hero2-content {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr);
+    align-items: center;
+    gap: 56px;
+    max-width: 1280px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 132px 24px 96px;
+    text-align: left;
+  }
+  .fcg-hero2-copy-column {
+    max-width: 620px;
+  }
+  .fcg-hero2-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.12);
+    padding: 9px 16px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .fcg-hero2 h1 {
+    max-width: 620px;
+    margin: 36px 0 0;
+    color: #fff !important;
+    font-size: clamp(3rem, 5.2vw, 5.8rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .fcg-hero2-copy {
+    max-width: 590px;
+    margin: 26px 0 0;
+    color: rgba(255,255,255,.72) !important;
+    font-size: clamp(1rem, 1.5vw, 1.18rem);
+    line-height: 1.7;
+  }
+  .fcg-hero2-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .fcg-hero2-preview-wrap {
+    position: relative;
+    width: 100%;
+    margin: 0;
+  }
+  .fcg-hero2-preview-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    background: rgba(255,255,255,.48);
+    filter: blur(8rem);
+    opacity: .24;
+  }
+  .fcg-hero2-preview {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(7,7,7,.88);
+    box-shadow: 0 30px 90px rgba(0,0,0,.45);
+  }
+  .fcg-hero2-preview img {
+    display: block;
+    width: 100%;
+    height: min(64vh, 560px);
+    object-fit: cover;
+    opacity: .64;
+    filter: grayscale(1) contrast(1.05);
+  }
+  .fcg-hero2-preview-grid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    align-items: stretch;
+    gap: 14px;
+    padding: 24px;
+    background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.38), transparent);
+  }
+  .fcg-hero2-preview-card {
+    min-height: 124px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 18px;
+    text-align: left;
+  }
+  .fcg-hero2-preview-card span {
+    display: block;
+    margin-bottom: 18px;
+    color: #fb923c;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+  .fcg-hero2-preview-card strong {
+    display: block;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .product-shell { background: var(--color-bg); color: var(--color-fg); }
+  .product-kicker { font-family: 'JetBrains Mono', monospace; letter-spacing: .18em; text-transform: uppercase; }
+  .product-card {
+    background: rgba(0,0,0,.4);
+    border: 1px solid rgba(255,255,255,.15);
+    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+  .product-card:hover {
+    background: rgba(0,0,0,.52);
+    border-color: rgba(255,255,255,.4);
+    transform: translateY(-2px);
+  }
+  html[data-theme="light"] .product-card {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 50px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .product-card:hover {
+    background: rgba(255,255,255,.92);
+    border-color: rgba(15,17,20,.24);
+  }
+  .product-panel { background: #050505; border: 1px solid rgba(255,255,255,.1); }
+  html[data-theme="light"] .product-panel { background: #f9fafb; border-color: #d1d5db; }
+  .product-line { background: linear-gradient(90deg, transparent, rgba(249,115,22,.55), transparent); }
+  #decision-paths,
+  #product-map {
+    padding-top: 5.5rem !important;
+    padding-bottom: 5.5rem !important;
+  }
+  #decision-paths > div,
+  #product-map > div {
+    max-width: 72rem;
+  }
+  #decision-paths .product-card,
+  #product-map .product-card {
+    border-radius: 16px !important;
+    padding: 1.25rem !important;
+  }
+  #decision-paths .product-card h3,
+  #product-map .product-card h3 {
+    font-size: 1.08rem !important;
+    line-height: 1.25 !important;
+  }
+  #decision-paths .product-card p,
+  #product-map .product-card p,
+  #product-map .product-card li {
+    font-size: .88rem !important;
+    line-height: 1.6 !important;
+  }
+  #decision-paths .product-card .product-kicker,
+  #product-map .product-card .product-kicker {
+    font-size: .63rem !important;
+  }
+  #decision-paths .space-y-5 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .75rem;
+  }
+  #decision-paths .space-y-5 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0 !important;
+  }
+  #decision-paths .product-card {
+    display: flex !important;
+    min-height: 18rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0 !important;
+  }
+  #decision-paths .product-card > p {
+    margin-top: .85rem;
+  }
+  #decision-paths .product-card > div:last-child {
+    margin-top: auto;
+    border-radius: 14px !important;
+    padding: 1rem !important;
+  }
+  #decision-paths .product-card .text-lg {
+    font-size: .98rem !important;
+    line-height: 1.3 !important;
+  }
+  #product-map .grid {
+    gap: .75rem !important;
+  }
+  #product-map .product-card {
+    min-height: 18.5rem;
+  }
+  #product-map .product-card .w-12 {
+    width: 2.5rem !important;
+  }
+  #product-map .product-card .h-12 {
+    height: 2.5rem !important;
+  }
+  #product-map .product-card .mb-6 {
+    margin-bottom: 1rem !important;
+  }
+  #product-map .product-card .gap-5 {
+    gap: .9rem !important;
+  }
+  #product-map .product-card .pt-5 {
+    padding-top: 1rem !important;
+  }
+  #product-map .product-card .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: .6rem !important;
+  }
+  html[data-theme="light"] #decision-paths .product-card > div:last-child {
+    background: rgba(255,255,255,.68) !important;
+    border-color: rgba(15,17,20,.1) !important;
+  }
+  @media (max-width: 980px) {
+    #decision-paths .space-y-5 {
+      grid-template-columns: 1fr;
+    }
+    #decision-paths .product-card,
+    #product-map .product-card {
+      min-height: auto;
+    }
+  }
+  .fcg-bento {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(125% 125% at 50% 10%, #000000 40%, #010133 100%);
+    color: #fff;
+  }
+  .fcg-bento::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 22%, rgba(249,115,22,.14), transparent 28%),
+      linear-gradient(to bottom, rgba(0,0,0,.04), rgba(0,0,0,.55));
+  }
+  .fcg-bento-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+  }
+  .fcg-bento-spiral {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .3;
+    mix-blend-mode: screen;
+    mask-image: radial-gradient(circle at center, rgba(255,255,255,1), rgba(255,255,255,.1) 60%, transparent 75%);
+    -webkit-mask-image: radial-gradient(circle at center, rgba(255,255,255,1), rgba(255,255,255,.1) 60%, transparent 75%);
+  }
+  .fcg-bento-header {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .fcg-bento-kicker {
+    color: #fb923c;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    margin-bottom: .9rem;
+    text-transform: uppercase;
+  }
+  .fcg-bento h2 {
+    color: #fff !important;
+    font-size: clamp(2.3rem, 5vw, 4.7rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+  .fcg-bento-subcopy {
+    color: rgba(255,255,255,.7) !important;
+    max-width: 31rem;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .fcg-bento-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-rows: minmax(120px, auto);
+    gap: .75rem;
+  }
+  .fcg-bento-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(0,0,0,.4);
+    padding: 1.25rem;
+    transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+  }
+  .fcg-bento-card:hover {
+    border-color: rgba(255,255,255,.4);
+    background: rgba(0,0,0,.52);
+    transform: translateY(-2px);
+  }
+  .fcg-bento-card::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 16px;
+    opacity: 0;
+    pointer-events: none;
+    mask-image: radial-gradient(180px 180px at var(--x, 50%) var(--y, 50%), white, transparent);
+    -webkit-mask-image: radial-gradient(180px 180px at var(--x, 50%) var(--y, 50%), white, transparent);
+    transition: opacity 180ms ease;
+  }
+  .fcg-bento-card:hover::after { opacity: 1; }
+  .fcg-bento-card-large {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+  .fcg-bento-card-small { grid-column: span 2; }
+  .fcg-bento-card-wide { grid-column: span 3; }
+  .fcg-bento-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    margin-bottom: .7rem;
+  }
+  .fcg-bento-dot {
+    flex: 0 0 auto;
+    width: .55rem;
+    height: .55rem;
+    margin-top: .38rem;
+    border-radius: 999px;
+    background: #fb923c;
+    box-shadow: 0 0 18px rgba(249,115,22,.45);
+    color: transparent;
+    font-size: 0;
+  }
+  .fcg-bento-card h3 {
+    min-width: 0;
+    color: #fff !important;
+    font-size: clamp(1rem, 1.7vw, 1.22rem);
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .fcg-bento-meta {
+    flex: 0 0 auto;
+    margin-left: auto;
+    margin-top: .12rem;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 999px;
+    color: rgba(255,255,255,.62);
+    font-size: 10px;
+    letter-spacing: .12em;
+    line-height: 1;
+    padding: .35rem .5rem;
+    text-transform: uppercase;
+  }
+  .fcg-bento-card p {
+    color: rgba(255,255,255,.7) !important;
+    font-size: 14px;
+    line-height: 1.65;
+    max-width: 48rem;
+  }
+  .fcg-marketing-section {
+    position: relative;
+    overflow: hidden;
+    background: #050505;
+    color: #fff;
+    padding: 6rem 1.5rem 6rem;
+  }
+  .fcg-marketing-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 16%, rgba(249,115,22,.16), transparent 26%),
+      radial-gradient(circle at 86% 66%, rgba(14,165,233,.14), transparent 30%);
+  }
+  .fcg-marketing-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 54.25rem;
+    margin: 0 auto;
+  }
+  .fcg-marketing-header {
+    max-width: 54.25rem;
+    margin-bottom: 3.75rem;
+  }
+  .fcg-marketing-eyebrow,
+  .fcg-mobile-eyebrow {
+    color: #fb923c;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    margin-bottom: .85rem;
+    text-transform: uppercase;
+  }
+  .fcg-marketing-title,
+  .fcg-mobile-feature h2 {
+    color: #fff !important;
+    font-size: clamp(2.6rem, 3vw, 3.25rem);
+    font-weight: 650;
+    letter-spacing: 0;
+    line-height: 1.05;
+  }
+  .fcg-marketing-title span {
+    color: rgba(255,255,255,.48);
+  }
+  .fcg-marketing-header p,
+  .fcg-mobile-subcopy {
+    color: rgba(255,255,255,.68) !important;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-top: 1rem;
+    max-width: 42rem;
+  }
+  .fcg-ai-showcase {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 29.15rem;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 18px;
+    background:
+      linear-gradient(135deg, rgba(255,226,190,.18), rgba(249,168,212,.14) 36%, rgba(125,211,252,.22) 78%, rgba(45,212,191,.2)),
+      #141414;
+    box-shadow: 0 24px 70px rgba(0,0,0,.28);
+  }
+  .fcg-ai-showcase::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .16;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.9) 1px, transparent 0);
+    background-size: 3px 3px;
+  }
+  .fcg-ai-card {
+    position: relative;
+    z-index: 1;
+    width: min(100% - 2rem, 26.5rem);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 16px;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 14px 28px rgba(0,0,0,.18);
+    color: #050505;
+    padding: 1.75rem;
+  }
+  .fcg-ai-spark {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    color: #c084fc;
+  }
+  .fcg-ai-prompt {
+    color: #050505 !important;
+    font-size: 1.08rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .fcg-ai-stats {
+    display: grid;
+    gap: .7rem;
+    margin: 1.35rem 0 1.55rem;
+  }
+  .fcg-ai-stat {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    color: #71717a;
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+  .fcg-ai-stat strong {
+    color: #050505;
+    font-weight: 700;
+  }
+  .fcg-ai-input {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 1rem;
+    border-radius: 14px;
+    background: #f1f1f2;
+    padding: 1rem 1rem .9rem;
+  }
+  .fcg-ai-placeholder {
+    color: #777;
+    font-size: 1.05rem;
+    margin-bottom: 1.1rem;
+  }
+  .fcg-ai-tools {
+    display: flex;
+    gap: .7rem;
+  }
+  .fcg-ai-tool,
+  .fcg-ai-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+  }
+  .fcg-ai-tool {
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid rgba(0,0,0,.08);
+    background: rgba(255,255,255,.42);
+    color: #050505;
+  }
+  .fcg-ai-submit {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: #050505;
+    color: #fff;
+  }
+  .fcg-marketing-features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4rem;
+    margin-top: 3.9rem;
+  }
+  .fcg-marketing-feature h3 {
+    color: #fff !important;
+    font-size: 1.5rem;
+    font-weight: 650;
+    line-height: 1.1;
+  }
+  .fcg-marketing-feature p {
+    color: rgba(255,255,255,.54) !important;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    margin-top: 1rem;
+  }
+  .fcg-mobile-feature {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    padding: 6.5rem 1.5rem;
+  }
+  .fcg-mobile-feature::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom, rgba(255,255,255,.04), transparent 22%),
+      radial-gradient(circle at 50% 0%, rgba(249,115,22,.16), transparent 30%);
+  }
+  .fcg-mobile-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+  .fcg-mobile-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .fcg-main-icon,
+  .fcg-feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: rgba(249,115,22,.12);
+    color: #fb923c;
+  }
+  .fcg-main-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: 1rem;
+  }
+  .fcg-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    margin: 4rem auto 0;
+  }
+  .fcg-feature-row {
+    display: flex;
+    gap: 1.15rem;
+    text-align: left;
+  }
+  .fcg-feature-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    flex: 0 0 auto;
+  }
+  .fcg-feature-row h3 {
+    color: #fff !important;
+    font-size: 1rem;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+  .fcg-feature-row p {
+    color: rgba(255,255,255,.62) !important;
+    font-size: .95rem;
+    line-height: 1.65;
+    margin-top: .25rem;
+  }
+  .fcg-mobile-cta {
+    margin-top: 4rem;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 22px;
+    background: rgba(255,255,255,.04);
+    padding: 2rem;
+    text-align: center;
+  }
+  .fcg-mobile-cta h3 {
+    color: #fff !important;
+    font-size: 1.35rem;
+    font-weight: 650;
+  }
+  .fcg-mobile-cta p {
+    color: rgba(255,255,255,.62) !important;
+    line-height: 1.65;
+    margin: .6rem auto 0;
+    max-width: 36rem;
+  }
+  .fcg-store-actions {
+    display: flex;
+    justify-content: center;
+    gap: .85rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+  .fcg-store-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    min-height: 44px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 999px;
+    color: #fff;
+    background: rgba(255,255,255,.04);
+    font-size: .9rem;
+    font-weight: 600;
+    padding: 0 1.15rem;
+    text-decoration: none;
+    transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  }
+  .fcg-store-button:hover {
+    transform: translateY(-1px);
+    background: rgba(255,255,255,.09);
+    border-color: rgba(255,255,255,.26);
+  }
+
+  html[data-theme="light"] .fcg-hero2 {
+    background:
+      radial-gradient(circle at 78% 18%, rgba(249,115,22,.16), transparent 30%),
+      radial-gradient(circle at 92% 42%, rgba(14,165,233,.13), transparent 28%),
+      linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #eef2f7 100%);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-hero2-glow span {
+    opacity: .42;
+  }
+  html[data-theme="light"] .fcg-hero2::after {
+    opacity: .35;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(15,17,20,.16) 1px, transparent 0),
+      linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.72));
+  }
+  html[data-theme="light"] .fcg-hero2-badge {
+    background: rgba(255,255,255,.78);
+    border-color: rgba(15,17,20,.12);
+    color: #374151;
+    box-shadow: 0 14px 40px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-hero2 h1 {
+    color: #0f1114 !important;
+  }
+  html[data-theme="light"] .fcg-hero2-copy {
+    color: #4b5563 !important;
+  }
+  html[data-theme="light"] .fcg-hero2-button-primary {
+    background: #0f1114;
+    color: #ffffff;
+    box-shadow: 0 16px 35px rgba(15,17,20,.16);
+  }
+  html[data-theme="light"] .fcg-hero2-button-secondary {
+    background: rgba(255,255,255,.76);
+    border-color: rgba(15,17,20,.14);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-hero2-button-secondary:hover {
+    background: #ffffff;
+  }
+  html[data-theme="light"] .fcg-hero2-preview-wrap::before {
+    background: rgba(15,17,20,.18);
+    opacity: .18;
+  }
+  html[data-theme="light"] .fcg-hero2-preview {
+    background: rgba(255,255,255,.82);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 30px 80px rgba(15,17,20,.13);
+  }
+  html[data-theme="light"] .fcg-hero2-preview img {
+    opacity: .86;
+    filter: grayscale(.8) contrast(1.02);
+  }
+  html[data-theme="light"] .fcg-hero2-preview-grid {
+    background: linear-gradient(to top, rgba(255,255,255,.94), rgba(255,255,255,.5), transparent);
+  }
+  html[data-theme="light"] .fcg-hero2-preview-card {
+    background: rgba(255,255,255,.74);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 45px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-hero2-preview-card strong {
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-bento {
+    background:
+      radial-gradient(circle at 52% 10%, rgba(249,115,22,.12), transparent 32%),
+      radial-gradient(125% 125% at 50% 10%, #ffffff 38%, #edf5ff 100%);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-bento::after {
+    background:
+      radial-gradient(circle at 18% 22%, rgba(249,115,22,.12), transparent 28%),
+      linear-gradient(to bottom, rgba(255,255,255,.08), rgba(255,255,255,.58));
+  }
+  html[data-theme="light"] .fcg-bento-spiral {
+    opacity: .16;
+    mix-blend-mode: multiply;
+  }
+  html[data-theme="light"] #fcgBentoSpiral {
+    color: #0f172a;
+  }
+  html[data-theme="light"] #fcgBentoSpiral circle {
+    fill: #0f172a;
+  }
+  html[data-theme="light"] .fcg-bento h2,
+  html[data-theme="light"] .fcg-bento-card h3 {
+    color: #0f1114 !important;
+  }
+  html[data-theme="light"] .fcg-bento-subcopy,
+  html[data-theme="light"] .fcg-bento-card p {
+    color: #4b5563 !important;
+  }
+  html[data-theme="light"] .fcg-bento-card {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 50px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-bento-card:hover {
+    background: rgba(255,255,255,.92);
+    border-color: rgba(15,17,20,.24);
+  }
+  html[data-theme="light"] .fcg-bento-card::after {
+    border-color: rgba(15,17,20,.16);
+  }
+  html[data-theme="light"] .fcg-bento-dot {
+    background: #ea580c;
+    box-shadow: 0 0 18px rgba(249,115,22,.28);
+  }
+  html[data-theme="light"] .fcg-bento-meta {
+    border-color: rgba(15,17,20,.14);
+    color: #6b7280;
+    background: rgba(255,255,255,.52);
+  }
+  html[data-theme="light"] .fcg-marketing-section {
+    background: #ffffff;
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-marketing-section::before {
+    display: none;
+  }
+  html[data-theme="light"] .fcg-marketing-title,
+  html[data-theme="light"] .fcg-mobile-feature h2,
+  html[data-theme="light"] .fcg-marketing-feature h3,
+  html[data-theme="light"] .fcg-feature-row h3,
+  html[data-theme="light"] .fcg-mobile-cta h3 {
+    color: #0f1114 !important;
+  }
+  html[data-theme="light"] .fcg-marketing-title span {
+    color: #737373;
+  }
+  html[data-theme="light"] .fcg-marketing-header p,
+  html[data-theme="light"] .fcg-marketing-feature p,
+  html[data-theme="light"] .fcg-mobile-subcopy,
+  html[data-theme="light"] .fcg-feature-row p,
+  html[data-theme="light"] .fcg-mobile-cta p {
+    color: #737373 !important;
+  }
+  html[data-theme="light"] .fcg-ai-showcase {
+    background:
+      linear-gradient(135deg, rgba(255,240,209,.9), rgba(252,201,196,.8) 34%, rgba(207,233,240,.86) 72%, rgba(106,203,213,.78)),
+      #f7f7f7;
+    border-color: #d9d9dd;
+    box-shadow: 0 10px 26px rgba(15,17,20,.14);
+  }
+  html[data-theme="light"] .fcg-ai-showcase::after {
+    opacity: .18;
+    background-image: radial-gradient(circle at 1px 1px, rgba(15,17,20,.28) 1px, transparent 0);
+  }
+  html[data-theme="light"] .fcg-ai-card {
+    background: rgba(255,255,255,.94);
+    border-color: rgba(15,17,20,.13);
+    box-shadow: 0 10px 20px rgba(15,17,20,.18);
+  }
+  html[data-theme="light"] .fcg-ai-prompt,
+  html[data-theme="light"] .fcg-ai-stat strong {
+    color: #050505 !important;
+  }
+  html[data-theme="light"] .fcg-ai-stat,
+  html[data-theme="light"] .fcg-ai-placeholder {
+    color: #737373;
+  }
+  html[data-theme="light"] .fcg-ai-input {
+    background: #f1f1f2;
+  }
+  html[data-theme="light"] .fcg-ai-tool {
+    background: rgba(255,255,255,.55);
+    border-color: rgba(15,17,20,.08);
+    color: #050505;
+  }
+  html[data-theme="light"] .fcg-ai-submit {
+    background: #050505;
+    color: #ffffff;
+  }
+  html[data-theme="light"] .fcg-mobile-cta {
+    background: rgba(255,255,255,.78);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 24px 70px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-mobile-feature {
+    background: #ffffff;
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-mobile-feature::before {
+    background:
+      linear-gradient(to bottom, rgba(15,17,20,.035), transparent 22%),
+      radial-gradient(circle at 50% 0%, rgba(249,115,22,.12), transparent 30%);
+  }
+  html[data-theme="light"] .fcg-store-button {
+    background: rgba(255,255,255,.8);
+    border-color: rgba(15,17,20,.14);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-store-button:hover {
+    background: #ffffff;
+    border-color: rgba(15,17,20,.24);
+  }
+  @media (max-width: 980px) {
+    .fcg-hero2-content {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      padding-top: 128px;
+      padding-bottom: 72px;
+      text-align: left;
+    }
+    .fcg-hero2-copy-column { max-width: 760px; }
+    .fcg-hero2 h1 { margin-top: 34px; max-width: 760px; }
+    .fcg-hero2-copy { max-width: 720px; }
+    .fcg-hero2-actions { align-items: stretch; flex-direction: column; }
+    .fcg-hero2-actions .fcg-hero2-button { width: 100%; }
+    .fcg-hero2-preview-grid {
+      position: relative;
+      grid-template-columns: 1fr;
+      padding: 16px;
+      background: rgba(0,0,0,.84);
+    }
+    html[data-theme="light"] .fcg-hero2-preview-grid {
+      background: rgba(255,255,255,.88);
+    }
+    .fcg-hero2-preview img { display: none; }
+    .fcg-hero2-preview-card { min-height: auto; }
+    .fcg-bento-inner { padding: 4.5rem 1.25rem; }
+    .fcg-bento-header { align-items: flex-start; flex-direction: column; }
+    .fcg-bento-grid { grid-template-columns: 1fr; }
+    .fcg-bento-card-large,
+    .fcg-bento-card-small,
+    .fcg-bento-card-wide {
+      grid-column: auto;
+      grid-row: auto;
+    }
+    .fcg-marketing-section,
+    .fcg-mobile-feature {
+      padding: 4.5rem 1.25rem;
+    }
+    .fcg-feature-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .fcg-marketing-title {
+      font-size: clamp(2.35rem, 11vw, 3.25rem) !important;
+    }
+    .fcg-marketing-header {
+      margin-bottom: 2.5rem;
+    }
+    .fcg-ai-showcase {
+      min-height: 28rem;
+    }
+    .fcg-ai-card {
+      padding: 1.35rem;
+    }
+    .fcg-ai-input {
+      grid-template-columns: 1fr;
+    }
+    .fcg-marketing-features {
+      grid-template-columns: 1fr;
+      gap: 2.4rem;
+      margin-top: 3rem;
+    }
+    .fcg-store-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .fcg-store-button {
+      width: 100%;
+    }
+  }
+</style>
+<main class="product-shell">
+  <section id="capabilities" class="fcg-hero2">
+    <div class="fcg-hero2-glow" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <div class="fcg-hero2-content">
+      <div class="fcg-hero2-copy-column">
+        <div class="fcg-hero2-badge">
+          Connect AI to G-Link &amp; F-Link supply
+          <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
+        </div>
+        <h1>Connect AI to live inventory.</h1>
+        <p class="fcg-hero2-copy">Your AI understands intent. But it has nothing bookable to connect to. Building supply connections from scratch defeats the speed advantage. G-Link and F-Link are the live inventory layer underneath — 1M+ deduplicated hotel properties, every major airline, APAC-native depth. Your AI talks to travelers. Ours talks to inventory. Connect them.</p>
+        <div class="fcg-hero2-actions">
+          <a href="#ai-showcase" class="fcg-hero2-button fcg-hero2-button-primary">See the inventory connection</a>
+          <a href="#product-map" class="fcg-hero2-button fcg-hero2-button-secondary">What's underneath</a>
+        </div>
+      </div>
+
+      <div class="fcg-hero2-preview-wrap">
+        <div class="fcg-hero2-preview">
+          <img src="assets/images/frame-mid.svg" alt="AI Booking Tool interface preview">
+          <div class="fcg-hero2-preview-grid">
+            <article class="fcg-hero2-preview-card"><span>G-Link</span><strong>1M+ deduplicated hotel properties, multi-source</strong></article>
+            <article class="fcg-hero2-preview-card"><span>F-Link</span><strong>Every major airline via GDS, NDC, and LCC direct</strong></article>
+            <article class="fcg-hero2-preview-card"><span>APAC-Native</span><strong>Real supply depth across Asia-Pacific markets</strong></article>
+            <article class="fcg-hero2-preview-card"><span>Live Supply</span><strong>Real-time rates and confirmed bookings, not cached results</strong></article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="product-capabilities" class="fcg-bento">
+    <div class="fcg-bento-spiral" aria-hidden="true">
+      <div id="fcgBentoSpiral"></div>
+    </div>
+    <div class="fcg-bento-inner">
+      <header class="fcg-bento-header fade-up">
+        <div>
+          <div class="fcg-bento-kicker">AI + Real Supply</div>
+          <h2>The problem it solves.</h2>
+        </div>
+        <p class="fcg-bento-subcopy">Your AI can understand travelers. But understanding isn't booking. The gap between intent and confirmed reservation is supply — and that's what G-Link and F-Link fill.</p>
+      </header>
+
+      <div class="fcg-bento-grid">
+        <article class="fcg-bento-card fcg-bento-card-large fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Chatbots that can't actually book anything</h3>
+            <span class="fcg-bento-meta">Pain</span>
+          </header>
+          <p>Companies build conversational travel interfaces — then discover there's nothing bookable on the other side. Travelers fill out rigid forms. Agents do manual work. AI understands the request but can't fulfill it. The AI Booking Tool connects natural language directly to G-Link and F-Link supply. Intent becomes a confirmed reservation, not a dead end.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-small fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>1M+ properties. Every airline. One connection.</h3>
+            <span class="fcg-bento-meta">Supply</span>
+          </header>
+          <p>G-Link aggregates hotel supply from GDS, bedbanks, and direct sources — deduplicated and commercially ready. F-Link connects GDS, NDC, and LCC direct into one feed. APAC-native depth. The inventory your AI needs to actually book.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-small fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Policy enforced at booking, not after</h3>
+            <span class="fcg-bento-meta">Control</span>
+          </header>
+          <p>Most platforms enforce policy retroactively through expense reports — if at all. The AI Booking Tool applies corporate rules, budget caps, and approval workflows before the traveler ever sees options.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-wide fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Confirmed itineraries, not suggested ones</h3>
+            <span class="fcg-bento-meta">Output</span>
+          </header>
+          <p>Because the AI connects to live G-Link and F-Link supply, itineraries come back with confirmed rates and real availability — flights, hotels, ground transport, policy-checked and priced. Not a recommendation engine. A booking engine.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-wide fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Skip the multi-year supply build</h3>
+            <span class="fcg-bento-meta">Connect</span>
+          </header>
+          <p>Building supply connections from scratch — GDS, bedbanks, NDC, LCC direct — is a multi-year engineering drain. One connection to G-Link and F-Link replaces all of it. Your AI handles the experience. The supply layer is already built.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="ai-showcase" class="fcg-marketing-section">
+    <div class="fcg-marketing-inner">
+      <header class="fcg-marketing-header fade-up">
+        <div class="fcg-marketing-eyebrow">The Supply Connection</div>
+        <h2 class="fcg-marketing-title"><span>Language in.</span><br>Live inventory out.</h2>
+        <p>A traveler types or speaks a request. The AI connects to 1M+ deduplicated properties via G-Link and every major airline via F-Link — real-time rates, real availability, confirmed bookings. The value isn't the AI. It's what the AI connects to.</p>
+      </header>
+
+      <div class="fcg-ai-showcase fade-up">
+        <article class="fcg-ai-card" aria-label="AI Booking Tool conversation preview">
+          <div class="fcg-ai-spark"><iconify-icon icon="solar:stars-bold-duotone" width="26" height="26"></iconify-icon></div>
+          <h3 class="fcg-ai-prompt">Book me a hotel near Raffles Place for 3 nights under $200, policy-compliant.</h3>
+
+          <div class="fcg-ai-stats">
+            <div class="fcg-ai-stat"><iconify-icon icon="solar:database-bold-duotone" width="22" height="22"></iconify-icon><span><strong>1M+</strong> deduplicated properties via G-Link — multi-source, APAC-native</span></div>
+            <div class="fcg-ai-stat"><iconify-icon icon="solar:bolt-circle-bold-duotone" width="22" height="22"></iconify-icon><span><strong>Every major airline</strong> via F-Link — GDS, NDC, and LCC direct in one feed</span></div>
+            <div class="fcg-ai-stat"><iconify-icon icon="solar:shield-check-bold-duotone" width="22" height="22"></iconify-icon><span><strong>Real-time</strong> rates, availability, and booking confirmation — not cached</span></div>
+          </div>
+
+          <div class="fcg-ai-input">
+            <div>
+              <div class="fcg-ai-placeholder">Ask the AI Booking Tool</div>
+              <div class="fcg-ai-tools">
+                <span class="fcg-ai-tool"><iconify-icon icon="solar:microphone-3-linear" width="22" height="22"></iconify-icon></span>
+                <span class="fcg-ai-tool"><iconify-icon icon="solar:global-linear" width="25" height="25"></iconify-icon></span>
+              </div>
+            </div>
+            <span class="fcg-ai-submit"><iconify-icon icon="solar:arrow-up-linear" width="24" height="24"></iconify-icon></span>
+          </div>
+        </article>
+      </div>
+
+      <div class="fcg-marketing-features">
+        <article class="fcg-marketing-feature fade-up">
+          <h3>Your AI understands intent</h3>
+          <p>Travelers describe what they need in plain language. Text or voice. But understanding a request isn't the hard part — connecting it to bookable supply is.</p>
+        </article>
+        <article class="fcg-marketing-feature fade-up">
+          <h3>G-Link and F-Link supply the answer</h3>
+          <p>Every parsed query hits G-Link and F-Link supply in real time — deduplicated hotel inventory and every major airline, multi-source, APAC-native, commercially ready. The inventory layer your AI is missing.</p>
+        </article>
+        <article class="fcg-marketing-feature fade-up">
+          <h3>Connected result: confirmed bookings</h3>
+          <p>Policy-compliant itineraries with live rates and real availability, ready to book. Not suggestions. Not cached results. Confirmed reservations from real supply.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="decision-paths" class="px-6 md:px-12 py-28 bg-[#050505] border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-3xl mb-16 fade-up">
+        <div class="product-kicker text-xs text-orange-500 mb-4">Use Cases</div>
+        <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Three ways to connect your AI to G-Link and F-Link.</h2>
+      </div>
+      <div class="space-y-5">
+        <article class="product-card rounded-3xl p-6 md:p-8 fade-up">
+          <div>
+            <div class="product-kicker text-[10px] text-orange-500 mb-2">Path 01</div>
+            <h3 class="text-2xl text-white font-medium tracking-tight">"We want conversational booking but can't build the supply layer for it."</h3>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed">You have a product and users. Your AI understands intent beautifully. But there's nothing bookable on the other side. Building supply connections from scratch — GDS, bedbanks, NDC, LCC direct — is a multi-year engineering drain that defeats the speed advantage of AI.</p>
+          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
+            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Recommended approach</div>
+            <div class="text-lg text-white font-medium mb-3">AI Booking Tool + G-Link + F-Link</div>
+            <p class="text-sm text-neutral-400 leading-relaxed">Connect your conversational interface to 1M+ deduplicated hotel properties via G-Link and every major airline via F-Link. Your AI handles the experience. The supply layer is already built.</p>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-6 md:p-8 fade-up">
+          <div>
+            <div class="product-kicker text-[10px] text-orange-500 mb-2">Path 02</div>
+            <h3 class="text-2xl text-white font-medium tracking-tight">"Travelers abandon our search forms. Policy gets enforced retroactively, if at all."</h3>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed">Your booking flow is rigid — dropdowns, date pickers, multi-step forms. Travelers abandon it. The 60% who book off-platform or call the agent never hit policy controls. You want to differentiate on experience, not plumbing.</p>
+          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
+            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Recommended approach</div>
+            <div class="text-lg text-white font-medium mb-3">AI Booking Tool + G-Link + F-Link + Policy Engine</div>
+            <p class="text-sm text-neutral-400 leading-relaxed">Replace rigid search with natural-language intake connected to G-Link and F-Link supply. Travelers describe what they need, the AI returns policy-compliant options from live, deduplicated inventory across every hotel and airline source. Policy enforced at booking, not at expense report.</p>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-6 md:p-8 fade-up">
+          <div>
+            <div class="product-kicker text-[10px] text-orange-500 mb-2">Path 03</div>
+            <h3 class="text-2xl text-white font-medium tracking-tight">"Our voice AI understands requests perfectly. It just can't book anything."</h3>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed">You're building voice interfaces for travel. The AI parses spoken intent flawlessly. But spoken words don't become bookings without a supply layer underneath — and building one means maintaining connections to GDS, bedbanks, NDC, and LCC direct across every market you serve.</p>
+          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
+            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Recommended approach</div>
+            <div class="text-lg text-white font-medium mb-3">AI Booking Tool (Voice) + G-Link + F-Link</div>
+            <p class="text-sm text-neutral-400 leading-relaxed">Voice input flows through the same booking engine as text — connected to G-Link and F-Link supply. Spoken requests become confirmed bookings against the full depth of deduplicated hotel and flight inventory. APAC-native coverage included.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="product-map" class="px-6 md:px-12 py-28 bg-[#000] border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 fade-up">
+        <div>
+          <div class="product-kicker text-xs text-orange-500 mb-4">What's Underneath</div>
+          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Four layers. One connection to real supply.</h2>
+        </div>
+        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Not a chatbot on top of search forms. A connection between your AI and the deepest inventory layer in APAC — G-Link and F-Link supply, policy logic, and confirmed bookings.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <article class="product-card rounded-3xl p-7 fade-up">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:chat-round-dots-linear" width="23" height="23"></iconify-icon></div>
+            <div>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Input</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Language Understanding</h3>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">The front door. Freeform traveler requests — text or voice — become structured queries that can hit G-Link and F-Link supply directly.</p>
+          <div class="border-t border-white/10 pt-5">
+            <ul class="space-y-3">
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Text and voice input with multi-turn conversational context</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Intent extraction mapped to bookable inventory parameters</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Disambiguation before the query hits supply — no wasted lookups</span></li>
+            </ul>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-7 fade-up">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:server-square-update-linear" width="23" height="23"></iconify-icon></div>
+            <div>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Supply — The Core</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">G-Link &amp; F-Link Inventory</h3>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">This is the layer that makes everything else valuable. 1M+ deduplicated hotel properties from GDS, bedbanks, and direct sources. Every major airline via GDS, NDC, and LCC direct. APAC-native supply depth — not retrofitted from a Western platform. Real-time, not cached.</p>
+          <div class="border-t border-white/10 pt-5">
+            <ul class="space-y-3">
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>G-Link: multi-source hotel content, property-level and room-level deduplication, negotiated-rate layering</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>F-Link: fare-family normalization, ancillary management, full commercial control across every airline</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Live rates, real availability, confirmed bookings — one connection replaces the six you'd build yourself</span></li>
+            </ul>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-7 fade-up">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:shield-check-linear" width="23" height="23"></iconify-icon></div>
+            <div>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Governance</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Policy Engine</h3>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Policy applied at the supply layer — before options from G-Link and F-Link reach the traveler. Not retroactively through expense reports. Not bolted on after the fact.</p>
+          <div class="border-t border-white/10 pt-5">
+            <ul class="space-y-3">
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Budget caps, preferred suppliers, and class-of-service rules enforced at point of search</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Pre-trip approval routing and out-of-policy flagging before the booking is made</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Client-level and traveler-level rule layering across G-Link and F-Link results</span></li>
+            </ul>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-7 fade-up">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:document-text-linear" width="23" height="23"></iconify-icon></div>
+            <div>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Output</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Confirmed Bookings</h3>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">The end result of connecting AI to G-Link and F-Link: complete, bookable itineraries with confirmed pricing from real supply — not suggestions, not cached results.</p>
+          <div class="border-t border-white/10 pt-5">
+            <ul class="space-y-3">
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Multi-segment itineraries assembled from a single conversation against live G-Link and F-Link supply</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Real-time pricing with supplier and rate source visibility across every connected source</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>One-step booking confirmation — no manual re-entry, no downstream verification</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+    <footer id="contact" class="flex flex-col w-full">
+      <section id="integration-path" class="fcg-mobile-feature border-t border-white/10">
+        <div class="fcg-mobile-inner">
+          <header class="fcg-mobile-heading fade-up">
+            <div class="fcg-main-icon"><iconify-icon icon="solar:plug-circle-linear" width="28" height="28"></iconify-icon></div>
+            <div class="fcg-mobile-eyebrow">Integration Path</div>
+            <h2>Connect your AI to G-Link and F-Link. Go live.</h2>
+            <p class="fcg-mobile-subcopy">The AI Booking Tool is the integration layer between your conversational interface and real supply. Connect to 1M+ deduplicated properties and every major airline, validate against live inventory, and ship to production.</p>
+          </header>
+
+          <div class="fcg-feature-grid">
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:link-round-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Connect your AI to G-Link and F-Link supply</h3>
+                <p>Point your conversational interface at the AI Booking Tool API. Your front end handles the traveler experience. G-Link and F-Link handle the full supply layer underneath — every hotel, every airline, deduplicated and commercially ready.</p>
+              </div>
+            </article>
+
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:test-tube-minimalistic-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Test against live inventory in sandbox</h3>
+                <p>Run natural-language queries against real G-Link and F-Link supply in a sandbox environment. Validate parsing, policy logic, and results before production.</p>
+              </div>
+            </article>
+
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Configure policy rules and approval flows</h3>
+                <p>Set up corporate travel policies, budget constraints, preferred suppliers, and approval routing. Rules are enforced on every query automatically.</p>
+              </div>
+            </article>
+
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:rocket-2-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Go live with confirmed bookings from real supply</h3>
+                <p>Move from sandbox to production. Natural-language requests from your users flow through to G-Link and F-Link inventory — confirmed rates, real availability, live reservations across every connected source.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="fcg-mobile-cta fade-up">
+            <h3>See what's on the other side of this connection.</h3>
+            <p>Request a live demo to see your AI connect to 1M+ deduplicated properties via G-Link and every major airline via F-Link — real-time supply, policy-compliant results, confirmed bookings.</p>
+            <div class="fcg-store-actions">
+              <a href="#" class="fcg-store-button"><iconify-icon icon="solar:play-circle-linear" width="18" height="18"></iconify-icon>Request live demo</a>
+              <a href="#" class="fcg-store-button"><iconify-icon icon="solar:document-text-linear" width="18" height="18"></iconify-icon>Read the API docs</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">
+        <div class="max-w-[100rem] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-[4rem] md:gap-[2rem]">
+
+            <div class="col-span-1 md:col-span-3 flex flex-col items-start gap-4">
+                <div class="flex items-center gap-3">
+                    <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 24px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="white"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="white"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="white"/></svg>
+                </div>
+                <p class="mt-2">TRAVEL_INFRASTRUCTURE</p>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="text-white mb-2">Platform</span>
+                <a href="corporate-booking-tool.html" class="hover:text-white transition-colors">Corporate Booking Tool</a>
+                <a href="agent-booking-tool.html" class="hover:text-white transition-colors">Agent Booking Tool</a>
+                <a href="ai-booking-tool.html" class="hover:text-white transition-colors">AI Booking Tool</a>
+                <a href="atlas.html" class="hover:text-white transition-colors">Atlas TMC OS</a>
+                <a href="#" class="hover:text-white transition-colors">G-Link</a>
+                <a href="#" class="hover:text-white transition-colors">F-Link</a>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="text-white mb-2">Solutions</span>
+                <a href="agreeease.html" class="hover:text-white transition-colors">AgreeEase</a>
+                <a href="ai-mapping.html" class="hover:text-white transition-colors">AI Mapping</a>
+                <a href="advisory-implementation.html" class="hover:text-white transition-colors">Advisory &amp; Implementation</a>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="text-white mb-2">Company</span>
+                <a href="about.html" class="hover:text-white transition-colors">About</a>
+                <a href="#" class="hover:text-white transition-colors">Careers</a>
+                <a href="#" class="hover:text-white transition-colors">Contact</a>
+                <a href="#" class="hover:text-white transition-colors">Press</a>
+            </div>
+
+            <div class="col-span-1 md:col-span-3 flex flex-col md:items-end gap-4">
+                <span class="text-white mb-2">Connect</span>
+                <a href="#" class="hover:text-white/60 transition-colors"><iconify-icon icon="solar:link-linear"></iconify-icon> LinkedIn</a>
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                <span class="mt-4 text-white/30">© 2026 FCG Group. All rights reserved.</span>
+            </div>
+
+        </div>
+    </footer>
+
+    
+<!-- Interactivity scripts -->
+    <script>
+      // Reveal elements on scroll
+      const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                  observer.unobserve(entry.target);
+              }
+          });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-up, .scale-in').forEach(el => observer.observe(el));
+
+      function renderFcgBentoSpiral() {
+          const spiralMount = document.getElementById('fcgBentoSpiral');
+          if (!spiralMount) return;
+
+          const size = 620;
+          const points = 800;
+          const dotRadius = 1.6;
+          const duration = 3;
+          const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+          const center = size / 2;
+          const maxRadius = center - 4 - dotRadius;
+          const svgNS = 'http://www.w3.org/2000/svg';
+          const svg = document.createElementNS(svgNS, 'svg');
+
+          svg.setAttribute('width', String(size));
+          svg.setAttribute('height', String(size));
+          svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+          svg.setAttribute('role', 'presentation');
+
+          for (let i = 0; i < points; i++) {
+              const idx = i + 0.5;
+              const frac = idx / points;
+              const radius = Math.sqrt(frac) * maxRadius;
+              const theta = idx * goldenAngle;
+              const x = center + radius * Math.cos(theta);
+              const y = center + radius * Math.sin(theta);
+              const circle = document.createElementNS(svgNS, 'circle');
+
+              circle.setAttribute('cx', x.toFixed(3));
+              circle.setAttribute('cy', y.toFixed(3));
+              circle.setAttribute('r', String(dotRadius));
+              circle.setAttribute('fill', 'currentColor');
+              circle.setAttribute('opacity', '0.6');
+
+              const animRadius = document.createElementNS(svgNS, 'animate');
+              animRadius.setAttribute('attributeName', 'r');
+              animRadius.setAttribute('values', `${dotRadius * 0.5};${dotRadius * 1.35};${dotRadius * 0.5}`);
+              animRadius.setAttribute('dur', `${duration}s`);
+              animRadius.setAttribute('begin', `${(frac * duration).toFixed(3)}s`);
+              animRadius.setAttribute('repeatCount', 'indefinite');
+              circle.appendChild(animRadius);
+
+              const animOpacity = document.createElementNS(svgNS, 'animate');
+              animOpacity.setAttribute('attributeName', 'opacity');
+              animOpacity.setAttribute('values', '0.25;0.9;0.25');
+              animOpacity.setAttribute('dur', `${duration}s`);
+              animOpacity.setAttribute('begin', `${(frac * duration).toFixed(3)}s`);
+              animOpacity.setAttribute('repeatCount', 'indefinite');
+              circle.appendChild(animOpacity);
+
+              svg.appendChild(circle);
+          }
+
+          spiralMount.innerHTML = '';
+          spiralMount.appendChild(svg);
+      }
+
+      renderFcgBentoSpiral();
+
+      document.querySelectorAll('.fcg-bento-card').forEach(card => {
+          card.addEventListener('mousemove', event => {
+              const rect = card.getBoundingClientRect();
+              card.style.setProperty('--x', `${event.clientX - rect.left}px`);
+              card.style.setProperty('--y', `${event.clientY - rect.top}px`);
+          });
+      });
+
+      // Counter animation (with IntersectionObserver cleanup)
+      const counters = document.querySelectorAll('.counter');
+      counters.forEach(counter => {
+          const target = parseFloat(counter.getAttribute('data-target'));
+          let current = target - 0.5;
+          let intervalId = null;
+
+          function startCounter() {
+              if (intervalId) return;
+              intervalId = setInterval(() => {
+                  const jitter = (Math.random() - 0.5) * 0.02;
+                  let val = current + jitter;
+                  if (val > target) val = target;
+                  if (val < target - 0.1) val = target - 0.1;
+                  current = val;
+                  counter.innerHTML = current.toFixed(2) + '<span class="text-lg text-neutral-500">%</span>';
+              }, 150);
+          }
+
+          function stopCounter() {
+              if (intervalId) { clearInterval(intervalId); intervalId = null; }
+          }
+
+          const counterObserver = new IntersectionObserver(([entry]) => {
+              entry.isIntersecting ? startCounter() : stopCounter();
+          });
+          counterObserver.observe(counter);
+      });
+    </script>
+
+    
+<!-- ===== THEME TOGGLE SCRIPT ===== -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Always start in light mode
+        html.setAttribute('data-theme', 'light');
+        if (themeToggle) themeToggle.checked = false;
+        localStorage.removeItem('theme');
+
+        // Toggle theme on checkbox change (checked = dark, unchecked = light)
+        if (themeToggle) {
+            themeToggle.addEventListener('change', function() {
+                const newTheme = this.checked ? 'dark' : 'light';
+                html.setAttribute('data-theme', newTheme);
+            });
+        }
+    </script>
+    <!-- ===== END THEME TOGGLE SCRIPT ===== -->
+</body>
+</html>

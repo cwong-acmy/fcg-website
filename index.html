@@ -24,12 +24,12 @@
             theme: {
                 extend: {
                     colors: {
-                        background: '#080805',
-                        foreground: '#ffffff',
-                        accent: '#F97316',
-                        card: '#121212',
-                        border: '#2A2A2A',
-                        muted: '#888888'
+                        background: 'var(--color-bg)',
+                        foreground: 'var(--color-fg)',
+                        accent: 'var(--color-accent)',
+                        card: 'var(--color-card)',
+                        border: 'var(--color-border)',
+                        muted: 'var(--color-muted)'
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -43,6 +43,7 @@
         :root {
             --color-bg: #080805;
             --color-fg: #ffffff;
+            --color-accent: #F97316;
             --color-card: #121212;
             --color-border: #2A2A2A;
             --color-muted: #888888;
@@ -86,15 +87,6 @@
 
         html[data-theme="light"] .text-zinc-300 {
             color: var(--color-fg) !important;
-        }
-
-        /* Logo theme styling */
-        img[alt="agreeease"] {
-            filter: brightness(1);
-        }
-
-        html[data-theme="light"] img[alt="agreeease"] {
-            filter: brightness(0) saturate(100%);
         }
 
         html[data-theme="light"] .bg-white {
@@ -909,33 +901,67 @@
             height: 18px;
         }
 
+        .partner-grid-section {
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+        }
+
+        .partner-grid-title {
+            color: var(--color-muted);
+        }
+
+        .partner-grid-title strong {
+            color: var(--color-fg);
+            font-weight: 500;
+        }
+
+        .partner-logo-band,
+        .partner-logo-grid,
+        .partner-logo-card {
+            border-color: var(--color-border) !important;
+        }
+
+        .partner-logo-card:nth-child(odd) {
+            background-color: var(--color-card);
+        }
+
+        html[data-theme="dark"] .partner-logo-card img {
+            filter: invert(1) grayscale(1) brightness(1.4);
+            opacity: 0.9;
+        }
+
+        html[data-theme="dark"] .partner-plus::before,
+        html[data-theme="dark"] .partner-plus::after {
+            background: var(--color-fg);
+        }
+
         /* ===== END GLOBAL LIGHT MODE OVERRIDES ===== */
     </style>
 </head>
 <body class="bg-background text-foreground antialiased">
     <!-- ===== MARINE HERO SECTION ===== -->
     <div class="marine-hero-section">
-        <section class="relative z-10 min-h-[100dvh] pt-32 pb-16 px-6 md:px-12 flex flex-col justify-center w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center max-w-[1600px] mx-auto w-full">
+        <section class="relative z-10 min-h-[100svh] pt-24 pb-12 px-6 md:px-12 flex flex-col justify-center w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center max-w-[1600px] mx-auto w-full">
 
                 <!-- Left: Typography & Action -->
-                <div class="lg:col-span-7 flex flex-col items-start gap-8 z-20">
+                <div class="lg:col-span-7 flex flex-col items-start gap-6 z-20">
                     <div class="inline-flex items-center gap-3 px-3 py-1.5 rounded-full border surface-glass text-xs font-mono uppercase tracking-tighter border-white/10 text-white">
                         <iconify-icon icon="solar:global-linear" class="text-orange-500 text-base"></iconify-icon>
                         FCG Group
                     </div>
 
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl tracking-tighter leading-none font-medium text-white">
-                        The travel operating system for modern operators.
+                    <h1 class="text-5xl md:text-7xl lg:text-[5.4rem] xl:text-8xl tracking-tighter leading-[0.96] font-medium text-white">
+                        Connect to the supply infrastructure behind travel.
                     </h1>
 
-                    <p class="text-base md:text-lg max-w-[50ch] leading-relaxed font-light mt-4 text-zinc-400">
-                        Modular infrastructure for TMCs and corporate travel programs. Built to scale. Built to stay out of the way.
+                    <p class="text-base md:text-lg max-w-[50ch] leading-relaxed font-light mt-2 text-zinc-400">
+                        1M+ hotel properties. Every major airline. One connection to all of it. G-Link and F-Link are the inventory and content layer that powers every booking — whether you're building a travel product, running a TMC, or managing a corporate travel program.
                     </p>
 
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mt-6">
+                    <div class="relative z-30 flex flex-col sm:flex-row items-start sm:items-center gap-6 mt-2">
                         <button class="group px-8 py-4 rounded-full text-sm font-medium tracking-tight active:scale-[0.98] transition-all shadow-[0_0_32px_rgba(255,255,255,0.1)] flex items-center gap-3 bg-white text-zinc-950 hover:bg-zinc-200">
-                            Book a demo
+                            Get connected
                             <iconify-icon icon="solar:arrow-right-linear" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
                         </button>
                     </div>
@@ -952,8 +978,8 @@
                                 <span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
                                 <span class="text-zinc-300">NETWORK ACTIVE</span>
                             </div>
-                            <span>PROPERTIES: 2.5M+</span>
-                            <span>HOTEL GROUPS: 300+</span>
+                            <span>PROPERTIES: 1M+</span>
+                            <span>PARTNERS: 300+</span>
                         </div>
                     </div>
                 </div>
@@ -968,9 +994,9 @@
         const { motion } = window.Motion;
 
         const Subheading = ({ text }) => (
-            <div className="flex items-center space-x-3 mb-4">
+            <div className="flex items-center space-x-3 mb-4 font-mono-jb">
                 <div className="w-5 h-1 rounded-full bg-accent"></div>
-                <span className="text-accent uppercase text-xs tracking-wider font-normal">{text}</span>
+                <span className="text-accent uppercase text-xs tracking-[0.18em] font-normal">{text}</span>
             </div>
         );
 
@@ -1002,111 +1028,51 @@
             ];
 
             return (
-                <section className="relative z-10 -mt-24 bg-white pt-10 pb-10 text-[#0F1114] md:-mt-36 md:pt-12 md:pb-16">
+                <section className="partner-grid-section relative z-10 pt-10 pb-10 md:pt-12 md:pb-16">
                     <div className="px-6 pb-8 text-center md:px-12 md:pb-10">
-                        <h2 className="text-2xl font-medium tracking-tight text-neutral-500 md:text-3xl">
-                            Companies we <span className="text-[#0F1114]">collaborate</span> with.
+                        <h2 className="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
+                            300+ travel brands, TMCs, and hotel groups. <strong>Already connected.</strong>
                         </h2>
                     </div>
 
-                    <div className="border-y border-[#DADDE1]">
-                        <div className="relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x md:border-[#DADDE1]">
-                            <PartnerLogoCard logo={logos[0]} className="border-r border-b border-[#DADDE1] bg-[#F4F4F4]">
+                    <div className="partner-logo-band border-y">
+                        <div className="partner-logo-grid relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x">
+                            <PartnerLogoCard logo={logos[0]} className="partner-logo-card border-r border-b">
                                 <PartnerPlus className="-right-3 -bottom-3" />
                             </PartnerLogoCard>
-                            <PartnerLogoCard logo={logos[1]} className="border-b border-[#DADDE1] md:border-r" />
-                            <PartnerLogoCard logo={logos[2]} className="border-r border-b border-[#DADDE1] bg-[#F4F4F4]">
+                            <PartnerLogoCard logo={logos[1]} className="partner-logo-card border-b md:border-r" />
+                            <PartnerLogoCard logo={logos[2]} className="partner-logo-card border-r border-b">
                                 <PartnerPlus className="-right-3 -bottom-3" />
                                 <PartnerPlus className="-left-3 -bottom-3 hidden md:block" />
                             </PartnerLogoCard>
-                            <PartnerLogoCard logo={logos[3]} className="border-b border-[#DADDE1]" />
-                            <PartnerLogoCard logo={logos[4]} className="border-r border-b border-[#DADDE1] md:border-b-0">
+                            <PartnerLogoCard logo={logos[3]} className="partner-logo-card border-b" />
+                            <PartnerLogoCard logo={logos[4]} className="partner-logo-card border-r border-b md:border-b-0">
                                 <PartnerPlus className="-right-3 -bottom-3 md:hidden" />
                             </PartnerLogoCard>
-                            <PartnerLogoCard logo={logos[5]} className="border-b border-[#DADDE1] bg-[#F4F4F4] md:border-r md:border-b-0" />
-                            <PartnerLogoCard logo={logos[6]} className="border-r border-[#DADDE1]" />
-                            <PartnerLogoCard logo={logos[7]} className="bg-[#F4F4F4]" />
+                            <PartnerLogoCard logo={logos[5]} className="partner-logo-card border-b md:border-r md:border-b-0" />
+                            <PartnerLogoCard logo={logos[6]} className="partner-logo-card border-r" />
+                            <PartnerLogoCard logo={logos[7]} className="partner-logo-card" />
                         </div>
                     </div>
                 </section>
             );
         };
 
-        const Navbar = () => (
-            <motion.nav
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute top-4 inset-x-0 z-50 flex items-center justify-between px-4 md:px-8 w-full max-w-[1440px] mx-auto"
-            >
-                <div className="flex items-center cursor-pointer">
-                    <img src="assets/images/agreeease-full-logo.svg" alt="agreeease" style={{height: '40px', width: 'auto'}} />
-                </div>
-                <div className="hidden md:flex glass-panel rounded-full px-6 py-2.5 items-center space-x-12">
-                    <div className="flex items-center space-x-2 cursor-pointer hover:text-white/70 transition-colors text-sm font-light">
-                        <span>Product Features</span>
-                        <iconify-icon icon="solar:alt-arrow-down-linear" width="16" height="16"></iconify-icon>
-                    </div>
-                    <div className="text-white/20">|</div>
-                    <div className="flex items-center space-x-4">
-                        <iconify-icon icon="solar:minimalistic-magnifer-linear" width="18" height="18" className="text-white/50 hover:text-white cursor-pointer transition-colors"></iconify-icon>
-                        <iconify-icon icon="solar:user-linear" width="18" height="18" className="text-white/50 hover:text-white cursor-pointer transition-colors"></iconify-icon>
-                    </div>
-                </div>
-                <div className="glass-panel rounded-full w-10 h-10 flex flex-col justify-center items-center space-y-1 cursor-pointer hover:bg-white/10 transition-colors">
-                    <div className="w-4 h-[1px] bg-white rounded-full"></div>
-                    <div className="w-4 h-[1px] bg-white rounded-full"></div>
-                    <div className="w-4 h-[1px] bg-white rounded-full"></div>
-                </div>
-            </motion.nav>
-        );
-
-        const Hero = () => (
-            <div className="p-2 md:p-4 h-[95vh] md:h-[90vh]">
-                <div className="relative w-full h-full rounded-[2rem] overflow-hidden">
-                    <img src="assets/images/frame-mid.svg" alt="Hero graphic" className="absolute inset-0 w-full h-full object-cover scale-105" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/90"></div>
-                    <Navbar />
-                    <div className="absolute bottom-0 inset-x-0 p-6 md:p-12 z-20 flex flex-col lg:flex-row justify-between lg:items-end gap-8">
-                        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="max-w-2xl">
-                            <Subheading text="AGREEEASE" />
-                            <h1 className="text-5xl md:text-7xl font-medium tracking-tighter leading-[1.1] mb-6">Turnkey AI<br />Hotel Sourcing Solution</h1>
-                        </motion.div>
-                        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="flex flex-col sm:flex-row items-start sm:items-center gap-6 border-t lg:border-t-0 lg:border-l border-white/10 pt-6 lg:pt-0 lg:pl-12 w-full lg:w-auto">
-                            <a href="#" className="group flex items-center space-x-3 text-lg font-light hover:text-accent transition-colors w-full sm:w-auto justify-between">
-                                <span>Talk to Us</span>
-                                <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-accent transition-colors">
-                                    <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
-                                </div>
-                            </a>
-                            <div className="hidden sm:block w-[1px] h-8 bg-white/10"></div>
-                            <a href="#" className="group flex items-center space-x-3 text-lg font-light hover:text-accent transition-colors w-full sm:w-auto justify-between">
-                                <span>See How It Works</span>
-                                <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-accent transition-colors">
-                                    <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
-                                </div>
-                            </a>
-                        </motion.div>
-                    </div>
-                </div>
-            </div>
-        );
-
         const About = () => {
             const stats = [
-                { number: "$500M", suffix: "+", label: "Annual volume through the ecosystem" },
-                { number: "2.5", suffix: "M+", label: "Properties on the G-Link network" },
-                { number: "300", suffix: "+", label: "Travel brands & hotel groups" },
-                { number: "<2", suffix: " min", label: "Average support response time" }
+                { number: "1", suffix: "M+", label: "Properties connected through G-Link" },
+                { number: "$500M", suffix: "+", label: "Volume flowing through connected partners" },
+                { number: "300", suffix: "+", label: "Travel brands and hotel groups connected" },
+                { number: "10", suffix: "", label: "Offices across Asia-Pacific and London" }
             ];
             return (
                 <section className="py-24 md:py-32 px-6 md:px-12 max-w-[1440px] mx-auto">
                     <div className="flex flex-col lg:flex-row justify-between gap-16 lg:gap-24">
                         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} className="lg:w-1/2">
                             <Subheading text="By The Numbers" />
-                            <h2 className="text-3xl md:text-5xl font-medium tracking-tight leading-tight mb-8 max-w-2xl">The systems, the team, and the volume are already in place with unbeatable inventory depth.</h2>
+                            <h2 className="text-3xl md:text-5xl font-medium tracking-tight leading-tight mb-8 max-w-2xl">The supply advantage behind every connection.</h2>
                             <div className="flex items-center space-x-6 border-b border-white/10 pb-8 max-w-md">
-                                <p className="text-muted font-light text-sm leading-relaxed">FCG Group serves 100+ large enterprises and grew 5x between 2021 and 2023.</p>
+                                <p className="text-muted font-light text-sm leading-relaxed">Any product is only as good as what it connects to. FCG's strength isn't the tools — it's the depth, cleanliness, and commercial readiness of the inventory on the other side.</p>
                             </div>
                             <a href="#" className="inline-flex items-center space-x-4 mt-8 group">
                                 <span className="text-lg font-light group-hover:text-accent transition-colors">Learn More</span>
@@ -1160,18 +1126,18 @@
 
         const FeaturedModels = () => {
             const cars = [
-                { name: "AgreeEase", brand: "Procurement", price: "RFP & Rate Management", hp: "Supplier Negotiation", mileage: "Rate Custody", location: "Workflow Auto", image: '<svg width="340" height="340" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="450" cy="720" r="370"/><circle cx="480" cy="720" r="400"/><circle cx="510" cy="720" r="430"/><circle cx="540" cy="720" r="460"/><circle cx="570" cy="720" r="490"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>' },
-                { name: "Atlas", brand: "Operations", price: "TMC Operating System", hp: "Booking Pipeline", mileage: "Duty of Care", location: "Unified Inbox", image: '<svg width="340" height="340" viewBox="100 250 1000 900" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="240" y1="790" x2="960" y2="790" stroke-dasharray="1 18" stroke-width="4"/><line x1="600" y1="380" x2="600" y2="970" stroke-dasharray="1 18" stroke-width="4"/><line x1="430" y1="930" x2="600" y2="790" stroke-dasharray="1 18" stroke-width="4"/><ellipse cx="420" cy="730" rx="80" ry="220"/><ellipse cx="815" cy="700" rx="115" ry="360"/><line x1="420" y1="510" x2="600" y2="790"/><line x1="420" y1="950" x2="600" y2="790"/><line x1="600" y1="790" x2="815" y2="340"/><line x1="600" y1="790" x2="815" y2="1060"/></g></svg>' },
-                { name: "Advisory Services", brand: "Implementation", price: "Strategic Consulting", hp: "Expert Embedding", mileage: "Legacy Modernization", location: "500+ Team", image: '<svg width="340" height="340" viewBox="200 400 800 750" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="260" y1="1020" x2="960" y2="1020" stroke-dasharray="1 18" stroke-width="4"/><line x1="600" y1="450" x2="600" y2="1050" stroke-dasharray="1 18" stroke-width="4"/><line x1="360" y1="1020" x2="890" y2="500" stroke-dasharray="1 18" stroke-width="4"/><line x1="360" y1="1020" x2="985" y2="800"/><path d="M360 1020 C 430 560, 530 450, 700 470"/><path d="M360 1020 C 455 575, 565 490, 735 540"/><path d="M360 1020 C 480 590, 600 530, 770 610"/><path d="M360 1020 C 505 605, 635 570, 805 680"/><path d="M360 1020 C 530 620, 670 610, 840 750"/><path d="M360 1020 C 555 635, 705 650, 875 820"/><path d="M360 1020 C 580 650, 740 690, 910 890"/><path d="M360 1020 C 605 665, 775 730, 945 960"/><path d="M360 1020 C 630 680, 810 770, 980 1030"/><path d="M360 1020 Q 520 690, 850 980" stroke-dasharray="1 18" stroke-width="4"/><path d="M360 1020 Q 600 670, 885 885" stroke-dasharray="1 18" stroke-width="4"/><path d="M360 1020 Q 680 650, 920 790" stroke-dasharray="1 18" stroke-width="4"/><path d="M360 1020 Q 760 630, 955 695" stroke-dasharray="1 18" stroke-width="4"/><path d="M360 1020 Q 840 610, 990 600" stroke-dasharray="1 18" stroke-width="4"/></g></svg>' },
-                { name: "Travakey", brand: "Distribution", price: "Resource APIs", hp: "300+ Hotel Groups", mileage: "Real-Time Supply", location: "Multi-Channel", image: '<svg width="340" height="340" viewBox="150 350 900 900" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="330,520 830,520 830,1020 330,1020 330,520"/><polyline points="520,390 1020,390 1020,890 520,890 520,390"/><line x1="330" y1="520" x2="520" y2="390"/><line x1="830" y1="520" x2="1020" y2="390"/><line x1="830" y1="1020" x2="1020" y2="890"/><line x1="330" y1="1020" x2="520" y2="890"/><line x1="497" y1="520" x2="497" y2="1020"/><line x1="663" y1="520" x2="663" y2="1020"/><line x1="330" y1="687" x2="830" y2="687"/><line x1="330" y1="853" x2="830" y2="853"/><line x1="687" y1="390" x2="687" y2="890"/><line x1="853" y1="390" x2="853" y2="890"/><line x1="520" y1="557" x2="1020" y2="557"/><line x1="520" y1="723" x2="1020" y2="723"/><line x1="330" y1="520" x2="830" y2="1020" stroke-dasharray="1 18" stroke-width="4"/><line x1="330" y1="1020" x2="830" y2="520" stroke-dasharray="1 18" stroke-width="4"/><line x1="520" y1="390" x2="1020" y2="890" stroke-dasharray="1 18" stroke-width="4"/><line x1="1020" y1="390" x2="520" y2="890" stroke-dasharray="1 18" stroke-width="4"/></g></svg>' },
-                { name: "Allbon", brand: "Business Travel", price: "Corporate Booking Tool", hp: "White-Label", mileage: "Traveler-Focused", location: "Enterprise-Ready", image: '<svg width="340" height="340" viewBox="100 350 1000 850" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="250" y1="790" x2="950" y2="790" stroke-dasharray="1 18" stroke-width="4"/><line x1="600" y1="470" x2="600" y2="1110" stroke-dasharray="1 18" stroke-width="4"/><ellipse cx="600" cy="790" rx="300" ry="82" transform="rotate(0 600 790)"/><ellipse cx="600" cy="790" rx="300" ry="82" transform="rotate(55 600 790)"/><ellipse cx="600" cy="790" rx="300" ry="82" transform="rotate(-55 600 790)"/><ellipse cx="600" cy="790" rx="300" ry="82" transform="rotate(90 600 790)"/></g></svg>' }
+                { name: "G-Link", brand: "Hotel Supply", price: "Connect to every hotel", hp: "1M+ Properties", mileage: "Deduplication", location: "Multi-Source", image: '<svg width="340" height="340" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="450" cy="720" r="370"/><circle cx="480" cy="720" r="400"/><circle cx="510" cy="720" r="430"/><circle cx="540" cy="720" r="460"/><circle cx="570" cy="720" r="490"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>' },
+                { name: "F-Link", brand: "Flight Supply", price: "Connect to every airline", hp: "GDS + NDC + LCC", mileage: "Fare Normalization", location: "Ancillary Mgmt", image: '<svg width="340" height="340" viewBox="100 250 1000 900" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="240" y1="790" x2="960" y2="790" stroke-dasharray="1 18" stroke-width="4"/><line x1="600" y1="380" x2="600" y2="970" stroke-dasharray="1 18" stroke-width="4"/><line x1="430" y1="930" x2="600" y2="790" stroke-dasharray="1 18" stroke-width="4"/><ellipse cx="420" cy="730" rx="80" ry="220"/><ellipse cx="815" cy="700" rx="115" ry="360"/><line x1="420" y1="510" x2="600" y2="790"/><line x1="420" y1="950" x2="600" y2="790"/><line x1="600" y1="790" x2="815" y2="340"/><line x1="600" y1="790" x2="815" y2="1060"/></g></svg>' },
+                { name: "Atlas", brand: "Operate", price: "TMC Operating System", hp: "Connected Ops", mileage: "Duty of Care", location: "Unified Inbox", image: '<svg width="340" height="340" viewBox="200 400 800 750" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="260" y1="1020" x2="960" y2="1020" stroke-dasharray="1 18" stroke-width="4"/><line x1="600" y1="450" x2="600" y2="1050" stroke-dasharray="1 18" stroke-width="4"/><line x1="360" y1="1020" x2="890" y2="500" stroke-dasharray="1 18" stroke-width="4"/><line x1="360" y1="1020" x2="985" y2="800"/><path d="M360 1020 C 430 560, 530 450, 700 470"/><path d="M360 1020 C 455 575, 565 490, 735 540"/><path d="M360 1020 C 480 590, 600 530, 770 610"/><path d="M360 1020 C 505 605, 635 570, 805 680"/><path d="M360 1020 C 530 620, 670 610, 840 750"/><path d="M360 1020 C 555 635, 705 650, 875 820"/><path d="M360 1020 C 580 650, 740 690, 910 890"/><path d="M360 1020 C 605 665, 775 730, 945 960"/><path d="M360 1020 C 630 680, 810 770, 980 1030"/><path d="M360 1020 Q 520 690, 850 980" stroke-dasharray="1 18" stroke-width="4"/><path d="M360 1020 Q 600 670, 885 885" stroke-dasharray="1 18" stroke-width="4"/><path d="M360 1020 Q 680 650, 920 790" stroke-dasharray="1 18" stroke-width="4"/><path d="M360 1020 Q 760 630, 955 695" stroke-dasharray="1 18" stroke-width="4"/><path d="M360 1020 Q 840 610, 990 600" stroke-dasharray="1 18" stroke-width="4"/></g></svg>' },
+                { name: "API Access", brand: "Connect", price: "Connect to G-Link & F-Link", hp: "One Integration", mileage: "Full Control", location: "Live in Weeks", image: '<svg width="340" height="340" viewBox="150 350 900 900" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="330,520 830,520 830,1020 330,1020 330,520"/><polyline points="520,390 1020,390 1020,890 520,890 520,390"/><line x1="330" y1="520" x2="520" y2="390"/><line x1="830" y1="520" x2="1020" y2="390"/><line x1="830" y1="1020" x2="1020" y2="890"/><line x1="330" y1="1020" x2="520" y2="890"/><line x1="497" y1="520" x2="497" y2="1020"/><line x1="663" y1="520" x2="663" y2="1020"/><line x1="330" y1="687" x2="830" y2="687"/><line x1="330" y1="853" x2="830" y2="853"/><line x1="687" y1="390" x2="687" y2="890"/><line x1="853" y1="390" x2="853" y2="890"/><line x1="520" y1="557" x2="1020" y2="557"/><line x1="520" y1="723" x2="1020" y2="723"/><line x1="330" y1="520" x2="830" y2="1020" stroke-dasharray="1 18" stroke-width="4"/><line x1="330" y1="1020" x2="830" y2="520" stroke-dasharray="1 18" stroke-width="4"/><line x1="520" y1="390" x2="1020" y2="890" stroke-dasharray="1 18" stroke-width="4"/><line x1="1020" y1="390" x2="520" y2="890" stroke-dasharray="1 18" stroke-width="4"/></g></svg>' },
+                { name: "Corporate Booking Tool", brand: "Experience", price: "Modern travel booking", hp: "Policy Engine", mileage: "Mobile-First", location: "Duty of Care", image: '<svg width="340" height="340" viewBox="100 350 1000 850" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="250" y1="790" x2="950" y2="790" stroke-dasharray="1 18" stroke-width="4"/><line x1="600" y1="470" x2="600" y2="1110" stroke-dasharray="1 18" stroke-width="4"/><ellipse cx="600" cy="790" rx="300" ry="82" transform="rotate(0 600 790)"/><ellipse cx="600" cy="790" rx="300" ry="82" transform="rotate(55 600 790)"/><ellipse cx="600" cy="790" rx="300" ry="82" transform="rotate(-55 600 790)"/><ellipse cx="600" cy="790" rx="300" ry="82" transform="rotate(90 600 790)"/></g></svg>' }
             ];
             return (
                 <section className="py-24 overflow-hidden">
                     <div className="px-6 md:px-12 max-w-[1440px] mx-auto mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-                        <div><Subheading text="Our Solutions" /><h2 className="text-3xl md:text-5xl font-medium tracking-tight">One Platform. Five Integrated Solutions.</h2></div>
+                        <div><Subheading text="Connect · Operate · Experience" /><h2 className="text-3xl md:text-5xl font-medium tracking-tight">One inventory underneath. Three product families.</h2></div>
                         <a href="#" className="hidden md:inline-flex items-center space-x-3 text-sm font-light hover:text-accent transition-colors pb-2 border-b border-white/10 hover:border-accent">
-                            <span>Explore All Products</span>
+                            <span>See How Companies Connect</span>
                             <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
                         </a>
                     </div>
@@ -1184,17 +1150,17 @@
 
         const Benefits = () => {
             const features = [
-                { icon: "solar:cpu-bolt-linear", title: "Asia-native. Globally ready.", desc: "Built in the world's fastest-growing business travel market. Real supply depth across APAC. Thirteen years in the making." },
-                { icon: "solar:chart-square-linear", title: "Operate at scale.", desc: "Procurement, distribution, booking and settlement, composable in any order with adoption on your timeline. Own the relationship, own your stack." },
-                { icon: "solar:code-scan-linear", title: "Win the AI era.", desc: "The first AI-native corporate booking experience. Built in, not bolted on. Policy-aware across the booking, agent, and supply layers." }
+                { icon: "solar:cpu-bolt-linear", title: "Deep, not just wide.", desc: "1M+ properties isn't a vanity number. Multi-source aggregation with property-level and room-level deduplication. Every connection returns bookable inventory — not three listings for the same hotel." },
+                { icon: "solar:chart-square-linear", title: "Asia-native. Globally connected.", desc: "Built in the region with the world's fastest-growing business travel market. Real supply depth across APAC — not retrofitted from a platform designed for somewhere else." },
+                { icon: "solar:code-scan-linear", title: "Open connections, not locked platforms.", desc: "No rip-and-replace. No all-or-nothing platform fee. Connect to one piece or the whole stack. Modular pricing. The inventory is the constant — the connection is flexible." }
             ];
             return (
                 <section className="py-24 px-6 md:px-12 max-w-[1440px] mx-auto relative">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px] -z-10"></div>
                     <div className="text-center mb-16 flex flex-col items-center">
-                        <Subheading text="Why FCG Group" />
-                        <h2 className="text-3xl md:text-5xl font-medium tracking-tight max-w-2xl leading-tight">Supply. Book. Settle. Done.</h2>
-                        <p className="text-muted font-light text-base md:text-lg mt-6 max-w-xl">The infrastructure built for operators, by operators.</p>
+                        <Subheading text="Why This Connection Matters" />
+                        <h2 className="text-3xl md:text-5xl font-medium tracking-tight max-w-2xl leading-tight">The supply advantage behind every connection.</h2>
+                        <p className="text-muted font-light text-base md:text-lg mt-6 max-w-xl">Any product is only as good as what it connects to. FCG's strength isn't the tools — it's the depth, cleanliness, and commercial readiness of the inventory on the other side.</p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {features.map((feature, idx) => (
@@ -1202,7 +1168,7 @@
                                 <div className="w-14 h-14 rounded-2xl bg-background border border-border flex items-center justify-center text-accent mb-8 group-hover:scale-110 transition-transform">
                                     <iconify-icon icon={feature.icon} width="24" height="24"></iconify-icon>
                                 </div>
-                                <h3 className="text-xl font-medium tracking-tight mb-4" style={{color: '#ffffff'}}>{feature.title}</h3>
+                                <h3 className="text-xl text-white font-medium tracking-tight mb-4">{feature.title}</h3>
                                 <p className="text-muted font-light text-sm leading-relaxed">{feature.desc}</p>
                             </motion.div>
                         ))}
@@ -1215,7 +1181,6 @@
             return (
                 <div className="min-h-screen bg-background flex flex-col">
                     <PartnerGrid />
-                    <Hero />
                     <About />
                     <FeaturedModels />
                     <Benefits />
@@ -1240,98 +1205,62 @@
                 <ul class="fcg-nav-shell hidden md:flex items-center gap-0 text-sm font-normal">
                     <li class="fcg-dropdown-item relative">
                         <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
-                            <span>About</span>
-                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
-                        </button>
-                        <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
-                            <div class="flex gap-9 overflow-hidden">
-                                <div>
-                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">FCG Group</h3>
-                                    <div class="space-y-6">
-                                        <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:global-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p class="text-sm font-medium">Asian travel network</p><span class="text-xs">Supply depth across key regional markets</span></div>
-                                        </a>
-                                        <a href="#h-scroll-section" class="fcg-menu-link flex items-start gap-3">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p class="text-sm font-medium">Operator infrastructure</p><span class="text-xs">Tools built around real travel workflows</span></div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Markets</h3>
-                                    <div class="space-y-6">
-                                        <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p class="text-sm font-medium">Regional coverage</p><span class="text-xs">Singapore, Hong Kong, Shenzhen and more</span></div>
-                                        </a>
-                                        <a href="#expansion-container" class="fcg-menu-link flex items-start gap-3">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:compass-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p class="text-sm font-medium">Expansion model</p><span class="text-xs">How FCG scales supply and operations</span></div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="fcg-dropdown-item relative">
-                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
                             <span>Products</span>
                             <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
                         </button>
                         <div class="fcg-dropdown-panel fcg-products-mega absolute left-0 top-full mt-2 rounded-2xl">
                             <div class="fcg-products-mega-grid">
                                 <div class="fcg-products-group">
-                                    <h3 class="fcg-products-group-heading">For TMCs & operators</h3>
+                                    <h3 class="fcg-products-group-heading">For builders & platforms</h3>
                                     <div class="fcg-products-group-title">Connect</div>
                                     <div class="fcg-products-list">
-                                        <a href="#capabilities" class="fcg-products-link">
+                                        <a href="api-access.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:code-scan-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>API Access</p><span>Connect to G-Link and F-Link directly</span></div>
+                                        </a>
+                                        <a href="ai-booking-tool.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:cpu-bolt-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>AgreeEase</p><span>AI hotel sourcing and RFP workflows</span></div>
+                                            <div><p>AI Booking Integration</p><span>Connect AI to live inventory</span></div>
                                         </a>
-                                        <a href="#h-scroll-section" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>Atlas</p><span>TMC operating system for bookings and service</span></div>
-                                        </a>
-                                        <a href="#h-scroll-section" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:case-round-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>Allbon</p><span>Corporate booking platform for business travel</span></div>
+                                        <a href="whitelabel.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:box-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Whitelabel</p><span>Connect through a ready-made platform</span></div>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="fcg-products-group">
-                                    <h3 class="fcg-products-group-heading">For travel suppliers</h3>
+                                    <h3 class="fcg-products-group-heading">For TMCs & operators</h3>
                                     <div class="fcg-products-group-title">Operate</div>
                                     <div class="fcg-products-list">
-                                        <a href="#capabilities" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:box-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>Travakey</p><span>Resource APIs and supplier connectivity</span></div>
+                                        <a href="atlas.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Atlas (TMC OS)</p><span>Connect every operational surface into one hub</span></div>
                                         </a>
-                                        <a href="#expansion-container" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:chart-2-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>Smart Distribution</p><span>Rate control and marketplace access</span></div>
+                                        <a href="agent-booking-tool.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:case-round-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Agent Booking Tool</p><span>Connect agents to every supplier in one search</span></div>
                                         </a>
-                                        <a href="#capabilities" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:card-transfer-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>Payment Solutions</p><span>Secure settlement and processing tools</span></div>
+                                        <a href="advisory-implementation.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:compass-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Advisory &amp; Implementation</p><span>Connect to the right part of the stack</span></div>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="fcg-products-group">
-                                    <h3 class="fcg-products-group-heading">For mapping & optimization</h3>
+                                    <h3 class="fcg-products-group-heading">For corporates & travel programs</h3>
                                     <div class="fcg-products-group-title">Experience</div>
                                     <div class="fcg-products-list">
-                                        <a href="#capabilities" class="fcg-products-link">
+                                        <a href="corporate-booking-tool.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>Hotel Mapping</p><span>Clean, standardized property records</span></div>
+                                            <div><p>Corporate Booking Tool</p><span>Connect travelers to a modern booking experience</span></div>
                                         </a>
-                                        <a href="#h-scroll-section" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:bed-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>Room Mapping</p><span>Full clarity across room types and suppliers</span></div>
+                                        <a href="agreeease.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:chart-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>AgreeEase (RFP &amp; Rates)</p><span>Connect negotiated rates directly into supply</span></div>
                                         </a>
-                                        <a href="#expansion-container" class="fcg-products-link">
+                                        <a href="ai-mapping.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:magic-stick-3-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>Content Optimization</p><span>Enrich, standardize, and improve conversion</span></div>
+                                            <div><p>AI Mapping</p><span>Connect clean data back into the supply layer</span></div>
                                         </a>
                                     </div>
                                 </div>
@@ -1340,39 +1269,44 @@
                     </li>
                     <li class="fcg-dropdown-item relative">
                         <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
-                            <span>Technology</span>
+                            <span>Solutions</span>
                             <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
                         </button>
                         <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
                             <div class="flex gap-9 overflow-hidden">
                                 <div>
-                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Platform</h3>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">G-Link · Hotel Supply</h3>
                                     <div class="space-y-6">
                                         <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:shield-check-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p class="text-sm font-medium">Reliable workflows</p><span class="text-xs">Structured processes for sourcing teams</span></div>
+                                            <div><p class="text-sm font-medium">1M+ properties connected</p><span class="text-xs">GDS, bedbanks, and direct sources in one feed</span></div>
                                         </a>
                                         <a href="#h-scroll-section" class="fcg-menu-link flex items-start gap-3">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:eye-scan-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p class="text-sm font-medium">Data visibility</p><span class="text-xs">See where requests and supply stand</span></div>
+                                            <div><p class="text-sm font-medium">Deduplicated content</p><span class="text-xs">Property-level and room-level resolution</span></div>
                                         </a>
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Automation</h3>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">F-Link · Flight Supply</h3>
                                     <div class="space-y-6">
                                         <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:rocket-2-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p class="text-sm font-medium">Faster responses</p><span class="text-xs">Reduce manual sourcing and follow-ups</span></div>
+                                            <div><p class="text-sm font-medium">GDS + NDC + LCC direct</p><span class="text-xs">Every source in one standardized feed</span></div>
                                         </a>
                                         <a href="#expansion-container" class="fcg-menu-link flex items-start gap-3">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:palette-round-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p class="text-sm font-medium">Custom workflows</p><span class="text-xs">Adapt the system around real teams</span></div>
+                                            <div><p class="text-sm font-medium">Full commercial control</p><span class="text-xs">Fare normalization, ancillaries, PNR reconciliation</span></div>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </li>
+                    <li class="fcg-dropdown-item relative">
+                        <a href="about.html" class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5">
+                            <span>About</span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -1408,23 +1342,27 @@
         <div class="absolute z-10 right-0 w-32 h-full bg-gradient-to-l to-transparent from-zinc-950"></div>
 
         <div class="absolute whitespace-nowrap flex items-center gap-16 font-mono text-xs text-zinc-500 marine-animate-marquee w-max">
-            <span>TRUSTED BY OPERATORS ACROSS</span><span class="text-white/10">///</span>
+            <span>CONNECTED ACROSS EVERY MARKET THAT MATTERS</span><span class="text-white/10">///</span>
             <span>SINGAPORE</span><span class="text-white/10">///</span>
             <span>HONG KONG</span><span class="text-white/10">///</span>
             <span>SHENZHEN</span><span class="text-white/10">///</span>
             <span>BEIJING</span><span class="text-white/10">///</span>
             <span>SHANGHAI</span><span class="text-white/10">///</span>
+            <span>TAIPEI</span><span class="text-white/10">///</span>
             <span>KUALA LUMPUR</span><span class="text-white/10">///</span>
             <span>BANGKOK</span><span class="text-white/10">///</span>
+            <span>HO CHI MINH</span><span class="text-white/10">///</span>
             <span>LONDON</span><span class="text-white/10">///</span>
-            <span>TRUSTED BY OPERATORS ACROSS</span><span class="text-white/10">///</span>
+            <span>CONNECTED ACROSS EVERY MARKET THAT MATTERS</span><span class="text-white/10">///</span>
             <span>SINGAPORE</span><span class="text-white/10">///</span>
             <span>HONG KONG</span><span class="text-white/10">///</span>
             <span>SHENZHEN</span><span class="text-white/10">///</span>
             <span>BEIJING</span><span class="text-white/10">///</span>
             <span>SHANGHAI</span><span class="text-white/10">///</span>
+            <span>TAIPEI</span><span class="text-white/10">///</span>
             <span>KUALA LUMPUR</span><span class="text-white/10">///</span>
             <span>BANGKOK</span><span class="text-white/10">///</span>
+            <span>HO CHI MINH</span><span class="text-white/10">///</span>
             <span>LONDON</span>
         </div>
     </div>
@@ -1435,10 +1373,10 @@
       <div class="max-w-7xl mx-auto border-t border-white/10 pt-20 overflow-visible">
         <div class="flex items-center gap-6 mb-20 fade-up">
           <h2 class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-white">
-            360° Coverage
+            The Core
           </h2>
           <div class="h-px bg-white/20 flex-1"></div>
-          <span class="text-[10px] font-mono text-neutral-500">FCG_CORE</span>
+          <span class="text-[10px] font-mono text-neutral-500">G-LINK_F-LINK</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 overflow-visible pb-24">
@@ -1452,7 +1390,7 @@
                 <div class="absolute inset-0 bg-grid opacity-10 pointer-events-none"></div>
                 <div class="font-mono text-[9px] text-neutral-500 uppercase flex items-center gap-2">
                   <span class="w-1.5 h-1.5 rounded-full bg-neutral-500"></span>
-                  RFP Workflow
+                  Multi-Source Aggregation
                 </div>
                 <div class="h-1 w-full bg-neutral-800 rounded mt-3 overflow-hidden">
                   <div class="h-full bg-neutral-500 w-3/4"></div>
@@ -1462,8 +1400,8 @@
               <!-- Depth Layer 1 -->
               <div class="absolute inset-0 rounded-3xl bg-[#0a0a0a] border border-white/[0.08] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:[transform:translate3d(12px,-12px,-30px)] opacity-0 group-hover:opacity-100 flex flex-col justify-start p-6 overflow-hidden shadow-xl">
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.05),transparent_50%)]"></div>
-                <div class="font-mono text-[9px] text-neutral-400 uppercase">Cycle Time</div>
-                <div class="font-mono text-[10px] text-white mt-1">WEEKS TO HOURS</div>
+                <div class="font-mono text-[9px] text-neutral-400 uppercase">Properties</div>
+                <div class="font-mono text-[10px] text-white mt-1">1M+ CONNECTED</div>
               </div>
 
               <!-- Main Card (Front) -->
@@ -1482,10 +1420,10 @@
 
                 <!-- Content -->
                 <h3 class="text-xl font-semibold text-white mb-3 tracking-tight">
-                  AgreeEase: RFP &amp; Rate Management
+                  G-Link — Hotel Supply
                 </h3>
                 <p class="text-sm text-neutral-400 font-light leading-relaxed mb-8 flex-1">
-                  The most underbuilt category in corporate travel, <span class="text-orange-500">purpose-built at last.</span> Structured RFP issuance, supplier response management, rate load verification, and annual review cycles automated from start to finish.
+                  The hardest problem in travel tech isn't booking — <span class="text-orange-500">it's content.</span> G-Link connects to GDS, bedbanks, and direct sources, then resolves everything into one clean, deduplicated, bookable feed. One API. One connection to every hotel.
                 </p>
 
                 <!-- Bottom Status Bar -->
@@ -1508,7 +1446,7 @@
                 <div class="absolute inset-0 bg-grid opacity-10 pointer-events-none"></div>
                 <div class="font-mono text-[9px] text-neutral-500 uppercase flex items-center gap-2">
                   <span class="w-1.5 h-1.5 rounded-full bg-neutral-500"></span>
-                  Mapping Engine
+                  Fare Normalization
                 </div>
                 <div class="flex items-end gap-1.5 mt-3 h-4">
                   <div class="h-2 w-1.5 bg-neutral-600 rounded-sm"></div>
@@ -1521,8 +1459,8 @@
               <!-- Depth Layer 1 -->
               <div class="absolute inset-0 rounded-3xl bg-[#0a0a0a] border border-white/[0.08] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:[transform:translate3d(12px,-12px,-30px)] opacity-0 group-hover:opacity-100 flex flex-col justify-start p-6 overflow-hidden shadow-xl">
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.05),transparent_50%)]"></div>
-                <div class="font-mono text-[9px] text-neutral-400 uppercase">Portfolio</div>
-                <div class="font-mono text-[10px] text-orange-500 mt-1">CLEANED, FAST</div>
+                <div class="font-mono text-[9px] text-neutral-400 uppercase">Sources</div>
+                <div class="font-mono text-[10px] text-orange-500 mt-1">GDS + NDC + LCC</div>
               </div>
 
               <!-- Main Card -->
@@ -1540,10 +1478,10 @@
                 </div>
 
                 <h3 class="text-xl font-semibold text-white mb-3 tracking-tight relative z-10">
-                  AI Mapping
+                  F-Link — Flight Supply
                 </h3>
                 <p class="text-sm text-neutral-400 font-light leading-relaxed mb-8 flex-1 relative z-10">
-                  Clean your supplier portfolio, fast. Property reconciliation, deduplication, and content normalization across every source feed. The cleanup work that used to take quarters, completed in hours.
+                  NDC changed distribution. LCCs went direct. GDS content alone isn't enough anymore. F-Link connects GDS, NDC, and LCC direct into one standardized feed. Fare-family normalization. Ancillary management. Full commercial control.
                 </p>
 
                 <!-- Code Terminal Lines -->
@@ -1571,16 +1509,16 @@
                 <div class="absolute inset-0 bg-grid opacity-10 pointer-events-none"></div>
                 <div class="font-mono text-[9px] text-neutral-500 uppercase flex items-center gap-2">
                   <span class="w-1.5 h-1.5 rounded-full bg-neutral-500"></span>
-                  Embedded Team
+                  Product Stack
                 </div>
-                <div class="font-mono text-[10px] text-white mt-2">500+ EXPERTS</div>
+                <div class="font-mono text-[10px] text-white mt-2">3 FAMILIES</div>
               </div>
 
               <!-- Depth Layer 1 -->
               <div class="absolute inset-0 rounded-3xl bg-[#0a0a0a] border border-white/[0.08] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:[transform:translate3d(12px,-12px,-30px)] opacity-0 group-hover:opacity-100 flex flex-col justify-start p-6 overflow-hidden shadow-xl">
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.05),transparent_50%)]"></div>
-                <div class="font-mono text-[9px] text-neutral-400 uppercase">Built For</div>
-                <div class="font-mono text-[10px] text-orange-500 mt-1">OPERATORS</div>
+                <div class="font-mono text-[9px] text-neutral-400 uppercase">Architecture</div>
+                <div class="font-mono text-[10px] text-orange-500 mt-1">MODULAR</div>
               </div>
 
               <!-- Main Card -->
@@ -1597,10 +1535,10 @@
                 </div>
 
                 <h3 class="text-xl font-semibold text-white mb-3 tracking-tight relative z-10">
-                  Advisory &amp; Implementation
+                  Connect · Operate · Experience
                 </h3>
                 <p class="text-sm text-neutral-400 font-light leading-relaxed mb-8 flex-1 relative z-10">
-                  For TMCs modernizing. For corporates redesigning their programs. Consultants and engineers embedded with your team, from legacy migration through full platform rollout. Built for operators, refined by operations.
+                  Three product families. Each one built for a different type of travel company — whether you're building a product, running operations, or managing a travel program. Every tool connects back to G-Link and F-Link.
                 </p>
 
                 <!-- Animated Bars -->
@@ -1626,11 +1564,10 @@
       <div class="max-w-7xl mx-auto px-6">
         <div class="flex flex-col items-start mb-16 fade-up">
           <h2 class="text-3xl md:text-5xl font-semibold tracking-tight mb-4 text-white">
-            The Network at a Glance
+            The Connection at a Glance
           </h2>
           <p class="text-base text-neutral-400 max-w-xl font-light leading-relaxed">
-            <span class="text-orange-500">100+ enterprises</span> around the world run on FCG's real-time inventory, direct supplier contracts and proprietary infrastructure.
-            
+            <span class="text-orange-500">300+ travel brands</span>, TMCs, and hotel groups already connected. Real-time inventory, commercial-ready supply, and infrastructure that scales.
           </p>
         </div>
 
@@ -1676,16 +1613,16 @@
               <!-- Bottom Stats -->
               <div>
                 <h3 class="text-xl font-semibold mb-2 tracking-tight text-white group-hover:translate-x-1 transition-transform">
-                  Annual Volume
+                  Connected Volume
                 </h3>
                 <div class="flex gap-8 pt-4 border-t border-white/10">
                   <div>
-                    <div class="text-[10px] text-neutral-500 font-mono mb-1">PROCESSED</div>
+                    <div class="text-[10px] text-neutral-500 font-mono mb-1">FLOWING THROUGH</div>
                     <div class="text-sm font-mono text-white">$500M+</div>
                   </div>
                   <div>
-                    <div class="text-[10px] text-neutral-500 font-mono mb-1">RESPONSE</div>
-                    <div class="text-sm font-mono text-white">< 2 min</div>
+                    <div class="text-[10px] text-neutral-500 font-mono mb-1">PARTNERS</div>
+                    <div class="text-sm font-mono text-white">300+</div>
                   </div>
                 </div>
               </div>
@@ -1713,14 +1650,14 @@
             </div>
 
             <div>
-              <h3 class="text-lg font-semibold mb-2 tracking-tight text-white">Tech Stack</h3>
+              <h3 class="text-lg font-semibold mb-2 tracking-tight text-white">Supply Layer</h3>
               <div class="space-y-1.5 pt-4 border-t border-white/10">
                 <div class="flex justify-between text-[10px] font-mono text-neutral-400">
-                  <span>BOOKING_ENGINE</span>
+                  <span>G-LINK_HOTEL</span>
                   <span class="text-white">OK</span>
                 </div>
                 <div class="flex justify-between text-[10px] font-mono text-neutral-400">
-                  <span>RATE_MANAGEMENT</span>
+                  <span>F-LINK_FLIGHT</span>
                   <span class="text-white">OK</span>
                 </div>
               </div>
@@ -1759,22 +1696,22 @@
             <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent pointer-events-none group-hover:from-white/10 transition-colors"></div>
             <div class="relative z-10 max-w-lg">
               <h3 class="text-xl font-semibold text-white mb-2 tracking-tight">
-                Global Presence
+                Connected Across Every Market That Matters
               </h3>
               <p class="text-sm text-neutral-400 font-light">
-                13 cities across Asia, UK, and Singapore. Direct relationships with 300+ hotel groups.
+                Asia-native. Globally connected. 10 offices across Asia-Pacific and London.
               </p>
             </div>
             <div class="flex gap-12 relative z-10 w-full md:w-auto justify-between md:justify-end">
               <div>
-                <div class="text-3xl font-semibold text-white tracking-tighter font-mono">13</div>
-                <div class="text-[10px] text-neutral-500 font-mono uppercase mt-1">Cities</div>
+                <div class="text-3xl font-semibold text-white tracking-tighter font-mono">10</div>
+                <div class="text-[10px] text-neutral-500 font-mono uppercase mt-1">Offices</div>
               </div>
               <div>
                 <div class="text-3xl font-semibold text-white tracking-tighter font-mono">
-                  500<span class="text-lg text-neutral-500">+</span>
+                  300<span class="text-lg text-neutral-500">+</span>
                 </div>
-                <div class="text-[10px] text-neutral-500 font-mono uppercase mt-1">Team Members</div>
+                <div class="text-[10px] text-neutral-500 font-mono uppercase mt-1">Partners Connected</div>
               </div>
             </div>
           </div>
@@ -1792,7 +1729,7 @@
         <div class="absolute top-12 left-6 md:left-12 z-20 flex items-center gap-4">
           <div class="w-12 h-[1px] bg-white/20"></div>
           <span class="text-[10px] font-mono font-bold tracking-widest text-white uppercase">
-            Our Technology
+            The Stack
           </span>
         </div>
 
@@ -1854,11 +1791,11 @@
                 Corporate Booking Tool
               </h3>
               <p class="text-sm text-neutral-400 font-light leading-relaxed mb-8">
-                Flights, hotels, and ground transport for the modern traveler. Self-service, policy-enforced, mobile-first. <span class="text-orange-500">Live in days, not quarters.</span>
+                Connect travelers to a modern booking experience. Mobile-first. Self-service. Policy enforced at booking, not at expense report. <span class="text-orange-500">The adoption problem isn't traveler resistance — it's that the current tool is bad.</span>
               </p>
               <div class="p-4 bg-black border border-white/[0.08] rounded-lg flex justify-between items-center group-hover:border-white/15 transition-colors">
-                <span class="text-[10px] font-mono text-neutral-500 uppercase">Category</span>
-                <span class="text-[10px] font-mono text-white">FRONT-END / CORPORATE</span>
+                <span class="text-[10px] font-mono text-neutral-500 uppercase">Family</span>
+                <span class="text-[10px] font-mono text-white">EXPERIENCE</span>
               </div>
             </div>
           </div>
@@ -1911,11 +1848,11 @@
                 Agent Booking Tool
               </h3>
               <p class="text-sm text-neutral-400 font-light leading-relaxed mb-8">
-                The cockpit for TMC agents. Unified search across flights, hotels, rail, and ground. Multi-option quote builder, negotiated rate auto-application, and full booking-on-behalf audit trails. <span class="text-orange-500">Everything in one place.</span> Nothing missed.
+                Connect agents to every supplier in one search. The professional cockpit — flights, hotels, rail, ground. Every source through G-Link and F-Link. <span class="text-orange-500">Negotiated rates surface at point of booking</span>, not in a spreadsheet nobody opens.
               </p>
               <div class="p-4 bg-black border border-white/[0.08] rounded-lg flex justify-between items-center group-hover:border-white/15 transition-colors">
-                <span class="text-[10px] font-mono text-neutral-500 uppercase">Category</span>
-                <span class="text-[10px] font-mono text-white">FRONT-END / AGENT</span>
+                <span class="text-[10px] font-mono text-neutral-500 uppercase">Family</span>
+                <span class="text-[10px] font-mono text-white">OPERATE</span>
               </div>
             </div>
           </div>
@@ -1962,14 +1899,14 @@
 
             <div class="relative z-10 mt-auto">
               <h3 class="text-2xl font-semibold mb-4 tracking-tight text-white">
-                Atlas TMC OS
+                Atlas — TMC Operating System
               </h3>
               <p class="text-sm text-neutral-400 font-light leading-relaxed mb-8">
-                <span class="text-orange-500">One hub.</span> Every client, every booking, every incident. Atlas replaces the spreadsheet, the inbox, the legacy system. The infrastructure that lets a TMC scale.
+                <span class="text-orange-500">Connect every operational surface into one hub.</span> Clients, queues, ticketing, duty of care, reporting — all connected. No more toggling between screens. No more tribal knowledge that only veteran agents carry.
               </p>
               <div class="p-4 bg-black border border-white/[0.08] rounded-lg flex justify-between items-center group-hover:border-white/15 transition-colors">
-                <span class="text-[10px] font-mono text-neutral-500 uppercase">Category</span>
-                <span class="text-[10px] font-mono text-white">MID-END / OPERATIONS</span>
+                <span class="text-[10px] font-mono text-neutral-500 uppercase">Family</span>
+                <span class="text-[10px] font-mono text-white">OPERATE</span>
               </div>
             </div>
           </div>
@@ -2026,14 +1963,14 @@
 
             <div class="relative z-10 mt-auto">
               <h3 class="text-2xl font-semibold mb-4 tracking-tight text-white">
-                G-Link
+                G-Link — Connect to Hotel Supply
               </h3>
               <p class="text-sm text-neutral-400 font-light leading-relaxed mb-8">
-                The global hotel supply platform. GDS, bedbanks, direct connects, aggregated into <span class="text-orange-500">one clean, deduplicated feed.</span> Negotiated-rate layering. Unified booking API. Response-time optimization.
+                Duplicate properties. Mismatched room types. Stale rates from six different sources. G-Link resolves all of it into <span class="text-orange-500">one clean, deduplicated, bookable feed.</span> Property-level and room-level deduplication. Negotiated-rate layering per client.
               </p>
               <div class="p-4 bg-black border border-white/[0.08] rounded-lg flex justify-between items-center group-hover:border-white/15 transition-colors">
-                <span class="text-[10px] font-mono text-neutral-500 uppercase">Category</span>
-                <span class="text-[10px] font-mono text-white">BACK-END / HOTEL SUPPLY</span>
+                <span class="text-[10px] font-mono text-neutral-500 uppercase">Layer</span>
+                <span class="text-[10px] font-mono text-white">SUPPLY / HOTEL</span>
               </div>
             </div>
           </div>
@@ -2091,14 +2028,14 @@
 
             <div class="relative z-10 mt-auto">
               <h3 class="text-2xl font-semibold mb-4 tracking-tight text-white">
-                F-Link
+                F-Link — Connect to Flight Supply
               </h3>
               <p class="text-sm text-neutral-400 font-light leading-relaxed mb-8">
-                Flight supply, managed. GDS, NDC, LCC direct, aggregated and standardized. <span class="text-orange-500">Fare-family normalization. PNR reconciliation.</span> Full commercial control: markups, fees, remit.
+                NDC changed distribution. LCCs went direct. GDS content alone isn't enough anymore. F-Link connects it all into one standardized feed. <span class="text-orange-500">Fare-family normalization. Ancillary management. PNR reconciliation.</span> Policy-aware filtering at the supply layer.
               </p>
               <div class="p-4 bg-black border border-white/[0.08] rounded-lg flex justify-between items-center group-hover:border-white/15 transition-colors">
-                <span class="text-[10px] font-mono text-neutral-500 uppercase">Category</span>
-                <span class="text-[10px] font-mono text-white">BACK-END / FLIGHT SUPPLY</span>
+                <span class="text-[10px] font-mono text-neutral-500 uppercase">Layer</span>
+                <span class="text-[10px] font-mono text-white">SUPPLY / FLIGHT</span>
               </div>
             </div>
           </div>
@@ -2275,93 +2212,6 @@
     </div>
     <!-- ===== END ENGINE MECHANICS HORIZONTAL SCROLL ===== -->
 
-    <!-- ===== OUR BRANDS MARQUEE + PROJECT GRID ===== -->
-    <section class="z-10 overflow-hidden group bg-[#000] border-white/10 border-t pt-40 pb-40 relative">
-      <div class="flex flex-col items-center justify-center fade-up">
-
-        <!-- ANIMATED MARQUEE -->
-        <div class="relative w-full overflow-hidden mb-24 flex items-center opacity-20 group-hover:opacity-40 transition-opacity duration-1000">
-          <div class="flex whitespace-nowrap animate-[marquee_25s_linear_infinite]">
-            <h2 class="text-[10vw] font-bold uppercase tracking-tighter text-white mx-8">
-              BOOKING TOOLS
-            </h2>
-            <h2 class="text-[10vw] font-bold uppercase tracking-tighter text-transparent mx-8" style="-webkit-text-stroke: 1px rgba(255,255,255,0.8);">
-              BOOKING TOOLS
-            </h2>
-            <h2 class="text-[10vw] font-bold uppercase tracking-tighter text-white mx-8">
-              BOOKING TOOLS
-            </h2>
-            <h2 class="text-[10vw] font-bold uppercase tracking-tighter text-transparent mx-8" style="-webkit-text-stroke: 1px rgba(255,255,255,0.8);">
-              BOOKING TOOLS
-            </h2>
-          </div>
-        </div>
-
-        <!-- PROJECT GRID -->
-        <div class="w-full max-w-6xl mx-auto -mt-32 grid grid-cols-1 md:grid-cols-2 gap-8 px-6 relative z-10">
-
-          <!-- PROJECT 1: Accomy -->
-          <a href="#" class="group/proj block relative rounded-[2rem] overflow-hidden aspect-[4/3] border border-white/10 hover:border-white/30 transition-all duration-500 shadow-2xl bg-[#050505] p-2">
-
-            <!-- Live Badge -->
-            <div class="absolute top-6 right-6 z-20 bg-black/50 backdrop-blur-md border border-white/20 text-white font-mono text-[10px] px-3 py-1 rounded-full opacity-0 group-hover/proj:opacity-100 translate-y-2 group-hover/proj:translate-y-0 transition-all duration-300 flex items-center gap-2">
-              <div class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
-              LIVE
-            </div>
-
-            <!-- Image Container -->
-            <div class="relative w-full h-full rounded-[1.5rem] overflow-hidden bg-neutral-900">
-              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/variants/468eeec1-e10c-4305-ad63-50cff0e023dc/1600w.png" alt="Contrabook" class="w-full h-full object-cover filter grayscale opacity-40 group-hover/proj:opacity-80 group-hover/proj:scale-105 transition-all duration-700 mix-blend-luminosity">
-
-              <!-- Gradient Overlay -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-8">
-                <div class="translate-y-4 group-hover/proj:translate-y-0 transition-transform duration-500">
-                  <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 mb-2 block opacity-0 group-hover/proj:opacity-100 transition-opacity duration-500">
-                    Allbon
-                  </span>
-                  <h3 class="text-3xl font-semibold tracking-tight text-white">
-                    Corporate
-                  </h3>
-                </div>
-              </div>
-            </div>
-          </a>
-
-          <!-- PROJECT 2: BlackVoya -->
-          <a href="#" class="group/proj block relative rounded-[2rem] overflow-hidden aspect-[4/3] border border-white/10 hover:border-white/30 transition-all duration-500 shadow-2xl md:mt-24 bg-[#050505] p-2">
-
-            <!-- Live Badge -->
-            <div class="absolute top-6 right-6 z-20 bg-black/50 backdrop-blur-md border border-white/20 text-white font-mono text-[10px] px-3 py-1 rounded-full opacity-0 group-hover/proj:opacity-100 translate-y-2 group-hover/proj:translate-y-0 transition-all duration-300 flex items-center gap-2">
-              <div class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
-              LIVE
-            </div>
-
-            <!-- Image Container -->
-            <div class="relative w-full h-full rounded-[1.5rem] overflow-hidden bg-neutral-900">
-              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/variants/823f2b22-afcd-4c1d-b3f6-c025e505e98c/1600w.jpg" alt="Allbon" class="w-full h-full object-cover filter grayscale opacity-40 group-hover/proj:opacity-80 group-hover/proj:scale-105 transition-all duration-700 mix-blend-luminosity">
-
-              <!-- Gradient Overlay -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-8">
-                <div class="translate-y-4 group-hover/proj:translate-y-0 transition-transform duration-500">
-                  <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400 mb-2 block opacity-0 group-hover/proj:opacity-100 transition-opacity duration-500">
-                    Contrabook
-                  </span>
-                  <h3 class="text-3xl font-semibold tracking-tight text-white">
-                    Agent
-                  </h3>
-                </div>
-              </div>
-            </div>
-          </a>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- MARQUEE ANIMATION (uses @keyframes marquee from head) -->
-    <!-- ===== END OUR BRANDS MARQUEE + PROJECT GRID ===== -->
-
-
     <!-- ===== ORBITAL FEATURE SYSTEM ===== -->
     <section class="overflow-hidden flex flex-col min-h-screen select-none text-white bg-[#000] border-white/10 border-t pt-32 pb-32 relative items-center justify-center">
       <!-- Background Elements -->
@@ -2373,15 +2223,15 @@
       <div class="relative z-20 flex flex-col items-center text-center px-6 mb-20">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900/30 text-xs font-normal text-neutral-400 mb-6 backdrop-blur-md">
           <span class="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)] animate-pulse"></span>
-          Global Network
+          Connected Network
         </div>
 
         <h2 class="md:text-5xl text-4xl font-semibold text-white tracking-tight mb-4">
-          Travel infrastructure, end to end.
+          Open connections vs. closed platforms.
         </h2>
 
         <p class="max-w-md mx-auto text-sm text-neutral-400 font-light leading-relaxed">
-          Sourcing, booking, operations, and settlement. Unified on one platform, connected to one supplier network.
+          No rip-and-replace. No all-or-nothing platform fee. Connect to one piece or the whole stack. The inventory is the constant — the connection is flexible.
         </p>
       </div>
 
@@ -2690,23 +2540,22 @@
       <!-- Badge with animation -->
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900/30 text-xs font-normal text-neutral-400 mb-8 opacity-0 backdrop-blur-md" id="hero-badge">
         <span class="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)] animate-pulse"></span>
-        Trusted by 100+ enterprises
+        300+ Partners Connected
       </div>
 
       <!-- Masked H1 Text Reveal -->
       <h1 class="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-white w-full max-w-[1100px] leading-[1.06] masked-reveal-target break-words whitespace-normal">
-        <span class="mask-word"><span class="mask-word-inner">Infrastructure</span></span>
+        <span class="mask-word"><span class="mask-word-inner">The</span></span>
+        <span class="mask-word"><span class="mask-word-inner">inventory</span></span>
         <span class="mask-word"><span class="mask-word-inner">that</span></span>
-        <span class="mask-word"><span class="mask-word-inner text-orange-500">scales</span></span>
-        <span class="mask-word"><span class="mask-word-inner">across</span></span>
-        <span class="mask-word"><span class="mask-word-inner text-orange-500">borders</span></span>
-        <span class="mask-word"><span class="mask-word-inner text-orange-500">and</span></span>
-        <span class="mask-word"><span class="mask-word-inner text-orange-500">markets.</span></span>
+        <span class="mask-word"><span class="mask-word-inner text-orange-500">everything</span></span>
+        <span class="mask-word"><span class="mask-word-inner text-orange-500">connects</span></span>
+        <span class="mask-word"><span class="mask-word-inner text-orange-500">to.</span></span>
       </h1>
 
       <!-- Subtitle with fade in -->
       <p class="mt-8 text-base md:text-lg text-neutral-400 max-w-2xl font-normal opacity-0" id="hero-desc">
-        <span class="text-orange-500">One API.</span> A full supplier network. Scales with you across Asia and the West.
+        <span class="text-orange-500">G-Link and F-Link</span> are the inventory and content layer that powers every booking — whether you're building a product, running a TMC, or managing a corporate travel program.
       </p>
     </header>
 
@@ -2738,10 +2587,10 @@
                 <iconify-icon icon="solar:cpu-bolt-bold-duotone" class="text-2xl text-neutral-300"></iconify-icon>
               </div>
               <h3 class="text-lg font-medium tracking-tight text-neutral-100">
-                Single API Connection
+                G-Link & F-Link
               </h3>
               <p class="mt-2 text-sm text-neutral-500 font-normal">
-                One integration point connects you to <span class="text-orange-500">2.5M+ properties</span> and <span class="text-orange-500">300+ hotel groups</span> across Asia.
+                One connection to <span class="text-orange-500">1M+ hotel properties</span> and <span class="text-orange-500">every major airline</span>. The supply layer everything connects to.
               </p>
             </div>
           </div>
@@ -2763,10 +2612,10 @@
                 <div class="bg-neutral-900/90 backdrop-blur-sm h-full w-full rounded-[15px] p-6 text-left border border-white/5">
                   <iconify-icon icon="solar:database-bold-duotone" class="text-xl text-neutral-400 mb-3"></iconify-icon>
                   <h3 class="text-base font-medium tracking-tight text-neutral-200">
-                    Real-Time Inventory
+                    Deduplicated Content
                   </h3>
                   <p class="mt-1 text-xs text-neutral-500 font-normal leading-relaxed">
-                    Live rates and availability from direct supplier relationships. No stale data, no manual updates.
+                    Property-level and room-level deduplication. Clean content. Accurate rates. Not three listings for the same hotel.
                   </p>
                 </div>
               </div>
@@ -2778,10 +2627,10 @@
                 <div class="bg-neutral-900/90 backdrop-blur-sm h-full w-full rounded-[15px] p-6 text-left border border-white/5">
                   <iconify-icon icon="solar:network-bold-duotone" class="text-xl text-neutral-400 mb-3"></iconify-icon>
                   <h3 class="text-base font-medium tracking-tight text-neutral-200">
-                    Global Coverage
+                    Commercially Connected
                   </h3>
                   <p class="mt-1 text-xs text-neutral-500 font-normal leading-relaxed">
-                    13 cities across Asia, UK, and Singapore. Local teams ensuring regional expertise and 24/7 support.
+                    Negotiated rates layered per client. Markup and remit logic built into the supply layer. Rates flow from negotiation to booking automatically.
                   </p>
                 </div>
               </div>
@@ -2814,10 +2663,10 @@
                       </span>
                     </div>
                     <h3 class="text-sm font-medium tracking-tight text-neutral-200">
-                      Transaction Security
+                      Connect
                     </h3>
                     <p class="mt-1 text-xs text-neutral-600 font-normal">
-                      Enterprise-grade compliance.
+                      API, AI Booking, Whitelabel. For builders & platforms.
                     </p>
                   </div>
                   <!-- Progress Bar -->
@@ -2847,10 +2696,10 @@
                       </span>
                     </div>
                     <h3 class="text-sm font-medium tracking-tight text-neutral-200">
-                      Booking Management
+                      Operate
                     </h3>
                     <p class="mt-1 text-xs text-neutral-600 font-normal">
-                      Processing $500M+ annually.
+                      Atlas, Agent Booking, Advisory. For TMCs & operators.
                     </p>
                   </div>
                   <!-- Mini Bar Chart -->
@@ -2887,10 +2736,10 @@
                       </span>
                     </div>
                     <h3 class="text-sm font-medium tracking-tight text-neutral-200">
-                      Response Times
+                      Experience
                     </h3>
                     <p class="mt-1 text-xs text-neutral-600 font-normal">
-                      Aggregating system logs & traces.
+                      Corporate Booking, AgreeEase, AI Mapping. For corporates.
                     </p>
                   </div>
                   <!-- Latency Display -->
@@ -3098,24 +2947,24 @@
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
                 <span class="text-white mb-2">Platform</span>
-                <a href="#" class="hover:text-white transition-colors">Corporate Booking Tool</a>
-                <a href="#" class="hover:text-white transition-colors">Agent Booking Tool</a>
-                <a href="#" class="hover:text-white transition-colors">AI Booking Tool</a>
-                <a href="#" class="hover:text-white transition-colors">Atlas TMC OS</a>
+                <a href="corporate-booking-tool.html" class="hover:text-white transition-colors">Corporate Booking Tool</a>
+                <a href="agent-booking-tool.html" class="hover:text-white transition-colors">Agent Booking Tool</a>
+                <a href="ai-booking-tool.html" class="hover:text-white transition-colors">AI Booking Tool</a>
+                <a href="atlas.html" class="hover:text-white transition-colors">Atlas TMC OS</a>
                 <a href="#" class="hover:text-white transition-colors">G-Link</a>
                 <a href="#" class="hover:text-white transition-colors">F-Link</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
                 <span class="text-white mb-2">Solutions</span>
-                <a href="#" class="hover:text-white transition-colors">AgreeEase</a>
-                <a href="#" class="hover:text-white transition-colors">AI Mapping</a>
-                <a href="#" class="hover:text-white transition-colors">Advisory &amp; Implementation</a>
+                <a href="agreeease.html" class="hover:text-white transition-colors">AgreeEase</a>
+                <a href="ai-mapping.html" class="hover:text-white transition-colors">AI Mapping</a>
+                <a href="advisory-implementation.html" class="hover:text-white transition-colors">Advisory &amp; Implementation</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
                 <span class="text-white mb-2">Company</span>
-                <a href="#" class="hover:text-white transition-colors">About</a>
+                <a href="about.html" class="hover:text-white transition-colors">About</a>
                 <a href="#" class="hover:text-white transition-colors">Careers</a>
                 <a href="#" class="hover:text-white transition-colors">Contact</a>
                 <a href="#" class="hover:text-white transition-colors">Press</a>
