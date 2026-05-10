@@ -1568,6 +1568,100 @@
     border: 1px solid rgba(255,255,255,.08);
     border-radius: .875rem;
   }
+  .fcg-advisory-hero {
+    padding: 8.75rem 1.5rem 6rem;
+    text-align: left;
+  }
+  .fcg-advisory-hero-layout {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: minmax(0, .92fr) minmax(30rem, 1fr);
+    align-items: center;
+    gap: clamp(3rem, 6vw, 6.5rem);
+    max-width: 82rem;
+    margin: 0 auto;
+  }
+  .fcg-advisory-hero .fcg-tailark-hero-inner {
+    max-width: none;
+    margin: 0;
+  }
+  .fcg-advisory-hero .fcg-tailark-pill {
+    margin: 0;
+  }
+  .fcg-advisory-hero .fcg-tailark-hero-inner h1 {
+    max-width: 44rem;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: clamp(3rem, 5.8vw, 5.4rem);
+  }
+  .fcg-advisory-hero .fcg-tailark-copy {
+    max-width: 38rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .fcg-advisory-hero .fcg-tailark-actions {
+    justify-content: flex-start;
+  }
+  .fcg-advisory-people {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: .75rem;
+    width: 100%;
+    min-width: 0;
+  }
+  .fcg-advisory-people-column {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+  }
+  .fcg-advisory-people-column:nth-child(2) {
+    margin-top: 4.25rem;
+  }
+  .fcg-advisory-people-column:nth-child(3) {
+    margin-top: 2rem;
+  }
+  .fcg-advisory-photo-card {
+    display: block;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: rgba(255,255,255,.08);
+    box-shadow: 0 18px 42px rgba(0,0,0,.28);
+    transition: opacity 260ms ease, transform 260ms ease, box-shadow 260ms ease;
+  }
+  .fcg-advisory-photo-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) brightness(.78);
+    transition: filter 360ms ease, transform 360ms ease;
+  }
+  .fcg-advisory-people:hover .fcg-advisory-photo-card {
+    opacity: .62;
+  }
+  .fcg-advisory-people .fcg-advisory-photo-card:hover {
+    opacity: 1;
+    transform: translateY(-4px);
+    box-shadow: 0 24px 58px rgba(0,0,0,.36);
+  }
+  .fcg-advisory-photo-card:hover img {
+    filter: grayscale(0) brightness(1);
+    transform: scale(1.035);
+  }
+  .fcg-advisory-photo-card-small {
+    width: clamp(7.1rem, 11vw, 9.7rem);
+    height: clamp(7.9rem, 12vw, 10.4rem);
+  }
+  .fcg-advisory-photo-card-medium {
+    width: clamp(7.7rem, 12vw, 10.75rem);
+    height: clamp(8.5rem, 13vw, 11.4rem);
+  }
+  .fcg-advisory-photo-card-large {
+    width: clamp(8.2rem, 13vw, 11.45rem);
+    height: clamp(9rem, 14vw, 12.15rem);
+  }
   .fcg-efferd-logos {
     position: relative;
     z-index: 4;
@@ -1686,6 +1780,13 @@
   }
   html[data-theme="light"] .fcg-tailark-preview img {
     border-color: rgba(15,17,20,.12);
+  }
+  html[data-theme="light"] .fcg-advisory-photo-card {
+    background: #e5e7eb;
+    box-shadow: 0 18px 42px rgba(15,17,20,.12);
+  }
+  html[data-theme="light"] .fcg-advisory-people .fcg-advisory-photo-card:hover {
+    box-shadow: 0 24px 58px rgba(15,17,20,.16);
   }
   html[data-theme="light"] .fcg-efferd-logos {
     background: #ffffff;
@@ -3441,6 +3542,45 @@
       border-radius: .875rem;
       padding: .6rem;
     }
+    .fcg-advisory-hero {
+      padding: 7.5rem 1.25rem 5rem;
+      text-align: center;
+    }
+    .fcg-advisory-hero-layout {
+      grid-template-columns: 1fr;
+      gap: 3.25rem;
+    }
+    .fcg-advisory-hero .fcg-tailark-pill,
+    .fcg-advisory-hero .fcg-tailark-hero-inner h1,
+    .fcg-advisory-hero .fcg-tailark-copy {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .fcg-advisory-hero .fcg-tailark-actions {
+      justify-content: center;
+    }
+    .fcg-advisory-people {
+      justify-content: flex-start;
+      overflow-x: auto;
+      padding: .25rem .25rem .75rem;
+      scroll-snap-type: x proximity;
+    }
+    .fcg-advisory-photo-card {
+      scroll-snap-align: center;
+      border-radius: .875rem;
+    }
+    .fcg-advisory-photo-card-small,
+    .fcg-advisory-photo-card-medium,
+    .fcg-advisory-photo-card-large {
+      width: 8.5rem;
+      height: 9.25rem;
+    }
+    .fcg-advisory-people-column:nth-child(2) {
+      margin-top: 3rem;
+    }
+    .fcg-advisory-people-column:nth-child(3) {
+      margin-top: 1.35rem;
+    }
     .fcg-efferd-logo-group {
       gap: 2.75rem;
       padding-right: 2.75rem;
@@ -3632,7 +3772,7 @@
   }
 </style>
 <main class="product-shell">
-  <section id="capabilities" class="fcg-tailark-hero">
+  <section id="capabilities" class="fcg-tailark-hero fcg-advisory-hero">
     <div class="fcg-tailark-radiance" aria-hidden="true">
       <span></span>
       <span></span>
@@ -3643,32 +3783,55 @@
       <img src="https://ik.imagekit.io/lrigu76hy/tailark/night-background.jpg?updatedAt=1745733451120" alt="">
     </div>
 
-    <div class="fcg-tailark-hero-inner">
-      <a href="#decision-paths" class="fcg-tailark-pill fcg-tailark-animate fcg-tailark-delay-1">
-        <span class="fcg-tailark-pill-text">Operate: For TMCs & Operators</span>
-        <span class="fcg-tailark-pill-divider"></span>
-        <span class="fcg-tailark-pill-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-      </a>
+    <div class="fcg-advisory-hero-layout">
+      <div class="fcg-tailark-hero-inner">
+        <a href="#decision-paths" class="fcg-tailark-pill fcg-tailark-animate fcg-tailark-delay-1">
+          <span class="fcg-tailark-pill-text">Operate: For TMCs & Operators</span>
+          <span class="fcg-tailark-pill-divider"></span>
+          <span class="fcg-tailark-pill-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </a>
 
-      <h1 class="fcg-tailark-animate fcg-tailark-delay-2">Modernize the right part of the stack first.</h1>
+        <h1 class="fcg-tailark-animate fcg-tailark-delay-2">Modernize the right part of the stack first.</h1>
 
-      <p class="fcg-tailark-copy fcg-tailark-animate fcg-tailark-delay-3">FCG advisory helps TMCs choose, sequence, and deploy the right infrastructure: Atlas, phased modules, data quality, payment workflows, AI booking, reporting, or Whitelabel. Start with the highest-value gap, then expand with confidence.</p>
+        <p class="fcg-tailark-copy fcg-tailark-animate fcg-tailark-delay-3">FCG advisory helps TMCs choose, sequence, and deploy the right infrastructure: Atlas, phased modules, data quality, payment workflows, AI booking, reporting, or Whitelabel. Start with the highest-value gap, then expand with confidence.</p>
 
-      <div class="fcg-tailark-actions fcg-tailark-animate fcg-tailark-delay-4">
-        <div class="fcg-tailark-action-frame">
-          <a href="#contact" class="fcg-tailark-button fcg-tailark-button-primary">Start a conversation</a>
+        <div class="fcg-tailark-actions fcg-tailark-animate fcg-tailark-delay-4">
+          <div class="fcg-tailark-action-frame">
+            <a href="#contact" class="fcg-tailark-button fcg-tailark-button-primary">Start a conversation</a>
+          </div>
+          <a href="#decision-paths" class="fcg-tailark-button fcg-tailark-button-secondary">See engagement models</a>
         </div>
-        <a href="#decision-paths" class="fcg-tailark-button fcg-tailark-button-secondary">See engagement models</a>
       </div>
-    </div>
 
-    <div class="fcg-tailark-preview-outer fcg-tailark-animate fcg-tailark-delay-5">
-      <div class="fcg-tailark-preview">
-        <img src="https://tailark.com/_next/image?url=%2Fmail2-light.png&w=3840&q=75" alt="Travel operations dashboard preview" width="2700" height="1440">
+      <div class="fcg-advisory-people fcg-tailark-animate fcg-tailark-delay-5" aria-label="Advisory experts across Asia Pacific and Europe">
+        <div class="fcg-advisory-people-column">
+          <figure class="fcg-advisory-photo-card fcg-advisory-photo-card-small">
+            <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=420&h=460&q=80" alt="Asia Pacific advisory consultant portrait">
+          </figure>
+          <figure class="fcg-advisory-photo-card fcg-advisory-photo-card-medium">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=460&h=500&q=80" alt="European travel technology advisor portrait">
+          </figure>
+        </div>
+        <div class="fcg-advisory-people-column">
+          <figure class="fcg-advisory-photo-card fcg-advisory-photo-card-large">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&h=540&q=80" alt="Asia Pacific operations leader portrait">
+          </figure>
+          <figure class="fcg-advisory-photo-card fcg-advisory-photo-card-large">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&h=540&q=80" alt="European implementation specialist portrait">
+          </figure>
+        </div>
+        <div class="fcg-advisory-people-column">
+          <figure class="fcg-advisory-photo-card fcg-advisory-photo-card-medium">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=460&h=500&q=80" alt="Asia Pacific client strategy advisor portrait">
+          </figure>
+          <figure class="fcg-advisory-photo-card fcg-advisory-photo-card-small">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=420&h=460&q=80" alt="European commercial advisor portrait">
+          </figure>
+        </div>
       </div>
     </div>
   </section>
