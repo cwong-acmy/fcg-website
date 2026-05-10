@@ -1173,8 +1173,13 @@
     width: 100%;
     height: min(64vh, 560px);
     object-fit: cover;
+    object-position: left top;
     opacity: .64;
     filter: grayscale(1) contrast(1.05);
+  }
+  .fcg-hero2-preview img.fcg-product-screen {
+    opacity: .92;
+    filter: saturate(1.04) contrast(1.03);
   }
   .fcg-hero2-preview-grid {
     position: absolute;
@@ -1652,8 +1657,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: left top;
     opacity: .28;
     filter: grayscale(.75) contrast(1.08);
+  }
+  .fcg-showcase-panel img.fcg-product-screen {
+    opacity: .78;
+    filter: saturate(.95) contrast(1.04);
   }
   .fcg-showcase-panel::after {
     content: "";
@@ -2348,6 +2358,10 @@
     opacity: .86;
     filter: grayscale(.8) contrast(1.02);
   }
+  html[data-theme="light"] .fcg-hero2-preview img.fcg-product-screen {
+    opacity: .96;
+    filter: saturate(1.02) contrast(1.02);
+  }
   html[data-theme="light"] .fcg-hero2-preview-grid {
     background: linear-gradient(to top, rgba(255,255,255,.94), rgba(255,255,255,.5), transparent);
   }
@@ -2468,6 +2482,10 @@
   html[data-theme="light"] .fcg-showcase-panel img {
     opacity: .32;
     filter: grayscale(.8) contrast(1.02);
+  }
+  html[data-theme="light"] .fcg-showcase-panel img.fcg-product-screen {
+    opacity: .72;
+    filter: saturate(.98) contrast(1.02);
   }
   html[data-theme="light"] .fcg-showcase-panel::after {
     background:
@@ -2943,7 +2961,7 @@
 
       <div class="fcg-hero2-preview-wrap">
         <div class="fcg-hero2-preview">
-          <img src="assets/images/frame-mid.svg" alt="AgreeEase RFP management interface preview">
+          <img class="fcg-product-screen" src="assets/images/agreeease-product/sourcing-workspace.svg" alt="AgreeEase hotel sourcing workspace interface preview">
           <div class="fcg-hero2-preview-grid">
             <article class="fcg-hero2-preview-card"><span>Rate Load</span><strong>RFP to bookable rate in 24 hours</strong></article>
             <article class="fcg-hero2-preview-card"><span>Coverage</span><strong>Multi-market RFP across APAC</strong></article>
@@ -3095,7 +3113,7 @@
         <div class="fcg-showcase-card">
           <!-- Tab 1: Sourcing View -->
           <article class="fcg-showcase-panel" id="showcase-panel-sourcing" role="tabpanel" aria-labelledby="showcase-tab-sourcing">
-            <img src="assets/images/frame-mid.svg" alt="AgreeEase RFP sourcing interface" loading="eager">
+            <img class="fcg-product-screen" src="assets/images/agreeease-product/sourcing-workspace.svg" alt="AgreeEase RFP sourcing workspace interface" loading="eager">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
                 <h3>Sourcing view</h3>
@@ -3118,7 +3136,7 @@
 
           <!-- Tab 2: Negotiation View -->
           <article class="fcg-showcase-panel" id="showcase-panel-negotiation" role="tabpanel" aria-labelledby="showcase-tab-negotiation" hidden>
-            <img src="assets/images/frame-mid.svg" alt="AgreeEase rate negotiation interface" loading="lazy">
+            <img class="fcg-product-screen" src="assets/images/agreeease-product/rate-review.svg" alt="AgreeEase hotel rate review interface" loading="lazy">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
                 <h3>Negotiation view</h3>
@@ -3141,7 +3159,7 @@
 
           <!-- Tab 3: Enforcement View -->
           <article class="fcg-showcase-panel" id="showcase-panel-enforcement" role="tabpanel" aria-labelledby="showcase-tab-enforcement" hidden>
-            <img src="assets/images/frame-mid.svg" alt="AgreeEase rate enforcement and booking integration" loading="lazy">
+            <img class="fcg-product-screen" src="assets/images/agreeease-product/mobile-rate-flow.svg" alt="AgreeEase mobile rate workflow interface" loading="lazy">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
                 <h3>Enforcement view</h3>
