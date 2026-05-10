@@ -1095,17 +1095,17 @@
     position: relative;
     z-index: 10;
     display: grid;
-    grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr);
+    grid-template-columns: minmax(0, .92fr) minmax(440px, 1.08fr);
     align-items: center;
-    gap: 56px;
+    gap: 64px;
     max-width: 1280px;
     margin: 0 auto;
-    min-height: 100vh;
-    padding: 132px 24px 96px;
+    min-height: 88vh;
+    padding: 124px 24px 78px;
     text-align: left;
   }
   .fcg-hero2-copy-column {
-    max-width: 620px;
+    max-width: 680px;
   }
   .fcg-hero2-badge {
     display: inline-flex;
@@ -1123,17 +1123,17 @@
     -webkit-backdrop-filter: blur(12px);
   }
   .fcg-hero2 h1 {
-    max-width: 620px;
-    margin: 36px 0 0;
+    max-width: 720px;
+    margin: 28px 0 0;
     color: #fff !important;
-    font-size: clamp(3rem, 5.2vw, 5.8rem);
+    font-size: clamp(2.55rem, 4vw, 4.45rem);
     font-weight: 500;
-    line-height: 1;
+    line-height: 1.05;
     letter-spacing: 0;
   }
   .fcg-hero2-copy {
-    max-width: 590px;
-    margin: 26px 0 0;
+    max-width: 640px;
+    margin: 22px 0 0;
     color: rgba(255,255,255,.72) !important;
     font-size: clamp(1rem, 1.5vw, 1.18rem);
     line-height: 1.7;
@@ -1143,7 +1143,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 14px;
-    margin-top: 40px;
+    margin-top: 34px;
     flex-wrap: wrap;
   }
   .fcg-hero2-preview-wrap {
@@ -1162,19 +1162,22 @@
   }
   .fcg-hero2-preview {
     position: relative;
-    overflow: hidden;
-    border-radius: 2rem;
+    overflow: visible;
+    border-radius: 22px;
     border: 1px solid rgba(255,255,255,.14);
     background: rgba(7,7,7,.88);
-    box-shadow: 0 30px 90px rgba(0,0,0,.45);
+    box-shadow: 0 30px 90px rgba(0,0,0,.34);
+    padding: 14px;
   }
   .fcg-hero2-preview img {
     display: block;
     width: 100%;
-    height: min(64vh, 560px);
-    object-fit: cover;
-    opacity: .64;
-    filter: grayscale(1) contrast(1.05);
+    height: min(56vh, 500px);
+    object-fit: contain;
+    object-position: center top;
+    border-radius: 14px;
+    opacity: .98;
+    filter: none;
   }
   .fcg-hero2-preview img.fcg-product-shot,
   .fcg-showcase-panel img.fcg-product-shot {
@@ -1182,30 +1185,28 @@
     filter: saturate(.9) contrast(1.03);
   }
   .fcg-hero2-preview-grid {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: relative;
     display: grid;
     grid-template-columns: repeat(2, minmax(0,1fr));
     align-items: stretch;
-    gap: 14px;
-    padding: 24px;
-    background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.38), transparent);
+    gap: 12px;
+    margin-top: 14px;
+    padding: 0;
+    background: transparent;
   }
   .fcg-hero2-preview-card {
-    min-height: 124px;
-    border-radius: 1.5rem;
+    min-height: 88px;
+    border-radius: 14px;
     border: 1px solid rgba(255,255,255,.14);
     background: rgba(255,255,255,.08);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    padding: 18px;
+    padding: 14px;
     text-align: left;
   }
   .fcg-hero2-preview-card span {
     display: block;
-    margin-bottom: 18px;
+    margin-bottom: 10px;
     color: #F97316;
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
@@ -1215,7 +1216,7 @@
   .fcg-hero2-preview-card strong {
     display: block;
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 1.25;
   }
@@ -2347,11 +2348,11 @@
   html[data-theme="light"] .fcg-hero2-preview {
     background: rgba(255,255,255,.82);
     border-color: rgba(15,17,20,.12);
-    box-shadow: 0 30px 80px rgba(15,17,20,.13);
+    box-shadow: 0 30px 80px rgba(15,17,20,.1);
   }
   html[data-theme="light"] .fcg-hero2-preview img {
-    opacity: .86;
-    filter: grayscale(.8) contrast(1.02);
+    opacity: .98;
+    filter: none;
   }
   html[data-theme="light"] .fcg-hero2-preview img.fcg-product-shot,
   html[data-theme="light"] .fcg-showcase-panel img.fcg-product-shot {
@@ -2359,7 +2360,7 @@
     filter: saturate(.92) contrast(1.02);
   }
   html[data-theme="light"] .fcg-hero2-preview-grid {
-    background: linear-gradient(to top, rgba(255,255,255,.94), rgba(255,255,255,.5), transparent);
+    background: transparent;
   }
   html[data-theme="light"] .fcg-hero2-preview-card {
     background: rgba(255,255,255,.74);
@@ -2813,13 +2814,13 @@
     .fcg-hero2-preview-grid {
       position: relative;
       grid-template-columns: 1fr;
-      padding: 16px;
-      background: rgba(0,0,0,.84);
+      padding: 0;
+      background: transparent;
     }
     html[data-theme="light"] .fcg-hero2-preview-grid {
-      background: rgba(255,255,255,.88);
+      background: transparent;
     }
-    .fcg-hero2-preview img { display: none; }
+    .fcg-hero2-preview img { height: 360px; }
     .fcg-hero2-preview-card { min-height: auto; }
     .fcg-bento-inner { padding: 4.5rem 1.25rem; }
     .fcg-bento-header { align-items: flex-start; flex-direction: column; }
