@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atlas - TMC Operating System | FCG Group</title>
+    <title>FCG Group - Advisory &amp; Implementation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -1052,9 +1052,9 @@
     filter: blur(6rem);
     opacity: .78;
   }
-  .fcg-hero2-glow span:nth-child(1) { width: 60rem; background: linear-gradient(to bottom, #f97316, #0ea5e9); }
-  .fcg-hero2-glow span:nth-child(2) { width: 90rem; background: linear-gradient(to bottom, #be123c, #facc15); }
-  .fcg-hero2-glow span:nth-child(3) { width: 60rem; background: linear-gradient(to bottom, #f59e0b, #06b6d4); }
+  .fcg-hero2-glow span:nth-child(1) { width: 60rem; background: linear-gradient(to bottom, #F97316, #ffffff); }
+  .fcg-hero2-glow span:nth-child(2) { width: 90rem; background: linear-gradient(to bottom, #F97316, #121212); }
+  .fcg-hero2-glow span:nth-child(3) { width: 60rem; background: linear-gradient(to bottom, #F97316, #2A2A2A); }
   .fcg-hero2::after {
     content: "";
     position: absolute;
@@ -1176,11 +1176,6 @@
     opacity: .64;
     filter: grayscale(1) contrast(1.05);
   }
-  .fcg-hero2-preview img.fcg-product-shot,
-  .fcg-showcase-panel img.fcg-product-shot {
-    opacity: .72;
-    filter: saturate(.9) contrast(1.03);
-  }
   .fcg-hero2-preview-grid {
     position: absolute;
     left: 0;
@@ -1218,6 +1213,487 @@
     font-size: 18px;
     font-weight: 500;
     line-height: 1.25;
+  }
+  .fcg-default-hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 22%, rgba(249,115,22,.14), transparent 30%),
+      radial-gradient(circle at 78% 68%, rgba(255,255,255,.05), transparent 28%),
+      linear-gradient(180deg, rgba(8,8,5,.86) 0%, rgba(5,5,5,.94) 100%),
+      url('https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/hero/gridBackground.png') center / cover no-repeat;
+    color: #ffffff;
+    padding: 10rem 1.5rem 11rem;
+    text-align: center;
+  }
+  .fcg-default-hero::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 42% 36%, rgba(249,115,22,.2), transparent 38%),
+      radial-gradient(ellipse at 38% 50%, rgba(255,255,255,.06), transparent 58%),
+      linear-gradient(to bottom, rgba(8,8,5,.08), rgba(8,8,5,.04) 58%, rgba(8,8,5,.18));
+  }
+  .fcg-default-hero::after {
+    content: "";
+    position: absolute;
+    left: -16%;
+    right: -16%;
+    bottom: -9rem;
+    z-index: 0;
+    height: 34rem;
+    pointer-events: none;
+    background:
+      linear-gradient(rgba(255,255,255,.11) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.11) 1px, transparent 1px);
+    background-size: 4.25rem 4.25rem;
+    transform: perspective(760px) rotateX(64deg);
+    transform-origin: bottom center;
+    opacity: .68;
+  }
+  .fcg-default-hero > * {
+    position: relative;
+    z-index: 1;
+  }
+  .fcg-default-hero * {
+    font-family: 'Inter', sans-serif;
+  }
+  .fcg-default-hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 999px;
+    background: rgba(255,255,255,.04);
+    color: rgba(255,255,255,.72);
+    font-size: 14px;
+    line-height: 1;
+    margin: 0 auto;
+    padding: .65rem 1rem;
+    transition: border-color 180ms ease;
+  }
+  .fcg-default-hero-pill:hover {
+    border-color: rgba(255,255,255,.3);
+  }
+  .fcg-default-hero-pill strong {
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+    color: #ffffff;
+    font-weight: 500;
+  }
+  .fcg-default-hero h1 {
+    max-width: 850px;
+    margin: 2rem auto 0;
+    color: #ffffff !important;
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.05;
+  }
+  .fcg-default-hero-copy {
+    max-width: 42rem;
+    margin: 1.5rem auto 0;
+    color: rgba(255,255,255,.68) !important;
+    font-size: clamp(.95rem, 1.2vw, 1rem);
+    line-height: 1.7;
+  }
+  .fcg-default-hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-top: 1rem;
+  }
+  .fcg-default-hero-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    border-radius: 999px;
+    min-height: 3rem;
+    padding: .75rem 1.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  }
+  .fcg-default-hero-button-primary {
+    background: #ffffff;
+    color: #080805;
+  }
+  .fcg-default-hero-button-primary:hover {
+    background: #f3f4f6;
+  }
+  .fcg-default-hero-button-secondary {
+    border: 1px solid rgba(255,255,255,.14);
+    color: #ffffff;
+    background: rgba(255,255,255,.04);
+  }
+  .fcg-default-hero-button-secondary:hover {
+    background: rgba(255,255,255,.09);
+  }
+  .fcg-tailark-hero {
+    position: relative;
+    overflow: hidden;
+    background: #080805;
+    color: #ffffff;
+    padding: 8.5rem 1.5rem 0;
+    text-align: center;
+  }
+  .fcg-tailark-hero * {
+    font-family: 'Inter', sans-serif;
+  }
+  .fcg-tailark-radiance {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: .5;
+    pointer-events: none;
+    contain: strict;
+  }
+  .fcg-tailark-radiance span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 80rem;
+    width: 14rem;
+    transform: translateY(-350px) rotate(-45deg);
+    border-radius: 999px;
+    background: radial-gradient(50% 50% at 50% 50%, hsla(0,0%,85%,.06) 0, hsla(0,0%,45%,.02) 80%, transparent 100%);
+  }
+  .fcg-tailark-radiance span:first-child {
+    width: 35rem;
+    background: radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(0,0%,85%,.08) 0, hsla(0,0%,55%,.02) 50%, hsla(0,0%,45%,0) 80%);
+  }
+  .fcg-tailark-radiance span:nth-child(2) {
+    transform: translate(5%, -50%) rotate(-45deg);
+  }
+  .fcg-tailark-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0;
+    animation: fcg-tailark-fade 1.2s ease forwards .4s;
+    pointer-events: none;
+  }
+  .fcg-tailark-background img {
+    position: absolute;
+    left: 50%;
+    top: 7rem;
+    width: min(136rem, 150vw);
+    max-width: none;
+    transform: translateX(-50%);
+    opacity: .62;
+  }
+  .fcg-tailark-background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(125% 125% at 50% 100%, transparent 0%, #080805 75%);
+  }
+  .fcg-tailark-hero-inner {
+    position: relative;
+    z-index: 3;
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+  .fcg-tailark-animate {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(12px);
+    animation: fcg-tailark-rise 1.1s cubic-bezier(.16, 1, .3, 1) forwards;
+  }
+  .fcg-tailark-delay-1 { animation-delay: .15s; }
+  .fcg-tailark-delay-2 { animation-delay: .28s; }
+  .fcg-tailark-delay-3 { animation-delay: .42s; }
+  .fcg-tailark-delay-4 { animation-delay: .56s; }
+  .fcg-tailark-delay-5 { animation-delay: .72s; }
+  @keyframes fcg-tailark-rise {
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+  @keyframes fcg-tailark-fade {
+    to { opacity: 1; }
+  }
+  .fcg-tailark-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    width: fit-content;
+    margin: 0 auto;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 999px;
+    background: rgba(255,255,255,.08);
+    box-shadow: 0 10px 28px rgba(0,0,0,.18);
+    color: #ffffff;
+    padding: .25rem .25rem .25rem 1rem;
+    text-decoration: none;
+    transition: background-color 240ms ease, border-color 240ms ease;
+  }
+  .fcg-tailark-pill:hover {
+    background: rgba(255,255,255,.12);
+    border-color: rgba(255,255,255,.18);
+  }
+  .fcg-tailark-pill-text {
+    font-size: .875rem;
+    line-height: 1.25rem;
+  }
+  .fcg-tailark-pill-divider {
+    display: block;
+    width: 1px;
+    height: 1rem;
+    background: rgba(255,255,255,.18);
+  }
+  .fcg-tailark-pill-icon {
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #080805;
+  }
+  .fcg-tailark-pill-icon svg {
+    width: .9rem;
+    height: .9rem;
+    transition: transform 240ms ease;
+  }
+  .fcg-tailark-pill:hover svg {
+    transform: translateX(2px);
+  }
+  .fcg-tailark-hero h1 {
+    max-width: 56rem;
+    margin: 2rem auto 0;
+    color: #ffffff !important;
+    font-size: clamp(3.1rem, 7vw, 5.25rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: .98;
+  }
+  .fcg-tailark-copy {
+    max-width: 42rem;
+    margin: 2rem auto 0;
+    color: rgba(255,255,255,.68) !important;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.7;
+  }
+  .fcg-tailark-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    margin-top: 3rem;
+  }
+  .fcg-tailark-action-frame {
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 14px;
+    background: rgba(255,255,255,.1);
+    padding: 2px;
+  }
+  .fcg-tailark-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    border-radius: .75rem;
+    padding: 0 1.25rem;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+  }
+  .fcg-tailark-button:hover {
+    transform: translateY(-1px);
+  }
+  .fcg-tailark-button-primary {
+    background: #ffffff;
+    color: #080805;
+  }
+  .fcg-tailark-button-secondary {
+    background: transparent;
+    color: rgba(255,255,255,.86);
+  }
+  .fcg-tailark-button-secondary:hover {
+    background: rgba(255,255,255,.08);
+  }
+  .fcg-tailark-preview-outer {
+    position: relative;
+    z-index: 3;
+    max-width: 80rem;
+    margin: 3.5rem auto 0;
+    padding: 0 .5rem;
+    overflow: hidden;
+  }
+  .fcg-tailark-preview-outer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(to bottom, transparent 35%, #080805 100%);
+    pointer-events: none;
+  }
+  .fcg-tailark-preview {
+    position: relative;
+    max-width: 72rem;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 1rem;
+    background: #080805;
+    box-shadow: 0 24px 70px rgba(0,0,0,.45);
+    padding: 1rem;
+  }
+  .fcg-tailark-preview img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 15 / 8;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: .875rem;
+  }
+  .fcg-efferd-logos {
+    position: relative;
+    z-index: 4;
+    background: #080805;
+    border-top: 1px solid rgba(255,255,255,.1);
+    overflow: hidden;
+    padding: 3.5rem 0 4.25rem;
+  }
+  .fcg-efferd-logos h2 {
+    margin: 0;
+    color: rgba(255,255,255,.62);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.4;
+    text-align: center;
+  }
+  .fcg-efferd-logos h2 span {
+    color: #ffffff;
+  }
+  .fcg-efferd-logo-viewport {
+    position: relative;
+    width: 100%;
+    margin-top: 3rem;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .fcg-efferd-logo-track {
+    display: flex;
+    width: max-content;
+    animation: fcg-efferd-marquee 28s linear infinite reverse;
+  }
+  .fcg-efferd-logo-group {
+    display: flex;
+    align-items: center;
+    gap: clamp(3rem, 5vw, 5rem);
+    padding-right: clamp(3rem, 5vw, 5rem);
+  }
+  .fcg-efferd-logo-item {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-width: 9rem;
+    height: 2.75rem;
+  }
+  .fcg-efferd-logo-item img {
+    width: auto;
+    max-width: 10rem;
+    max-height: 2rem;
+    filter: invert(1);
+    opacity: .62;
+  }
+  @keyframes fcg-efferd-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  html[data-theme="light"] .fcg-tailark-hero {
+    background: #ffffff;
+    color: #0F1114;
+  }
+  html[data-theme="light"] .fcg-tailark-background {
+    opacity: 0 !important;
+  }
+  html[data-theme="light"] .fcg-tailark-background::after {
+    background: radial-gradient(125% 125% at 50% 100%, transparent 0%, #ffffff 75%);
+  }
+  html[data-theme="light"] .fcg-tailark-pill {
+    background: #f3f4f6;
+    border-color: rgba(15,17,20,.1);
+    color: #0F1114;
+    box-shadow: 0 12px 30px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-tailark-pill:hover {
+    background: #ffffff;
+    border-color: rgba(15,17,20,.16);
+  }
+  html[data-theme="light"] .fcg-tailark-pill-divider {
+    background: rgba(15,17,20,.16);
+  }
+  html[data-theme="light"] .fcg-tailark-pill-icon {
+    background: #ffffff;
+    color: #0F1114;
+  }
+  html[data-theme="light"] .fcg-tailark-hero h1 {
+    color: #0F1114 !important;
+  }
+  html[data-theme="light"] .fcg-tailark-copy {
+    color: #4B5563 !important;
+  }
+  html[data-theme="light"] .fcg-tailark-action-frame {
+    background: rgba(15,17,20,.08);
+    border-color: rgba(15,17,20,.1);
+  }
+  html[data-theme="light"] .fcg-tailark-button-primary {
+    background: #0F1114;
+    color: #ffffff;
+  }
+  html[data-theme="light"] .fcg-tailark-button-secondary {
+    color: #0F1114;
+  }
+  html[data-theme="light"] .fcg-tailark-button-secondary:hover {
+    background: rgba(15,17,20,.06);
+  }
+  html[data-theme="light"] .fcg-tailark-preview-outer::before {
+    background: linear-gradient(to bottom, transparent 35%, #ffffff 100%);
+  }
+  html[data-theme="light"] .fcg-tailark-preview {
+    background: #ffffff;
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 24px 60px rgba(15,17,20,.14);
+  }
+  html[data-theme="light"] .fcg-tailark-preview img {
+    border-color: rgba(15,17,20,.12);
+  }
+  html[data-theme="light"] .fcg-efferd-logos {
+    background: #ffffff;
+    border-color: rgba(15,17,20,.1);
+  }
+  html[data-theme="light"] .fcg-efferd-logos h2 {
+    color: #6B7280;
+  }
+  html[data-theme="light"] .fcg-efferd-logos h2 span {
+    color: #0F1114;
+  }
+  html[data-theme="light"] .fcg-efferd-logo-item img {
+    filter: grayscale(.35);
+    opacity: .66;
   }
   .product-shell { background: var(--color-bg); color: var(--color-fg); }
   .product-kicker { font-family: 'JetBrains Mono', monospace; letter-spacing: .18em; text-transform: uppercase; }
@@ -1336,154 +1812,241 @@
       min-height: auto;
     }
   }
-  .fcg-bento {
+  .fcg-solution-features {
     position: relative;
-    min-height: 100vh;
     overflow: hidden;
     background:
-      radial-gradient(circle at 18% 12%, rgba(249,115,22,.12), transparent 28%),
-      radial-gradient(125% 125% at 50% 10%, #080805 42%, #121212 100%);
-    color: #fff;
+      radial-gradient(circle at 18% 50%, rgba(249,115,22,.14), transparent 34%),
+      radial-gradient(circle at 86% 20%, rgba(255,255,255,.04), transparent 28%),
+      linear-gradient(180deg, #080805 0%, #050505 100%);
+    border-top: 1px solid rgba(255,255,255,.1);
+    color: #ffffff;
   }
-  .fcg-bento::after {
+  .fcg-solution-features::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
     background:
-      radial-gradient(circle at 18% 22%, rgba(249,115,22,.14), transparent 28%),
-      linear-gradient(to bottom, rgba(0,0,0,.04), rgba(0,0,0,.55));
+      radial-gradient(circle at 8% 50%, rgba(249,115,22,.16), transparent 32%),
+      radial-gradient(circle at 80% 18%, rgba(255,255,255,.04), transparent 26%);
   }
-  .fcg-bento-inner {
+  .fcg-solution-features-inner {
     position: relative;
     z-index: 1;
-    max-width: 72rem;
+    max-width: 80rem;
     margin: 0 auto;
     padding: 5rem 1.5rem;
   }
-  .fcg-bento-spiral {
-    pointer-events: none;
+  .fcg-solution-feature-stage {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+    gap: 3.5rem;
+  }
+  .fcg-solution-feature-visual {
+    grid-column: span 6;
+    min-width: 0;
+  }
+  .fcg-solution-feature-panel {
+    display: grid;
+    height: 39rem;
+    min-height: 39rem;
+    place-items: center;
+    transition: opacity 180ms ease;
+  }
+  .fcg-solution-feature-panel[hidden] {
+    display: none;
+  }
+  .fcg-solution-feature-panel img {
+    display: block;
+    width: min(100%, 30rem);
+    height: auto;
+    filter: none;
+  }
+  .fcg-solution-human-image {
+    width: min(150%, 51rem) !important;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1338 1350'%3E%3Crect x='353' y='258' width='511' height='604' rx='36' fill='white'/%3E%3Crect x='573' y='508' width='433' height='584' rx='36' fill='white'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1338 1350'%3E%3Crect x='353' y='258' width='511' height='604' rx='36' fill='white'/%3E%3Crect x='573' y='508' width='433' height='584' rx='36' fill='white'/%3E%3C/svg%3E");
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+  .fcg-card-placeholder {
+    position: relative;
+    width: min(100%, 34rem);
+    min-height: 28rem;
+  }
+  .fcg-card-placeholder-card {
     position: absolute;
-    inset: 0;
+    overflow: hidden;
+    border-radius: 1.3rem;
+    color: #ffffff;
+    box-shadow: 0 26px 70px rgba(249,115,22,.14);
+  }
+  .fcg-card-placeholder-card::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 32%;
+    background: rgba(255,255,255,.14);
+  }
+  .fcg-card-placeholder-card-back {
+    top: 4rem;
+    left: 0;
+    width: 24rem;
+    height: 16rem;
+    background: linear-gradient(135deg, #2A2A2A 0%, #F97316 54%, #121212 100%);
+    transform: rotate(-26deg);
+  }
+  .fcg-card-placeholder-card-front {
+    right: 0;
+    bottom: 2.75rem;
+    width: 28.5rem;
+    height: 14.75rem;
+    background: linear-gradient(135deg, #F97316 0%, #f59e0b 44%, #121212 100%);
+    transform: rotate(-5deg);
+  }
+  .fcg-card-placeholder-brand {
+    position: absolute;
+    top: 1.6rem;
+    right: 1.8rem;
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -.04em;
+    line-height: 1;
+  }
+  .fcg-card-placeholder-balance,
+  .fcg-card-placeholder-holder,
+  .fcg-card-placeholder-valid,
+  .fcg-card-placeholder-number {
+    position: absolute;
+    z-index: 1;
+    text-shadow: 0 1px 12px rgba(0,0,0,.14);
+  }
+  .fcg-card-placeholder-balance {
+    top: 3rem;
+    left: 1.6rem;
+    font-size: 1.4rem;
+    line-height: 1.1;
+  }
+  .fcg-card-placeholder-balance span,
+  .fcg-card-placeholder-holder span,
+  .fcg-card-placeholder-valid span {
+    display: block;
+    color: rgba(255,255,255,.72);
+    font-size: .68rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .fcg-card-placeholder-holder {
+    left: 1.8rem;
+    bottom: 5.6rem;
+    font-size: .88rem;
+  }
+  .fcg-card-placeholder-valid {
+    right: 7.2rem;
+    bottom: 5.15rem;
+    font-size: .88rem;
+  }
+  .fcg-card-placeholder-number {
+    left: 1.8rem;
+    bottom: 1.7rem;
+    font-size: 1.55rem;
+    letter-spacing: .06em;
+  }
+  .fcg-card-placeholder-circles {
+    position: absolute;
+    right: 2rem;
+    bottom: 1.7rem;
+    z-index: 1;
+    display: flex;
+  }
+  .fcg-card-placeholder-circles span {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,.5);
+  }
+  .fcg-card-placeholder-circles span + span {
+    margin-left: -.9rem;
+  }
+  .fcg-solution-feature-options {
+    grid-column: span 6;
+    display: grid;
+    gap: 1.25rem;
+    min-width: 0;
+  }
+  .fcg-solution-feature-choice {
+    display: grid;
+    grid-template-columns: 3.75rem 1fr;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 1rem;
+    background: transparent;
+    color: rgba(255,255,255,.72);
+    cursor: pointer;
+    font: inherit;
+    padding: .95rem 1rem;
+    text-align: left;
+    transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+  .fcg-solution-feature-choice:hover {
+    background: rgba(255,255,255,.04);
+    transform: translateY(-1px);
+  }
+  .fcg-solution-feature-choice[aria-selected="true"] {
+    background: #121212;
+    border-color: #2A2A2A;
+    box-shadow: 0 18px 48px rgba(249,115,22,.08);
+  }
+  .fcg-solution-feature-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: .3;
-    mix-blend-mode: screen;
-    mask-image: radial-gradient(circle at center, rgba(255,255,255,1), rgba(255,255,255,.1) 60%, transparent 75%);
-    -webkit-mask-image: radial-gradient(circle at center, rgba(255,255,255,1), rgba(255,255,255,.1) 60%, transparent 75%);
-  }
-  .fcg-bento-header {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-bottom: 2.5rem;
-  }
-  .fcg-bento-kicker {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: rgba(249,115,22,.12);
     color: #F97316;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: .18em;
-    margin-bottom: .9rem;
-    text-transform: uppercase;
   }
-  .fcg-bento h2 {
-    color: #fff !important;
-    font-size: clamp(2.3rem, 5vw, 4.7rem);
-    font-weight: 500;
+  .fcg-solution-feature-icon iconify-icon {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+  .fcg-solution-feature-choice:nth-child(2) .fcg-solution-feature-icon {
+    background: rgba(255,255,255,.08);
+    color: #F97316;
+  }
+  .fcg-solution-feature-choice:nth-child(3) .fcg-solution-feature-icon {
+    background: rgba(249,115,22,.12);
+    color: #f97316;
+  }
+  .fcg-solution-feature-title {
+    display: block;
+    color: #ffffff !important;
+    font-size: 1.05rem;
+    font-weight: 600;
     letter-spacing: 0;
-    line-height: 1;
+    line-height: 1.2;
   }
-  .fcg-bento-subcopy {
-    color: rgba(255,255,255,.7) !important;
-    max-width: 31rem;
-    font-size: 15px;
-    line-height: 1.7;
-  }
-  .fcg-bento-grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    grid-auto-rows: minmax(120px, auto);
-    gap: .75rem;
-  }
-  .fcg-bento-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 2rem;
-    border: 1px solid rgba(255,255,255,.15);
-    background: rgba(0,0,0,.4);
-    padding: 1.25rem;
-    transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
-  }
-  .fcg-bento-card:hover {
-    border-color: rgba(255,255,255,.4);
-    background: rgba(0,0,0,.52);
-    transform: translateY(-2px);
-  }
-  .fcg-bento-card::after {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 2rem;
-    opacity: 0;
-    pointer-events: none;
-    mask-image: radial-gradient(180px 180px at var(--x, 50%) var(--y, 50%), white, transparent);
-    -webkit-mask-image: radial-gradient(180px 180px at var(--x, 50%) var(--y, 50%), white, transparent);
-    transition: opacity 180ms ease;
-  }
-  .fcg-bento-card:hover::after { opacity: 1; }
-  .fcg-bento-card-large {
-    grid-column: span 4;
-    grid-row: span 2;
-  }
-  .fcg-bento-card-small { grid-column: span 2; }
-  .fcg-bento-card-wide { grid-column: span 3; }
-  .fcg-bento-card-header {
-    display: flex;
-    align-items: flex-start;
-    gap: .75rem;
-    margin-bottom: .7rem;
-  }
-  .fcg-bento-dot {
-    flex: 0 0 auto;
-    width: .55rem;
-    height: .55rem;
-    margin-top: .38rem;
-    border-radius: 999px;
-    background: #F97316;
-    box-shadow: 0 0 18px rgba(249,115,22,.45);
-    color: transparent;
-    font-size: 0;
-  }
-  .fcg-bento-card h3 {
-    min-width: 0;
-    color: #fff !important;
-    font-size: clamp(1rem, 1.7vw, 1.22rem);
-    font-weight: 500;
-    line-height: 1.25;
-  }
-  .fcg-bento-meta {
-    flex: 0 0 auto;
-    margin-left: auto;
-    margin-top: .12rem;
-    border: 1px solid rgba(255,255,255,.15);
-    border-radius: 999px;
-    color: rgba(255,255,255,.62);
-    font-size: 10px;
-    letter-spacing: .12em;
-    line-height: 1;
-    padding: .35rem .5rem;
-    text-transform: uppercase;
-  }
-  .fcg-bento-card p {
-    color: rgba(255,255,255,.7) !important;
+  .fcg-solution-feature-text {
+    display: block;
+    color: rgba(255,255,255,.66) !important;
     font-size: 14px;
-    line-height: 1.65;
-    max-width: 48rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-top: .55rem;
+  }
+  .fcg-solution-feature-choice:focus-visible {
+    outline: 3px solid rgba(249,115,22,.28);
+    outline-offset: 4px;
   }
   .fcg-showcase {
     position: relative;
@@ -1853,7 +2416,7 @@
   .fcg-ai-spark {
     display: inline-flex;
     margin-bottom: 1rem;
-    color: #c084fc;
+    color: #F97316;
   }
   .fcg-ai-prompt {
     color: #050505 !important;
@@ -2353,11 +2916,6 @@
     opacity: .86;
     filter: grayscale(.8) contrast(1.02);
   }
-  html[data-theme="light"] .fcg-hero2-preview img.fcg-product-shot,
-  html[data-theme="light"] .fcg-showcase-panel img.fcg-product-shot {
-    opacity: .74;
-    filter: saturate(.92) contrast(1.02);
-  }
   html[data-theme="light"] .fcg-hero2-preview-grid {
     background: linear-gradient(to top, rgba(255,255,255,.94), rgba(255,255,255,.5), transparent);
   }
@@ -2369,55 +2927,94 @@
   html[data-theme="light"] .fcg-hero2-preview-card strong {
     color: #0f1114;
   }
-  html[data-theme="light"] .fcg-bento {
+  html[data-theme="light"] .fcg-default-hero {
     background:
-      radial-gradient(circle at 52% 10%, rgba(249,115,22,.12), transparent 32%),
-      radial-gradient(125% 125% at 50% 10%, #ffffff 38%, #F3F4F6 100%);
-    color: #0f1114;
+      radial-gradient(ellipse at 35% 41%, rgba(249,115,22,.24), transparent 38%),
+      radial-gradient(ellipse at 28% 68%, rgba(250,204,21,.24), transparent 50%),
+      url('https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/hero/gridBackground.png') center / cover no-repeat,
+      linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    color: #0F1114;
   }
-  html[data-theme="light"] .fcg-bento::after {
+  html[data-theme="light"] .fcg-default-hero::before {
     background:
-      radial-gradient(circle at 18% 22%, rgba(249,115,22,.12), transparent 28%),
-      linear-gradient(to bottom, rgba(255,255,255,.08), rgba(255,255,255,.58));
+      radial-gradient(ellipse at 30% 50%, rgba(255,236,188,.55), transparent 58%),
+      radial-gradient(ellipse at 42% 62%, rgba(249,115,22,.14), transparent 54%),
+      linear-gradient(to bottom, rgba(255,255,255,.02), rgba(255,255,255,0) 58%, rgba(255,255,255,.08));
   }
-  html[data-theme="light"] .fcg-bento-spiral {
-    opacity: .16;
-    mix-blend-mode: multiply;
+  html[data-theme="light"] .fcg-default-hero::after {
+    background:
+      linear-gradient(rgba(15,23,42,.18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15,23,42,.18) 1px, transparent 1px);
+    opacity: .72;
   }
-  html[data-theme="light"] #fcgBentoSpiral {
-    color: #0f172a;
-  }
-  html[data-theme="light"] #fcgBentoSpiral circle {
-    fill: #0f172a;
-  }
-  html[data-theme="light"] .fcg-bento h2,
-  html[data-theme="light"] .fcg-bento-card h3 {
-    color: #0f1114 !important;
-  }
-  html[data-theme="light"] .fcg-bento-subcopy,
-  html[data-theme="light"] .fcg-bento-card p {
-    color: #4b5563 !important;
-  }
-  html[data-theme="light"] .fcg-bento-card {
-    background: rgba(255,255,255,.72);
+  html[data-theme="light"] .fcg-default-hero-pill {
+    background: rgba(255,255,255,.68);
     border-color: rgba(15,17,20,.12);
-    box-shadow: 0 18px 50px rgba(15,17,20,.08);
+    color: #475569;
   }
-  html[data-theme="light"] .fcg-bento-card:hover {
-    background: rgba(255,255,255,.92);
+  html[data-theme="light"] .fcg-default-hero-pill:hover {
     border-color: rgba(15,17,20,.24);
   }
-  html[data-theme="light"] .fcg-bento-card::after {
-    border-color: rgba(15,17,20,.16);
+  html[data-theme="light"] .fcg-default-hero-pill strong,
+  html[data-theme="light"] .fcg-default-hero h1 {
+    color: #0F1114 !important;
   }
-  html[data-theme="light"] .fcg-bento-dot {
-    background: #F97316;
-    box-shadow: 0 0 18px rgba(249,115,22,.28);
+  html[data-theme="light"] .fcg-default-hero-copy {
+    color: #4B5563 !important;
   }
-  html[data-theme="light"] .fcg-bento-meta {
+  html[data-theme="light"] .fcg-default-hero-button-primary {
+    background: #0F1114;
+    color: #ffffff;
+  }
+  html[data-theme="light"] .fcg-default-hero-button-primary:hover {
+    background: #000000;
+  }
+  html[data-theme="light"] .fcg-default-hero-button-secondary {
+    background: rgba(255,255,255,.72);
     border-color: rgba(15,17,20,.14);
-    color: #6b7280;
-    background: rgba(255,255,255,.52);
+    color: #0F1114;
+  }
+  html[data-theme="light"] .fcg-default-hero-button-secondary:hover {
+    background: #ffffff;
+  }
+  html[data-theme="light"] .fcg-solution-features {
+    background:
+      radial-gradient(circle at 18% 50%, rgba(249,115,22,.1), transparent 34%),
+      radial-gradient(circle at 86% 20%, rgba(15,17,20,.035), transparent 28%),
+      linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border-color: #D1D5DB;
+    color: #334155;
+  }
+  html[data-theme="light"] .fcg-solution-features::before {
+    background:
+      radial-gradient(circle at 8% 50%, rgba(249,115,22,.12), transparent 32%),
+      radial-gradient(circle at 80% 18%, rgba(15,17,20,.035), transparent 26%);
+  }
+  html[data-theme="light"] .fcg-solution-feature-panel img {
+    filter: none;
+  }
+  html[data-theme="light"] .fcg-solution-feature-choice {
+    color: #475569;
+  }
+  html[data-theme="light"] .fcg-solution-feature-choice:hover {
+    background: rgba(15,17,20,.035);
+  }
+  html[data-theme="light"] .fcg-solution-feature-choice[aria-selected="true"] {
+    background: rgba(255,255,255,.78);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 48px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-solution-feature-icon,
+  html[data-theme="light"] .fcg-solution-feature-choice:nth-child(2) .fcg-solution-feature-icon,
+  html[data-theme="light"] .fcg-solution-feature-choice:nth-child(3) .fcg-solution-feature-icon {
+    background: rgba(249,115,22,.1);
+    color: #F97316;
+  }
+  html[data-theme="light"] .fcg-solution-feature-title {
+    color: #0F1114 !important;
+  }
+  html[data-theme="light"] .fcg-solution-feature-text {
+    color: #4B5563 !important;
   }
   html[data-theme="light"] .fcg-showcase {
     background: #ffffff;
@@ -2659,7 +3256,7 @@
 
   /* Index visual consistency pass */
   .fcg-hero2 h1,
-  .fcg-bento h2,
+  .fcg-solution-feature-title,
   .fcg-showcase h2,
   .fcg-showcase-window h3,
   .fcg-feature108-title,
@@ -2672,7 +3269,7 @@
     letter-spacing: 0;
   }
   .fcg-hero2-copy,
-  .fcg-bento-subcopy,
+  .fcg-solution-feature-text,
   .fcg-showcase-description,
   .fcg-showcase-step-content,
   .fcg-showcase-window p,
@@ -2688,7 +3285,6 @@
   .fcg-showcase-badge,
   .fcg-feature108-badge,
   .product-kicker,
-  .fcg-bento-kicker,
   .fcg-mobile-eyebrow {
     font-family: 'JetBrains Mono', monospace;
     font-weight: 400;
@@ -2707,13 +3303,7 @@
   .fcg-mobile-feature {
     border-color: rgba(255,255,255,.1) !important;
   }
-  .fcg-bento {
-    background:
-      radial-gradient(circle at 18% 12%, rgba(249,115,22,.12), transparent 28%),
-      radial-gradient(125% 125% at 50% 10%, #080805 42%, #121212 100%);
-  }
   .product-card,
-  .fcg-bento-card,
   .fcg-showcase-card,
   .fcg-showcase-window,
   .fcg-feature108-card,
@@ -2722,8 +3312,7 @@
     background: #121212;
     border-color: #2A2A2A;
   }
-  .product-card:hover,
-  .fcg-bento-card:hover {
+  .product-card:hover {
     background: #171717;
     border-color: rgba(255,255,255,.18);
   }
@@ -2744,7 +3333,6 @@
   .fcg-store-button {
     font-weight: 500;
   }
-  .fcg-bento-card h3,
   .fcg-showcase-step-trigger,
   .fcg-feature-row h3,
   .fcg-mobile-cta h3,
@@ -2768,13 +3356,7 @@
   html[data-theme="light"] .fcg-mobile-feature {
     border-color: #D1D5DB !important;
   }
-  html[data-theme="light"] .fcg-bento {
-    background:
-      radial-gradient(circle at 52% 10%, rgba(249,115,22,.1), transparent 32%),
-      radial-gradient(125% 125% at 50% 10%, #ffffff 38%, #F3F4F6 100%);
-  }
   html[data-theme="light"] .product-card,
-  html[data-theme="light"] .fcg-bento-card,
   html[data-theme="light"] .fcg-showcase-card,
   html[data-theme="light"] .fcg-showcase-window,
   html[data-theme="light"] .fcg-feature108-card,
@@ -2784,8 +3366,7 @@
     border-color: rgba(15,17,20,.12);
     box-shadow: 0 18px 50px rgba(15,17,20,.08);
   }
-  html[data-theme="light"] .product-card:hover,
-  html[data-theme="light"] .fcg-bento-card:hover {
+  html[data-theme="light"] .product-card:hover {
     background: rgba(255,255,255,.92);
     border-color: rgba(15,17,20,.24);
   }
@@ -2798,6 +3379,54 @@
     background: #f1f5f9;
   }
   @media (max-width: 980px) {
+    .fcg-default-hero {
+      padding: 8rem 1.25rem 8rem;
+    }
+    .fcg-default-hero-pill {
+      align-items: flex-start;
+      flex-direction: column;
+      line-height: 1.4;
+    }
+    .fcg-default-hero-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .fcg-default-hero-button {
+      width: 100%;
+    }
+    .fcg-tailark-hero {
+      padding: 7.5rem 1.25rem 0;
+    }
+    .fcg-tailark-radiance {
+      display: none;
+    }
+    .fcg-tailark-hero h1 {
+      line-height: 1.02;
+    }
+    .fcg-tailark-actions {
+      align-items: stretch;
+      flex-direction: column;
+      margin-top: 2.25rem;
+    }
+    .fcg-tailark-action-frame,
+    .fcg-tailark-button {
+      width: 100%;
+    }
+    .fcg-tailark-preview-outer {
+      margin-top: 3rem;
+      padding: 0;
+    }
+    .fcg-tailark-preview {
+      border-radius: .875rem;
+      padding: .6rem;
+    }
+    .fcg-efferd-logo-group {
+      gap: 2.75rem;
+      padding-right: 2.75rem;
+    }
+    .fcg-efferd-logo-item {
+      min-width: 7.5rem;
+    }
     .fcg-hero2-content {
       grid-template-columns: 1fr;
       min-height: auto;
@@ -2821,14 +3450,63 @@
     }
     .fcg-hero2-preview img { display: none; }
     .fcg-hero2-preview-card { min-height: auto; }
-    .fcg-bento-inner { padding: 4.5rem 1.25rem; }
-    .fcg-bento-header { align-items: flex-start; flex-direction: column; }
-    .fcg-bento-grid { grid-template-columns: 1fr; }
-    .fcg-bento-card-large,
-    .fcg-bento-card-small,
-    .fcg-bento-card-wide {
+    .fcg-solution-features-inner {
+      padding: 4.5rem 1.25rem;
+    }
+    .fcg-solution-feature-stage {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .fcg-solution-feature-visual,
+    .fcg-solution-feature-options {
       grid-column: auto;
-      grid-row: auto;
+    }
+    .fcg-solution-feature-panel {
+      height: 28rem;
+      min-height: 28rem;
+    }
+    .fcg-solution-human-image {
+      width: min(100%, 28rem) !important;
+    }
+    .fcg-card-placeholder {
+      min-height: 24rem;
+    }
+    .fcg-card-placeholder-card-back {
+      left: 0;
+      width: min(78vw, 22rem);
+      height: 14rem;
+    }
+    .fcg-card-placeholder-card-front {
+      right: 0;
+      width: min(82vw, 25rem);
+      height: 13.5rem;
+    }
+    .fcg-card-placeholder-brand {
+      font-size: 1.45rem;
+    }
+    .fcg-card-placeholder-balance {
+      font-size: 1.25rem;
+    }
+    .fcg-card-placeholder-number {
+      font-size: 1.2rem;
+    }
+    .fcg-card-placeholder-holder,
+    .fcg-card-placeholder-valid {
+      font-size: .85rem;
+    }
+    .fcg-card-placeholder-valid {
+      right: 5.4rem;
+    }
+    .fcg-card-placeholder-circles span {
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+    .fcg-solution-feature-options {
+      gap: 1rem;
+    }
+    .fcg-solution-feature-choice {
+      grid-template-columns: 2.5rem 1fr;
+      padding: 1rem;
     }
     .fcg-showcase-inner {
       grid-template-columns: 1fr;
@@ -2933,32 +3611,70 @@
   }
 </style>
 <main class="product-shell">
-  <section id="capabilities" class="fcg-hero2">
-    <div class="fcg-hero2-glow" aria-hidden="true"><span></span><span></span><span></span></div>
+  <section id="capabilities" class="fcg-tailark-hero">
+    <div class="fcg-tailark-radiance" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
 
-    <div class="fcg-hero2-content">
-      <div class="fcg-hero2-copy-column">
-        <div class="fcg-hero2-badge">
-          Operate &middot; TMC OS
-          <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
+    <div class="fcg-tailark-background" aria-hidden="true">
+      <img src="https://ik.imagekit.io/lrigu76hy/tailark/night-background.jpg?updatedAt=1745733451120" alt="">
+    </div>
+
+    <div class="fcg-tailark-hero-inner">
+      <a href="#decision-paths" class="fcg-tailark-pill fcg-tailark-animate fcg-tailark-delay-1">
+        <span class="fcg-tailark-pill-text">Operate — For TMCs & Operators</span>
+        <span class="fcg-tailark-pill-divider"></span>
+        <span class="fcg-tailark-pill-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+
+      <h1 class="fcg-tailark-animate fcg-tailark-delay-2">Connect to the right part of the stack. At the right pace.</h1>
+
+      <p class="fcg-tailark-copy fcg-tailark-animate fcg-tailark-delay-3">Not software. Strategy + execution. FCG's advisory team connects TMCs to the right deployment — whether that's full Atlas, a phased rollout, or a single module to start. No rip-and-replace. No forced migration. Just the right connection, at the right time.</p>
+
+      <div class="fcg-tailark-actions fcg-tailark-animate fcg-tailark-delay-4">
+        <div class="fcg-tailark-action-frame">
+          <a href="#contact" class="fcg-tailark-button fcg-tailark-button-primary">Start a conversation</a>
         </div>
-        <h1>Run every TMC workflow from one hub.</h1>
-        <p class="fcg-hero2-copy">Atlas is the operating system for independent TMCs. It connects clients, queues, ticketing, duty of care, reporting, integrations, payment visibility, and service workflows in one infrastructure layer, so teams can modernize operations without giving up independence.</p>
-        <div class="fcg-hero2-actions">
-          <a href="#stack-showcase" class="fcg-hero2-button fcg-hero2-button-primary">See Atlas in action</a>
-          <a href="#product-capabilities" class="fcg-hero2-button fcg-hero2-button-secondary">Explore modules</a>
-        </div>
+        <a href="#decision-paths" class="fcg-tailark-button fcg-tailark-button-secondary">See engagement models</a>
       </div>
+    </div>
 
-      <div class="fcg-hero2-preview-wrap">
-        <div class="fcg-hero2-preview">
-          <img class="fcg-product-shot" src="assets/images/atlas-product/dashboard.jpg" alt="Atlas TMC OS dashboard showing clients, tickets, bookings, incidents, and operational activity">
-          <div class="fcg-hero2-preview-grid">
-            <article class="fcg-hero2-preview-card"><span>Agent Tools</span><strong>1 operating surface</strong></article>
-            <article class="fcg-hero2-preview-card"><span>Client Reporting</span><strong>Connected to every booking</strong></article>
-            <article class="fcg-hero2-preview-card"><span>Modules</span><strong>5 connected modules</strong></article>
-            <article class="fcg-hero2-preview-card"><span>Deployment</span><strong>Layer-by-layer rollout</strong></article>
-          </div>
+    <div class="fcg-tailark-preview-outer fcg-tailark-animate fcg-tailark-delay-5">
+      <div class="fcg-tailark-preview">
+        <img src="https://tailark.com/_next/image?url=%2Fmail2-light.png&w=3840&q=75" alt="Travel operations dashboard preview" width="2700" height="1440">
+      </div>
+    </div>
+  </section>
+
+  <section class="fcg-efferd-logos" aria-label="Trusted by experts">
+    <h2>Trusted by <span>travel operators</span> across APAC</h2>
+    <div class="fcg-efferd-logo-viewport">
+      <div class="fcg-efferd-logo-track">
+        <div class="fcg-efferd-logo-group">
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/turso-wordmark.svg" alt="Turso logo"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/vercel-wordmark.svg" alt="Vercel logo"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/github-wordmark.svg" alt="GitHub logo"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/claude-wordmark.svg" alt="Claude AI logo"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/clerk-wordmark.svg" alt="Clerk logo"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/nvidia-wordmark.svg" alt="Nvidia logo"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/supabase-wordmark.svg" alt="Supabase logo"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/openai-wordmark.svg" alt="OpenAI logo"></div>
+        </div>
+        <div class="fcg-efferd-logo-group" aria-hidden="true">
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/turso-wordmark.svg" alt=""></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/vercel-wordmark.svg" alt=""></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/github-wordmark.svg" alt=""></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/claude-wordmark.svg" alt=""></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/clerk-wordmark.svg" alt=""></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/nvidia-wordmark.svg" alt=""></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/supabase-wordmark.svg" alt=""></div>
+          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/openai-wordmark.svg" alt=""></div>
         </div>
       </div>
     </div>
@@ -2967,44 +3683,44 @@
   <section id="decision-paths" class="px-6 md:px-12 py-28 bg-[#050505] border-t border-white/10">
     <div class="max-w-7xl mx-auto">
       <div class="max-w-3xl mb-16 fade-up">
-        <div class="product-kicker text-xs text-orange-500 mb-4">Pain Points</div>
-        <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Three reasons TMC operators start an Atlas conversation.</h2>
+        <div class="product-kicker text-xs text-orange-500 mb-4">Where TMCs Start</div>
+        <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Three triggers that start an advisory conversation.</h2>
       </div>
       <div class="space-y-5">
         <article class="product-card rounded-3xl p-6 md:p-8 fade-up grid lg:grid-cols-[.55fr_1fr_.85fr] gap-6 items-start">
           <div>
-            <div class="product-kicker text-[10px] text-orange-500 mb-2">Pain 01</div>
-            <h3 class="text-2xl text-white font-medium tracking-tight">Operations don't scale</h3>
+            <div class="product-kicker text-[10px] text-orange-500 mb-2">Path 01</div>
+            <h3 class="text-2xl text-white font-medium tracking-tight">Margin pressure</h3>
           </div>
-          <p class="text-sm text-neutral-400 leading-relaxed">Every new client means more agent hours, more manual reporting, and more margin compression. Growth creates operational drag instead of leverage.</p>
+          <p class="text-sm text-neutral-400 leading-relaxed">Revenue grows but profit doesn't. Operational cost per booking is too high. The owner starts looking at the tech as the problem.</p>
           <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
-            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Atlas module</div>
-            <div class="text-lg text-white font-medium mb-3">OpsHub + Reports</div>
-            <p class="text-sm text-neutral-400 leading-relaxed">One connected surface for client CRM, booking pipeline, agent queues, and branded analytics eliminates weekend spreadsheet assembly.</p>
+            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Recommended</div>
+            <div class="text-lg text-white font-medium mb-3">Operational audit + Atlas phased deployment</div>
+            <p class="text-sm text-neutral-400 leading-relaxed">Map where the operation loses time and money, then deploy the modules that fix the highest-cost gaps first.</p>
           </div>
         </article>
         <article class="product-card rounded-3xl p-6 md:p-8 fade-up grid lg:grid-cols-[.55fr_1fr_.85fr] gap-6 items-start">
           <div>
-            <div class="product-kicker text-[10px] text-orange-500 mb-2">Pain 02</div>
-            <h3 class="text-2xl text-white font-medium tracking-tight">Agents toggle between six screens</h3>
+            <div class="product-kicker text-[10px] text-orange-500 mb-2">Path 02</div>
+            <h3 class="text-2xl text-white font-medium tracking-tight">Client loss or near-loss</h3>
           </div>
-          <p class="text-sm text-neutral-400 leading-relaxed">GDS terminals, CRM tabs, email inboxes, spreadsheets, duty of care PDFs, and supplier portals. Every booking requires context-switching across disconnected tools.</p>
+          <p class="text-sm text-neutral-400 leading-relaxed">A corporate client leaves for a competitor with better reporting, self-service, or duty of care. Or a key prospect chooses someone else in a pitch.</p>
           <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
-            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Atlas module</div>
-            <div class="text-lg text-white font-medium mb-3">Inbox + FlowConnect</div>
-            <p class="text-sm text-neutral-400 leading-relaxed">Unified ticketing with SLA enforcement and an integration fabric connecting GDS, suppliers, finance, HR, and SSO into one workflow.</p>
+            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Recommended</div>
+            <div class="text-lg text-white font-medium mb-3">Competitive positioning review + capability gap analysis</div>
+            <p class="text-sm text-neutral-400 leading-relaxed">Identify what the TMC is missing relative to digitally-native competitors and build a plan to close the gap.</p>
           </div>
         </article>
         <article class="product-card rounded-3xl p-6 md:p-8 fade-up grid lg:grid-cols-[.55fr_1fr_.85fr] gap-6 items-start">
           <div>
-            <div class="product-kicker text-[10px] text-orange-500 mb-2">Pain 03</div>
-            <h3 class="text-2xl text-white font-medium tracking-tight">Duty of care is a bolt-on PDF</h3>
+            <div class="product-kicker text-[10px] text-orange-500 mb-2">Path 03</div>
+            <h3 class="text-2xl text-white font-medium tracking-tight">Platform frustration</h3>
           </div>
-          <p class="text-sm text-neutral-400 leading-relaxed">Real-time traveler visibility doesn't exist. Incidents are discovered after the client complains. Risk management is reactive, not operational.</p>
+          <p class="text-sm text-neutral-400 leading-relaxed">SAP is too expensive, too rigid, or requires too much IT overhead. The GDS terminal workflow hasn't changed in a decade.</p>
           <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
-            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Atlas module</div>
-            <div class="text-lg text-white font-medium mb-3">DutyView</div>
-            <p class="text-sm text-neutral-400 leading-relaxed">Real-time traveler tracking with every incident surfaced proactively. Connected to every booking, not buried in a static report.</p>
+            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Recommended</div>
+            <div class="text-lg text-white font-medium mb-3">Stack assessment + migration planning</div>
+            <p class="text-sm text-neutral-400 leading-relaxed">Evaluate the current technology stack, identify what to keep, what to replace, and design a migration path that doesn't disrupt the business.</p>
           </div>
         </article>
       </div>
@@ -3015,77 +3731,77 @@
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 fade-up">
         <div>
-          <div class="product-kicker text-xs text-orange-500 mb-4">Module Map</div>
-          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Five modules, one connected operating surface.</h2>
+          <div class="product-kicker text-xs text-orange-500 mb-4">How We Engage</div>
+          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Four engagement types, mapped to where you are.</h2>
         </div>
-        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Each module solves a specific operational pain. Together, they replace the duct tape holding your TMC infrastructure together: service queues, supplier connections, traveler visibility, reporting, and financial handoffs.</p>
+        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Every TMC is at a different stage. The engagement model matches the TMC's readiness, not a one-size-fits-all playbook.</p>
       </div>
       <div class="grid md:grid-cols-2 gap-5">
         <article class="product-card rounded-3xl p-7 fade-up">
           <div class="flex items-start gap-5 mb-6">
-            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:cpu-bolt-linear" width="23" height="23"></iconify-icon></div>
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:clipboard-check-linear" width="23" height="23"></iconify-icon></div>
             <div>
-              <div class="product-kicker text-[10px] text-orange-500 mb-2">Module 01</div>
-              <h3 class="text-2xl text-white font-medium tracking-tight">OpsHub</h3>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Assess</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Operational Audit</h3>
             </div>
           </div>
-          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Client CRM, booking pipeline, and agent queues in one connected surface. Everything visible, everything linked.</p>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Map current tools, workflows, pain points, and margin structure. Identify where the operation loses time and money. Output: a clear picture of what's working, what isn't, and what to fix first.</p>
           <div class="border-t border-white/10 pt-5">
             <ul class="space-y-3">
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Client profiles, travel policies, and booking history in one view</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Agent queue management with workload visibility</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Booking pipeline from request through to confirmation</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Current-state workflow mapping</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Cost-per-booking analysis</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Technology gap assessment</span></li>
             </ul>
           </div>
         </article>
         <article class="product-card rounded-3xl p-7 fade-up">
           <div class="flex items-start gap-5 mb-6">
-            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:inbox-line-linear" width="23" height="23"></iconify-icon></div>
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:compass-linear" width="23" height="23"></iconify-icon></div>
             <div>
-              <div class="product-kicker text-[10px] text-orange-500 mb-2">Module 02</div>
-              <h3 class="text-2xl text-white font-medium tracking-tight">Inbox</h3>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Plan</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Deployment Strategy</h3>
             </div>
           </div>
-          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Unified ticketing with SLA enforcement across every channel. No request lost. No breach discovered after the client complains.</p>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Design the right deployment — full Atlas, phased rollout, or single module. Match the plan to the TMC's size, market, client mix, and risk tolerance.</p>
           <div class="border-t border-white/10 pt-5">
             <ul class="space-y-3">
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Multi-channel request capture: email, chat, phone, portal</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>SLA timers with escalation rules and breach alerts</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Full audit trail from request to resolution</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Phased vs. full deployment recommendation</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Module sequencing by pain priority</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Risk assessment and mitigation plan</span></li>
             </ul>
           </div>
         </article>
         <article class="product-card rounded-3xl p-7 fade-up">
           <div class="flex items-start gap-5 mb-6">
-            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:link-round-linear" width="23" height="23"></iconify-icon></div>
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:settings-linear" width="23" height="23"></iconify-icon></div>
             <div>
-              <div class="product-kicker text-[10px] text-orange-500 mb-2">Module 03</div>
-              <h3 class="text-2xl text-white font-medium tracking-tight">FlowConnect</h3>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Execute</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Implementation Support</h3>
             </div>
           </div>
-          <p class="text-sm text-neutral-400 leading-relaxed mb-6">GDS, suppliers, finance, HR, SSO, payment data, CRM, and reporting. One connected fabric that replaces duct-taped operations.</p>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Hands-on support through configuration, data migration, agent training, and go-live. FCG's team works alongside the TMC's team — not instead of them.</p>
           <div class="border-t border-white/10 pt-5">
             <ul class="space-y-3">
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Pre-built connectors for major GDS and supplier systems</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Finance and HR system integration for reconciliation</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>SSO and identity management across the TMC stack</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Configuration and data migration</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Agent training and change management</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Go-live support and stabilization</span></li>
             </ul>
           </div>
         </article>
         <article class="product-card rounded-3xl p-7 fade-up">
           <div class="flex items-start gap-5 mb-6">
-            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:shield-check-linear" width="23" height="23"></iconify-icon></div>
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:graph-up-linear" width="23" height="23"></iconify-icon></div>
             <div>
-              <div class="product-kicker text-[10px] text-orange-500 mb-2">Module 04</div>
-              <h3 class="text-2xl text-white font-medium tracking-tight">DutyView</h3>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Grow</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Ongoing Advisory</h3>
             </div>
           </div>
-          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Real-time traveler tracking with incidents surfaced proactively. Duty of care becomes an operational workflow, not a static report.</p>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Post-deployment optimization. Quarterly reviews. Expansion planning. The advisory relationship doesn't end at go-live — it evolves as the TMC grows.</p>
           <div class="border-t border-white/10 pt-5">
             <ul class="space-y-3">
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Live traveler location and itinerary tracking</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Incident alerting connected to booking and client data</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Risk dashboard for client reporting and compliance</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Quarterly performance reviews</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Module expansion planning</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Client portfolio growth strategy</span></li>
             </ul>
           </div>
         </article>
@@ -3094,200 +3810,87 @@
   </section>
 
   <section id="performance-signals" class="fcg-marketing-section">
-    <div class="fcg-feature108-inner">
-      <header class="fcg-feature108-header fade-up">
-        <div class="fcg-feature108-badge">Competitive Position</div>
-        <h2 class="fcg-feature108-title">Replace the duct tape without losing your independence</h2>
-        <p class="fcg-feature108-copy">Atlas modernizes your TMC infrastructure without taking your clients, your brand, or your independence. One operating system replaces the patchwork of legacy terminals, homegrown CRM, and spreadsheet ops.</p>
+    <div class="fcg-marketing-inner">
+      <header class="fcg-marketing-header fade-up">
+        <div class="fcg-marketing-eyebrow">THE ADVISORY DIFFERENCE</div>
+        <h2 class="fcg-marketing-title">We don't sell software to TMCs that need strategy first.</h2>
+        <p>Most TMC owners know their tools are outdated. What they don't know is where to start, what to prioritize, and how to modernize without disrupting the business they built. That's what advisory solves.</p>
       </header>
 
-      <div class="fcg-feature108-tabs fade-up" data-feature108-tabs>
-        <div class="fcg-feature108-tablist" role="tablist" aria-label="Atlas competitive advantages">
-          <button class="fcg-feature108-trigger" type="button" id="feature108-tab-options" role="tab" aria-selected="true" aria-controls="feature108-panel-options" data-tab-target="feature108-panel-options">
-            <iconify-icon icon="solar:bolt-circle-bold-duotone" width="18" height="18"></iconify-icon>
-            vs. Legacy terminals
-          </button>
-          <button class="fcg-feature108-trigger" type="button" id="feature108-tab-workflows" role="tab" aria-selected="false" aria-controls="feature108-panel-workflows" data-tab-target="feature108-panel-workflows" tabindex="-1">
-            <iconify-icon icon="solar:cursor-bold-duotone" width="18" height="18"></iconify-icon>
-            vs. Enterprise suites
-          </button>
-          <button class="fcg-feature108-trigger" type="button" id="feature108-tab-rollouts" role="tab" aria-selected="false" aria-controls="feature108-panel-rollouts" data-tab-target="feature108-panel-rollouts" tabindex="-1">
-            <iconify-icon icon="solar:layers-bold-duotone" width="18" height="18"></iconify-icon>
-            vs. Super-platforms
-          </button>
-        </div>
-
-        <div class="fcg-feature108-card">
-          <article class="fcg-feature108-panel" id="feature108-panel-options" role="tabpanel" aria-labelledby="feature108-tab-options">
-            <div class="fcg-feature108-content">
-              <div class="fcg-feature108-badge">Connected Ops</div>
-              <h3>Functional but disconnected is no longer enough.</h3>
-              <p>Legacy GDS terminals handle bookings but leave everything else in spreadsheets, email, and manual handoffs. Atlas connects every operational surface so agents stop toggling and start delivering.</p>
-              <a class="fcg-feature108-action" href="#product-map">Explore modules</a>
-            </div>
-            <div class="fcg-feature108-visual" aria-label="Atlas unified operations preview">
-              <div class="fcg-feature108-window">
-                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
-                <div class="fcg-feature108-stack">
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:cpu-bolt-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>OpsHub active</strong><small>Client CRM, pipeline, and queues in one surface</small></div>
-                    <mark>Live</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:inbox-line-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Inbox SLA tracking</strong><small>Zero breaches discovered after client complaint</small></div>
-                    <mark>0 breach</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:chart-2-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Reports connected</strong><small>Branded analytics linked to every booking</small></div>
-                    <mark>Auto</mark>
-                  </div>
-                </div>
-                <div class="fcg-feature108-metrics">
-                  <div class="fcg-feature108-metric"><strong>5</strong><span>Connected modules</span></div>
-                  <div class="fcg-feature108-metric"><strong>1</strong><span>Operating surface</span></div>
-                  <div class="fcg-feature108-metric"><strong>24/7</strong><span>Visibility</span></div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="fcg-feature108-panel" id="feature108-panel-workflows" role="tabpanel" aria-labelledby="feature108-tab-workflows" hidden>
-            <div class="fcg-feature108-content">
-              <div class="fcg-feature108-badge">Right-Sized</div>
-              <h3>Enterprise suites over-engineer the mid-market problem.</h3>
-              <p>SAP Concur and similar platforms were built for global enterprises with dedicated IT teams. Atlas is built for independent TMCs and regional networks that need infrastructure-grade tools without the overhead.</p>
-              <a class="fcg-feature108-action" href="#decision-paths">See pain points</a>
-            </div>
-            <div class="fcg-feature108-visual" aria-label="Atlas mid-market fit preview">
-              <div class="fcg-feature108-window">
-                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
-                <div class="fcg-feature108-stack">
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:layers-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Layer-by-layer deployment</strong><small>Start with one module, expand on your timeline</small></div>
-                    <mark>Flexible</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:users-group-rounded-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>10-100+ agent teams</strong><small>Built for the operator scale that matters</small></div>
-                    <mark>Fit</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:map-point-wave-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>APAC-native</strong><small>Singapore, Hong Kong, Thailand, Malaysia, and beyond</small></div>
-                    <mark>Regional</mark>
-                  </div>
-                </div>
-                <div class="fcg-feature108-metrics">
-                  <div class="fcg-feature108-metric"><strong>0</strong><span>IT team required</span></div>
-                  <div class="fcg-feature108-metric"><strong>10+</strong><span>Min. agents</span></div>
-                  <div class="fcg-feature108-metric"><strong>APAC</strong><span>Coverage</span></div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="fcg-feature108-panel" id="feature108-panel-rollouts" role="tabpanel" aria-labelledby="feature108-tab-rollouts" hidden>
-            <div class="fcg-feature108-content">
-              <div class="fcg-feature108-badge">Independence</div>
-              <h3>Platforms that help you today compete with you tomorrow.</h3>
-              <p>Super-platforms offer infrastructure but eventually compete for your clients. Atlas is built by FCG, which does not compete with its customers. Your brand, your clients, and your independence stay protected.</p>
-              <a class="fcg-feature108-action" href="#mobile-workflows">See deployment</a>
-            </div>
-            <div class="fcg-feature108-visual" aria-label="Atlas independence model preview">
-              <div class="fcg-feature108-window">
-                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
-                <div class="fcg-feature108-stack">
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:shield-check-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Your brand stays yours</strong><small>White-label reporting and client-facing surfaces</small></div>
-                    <mark>Owned</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:lock-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Your clients stay yours</strong><small>FCG builds infrastructure, not a competing TMC</small></div>
-                    <mark>Protected</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:key-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Your data stays yours</strong><small>Full ownership of operational and booking data</small></div>
-                    <mark>Sovereign</mark>
-                  </div>
-                </div>
-                <div class="fcg-feature108-metrics">
-                  <div class="fcg-feature108-metric"><strong>100%</strong><span>Brand control</span></div>
-                  <div class="fcg-feature108-metric"><strong>0</strong><span>Client conflict</span></div>
-                  <div class="fcg-feature108-metric"><strong>Full</strong><span>Data ownership</span></div>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
+      <div class="fcg-marketing-features fade-up">
+        <article class="fcg-marketing-feature">
+          <h3>Independence preserved</h3>
+          <p>We don't compete with TMCs. We don't take their clients. We modernize the infrastructure underneath — and the TMC keeps everything that makes it valuable.</p>
+        </article>
+        <article class="fcg-marketing-feature">
+          <h3>Layer-by-layer</h3>
+          <p>Start with one module. Start with one office. Start with one corporate account. The deployment expands as confidence builds — not before.</p>
+        </article>
+        <article class="fcg-marketing-feature">
+          <h3>10 offices across APAC</h3>
+          <p>Singapore, Hong Kong, Bangkok, KL, Shenzhen, Beijing, Shanghai, Taipei, HCMC, London. Advisory isn't remote-only — FCG has people in the markets where TMCs operate.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <section id="product-capabilities" class="fcg-bento">
-    <div class="fcg-bento-spiral" aria-hidden="true">
-      <div id="fcgBentoSpiral"></div>
-    </div>
-    <div class="fcg-bento-inner">
-      <header class="fcg-bento-header fade-up">
-        <div>
-          <div class="fcg-bento-kicker">Atlas Capabilities</div>
-          <h2>What sits inside the operating system.</h2>
+  <section id="solution-capabilities" class="fcg-solution-features">
+    <div class="fcg-solution-features-inner">
+      <div class="fcg-solution-feature-stage fade-up" data-solution-feature-tabs>
+        <div class="fcg-solution-feature-visual">
+          <article class="fcg-solution-feature-panel" id="solution-panel-booking" role="tabpanel" aria-labelledby="solution-tab-booking">
+            <img class="fcg-solution-human-image" src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/features/group-image-1.png" alt="Two people working at laptops in office settings" loading="lazy">
+          </article>
+          <article class="fcg-solution-feature-panel" id="solution-panel-operations" role="tabpanel" aria-labelledby="solution-tab-operations" hidden>
+            <div class="fcg-card-placeholder" aria-label="Visa card placeholder preview">
+              <div class="fcg-card-placeholder-card fcg-card-placeholder-card-back">
+                <div class="fcg-card-placeholder-brand">VISA</div>
+                <div class="fcg-card-placeholder-balance"><span>Balance</span>$2,234</div>
+                <div class="fcg-card-placeholder-holder"><span>Card holder</span>Sofia Gracenia</div>
+                <div class="fcg-card-placeholder-valid"><span>Valid thru</span>08/28</div>
+                <div class="fcg-card-placeholder-number">4242 **** **** 2255</div>
+                <div class="fcg-card-placeholder-circles"><span></span><span></span></div>
+              </div>
+              <div class="fcg-card-placeholder-card fcg-card-placeholder-card-front">
+                <div class="fcg-card-placeholder-brand">VISA</div>
+                <div class="fcg-card-placeholder-balance"><span>Balance</span>$2,234</div>
+                <div class="fcg-card-placeholder-holder"><span>Card holder</span>Sofia Gracenia</div>
+                <div class="fcg-card-placeholder-valid"><span>Valid thru</span>08/28</div>
+                <div class="fcg-card-placeholder-number">4242 **** **** 2255</div>
+                <div class="fcg-card-placeholder-circles"><span></span><span></span></div>
+              </div>
+            </div>
+          </article>
+          <article class="fcg-solution-feature-panel" id="solution-panel-supply" role="tabpanel" aria-labelledby="solution-tab-supply" hidden>
+            <img src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/features/image-3.png" alt="Supply and content solution preview" loading="lazy">
+          </article>
         </div>
-        <p class="fcg-bento-subcopy">Six capabilities turn disconnected TMC tools into one infrastructure layer: workspace, ticketing, integration, duty of care, analytics, payment visibility, and deployment.</p>
-      </header>
 
-      <div class="fcg-bento-grid">
-        <article class="fcg-bento-card fcg-bento-card-large fade-up">
-          <header class="fcg-bento-card-header">
-            <span class="fcg-bento-dot">&bull;</span>
-            <h3>Unified agent workspace</h3>
-            <span class="fcg-bento-meta">OpsHub</span>
-          </header>
-          <p>Client CRM, booking pipeline, and agent queues in one connected surface. Every client relationship, every open request, and every team workload visible without switching screens.</p>
-        </article>
+        <div class="fcg-solution-feature-options" role="tablist" aria-label="Engagement process choices">
+          <button class="fcg-solution-feature-choice" type="button" id="solution-tab-booking" role="tab" aria-selected="true" aria-controls="solution-panel-booking" data-solution-target="solution-panel-booking">
+            <span class="fcg-solution-feature-icon"><iconify-icon icon="solar:chart-square-bold-duotone" width="34" height="34"></iconify-icon></span>
+            <span>
+              <span class="fcg-solution-feature-title">Understand the current state.</span>
+              <span class="fcg-solution-feature-text">Map workflows, tools, margin structure, and client requirements. Identify the gaps between where the TMC is and where it needs to be.</span>
+            </span>
+          </button>
 
-        <article class="fcg-bento-card fcg-bento-card-small fade-up">
-          <header class="fcg-bento-card-header">
-            <span class="fcg-bento-dot">&bull;</span>
-            <h3>SLA-enforced ticketing</h3>
-            <span class="fcg-bento-meta">Inbox</span>
-          </header>
-          <p>Unified ticketing across every channel with SLA timers, escalation rules, and breach alerts. No request lost or forgotten.</p>
-        </article>
+          <button class="fcg-solution-feature-choice" type="button" id="solution-tab-operations" role="tab" aria-selected="false" aria-controls="solution-panel-operations" data-solution-target="solution-panel-operations" tabindex="-1">
+            <span class="fcg-solution-feature-icon"><iconify-icon icon="solar:compass-bold-duotone" width="34" height="34"></iconify-icon></span>
+            <span>
+              <span class="fcg-solution-feature-title">Build the deployment plan.</span>
+              <span class="fcg-solution-feature-text">Match the right FCG modules to the TMC's specific pain points. Sequence the rollout by priority. Set success criteria.</span>
+            </span>
+          </button>
 
-        <article class="fcg-bento-card fcg-bento-card-small fade-up">
-          <header class="fcg-bento-card-header">
-            <span class="fcg-bento-dot">&bull;</span>
-            <h3>Integration fabric</h3>
-            <span class="fcg-bento-meta">FlowConnect</span>
-          </header>
-          <p>GDS, suppliers, finance, HR, SSO, payment status, CRM, and reporting connected through one fabric. The layer that replaces the duct tape.</p>
-        </article>
-
-        <article class="fcg-bento-card fcg-bento-card-wide fade-up">
-          <header class="fcg-bento-card-header">
-            <span class="fcg-bento-dot">&bull;</span>
-            <h3>Real-time duty of care</h3>
-            <span class="fcg-bento-meta">DutyView</span>
-          </header>
-          <p>Live traveler tracking with incident surfacing connected to every booking. Operational risk management, not a bolt-on PDF report.</p>
-        </article>
-
-        <article class="fcg-bento-card fcg-bento-card-wide fade-up">
-          <header class="fcg-bento-card-header">
-            <span class="fcg-bento-dot">&bull;</span>
-            <h3>Client-ready analytics</h3>
-            <span class="fcg-bento-meta">Reports</span>
-          </header>
-          <p>Branded reporting connected to every booking. No more weekend spreadsheet assembly. Deliver client insights that look as professional as the service behind them.</p>
-        </article>
+          <button class="fcg-solution-feature-choice" type="button" id="solution-tab-supply" role="tab" aria-selected="false" aria-controls="solution-panel-supply" data-solution-target="solution-panel-supply" tabindex="-1">
+            <span class="fcg-solution-feature-icon"><iconify-icon icon="solar:rocket-2-bold-duotone" width="34" height="34"></iconify-icon></span>
+            <span>
+              <span class="fcg-solution-feature-title">Deploy with support.</span>
+              <span class="fcg-solution-feature-text">Configuration, migration, training, go-live. FCG's advisory team works alongside the TMC's team through every phase.</span>
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -3295,137 +3898,126 @@
   <section id="stack-showcase" class="fcg-showcase">
     <div class="fcg-showcase-inner">
       <div class="fcg-showcase-copy fade-up">
-        <div class="fcg-showcase-badge">Atlas Modules</div>
-        <h2>Walk through the five modules that connect your TMC.</h2>
-        <p class="fcg-showcase-description">Each module handles a distinct operational surface. Together, they form one connected hub that scales with your business instead of against it.</p>
+        <div class="fcg-showcase-badge">ENGAGEMENT</div>
+        <h2>From first conversation to operational lift.</h2>
+        <p class="fcg-showcase-description">Every TMC engagement starts the same way — a conversation about what's working, what isn't, and what matters most. The advisory team maps the path from there.</p>
 
-        <div class="fcg-showcase-stats" aria-label="Atlas highlights">
-          <span class="fcg-showcase-chip">5 connected modules</span>
-          <span class="fcg-showcase-chip">One operating surface</span>
-          <span class="fcg-showcase-chip">Layer-by-layer deployment</span>
-          <span class="fcg-showcase-chip">TMC independence preserved</span>
+        <div class="fcg-showcase-stats" aria-label="Engagement highlights">
+          <span class="fcg-showcase-chip">3-6 month cycle</span>
+          <span class="fcg-showcase-chip">2-3 stakeholders</span>
+          <span class="fcg-showcase-chip">Phased deployment</span>
         </div>
 
         <div class="fcg-showcase-steps" data-fcg-showcase-accordion>
           <div class="fcg-showcase-step">
-            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-opshub" aria-expanded="true" aria-controls="showcase-step-opshub-content">
-              <span>OpsHub</span>
+            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-map" aria-expanded="true" aria-controls="showcase-step-map-content">
+              <span>Discovery call</span>
               <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
             </button>
-            <div class="fcg-showcase-step-content" id="showcase-step-opshub-content" role="region" aria-labelledby="showcase-step-opshub">
-              Client CRM, booking pipeline, and agent queues in one connected surface. Everything connected, everything visible. The foundation of Atlas.
+            <div class="fcg-showcase-step-content" id="showcase-step-map-content" role="region" aria-labelledby="showcase-step-map">
+              Understand the TMC's business, pain points, client mix, and growth plans.
             </div>
           </div>
 
           <div class="fcg-showcase-step">
-            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-inbox" aria-expanded="false" aria-controls="showcase-step-inbox-content">
-              <span>Inbox</span>
+            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-compare" aria-expanded="false" aria-controls="showcase-step-compare-content">
+              <span>Operational audit</span>
               <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
             </button>
-            <div class="fcg-showcase-step-content" id="showcase-step-inbox-content" role="region" aria-labelledby="showcase-step-inbox" hidden>
-              Unified ticketing with SLA enforcement across every channel. No request lost. No breach discovered after the client complains.
+            <div class="fcg-showcase-step-content" id="showcase-step-compare-content" role="region" aria-labelledby="showcase-step-compare" hidden>
+              Map current workflows, tools, costs, and gaps. Output: a clear picture and a recommended starting point.
             </div>
           </div>
 
           <div class="fcg-showcase-step">
-            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-flowconnect" aria-expanded="false" aria-controls="showcase-step-flowconnect-content">
-              <span>FlowConnect</span>
+            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-rollout" aria-expanded="false" aria-controls="showcase-step-rollout-content">
+              <span>Deployment plan</span>
               <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
             </button>
-            <div class="fcg-showcase-step-content" id="showcase-step-flowconnect-content" role="region" aria-labelledby="showcase-step-flowconnect" hidden>
-              Integration fabric connecting GDS, suppliers, finance, HR, and SSO. The layer that replaces duct-taped operations.
+            <div class="fcg-showcase-step-content" id="showcase-step-rollout-content" role="region" aria-labelledby="showcase-step-rollout" hidden>
+              Design the rollout. Module selection, sequencing, timeline, success metrics.
             </div>
           </div>
 
           <div class="fcg-showcase-step">
-            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-dutyview" aria-expanded="false" aria-controls="showcase-step-dutyview-content">
-              <span>DutyView</span>
+            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-implement" aria-expanded="false" aria-controls="showcase-step-implement-content">
+              <span>Implementation</span>
               <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
             </button>
-            <div class="fcg-showcase-step-content" id="showcase-step-dutyview-content" role="region" aria-labelledby="showcase-step-dutyview" hidden>
-              Real-time traveler tracking and incident surfacing. Every risk event connected to booking data and client records. Not a bolt-on PDF.
-            </div>
-          </div>
-
-          <div class="fcg-showcase-step">
-            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-reports" aria-expanded="false" aria-controls="showcase-step-reports-content">
-              <span>Reports</span>
-              <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
-            </button>
-            <div class="fcg-showcase-step-content" id="showcase-step-reports-content" role="region" aria-labelledby="showcase-step-reports" hidden>
-              Branded, client-ready analytics connected to every booking. No more weekend spreadsheet assembly. Deliver insights that match the quality of your service.
+            <div class="fcg-showcase-step-content" id="showcase-step-implement-content" role="region" aria-labelledby="showcase-step-implement" hidden>
+              Configuration, migration, training, go-live. FCG works alongside, not instead of.
             </div>
           </div>
         </div>
 
         <div class="fcg-showcase-actions">
-          <a class="fcg-showcase-action fcg-showcase-action-primary" href="#contact">Start an Atlas conversation</a>
-          <a class="fcg-showcase-action fcg-showcase-action-secondary" href="#product-map">Browse all modules</a>
+          <a class="fcg-showcase-action fcg-showcase-action-primary" href="#contact">Start a conversation</a>
+          <a class="fcg-showcase-action fcg-showcase-action-secondary" href="#product-map">View engagement details</a>
         </div>
       </div>
 
       <div class="fcg-showcase-visual fade-up" data-fcg-showcase-tabs>
         <div class="fcg-showcase-card">
-          <article class="fcg-showcase-panel" id="showcase-panel-operations" role="tabpanel" aria-labelledby="showcase-tab-operations">
-            <img class="fcg-product-shot" src="assets/images/atlas-product/dashboard.jpg" alt="Atlas operations dashboard showing active clients, bookings, tickets, incidents, and team activity" loading="eager">
+          <article class="fcg-showcase-panel" id="showcase-panel-booking" role="tabpanel" aria-labelledby="showcase-tab-booking">
+            <img src="assets/images/frame-mid.svg" alt="Discovery engagement preview" loading="eager">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
-                <h3>Operations</h3>
-                <p>Agent queues, booking pipeline, and client CRM in one surface. See every open request, every team workload, and every client relationship without switching tools.</p>
+                <h3>Discovery</h3>
+                <p>Understand the TMC's business model, pain points, client portfolio, competitive position, and growth ambitions before recommending anything.</p>
                 <div class="fcg-showcase-preview-list">
                   <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:cpu-bolt-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>OpsHub active workspace</strong>
-                    <mark>Live</mark>
+                    <iconify-icon icon="solar:chat-round-dots-bold-duotone" width="20" height="20"></iconify-icon>
+                    <strong>Business and pain point mapping</strong>
+                    <mark>Week 1</mark>
                   </div>
                   <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:inbox-line-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>Inbox queue and SLA status</strong>
-                    <mark>Tracking</mark>
+                    <iconify-icon icon="solar:users-group-rounded-bold-duotone" width="20" height="20"></iconify-icon>
+                    <strong>Stakeholder alignment</strong>
+                    <mark>Owner + Ops</mark>
                   </div>
                 </div>
               </div>
             </div>
           </article>
 
-          <article class="fcg-showcase-panel" id="showcase-panel-service" role="tabpanel" aria-labelledby="showcase-tab-service" hidden>
-            <img class="fcg-product-shot" src="assets/images/atlas-product/tickets.jpg" alt="Atlas tickets module showing open service requests, priority labels, ownership, and status tracking" loading="lazy">
+          <article class="fcg-showcase-panel" id="showcase-panel-operations" role="tabpanel" aria-labelledby="showcase-tab-operations" hidden>
+            <img src="assets/images/frame-mid.svg" alt="Operational audit preview" loading="lazy">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
-                <h3>Service</h3>
-                <p>Ticketing, SLA tracking, client requests, enquiry capture, and service conversations across every channel. Escalation rules enforce response times before breaches happen.</p>
+                <h3>Audit</h3>
+                <p>Map current workflows, tools, costs per booking, and technology gaps. Deliver a clear picture of what's working and what needs to change.</p>
                 <div class="fcg-showcase-preview-list">
                   <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:shield-check-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>SLA enforcement active</strong>
-                    <mark>0 breach</mark>
+                    <iconify-icon icon="solar:clipboard-check-bold-duotone" width="20" height="20"></iconify-icon>
+                    <strong>Workflow and cost analysis</strong>
+                    <mark>Assess</mark>
                   </div>
                   <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:link-round-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>FlowConnect integrations</strong>
-                    <mark>Synced</mark>
+                    <iconify-icon icon="solar:chart-square-bold-duotone" width="20" height="20"></iconify-icon>
+                    <strong>Gap identification and priority ranking</strong>
+                    <mark>Report</mark>
                   </div>
                 </div>
               </div>
             </div>
           </article>
 
-          <article class="fcg-showcase-panel" id="showcase-panel-intelligence" role="tabpanel" aria-labelledby="showcase-tab-intelligence" hidden>
-            <img class="fcg-product-shot" src="assets/images/atlas-product/reports.jpg" alt="Atlas reporting module showing corporate report controls and client-ready travel management reporting" loading="lazy">
+          <article class="fcg-showcase-panel" id="showcase-panel-supply" role="tabpanel" aria-labelledby="showcase-tab-supply" hidden>
+            <img src="assets/images/frame-mid.svg" alt="Deployment planning preview" loading="lazy">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
-                <h3>Intelligence</h3>
-                <p>Reporting, duty of care, and analytics connected to every booking. Real-time traveler visibility and branded client reporting in one view.</p>
+                <h3>Deployment</h3>
+                <p>Design the rollout plan — which modules, in what order, with what success metrics. Match the deployment to the TMC's risk tolerance and pace.</p>
                 <div class="fcg-showcase-preview-list">
                   <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:chart-2-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>Client-ready analytics</strong>
-                    <mark>Reports</mark>
+                    <iconify-icon icon="solar:compass-bold-duotone" width="20" height="20"></iconify-icon>
+                    <strong>Module selection and sequencing</strong>
+                    <mark>Plan</mark>
                   </div>
                   <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:map-point-wave-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>DutyView traveler tracking</strong>
-                    <mark>Real-time</mark>
+                    <iconify-icon icon="solar:rocket-2-bold-duotone" width="20" height="20"></iconify-icon>
+                    <strong>Timeline and success criteria</strong>
+                    <mark>Execute</mark>
                   </div>
                 </div>
               </div>
@@ -3433,10 +4025,10 @@
           </article>
 
           <div class="fcg-showcase-tabs">
-            <div class="fcg-showcase-tablist" role="tablist" aria-label="Atlas operational views">
-              <button class="fcg-showcase-tab" type="button" id="showcase-tab-operations" role="tab" aria-selected="true" aria-controls="showcase-panel-operations" data-showcase-target="showcase-panel-operations">Operations</button>
-              <button class="fcg-showcase-tab" type="button" id="showcase-tab-service" role="tab" aria-selected="false" aria-controls="showcase-panel-service" data-showcase-target="showcase-panel-service" tabindex="-1">Service</button>
-              <button class="fcg-showcase-tab" type="button" id="showcase-tab-intelligence" role="tab" aria-selected="false" aria-controls="showcase-panel-intelligence" data-showcase-target="showcase-panel-intelligence" tabindex="-1">Intelligence</button>
+            <div class="fcg-showcase-tablist" role="tablist" aria-label="Engagement phase views">
+              <button class="fcg-showcase-tab" type="button" id="showcase-tab-booking" role="tab" aria-selected="true" aria-controls="showcase-panel-booking" data-showcase-target="showcase-panel-booking">Discovery</button>
+              <button class="fcg-showcase-tab" type="button" id="showcase-tab-operations" role="tab" aria-selected="false" aria-controls="showcase-panel-operations" data-showcase-target="showcase-panel-operations" tabindex="-1">Audit</button>
+              <button class="fcg-showcase-tab" type="button" id="showcase-tab-supply" role="tab" aria-selected="false" aria-controls="showcase-panel-supply" data-showcase-target="showcase-panel-supply" tabindex="-1">Deployment</button>
             </div>
           </div>
         </div>
@@ -3449,52 +4041,52 @@
       <section id="mobile-workflows" class="fcg-mobile-feature border-t border-white/10">
         <div class="fcg-mobile-inner">
           <header class="fcg-mobile-heading fade-up">
-            <div class="fcg-main-icon"><iconify-icon icon="solar:layers-minimalistic-linear" width="28" height="28"></iconify-icon></div>
-            <div class="fcg-mobile-eyebrow">Layer-by-Layer Deployment</div>
-            <h2>Deploy Atlas one module at a time.</h2>
-            <p class="fcg-mobile-subcopy">Atlas does not require rip-and-replace. Start with the module that solves your most urgent operational pain, then expand across the platform as your team is ready.</p>
+            <div class="fcg-main-icon"><iconify-icon icon="solar:headphones-round-sound-linear" width="28" height="28"></iconify-icon></div>
+            <div class="fcg-mobile-eyebrow">START HERE</div>
+            <h2>One conversation. The right starting point.</h2>
+            <p class="fcg-mobile-subcopy">Whether you're a 10-agent independent TMC or a 100-agent regional network — the advisory engagement starts the same way. A conversation with the team that built the infrastructure.</p>
           </header>
 
           <div class="fcg-feature-grid">
             <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:layers-minimalistic-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>No rip-and-replace</h3>
+                <p>Layer in, don't rip out. Start with one module, one office, one corporate account. Expand as confidence builds.</p>
+              </div>
+            </article>
+
+            <article class="fcg-feature-row fade-up">
               <div class="fcg-feature-icon"><iconify-icon icon="solar:routing-3-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Start with the highest-friction workflow</h3>
-                <p>Is it agent queue visibility? Client reporting? SLA compliance? Pick the module that addresses the pain your team feels every day.</p>
+                <h3>No forced migration</h3>
+                <p>Advisory designs the path. The TMC decides the pace. No all-or-nothing commitment.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:link-round-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Connect without replacing everything</h3>
-                <p>FlowConnect integrates with your existing GDS, supplier systems, and finance tools. Atlas layers on top of what works and replaces what doesn't.</p>
+                <h3>Independence first</h3>
+                <p>FCG doesn't compete with TMCs. The brand stays. The clients stay. The relationships stay.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:chart-square-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:global-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Measure operational lift from day one</h3>
-                <p>Track agent productivity, SLA compliance, queue throughput, and client satisfaction as each module comes online.</p>
-              </div>
-            </article>
-
-            <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:shield-network-linear" width="22" height="22"></iconify-icon></div>
-              <div>
-                <h3>Scale across APAC complexity</h3>
-                <p>Support different markets, languages, supplier networks, and regulatory requirements across Singapore, Hong Kong, Thailand, Malaysia, and beyond.</p>
+                <h3>Regional presence</h3>
+                <p>10 offices across APAC and London. Advisory isn't remote-only. FCG has people where TMCs operate.</p>
               </div>
             </article>
           </div>
 
           <div class="fcg-mobile-cta fade-up">
-            <h3>Choose your first Atlas module with confidence.</h3>
-            <p>Use the sections above to match your operational pain points with the right module before starting a deeper conversation with FCG.</p>
+            <h3>Ready to start?</h3>
+            <p>The best engagements begin with one honest conversation about what's working and what isn't.</p>
             <div class="fcg-store-actions">
-              <a href="#decision-paths" class="fcg-store-button"><iconify-icon icon="solar:compass-linear" width="18" height="18"></iconify-icon>Explore pain points</a>
-              <a href="#product-map" class="fcg-store-button"><iconify-icon icon="solar:map-linear" width="18" height="18"></iconify-icon>View all modules</a>
+              <a href="#contact" class="fcg-store-button"><iconify-icon icon="solar:chat-round-dots-linear" width="18" height="18"></iconify-icon>Book a discovery call</a>
+              <a href="#product-map" class="fcg-store-button"><iconify-icon icon="solar:map-linear" width="18" height="18"></iconify-icon>View engagement models</a>
             </div>
           </div>
         </div>
@@ -3566,73 +4158,6 @@
 
       document.querySelectorAll('.fade-up, .scale-in').forEach(el => observer.observe(el));
 
-      function renderFcgBentoSpiral() {
-          const spiralMount = document.getElementById('fcgBentoSpiral');
-          if (!spiralMount) return;
-
-          const size = 620;
-          const points = 800;
-          const dotRadius = 1.6;
-          const duration = 3;
-          const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-          const center = size / 2;
-          const maxRadius = center - 4 - dotRadius;
-          const svgNS = 'http://www.w3.org/2000/svg';
-          const svg = document.createElementNS(svgNS, 'svg');
-
-          svg.setAttribute('width', String(size));
-          svg.setAttribute('height', String(size));
-          svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
-          svg.setAttribute('role', 'presentation');
-
-          for (let i = 0; i < points; i++) {
-              const idx = i + 0.5;
-              const frac = idx / points;
-              const radius = Math.sqrt(frac) * maxRadius;
-              const theta = idx * goldenAngle;
-              const x = center + radius * Math.cos(theta);
-              const y = center + radius * Math.sin(theta);
-              const circle = document.createElementNS(svgNS, 'circle');
-
-              circle.setAttribute('cx', x.toFixed(3));
-              circle.setAttribute('cy', y.toFixed(3));
-              circle.setAttribute('r', String(dotRadius));
-              circle.setAttribute('fill', 'currentColor');
-              circle.setAttribute('opacity', '0.6');
-
-              const animRadius = document.createElementNS(svgNS, 'animate');
-              animRadius.setAttribute('attributeName', 'r');
-              animRadius.setAttribute('values', `${dotRadius * 0.5};${dotRadius * 1.35};${dotRadius * 0.5}`);
-              animRadius.setAttribute('dur', `${duration}s`);
-              animRadius.setAttribute('begin', `${(frac * duration).toFixed(3)}s`);
-              animRadius.setAttribute('repeatCount', 'indefinite');
-              circle.appendChild(animRadius);
-
-              const animOpacity = document.createElementNS(svgNS, 'animate');
-              animOpacity.setAttribute('attributeName', 'opacity');
-              animOpacity.setAttribute('values', '0.25;0.9;0.25');
-              animOpacity.setAttribute('dur', `${duration}s`);
-              animOpacity.setAttribute('begin', `${(frac * duration).toFixed(3)}s`);
-              animOpacity.setAttribute('repeatCount', 'indefinite');
-              circle.appendChild(animOpacity);
-
-              svg.appendChild(circle);
-          }
-
-          spiralMount.innerHTML = '';
-          spiralMount.appendChild(svg);
-      }
-
-      renderFcgBentoSpiral();
-
-      document.querySelectorAll('.fcg-bento-card').forEach(card => {
-          card.addEventListener('mousemove', event => {
-              const rect = card.getBoundingClientRect();
-              card.style.setProperty('--x', `${event.clientX - rect.left}px`);
-              card.style.setProperty('--y', `${event.clientY - rect.top}px`);
-          });
-      });
-
       document.querySelectorAll('[data-feature108-tabs]').forEach(tabGroup => {
           const tabs = Array.from(tabGroup.querySelectorAll('[role="tab"]'));
           const panels = Array.from(tabGroup.querySelectorAll('[role="tabpanel"]'));
@@ -3663,6 +4188,40 @@
 
                   tabs[nextIndex].focus();
                   activateTab(tabs[nextIndex]);
+              });
+          });
+      });
+
+      document.querySelectorAll('[data-solution-feature-tabs]').forEach(tabGroup => {
+          const tabs = Array.from(tabGroup.querySelectorAll('[role="tab"]'));
+          const panels = Array.from(tabGroup.querySelectorAll('[role="tabpanel"]'));
+
+          function activateSolutionFeature(tab) {
+              tabs.forEach(item => {
+                  const isActive = item === tab;
+                  item.setAttribute('aria-selected', String(isActive));
+                  item.tabIndex = isActive ? 0 : -1;
+              });
+
+              panels.forEach(panel => {
+                  panel.hidden = panel.id !== tab.dataset.solutionTarget;
+              });
+          }
+
+          tabs.forEach((tab, index) => {
+              tab.addEventListener('click', () => activateSolutionFeature(tab));
+              tab.addEventListener('keydown', event => {
+                  if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+                  event.preventDefault();
+
+                  let nextIndex = index;
+                  if (event.key === 'ArrowDown' || event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+                  if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+                  if (event.key === 'Home') nextIndex = 0;
+                  if (event.key === 'End') nextIndex = tabs.length - 1;
+
+                  tabs[nextIndex].focus();
+                  activateSolutionFeature(tabs[nextIndex]);
               });
           });
       });

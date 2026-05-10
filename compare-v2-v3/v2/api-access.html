@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atlas - TMC Operating System | FCG Group</title>
+    <title>API Access - FCG Group</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -1080,7 +1080,7 @@
     text-decoration: none;
     transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
   }
-  .fcg-hero2-button:hover { transform: scale(1.05); }
+  .fcg-hero2-button:hover { transform: translateY(-1px); }
   .fcg-hero2-button-primary {
     background: #fff;
     color: #050505;
@@ -1127,7 +1127,7 @@
     margin: 36px 0 0;
     color: #fff !important;
     font-size: clamp(3rem, 5.2vw, 5.8rem);
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1;
     letter-spacing: 0;
   }
@@ -1155,7 +1155,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: 2rem;
+    border-radius: 18px;
     background: rgba(255,255,255,.48);
     filter: blur(8rem);
     opacity: .24;
@@ -1163,7 +1163,7 @@
   .fcg-hero2-preview {
     position: relative;
     overflow: hidden;
-    border-radius: 2rem;
+    border-radius: 18px;
     border: 1px solid rgba(255,255,255,.14);
     background: rgba(7,7,7,.88);
     box-shadow: 0 30px 90px rgba(0,0,0,.45);
@@ -1176,26 +1176,18 @@
     opacity: .64;
     filter: grayscale(1) contrast(1.05);
   }
-  .fcg-hero2-preview img.fcg-product-shot,
-  .fcg-showcase-panel img.fcg-product-shot {
-    opacity: .72;
-    filter: saturate(.9) contrast(1.03);
-  }
   .fcg-hero2-preview-grid {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: relative;
     display: grid;
     grid-template-columns: repeat(2, minmax(0,1fr));
     align-items: stretch;
     gap: 14px;
     padding: 24px;
-    background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.38), transparent);
+    background: rgba(0,0,0,.84);
   }
   .fcg-hero2-preview-card {
     min-height: 124px;
-    border-radius: 1.5rem;
+    border-radius: 14px;
     border: 1px solid rgba(255,255,255,.14);
     background: rgba(255,255,255,.08);
     backdrop-filter: blur(18px);
@@ -1206,7 +1198,7 @@
   .fcg-hero2-preview-card span {
     display: block;
     margin-bottom: 18px;
-    color: #F97316;
+    color: #fb923c;
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     letter-spacing: .18em;
@@ -1218,6 +1210,22 @@
     font-size: 18px;
     font-weight: 500;
     line-height: 1.25;
+  }
+  .fcg-hero2-preview-card .stat-value {
+    display: block;
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .fcg-hero2-preview-card .stat-label {
+    display: block;
+    color: rgba(255,255,255,.62);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
   }
   .product-shell { background: var(--color-bg); color: var(--color-fg); }
   .product-kicker { font-family: 'JetBrains Mono', monospace; letter-spacing: .18em; text-transform: uppercase; }
@@ -1254,7 +1262,7 @@
   }
   #decision-paths .product-card,
   #product-map .product-card {
-    border-radius: 2rem !important;
+    border-radius: 16px !important;
     padding: 1.25rem !important;
   }
   #decision-paths .product-card h3,
@@ -1340,9 +1348,7 @@
     position: relative;
     min-height: 100vh;
     overflow: hidden;
-    background:
-      radial-gradient(circle at 18% 12%, rgba(249,115,22,.12), transparent 28%),
-      radial-gradient(125% 125% at 50% 10%, #080805 42%, #121212 100%);
+    background: radial-gradient(125% 125% at 50% 10%, #000000 40%, #010133 100%);
     color: #fff;
   }
   .fcg-bento::after {
@@ -1382,7 +1388,7 @@
     margin-bottom: 2.5rem;
   }
   .fcg-bento-kicker {
-    color: #F97316;
+    color: #fb923c;
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     letter-spacing: .18em;
@@ -1392,7 +1398,7 @@
   .fcg-bento h2 {
     color: #fff !important;
     font-size: clamp(2.3rem, 5vw, 4.7rem);
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0;
     line-height: 1;
   }
@@ -1412,7 +1418,7 @@
   .fcg-bento-card {
     position: relative;
     overflow: hidden;
-    border-radius: 2rem;
+    border-radius: 16px;
     border: 1px solid rgba(255,255,255,.15);
     background: rgba(0,0,0,.4);
     padding: 1.25rem;
@@ -1428,7 +1434,7 @@
     position: absolute;
     inset: -1px;
     border: 1px solid rgba(255,255,255,.12);
-    border-radius: 2rem;
+    border-radius: 16px;
     opacity: 0;
     pointer-events: none;
     mask-image: radial-gradient(180px 180px at var(--x, 50%) var(--y, 50%), white, transparent);
@@ -1454,7 +1460,7 @@
     height: .55rem;
     margin-top: .38rem;
     border-radius: 999px;
-    background: #F97316;
+    background: #fb923c;
     box-shadow: 0 0 18px rgba(249,115,22,.45);
     color: transparent;
     font-size: 0;
@@ -1463,7 +1469,7 @@
     min-width: 0;
     color: #fff !important;
     font-size: clamp(1rem, 1.7vw, 1.22rem);
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.25;
   }
   .fcg-bento-meta {
@@ -1485,283 +1491,6 @@
     line-height: 1.65;
     max-width: 48rem;
   }
-  .fcg-showcase {
-    position: relative;
-    overflow: hidden;
-    background: #080805;
-    color: #ffffff;
-    border-top: 1px solid rgba(255,255,255,.1);
-  }
-  .fcg-showcase::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(circle at 18% 14%, rgba(249,115,22,.12), transparent 28%),
-      radial-gradient(circle at 86% 74%, rgba(255,255,255,.04), transparent 28%);
-  }
-  .fcg-showcase-inner {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: 3.5rem;
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 5rem 1.5rem;
-  }
-  .fcg-showcase-copy {
-    grid-column: span 6;
-  }
-  .fcg-showcase-badge {
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid rgba(255,255,255,.16);
-    border-radius: 999px;
-    color: #F97316;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: .18em;
-    line-height: 1;
-    margin-bottom: 1.5rem;
-    padding: .48rem .75rem;
-    text-transform: uppercase;
-  }
-  .fcg-showcase h2 {
-    color: #fff !important;
-    font-size: clamp(2.4rem, 4.8vw, 4.5rem);
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: .98;
-    max-width: 41rem;
-  }
-  .fcg-showcase-description {
-    color: rgba(255,255,255,.68) !important;
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.7;
-    margin-top: 1.5rem;
-    max-width: 36rem;
-  }
-  .fcg-showcase-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
-    margin-top: 1.5rem;
-  }
-  .fcg-showcase-chip {
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 999px;
-    background: rgba(255,255,255,.05);
-    color: rgba(255,255,255,.78);
-    font-size: 12px;
-    line-height: 1;
-    padding: .55rem .7rem;
-  }
-  .fcg-showcase-steps {
-    border-top: 1px solid rgba(255,255,255,.1);
-    margin-top: 2.5rem;
-    max-width: 36rem;
-  }
-  .fcg-showcase-step {
-    border-bottom: 1px solid rgba(255,255,255,.1);
-  }
-  .fcg-showcase-step-trigger {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    width: 100%;
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 1.15rem 0;
-    text-align: left;
-  }
-  .fcg-showcase-step-trigger iconify-icon {
-    flex: 0 0 auto;
-    color: rgba(255,255,255,.56);
-    transition: transform 180ms ease, color 180ms ease;
-  }
-  .fcg-showcase-step-trigger[aria-expanded="true"] iconify-icon {
-    color: #F97316;
-    transform: rotate(45deg);
-  }
-  .fcg-showcase-step-content {
-    color: rgba(255,255,255,.62);
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 1.65;
-    padding: 0 0 1.15rem;
-  }
-  .fcg-showcase-step-content[hidden] {
-    display: none;
-  }
-  .fcg-showcase-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .75rem;
-    margin-top: 2rem;
-  }
-  .fcg-showcase-action {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 500;
-    min-height: 2.75rem;
-    padding: .88rem 2rem;
-    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
-  }
-  .fcg-showcase-action:hover {
-    transform: scale(1.05);
-  }
-  .fcg-showcase-action-primary {
-    background: #ffffff;
-    color: #080805;
-    box-shadow: 0 0 30px rgba(255,255,255,.12);
-  }
-  .fcg-showcase-action-secondary {
-    border: 1px solid rgba(255,255,255,.14);
-    background: transparent;
-    color: #ffffff;
-  }
-  .fcg-showcase-action-secondary:hover {
-    border-color: rgba(255,255,255,.28);
-    background: rgba(255,255,255,.06);
-  }
-  .fcg-showcase-visual {
-    grid-column: span 6;
-    min-width: 0;
-  }
-  .fcg-showcase-card {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 2rem;
-    background: rgba(18,18,18,.72);
-    box-shadow: 0 24px 70px rgba(0,0,0,.28);
-    min-height: 720px;
-  }
-  .fcg-showcase-panel {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-  }
-  .fcg-showcase-panel[hidden] {
-    display: none;
-  }
-  .fcg-showcase-panel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: .28;
-    filter: grayscale(.75) contrast(1.08);
-  }
-  .fcg-showcase-panel::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(to bottom, rgba(8,8,5,.16), rgba(8,8,5,.78)),
-      radial-gradient(circle at 50% 22%, rgba(249,115,22,.16), transparent 34%);
-    pointer-events: none;
-  }
-  .fcg-showcase-overlay {
-    position: absolute;
-    inset: auto 1.4rem 6rem 1.4rem;
-    z-index: 1;
-    display: grid;
-    gap: .9rem;
-  }
-  .fcg-showcase-window {
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: 1.5rem;
-    background: rgba(8,8,5,.74);
-    backdrop-filter: blur(18px);
-    padding: 1rem;
-  }
-  .fcg-showcase-window h3 {
-    color: #fff !important;
-    font-size: 1.35rem;
-    font-weight: 500;
-    line-height: 1.2;
-    margin-bottom: .9rem;
-  }
-  .fcg-showcase-window p {
-    color: rgba(255,255,255,.66) !important;
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 1.6;
-  }
-  .fcg-showcase-preview-list {
-    display: grid;
-    gap: .6rem;
-    margin-top: 1rem;
-  }
-  .fcg-showcase-preview-row {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: .75rem;
-    border: 1px solid rgba(255,255,255,.09);
-    border-radius: 12px;
-    background: rgba(255,255,255,.04);
-    padding: .75rem;
-  }
-  .fcg-showcase-preview-row iconify-icon {
-    color: #F97316;
-  }
-  .fcg-showcase-preview-row strong {
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 500;
-  }
-  .fcg-showcase-preview-row span {
-    color: rgba(255,255,255,.48);
-    font-size: 11px;
-  }
-  .fcg-showcase-preview-row mark {
-    border-radius: 999px;
-    background: rgba(249,115,22,.12);
-    color: #F97316;
-    font-size: 10px;
-    padding: .32rem .48rem;
-  }
-  .fcg-showcase-tabs {
-    position: absolute;
-    inset: auto 0 1rem 0;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    padding: 0 1rem;
-  }
-  .fcg-showcase-tablist {
-    display: flex;
-    gap: .4rem;
-    max-width: 100%;
-    overflow-x: auto;
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: 14px;
-    background: rgba(8,8,5,.76);
-    backdrop-filter: blur(18px);
-    padding: .35rem;
-  }
-  .fcg-showcase-tab {
-    flex: 0 0 auto;
-    border-radius: 10px;
-    color: rgba(255,255,255,.74);
-    font-size: 13px;
-    font-weight: 500;
-    padding: .62rem .9rem;
-    transition: background-color 180ms ease, color 180ms ease;
-  }
-  .fcg-showcase-tab[aria-selected="true"] {
-    background: #ffffff;
-    color: #080805;
-  }
   .fcg-marketing-section {
     position: relative;
     overflow: hidden;
@@ -1776,7 +1505,7 @@
     pointer-events: none;
     background:
       radial-gradient(circle at 18% 16%, rgba(249,115,22,.16), transparent 26%),
-      radial-gradient(circle at 86% 66%, rgba(255,255,255,.05), transparent 30%);
+      radial-gradient(circle at 86% 66%, rgba(14,165,233,.14), transparent 30%);
   }
   .fcg-marketing-inner {
     position: relative;
@@ -1790,7 +1519,7 @@
   }
   .fcg-marketing-eyebrow,
   .fcg-mobile-eyebrow {
-    color: #F97316;
+    color: #fb923c;
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     letter-spacing: .18em;
@@ -1801,7 +1530,7 @@
   .fcg-mobile-feature h2 {
     color: #fff !important;
     font-size: clamp(2.6rem, 3vw, 3.25rem);
-    font-weight: 500;
+    font-weight: 650;
     letter-spacing: 0;
     line-height: 1.05;
   }
@@ -1824,9 +1553,9 @@
     overflow: hidden;
     min-height: 29.15rem;
     border: 1px solid rgba(255,255,255,.12);
-    border-radius: 2rem;
+    border-radius: 18px;
     background:
-      linear-gradient(135deg, rgba(249,115,22,.16), rgba(255,255,255,.05) 42%, rgba(255,255,255,.08) 78%, rgba(249,115,22,.08)),
+      linear-gradient(135deg, rgba(255,226,190,.18), rgba(249,168,212,.14) 36%, rgba(125,211,252,.22) 78%, rgba(45,212,191,.2)),
       #141414;
     box-shadow: 0 24px 70px rgba(0,0,0,.28);
   }
@@ -1844,7 +1573,7 @@
     z-index: 1;
     width: min(100% - 2rem, 26.5rem);
     border: 1px solid rgba(255,255,255,.18);
-    border-radius: 1.5rem;
+    border-radius: 16px;
     background: rgba(255,255,255,.94);
     box-shadow: 0 14px 28px rgba(0,0,0,.18);
     color: #050505;
@@ -1876,7 +1605,7 @@
   }
   .fcg-ai-stat strong {
     color: #050505;
-    font-weight: 500;
+    font-weight: 700;
   }
   .fcg-ai-input {
     display: grid;
@@ -1922,257 +1651,10 @@
     gap: 4rem;
     margin-top: 3.9rem;
   }
-  .fcg-feature108-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 76rem;
-    margin: 0 auto;
-  }
-  .fcg-feature108-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    text-align: center;
-  }
-  .fcg-feature108-badge {
-    display: inline-flex;
-    align-items: center;
-    width: fit-content;
-    min-height: 2rem;
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: 999px;
-    background: rgba(255,255,255,.04);
-    color: rgba(255,255,255,.7);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: .16em;
-    padding: 0 .9rem;
-    text-transform: uppercase;
-  }
-  .fcg-feature108-title {
-    max-width: 42rem;
-    color: #fff !important;
-    font-size: clamp(2.25rem, 4vw, 3.55rem);
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 1.04;
-  }
-  .fcg-feature108-copy {
-    max-width: 42rem;
-    color: rgba(255,255,255,.64) !important;
-    font-size: 1rem;
-    line-height: 1.7;
-  }
-  .fcg-feature108-tabs {
-    margin-top: 2.25rem;
-  }
-  .fcg-feature108-tablist {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.1rem;
-    flex-wrap: wrap;
-  }
-  .fcg-feature108-trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    min-height: 3rem;
-    border: 0;
-    border-radius: 12px;
-    background: transparent;
-    color: rgba(255,255,255,.56);
-    cursor: pointer;
-    font-size: .9rem;
-    font-weight: 500;
-    padding: 0 1rem;
-    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
-  }
-  .fcg-feature108-trigger iconify-icon {
-    color: currentColor;
-  }
-  .fcg-feature108-trigger:hover {
-    color: rgba(255,255,255,.86);
-    transform: translateY(-1px);
-  }
-  .fcg-feature108-trigger[aria-selected="true"] {
-    background: rgba(255,255,255,.09);
-    color: #fff;
-  }
-  .fcg-feature108-card {
-    margin-top: 2rem;
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 22px;
-    background: rgba(255,255,255,.055);
-    box-shadow: 0 24px 80px rgba(0,0,0,.28);
-    padding: clamp(1.5rem, 4vw, 4rem);
-  }
-  .fcg-feature108-panel {
-    display: grid;
-    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
-    align-items: center;
-    gap: clamp(2rem, 5vw, 4.5rem);
-  }
-  .fcg-feature108-panel[hidden] {
-    display: none;
-  }
-  .fcg-feature108-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.15rem;
-  }
-  .fcg-feature108-content h3 {
-    color: #fff !important;
-    font-size: clamp(2rem, 4vw, 3.4rem);
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 1.05;
-  }
-  .fcg-feature108-content p {
-    color: rgba(255,255,255,.62) !important;
-    font-size: 1.05rem;
-    line-height: 1.7;
-  }
-  .fcg-feature108-action {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 3rem;
-    border-radius: 999px;
-    background: #fff;
-    color: #0f1114;
-    font-size: .95rem;
-    font-weight: 500;
-    margin-top: .35rem;
-    padding: 0 1.25rem;
-    text-decoration: none;
-    transition: transform 180ms ease, box-shadow 180ms ease;
-  }
-  .fcg-feature108-action:hover {
-    box-shadow: 0 14px 35px rgba(255,255,255,.12);
-    transform: scale(1.05);
-  }
-  .fcg-feature108-visual {
-    position: relative;
-    overflow: hidden;
-    min-height: 24rem;
-    border: 1px solid rgba(255,255,255,.13);
-    border-radius: 2rem;
-    background:
-      radial-gradient(circle at 18% 24%, rgba(249,115,22,.22), transparent 30%),
-      radial-gradient(circle at 85% 12%, rgba(255,255,255,.06), transparent 28%),
-      linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-    padding: 1.1rem;
-  }
-  .fcg-feature108-visual::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: .14;
-    pointer-events: none;
-    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.85) 1px, transparent 0);
-    background-size: 4px 4px;
-  }
-  .fcg-feature108-window {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    min-height: 21.8rem;
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: 1.5rem;
-    background: rgba(5,5,5,.78);
-    box-shadow: 0 18px 55px rgba(0,0,0,.32);
-    padding: 1rem;
-  }
-  .fcg-feature108-window-bar {
-    display: flex;
-    align-items: center;
-    gap: .4rem;
-    margin-bottom: 1rem;
-  }
-  .fcg-feature108-window-bar span {
-    width: .52rem;
-    height: .52rem;
-    border-radius: 999px;
-    background: rgba(255,255,255,.28);
-  }
-  .fcg-feature108-stack {
-    display: grid;
-    gap: .75rem;
-  }
-  .fcg-feature108-row {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: .8rem;
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 12px;
-    background: rgba(255,255,255,.055);
-    padding: .85rem;
-  }
-  .fcg-feature108-row strong {
-    color: #fff;
-    display: block;
-    font-size: .88rem;
-    font-weight: 500;
-    line-height: 1.25;
-  }
-  .fcg-feature108-row small {
-    color: rgba(255,255,255,.5);
-    display: block;
-    font-size: .76rem;
-    line-height: 1.35;
-    margin-top: .2rem;
-  }
-  .fcg-feature108-row mark {
-    border-radius: 999px;
-    background: rgba(249,115,22,.15);
-    color: #F97316;
-    font-size: .72rem;
-    font-weight: 500;
-    padding: .35rem .55rem;
-  }
-  .fcg-feature108-dot {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 12px;
-    background: rgba(249,115,22,.12);
-    color: #F97316;
-  }
-  .fcg-feature108-metrics {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: .75rem;
-    margin-top: .75rem;
-  }
-  .fcg-feature108-metric {
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 12px;
-    background: rgba(255,255,255,.045);
-    padding: .85rem;
-  }
-  .fcg-feature108-metric strong {
-    color: #fff;
-    display: block;
-    font-size: 1.15rem;
-    font-weight: 500;
-  }
-  .fcg-feature108-metric span {
-    color: rgba(255,255,255,.48);
-    display: block;
-    font-size: .72rem;
-    line-height: 1.35;
-    margin-top: .25rem;
-  }
   .fcg-marketing-feature h3 {
     color: #fff !important;
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: 650;
     line-height: 1.1;
   }
   .fcg-marketing-feature p {
@@ -2181,6 +1663,154 @@
     line-height: 1.45;
     margin-top: 1rem;
   }
+  .fcg-integration-section {
+    position: relative;
+    overflow: hidden;
+    background: #050505;
+    color: #fff;
+    padding: 6rem 1.5rem;
+  }
+  .fcg-integration-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 16%, rgba(249,115,22,.16), transparent 26%),
+      radial-gradient(circle at 86% 66%, rgba(14,165,233,.14), transparent 30%);
+  }
+  .fcg-integration-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+  .fcg-integration-header {
+    max-width: 54.25rem;
+    margin-bottom: 3.75rem;
+  }
+  .fcg-integration-eyebrow {
+    color: #fb923c;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    margin-bottom: .85rem;
+    text-transform: uppercase;
+  }
+  .fcg-integration-title {
+    color: #fff !important;
+    font-size: clamp(2.6rem, 3vw, 3.25rem);
+    font-weight: 650;
+    letter-spacing: 0;
+    line-height: 1.05;
+  }
+  .fcg-integration-title span {
+    color: rgba(255,255,255,.48);
+  }
+  .fcg-integration-header p {
+    color: rgba(255,255,255,.68) !important;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-top: 1rem;
+    max-width: 42rem;
+  }
+  .fcg-flow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.06);
+  }
+  .fcg-flow-step {
+    position: relative;
+    padding: 2.5rem 2rem;
+    background: rgba(5,5,5,.92);
+    text-align: center;
+  }
+  .fcg-flow-step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: rgba(249,115,22,.12);
+    border: 1px solid rgba(249,115,22,.24);
+    color: #fb923c;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+  }
+  .fcg-flow-step h3 {
+    color: #fff !important;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: .65rem;
+  }
+  .fcg-flow-step p {
+    color: rgba(255,255,255,.54) !important;
+    font-size: .95rem;
+    line-height: 1.55;
+    max-width: 22rem;
+    margin: 0 auto;
+  }
+  .fcg-flow-step .code-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .3rem .65rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,.55);
+    letter-spacing: .02em;
+  }
+  .fcg-code-preview {
+    margin-top: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+  .fcg-code-bar {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.02);
+  }
+  .fcg-code-dot {
+    width: .5rem;
+    height: .5rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,.15);
+  }
+  .fcg-code-bar span {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,.35);
+    letter-spacing: .08em;
+  }
+  .fcg-code-body {
+    padding: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .fcg-code-body .code-comment { color: rgba(255,255,255,.3); }
+  .fcg-code-body .code-key { color: #fb923c; }
+  .fcg-code-body .code-string { color: #34d399; }
+  .fcg-code-body .code-method { color: #60a5fa; }
+  .fcg-code-body .code-number { color: #c084fc; }
+  .fcg-code-body .code-punct { color: rgba(255,255,255,.5); }
   .fcg-mobile-feature {
     position: relative;
     overflow: hidden;
@@ -2216,7 +1846,7 @@
     justify-content: center;
     border-radius: 14px;
     background: rgba(249,115,22,.12);
-    color: #F97316;
+    color: #fb923c;
   }
   .fcg-main-icon {
     width: 3.5rem;
@@ -2242,7 +1872,7 @@
   .fcg-feature-row h3 {
     color: #fff !important;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 650;
     line-height: 1.45;
   }
   .fcg-feature-row p {
@@ -2262,7 +1892,7 @@
   .fcg-mobile-cta h3 {
     color: #fff !important;
     font-size: 1.35rem;
-    font-weight: 500;
+    font-weight: 650;
   }
   .fcg-mobile-cta p {
     color: rgba(255,255,255,.62) !important;
@@ -2288,13 +1918,13 @@
     color: #fff;
     background: rgba(255,255,255,.04);
     font-size: .9rem;
-    font-weight: 500;
+    font-weight: 600;
     padding: 0 1.15rem;
     text-decoration: none;
     transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
   }
   .fcg-store-button:hover {
-    transform: scale(1.05);
+    transform: translateY(-1px);
     background: rgba(255,255,255,.09);
     border-color: rgba(255,255,255,.26);
   }
@@ -2302,7 +1932,7 @@
   html[data-theme="light"] .fcg-hero2 {
     background:
       radial-gradient(circle at 78% 18%, rgba(249,115,22,.16), transparent 30%),
-      radial-gradient(circle at 92% 42%, rgba(15,17,20,.04), transparent 28%),
+      radial-gradient(circle at 92% 42%, rgba(14,165,233,.13), transparent 28%),
       linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #eef2f7 100%);
     color: #0f1114;
   }
@@ -2349,30 +1979,25 @@
     border-color: rgba(15,17,20,.12);
     box-shadow: 0 30px 80px rgba(15,17,20,.13);
   }
-  html[data-theme="light"] .fcg-hero2-preview img {
-    opacity: .86;
-    filter: grayscale(.8) contrast(1.02);
-  }
-  html[data-theme="light"] .fcg-hero2-preview img.fcg-product-shot,
-  html[data-theme="light"] .fcg-showcase-panel img.fcg-product-shot {
-    opacity: .74;
-    filter: saturate(.92) contrast(1.02);
-  }
   html[data-theme="light"] .fcg-hero2-preview-grid {
-    background: linear-gradient(to top, rgba(255,255,255,.94), rgba(255,255,255,.5), transparent);
+    background: rgba(255,255,255,.88);
   }
   html[data-theme="light"] .fcg-hero2-preview-card {
     background: rgba(255,255,255,.74);
     border-color: rgba(15,17,20,.12);
     box-shadow: 0 18px 45px rgba(15,17,20,.08);
   }
-  html[data-theme="light"] .fcg-hero2-preview-card strong {
+  html[data-theme="light"] .fcg-hero2-preview-card strong,
+  html[data-theme="light"] .fcg-hero2-preview-card .stat-value {
     color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-hero2-preview-card .stat-label {
+    color: #6b7280;
   }
   html[data-theme="light"] .fcg-bento {
     background:
       radial-gradient(circle at 52% 10%, rgba(249,115,22,.12), transparent 32%),
-      radial-gradient(125% 125% at 50% 10%, #ffffff 38%, #F3F4F6 100%);
+      radial-gradient(125% 125% at 50% 10%, #ffffff 38%, #edf5ff 100%);
     color: #0f1114;
   }
   html[data-theme="light"] .fcg-bento::after {
@@ -2411,100 +2036,13 @@
     border-color: rgba(15,17,20,.16);
   }
   html[data-theme="light"] .fcg-bento-dot {
-    background: #F97316;
+    background: #ea580c;
     box-shadow: 0 0 18px rgba(249,115,22,.28);
   }
   html[data-theme="light"] .fcg-bento-meta {
     border-color: rgba(15,17,20,.14);
     color: #6b7280;
     background: rgba(255,255,255,.52);
-  }
-  html[data-theme="light"] .fcg-showcase {
-    background: #ffffff;
-    color: #0f1114;
-    border-color: #D1D5DB;
-  }
-  html[data-theme="light"] .fcg-showcase::before {
-    background:
-      radial-gradient(circle at 18% 14%, rgba(249,115,22,.12), transparent 28%),
-      radial-gradient(circle at 86% 74%, rgba(15,17,20,.035), transparent 28%);
-  }
-  html[data-theme="light"] .fcg-showcase-badge {
-    border-color: rgba(15,17,20,.14);
-    background: rgba(255,255,255,.58);
-    color: #F97316;
-  }
-  html[data-theme="light"] .fcg-showcase h2,
-  html[data-theme="light"] .fcg-showcase-step-trigger,
-  html[data-theme="light"] .fcg-showcase-window h3,
-  html[data-theme="light"] .fcg-showcase-preview-row strong {
-    color: #0f1114 !important;
-  }
-  html[data-theme="light"] .fcg-showcase-description,
-  html[data-theme="light"] .fcg-showcase-step-content,
-  html[data-theme="light"] .fcg-showcase-window p {
-    color: #4b5563 !important;
-  }
-  html[data-theme="light"] .fcg-showcase-chip {
-    background: rgba(255,255,255,.68);
-    border-color: rgba(15,17,20,.1);
-    color: #4b5563;
-  }
-  html[data-theme="light"] .fcg-showcase-steps,
-  html[data-theme="light"] .fcg-showcase-step {
-    border-color: rgba(15,17,20,.1);
-  }
-  html[data-theme="light"] .fcg-showcase-step-trigger iconify-icon {
-    color: #6b7280;
-  }
-  html[data-theme="light"] .fcg-showcase-action-primary {
-    background: #0f1114;
-    color: #ffffff;
-  }
-  html[data-theme="light"] .fcg-showcase-action-secondary {
-    border-color: rgba(15,17,20,.14);
-    color: #0f1114;
-  }
-  html[data-theme="light"] .fcg-showcase-action-secondary:hover {
-    border-color: rgba(15,17,20,.24);
-    background: rgba(15,17,20,.04);
-  }
-  html[data-theme="light"] .fcg-showcase-card,
-  html[data-theme="light"] .fcg-showcase-window {
-    background: rgba(255,255,255,.72);
-    border-color: rgba(15,17,20,.12);
-    box-shadow: 0 18px 50px rgba(15,17,20,.08);
-  }
-  html[data-theme="light"] .fcg-showcase-panel img {
-    opacity: .32;
-    filter: grayscale(.8) contrast(1.02);
-  }
-  html[data-theme="light"] .fcg-showcase-panel::after {
-    background:
-      linear-gradient(to bottom, rgba(255,255,255,.12), rgba(255,255,255,.86)),
-      radial-gradient(circle at 50% 22%, rgba(249,115,22,.16), transparent 34%);
-  }
-  html[data-theme="light"] .fcg-showcase-preview-row {
-    background: rgba(255,255,255,.72);
-    border-color: rgba(15,17,20,.1);
-  }
-  html[data-theme="light"] .fcg-showcase-preview-row span {
-    color: #6b7280;
-  }
-  html[data-theme="light"] .fcg-showcase-preview-row mark {
-    background: rgba(249,115,22,.12);
-    color: #F97316;
-  }
-  html[data-theme="light"] .fcg-showcase-tablist {
-    background: rgba(255,255,255,.78);
-    border-color: rgba(15,17,20,.12);
-  }
-  html[data-theme="light"] .fcg-showcase-tab {
-    color: #4b5563;
-  }
-  html[data-theme="light"] .fcg-showcase-tab[aria-selected="true"] {
-    background: #0f1114;
-    color: #ffffff;
   }
   html[data-theme="light"] .fcg-marketing-section {
     background: #ffffff;
@@ -2566,73 +2104,56 @@
     background: #050505;
     color: #ffffff;
   }
-  html[data-theme="light"] .fcg-feature108-badge {
-    background: rgba(255,255,255,.76);
-    border-color: rgba(15,17,20,.12);
-    color: #6b7280;
+  html[data-theme="light"] .fcg-integration-section {
+    background: #ffffff;
+    color: #0f1114;
   }
-  html[data-theme="light"] .fcg-feature108-title,
-  html[data-theme="light"] .fcg-feature108-content h3 {
+  html[data-theme="light"] .fcg-integration-section::before {
+    display: none;
+  }
+  html[data-theme="light"] .fcg-integration-title,
+  html[data-theme="light"] .fcg-flow-step h3 {
     color: #0f1114 !important;
   }
-  html[data-theme="light"] .fcg-feature108-copy,
-  html[data-theme="light"] .fcg-feature108-content p {
+  html[data-theme="light"] .fcg-integration-title span {
+    color: #737373;
+  }
+  html[data-theme="light"] .fcg-integration-header p,
+  html[data-theme="light"] .fcg-flow-step p {
     color: #737373 !important;
   }
-  html[data-theme="light"] .fcg-feature108-trigger {
-    color: #737373;
-  }
-  html[data-theme="light"] .fcg-feature108-trigger:hover {
-    color: #0f1114;
-  }
-  html[data-theme="light"] .fcg-feature108-trigger[aria-selected="true"] {
-    background: #f1f5f9;
-    color: #0f1114;
-  }
-  html[data-theme="light"] .fcg-feature108-card {
-    background: rgba(255,255,255,.72);
-    border-color: rgba(15,17,20,.12);
-    box-shadow: 0 18px 50px rgba(15,17,20,.08);
-  }
-  html[data-theme="light"] .fcg-feature108-action {
-    background: #0f1114;
-    color: #ffffff;
-  }
-  html[data-theme="light"] .fcg-feature108-action:hover {
-    box-shadow: 0 14px 35px rgba(15,17,20,.16);
-  }
-  html[data-theme="light"] .fcg-feature108-visual {
-    background:
-      radial-gradient(circle at 18% 24%, rgba(249,115,22,.17), transparent 30%),
-      radial-gradient(circle at 85% 12%, rgba(15,17,20,.04), transparent 28%),
-      linear-gradient(135deg, #ffffff, #F3F4F6);
+  html[data-theme="light"] .fcg-flow-grid {
+    background: rgba(0,0,0,.06);
     border-color: rgba(15,17,20,.12);
   }
-  html[data-theme="light"] .fcg-feature108-visual::after {
-    opacity: .16;
-    background-image: radial-gradient(circle at 1px 1px, rgba(15,17,20,.22) 1px, transparent 0);
+  html[data-theme="light"] .fcg-flow-step {
+    background: rgba(255,255,255,.94);
   }
-  html[data-theme="light"] .fcg-feature108-window {
-    background: rgba(255,255,255,.88);
-    border-color: rgba(15,17,20,.12);
-    box-shadow: 0 18px 55px rgba(15,17,20,.12);
-  }
-  html[data-theme="light"] .fcg-feature108-window-bar span {
-    background: rgba(15,17,20,.22);
-  }
-  html[data-theme="light"] .fcg-feature108-row,
-  html[data-theme="light"] .fcg-feature108-metric {
-    background: rgba(255,255,255,.72);
+  html[data-theme="light"] .fcg-flow-step .code-tag {
+    background: rgba(0,0,0,.04);
     border-color: rgba(15,17,20,.1);
+    color: #6b7280;
   }
-  html[data-theme="light"] .fcg-feature108-row strong,
-  html[data-theme="light"] .fcg-feature108-metric strong {
-    color: #0f1114;
+  html[data-theme="light"] .fcg-code-preview {
+    background: #f9fafb;
+    border-color: #d1d5db;
   }
-  html[data-theme="light"] .fcg-feature108-row small,
-  html[data-theme="light"] .fcg-feature108-metric span {
-    color: #737373;
+  html[data-theme="light"] .fcg-code-bar {
+    background: rgba(0,0,0,.03);
+    border-color: #e5e7eb;
   }
+  html[data-theme="light"] .fcg-code-dot {
+    background: rgba(0,0,0,.12);
+  }
+  html[data-theme="light"] .fcg-code-bar span {
+    color: #9ca3af;
+  }
+  html[data-theme="light"] .fcg-code-body .code-comment { color: #9ca3af; }
+  html[data-theme="light"] .fcg-code-body .code-key { color: #ea580c; }
+  html[data-theme="light"] .fcg-code-body .code-string { color: #059669; }
+  html[data-theme="light"] .fcg-code-body .code-method { color: #2563eb; }
+  html[data-theme="light"] .fcg-code-body .code-number { color: #7c3aed; }
+  html[data-theme="light"] .fcg-code-body .code-punct { color: #6b7280; }
   html[data-theme="light"] .fcg-mobile-cta {
     background: rgba(255,255,255,.78);
     border-color: rgba(15,17,20,.12);
@@ -2655,147 +2176,6 @@
   html[data-theme="light"] .fcg-store-button:hover {
     background: #ffffff;
     border-color: rgba(15,17,20,.24);
-  }
-
-  /* Index visual consistency pass */
-  .fcg-hero2 h1,
-  .fcg-bento h2,
-  .fcg-showcase h2,
-  .fcg-showcase-window h3,
-  .fcg-feature108-title,
-  .fcg-feature108-content h3,
-  .fcg-mobile-feature h2,
-  #decision-paths h2,
-  #product-map h2 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500 !important;
-    letter-spacing: 0;
-  }
-  .fcg-hero2-copy,
-  .fcg-bento-subcopy,
-  .fcg-showcase-description,
-  .fcg-showcase-step-content,
-  .fcg-showcase-window p,
-  .fcg-feature108-copy,
-  .fcg-feature108-content p,
-  .fcg-mobile-subcopy,
-  #decision-paths p,
-  #product-map p,
-  #product-map li {
-    font-weight: 300;
-  }
-  .fcg-hero2-badge,
-  .fcg-showcase-badge,
-  .fcg-feature108-badge,
-  .product-kicker,
-  .fcg-bento-kicker,
-  .fcg-mobile-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 400;
-  }
-  #decision-paths,
-  #product-map,
-  .fcg-marketing-section,
-  .fcg-showcase,
-  .fcg-mobile-feature {
-    background: #080805 !important;
-    color: #ffffff;
-  }
-  #decision-paths,
-  #product-map,
-  .fcg-showcase,
-  .fcg-mobile-feature {
-    border-color: rgba(255,255,255,.1) !important;
-  }
-  .fcg-bento {
-    background:
-      radial-gradient(circle at 18% 12%, rgba(249,115,22,.12), transparent 28%),
-      radial-gradient(125% 125% at 50% 10%, #080805 42%, #121212 100%);
-  }
-  .product-card,
-  .fcg-bento-card,
-  .fcg-showcase-card,
-  .fcg-showcase-window,
-  .fcg-feature108-card,
-  .fcg-feature108-window,
-  .fcg-mobile-cta {
-    background: #121212;
-    border-color: #2A2A2A;
-  }
-  .product-card:hover,
-  .fcg-bento-card:hover {
-    background: #171717;
-    border-color: rgba(255,255,255,.18);
-  }
-  .fcg-feature108-row,
-  .fcg-feature108-metric {
-    background: rgba(255,255,255,.04);
-    border-color: rgba(255,255,255,.08);
-  }
-  .fcg-feature108-trigger {
-    font-weight: 500;
-  }
-  .fcg-feature108-trigger[aria-selected="true"] {
-    background: rgba(255,255,255,.08);
-  }
-  .fcg-feature108-action,
-  .fcg-showcase-action,
-  .fcg-hero2-button,
-  .fcg-store-button {
-    font-weight: 500;
-  }
-  .fcg-bento-card h3,
-  .fcg-showcase-step-trigger,
-  .fcg-feature-row h3,
-  .fcg-mobile-cta h3,
-  #decision-paths .product-card h3,
-  #product-map .product-card h3,
-  #decision-paths .product-card .text-lg {
-    font-weight: 500 !important;
-    letter-spacing: 0;
-  }
-  html[data-theme="light"] #decision-paths,
-  html[data-theme="light"] #product-map,
-  html[data-theme="light"] .fcg-marketing-section,
-  html[data-theme="light"] .fcg-showcase,
-  html[data-theme="light"] .fcg-mobile-feature {
-    background: #ffffff !important;
-    color: #0F1114;
-  }
-  html[data-theme="light"] #decision-paths,
-  html[data-theme="light"] #product-map,
-  html[data-theme="light"] .fcg-showcase,
-  html[data-theme="light"] .fcg-mobile-feature {
-    border-color: #D1D5DB !important;
-  }
-  html[data-theme="light"] .fcg-bento {
-    background:
-      radial-gradient(circle at 52% 10%, rgba(249,115,22,.1), transparent 32%),
-      radial-gradient(125% 125% at 50% 10%, #ffffff 38%, #F3F4F6 100%);
-  }
-  html[data-theme="light"] .product-card,
-  html[data-theme="light"] .fcg-bento-card,
-  html[data-theme="light"] .fcg-showcase-card,
-  html[data-theme="light"] .fcg-showcase-window,
-  html[data-theme="light"] .fcg-feature108-card,
-  html[data-theme="light"] .fcg-feature108-window,
-  html[data-theme="light"] .fcg-mobile-cta {
-    background: rgba(255,255,255,.72);
-    border-color: rgba(15,17,20,.12);
-    box-shadow: 0 18px 50px rgba(15,17,20,.08);
-  }
-  html[data-theme="light"] .product-card:hover,
-  html[data-theme="light"] .fcg-bento-card:hover {
-    background: rgba(255,255,255,.92);
-    border-color: rgba(15,17,20,.24);
-  }
-  html[data-theme="light"] .fcg-feature108-row,
-  html[data-theme="light"] .fcg-feature108-metric {
-    background: rgba(255,255,255,.68);
-    border-color: rgba(15,17,20,.1);
-  }
-  html[data-theme="light"] .fcg-feature108-trigger[aria-selected="true"] {
-    background: #f1f5f9;
   }
   @media (max-width: 980px) {
     .fcg-hero2-content {
@@ -2830,38 +2210,13 @@
       grid-column: auto;
       grid-row: auto;
     }
-    .fcg-showcase-inner {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-      padding: 4.5rem 1.25rem;
-    }
-    .fcg-showcase-copy,
-    .fcg-showcase-visual {
-      grid-column: auto;
-    }
-    .fcg-showcase-card {
-      min-height: 34rem;
-    }
-    .fcg-showcase-overlay {
-      inset: auto .9rem 5.4rem .9rem;
-    }
-    .fcg-showcase-preview-row {
-      grid-template-columns: auto 1fr;
-    }
-    .fcg-showcase-preview-row mark {
-      grid-column: 2;
-      width: fit-content;
-    }
-    .fcg-showcase-actions {
-      align-items: stretch;
-      flex-direction: column;
-    }
-    .fcg-showcase-action {
-      width: 100%;
-    }
     .fcg-marketing-section,
+    .fcg-integration-section,
     .fcg-mobile-feature {
       padding: 4.5rem 1.25rem;
+    }
+    .fcg-flow-grid {
+      grid-template-columns: 1fr;
     }
     .fcg-feature-grid {
       grid-template-columns: 1fr;
@@ -2872,42 +2227,6 @@
     }
     .fcg-marketing-header {
       margin-bottom: 2.5rem;
-    }
-    .fcg-feature108-header {
-      align-items: flex-start;
-      text-align: left;
-    }
-    .fcg-feature108-tablist {
-      align-items: stretch;
-      flex-direction: column;
-    }
-    .fcg-feature108-trigger {
-      justify-content: flex-start;
-      width: 100%;
-    }
-    .fcg-feature108-panel {
-      grid-template-columns: 1fr;
-    }
-    .fcg-feature108-card {
-      border-radius: 18px;
-      padding: 1.1rem;
-    }
-    .fcg-feature108-visual {
-      min-height: auto;
-      padding: .8rem;
-    }
-    .fcg-feature108-window {
-      min-height: auto;
-    }
-    .fcg-feature108-metrics {
-      grid-template-columns: 1fr;
-    }
-    .fcg-feature108-row {
-      grid-template-columns: auto 1fr;
-    }
-    .fcg-feature108-row mark {
-      grid-column: 2;
-      width: fit-content;
     }
     .fcg-ai-showcase {
       min-height: 28rem;
@@ -2939,74 +2258,156 @@
     <div class="fcg-hero2-content">
       <div class="fcg-hero2-copy-column">
         <div class="fcg-hero2-badge">
-          Operate &middot; TMC OS
+          The most direct path to G-Link &amp; F-Link
           <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
         </div>
-        <h1>Run every TMC workflow from one hub.</h1>
-        <p class="fcg-hero2-copy">Atlas is the operating system for independent TMCs. It connects clients, queues, ticketing, duty of care, reporting, integrations, payment visibility, and service workflows in one infrastructure layer, so teams can modernize operations without giving up independence.</p>
+        <h1>One connection to G-Link &amp; F-Link. Every hotel. Every airline.</h1>
+        <p class="fcg-hero2-copy">You're maintaining six supplier integrations and none of them give you full coverage. Content is fragmented, rates are stale, and your engineering team builds plumbing instead of product. G-Link and F-Link are the inventory layer underneath: 1M+ deduplicated hotel properties and every major airline. Connect once, through a single API, and replace all of it.</p>
         <div class="fcg-hero2-actions">
-          <a href="#stack-showcase" class="fcg-hero2-button fcg-hero2-button-primary">See Atlas in action</a>
-          <a href="#product-capabilities" class="fcg-hero2-button fcg-hero2-button-secondary">Explore modules</a>
+          <a href="#getting-started" class="fcg-hero2-button fcg-hero2-button-primary">Get sandbox access</a>
+          <a href="#api-capabilities" class="fcg-hero2-button fcg-hero2-button-secondary">Read the docs</a>
         </div>
       </div>
 
       <div class="fcg-hero2-preview-wrap">
         <div class="fcg-hero2-preview">
-          <img class="fcg-product-shot" src="assets/images/atlas-product/dashboard.jpg" alt="Atlas TMC OS dashboard showing clients, tickets, bookings, incidents, and operational activity">
           <div class="fcg-hero2-preview-grid">
-            <article class="fcg-hero2-preview-card"><span>Agent Tools</span><strong>1 operating surface</strong></article>
-            <article class="fcg-hero2-preview-card"><span>Client Reporting</span><strong>Connected to every booking</strong></article>
-            <article class="fcg-hero2-preview-card"><span>Modules</span><strong>5 connected modules</strong></article>
-            <article class="fcg-hero2-preview-card"><span>Deployment</span><strong>Layer-by-layer rollout</strong></article>
+            <article class="fcg-hero2-preview-card">
+              <span>G-Link</span>
+              <div class="stat-value">1M+</div>
+              <div class="stat-label">Deduplicated properties via GDS, Booking.com Group, and direct</div>
+            </article>
+            <article class="fcg-hero2-preview-card">
+              <span>F-Link</span>
+              <div class="stat-value">GDS + NDC + LCC</div>
+              <div class="stat-label">Every major airline through one connection</div>
+            </article>
+            <article class="fcg-hero2-preview-card">
+              <span>Coverage</span>
+              <div class="stat-value">APAC-native</div>
+              <div class="stat-label">Deep supply across the fastest-growing travel region</div>
+            </article>
+            <article class="fcg-hero2-preview-card">
+              <span>Replaces</span>
+              <div class="stat-value">6 &rarr; 1</div>
+              <div class="stat-label">One connection replaces fragmented supplier feeds</div>
+            </article>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="decision-paths" class="px-6 md:px-12 py-28 bg-[#050505] border-t border-white/10">
-    <div class="max-w-7xl mx-auto">
-      <div class="max-w-3xl mb-16 fade-up">
-        <div class="product-kicker text-xs text-orange-500 mb-4">Pain Points</div>
-        <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Three reasons TMC operators start an Atlas conversation.</h2>
+  <section id="api-capabilities" class="fcg-bento">
+    <div class="fcg-bento-spiral" aria-hidden="true">
+      <div id="fcgBentoSpiral"></div>
+    </div>
+    <div class="fcg-bento-inner">
+      <header class="fcg-bento-header fade-up">
+        <div>
+          <div class="fcg-bento-kicker">What you're connecting to</div>
+          <h2>The inventory depth behind one connection.</h2>
+        </div>
+        <p class="fcg-bento-subcopy">The API is a method. G-Link and F-Link are the resource: 1M+ deduplicated properties, every major airline, Booking.com Group access, and APAC-native supply depth.</p>
+      </header>
+
+      <div class="fcg-bento-grid">
+        <article class="fcg-bento-card fcg-bento-card-large fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>G-Link: 1M+ properties, deduplicated and resolved</h3>
+            <span class="fcg-bento-meta">G-Link</span>
+          </header>
+          <p>Duplicate properties. Mismatched room types. Stale rates from six different sources. The same hotel appearing three times at three different prices. G-Link resolves all of it. Supply from GDS systems, Booking.com Group, direct hotel connections, and OTA networks is aggregated into one clean, deduplicated, bookable feed.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-small fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Clean content, not three listings for the same hotel</h3>
+            <span class="fcg-bento-meta">Content</span>
+          </header>
+          <p>G-Link standardises property records, room types, images, and amenities so each hotel appears once, at the best available rate.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-small fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>F-Link: every airline, one connection</h3>
+            <span class="fcg-bento-meta">F-Link</span>
+          </header>
+          <p>F-Link connects GDS, NDC, and LCC direct into one standardised feed with fare-family normalisation, ancillary management, and full commercial control.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-wide fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Asia-native supply depth, not retrofitted coverage</h3>
+            <span class="fcg-bento-meta">APAC</span>
+          </header>
+          <p>Built in the region with real supply depth across APAC, the API helps companies expanding into Asia move faster than a supplier-by-supplier integration project.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-wide fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Commercial control that isn't trapped in a spreadsheet</h3>
+            <span class="fcg-bento-meta">Business</span>
+          </header>
+          <p>Mark up, mark down, apply programme rates, layer negotiated rates, or pass through net rates at the supply layer, with booking data flowing back to analytics and reporting systems.</p>
+        </article>
       </div>
-      <div class="space-y-5">
-        <article class="product-card rounded-3xl p-6 md:p-8 fade-up grid lg:grid-cols-[.55fr_1fr_.85fr] gap-6 items-start">
-          <div>
-            <div class="product-kicker text-[10px] text-orange-500 mb-2">Pain 01</div>
-            <h3 class="text-2xl text-white font-medium tracking-tight">Operations don't scale</h3>
-          </div>
-          <p class="text-sm text-neutral-400 leading-relaxed">Every new client means more agent hours, more manual reporting, and more margin compression. Growth creates operational drag instead of leverage.</p>
-          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
-            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Atlas module</div>
-            <div class="text-lg text-white font-medium mb-3">OpsHub + Reports</div>
-            <p class="text-sm text-neutral-400 leading-relaxed">One connected surface for client CRM, booking pipeline, agent queues, and branded analytics eliminates weekend spreadsheet assembly.</p>
-          </div>
-        </article>
-        <article class="product-card rounded-3xl p-6 md:p-8 fade-up grid lg:grid-cols-[.55fr_1fr_.85fr] gap-6 items-start">
-          <div>
-            <div class="product-kicker text-[10px] text-orange-500 mb-2">Pain 02</div>
-            <h3 class="text-2xl text-white font-medium tracking-tight">Agents toggle between six screens</h3>
-          </div>
-          <p class="text-sm text-neutral-400 leading-relaxed">GDS terminals, CRM tabs, email inboxes, spreadsheets, duty of care PDFs, and supplier portals. Every booking requires context-switching across disconnected tools.</p>
-          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
-            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Atlas module</div>
-            <div class="text-lg text-white font-medium mb-3">Inbox + FlowConnect</div>
-            <p class="text-sm text-neutral-400 leading-relaxed">Unified ticketing with SLA enforcement and an integration fabric connecting GDS, suppliers, finance, HR, and SSO into one workflow.</p>
-          </div>
-        </article>
-        <article class="product-card rounded-3xl p-6 md:p-8 fade-up grid lg:grid-cols-[.55fr_1fr_.85fr] gap-6 items-start">
-          <div>
-            <div class="product-kicker text-[10px] text-orange-500 mb-2">Pain 03</div>
-            <h3 class="text-2xl text-white font-medium tracking-tight">Duty of care is a bolt-on PDF</h3>
-          </div>
-          <p class="text-sm text-neutral-400 leading-relaxed">Real-time traveler visibility doesn't exist. Incidents are discovered after the client complains. Risk management is reactive, not operational.</p>
-          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
-            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Atlas module</div>
-            <div class="text-lg text-white font-medium mb-3">DutyView</div>
-            <p class="text-sm text-neutral-400 leading-relaxed">Real-time traveler tracking with every incident surfaced proactively. Connected to every booking, not buried in a static report.</p>
-          </div>
-        </article>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="fcg-integration-section">
+    <div class="fcg-integration-inner">
+      <header class="fcg-integration-header fade-up">
+        <div class="fcg-integration-eyebrow">Integration Points</div>
+        <h2 class="fcg-integration-title"><span>Connect to G-Link &amp; F-Link.</span><br>Search, book, and manage through one integration.</h2>
+        <p>Authenticate once, search across every connected supplier, confirm bookings, and manage changes. The supply complexity is resolved before it reaches your product.</p>
+      </header>
+
+      <div class="fcg-flow-grid fade-up">
+        <div class="fcg-flow-step">
+          <div class="fcg-flow-step-number">01</div>
+          <h3>Search G-Link &amp; F-Link</h3>
+          <p>One request queries GDS, Booking.com Group, direct hotels, OTAs, NDC, and LCC. Results return deduplicated, normalised, and priced.</p>
+          <div class="code-tag">GET /v2/hotels/availability</div>
+        </div>
+        <div class="fcg-flow-step">
+          <div class="fcg-flow-step-number">02</div>
+          <h3>Book through the connection</h3>
+          <p>Confirm a reservation with one call while G-Link or F-Link handles supplier confirmation, payment, and PNR generation behind the scenes.</p>
+          <div class="code-tag">POST /v2/bookings/create</div>
+        </div>
+        <div class="fcg-flow-step">
+          <div class="fcg-flow-step-number">03</div>
+          <h3>Manage the full lifecycle</h3>
+          <p>Modifications, cancellations, reporting, and post-booking workflows run through the same connection.</p>
+          <div class="code-tag">GET /v2/bookings/{id}</div>
+        </div>
+      </div>
+
+      <div class="fcg-code-preview fade-up">
+        <div class="fcg-code-bar">
+          <div class="fcg-code-dot"></div>
+          <div class="fcg-code-dot"></div>
+          <div class="fcg-code-dot"></div>
+          <span>hotel-search.js</span>
+        </div>
+        <pre class="fcg-code-body"><code><span class="code-comment">// Search G-Link -- every supplier, one call</span>
+<span class="code-key">const</span> results <span class="code-punct">=</span> <span class="code-key">await</span> fcg<span class="code-punct">.</span><span class="code-method">hotels</span><span class="code-punct">.</span><span class="code-method">search</span><span class="code-punct">({</span>
+  <span class="code-key">destination</span><span class="code-punct">:</span> <span class="code-string">"SIN"</span><span class="code-punct">,</span>
+  <span class="code-key">checkIn</span><span class="code-punct">:</span>  <span class="code-string">"2026-06-15"</span><span class="code-punct">,</span>
+  <span class="code-key">checkOut</span><span class="code-punct">:</span> <span class="code-string">"2026-06-18"</span><span class="code-punct">,</span>
+  <span class="code-key">guests</span><span class="code-punct">:</span>   <span class="code-number">2</span><span class="code-punct">,</span>
+  <span class="code-key">currency</span><span class="code-punct">:</span> <span class="code-string">"USD"</span>
+<span class="code-punct">});</span>
+
+<span class="code-comment">// 1,247 properties returned. Deduplicated. Normalised. Bookable.</span>
+console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>properties<span class="code-punct">.</span>length<span class="code-punct">);</span> <span class="code-comment">// 1247</span>
+console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>sources<span class="code-punct">);</span> <span class="code-comment">// ["gds", "booking_group", "direct", "ota"]</span></code></pre>
       </div>
     </div>
   </section>
@@ -3015,492 +2416,141 @@
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 fade-up">
         <div>
-          <div class="product-kicker text-xs text-orange-500 mb-4">Module Map</div>
-          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Five modules, one connected operating surface.</h2>
+          <div class="product-kicker text-xs text-orange-500 mb-4">API Surface</div>
+          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Four domains. The full depth of G-Link and F-Link.</h2>
         </div>
-        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Each module solves a specific operational pain. Together, they replace the duct tape holding your TMC infrastructure together: service queues, supplier connections, traveler visibility, reporting, and financial handoffs.</p>
+        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Every API domain connects to a deep resource layer: hotel supply, flight supply, payments, and reporting.</p>
       </div>
       <div class="grid md:grid-cols-2 gap-5">
         <article class="product-card rounded-3xl p-7 fade-up">
           <div class="flex items-start gap-5 mb-6">
-            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:cpu-bolt-linear" width="23" height="23"></iconify-icon></div>
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="23" height="23"></iconify-icon></div>
             <div>
-              <div class="product-kicker text-[10px] text-orange-500 mb-2">Module 01</div>
-              <h3 class="text-2xl text-white font-medium tracking-tight">OpsHub</h3>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">G-Link</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Hotel Supply</h3>
             </div>
           </div>
-          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Client CRM, booking pipeline, and agent queues in one connected surface. Everything visible, everything linked.</p>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">1M+ deduplicated properties. GDS, Booking.com Group, direct hotel connections, and OTA networks all resolved into one clean feed through a single endpoint.</p>
           <div class="border-t border-white/10 pt-5">
             <ul class="space-y-3">
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Client profiles, travel policies, and booking history in one view</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Agent queue management with workload visibility</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Booking pipeline from request through to confirmation</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Property-level and room-level deduplication across every source</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Standardised content, images, and room mapping so each hotel appears once</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Negotiated-rate layering, programme rates, and net rate passthrough per client</span></li>
             </ul>
           </div>
         </article>
         <article class="product-card rounded-3xl p-7 fade-up">
           <div class="flex items-start gap-5 mb-6">
-            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:inbox-line-linear" width="23" height="23"></iconify-icon></div>
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:plane-linear" width="23" height="23"></iconify-icon></div>
             <div>
-              <div class="product-kicker text-[10px] text-orange-500 mb-2">Module 02</div>
-              <h3 class="text-2xl text-white font-medium tracking-tight">Inbox</h3>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">F-Link</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Flight Supply</h3>
             </div>
           </div>
-          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Unified ticketing with SLA enforcement across every channel. No request lost. No breach discovered after the client complains.</p>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Every major airline through one connection. F-Link aggregates GDS, NDC direct, and LCC direct into one normalised feed.</p>
           <div class="border-t border-white/10 pt-5">
             <ul class="space-y-3">
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Multi-channel request capture: email, chat, phone, portal</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>SLA timers with escalation rules and breach alerts</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Full audit trail from request to resolution</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>GDS + NDC + LCC direct: every distribution channel, one search</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Fare-family normalisation and ancillary management across sources</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>PNR creation, ticketing, post-booking servicing, and policy-aware filtering</span></li>
             </ul>
           </div>
         </article>
         <article class="product-card rounded-3xl p-7 fade-up">
           <div class="flex items-start gap-5 mb-6">
-            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:link-round-linear" width="23" height="23"></iconify-icon></div>
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:card-transfer-linear" width="23" height="23"></iconify-icon></div>
             <div>
-              <div class="product-kicker text-[10px] text-orange-500 mb-2">Module 03</div>
-              <h3 class="text-2xl text-white font-medium tracking-tight">FlowConnect</h3>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Payments</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Payment &amp; Settlement</h3>
             </div>
           </div>
-          <p class="text-sm text-neutral-400 leading-relaxed mb-6">GDS, suppliers, finance, HR, SSO, payment data, CRM, and reporting. One connected fabric that replaces duct-taped operations.</p>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Virtual card issuance and settlement infrastructure embedded in the booking flow, without requiring a separate payment provider.</p>
           <div class="border-t border-white/10 pt-5">
             <ul class="space-y-3">
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Pre-built connectors for major GDS and supplier systems</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Finance and HR system integration for reconciliation</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>SSO and identity management across the TMC stack</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Virtual card generation per booking or per supplier</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Automated settlement and reconciliation</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Multi-currency support and spend reporting</span></li>
             </ul>
           </div>
         </article>
         <article class="product-card rounded-3xl p-7 fade-up">
           <div class="flex items-start gap-5 mb-6">
-            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:shield-check-linear" width="23" height="23"></iconify-icon></div>
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:chart-2-linear" width="23" height="23"></iconify-icon></div>
             <div>
-              <div class="product-kicker text-[10px] text-orange-500 mb-2">Module 04</div>
-              <h3 class="text-2xl text-white font-medium tracking-tight">DutyView</h3>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Data</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Reporting &amp; Analytics</h3>
             </div>
           </div>
-          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Real-time traveler tracking with incidents surfaced proactively. Duty of care becomes an operational workflow, not a static report.</p>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Booking data, search analytics, and programme performance can be accessed through the API or pushed to your analytics stack.</p>
           <div class="border-t border-white/10 pt-5">
             <ul class="space-y-3">
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Live traveler location and itinerary tracking</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Incident alerting connected to booking and client data</span></li>
-              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Risk dashboard for client reporting and compliance</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Booking and spend data via API or webhook delivery</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Search-to-book conversion and supplier performance</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>ERP and accounting system connectivity</span></li>
             </ul>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="performance-signals" class="fcg-marketing-section">
-    <div class="fcg-feature108-inner">
-      <header class="fcg-feature108-header fade-up">
-        <div class="fcg-feature108-badge">Competitive Position</div>
-        <h2 class="fcg-feature108-title">Replace the duct tape without losing your independence</h2>
-        <p class="fcg-feature108-copy">Atlas modernizes your TMC infrastructure without taking your clients, your brand, or your independence. One operating system replaces the patchwork of legacy terminals, homegrown CRM, and spreadsheet ops.</p>
-      </header>
-
-      <div class="fcg-feature108-tabs fade-up" data-feature108-tabs>
-        <div class="fcg-feature108-tablist" role="tablist" aria-label="Atlas competitive advantages">
-          <button class="fcg-feature108-trigger" type="button" id="feature108-tab-options" role="tab" aria-selected="true" aria-controls="feature108-panel-options" data-tab-target="feature108-panel-options">
-            <iconify-icon icon="solar:bolt-circle-bold-duotone" width="18" height="18"></iconify-icon>
-            vs. Legacy terminals
-          </button>
-          <button class="fcg-feature108-trigger" type="button" id="feature108-tab-workflows" role="tab" aria-selected="false" aria-controls="feature108-panel-workflows" data-tab-target="feature108-panel-workflows" tabindex="-1">
-            <iconify-icon icon="solar:cursor-bold-duotone" width="18" height="18"></iconify-icon>
-            vs. Enterprise suites
-          </button>
-          <button class="fcg-feature108-trigger" type="button" id="feature108-tab-rollouts" role="tab" aria-selected="false" aria-controls="feature108-panel-rollouts" data-tab-target="feature108-panel-rollouts" tabindex="-1">
-            <iconify-icon icon="solar:layers-bold-duotone" width="18" height="18"></iconify-icon>
-            vs. Super-platforms
-          </button>
-        </div>
-
-        <div class="fcg-feature108-card">
-          <article class="fcg-feature108-panel" id="feature108-panel-options" role="tabpanel" aria-labelledby="feature108-tab-options">
-            <div class="fcg-feature108-content">
-              <div class="fcg-feature108-badge">Connected Ops</div>
-              <h3>Functional but disconnected is no longer enough.</h3>
-              <p>Legacy GDS terminals handle bookings but leave everything else in spreadsheets, email, and manual handoffs. Atlas connects every operational surface so agents stop toggling and start delivering.</p>
-              <a class="fcg-feature108-action" href="#product-map">Explore modules</a>
-            </div>
-            <div class="fcg-feature108-visual" aria-label="Atlas unified operations preview">
-              <div class="fcg-feature108-window">
-                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
-                <div class="fcg-feature108-stack">
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:cpu-bolt-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>OpsHub active</strong><small>Client CRM, pipeline, and queues in one surface</small></div>
-                    <mark>Live</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:inbox-line-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Inbox SLA tracking</strong><small>Zero breaches discovered after client complaint</small></div>
-                    <mark>0 breach</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:chart-2-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Reports connected</strong><small>Branded analytics linked to every booking</small></div>
-                    <mark>Auto</mark>
-                  </div>
-                </div>
-                <div class="fcg-feature108-metrics">
-                  <div class="fcg-feature108-metric"><strong>5</strong><span>Connected modules</span></div>
-                  <div class="fcg-feature108-metric"><strong>1</strong><span>Operating surface</span></div>
-                  <div class="fcg-feature108-metric"><strong>24/7</strong><span>Visibility</span></div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="fcg-feature108-panel" id="feature108-panel-workflows" role="tabpanel" aria-labelledby="feature108-tab-workflows" hidden>
-            <div class="fcg-feature108-content">
-              <div class="fcg-feature108-badge">Right-Sized</div>
-              <h3>Enterprise suites over-engineer the mid-market problem.</h3>
-              <p>SAP Concur and similar platforms were built for global enterprises with dedicated IT teams. Atlas is built for independent TMCs and regional networks that need infrastructure-grade tools without the overhead.</p>
-              <a class="fcg-feature108-action" href="#decision-paths">See pain points</a>
-            </div>
-            <div class="fcg-feature108-visual" aria-label="Atlas mid-market fit preview">
-              <div class="fcg-feature108-window">
-                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
-                <div class="fcg-feature108-stack">
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:layers-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Layer-by-layer deployment</strong><small>Start with one module, expand on your timeline</small></div>
-                    <mark>Flexible</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:users-group-rounded-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>10-100+ agent teams</strong><small>Built for the operator scale that matters</small></div>
-                    <mark>Fit</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:map-point-wave-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>APAC-native</strong><small>Singapore, Hong Kong, Thailand, Malaysia, and beyond</small></div>
-                    <mark>Regional</mark>
-                  </div>
-                </div>
-                <div class="fcg-feature108-metrics">
-                  <div class="fcg-feature108-metric"><strong>0</strong><span>IT team required</span></div>
-                  <div class="fcg-feature108-metric"><strong>10+</strong><span>Min. agents</span></div>
-                  <div class="fcg-feature108-metric"><strong>APAC</strong><span>Coverage</span></div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="fcg-feature108-panel" id="feature108-panel-rollouts" role="tabpanel" aria-labelledby="feature108-tab-rollouts" hidden>
-            <div class="fcg-feature108-content">
-              <div class="fcg-feature108-badge">Independence</div>
-              <h3>Platforms that help you today compete with you tomorrow.</h3>
-              <p>Super-platforms offer infrastructure but eventually compete for your clients. Atlas is built by FCG, which does not compete with its customers. Your brand, your clients, and your independence stay protected.</p>
-              <a class="fcg-feature108-action" href="#mobile-workflows">See deployment</a>
-            </div>
-            <div class="fcg-feature108-visual" aria-label="Atlas independence model preview">
-              <div class="fcg-feature108-window">
-                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
-                <div class="fcg-feature108-stack">
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:shield-check-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Your brand stays yours</strong><small>White-label reporting and client-facing surfaces</small></div>
-                    <mark>Owned</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:lock-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Your clients stay yours</strong><small>FCG builds infrastructure, not a competing TMC</small></div>
-                    <mark>Protected</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:key-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Your data stays yours</strong><small>Full ownership of operational and booking data</small></div>
-                    <mark>Sovereign</mark>
-                  </div>
-                </div>
-                <div class="fcg-feature108-metrics">
-                  <div class="fcg-feature108-metric"><strong>100%</strong><span>Brand control</span></div>
-                  <div class="fcg-feature108-metric"><strong>0</strong><span>Client conflict</span></div>
-                  <div class="fcg-feature108-metric"><strong>Full</strong><span>Data ownership</span></div>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="product-capabilities" class="fcg-bento">
-    <div class="fcg-bento-spiral" aria-hidden="true">
-      <div id="fcgBentoSpiral"></div>
-    </div>
-    <div class="fcg-bento-inner">
-      <header class="fcg-bento-header fade-up">
-        <div>
-          <div class="fcg-bento-kicker">Atlas Capabilities</div>
-          <h2>What sits inside the operating system.</h2>
-        </div>
-        <p class="fcg-bento-subcopy">Six capabilities turn disconnected TMC tools into one infrastructure layer: workspace, ticketing, integration, duty of care, analytics, payment visibility, and deployment.</p>
-      </header>
-
-      <div class="fcg-bento-grid">
-        <article class="fcg-bento-card fcg-bento-card-large fade-up">
-          <header class="fcg-bento-card-header">
-            <span class="fcg-bento-dot">&bull;</span>
-            <h3>Unified agent workspace</h3>
-            <span class="fcg-bento-meta">OpsHub</span>
-          </header>
-          <p>Client CRM, booking pipeline, and agent queues in one connected surface. Every client relationship, every open request, and every team workload visible without switching screens.</p>
-        </article>
-
-        <article class="fcg-bento-card fcg-bento-card-small fade-up">
-          <header class="fcg-bento-card-header">
-            <span class="fcg-bento-dot">&bull;</span>
-            <h3>SLA-enforced ticketing</h3>
-            <span class="fcg-bento-meta">Inbox</span>
-          </header>
-          <p>Unified ticketing across every channel with SLA timers, escalation rules, and breach alerts. No request lost or forgotten.</p>
-        </article>
-
-        <article class="fcg-bento-card fcg-bento-card-small fade-up">
-          <header class="fcg-bento-card-header">
-            <span class="fcg-bento-dot">&bull;</span>
-            <h3>Integration fabric</h3>
-            <span class="fcg-bento-meta">FlowConnect</span>
-          </header>
-          <p>GDS, suppliers, finance, HR, SSO, payment status, CRM, and reporting connected through one fabric. The layer that replaces the duct tape.</p>
-        </article>
-
-        <article class="fcg-bento-card fcg-bento-card-wide fade-up">
-          <header class="fcg-bento-card-header">
-            <span class="fcg-bento-dot">&bull;</span>
-            <h3>Real-time duty of care</h3>
-            <span class="fcg-bento-meta">DutyView</span>
-          </header>
-          <p>Live traveler tracking with incident surfacing connected to every booking. Operational risk management, not a bolt-on PDF report.</p>
-        </article>
-
-        <article class="fcg-bento-card fcg-bento-card-wide fade-up">
-          <header class="fcg-bento-card-header">
-            <span class="fcg-bento-dot">&bull;</span>
-            <h3>Client-ready analytics</h3>
-            <span class="fcg-bento-meta">Reports</span>
-          </header>
-          <p>Branded reporting connected to every booking. No more weekend spreadsheet assembly. Deliver client insights that look as professional as the service behind them.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="stack-showcase" class="fcg-showcase">
-    <div class="fcg-showcase-inner">
-      <div class="fcg-showcase-copy fade-up">
-        <div class="fcg-showcase-badge">Atlas Modules</div>
-        <h2>Walk through the five modules that connect your TMC.</h2>
-        <p class="fcg-showcase-description">Each module handles a distinct operational surface. Together, they form one connected hub that scales with your business instead of against it.</p>
-
-        <div class="fcg-showcase-stats" aria-label="Atlas highlights">
-          <span class="fcg-showcase-chip">5 connected modules</span>
-          <span class="fcg-showcase-chip">One operating surface</span>
-          <span class="fcg-showcase-chip">Layer-by-layer deployment</span>
-          <span class="fcg-showcase-chip">TMC independence preserved</span>
-        </div>
-
-        <div class="fcg-showcase-steps" data-fcg-showcase-accordion>
-          <div class="fcg-showcase-step">
-            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-opshub" aria-expanded="true" aria-controls="showcase-step-opshub-content">
-              <span>OpsHub</span>
-              <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
-            </button>
-            <div class="fcg-showcase-step-content" id="showcase-step-opshub-content" role="region" aria-labelledby="showcase-step-opshub">
-              Client CRM, booking pipeline, and agent queues in one connected surface. Everything connected, everything visible. The foundation of Atlas.
-            </div>
-          </div>
-
-          <div class="fcg-showcase-step">
-            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-inbox" aria-expanded="false" aria-controls="showcase-step-inbox-content">
-              <span>Inbox</span>
-              <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
-            </button>
-            <div class="fcg-showcase-step-content" id="showcase-step-inbox-content" role="region" aria-labelledby="showcase-step-inbox" hidden>
-              Unified ticketing with SLA enforcement across every channel. No request lost. No breach discovered after the client complains.
-            </div>
-          </div>
-
-          <div class="fcg-showcase-step">
-            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-flowconnect" aria-expanded="false" aria-controls="showcase-step-flowconnect-content">
-              <span>FlowConnect</span>
-              <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
-            </button>
-            <div class="fcg-showcase-step-content" id="showcase-step-flowconnect-content" role="region" aria-labelledby="showcase-step-flowconnect" hidden>
-              Integration fabric connecting GDS, suppliers, finance, HR, and SSO. The layer that replaces duct-taped operations.
-            </div>
-          </div>
-
-          <div class="fcg-showcase-step">
-            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-dutyview" aria-expanded="false" aria-controls="showcase-step-dutyview-content">
-              <span>DutyView</span>
-              <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
-            </button>
-            <div class="fcg-showcase-step-content" id="showcase-step-dutyview-content" role="region" aria-labelledby="showcase-step-dutyview" hidden>
-              Real-time traveler tracking and incident surfacing. Every risk event connected to booking data and client records. Not a bolt-on PDF.
-            </div>
-          </div>
-
-          <div class="fcg-showcase-step">
-            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-reports" aria-expanded="false" aria-controls="showcase-step-reports-content">
-              <span>Reports</span>
-              <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
-            </button>
-            <div class="fcg-showcase-step-content" id="showcase-step-reports-content" role="region" aria-labelledby="showcase-step-reports" hidden>
-              Branded, client-ready analytics connected to every booking. No more weekend spreadsheet assembly. Deliver insights that match the quality of your service.
-            </div>
-          </div>
-        </div>
-
-        <div class="fcg-showcase-actions">
-          <a class="fcg-showcase-action fcg-showcase-action-primary" href="#contact">Start an Atlas conversation</a>
-          <a class="fcg-showcase-action fcg-showcase-action-secondary" href="#product-map">Browse all modules</a>
-        </div>
-      </div>
-
-      <div class="fcg-showcase-visual fade-up" data-fcg-showcase-tabs>
-        <div class="fcg-showcase-card">
-          <article class="fcg-showcase-panel" id="showcase-panel-operations" role="tabpanel" aria-labelledby="showcase-tab-operations">
-            <img class="fcg-product-shot" src="assets/images/atlas-product/dashboard.jpg" alt="Atlas operations dashboard showing active clients, bookings, tickets, incidents, and team activity" loading="eager">
-            <div class="fcg-showcase-overlay">
-              <div class="fcg-showcase-window">
-                <h3>Operations</h3>
-                <p>Agent queues, booking pipeline, and client CRM in one surface. See every open request, every team workload, and every client relationship without switching tools.</p>
-                <div class="fcg-showcase-preview-list">
-                  <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:cpu-bolt-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>OpsHub active workspace</strong>
-                    <mark>Live</mark>
-                  </div>
-                  <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:inbox-line-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>Inbox queue and SLA status</strong>
-                    <mark>Tracking</mark>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="fcg-showcase-panel" id="showcase-panel-service" role="tabpanel" aria-labelledby="showcase-tab-service" hidden>
-            <img class="fcg-product-shot" src="assets/images/atlas-product/tickets.jpg" alt="Atlas tickets module showing open service requests, priority labels, ownership, and status tracking" loading="lazy">
-            <div class="fcg-showcase-overlay">
-              <div class="fcg-showcase-window">
-                <h3>Service</h3>
-                <p>Ticketing, SLA tracking, client requests, enquiry capture, and service conversations across every channel. Escalation rules enforce response times before breaches happen.</p>
-                <div class="fcg-showcase-preview-list">
-                  <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:shield-check-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>SLA enforcement active</strong>
-                    <mark>0 breach</mark>
-                  </div>
-                  <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:link-round-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>FlowConnect integrations</strong>
-                    <mark>Synced</mark>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="fcg-showcase-panel" id="showcase-panel-intelligence" role="tabpanel" aria-labelledby="showcase-tab-intelligence" hidden>
-            <img class="fcg-product-shot" src="assets/images/atlas-product/reports.jpg" alt="Atlas reporting module showing corporate report controls and client-ready travel management reporting" loading="lazy">
-            <div class="fcg-showcase-overlay">
-              <div class="fcg-showcase-window">
-                <h3>Intelligence</h3>
-                <p>Reporting, duty of care, and analytics connected to every booking. Real-time traveler visibility and branded client reporting in one view.</p>
-                <div class="fcg-showcase-preview-list">
-                  <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:chart-2-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>Client-ready analytics</strong>
-                    <mark>Reports</mark>
-                  </div>
-                  <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:map-point-wave-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>DutyView traveler tracking</strong>
-                    <mark>Real-time</mark>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <div class="fcg-showcase-tabs">
-            <div class="fcg-showcase-tablist" role="tablist" aria-label="Atlas operational views">
-              <button class="fcg-showcase-tab" type="button" id="showcase-tab-operations" role="tab" aria-selected="true" aria-controls="showcase-panel-operations" data-showcase-target="showcase-panel-operations">Operations</button>
-              <button class="fcg-showcase-tab" type="button" id="showcase-tab-service" role="tab" aria-selected="false" aria-controls="showcase-panel-service" data-showcase-target="showcase-panel-service" tabindex="-1">Service</button>
-              <button class="fcg-showcase-tab" type="button" id="showcase-tab-intelligence" role="tab" aria-selected="false" aria-controls="showcase-panel-intelligence" data-showcase-target="showcase-panel-intelligence" tabindex="-1">Intelligence</button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
 </main>
-<!-- ===== MODULAR ROLLOUT CTA SECTION ===== -->
+<!-- ===== API ACCESS CTA SECTION ===== -->
     <footer id="contact" class="flex flex-col w-full">
-      <section id="mobile-workflows" class="fcg-mobile-feature border-t border-white/10">
+      <section id="getting-started" class="fcg-mobile-feature border-t border-white/10">
         <div class="fcg-mobile-inner">
           <header class="fcg-mobile-heading fade-up">
-            <div class="fcg-main-icon"><iconify-icon icon="solar:layers-minimalistic-linear" width="28" height="28"></iconify-icon></div>
-            <div class="fcg-mobile-eyebrow">Layer-by-Layer Deployment</div>
-            <h2>Deploy Atlas one module at a time.</h2>
-            <p class="fcg-mobile-subcopy">Atlas does not require rip-and-replace. Start with the module that solves your most urgent operational pain, then expand across the platform as your team is ready.</p>
+            <div class="fcg-main-icon"><iconify-icon icon="solar:code-square-linear" width="28" height="28"></iconify-icon></div>
+            <div class="fcg-mobile-eyebrow">Getting Started</div>
+            <h2>Connect to G-Link &amp; F-Link in weeks, not quarters.</h2>
+            <p class="fcg-mobile-subcopy">From sandbox access to your first production booking against G-Link and F-Link inventory in four steps. Clean documentation, working test environments, and a clear path to launch.</p>
           </header>
 
           <div class="fcg-feature-grid">
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:routing-3-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:key-minimalistic-square-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Start with the highest-friction workflow</h3>
-                <p>Is it agent queue visibility? Client reporting? SLA compliance? Pick the module that addresses the pain your team feels every day.</p>
+                <h3>Get your API credentials</h3>
+                <p>Request sandbox access and receive your API key and test environment credentials within 24 hours.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:link-round-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:document-text-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Connect without replacing everything</h3>
-                <p>FlowConnect integrates with your existing GDS, supplier systems, and finance tools. Atlas layers on top of what works and replaces what doesn't.</p>
+                <h3>Explore the documentation</h3>
+                <p>Use request and response examples, authentication guides, error handling, and integration patterns built for developer teams.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:chart-square-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:test-tube-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Measure operational lift from day one</h3>
-                <p>Track agent productivity, SLA compliance, queue throughput, and client satisfaction as each module comes online.</p>
+                <h3>Make your first test booking</h3>
+                <p>Run a hotel search against G-Link, select a rate, and confirm a sandbox booking in a realistic test environment.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:shield-network-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:rocket-2-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Scale across APAC complexity</h3>
-                <p>Support different markets, languages, supplier networks, and regulatory requirements across Singapore, Hong Kong, Thailand, Malaysia, and beyond.</p>
+                <h3>Move to production</h3>
+                <p>Switch to production credentials once the connection is validated, with commercial terms and supplier activation handled in parallel.</p>
               </div>
             </article>
           </div>
 
           <div class="fcg-mobile-cta fade-up">
-            <h3>Choose your first Atlas module with confidence.</h3>
-            <p>Use the sections above to match your operational pain points with the right module before starting a deeper conversation with FCG.</p>
+            <h3>Start connecting today.</h3>
+            <p>Get sandbox access to G-Link and F-Link and ship your first integration without waiting for a long contract cycle.</p>
             <div class="fcg-store-actions">
-              <a href="#decision-paths" class="fcg-store-button"><iconify-icon icon="solar:compass-linear" width="18" height="18"></iconify-icon>Explore pain points</a>
-              <a href="#product-map" class="fcg-store-button"><iconify-icon icon="solar:map-linear" width="18" height="18"></iconify-icon>View all modules</a>
+              <a href="#contact" class="fcg-store-button"><iconify-icon icon="solar:key-minimalistic-square-linear" width="18" height="18"></iconify-icon>Request sandbox access</a>
+              <a href="#contact" class="fcg-store-button"><iconify-icon icon="solar:document-text-linear" width="18" height="18"></iconify-icon>View API documentation</a>
             </div>
           </div>
         </div>
       </section>
     </footer>
-    <!-- ===== END MODULAR ROLLOUT CTA SECTION ===== -->
+    <!-- ===== END API ACCESS CTA SECTION ===== -->
 
     <!-- FOOTER -->
     <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">
@@ -3545,7 +2595,7 @@
         </div>
     </footer>
 
-    
+
 <!-- Interactivity scripts -->
     <script>
       // Reveal elements on scroll
@@ -3633,96 +2683,6 @@
           });
       });
 
-      document.querySelectorAll('[data-feature108-tabs]').forEach(tabGroup => {
-          const tabs = Array.from(tabGroup.querySelectorAll('[role="tab"]'));
-          const panels = Array.from(tabGroup.querySelectorAll('[role="tabpanel"]'));
-
-          function activateTab(tab) {
-              tabs.forEach(item => {
-                  const isActive = item === tab;
-                  item.setAttribute('aria-selected', String(isActive));
-                  item.tabIndex = isActive ? 0 : -1;
-              });
-
-              panels.forEach(panel => {
-                  panel.hidden = panel.id !== tab.dataset.tabTarget;
-              });
-          }
-
-          tabs.forEach((tab, index) => {
-              tab.addEventListener('click', () => activateTab(tab));
-              tab.addEventListener('keydown', event => {
-                  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-                  event.preventDefault();
-
-                  let nextIndex = index;
-                  if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
-                  if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
-                  if (event.key === 'Home') nextIndex = 0;
-                  if (event.key === 'End') nextIndex = tabs.length - 1;
-
-                  tabs[nextIndex].focus();
-                  activateTab(tabs[nextIndex]);
-              });
-          });
-      });
-
-      document.querySelectorAll('[data-fcg-showcase-accordion]').forEach(accordion => {
-          const triggers = Array.from(accordion.querySelectorAll('.fcg-showcase-step-trigger'));
-
-          triggers.forEach(trigger => {
-              trigger.addEventListener('click', () => {
-                  const content = document.getElementById(trigger.getAttribute('aria-controls'));
-                  const isOpen = trigger.getAttribute('aria-expanded') === 'true';
-
-                  triggers.forEach(item => {
-                      const itemContent = document.getElementById(item.getAttribute('aria-controls'));
-                      item.setAttribute('aria-expanded', 'false');
-                      if (itemContent) itemContent.hidden = true;
-                  });
-
-                  if (!isOpen && content) {
-                      trigger.setAttribute('aria-expanded', 'true');
-                      content.hidden = false;
-                  }
-              });
-          });
-      });
-
-      document.querySelectorAll('[data-fcg-showcase-tabs]').forEach(tabGroup => {
-          const tabs = Array.from(tabGroup.querySelectorAll('[role="tab"]'));
-          const panels = Array.from(tabGroup.querySelectorAll('[role="tabpanel"]'));
-
-          function activateShowcaseTab(tab) {
-              tabs.forEach(item => {
-                  const isActive = item === tab;
-                  item.setAttribute('aria-selected', String(isActive));
-                  item.tabIndex = isActive ? 0 : -1;
-              });
-
-              panels.forEach(panel => {
-                  panel.hidden = panel.id !== tab.dataset.showcaseTarget;
-              });
-          }
-
-          tabs.forEach((tab, index) => {
-              tab.addEventListener('click', () => activateShowcaseTab(tab));
-              tab.addEventListener('keydown', event => {
-                  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-                  event.preventDefault();
-
-                  let nextIndex = index;
-                  if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
-                  if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
-                  if (event.key === 'Home') nextIndex = 0;
-                  if (event.key === 'End') nextIndex = tabs.length - 1;
-
-                  tabs[nextIndex].focus();
-                  activateShowcaseTab(tabs[nextIndex]);
-              });
-          });
-      });
-
       // Counter animation (with IntersectionObserver cleanup)
       const counters = document.querySelectorAll('.counter');
       counters.forEach(counter => {
@@ -3753,7 +2713,7 @@
       });
     </script>
 
-    
+
 <!-- ===== THEME TOGGLE SCRIPT ===== -->
     <script>
         const themeToggle = document.getElementById('themeToggle');

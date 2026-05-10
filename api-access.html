@@ -1168,6 +1168,12 @@
     background: rgba(7,7,7,.88);
     box-shadow: 0 30px 90px rgba(0,0,0,.45);
   }
+  .fcg-hero2-code-preview {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
   .fcg-hero2-preview img {
     display: block;
     width: 100%;
@@ -1226,6 +1232,97 @@
     font-size: 13px;
     font-weight: 400;
     line-height: 1.4;
+  }
+  .fcg-hero2-code-window {
+    position: relative;
+    min-height: min(56vh, 520px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: #121827;
+    box-shadow: 0 30px 90px rgba(0,0,0,.45);
+    overflow: hidden;
+  }
+  .fcg-hero2-code-window::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(249,115,22,.18), transparent 24%),
+      linear-gradient(135deg, rgba(255,255,255,.06), transparent 42%);
+  }
+  .fcg-hero2-code-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    color: rgba(255,255,255,.58);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .fcg-hero2-window-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .fcg-hero2-window-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+  }
+  .fcg-hero2-window-dots span:nth-child(1) { background: #fb7185; }
+  .fcg-hero2-window-dots span:nth-child(2) { background: #fbbf24; }
+  .fcg-hero2-window-dots span:nth-child(3) { background: #22c55e; }
+  .fcg-hero2-code-body {
+    position: relative;
+    margin: 0;
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    color: #e5e7eb;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(.84rem, 1.25vw, 1rem);
+    line-height: 1.9;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .fcg-hero2-code-body .code-keyword { color: #fb7185; }
+  .fcg-hero2-code-body .code-method { color: #60a5fa; }
+  .fcg-hero2-code-body .code-string { color: #34d399; }
+  .fcg-hero2-code-body .code-number { color: #f59e0b; }
+  .fcg-hero2-code-body .code-property { color: #38bdf8; }
+  .fcg-hero2-code-body .code-comment { color: #94a3b8; }
+  .fcg-hero2-code-footer {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px;
+    padding: 0 clamp(1.5rem, 4vw, 2.75rem) clamp(1.5rem, 4vw, 2.75rem);
+  }
+  .fcg-hero2-code-chip {
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.06);
+    padding: 14px;
+  }
+  .fcg-hero2-code-chip span {
+    display: block;
+    color: #fb923c;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .fcg-hero2-code-chip strong {
+    display: block;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.25;
   }
   .product-shell { background: var(--color-bg); color: var(--color-fg); }
   .product-kicker { font-family: 'JetBrains Mono', monospace; letter-spacing: .18em; text-transform: uppercase; }
@@ -1979,6 +2076,11 @@
     border-color: rgba(15,17,20,.12);
     box-shadow: 0 30px 80px rgba(15,17,20,.13);
   }
+  html[data-theme="light"] .fcg-hero2-code-preview {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
   html[data-theme="light"] .fcg-hero2-preview-grid {
     background: rgba(255,255,255,.88);
   }
@@ -1993,6 +2095,37 @@
   }
   html[data-theme="light"] .fcg-hero2-preview-card .stat-label {
     color: #6b7280;
+  }
+  html[data-theme="light"] .fcg-hero2-code-window {
+    background: rgba(255,255,255,.92);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 30px 80px rgba(15,17,20,.14);
+  }
+  html[data-theme="light"] .fcg-hero2-code-window::before {
+    background:
+      radial-gradient(circle at 18% 12%, rgba(249,115,22,.1), transparent 24%),
+      linear-gradient(135deg, rgba(15,17,20,.035), transparent 42%);
+  }
+  html[data-theme="light"] .fcg-hero2-code-bar {
+    border-color: rgba(15,17,20,.1);
+    color: #9ca3af;
+  }
+  html[data-theme="light"] .fcg-hero2-code-body {
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-hero2-code-body .code-keyword { color: #ef4444; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-method { color: #0f4ea3; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-string { color: #047857; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-number { color: #ea580c; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-property { color: #0369a1; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-comment { color: #9ca3af; }
+  html[data-theme="light"] .fcg-hero2-code-chip {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.1);
+    box-shadow: 0 14px 32px rgba(15,17,20,.07);
+  }
+  html[data-theme="light"] .fcg-hero2-code-chip strong {
+    color: #0f1114;
   }
   html[data-theme="light"] .fcg-bento {
     background:
@@ -2201,6 +2334,8 @@
     }
     .fcg-hero2-preview img { display: none; }
     .fcg-hero2-preview-card { min-height: auto; }
+    .fcg-hero2-code-window { min-height: auto; }
+    .fcg-hero2-code-footer { grid-template-columns: 1fr; }
     .fcg-bento-inner { padding: 4.5rem 1.25rem; }
     .fcg-bento-header { align-items: flex-start; flex-direction: column; }
     .fcg-bento-grid { grid-template-columns: 1fr; }
@@ -2258,7 +2393,7 @@
     <div class="fcg-hero2-content">
       <div class="fcg-hero2-copy-column">
         <div class="fcg-hero2-badge">
-          The most direct path to G-Link &amp; F-Link
+          Scale with confidence
           <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
         </div>
         <h1>One connection to every hotel and airline.</h1>
@@ -2270,28 +2405,29 @@
       </div>
 
       <div class="fcg-hero2-preview-wrap">
-        <div class="fcg-hero2-preview">
-          <div class="fcg-hero2-preview-grid">
-            <article class="fcg-hero2-preview-card">
-              <span>G-Link</span>
-              <div class="stat-value">1M+</div>
-              <div class="stat-label">Deduplicated properties via GDS, Booking.com Group, and direct</div>
-            </article>
-            <article class="fcg-hero2-preview-card">
-              <span>F-Link</span>
-              <div class="stat-value">GDS + NDC + LCC</div>
-              <div class="stat-label">Every major airline through one connection</div>
-            </article>
-            <article class="fcg-hero2-preview-card">
-              <span>Coverage</span>
-              <div class="stat-value">APAC-native</div>
-              <div class="stat-label">Deep supply across the fastest-growing travel region</div>
-            </article>
-            <article class="fcg-hero2-preview-card">
-              <span>Replaces</span>
-              <div class="stat-value">6 &rarr; 1</div>
-              <div class="stat-label">One connection replaces fragmented supplier feeds</div>
-            </article>
+        <div class="fcg-hero2-preview fcg-hero2-code-preview">
+          <div class="fcg-hero2-code-window" aria-label="FCG API code example">
+            <div class="fcg-hero2-code-bar">
+              <div class="fcg-hero2-window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span>fcg.api / live supply</span>
+            </div>
+            <pre class="fcg-hero2-code-body"><code><span class="code-keyword">const</span> fcg = <span class="code-keyword">new</span> FCGClient({
+  <span class="code-property">connection</span>: <span class="code-string">"g-link + f-link"</span>,
+  <span class="code-property">region</span>: <span class="code-string">"APAC"</span>
+});
+
+<span class="code-keyword">await</span> fcg.<span class="code-method">availability</span>.<span class="code-method">search</span>({
+  <span class="code-property">hotels</span>: <span class="code-string">"1M+ deduplicated properties"</span>,
+  <span class="code-property">airlines</span>: [<span class="code-string">"GDS"</span>, <span class="code-string">"NDC"</span>, <span class="code-string">"LCC"</span>],
+  <span class="code-property">scaleMode</span>: <span class="code-string">"confidence"</span>
+});
+
+<span class="code-comment">// One supply layer for search, booking, reporting, and payment.</span></code></pre>
+            <div class="fcg-hero2-code-footer" aria-hidden="true">
+              <div class="fcg-hero2-code-chip"><span>G-Link</span><strong>1M+ properties</strong></div>
+              <div class="fcg-hero2-code-chip"><span>F-Link</span><strong>GDS + NDC + LCC</strong></div>
+              <div class="fcg-hero2-code-chip"><span>Control</span><strong>Sandbox to live</strong></div>
+            </div>
           </div>
         </div>
       </div>
@@ -2441,7 +2577,7 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
         </article>
         <article class="product-card rounded-3xl p-7 fade-up">
           <div class="flex items-start gap-5 mb-6">
-            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:plane-linear" width="23" height="23"></iconify-icon></div>
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:plane-bold-duotone" width="23" height="23"></iconify-icon></div>
             <div>
               <div class="product-kicker text-[10px] text-orange-500 mb-2">F-Link</div>
               <h3 class="text-2xl text-white font-medium tracking-tight">Flight Supply</h3>

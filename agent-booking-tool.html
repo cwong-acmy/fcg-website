@@ -1176,6 +1176,11 @@
     opacity: .64;
     filter: grayscale(1) contrast(1.05);
   }
+  .fcg-hero2-preview img.fcg-product-shot,
+  .fcg-feature108-product-shot {
+    opacity: .76;
+    filter: saturate(.9) contrast(1.03);
+  }
   .fcg-hero2-preview-grid {
     position: absolute;
     left: 0;
@@ -1784,6 +1789,21 @@
       linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
     padding: 1.1rem;
   }
+  .fcg-feature108-product-visual {
+    min-height: 28rem;
+    padding: 0;
+    background: rgba(7,7,7,.88);
+  }
+  .fcg-feature108-product-shot {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 28rem;
+    object-fit: cover;
+    object-position: left top;
+  }
   .fcg-feature108-visual::after {
     content: "";
     position: absolute;
@@ -2071,6 +2091,11 @@
     opacity: .86;
     filter: grayscale(.8) contrast(1.02);
   }
+  html[data-theme="light"] .fcg-hero2-preview img.fcg-product-shot,
+  html[data-theme="light"] .fcg-feature108-product-shot {
+    opacity: .76;
+    filter: saturate(.92) contrast(1.02);
+  }
   html[data-theme="light"] .fcg-hero2-preview-grid {
     background: linear-gradient(to top, rgba(255,255,255,.94), rgba(255,255,255,.5), transparent);
   }
@@ -2233,6 +2258,9 @@
       radial-gradient(circle at 85% 12%, rgba(14,165,233,.14), transparent 28%),
       linear-gradient(135deg, #ffffff, #F3F4F6);
     border-color: rgba(15,17,20,.12);
+  }
+  html[data-theme="light"] .fcg-feature108-product-visual {
+    background: rgba(255,255,255,.88);
   }
   html[data-theme="light"] .fcg-feature108-visual::after {
     opacity: .16;
@@ -2537,7 +2565,7 @@
 
       <div class="fcg-hero2-preview-wrap">
         <div class="fcg-hero2-preview">
-          <img src="assets/images/frame-mid.svg" alt="Agent Booking Tool interface preview">
+          <img class="fcg-product-shot" src="assets/images/agent-booking-product/dashboard.jpg" alt="Agent Booking Tool dashboard showing booking activity, revenue, group quotations, and recent bookings">
           <div class="fcg-hero2-preview-grid">
             <article class="fcg-hero2-preview-card"><span>Multi-GDS</span><strong>Amadeus, Sabre, and Travelport in one view</strong></article>
             <article class="fcg-hero2-preview-card"><span>Unified Content</span><strong>GDS + OTA + direct hotel supply connected</strong></article>
@@ -2588,32 +2616,8 @@
               <p>Connect to Amadeus, Sabre, Travelport, OTA aggregators, and direct hotel supply simultaneously. Negotiated rates from AgreeEase surface automatically with clear rate breakdowns, cancellation terms, and availability confidence. No more tabbing between GDS terminals and rate sheets.</p>
               <a class="fcg-feature108-action" href="#how-it-works">See how search works</a>
             </div>
-            <div class="fcg-feature108-visual" aria-label="Unified search preview">
-              <div class="fcg-feature108-window">
-                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
-                <div class="fcg-feature108-stack">
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:route-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>SIN-HKG 12 Jun, 2 pax</strong><small>Amadeus, Sabre, Travelport, NDC direct</small></div>
-                    <mark>4 GDS</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:buildings-2-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Conrad Hong Kong</strong><small>G-Link rate, Booking.com, Expedia, GDS</small></div>
-                    <mark>Best</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:tag-price-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Corporate negotiated rate</strong><small>AgreeEase programme rate applied</small></div>
-                    <mark>-22%</mark>
-                  </div>
-                </div>
-                <div class="fcg-feature108-metrics">
-                  <div class="fcg-feature108-metric"><strong>3 GDS</strong><span>Connected</span></div>
-                  <div class="fcg-feature108-metric"><strong>40+</strong><span>Hotel sources</span></div>
-                  <div class="fcg-feature108-metric"><strong>&lt;4s</strong><span>Search time</span></div>
-                </div>
-              </div>
+            <div class="fcg-feature108-visual fcg-feature108-product-visual" aria-label="Unified search preview">
+              <img class="fcg-feature108-product-shot" src="assets/images/agent-booking-product/hotels.jpg" alt="Agent Booking Tool hotel search showing live rates, corporate labels, property cards, and filters">
             </div>
           </article>
 
@@ -2625,32 +2629,8 @@
               <p>Select multiple options across flight, hotel, and ground. Build comparison quotes with your TMC branding. Send to clients directly. No copy-pasting between systems, no formatting spreadsheets at midnight.</p>
               <a class="fcg-feature108-action" href="#how-it-works">See quoting workflow</a>
             </div>
-            <div class="fcg-feature108-visual" aria-label="Quote builder preview">
-              <div class="fcg-feature108-window">
-                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
-                <div class="fcg-feature108-stack">
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:document-text-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Option A: Economy + 4-star</strong><small>SQ 321 + Conrad Hong Kong, 3 nights</small></div>
-                    <mark>$2,840</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:document-text-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Option B: Business + 5-star</strong><small>CX 714 + Mandarin Oriental, 3 nights</small></div>
-                    <mark>$5,120</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:printer-2-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Export as branded PDF</strong><small>Your logo, terms, and contact details</small></div>
-                    <mark>Ready</mark>
-                  </div>
-                </div>
-                <div class="fcg-feature108-metrics">
-                  <div class="fcg-feature108-metric"><strong>Multi</strong><span>Option compare</span></div>
-                  <div class="fcg-feature108-metric"><strong>PDF</strong><span>Branded export</span></div>
-                  <div class="fcg-feature108-metric"><strong>1-click</strong><span>Client send</span></div>
-                </div>
-              </div>
+            <div class="fcg-feature108-visual fcg-feature108-product-visual" aria-label="Quote builder preview">
+              <img class="fcg-feature108-product-shot" src="assets/images/agent-booking-product/quotations.jpg" alt="Agent Booking Tool quotations list showing group quotations, client proposals, amounts, statuses, and actions">
             </div>
           </article>
 
@@ -2662,32 +2642,8 @@
               <p>Complete bookings for any traveler with role-based access. Every action logged. Every change tracked. Programme rates enforced at point of booking so agents never accidentally book outside policy.</p>
               <a class="fcg-feature108-action" href="#how-it-works">See booking flow</a>
             </div>
-            <div class="fcg-feature108-visual" aria-label="Booking management preview">
-              <div class="fcg-feature108-window">
-                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
-                <div class="fcg-feature108-stack">
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:user-check-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Booking on behalf: J. Chen</strong><small>Corporate profile, passport, preferences loaded</small></div>
-                    <mark>Active</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:shield-check-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Policy compliance check</strong><small>All segments within corporate travel policy</small></div>
-                    <mark>Pass</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:clipboard-check-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Audit trail</strong><small>Agent ID, timestamp, approval chain recorded</small></div>
-                    <mark>Logged</mark>
-                  </div>
-                </div>
-                <div class="fcg-feature108-metrics">
-                  <div class="fcg-feature108-metric"><strong>100%</strong><span>Audit coverage</span></div>
-                  <div class="fcg-feature108-metric"><strong>RBAC</strong><span>Role-based access</span></div>
-                  <div class="fcg-feature108-metric"><strong>Auto</strong><span>Policy enforce</span></div>
-                </div>
-              </div>
+            <div class="fcg-feature108-visual fcg-feature108-product-visual" aria-label="Booking management preview">
+              <img class="fcg-feature108-product-shot" src="assets/images/agent-booking-product/bookings.jpg" alt="Agent Booking Tool bookings table showing references, guests, products, destinations, payment status, and group bookings">
             </div>
           </article>
 
@@ -2699,32 +2655,8 @@
               <p>Every search, quote, and booking generates structured data. See which suppliers win, where negotiated rates are used, where leakage happens, and which response patterns slow agents down. Turn booking volume into leverage at the next rate review.</p>
               <a class="fcg-feature108-action" href="#how-it-works">See analytics</a>
             </div>
-            <div class="fcg-feature108-visual" aria-label="Analytics and insights preview">
-              <div class="fcg-feature108-window">
-                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
-                <div class="fcg-feature108-stack">
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:chart-2-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Programme rate adoption</strong><small>Negotiated rates used vs. open market</small></div>
-                    <mark>78%</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:graph-up-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Supplier performance</strong><small>Response time, confirmation rate, savings</small></div>
-                    <mark>Ranked</mark>
-                  </div>
-                  <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:money-bag-bold-duotone" width="20" height="20"></iconify-icon></span>
-                    <div><strong>Leakage report</strong><small>Bookings outside negotiated programme</small></div>
-                    <mark>$42K</mark>
-                  </div>
-                </div>
-                <div class="fcg-feature108-metrics">
-                  <div class="fcg-feature108-metric"><strong>Real-time</strong><span>Reporting</span></div>
-                  <div class="fcg-feature108-metric"><strong>Export</strong><span>CSV, PDF, API</span></div>
-                  <div class="fcg-feature108-metric"><strong>Custom</strong><span>Dashboards</span></div>
-                </div>
-              </div>
+            <div class="fcg-feature108-visual fcg-feature108-product-visual" aria-label="Analytics and insights preview">
+              <img class="fcg-feature108-product-shot" src="assets/images/agent-booking-product/reports.jpg" alt="Agent Booking Tool reports dashboard showing booking volume, revenue, group quotations, and destination analytics">
             </div>
           </article>
 
