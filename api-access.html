@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
+    <script>
+        (function () {
+            try {
+                const savedTheme = localStorage.getItem("theme");
+                if (savedTheme === "dark" || savedTheme === "light") {
+                    document.documentElement.setAttribute("data-theme", savedTheme);
+                    document.documentElement.classList.toggle("dark", savedTheme === "dark");
+                }
+            } catch (error) {}
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Access - FCG Group</title>
@@ -911,6 +922,7 @@
 
         /* ===== END GLOBAL LIGHT MODE OVERRIDES ===== */
     </style>
+    <link rel="stylesheet" href="assets/css/fcg-brand-theme.css">
 </head>
 <body class="bg-background text-foreground antialiased">
     <!-- ===== MARINE HEADER SECTION ===== -->
@@ -2857,21 +2869,29 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
 
 <!-- ===== THEME TOGGLE SCRIPT ===== -->
     <script>
-        const themeToggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
+        (function () {
+            const themeToggle = document.getElementById("themeToggle");
+            const html = document.documentElement;
+            const savedTheme = localStorage.getItem("theme");
+            const activeTheme = savedTheme === "dark" || savedTheme === "light" ? savedTheme : "light";
 
-        // Always start in light mode
-        html.setAttribute('data-theme', 'light');
-        if (themeToggle) themeToggle.checked = false;
-        localStorage.removeItem('theme');
+            function applyTheme(theme) {
+                const isDark = theme === "dark";
+                html.setAttribute("data-theme", theme);
+                html.classList.toggle("dark", isDark);
+                if (themeToggle) themeToggle.checked = isDark;
+            }
 
-        // Toggle theme on checkbox change (checked = dark, unchecked = light)
-        if (themeToggle) {
-            themeToggle.addEventListener('change', function() {
-                const newTheme = this.checked ? 'dark' : 'light';
-                html.setAttribute('data-theme', newTheme);
-            });
-        }
+            applyTheme(activeTheme);
+
+            if (themeToggle) {
+                themeToggle.addEventListener("change", function () {
+                    const newTheme = this.checked ? "dark" : "light";
+                    localStorage.setItem("theme", newTheme);
+                    applyTheme(newTheme);
+                });
+            }
+        })();
     </script>
     <!-- ===== END THEME TOGGLE SCRIPT ===== -->
 </body>

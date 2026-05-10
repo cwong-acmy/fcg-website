@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
+    <script>
+        (function () {
+            try {
+                const savedTheme = localStorage.getItem("theme");
+                if (savedTheme === "dark" || savedTheme === "light") {
+                    document.documentElement.setAttribute("data-theme", savedTheme);
+                    document.documentElement.classList.toggle("dark", savedTheme === "dark");
+                }
+            } catch (error) {}
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About FCG Group - Travel Infrastructure Story</title>
@@ -1059,6 +1070,7 @@
 
         }
     </style>
+    <link rel="stylesheet" href="assets/css/fcg-brand-theme.css">
 </head>
 <body>
     <main>
@@ -1543,27 +1555,27 @@
     <script>
         (function () {
             const themeToggle = document.getElementById('themeToggle');
-            const themeToggleControl = document.getElementById('themeToggleControl');
             const html = document.documentElement;
 
-            function applyTheme(isDark) {
-                html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            const savedTheme = localStorage.getItem('theme');
+            const activeTheme = savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : 'light';
+
+            function applyTheme(theme) {
+                const isDark = theme === 'dark';
+                html.setAttribute('data-theme', theme);
                 html.classList.toggle('dark', isDark);
-                themeToggle.checked = isDark;
+                if (themeToggle) themeToggle.checked = isDark;
             }
 
-            applyTheme(false);
-            localStorage.removeItem('theme');
+            applyTheme(activeTheme);
 
-            themeToggle.addEventListener('change', function () {
-                applyTheme(themeToggle.checked);
-            });
-
-            themeToggleControl.addEventListener('click', function (event) {
-                event.preventDefault();
-                applyTheme(!themeToggle.checked);
-            });
-
+            if (themeToggle) {
+                themeToggle.addEventListener('change', function () {
+                    const newTheme = themeToggle.checked ? 'dark' : 'light';
+                    localStorage.setItem('theme', newTheme);
+                    applyTheme(newTheme);
+                });
+            }
             document.querySelectorAll('[data-feature-accordion]').forEach(function (accordion) {
                 const triggers = accordion.querySelectorAll('.feature-accordion-trigger');
 
