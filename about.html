@@ -1486,6 +1486,73 @@
                 </div>
             </div>
         </section>
+    <!-- ===== FINAL CTA SECTION ===== -->
+    <footer id="contact" class="flex flex-col w-full bg-[#000]">
+  <!-- CTA Section -->
+  <div class="overflow-hidden w-full border-white/10 border-t pt-32 pb-32 relative">
+    <div class="absolute inset-0 bg-grid opacity-10 pointer-events-none" style="mask-image: linear-gradient(to bottom, black 20%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/[0.03] blur-[100px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900/30 text-xs font-normal text-neutral-400 mb-6 backdrop-blur-md">
+        <span class="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)] animate-pulse"></span>
+        Get Started
+      </div>
+
+      <style>
+        @keyframes type {
+          0%, 10% { width: 0; }
+          40%, 90% { width: 21ch; }
+          100% { width: 0; }
+        }
+        @keyframes blink {
+          0%, 100% { border-color: transparent; }
+          50% { border-color: #fff; }
+        }
+        .typewriter-text {
+          display: inline-block;
+          overflow: hidden;
+          white-space: nowrap;
+          border-right: 3px solid #fff;
+          width: 21ch;
+          animation: type 5s steps(21, end) infinite, blink 0.8s step-end infinite;
+        }
+      </style>
+
+      <h2 class="text-4xl md:text-5xl font-normal text-white tracking-tight mb-6 font-mono typewriter-text">
+        &gt; Ready to modernize?
+      </h2>
+
+      <p class="text-neutral-400 max-w-lg font-light leading-relaxed mb-10">
+        Address supplier fragmentation, rate complexity, and legacy infrastructure <span class="text-orange-500">one module at a time.</span> No full system replacement. No multi-year migrations.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <button class="w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-black bg-white rounded-full transition-all duration-300 hover:scale-105 hover:bg-neutral-200 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+          <span class="relative z-10 flex items-center gap-2">
+            Book a demo
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right transition-transform duration-300 group-hover:translate-x-1">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </span>
+        </button>
+        <button class="w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-white bg-white/5 border border-white/10 rounded-full transition-all duration-300 hover:bg-white/10 backdrop-blur-sm">
+          <span class="relative z-10 flex items-center gap-2 text-neutral-300 group-hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-2">
+              <path d="m18 16 4-4-4-4"></path>
+              <path d="m6 8-4 4 4 4"></path>
+              <path d="m14.5 4-5 16"></path>
+            </svg>
+            Schedule a Call
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+    </footer>
+    <!-- ===== END FINAL CTA SECTION ===== -->
+
     <!-- FOOTER -->
     <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">
         <div class="max-w-[100rem] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-[4rem] md:gap-[2rem]">

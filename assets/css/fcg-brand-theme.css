@@ -219,6 +219,10 @@ body footer.bg-\[\#000\] .text-white\/30 {
     color: rgba(255, 255, 255, 0.38) !important;
 }
 
+html[data-theme="light"] body footer.bg-black svg path {
+    fill: #ffffff !important;
+}
+
 body .fcg-product-screen,
 body .fcg-showcase-panel img,
 body .fcg-tailark-preview img {
