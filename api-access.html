@@ -2414,7 +2414,7 @@
           <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
         </div>
         <h1>One connection to every hotel and airline.</h1>
-        <p class="fcg-hero2-copy">G-Link and F-Link give product teams direct access to FCG's travel supply layer: 1M+ deduplicated hotel properties, every major airline, sandbox access, documentation, webhooks, reporting, and payment workflows built around the same connection.</p>
+        <p class="fcg-hero2-copy">G-Link and F-Link give product teams direct access to FCG's travel supply layer: 4.3M+ deduplicated hotels, 24.9M+ room types, every major airline, sandbox access, documentation, webhooks, reporting, and payment workflows built around the same connection.</p>
         <div class="fcg-hero2-actions">
           <a href="#getting-started" class="fcg-hero2-button fcg-hero2-button-primary">Get sandbox access</a>
           <a href="#api-capabilities" class="fcg-hero2-button fcg-hero2-button-secondary">Read the docs</a>
@@ -2434,14 +2434,15 @@
 });
 
 <span class="code-keyword">await</span> fcg.<span class="code-method">availability</span>.<span class="code-method">search</span>({
-  <span class="code-property">hotels</span>: <span class="code-string">"1M+ deduplicated properties"</span>,
+  <span class="code-property">hotels</span>: <span class="code-string">"4.3M+ deduplicated hotels"</span>,
+  <span class="code-property">roomTypes</span>: <span class="code-string">"24.9M+ mapped room types"</span>,
   <span class="code-property">airlines</span>: [<span class="code-string">"GDS"</span>, <span class="code-string">"NDC"</span>, <span class="code-string">"LCC"</span>],
   <span class="code-property">scaleMode</span>: <span class="code-string">"confidence"</span>
 });
 
 <span class="code-comment">// One supply layer for search, booking, reporting, and payment.</span></code></pre>
             <div class="fcg-hero2-code-footer" aria-hidden="true">
-              <div class="fcg-hero2-code-chip"><span>G-Link</span><strong>1M+ properties</strong></div>
+              <div class="fcg-hero2-code-chip"><span>G-Link</span><strong>4.3M+ hotels</strong></div>
               <div class="fcg-hero2-code-chip"><span>F-Link</span><strong>GDS + NDC + LCC</strong></div>
               <div class="fcg-hero2-code-chip"><span>Control</span><strong>Sandbox to live</strong></div>
             </div>
@@ -2468,7 +2469,7 @@
         <article class="fcg-bento-card fcg-bento-card-large fade-up">
           <header class="fcg-bento-card-header">
             <span class="fcg-bento-dot">&bull;</span>
-            <h3>G-Link: 1M+ properties, deduplicated and resolved</h3>
+            <h3>G-Link: 4.3M+ hotels and 24.9M+ room types, deduplicated and resolved</h3>
             <span class="fcg-bento-meta">G-Link</span>
           </header>
           <p>Duplicate properties. Mismatched room types. Stale rates from six different sources. The same hotel appearing three times at three different prices. G-Link resolves all of it. Supply from GDS systems, Booking.com Group, direct hotel connections, and OTA networks is aggregated into one clean, deduplicated, bookable feed.</p>
@@ -2583,7 +2584,7 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
               <h3 class="text-2xl text-white font-medium tracking-tight">Hotel Supply</h3>
             </div>
           </div>
-          <p class="text-sm text-neutral-400 leading-relaxed mb-6">1M+ deduplicated properties. GDS, Booking.com Group, direct hotel connections, and OTA networks all resolved into one clean feed through a single endpoint, with content, imagery, amenities, room mapping, policies, and rate confidence kept consistent across sources.</p>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">4.3M+ deduplicated hotels and 24.9M+ mapped room types. GDS, Booking.com Group, direct hotel connections, and OTA networks all resolved into one clean feed through a single endpoint, with content, imagery, amenities, room mapping, policies, and rate confidence kept consistent across sources.</p>
           <div class="border-t border-white/10 pt-5">
             <ul class="space-y-3">
               <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Property-level and room-level deduplication across every source</span></li>
