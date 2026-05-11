@@ -1554,6 +1554,7 @@
     justify-content: center;
     overflow: hidden;
     min-height: 29.15rem;
+    padding: 1.5rem;
     border: 1px solid rgba(255,255,255,.12);
     border-radius: 18px;
     background:
@@ -1567,8 +1568,26 @@
     inset: 0;
     opacity: .16;
     pointer-events: none;
+    z-index: 0;
     background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.9) 1px, transparent 0);
     background-size: 3px 3px;
+  }
+  .fcg-ai-showcase--screenshot {
+    min-height: auto;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    background: #f5f7fa;
+  }
+  .fcg-ai-showcase--screenshot::after {
+    display: none;
+  }
+  .fcg-ai-screenshot {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    max-width: 76rem;
+    border-radius: 12px;
+    box-shadow: 0 18px 42px rgba(0,0,0,.16);
   }
   .fcg-ai-card {
     position: relative;
@@ -2569,28 +2588,8 @@
         <p>When travelers bypass the OBT and email the travel desk instead, policy leakage follows. Negotiated rates go unused. Duty of care becomes retroactive. The Corporate Booking Tool gives travelers an interface that is faster than calling their agent.</p>
       </header>
 
-      <div class="fcg-ai-showcase fade-up">
-        <div class="fcg-ai-card">
-          <div class="fcg-ai-spark">
-            <iconify-icon icon="solar:routing-3-bold-duotone" width="28" height="28"></iconify-icon>
-          </div>
-          <div class="fcg-ai-prompt">Book SIN to NRT, 12-14 Jun, economy. Hilton preferred.</div>
-          <div class="fcg-ai-stats">
-            <div class="fcg-ai-stat"><iconify-icon icon="solar:check-circle-bold" width="18" height="18" style="color:#22c55e"></iconify-icon> <strong>Policy compliant</strong></div>
-            <div class="fcg-ai-stat"><iconify-icon icon="solar:tag-price-bold" width="18" height="18" style="color:#fb923c"></iconify-icon> <strong>Negotiated rate applied</strong>: Hilton Corporate</div>
-            <div class="fcg-ai-stat"><iconify-icon icon="solar:leaf-bold" width="18" height="18" style="color:#22c55e"></iconify-icon> <strong>142 kg CO&#8322;</strong>: Economy direct</div>
-          </div>
-          <div class="fcg-ai-input">
-            <div>
-              <div class="fcg-ai-placeholder">Add ground transport or modify dates...</div>
-              <div class="fcg-ai-tools">
-                <span class="fcg-ai-tool"><iconify-icon icon="solar:calendar-linear" width="16" height="16"></iconify-icon></span>
-                <span class="fcg-ai-tool"><iconify-icon icon="solar:map-point-linear" width="16" height="16"></iconify-icon></span>
-              </div>
-            </div>
-            <span class="fcg-ai-submit"><iconify-icon icon="solar:arrow-up-linear" width="18" height="18"></iconify-icon></span>
-          </div>
-        </div>
+      <div class="fcg-ai-showcase fcg-ai-showcase--screenshot fade-up">
+        <img class="fcg-ai-screenshot" src="assets/images/corporate-booking-product/flight-search-results.png" alt="Corporate Booking Tool flight search results showing Singapore to Hong Kong options, filters, fare tabs, and direct flight pricing" loading="lazy">
       </div>
 
       <div class="fcg-marketing-features fade-up">
@@ -2654,7 +2653,7 @@
                 <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
                 <div class="fcg-feature108-stack">
                   <div class="fcg-feature108-row">
-                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:plane-linear" width="20" height="20"></iconify-icon></span>
+                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:plane-bold-duotone" width="20" height="20"></iconify-icon></span>
                     <div><strong>SIN &rarr; NRT Economy</strong><small>Singapore Airlines, direct, 6h 45m</small></div>
                     <mark>In policy</mark>
                   </div>
