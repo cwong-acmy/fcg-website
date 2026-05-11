@@ -1580,12 +1580,12 @@
     position: relative;
     z-index: 1;
     width: min(100%, 54rem);
-    min-height: clamp(27rem, 49vw, 34rem);
+    min-height: clamp(28rem, 50vw, 34rem);
   }
   .fcg-platform-screen {
     position: absolute;
     display: block;
-    width: min(82%, 44rem);
+    width: min(72%, 38rem);
     height: auto;
     border: 1px solid rgba(255,255,255,.22);
     border-radius: 16px;
@@ -1594,16 +1594,16 @@
   }
   .fcg-platform-screen-bookings {
     top: 0;
-    right: 0;
-    z-index: 1;
-    transform: rotate(-1.6deg);
+    left: 50%;
+    z-index: 2;
+    transform: translateX(-50%);
   }
   .fcg-platform-screen-clients {
     bottom: 0;
-    left: 0;
-    z-index: 2;
-    width: min(78%, 42rem);
-    transform: rotate(1.8deg);
+    left: 50%;
+    z-index: 1;
+    width: min(72%, 38rem);
+    transform: translateX(-50%);
   }
   .fcg-ai-card {
     position: relative;
@@ -2566,21 +2566,21 @@
       padding: 2.6rem .9rem;
     }
     .fcg-platform-screens {
-      min-height: clamp(20rem, 76vw, 31rem);
+      min-height: clamp(22rem, 82vw, 31rem);
     }
     .fcg-platform-screen {
-      width: 90%;
+      width: 88%;
       border-radius: 10px;
       box-shadow: 0 18px 36px rgba(0,0,0,.24);
     }
     .fcg-platform-screen-bookings {
-      right: 0;
-      transform: rotate(-1.2deg);
+      left: 50%;
+      transform: translateX(-50%);
     }
     .fcg-platform-screen-clients {
-      left: 0;
-      width: 90%;
-      transform: rotate(1.2deg);
+      left: 50%;
+      width: 88%;
+      transform: translateX(-50%);
     }
     .fcg-ai-card {
       padding: 1.35rem;
