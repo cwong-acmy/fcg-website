@@ -1678,7 +1678,9 @@
     filter: saturate(.95) contrast(1.04);
   }
   .fcg-showcase-panel img.fcg-showcase-image-sourcing {
-    object-position: right top;
+    object-position: left top;
+    opacity: .9;
+    filter: saturate(1.04) contrast(1.04);
   }
   .fcg-showcase-panel img.fcg-showcase-image-negotiation {
     object-position: center top;
@@ -2516,6 +2518,10 @@
     opacity: .72;
     filter: saturate(.98) contrast(1.02);
   }
+  html[data-theme="light"] .fcg-showcase-panel img.fcg-showcase-image-sourcing {
+    opacity: .9;
+    filter: saturate(1.04) contrast(1.04);
+  }
   html[data-theme="light"] .fcg-showcase-panel::after {
     background:
       linear-gradient(to bottom, rgba(255,255,255,.12), rgba(255,255,255,.86)),
@@ -2996,7 +3002,7 @@
 
       <div class="fcg-hero2-preview-wrap">
         <div class="fcg-hero2-preview">
-          <img class="fcg-product-screen" src="assets/images/agreeease-product/hotel-sourcing-agent.png" alt="AgreeEase hotel sourcing agent interface preview">
+          <img class="fcg-product-screen" src="assets/images/agreeease-product/hotel-search-laptop.png" alt="AgreeEase hotel search and invite interface preview">
           <div class="fcg-hero2-preview-grid">
             <article class="fcg-hero2-preview-card"><span>Rate Load</span><strong>RFP to bookable rate in 24 hours</strong></article>
             <article class="fcg-hero2-preview-card"><span>Coverage</span><strong>Multi-market RFP across APAC</strong></article>
@@ -3148,7 +3154,7 @@
         <div class="fcg-showcase-card">
           <!-- Tab 1: Sourcing View -->
           <article class="fcg-showcase-panel" id="showcase-panel-sourcing" role="tabpanel" aria-labelledby="showcase-tab-sourcing">
-            <img class="fcg-product-screen fcg-showcase-image-sourcing" src="assets/images/agreeease-product/sourcing-workspace.svg" alt="AgreeEase RFP sourcing workspace interface" loading="eager">
+            <img class="fcg-product-screen fcg-showcase-image-sourcing" src="assets/images/agreeease-product/sourcing-editorial.png" alt="AgreeEase hotel search, invite, and map sourcing interface" loading="eager">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
                 <h3>Sourcing view</h3>
