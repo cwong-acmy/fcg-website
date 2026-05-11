@@ -2341,8 +2341,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: .28;
-    filter: grayscale(.75) contrast(1.08);
+    opacity: .42;
+    filter: saturate(.72) contrast(1.08);
   }
   .fcg-showcase-panel::after {
     content: "";
@@ -3204,12 +3204,12 @@
     box-shadow: 0 18px 50px rgba(15,17,20,.08);
   }
   html[data-theme="light"] .fcg-showcase-panel img {
-    opacity: .32;
-    filter: grayscale(.8) contrast(1.02);
+    opacity: .46;
+    filter: saturate(.74) contrast(1.04);
   }
   html[data-theme="light"] .fcg-showcase-panel::after {
     background:
-      linear-gradient(to bottom, rgba(255,255,255,.12), rgba(255,255,255,.86)),
+      linear-gradient(to bottom, rgba(255,255,255,.04), rgba(255,255,255,.72)),
       radial-gradient(circle at 50% 22%, rgba(249,115,22,.16), transparent 34%);
   }
   html[data-theme="light"] .fcg-showcase-preview-row {
@@ -4158,7 +4158,7 @@
       <div class="fcg-showcase-visual fade-up" data-fcg-showcase-tabs>
         <div class="fcg-showcase-card">
           <article class="fcg-showcase-panel" id="showcase-panel-booking" role="tabpanel" aria-labelledby="showcase-tab-booking">
-            <img src="assets/images/frame-mid.svg" alt="Discovery engagement preview" loading="eager">
+            <img src="https://images.unsplash.com/photo-1775163024488-e88e4a71179f?auto=format&amp;fit=crop&amp;fm=jpg&amp;q=80&amp;w=1800" alt="Business discovery meeting with documents" loading="eager">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
                 <h3>Discovery</h3>
@@ -4180,7 +4180,7 @@
           </article>
 
           <article class="fcg-showcase-panel" id="showcase-panel-operations" role="tabpanel" aria-labelledby="showcase-tab-operations" hidden>
-            <img src="assets/images/frame-mid.svg" alt="Operational audit preview" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1758519289022-5f9dea0d8cdc?auto=format&amp;fit=crop&amp;fm=jpg&amp;q=80&amp;w=1800" alt="Operational audit with financial charts and notes" loading="lazy">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
                 <h3>Audit</h3>
@@ -4202,7 +4202,7 @@
           </article>
 
           <article class="fcg-showcase-panel" id="showcase-panel-supply" role="tabpanel" aria-labelledby="showcase-tab-supply" hidden>
-            <img src="assets/images/frame-mid.svg" alt="Deployment planning preview" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1758519288948-e3c87d2d78d8?auto=format&amp;fit=crop&amp;fm=jpg&amp;q=80&amp;w=1800" alt="Deployment planning discussion with laptop" loading="lazy">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
                 <h3>Deployment</h3>
