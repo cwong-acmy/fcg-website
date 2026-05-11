@@ -1579,6 +1579,17 @@
     color: #050505;
     padding: 1.75rem;
   }
+  .fcg-ai-experience-shot {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: min(100% - 2rem, 30rem);
+    max-height: 39rem;
+    object-fit: contain;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 16px;
+    box-shadow: 0 18px 38px rgba(0,0,0,.22);
+  }
   .fcg-ai-spark {
     display: inline-flex;
     margin-bottom: 1rem;
@@ -2069,7 +2080,7 @@
 
       <div class="fcg-hero2-preview-wrap">
         <div class="fcg-hero2-preview">
-          <img src="assets/images/frame-mid.svg" alt="AI Booking Tool interface preview">
+          <img src="assets/images/ai-booking-product/fcg-ai-booking-dashboard.png" alt="AI Booking Tool FCG dashboard preview">
         </div>
       </div>
     </div>
@@ -2146,27 +2157,7 @@
       </header>
 
       <div class="fcg-ai-showcase fade-up">
-        <article class="fcg-ai-card" aria-label="AI Booking Tool conversation preview">
-          <div class="fcg-ai-spark"><iconify-icon icon="solar:stars-bold-duotone" width="26" height="26"></iconify-icon></div>
-          <h3 class="fcg-ai-prompt">Book me a hotel near Raffles Place for 3 nights under $200, policy-compliant.</h3>
-
-          <div class="fcg-ai-stats">
-            <div class="fcg-ai-stat"><iconify-icon icon="solar:database-bold-duotone" width="22" height="22"></iconify-icon><span><strong>Live options</strong> from 4.3M+ hotels via G-Link</span></div>
-            <div class="fcg-ai-stat"><iconify-icon icon="solar:bolt-circle-bold-duotone" width="22" height="22"></iconify-icon><span><strong>Flight coverage</strong> via F-Link, with GDS, NDC, and LCC direct in one feed</span></div>
-            <div class="fcg-ai-stat"><iconify-icon icon="solar:shield-check-bold-duotone" width="22" height="22"></iconify-icon><span><strong>Policy-aware</strong> results with real-time rates, availability, and booking confirmation</span></div>
-          </div>
-
-          <div class="fcg-ai-input">
-            <div>
-              <div class="fcg-ai-placeholder">Ask the AI Booking Tool</div>
-              <div class="fcg-ai-tools">
-                <span class="fcg-ai-tool"><iconify-icon icon="solar:microphone-3-linear" width="22" height="22"></iconify-icon></span>
-                <span class="fcg-ai-tool"><iconify-icon icon="solar:global-linear" width="25" height="25"></iconify-icon></span>
-              </div>
-            </div>
-            <span class="fcg-ai-submit"><iconify-icon icon="solar:arrow-up-linear" width="24" height="24"></iconify-icon></span>
-          </div>
-        </article>
+        <img class="fcg-ai-experience-shot" src="assets/images/ai-booking-product/fcg-booking-experience.png" alt="FCG AI Booking Tool hotel search conversation preview" loading="lazy">
       </div>
 
       <div class="fcg-marketing-features">
