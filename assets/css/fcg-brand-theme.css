@@ -51,6 +51,10 @@ body * {
     font-family: 'Inter', sans-serif !important;
 }
 
+body :is(.font-mono, .font-mono-jb, .tracking-tech, .fcg-products-group-heading) {
+    font-family: 'Inter', sans-serif !important;
+}
+
 ::selection {
     background: rgba(249, 115, 22, 0.24);
     color: var(--fcg-fg);
