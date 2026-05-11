@@ -889,7 +889,7 @@
             background-color: var(--color-card);
         }
 
-        html[data-theme="dark"] .partner-logo-card img {
+        html[data-theme="dark"] .partner-logo-card img.partner-logo-invert-dark {
             filter: invert(1) grayscale(1) brightness(1.4);
             opacity: 0.9;
         }
@@ -897,6 +897,30 @@
         html[data-theme="dark"] .partner-plus::before,
         html[data-theme="dark"] .partner-plus::after {
             background: var(--color-fg);
+        }
+
+        .partner-logo-text {
+            color: var(--color-fg);
+            font-family: Inter, sans-serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .partner-logo-text.is-long {
+            font-size: 1rem;
+            letter-spacing: -0.025em;
+        }
+
+        .partner-logo-text.is-blue {
+            color: #164a8b;
+        }
+
+        .partner-logo-text.is-red {
+            color: #b21f2d;
         }
 
         /* ===== END GLOBAL LIGHT MODE OVERRIDES ===== */
@@ -971,25 +995,60 @@
 
         const PartnerLogoCard = ({ logo, className = "", children }) => (
             <div className={`relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 ${className}`}>
-                <img
-                    alt={logo.alt}
-                    className="pointer-events-none max-h-6 max-w-[140px] select-none object-contain md:max-h-7"
-                    src={logo.src}
-                />
+                {logo.src ? (
+                    <img
+                        alt={logo.alt}
+                        className={`pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] ${logo.invertOnDark ? "partner-logo-invert-dark" : ""} ${logo.className || ""}`}
+                        src={logo.src}
+                    />
+                ) : (
+                    <span className={`partner-logo-text ${logo.textClassName || ""}`} role="img" aria-label={logo.alt}>{logo.label}</span>
+                )}
                 {children}
             </div>
         );
 
         const PartnerGrid = () => {
             const logos = [
-                { src: "https://svgl.app/library/nvidia-wordmark-light.svg", alt: "Nvidia Logo" },
-                { src: "https://svgl.app/library/supabase_wordmark_light.svg", alt: "Supabase Logo" },
-                { src: "https://svgl.app/library/github_wordmark_light.svg", alt: "GitHub Logo" },
-                { src: "https://svgl.app/library/openai_wordmark_light.svg", alt: "OpenAI Logo" },
-                { src: "https://svgl.app/library/turso-wordmark-light.svg", alt: "Turso Logo" },
-                { src: "https://svgl.app/library/clerk-wordmark-light.svg", alt: "Clerk Logo" },
-                { src: "https://svgl.app/library/claude-ai-wordmark-icon_light.svg", alt: "Claude AI Logo" },
-                { src: "https://svgl.app/library/vercel_wordmark.svg", alt: "Vercel Logo" }
+                {
+                    src: "https://static.wixstatic.com/media/6f8e7e_f844282625cb466d8c9580ec35a3645b~mv2.jpg/v1/crop/x_386,y_592,w_3524,h_3344/fill/w_274,h_260,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/PST_Travel-Secondary2.jpg",
+                    alt: "PST Travel Logo",
+                    className: "max-h-12 md:max-h-14"
+                },
+                {
+                    src: "https://cdn.prod.website-files.com/68553d1dd8ca0b336f66b55c/69e8a0b042a0c29ce4b7f0f9_2026%20CTL%20logo_Colour_Tran%20bg%20(2).png",
+                    alt: "Connexus Travel Logo",
+                    className: "max-h-10 md:max-h-12"
+                },
+                {
+                    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Alibaba_en_logo.svg",
+                    alt: "Alibaba Logo"
+                },
+                {
+                    src: "https://commons.wikimedia.org/wiki/Special:FilePath/ByteDance_logo_English.svg",
+                    alt: "ByteDance Logo",
+                    invertOnDark: true
+                },
+                {
+                    src: "https://vtlogo.com/wp-content/uploads/2020/11/jin-jiang-international-vector-logo-small.png",
+                    alt: "Jin Jiang International Logo",
+                    className: "max-h-10 md:max-h-12"
+                },
+                {
+                    src: "https://companieslogo.com/img/orig/HTHT_BIG-d42ec412.svg?t=1720244492",
+                    alt: "Huazhu Group Logo",
+                    className: "max-h-10 md:max-h-12"
+                },
+                {
+                    src: "https://commons.wikimedia.org/wiki/Special:FilePath/IHG_Hotels_%26_Resorts_logo.svg",
+                    alt: "IHG Hotels and Resorts Logo",
+                    invertOnDark: true
+                },
+                {
+                    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Marriott_International.svg",
+                    alt: "Marriott International Logo",
+                    invertOnDark: true
+                }
             ];
 
             return (
@@ -1102,10 +1161,6 @@
                 <section className="py-24 overflow-hidden">
                     <div className="px-6 md:px-12 max-w-[1440px] mx-auto mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
                         <div><Subheading text="Connect · Operate · Experience" /><h2 className="text-3xl md:text-5xl font-medium tracking-tight">One inventory underneath. Three product families.</h2></div>
-                        <a href="#" className="hidden md:inline-flex items-center space-x-3 text-sm font-light hover:text-accent transition-colors pb-2 border-b border-white/10 hover:border-accent">
-                            <span>See How Companies Connect</span>
-                            <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
-                        </a>
                     </div>
                     <div className="flex gap-6 overflow-x-auto hide-scrollbar px-6 md:px-12 pb-12 snap-x snap-mandatory">
                         {cars.map((car, idx) => <CarCard key={idx} {...car} />)}
@@ -1277,6 +1332,11 @@
         <div class="absolute z-10 right-0 w-32 h-full bg-gradient-to-l to-transparent from-zinc-950"></div>
 
         <div class="absolute whitespace-nowrap flex items-center gap-10 font-mono text-xs text-zinc-500 marine-animate-marquee w-max">
+            <span>FCG LOCATIONS</span><span class="text-white/10">///</span>
+            <span>HONG KONG</span><span class="text-white/10">///</span>
+            <span>MALAYSIA</span><span class="text-white/10">///</span>
+            <span>SHENZHEN</span><span class="text-white/10">///</span>
+            <span>LONDON</span><span class="text-white/10">///</span>
             <span>FCG LOCATIONS</span><span class="text-white/10">///</span>
             <span>HONG KONG</span><span class="text-white/10">///</span>
             <span>MALAYSIA</span><span class="text-white/10">///</span>
@@ -2521,17 +2581,30 @@
       }
 
       var markerData = [
-        { id: 'hongkong', location: [22.3193, 114.1694], size: 0.05, label: 'HKG (HQ)', offset: [65, -5] },
-        { id: 'malaysia', location: [3.1390, 101.6869], size: 0.04, label: 'KUL', offset: [60, 5] },
-        { id: 'shenzhen', location: [22.5431, 114.0579], size: 0.04, label: 'SZX', offset: [65, 8] },
-        { id: 'london', location: [51.5074, -0.1278], size: 0.04, label: 'LHR', offset: [-55, -15] },
+        { id: 'bangkok', location: [13.7563, 100.5018], size: 0.04, label: 'Bangkok', offset: [60, -5] },
+        { id: 'tokyo', location: [35.6762, 139.6503], size: 0.04, label: 'Tokyo', offset: [55, -10] },
+        { id: 'shanghai', location: [31.2304, 121.4737], size: 0.04, label: 'Shanghai', offset: [60, 0] },
+        { id: 'london', location: [51.5074, -0.1278], size: 0.04, label: 'London', offset: [-55, -15] },
+        { id: 'dubai', location: [25.2048, 55.2708], size: 0.04, label: 'Dubai', offset: [-50, -10] },
+        { id: 'sydney', location: [-33.8688, 151.2093], size: 0.03, label: 'Sydney', offset: [55, 10] },
+        { id: 'singapore', location: [1.3521, 103.8198], size: 0.04, label: 'Singapore', offset: [65, 5] },
+        { id: 'paris', location: [48.8566, 2.3522], size: 0.03, label: 'Paris', offset: [50, 5] },
+        { id: 'hongkong', location: [22.3193, 114.1694], size: 0.04, label: 'Hong Kong', offset: [65, -5] },
+        { id: 'newyork', location: [40.7128, -74.0060], size: 0.04, label: 'New York', offset: [55, -10] },
+        { id: 'miami', location: [25.7617, -80.1918], size: 0.03, label: 'Miami', offset: [50, 5] },
+        { id: 'mexicocity', location: [19.4326, -99.1332], size: 0.03, label: 'Mexico City', offset: [-70, 5] },
+        { id: 'saopaulo', location: [-23.5505, -46.6333], size: 0.03, label: 'São Paulo', offset: [60, 5] },
+        { id: 'losangeles', location: [33.9425, -118.4081], size: 0.03, label: 'Los Angeles', offset: [-75, -10] },
       ];
 
       var arcData = [
-        { from: [22.3193, 114.1694], to: [3.1390, 101.6869], label: 'HKG → KUL' },
-        { from: [22.3193, 114.1694], to: [22.5431, 114.0579], label: 'HKG → SZX' },
-        { from: [22.3193, 114.1694], to: [51.5074, -0.1278], label: 'HKG → LHR' },
-        { from: [3.1390, 101.6869], to: [51.5074, -0.1278], label: 'KUL → LHR' },
+        { from: [13.7563, 100.5018], to: [51.5074, -0.1278], label: 'BKK → LHR' },
+        { from: [22.3193, 114.1694], to: [48.8566, 2.3522], label: 'HKG → CDG' },
+        { from: [1.3521, 103.8198], to: [25.2048, 55.2708], label: 'SIN → DXB' },
+        { from: [35.6762, 139.6503], to: [-33.8688, 151.2093], label: 'TYO → SYD' },
+        { from: [40.7128, -74.0060], to: [25.7617, -80.1918], label: 'JFK → MIA' },
+        { from: [33.9425, -118.4081], to: [19.4326, -99.1332], label: 'LAX → MEX' },
+        { from: [25.7617, -80.1918], to: [-23.5505, -46.6333], label: 'MIA → GRU' },
       ];
 
       var labelEls = {};
