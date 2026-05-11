@@ -1619,23 +1619,27 @@
   .fcg-efferd-logo-group {
     display: flex;
     align-items: center;
-    gap: clamp(3rem, 5vw, 5rem);
-    padding-right: clamp(3rem, 5vw, 5rem);
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    padding-right: clamp(1.25rem, 3vw, 2.5rem);
   }
   .fcg-efferd-logo-item {
     display: flex;
     flex: 0 0 auto;
     align-items: center;
     justify-content: center;
-    min-width: 9rem;
-    height: 2.75rem;
+    min-width: 10.5rem;
+    height: 4rem;
+    padding: .65rem 1.15rem;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: .75rem;
+    background: rgba(255,255,255,.92);
   }
   .fcg-efferd-logo-item img {
     width: auto;
-    max-width: 10rem;
-    max-height: 2rem;
-    filter: invert(1);
-    opacity: .62;
+    max-width: 9rem;
+    max-height: 2.55rem;
+    object-fit: contain;
+    opacity: .92;
   }
   @keyframes fcg-efferd-marquee {
     from { transform: translateX(0); }
@@ -1712,8 +1716,12 @@
     color: #0F1114;
   }
   html[data-theme="light"] .fcg-efferd-logo-item img {
-    filter: grayscale(.35);
-    opacity: .66;
+    opacity: .86;
+  }
+  html[data-theme="light"] .fcg-efferd-logo-item {
+    background: #ffffff;
+    border-color: rgba(15,17,20,.08);
+    box-shadow: 0 10px 26px rgba(15,17,20,.06);
   }
   .product-shell { background: var(--color-bg); color: var(--color-fg); }
   .product-kicker { font-family: 'Inter', sans-serif; letter-spacing: .18em; text-transform: uppercase; }
@@ -3998,29 +4006,21 @@
     </div>
   </section>
 
-  <section class="fcg-efferd-logos" aria-label="Trusted by experts">
-    <h2>Powering travel for <span>leading platforms</span></h2>
+  <section class="fcg-efferd-logos" aria-label="Trusted by travel operators">
+    <h2>Powering travel for <span>operators across APAC</span></h2>
     <div class="fcg-efferd-logo-viewport">
       <div class="fcg-efferd-logo-track">
         <div class="fcg-efferd-logo-group">
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/turso-wordmark.svg" alt="Turso logo"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/vercel-wordmark.svg" alt="Vercel logo"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/github-wordmark.svg" alt="GitHub logo"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/claude-wordmark.svg" alt="Claude AI logo"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/clerk-wordmark.svg" alt="Clerk logo"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/nvidia-wordmark.svg" alt="Nvidia logo"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/supabase-wordmark.svg" alt="Supabase logo"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/openai-wordmark.svg" alt="OpenAI logo"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://uniqueryoko.com/wp-content/uploads/2025/08/logo-baru-uni.jpg" alt="Unique Ryoko Travel &amp; Tours logo" loading="lazy"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://rsatraveltour.com/logo.svg" alt="RSA Travel &amp; Tours logo" loading="lazy"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://www.topglobaltours.com/wp-content/uploads/2025/12/cropped-COMPANY-LOGO-AMEND.png" alt="Top Global Tours logo" loading="lazy"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://static.wixstatic.com/media/60409b_c08a26c6035a4f59a805bc895e3eaf63~mv2.jpg" alt="Monster Day Tours logo" loading="lazy"></div>
         </div>
         <div class="fcg-efferd-logo-group" aria-hidden="true">
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/turso-wordmark.svg" alt=""></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/vercel-wordmark.svg" alt=""></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/github-wordmark.svg" alt=""></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/claude-wordmark.svg" alt=""></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/clerk-wordmark.svg" alt=""></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/nvidia-wordmark.svg" alt=""></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/supabase-wordmark.svg" alt=""></div>
-          <div class="fcg-efferd-logo-item"><img src="https://storage.efferd.com/logo/openai-wordmark.svg" alt=""></div>
+          <div class="fcg-efferd-logo-item"><img src="https://uniqueryoko.com/wp-content/uploads/2025/08/logo-baru-uni.jpg" alt="" loading="lazy"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://rsatraveltour.com/logo.svg" alt="" loading="lazy"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://www.topglobaltours.com/wp-content/uploads/2025/12/cropped-COMPANY-LOGO-AMEND.png" alt="" loading="lazy"></div>
+          <div class="fcg-efferd-logo-item"><img src="https://static.wixstatic.com/media/60409b_c08a26c6035a4f59a805bc895e3eaf63~mv2.jpg" alt="" loading="lazy"></div>
         </div>
       </div>
     </div>
