@@ -1,0 +1,49 @@
+<svg width="720" height="360" viewBox="0 0 720 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">FCG platform layers</title>
+  <desc id="desc">Abstract cube showing connected travel platform layers for inventory, workflow, payment, and service operations.</desc>
+  <rect width="720" height="360" rx="44" fill="#F7F7F6"/>
+  <g filter="url(#shadow)">
+    <path d="M360 66L508 151V269L360 354L212 269V151L360 66Z" fill="#080805"/>
+    <path d="M360 106L462 165V255L360 314L258 255V165L360 106Z" fill="#F7F7F6"/>
+    <path d="M360 142L430 182V238L360 278L290 238V182L360 142Z" fill="#080805"/>
+    <path d="M508 151L552 126V244L508 269V151Z" fill="#F7F7F6" stroke="#080805" stroke-width="2"/>
+    <path d="M360 66L404 41L552 126L508 151L360 66Z" fill="#080805"/>
+    <path d="M360 106L404 81L462 115L418 140L360 106Z" fill="#F7F7F6"/>
+  </g>
+  <g stroke="#F97316" stroke-width="3" stroke-linecap="round">
+    <path d="M146 122H253"/>
+    <path d="M146 178H212"/>
+    <path d="M146 234H253"/>
+    <path d="M467 122H574"/>
+    <path d="M508 178H574"/>
+    <path d="M467 234H574"/>
+  </g>
+  <g fill="#F97316">
+    <circle cx="146" cy="122" r="6"/>
+    <circle cx="146" cy="178" r="6"/>
+    <circle cx="146" cy="234" r="6"/>
+    <circle cx="574" cy="122" r="6"/>
+    <circle cx="574" cy="178" r="6"/>
+    <circle cx="574" cy="234" r="6"/>
+  </g>
+  <g fill="#080805" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="0.12em">
+    <text x="94" y="105">HOTELS</text>
+    <text x="88" y="161">RATES</text>
+    <text x="71" y="217">CONTENT</text>
+    <text x="590" y="105">BOOKING</text>
+    <text x="590" y="161">PAYMENT</text>
+    <text x="590" y="217">SERVICE</text>
+  </g>
+  <defs>
+    <filter id="shadow" x="172" y="13" width="420" height="381" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="16"/>
+      <feGaussianBlur stdDeviation="20"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0666667 0 0 0 0 0.0784314 0 0 0 0.14 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+  </defs>
+</svg>
