@@ -283,6 +283,93 @@ body .fcg-tailark-action-frame > .fcg-tailark-button {
 }
 
 @media (max-width: 639px) {
+    body .fcg-dropdown-nav > div {
+        min-height: 3.75rem;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    body .fcg-dropdown-nav svg {
+        max-width: 5rem;
+    }
+
+    body #themeToggleControl {
+        gap: 0.5rem !important;
+        padding: 0.2rem !important;
+    }
+
+    body :is(.fcg-hero2, .fcg-default-hero, .fcg-tailark-hero) {
+        min-height: auto !important;
+        padding-top: 6rem !important;
+        padding-bottom: 4.5rem !important;
+    }
+
+    body main > section:first-of-type h1,
+    body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
+        font-size: 2.55rem !important;
+        line-height: 1.06 !important;
+    }
+
+    body :is(.fcg-feature108-title, .fcg-showcase-copy h2, .fcg-mobile-feature h2, .fcg-marketing-title, #decision-paths h2, #product-map h2, .about3-heading, .partner-grid-title, main section h2) {
+        font-size: 2rem !important;
+        line-height: 1.1 !important;
+    }
+
+    body :is(.fcg-hero2-copy, .fcg-default-hero-copy, .fcg-tailark-copy, .fcg-feature108-copy, .fcg-mobile-subcopy, .fcg-showcase-description, .about3-copy) {
+        font-size: 1rem !important;
+        line-height: 1.65 !important;
+    }
+
+    body :is(#decision-paths, #product-map, .fcg-marketing-section, .fcg-showcase, .fcg-mobile-feature, .fcg-solution-features, .about3-section, .partner-grid-section) {
+        padding-top: 4.5rem !important;
+        padding-bottom: 4.5rem !important;
+    }
+
+    body .about3-section#capabilities {
+        padding-top: 6rem !important;
+    }
+
+    body :is(.product-card, .fcg-feature108-card, .fcg-showcase-card, .fcg-mobile-cta, .fcg-solution-feature-choice, .about3-card, .about3-achievements) {
+        border-radius: 1.25rem !important;
+        padding: 1.25rem !important;
+    }
+
+    body :is(.fcg-feature108-panel, .fcg-showcase-inner, .fcg-solution-feature-stage) {
+        grid-template-columns: 1fr !important;
+    }
+
+    body .fcg-feature108-tablist,
+    body .fcg-showcase-tablist {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        width: 100%;
+    }
+
+    body .fcg-feature108-trigger,
+    body .fcg-showcase-tab,
+    body .fcg-showcase-step-trigger {
+        width: 100% !important;
+        justify-content: flex-start !important;
+    }
+
+    body .fcg-hero2-preview-grid {
+        position: relative !important;
+        grid-template-columns: 1fr !important;
+        padding: 1rem !important;
+        background: rgba(0, 0, 0, 0.72) !important;
+    }
+
+    body .fcg-hero2-preview-card {
+        min-height: auto !important;
+    }
+
+    body .fcg-hero2-preview img,
+    body .fcg-tailark-preview img,
+    body .fcg-feature108-product-shot,
+    body .fcg-showcase-panel img {
+        max-height: 22rem;
+    }
+
     body .mask-word {
         margin-right: 0.1em !important;
         margin-bottom: 0.12em !important;
@@ -292,6 +379,63 @@ body .fcg-tailark-action-frame > .fcg-tailark-button {
         min-width: 0 !important;
         width: 100% !important;
         white-space: normal !important;
+    }
+}
+
+@media (max-width: 380px) {
+    body main > section:first-of-type h1,
+    body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
+        font-size: 2.25rem !important;
+    }
+
+    body :is(.fcg-feature108-title, .fcg-showcase-copy h2, .fcg-mobile-feature h2, .fcg-marketing-title, #decision-paths h2, #product-map h2, .about3-heading, .partner-grid-title, main section h2) {
+        font-size: 1.8rem !important;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+    body :is(.fcg-hero2, .fcg-default-hero, .fcg-tailark-hero) {
+        padding-top: 7rem !important;
+        padding-bottom: 5.5rem !important;
+    }
+
+    body main > section:first-of-type h1,
+    body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
+        font-size: 3.75rem !important;
+        line-height: 1.05 !important;
+    }
+
+    body :is(.fcg-feature108-title, .fcg-showcase-copy h2, .fcg-mobile-feature h2, .fcg-marketing-title, #decision-paths h2, #product-map h2, main section h2) {
+        font-size: 2.75rem !important;
+        line-height: 1.08 !important;
+    }
+
+    body :is(#decision-paths, #product-map, .fcg-marketing-section, .fcg-showcase, .fcg-mobile-feature, .fcg-solution-features, .about3-section, .partner-grid-section) {
+        padding-top: 5.5rem !important;
+        padding-bottom: 5.5rem !important;
+    }
+
+    body .about3-section#capabilities {
+        padding-top: 7rem !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    body main > section:first-of-type h1,
+    body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
+        font-size: 5rem !important;
+    }
+
+    body :is(.fcg-feature108-title, .fcg-showcase-copy h2, .fcg-mobile-feature h2, .fcg-marketing-title, #decision-paths h2, #product-map h2, main section h2) {
+        font-size: 3.5rem !important;
+        line-height: 1.08 !important;
+    }
+}
+
+@media (min-width: 1280px) {
+    body main > section:first-of-type h1,
+    body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
+        font-size: 5.75rem !important;
     }
 }
 
