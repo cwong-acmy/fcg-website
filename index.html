@@ -2384,7 +2384,7 @@
     <!-- ===== END PROGRESSIVE GRID EXPANSION SYSTEM ===== -->
 
     <!-- ===== FINAL CTA SECTION ===== -->
-    <footer id="contact" class="fcg-final-cta flex flex-col w-full bg-[#000]">
+    <footer id="contact" class="flex flex-col w-full bg-[#000]">
   <!-- CTA Section -->
   <div class="overflow-hidden w-full border-white/10 border-t pt-32 pb-32 relative">
     <div class="absolute inset-0 bg-grid opacity-10 pointer-events-none" style="mask-image: linear-gradient(to bottom, black 20%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);"></div>
@@ -2414,58 +2414,6 @@
           width: 21ch;
           animation: type 5s steps(21, end) infinite, blink 0.8s step-end infinite;
         }
-        html[data-theme="light"] .fcg-final-cta,
-        html[data-theme="light"] .fcg-final-cta.bg-\[\#000\] {
-          background-color: #000 !important;
-          color: #fff !important;
-        }
-        html[data-theme="light"] .fcg-final-cta .text-white,
-        html[data-theme="light"] .fcg-final-cta .text-neutral-300,
-        html[data-theme="light"] .fcg-final-cta .group-hover\:text-white {
-          color: #fff !important;
-        }
-        html[data-theme="light"] .fcg-final-cta .text-neutral-400 {
-          color: rgba(255,255,255,.66) !important;
-        }
-        html[data-theme="light"] .fcg-final-cta .bg-white {
-          background-color: #fff !important;
-        }
-        html[data-theme="light"] .fcg-final-cta .text-black {
-          color: #000 !important;
-        }
-        html[data-theme="light"] .fcg-final-cta .bg-white\/5 {
-          background-color: rgba(255,255,255,.08) !important;
-        }
-        html[data-theme="light"] .fcg-final-cta .border-white\/10 {
-          border-color: rgba(255,255,255,.18) !important;
-        }
-        html[data-theme="light"] .fcg-final-cta .bg-neutral-900\/30 {
-          background-color: rgba(255,255,255,.08) !important;
-        }
-        html[data-theme="light"] .fcg-final-cta .border-neutral-800 {
-          border-color: rgba(255,255,255,.16) !important;
-        }
-        .fcg-final-cta-actions {
-          align-items: stretch;
-        }
-        .fcg-final-cta-button {
-          box-sizing: border-box;
-          height: 3rem;
-          min-width: 12.25rem;
-          padding-left: 1.5rem;
-          padding-right: 1.5rem;
-        }
-        .fcg-final-cta-button > span {
-          justify-content: center;
-          white-space: nowrap;
-          width: 100%;
-        }
-        @media (max-width: 639px) {
-          .fcg-final-cta-button {
-            min-width: 0;
-            width: 100%;
-          }
-        }
       </style>
 
       <h2 class="text-4xl md:text-5xl font-normal text-white tracking-tight mb-6 font-mono typewriter-text">
@@ -2476,8 +2424,8 @@
         Address supplier fragmentation, rate complexity, and legacy infrastructure <span class="text-orange-500">one module at a time.</span> No full system replacement. No multi-year migrations.
       </p>
 
-      <div class="fcg-final-cta-actions flex flex-col sm:flex-row items-center gap-4">
-        <button class="fcg-final-cta-button w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-black bg-white rounded-full transition-all duration-300 hover:scale-105 hover:bg-neutral-200 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <button class="w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-black bg-white rounded-full transition-all duration-300 hover:scale-105 hover:bg-neutral-200 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
           <span class="relative z-10 flex items-center gap-2">
             Book a demo
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right transition-transform duration-300 group-hover:translate-x-1">
@@ -2486,7 +2434,7 @@
             </svg>
           </span>
         </button>
-        <button class="fcg-final-cta-button w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-white bg-white/5 border border-white/10 rounded-full transition-all duration-300 hover:bg-white/10 backdrop-blur-sm">
+        <button class="w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-white bg-white/5 border border-white/10 rounded-full transition-all duration-300 hover:bg-white/10 backdrop-blur-sm">
           <span class="relative z-10 flex items-center gap-2 text-neutral-300 group-hover:text-white transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-2">
               <path d="m18 16 4-4-4-4"></path>
