@@ -1552,6 +1552,7 @@
     justify-content: center;
     overflow: hidden;
     min-height: 29.15rem;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
     border: 1px solid rgba(255,255,255,.12);
     border-radius: 18px;
     background:
@@ -1606,13 +1607,13 @@
     top: 0;
     z-index: 2;
     aspect-ratio: 984 / 664;
-    transform: translateX(-58%) rotate(-1deg);
+    transform: translateX(-58%);
   }
   .fcg-ai-experience-panel-bottom {
     top: 39%;
     z-index: 1;
     aspect-ratio: 984 / 814;
-    transform: translateX(-42%) rotate(1deg);
+    transform: translateX(-42%);
   }
   .fcg-ai-experience-panel-bottom img {
     transform: translateY(-43.5%);
@@ -2071,10 +2072,10 @@
       width: min(100% - .5rem, 28rem);
     }
     .fcg-ai-experience-panel-top {
-      transform: translateX(-53%) rotate(-.6deg);
+      transform: translateX(-53%);
     }
     .fcg-ai-experience-panel-bottom {
-      transform: translateX(-47%) rotate(.6deg);
+      transform: translateX(-47%);
     }
     .fcg-ai-card {
       padding: 1.35rem;

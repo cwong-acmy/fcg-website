@@ -1671,24 +1671,36 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: left top;
-    opacity: .28;
-    filter: grayscale(.75) contrast(1.08);
+    object-position: center top;
+    opacity: 1;
+    filter: saturate(.82) contrast(.96);
   }
   .fcg-showcase-panel img.fcg-showcase-image-service {
-    object-position: left top;
+    object-position: center top;
   }
   .fcg-showcase-panel img.fcg-showcase-image-intelligence {
-    object-position: left top;
+    object-position: center top;
   }
   .fcg-showcase-panel::after {
     content: "";
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to bottom, rgba(8,8,5,.16), rgba(8,8,5,.78)),
-      radial-gradient(circle at 50% 22%, rgba(249,115,22,.16), transparent 34%);
+      linear-gradient(to bottom, rgba(8,8,5,.44), rgba(8,8,5,.06) 42%, rgba(8,8,5,.24)),
+      radial-gradient(circle at 24% 14%, rgba(249,115,22,.2), transparent 30%);
     pointer-events: none;
+  }
+  .fcg-showcase-image-label {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    z-index: 1;
+    color: #ffffff;
+    font-size: clamp(1.75rem, 3.2vw, 2.35rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1;
+    text-shadow: 0 10px 32px rgba(0,0,0,.32);
   }
   .fcg-showcase-overlay {
     position: absolute;
@@ -2505,13 +2517,13 @@
     box-shadow: 0 18px 50px rgba(15,17,20,.08);
   }
   html[data-theme="light"] .fcg-showcase-panel img {
-    opacity: .32;
-    filter: grayscale(.8) contrast(1.02);
+    opacity: 1;
+    filter: saturate(.82) contrast(.96);
   }
   html[data-theme="light"] .fcg-showcase-panel::after {
     background:
-      linear-gradient(to bottom, rgba(255,255,255,.12), rgba(255,255,255,.86)),
-      radial-gradient(circle at 50% 22%, rgba(249,115,22,.16), transparent 34%);
+      linear-gradient(to bottom, rgba(15,17,20,.42), rgba(15,17,20,.04) 42%, rgba(15,17,20,.16)),
+      radial-gradient(circle at 24% 14%, rgba(249,115,22,.18), transparent 30%);
   }
   html[data-theme="light"] .fcg-showcase-preview-row {
     background: rgba(255,255,255,.72);
@@ -2987,7 +2999,7 @@
 
       <div class="fcg-hero2-preview-wrap">
         <div class="fcg-hero2-preview">
-          <img class="fcg-product-shot" src="assets/images/atlas-product/dashboard.jpg" alt="Atlas TMC OS dashboard showing clients, tickets, bookings, incidents, and operational activity">
+          <img class="fcg-product-shot" src="assets/images/atlas-product/atlas-hero-dashboard.jpg" alt="Atlas TMC OS dashboard showing urgent tickets, booking actions, queue status, and duty of care operations">
         </div>
       </div>
     </div>
@@ -3396,69 +3408,18 @@
       <div class="fcg-showcase-visual fade-up" data-fcg-showcase-tabs>
         <div class="fcg-showcase-card">
           <article class="fcg-showcase-panel" id="showcase-panel-operations" role="tabpanel" aria-labelledby="showcase-tab-operations">
-            <img class="fcg-product-shot fcg-showcase-image-operations" src="assets/images/atlas-product/dashboard.jpg" alt="Atlas operations dashboard showing active clients, bookings, tickets, incidents, and team activity" loading="eager">
-            <div class="fcg-showcase-overlay">
-              <div class="fcg-showcase-window">
-                <h3>Operations</h3>
-                <p>Agent queues, booking pipeline, and client CRM in one surface. See every open request, every team workload, and every client relationship without switching tools.</p>
-                <div class="fcg-showcase-preview-list">
-                  <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:cpu-bolt-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>OpsHub active workspace</strong>
-                    <mark>Live</mark>
-                  </div>
-                  <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:inbox-line-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>Inbox queue and SLA status</strong>
-                    <mark>Tracking</mark>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <img class="fcg-product-shot fcg-showcase-image-operations" src="assets/images/atlas-product/atlas-hero-dashboard.jpg" alt="Atlas operations dashboard showing urgent tickets, booking actions, queue status, and duty of care operations" loading="eager">
+            <div class="fcg-showcase-image-label">Operations</div>
           </article>
 
           <article class="fcg-showcase-panel" id="showcase-panel-service" role="tabpanel" aria-labelledby="showcase-tab-service" hidden>
             <img class="fcg-product-shot fcg-showcase-image-service" src="assets/images/atlas-product/tickets.jpg" alt="Atlas service tickets module showing open service requests, priority labels, ownership, and status tracking" loading="lazy">
-            <div class="fcg-showcase-overlay">
-              <div class="fcg-showcase-window">
-                <h3>Service</h3>
-                <p>Ticketing, SLA tracking, client requests, enquiry capture, and service conversations across every channel. Escalation rules enforce response times before breaches happen.</p>
-                <div class="fcg-showcase-preview-list">
-                  <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:shield-check-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>SLA enforcement active</strong>
-                    <mark>0 breach</mark>
-                  </div>
-                  <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:link-round-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>FlowConnect integrations</strong>
-                    <mark>Synced</mark>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div class="fcg-showcase-image-label">Service</div>
           </article>
 
           <article class="fcg-showcase-panel" id="showcase-panel-intelligence" role="tabpanel" aria-labelledby="showcase-tab-intelligence" hidden>
             <img class="fcg-product-shot fcg-showcase-image-intelligence" src="assets/images/atlas-product/reports.jpg" alt="Atlas intelligence reporting module showing corporate report controls and client-ready travel management reporting" loading="lazy">
-            <div class="fcg-showcase-overlay">
-              <div class="fcg-showcase-window">
-                <h3>Intelligence</h3>
-                <p>Reporting, duty of care, and analytics connected to every booking. Real-time traveler visibility and branded client reporting in one view.</p>
-                <div class="fcg-showcase-preview-list">
-                  <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:chart-2-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>Client-ready analytics</strong>
-                    <mark>Reports</mark>
-                  </div>
-                  <div class="fcg-showcase-preview-row">
-                    <iconify-icon icon="solar:map-point-wave-bold-duotone" width="20" height="20"></iconify-icon>
-                    <strong>DutyView traveler tracking</strong>
-                    <mark>Real-time</mark>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div class="fcg-showcase-image-label">Intelligence</div>
           </article>
 
           <div class="fcg-showcase-tabs">
