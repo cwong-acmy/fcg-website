@@ -290,3 +290,156 @@ body .fcg-tailark-action-frame > .fcg-tailark-button {
         white-space: normal !important;
     }
 }
+
+/* Shared product-style pill and button system */
+body :is(.fcg-hero2-badge, .fcg-default-hero-pill, .fcg-tailark-pill) {
+    align-items: center !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 999px !important;
+    box-shadow: none !important;
+    color: var(--fcg-accent) !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    gap: 8px !important;
+    justify-content: center !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0 !important;
+    min-height: 2.625rem !important;
+    padding: 9px 16px !important;
+    text-decoration: none !important;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease !important;
+    width: fit-content !important;
+}
+
+body :is(.fcg-hero2-badge, .fcg-default-hero-pill, .fcg-tailark-pill):hover {
+    background: rgba(255, 255, 255, 0.14) !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+    box-shadow: none !important;
+    color: var(--fcg-accent) !important;
+    transform: translateY(-1px) !important;
+}
+
+body :is(.fcg-tailark-pill-text, .fcg-default-hero-pill strong) {
+    color: inherit !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+}
+
+body .fcg-tailark-pill-divider {
+    display: none !important;
+}
+
+body .fcg-tailark-pill-icon {
+    background: transparent !important;
+    color: currentColor !important;
+    display: inline-flex !important;
+    height: auto !important;
+    overflow: visible !important;
+    width: auto !important;
+}
+
+body .fcg-tailark-pill-icon svg {
+    height: 1rem !important;
+    transition: transform 180ms ease !important;
+    width: 1rem !important;
+}
+
+body .fcg-tailark-pill:hover svg {
+    transform: translateX(2px) !important;
+}
+
+body .fcg-tailark-action-frame {
+    background: transparent !important;
+    border: 0 !important;
+    display: inline-flex !important;
+    padding: 0 !important;
+    width: auto !important;
+}
+
+body .fcg-tailark-action-frame > .fcg-tailark-button {
+    width: auto !important;
+}
+
+body :is(.fcg-hero2-button, .fcg-default-hero-button, .fcg-tailark-button, .fcg-showcase-action, .fcg-feature108-action, .fcg-store-button, .fcg-final-cta-button) {
+    border-radius: 999px !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    min-height: 3rem !important;
+    padding-left: 1.75rem !important;
+    padding-right: 1.75rem !important;
+    transform: none !important;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease !important;
+}
+
+body :is(.fcg-hero2-button, .fcg-default-hero-button, .fcg-tailark-button, .fcg-showcase-action, .fcg-feature108-action, .fcg-store-button, .fcg-final-cta-button):hover {
+    transform: translateY(-1px) !important;
+}
+
+body :is(.fcg-hero2-button-primary, .fcg-default-hero-button-primary, .fcg-tailark-button-primary, .fcg-showcase-action-primary, .fcg-feature108-action) {
+    background: var(--fcg-accent) !important;
+    border-color: var(--fcg-accent) !important;
+    color: #ffffff !important;
+    box-shadow: 0 14px 34px rgba(249, 115, 22, 0.22) !important;
+}
+
+body :is(.fcg-hero2-button-primary, .fcg-default-hero-button-primary, .fcg-tailark-button-primary, .fcg-showcase-action-primary, .fcg-feature108-action):hover {
+    background: var(--fcg-accent-strong) !important;
+    border-color: var(--fcg-accent-strong) !important;
+    box-shadow: 0 16px 38px rgba(249, 115, 22, 0.28) !important;
+}
+
+body :is(.fcg-hero2-button-secondary, .fcg-default-hero-button-secondary, .fcg-tailark-button-secondary, .fcg-showcase-action-secondary, .fcg-store-button) {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+body :is(.fcg-hero2-button-secondary, .fcg-default-hero-button-secondary, .fcg-tailark-button-secondary, .fcg-showcase-action-secondary, .fcg-store-button):hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(249, 115, 22, 0.45) !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+body .fcg-store-button iconify-icon {
+    color: currentColor !important;
+}
+
+html[data-theme="light"] body :is(.fcg-hero2-badge, .fcg-default-hero-pill, .fcg-tailark-pill) {
+    background: rgba(255, 255, 255, 0.78) !important;
+    border-color: rgba(15, 17, 20, 0.12) !important;
+    box-shadow: 0 14px 40px rgba(15, 17, 20, 0.08) !important;
+    color: var(--fcg-accent) !important;
+}
+
+html[data-theme="light"] body :is(.fcg-hero2-badge, .fcg-default-hero-pill, .fcg-tailark-pill):hover {
+    background: #ffffff !important;
+    border-color: rgba(15, 17, 20, 0.2) !important;
+    box-shadow: 0 16px 42px rgba(15, 17, 20, 0.1) !important;
+}
+
+html[data-theme="light"] body :is(.fcg-hero2-button-secondary, .fcg-default-hero-button-secondary, .fcg-tailark-button-secondary, .fcg-showcase-action-secondary, .fcg-store-button) {
+    background: rgba(255, 255, 255, 0.76) !important;
+    border-color: rgba(15, 17, 20, 0.14) !important;
+    color: #0f1114 !important;
+}
+
+html[data-theme="light"] body :is(.fcg-hero2-button-secondary, .fcg-default-hero-button-secondary, .fcg-tailark-button-secondary, .fcg-showcase-action-secondary, .fcg-store-button):hover {
+    background: #ffffff !important;
+    border-color: rgba(15, 17, 20, 0.24) !important;
+    color: #0f1114 !important;
+}
+
+@media (max-width: 639px) {
+    body .fcg-tailark-action-frame,
+    body .fcg-tailark-action-frame > .fcg-tailark-button {
+        width: 100% !important;
+    }
+}
