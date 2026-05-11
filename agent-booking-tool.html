@@ -1578,14 +1578,17 @@
   }
   .fcg-platform-screens {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 1;
     width: min(100%, 54rem);
-    min-height: clamp(28rem, 50vw, 34rem);
+    min-height: clamp(20rem, 42vw, 31rem);
   }
   .fcg-platform-screen {
-    position: absolute;
+    position: relative;
     display: block;
-    width: min(72%, 38rem);
+    width: min(88%, 46rem);
     height: auto;
     border: 1px solid rgba(255,255,255,.22);
     border-radius: 16px;
@@ -1593,17 +1596,7 @@
     box-shadow: 0 26px 58px rgba(0,0,0,.28);
   }
   .fcg-platform-screen-bookings {
-    top: 0;
-    left: 50%;
     z-index: 2;
-    transform: translateX(-50%);
-  }
-  .fcg-platform-screen-clients {
-    bottom: 0;
-    left: 50%;
-    z-index: 1;
-    width: min(72%, 38rem);
-    transform: translateX(-50%);
   }
   .fcg-ai-card {
     position: relative;
@@ -2566,21 +2559,12 @@
       padding: 2.6rem .9rem;
     }
     .fcg-platform-screens {
-      min-height: clamp(22rem, 82vw, 31rem);
+      min-height: auto;
     }
     .fcg-platform-screen {
       width: 88%;
       border-radius: 10px;
       box-shadow: 0 18px 36px rgba(0,0,0,.24);
-    }
-    .fcg-platform-screen-bookings {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .fcg-platform-screen-clients {
-      left: 50%;
-      width: 88%;
-      transform: translateX(-50%);
     }
     .fcg-ai-card {
       padding: 1.35rem;
@@ -2793,9 +2777,8 @@
       </header>
 
       <div class="fcg-ai-showcase fade-up">
-        <div class="fcg-platform-screens" aria-label="Agent Booking Tool platform screens showing bookings and client management">
+        <div class="fcg-platform-screens" aria-label="Agent Booking Tool bookings screen">
           <img class="fcg-platform-screen fcg-platform-screen-bookings" src="assets/images/agent-booking-product/bookings-screen.png" alt="Agent Booking Tool bookings table with reservation references, guests, destinations, payment status, and group bookings">
-          <img class="fcg-platform-screen fcg-platform-screen-clients" src="assets/images/agent-booking-product/clients-screen.png" alt="Agent Booking Tool clients table with account managers, contact details, bookings, spend, and client status">
         </div>
       </div>
 
