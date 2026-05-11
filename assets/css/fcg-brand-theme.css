@@ -231,3 +231,62 @@ html[data-theme="light"] body .fcg-showcase-panel img,
 html[data-theme="light"] body .fcg-tailark-preview img {
     background: #ffffff;
 }
+
+body :is(h1, h2, .about3-title, .about3-heading, .partner-grid-title, .fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .fcg-marketing-title, .fcg-feature108-title, .masked-reveal-target) {
+    overflow-wrap: break-word;
+    text-wrap: balance;
+}
+
+body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
+    max-width: min(100%, 64rem) !important;
+}
+
+body .masked-reveal-target {
+    line-height: 1.08 !important;
+}
+
+body .mask-word {
+    margin-right: 0.14em !important;
+    margin-bottom: 0.1em !important;
+    padding-bottom: 0.04em !important;
+}
+
+body :is(.fcg-hero2-actions, .fcg-default-hero-actions, .fcg-tailark-actions, .fcg-showcase-actions, .fcg-store-actions, .fcg-final-cta-actions) {
+    align-items: stretch !important;
+}
+
+body :is(.fcg-hero2-button, .fcg-default-hero-button, .fcg-tailark-button, .fcg-showcase-action, .fcg-feature108-action, .fcg-store-button, .about3-button, .fcg-final-cta button) {
+    box-sizing: border-box !important;
+    min-height: 3rem !important;
+    min-width: 12.25rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+}
+
+body :is(.fcg-hero2-button, .fcg-default-hero-button, .fcg-tailark-button, .fcg-showcase-action, .fcg-feature108-action, .fcg-store-button, .about3-button, .fcg-final-cta button) > :is(span, iconify-icon, svg) {
+    flex-shrink: 0;
+}
+
+body :is(.fcg-tailark-action-frame) {
+    box-sizing: border-box !important;
+    display: flex !important;
+}
+
+body .fcg-tailark-action-frame > .fcg-tailark-button {
+    width: 100% !important;
+}
+
+@media (max-width: 639px) {
+    body .mask-word {
+        margin-right: 0.1em !important;
+        margin-bottom: 0.12em !important;
+    }
+
+    body :is(.fcg-hero2-button, .fcg-default-hero-button, .fcg-tailark-button, .fcg-showcase-action, .fcg-feature108-action, .fcg-store-button, .about3-button, .fcg-final-cta button) {
+        min-width: 0 !important;
+        width: 100% !important;
+        white-space: normal !important;
+    }
+}
