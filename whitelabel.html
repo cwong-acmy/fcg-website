@@ -1603,47 +1603,56 @@
   .fcg-efferd-logos h2 span {
     color: #ffffff;
   }
-  .fcg-efferd-logo-viewport {
+  .fcg-efferd-logo-band {
     position: relative;
     width: 100%;
     margin-top: 3rem;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    border-top: 1px solid rgba(255,255,255,.12);
+    border-bottom: 1px solid rgba(255,255,255,.12);
   }
-  .fcg-efferd-logo-track {
-    display: flex;
-    width: max-content;
-    animation: fcg-efferd-marquee 28s linear infinite reverse;
-  }
-  .fcg-efferd-logo-group {
-    display: flex;
-    align-items: center;
-    gap: clamp(1.25rem, 3vw, 2.5rem);
-    padding-right: clamp(1.25rem, 3vw, 2.5rem);
+  .fcg-efferd-logo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 940px;
+    margin: 0 auto;
   }
   .fcg-efferd-logo-item {
     display: flex;
-    flex: 0 0 auto;
     align-items: center;
     justify-content: center;
-    min-width: 10.5rem;
-    height: 4rem;
-    padding: .65rem 1.15rem;
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: .75rem;
-    background: rgba(255,255,255,.92);
+    min-height: 104px;
+    padding: 2rem 1rem;
+    border-color: rgba(255,255,255,.12);
+  }
+  .fcg-efferd-logo-item:nth-child(odd) {
+    border-right: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.03);
+  }
+  .fcg-efferd-logo-item:nth-child(-n+2) {
+    border-bottom: 1px solid rgba(255,255,255,.12);
   }
   .fcg-efferd-logo-item img {
     width: auto;
-    max-width: 9rem;
-    max-height: 2.55rem;
+    max-width: 9.5rem;
+    max-height: 3rem;
     object-fit: contain;
     opacity: .92;
   }
-  @keyframes fcg-efferd-marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+  @media (min-width: 768px) {
+    .fcg-efferd-logo-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-left: 1px solid rgba(255,255,255,.12);
+      border-right: 1px solid rgba(255,255,255,.12);
+    }
+    .fcg-efferd-logo-item:nth-child(odd) {
+      border-right: 0;
+    }
+    .fcg-efferd-logo-item:nth-child(-n+2) {
+      border-bottom: 0;
+    }
+    .fcg-efferd-logo-item:not(:last-child) {
+      border-right: 1px solid rgba(255,255,255,.12);
+    }
   }
   html[data-theme="light"] .fcg-tailark-hero {
     background: #ffffff;
@@ -1715,13 +1724,25 @@
   html[data-theme="light"] .fcg-efferd-logos h2 span {
     color: #0F1114;
   }
-  html[data-theme="light"] .fcg-efferd-logo-item img {
-    opacity: .86;
+  html[data-theme="light"] .fcg-efferd-logo-band {
+    border-color: rgba(15,17,20,.1);
+  }
+  html[data-theme="light"] .fcg-efferd-logo-grid {
+    border-color: rgba(15,17,20,.1);
   }
   html[data-theme="light"] .fcg-efferd-logo-item {
-    background: #ffffff;
-    border-color: rgba(15,17,20,.08);
-    box-shadow: 0 10px 26px rgba(15,17,20,.06);
+    border-color: rgba(15,17,20,.1);
+  }
+  html[data-theme="light"] .fcg-efferd-logo-item:nth-child(odd) {
+    background: #f8fafc;
+    border-color: rgba(15,17,20,.1);
+  }
+  html[data-theme="light"] .fcg-efferd-logo-item:not(:last-child),
+  html[data-theme="light"] .fcg-efferd-logo-item:nth-child(-n+2) {
+    border-color: rgba(15,17,20,.1);
+  }
+  html[data-theme="light"] .fcg-efferd-logo-item img {
+    opacity: .86;
   }
   .product-shell { background: var(--color-bg); color: var(--color-fg); }
   .product-kicker { font-family: 'Inter', sans-serif; letter-spacing: .18em; text-transform: uppercase; }
@@ -3774,12 +3795,8 @@
       border-radius: .875rem;
       padding: .6rem;
     }
-    .fcg-efferd-logo-group {
-      gap: 2.75rem;
-      padding-right: 2.75rem;
-    }
     .fcg-efferd-logo-item {
-      min-width: 7.5rem;
+      min-height: 96px;
     }
     .fcg-hero2-content {
       grid-template-columns: 1fr;
@@ -4008,20 +4025,12 @@
 
   <section class="fcg-efferd-logos" aria-label="Trusted by travel operators">
     <h2>Powering travel for <span>operators across APAC</span></h2>
-    <div class="fcg-efferd-logo-viewport">
-      <div class="fcg-efferd-logo-track">
-        <div class="fcg-efferd-logo-group">
-          <div class="fcg-efferd-logo-item"><img src="https://uniqueryoko.com/wp-content/uploads/2025/08/logo-baru-uni.jpg" alt="Unique Ryoko Travel &amp; Tours logo" loading="lazy"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://rsatraveltour.com/logo.svg" alt="RSA Travel &amp; Tours logo" loading="lazy"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://www.topglobaltours.com/wp-content/uploads/2025/12/cropped-COMPANY-LOGO-AMEND.png" alt="Top Global Tours logo" loading="lazy"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://static.wixstatic.com/media/60409b_c08a26c6035a4f59a805bc895e3eaf63~mv2.jpg" alt="Monster Day Tours logo" loading="lazy"></div>
-        </div>
-        <div class="fcg-efferd-logo-group" aria-hidden="true">
-          <div class="fcg-efferd-logo-item"><img src="https://uniqueryoko.com/wp-content/uploads/2025/08/logo-baru-uni.jpg" alt="" loading="lazy"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://rsatraveltour.com/logo.svg" alt="" loading="lazy"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://www.topglobaltours.com/wp-content/uploads/2025/12/cropped-COMPANY-LOGO-AMEND.png" alt="" loading="lazy"></div>
-          <div class="fcg-efferd-logo-item"><img src="https://static.wixstatic.com/media/60409b_c08a26c6035a4f59a805bc895e3eaf63~mv2.jpg" alt="" loading="lazy"></div>
-        </div>
+    <div class="fcg-efferd-logo-band">
+      <div class="fcg-efferd-logo-grid">
+        <div class="fcg-efferd-logo-item"><img src="https://uniqueryoko.com/wp-content/uploads/2025/08/logo-baru-uni.jpg" alt="Unique Ryoko Travel &amp; Tours logo" loading="lazy"></div>
+        <div class="fcg-efferd-logo-item"><img src="https://rsatraveltour.com/logo.svg" alt="RSA Travel &amp; Tours logo" loading="lazy"></div>
+        <div class="fcg-efferd-logo-item"><img src="https://www.topglobaltours.com/wp-content/uploads/2025/12/cropped-COMPANY-LOGO-AMEND.png" alt="Top Global Tours logo" loading="lazy"></div>
+        <div class="fcg-efferd-logo-item"><img src="https://static.wixstatic.com/media/60409b_c08a26c6035a4f59a805bc895e3eaf63~mv2.jpg" alt="Monster Day Tours logo" loading="lazy"></div>
       </div>
     </div>
   </section>
