@@ -1995,14 +1995,32 @@
       display: inline-block;
       overflow: hidden;
       vertical-align: top;
-      margin-right: 0.18em;
-      margin-bottom: 0.08em;
+      margin-right: 0.14em;
+      margin-bottom: 0.1em;
+    }
+
+    .masked-reveal-target {
+      max-width: 960px;
+      text-wrap: balance;
     }
 
     .mask-word-inner {
       display: inline-block;
       transform: translateY(110%);
       will-change: transform;
+    }
+
+    @media (max-width: 1023px) {
+      .masked-reveal-target {
+        max-width: 860px;
+      }
+    }
+
+    @media (max-width: 639px) {
+      .mask-word {
+        margin-right: 0.1em;
+        margin-bottom: 0.12em;
+      }
     }
 
     .initially-hidden {
@@ -2033,7 +2051,7 @@
     </svg>
 
     <!-- HERO SECTION WITH MASKED REVEAL -->
-    <header class="pt-40 pb-24 px-6 md:px-12 relative z-10 flex flex-col items-center text-center w-full overflow-hidden">
+    <header class="pt-40 pb-24 px-6 md:px-12 relative z-10 flex flex-col items-center text-center w-full overflow-visible">
 
       <!-- Badge with animation -->
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900/30 text-xs font-normal text-neutral-400 mb-8 opacity-0 backdrop-blur-md" id="hero-badge">
@@ -2427,6 +2445,27 @@
         html[data-theme="light"] .fcg-final-cta .border-neutral-800 {
           border-color: rgba(255,255,255,.16) !important;
         }
+        .fcg-final-cta-actions {
+          align-items: stretch;
+        }
+        .fcg-final-cta-button {
+          box-sizing: border-box;
+          height: 3rem;
+          min-width: 12.25rem;
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .fcg-final-cta-button > span {
+          justify-content: center;
+          white-space: nowrap;
+          width: 100%;
+        }
+        @media (max-width: 639px) {
+          .fcg-final-cta-button {
+            min-width: 0;
+            width: 100%;
+          }
+        }
       </style>
 
       <h2 class="text-4xl md:text-5xl font-normal text-white tracking-tight mb-6 font-mono typewriter-text">
@@ -2437,8 +2476,8 @@
         Address supplier fragmentation, rate complexity, and legacy infrastructure <span class="text-orange-500">one module at a time.</span> No full system replacement. No multi-year migrations.
       </p>
 
-      <div class="flex flex-col sm:flex-row items-center gap-4">
-        <button class="w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-black bg-white rounded-full transition-all duration-300 hover:scale-105 hover:bg-neutral-200 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+      <div class="fcg-final-cta-actions flex flex-col sm:flex-row items-center gap-4">
+        <button class="fcg-final-cta-button w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-black bg-white rounded-full transition-all duration-300 hover:scale-105 hover:bg-neutral-200 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
           <span class="relative z-10 flex items-center gap-2">
             Book a demo
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right transition-transform duration-300 group-hover:translate-x-1">
@@ -2447,7 +2486,7 @@
             </svg>
           </span>
         </button>
-        <button class="w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-white bg-white/5 border border-white/10 rounded-full transition-all duration-300 hover:bg-white/10 backdrop-blur-sm">
+        <button class="fcg-final-cta-button w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-white bg-white/5 border border-white/10 rounded-full transition-all duration-300 hover:bg-white/10 backdrop-blur-sm">
           <span class="relative z-10 flex items-center gap-2 text-neutral-300 group-hover:text-white transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-2">
               <path d="m18 16 4-4-4-4"></path>
