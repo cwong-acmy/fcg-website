@@ -440,6 +440,60 @@
                 linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
         }
 
+        .partner-plus::before,
+        .partner-plus::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            background: #0F1114;
+            transform: translate(-50%, -50%);
+        }
+
+        .partner-plus::before {
+            width: 18px;
+            height: 1px;
+        }
+
+        .partner-plus::after {
+            width: 1px;
+            height: 18px;
+        }
+
+        .partner-grid-section {
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+        }
+
+        .partner-grid-title {
+            color: var(--color-muted);
+        }
+
+        .partner-grid-title strong {
+            color: var(--color-fg);
+            font-weight: 500;
+        }
+
+        .partner-logo-band,
+        .partner-logo-grid,
+        .partner-logo-card {
+            border-color: var(--color-border) !important;
+        }
+
+        .partner-logo-card:nth-child(odd) {
+            background-color: var(--color-card);
+        }
+
+        html[data-theme="dark"] .partner-logo-card img.partner-logo-invert-dark {
+            filter: invert(1) grayscale(1) brightness(1.4);
+            opacity: 0.9;
+        }
+
+        html[data-theme="dark"] .partner-plus::before,
+        html[data-theme="dark"] .partner-plus::after {
+            background: var(--color-fg);
+        }
+
         .about4-orange-image {
             filter: hue-rotate(145deg) saturate(1.35) contrast(1.04);
         }
@@ -1224,15 +1278,44 @@
                     </div>
                 </div>
 
-                <div class="py-32">
-                    <p class="about3-companies-title text-center font-light">300+ travel brands, TMCs, and hotel groups. Already connected.</p>
-                    <div class="mt-8 flex flex-wrap justify-center gap-8">
-                        <div class="flex items-center gap-3"><img src="https://shadcnblocks.com/images/block/logos/company/fictional-company-logo-1.svg" alt="Arc" class="about3-company-logo h-6 w-auto md:h-8"></div>
-                        <div class="flex items-center gap-3"><img src="https://shadcnblocks.com/images/block/logos/company/fictional-company-logo-2.svg" alt="Descript" class="about3-company-logo h-6 w-auto md:h-8"></div>
-                        <div class="flex items-center gap-3"><img src="https://shadcnblocks.com/images/block/logos/company/fictional-company-logo-3.svg" alt="Mercury" class="about3-company-logo h-6 w-auto md:h-8"></div>
-                        <div class="flex items-center gap-3"><img src="https://shadcnblocks.com/images/block/logos/company/fictional-company-logo-4.svg" alt="Ramp" class="about3-company-logo h-6 w-auto md:h-8"></div>
-                        <div class="flex items-center gap-3"><img src="https://shadcnblocks.com/images/block/logos/company/fictional-company-logo-5.svg" alt="Retool" class="about3-company-logo h-6 w-auto md:h-8"></div>
-                        <div class="flex items-center gap-3"><img src="https://shadcnblocks.com/images/block/logos/company/fictional-company-logo-6.svg" alt="Watershed" class="about3-company-logo h-6 w-auto md:h-8"></div>
+                <div class="partner-grid-section relative z-10 py-20 md:py-28">
+                    <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
+                        <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
+                            300+ travel brands, TMCs, and hotel groups. <strong>Already connected.</strong>
+                        </h2>
+                    </div>
+
+                    <div class="partner-logo-band border-y">
+                        <div class="partner-logo-grid relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x">
+                            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center border-r border-b px-4 py-8 md:p-8">
+                                <img src="https://static.wixstatic.com/media/6f8e7e_f844282625cb466d8c9580ec35a3645b~mv2.jpg/v1/crop/x_386,y_592,w_3524,h_3344/fill/w_274,h_260,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/PST_Travel-Secondary2.jpg" alt="PST Travel Logo" class="pointer-events-none max-h-12 max-w-[150px] select-none object-contain md:max-h-14 md:max-w-[170px]">
+                                <span class="partner-plus absolute -right-3 -bottom-3 z-10 h-6 w-6 pointer-events-none" aria-hidden="true"></span>
+                            </div>
+                            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center border-b px-4 py-8 md:border-r md:p-8">
+                                <img src="https://cdn.prod.website-files.com/68553d1dd8ca0b336f66b55c/69e8a0b042a0c29ce4b7f0f9_2026%20CTL%20logo_Colour_Tran%20bg%20(2).png" alt="Connexus Travel Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]">
+                            </div>
+                            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center border-r border-b px-4 py-8 md:p-8">
+                                <img src="assets/images/logos/alibaba.svg" alt="Alibaba Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px]">
+                                <span class="partner-plus absolute -right-3 -bottom-3 z-10 h-6 w-6 pointer-events-none" aria-hidden="true"></span>
+                                <span class="partner-plus absolute -left-3 -bottom-3 z-10 hidden h-6 w-6 pointer-events-none md:block" aria-hidden="true"></span>
+                            </div>
+                            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center border-b px-4 py-8 md:p-8">
+                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/ByteDance_logo_English.svg" alt="ByteDance Logo" class="partner-logo-invert-dark pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px]">
+                            </div>
+                            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center border-r border-b px-4 py-8 md:border-b-0 md:p-8">
+                                <img src="assets/images/logos/jinjiang-international.jpg" alt="Jin Jiang International Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]">
+                                <span class="partner-plus absolute -right-3 -top-3 z-10 hidden h-6 w-6 pointer-events-none md:block" aria-hidden="true"></span>
+                            </div>
+                            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center border-b px-4 py-8 md:border-r md:border-b-0 md:p-8">
+                                <img src="https://companieslogo.com/img/orig/HTHT_BIG-d42ec412.svg?t=1720244492" alt="Huazhu Group Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]">
+                            </div>
+                            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center border-r px-4 py-8 md:p-8">
+                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/IHG_Hotels_%26_Resorts_logo.svg" alt="IHG Hotels and Resorts Logo" class="partner-logo-invert-dark pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px]">
+                            </div>
+                            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8">
+                                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Marriott_International.svg" alt="Marriott International Logo" class="partner-logo-invert-dark pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px]">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
