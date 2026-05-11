@@ -1671,8 +1671,15 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: left top;
     opacity: .28;
     filter: grayscale(.75) contrast(1.08);
+  }
+  .fcg-showcase-panel img.fcg-showcase-image-service {
+    object-position: left top;
+  }
+  .fcg-showcase-panel img.fcg-showcase-image-intelligence {
+    object-position: left top;
   }
   .fcg-showcase-panel::after {
     content: "";
@@ -3389,7 +3396,7 @@
       <div class="fcg-showcase-visual fade-up" data-fcg-showcase-tabs>
         <div class="fcg-showcase-card">
           <article class="fcg-showcase-panel" id="showcase-panel-operations" role="tabpanel" aria-labelledby="showcase-tab-operations">
-            <img class="fcg-product-shot" src="assets/images/atlas-product/dashboard.jpg" alt="Atlas operations dashboard showing active clients, bookings, tickets, incidents, and team activity" loading="eager">
+            <img class="fcg-product-shot fcg-showcase-image-operations" src="assets/images/atlas-product/dashboard.jpg" alt="Atlas operations dashboard showing active clients, bookings, tickets, incidents, and team activity" loading="eager">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
                 <h3>Operations</h3>
@@ -3411,7 +3418,7 @@
           </article>
 
           <article class="fcg-showcase-panel" id="showcase-panel-service" role="tabpanel" aria-labelledby="showcase-tab-service" hidden>
-            <img class="fcg-product-shot" src="assets/images/atlas-product/tickets.jpg" alt="Atlas tickets module showing open service requests, priority labels, ownership, and status tracking" loading="lazy">
+            <img class="fcg-product-shot fcg-showcase-image-service" src="assets/images/atlas-product/tickets.jpg" alt="Atlas service tickets module showing open service requests, priority labels, ownership, and status tracking" loading="lazy">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
                 <h3>Service</h3>
@@ -3433,7 +3440,7 @@
           </article>
 
           <article class="fcg-showcase-panel" id="showcase-panel-intelligence" role="tabpanel" aria-labelledby="showcase-tab-intelligence" hidden>
-            <img class="fcg-product-shot" src="assets/images/atlas-product/reports.jpg" alt="Atlas reporting module showing corporate report controls and client-ready travel management reporting" loading="lazy">
+            <img class="fcg-product-shot fcg-showcase-image-intelligence" src="assets/images/atlas-product/reports.jpg" alt="Atlas intelligence reporting module showing corporate report controls and client-ready travel management reporting" loading="lazy">
             <div class="fcg-showcase-overlay">
               <div class="fcg-showcase-window">
                 <h3>Intelligence</h3>

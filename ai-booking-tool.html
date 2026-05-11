@@ -1579,16 +1579,43 @@
     color: #050505;
     padding: 1.75rem;
   }
-  .fcg-ai-experience-shot {
+  .fcg-ai-experience-stack {
     position: relative;
     z-index: 1;
-    display: block;
     width: min(100% - 2rem, 30rem);
-    max-height: 39rem;
-    object-fit: contain;
+    aspect-ratio: 1 / 1.355;
+  }
+  .fcg-ai-experience-panel {
+    position: absolute;
+    left: 50%;
+    display: block;
+    width: 100%;
+    overflow: hidden;
     border: 1px solid rgba(255,255,255,.18);
     border-radius: 16px;
+    background: #fff;
     box-shadow: 0 18px 38px rgba(0,0,0,.22);
+  }
+  .fcg-ai-experience-panel img {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+  .fcg-ai-experience-panel-top {
+    top: 0;
+    z-index: 2;
+    aspect-ratio: 984 / 664;
+    transform: translateX(-58%) rotate(-1deg);
+  }
+  .fcg-ai-experience-panel-bottom {
+    top: 39%;
+    z-index: 1;
+    aspect-ratio: 984 / 814;
+    transform: translateX(-42%) rotate(1deg);
+  }
+  .fcg-ai-experience-panel-bottom img {
+    transform: translateY(-43.5%);
   }
   .fcg-ai-spark {
     display: inline-flex;
@@ -2040,6 +2067,15 @@
     .fcg-ai-showcase {
       min-height: 28rem;
     }
+    .fcg-ai-experience-stack {
+      width: min(100% - .5rem, 28rem);
+    }
+    .fcg-ai-experience-panel-top {
+      transform: translateX(-53%) rotate(-.6deg);
+    }
+    .fcg-ai-experience-panel-bottom {
+      transform: translateX(-47%) rotate(.6deg);
+    }
     .fcg-ai-card {
       padding: 1.35rem;
     }
@@ -2157,7 +2193,14 @@
       </header>
 
       <div class="fcg-ai-showcase fade-up">
-        <img class="fcg-ai-experience-shot" src="assets/images/ai-booking-product/fcg-booking-experience.png" alt="FCG AI Booking Tool hotel search conversation preview" loading="lazy">
+        <div class="fcg-ai-experience-stack" role="img" aria-label="FCG AI Booking Tool hotel search conversation preview">
+          <div class="fcg-ai-experience-panel fcg-ai-experience-panel-top">
+            <img src="assets/images/ai-booking-product/fcg-booking-experience.png" alt="" loading="lazy">
+          </div>
+          <div class="fcg-ai-experience-panel fcg-ai-experience-panel-bottom" aria-hidden="true">
+            <img src="assets/images/ai-booking-product/fcg-booking-experience.png" alt="" loading="lazy">
+          </div>
+        </div>
       </div>
 
       <div class="fcg-marketing-features">
