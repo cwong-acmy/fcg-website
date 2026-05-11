@@ -2301,7 +2301,7 @@
     <!-- ===== END PROGRESSIVE GRID EXPANSION SYSTEM ===== -->
 
     <!-- ===== FINAL CTA SECTION ===== -->
-    <footer id="contact" class="flex flex-col w-full bg-[#000]">
+    <footer id="contact" class="fcg-final-cta flex flex-col w-full bg-[#000]">
   <!-- CTA Section -->
   <div class="overflow-hidden w-full border-white/10 border-t pt-32 pb-32 relative">
     <div class="absolute inset-0 bg-grid opacity-10 pointer-events-none" style="mask-image: linear-gradient(to bottom, black 20%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);"></div>
@@ -2330,6 +2330,37 @@
           border-right: 3px solid #fff;
           width: 21ch;
           animation: type 5s steps(21, end) infinite, blink 0.8s step-end infinite;
+        }
+        html[data-theme="light"] .fcg-final-cta,
+        html[data-theme="light"] .fcg-final-cta.bg-\[\#000\] {
+          background-color: #000 !important;
+          color: #fff !important;
+        }
+        html[data-theme="light"] .fcg-final-cta .text-white,
+        html[data-theme="light"] .fcg-final-cta .text-neutral-300,
+        html[data-theme="light"] .fcg-final-cta .group-hover\:text-white {
+          color: #fff !important;
+        }
+        html[data-theme="light"] .fcg-final-cta .text-neutral-400 {
+          color: rgba(255,255,255,.66) !important;
+        }
+        html[data-theme="light"] .fcg-final-cta .bg-white {
+          background-color: #fff !important;
+        }
+        html[data-theme="light"] .fcg-final-cta .text-black {
+          color: #000 !important;
+        }
+        html[data-theme="light"] .fcg-final-cta .bg-white\/5 {
+          background-color: rgba(255,255,255,.08) !important;
+        }
+        html[data-theme="light"] .fcg-final-cta .border-white\/10 {
+          border-color: rgba(255,255,255,.18) !important;
+        }
+        html[data-theme="light"] .fcg-final-cta .bg-neutral-900\/30 {
+          background-color: rgba(255,255,255,.08) !important;
+        }
+        html[data-theme="light"] .fcg-final-cta .border-neutral-800 {
+          border-color: rgba(255,255,255,.16) !important;
         }
       </style>
 
@@ -2485,17 +2516,17 @@
       }
 
       var markerData = [
-        { id: 'hongkong', location: [22.3193, 114.1694], size: 0.05, label: 'Hong Kong (HQ)', offset: [65, -5] },
-        { id: 'malaysia', location: [3.1390, 101.6869], size: 0.04, label: 'Malaysia', offset: [60, 5] },
-        { id: 'shenzhen', location: [22.5431, 114.0579], size: 0.04, label: 'Shenzhen', offset: [65, 8] },
-        { id: 'london', location: [51.5074, -0.1278], size: 0.04, label: 'London', offset: [-55, -15] },
+        { id: 'hongkong', location: [22.3193, 114.1694], size: 0.05, label: 'HKG (HQ)', offset: [65, -5] },
+        { id: 'malaysia', location: [3.1390, 101.6869], size: 0.04, label: 'KUL', offset: [60, 5] },
+        { id: 'shenzhen', location: [22.5431, 114.0579], size: 0.04, label: 'SZX', offset: [65, 8] },
+        { id: 'london', location: [51.5074, -0.1278], size: 0.04, label: 'LHR', offset: [-55, -15] },
       ];
 
       var arcData = [
-        { from: [22.3193, 114.1694], to: [3.1390, 101.6869], label: 'Hong Kong → Malaysia' },
-        { from: [22.3193, 114.1694], to: [22.5431, 114.0579], label: 'Hong Kong → Shenzhen' },
-        { from: [22.3193, 114.1694], to: [51.5074, -0.1278], label: 'Hong Kong → London' },
-        { from: [3.1390, 101.6869], to: [51.5074, -0.1278], label: 'Malaysia → London' },
+        { from: [22.3193, 114.1694], to: [3.1390, 101.6869], label: 'HKG → KUL' },
+        { from: [22.3193, 114.1694], to: [22.5431, 114.0579], label: 'HKG → SZX' },
+        { from: [22.3193, 114.1694], to: [51.5074, -0.1278], label: 'HKG → LHR' },
+        { from: [3.1390, 101.6869], to: [51.5074, -0.1278], label: 'KUL → LHR' },
       ];
 
       var labelEls = {};
