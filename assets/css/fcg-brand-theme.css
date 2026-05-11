@@ -282,6 +282,128 @@ body .fcg-tailark-action-frame > .fcg-tailark-button {
     width: 100% !important;
 }
 
+/* Responsive layout and spacing pass */
+body,
+body * {
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+}
+
+body img,
+body svg,
+body video {
+    max-width: 100%;
+}
+
+body img,
+body video {
+    height: auto;
+}
+
+body :is(h1, h2, h3, h4, p, li, a, button, span, strong, .tracking-tight, .tracking-tighter, .tracking-tech) {
+    letter-spacing: 0 !important;
+}
+
+body .fcg-dropdown-nav > div {
+    min-height: 4rem;
+    padding-left: clamp(1rem, 3vw, 2rem) !important;
+    padding-right: clamp(1rem, 3vw, 2rem) !important;
+}
+
+body .fcg-nav-trigger {
+    min-height: 2.5rem;
+    padding-left: 0.95rem !important;
+    padding-right: 0.95rem !important;
+    white-space: nowrap;
+}
+
+body .fcg-dropdown-panel {
+    max-width: calc(100vw - 2rem);
+    overflow: hidden;
+}
+
+body main > section {
+    scroll-margin-top: 5rem;
+}
+
+body main > section:not(.fcg-hero2):not(.fcg-default-hero):not(.fcg-tailark-hero) {
+    padding-left: clamp(1rem, 4vw, 3.5rem) !important;
+    padding-right: clamp(1rem, 4vw, 3.5rem) !important;
+}
+
+body main > section:first-of-type h1,
+body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
+    max-width: min(100%, 64rem) !important;
+}
+
+body main > section:first-of-type h1,
+body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target, .fcg-feature108-title, .fcg-showcase-copy h2, .fcg-mobile-feature h2, .fcg-marketing-title, #decision-paths h2, #product-map h2, main section h2) {
+    letter-spacing: 0 !important;
+    line-height: 1.08 !important;
+    text-wrap: balance;
+}
+
+body :is(.fcg-hero2-copy, .fcg-default-hero-copy, .fcg-tailark-copy, .fcg-feature108-copy, .fcg-mobile-subcopy, .fcg-showcase-description, .about3-copy, .about3-card-copy, #decision-paths p, #product-map p, #product-map li) {
+    line-height: 1.65 !important;
+}
+
+body :is(.fcg-hero2, .fcg-default-hero, .fcg-tailark-hero, #decision-paths, #product-map, .fcg-marketing-section, .fcg-showcase, .fcg-mobile-feature, .fcg-solution-features, .about3-section, .partner-grid-section) {
+    padding-left: clamp(1rem, 4vw, 3.5rem) !important;
+    padding-right: clamp(1rem, 4vw, 3.5rem) !important;
+}
+
+body :is(#decision-paths, #product-map) > div,
+body :is(.fcg-feature108-inner, .fcg-showcase-inner, .fcg-mobile-inner, .fcg-solution-features-inner) {
+    width: min(100%, 72rem);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body .fcg-hero2-content,
+body :is(.fcg-feature108-panel, .fcg-showcase-inner, .fcg-solution-feature-stage) {
+    gap: clamp(1.5rem, 3vw, 3rem) !important;
+}
+
+body :is(.fcg-hero2-preview-wrap, .fcg-tailark-preview-outer, .fcg-showcase-visual, .fcg-feature108-visual) {
+    min-width: 0;
+}
+
+body :is(.fcg-hero2-preview, .fcg-tailark-preview, .fcg-showcase-card, .fcg-feature108-card, .fcg-solution-feature-stage) {
+    max-width: 100%;
+}
+
+body :is(.fcg-hero2-preview img, .fcg-tailark-preview img, .fcg-feature108-product-shot, .fcg-showcase-panel img) {
+    display: block;
+    width: 100% !important;
+    max-height: min(62vh, 34rem);
+    object-fit: cover;
+}
+
+body :is(.product-card, .fcg-feature108-card, .fcg-showcase-card, .fcg-mobile-cta, .fcg-solution-feature-choice, .about3-card, .about3-achievements) {
+    overflow: hidden;
+}
+
+body :is(.product-card, .fcg-feature108-card, .fcg-showcase-card, .fcg-mobile-cta, .fcg-solution-feature-choice, .about3-card, .about3-achievements) :is(h3, p, li, span, strong) {
+    overflow-wrap: anywhere;
+}
+
+body :is(.product-card, .fcg-feature108-card, .fcg-showcase-card, .fcg-mobile-cta, .fcg-solution-feature-choice, .about3-card) {
+    padding: clamp(1.25rem, 2.5vw, 1.9rem) !important;
+}
+
+body :is(.fcg-feature108-tablist, .fcg-showcase-tablist, .fcg-store-actions, .fcg-showcase-actions, .fcg-final-cta-actions, .fcg-hero2-actions, .fcg-default-hero-actions, .fcg-tailark-actions) {
+    gap: 0.75rem !important;
+}
+
+body :is(.fcg-feature108-trigger, .fcg-showcase-tab, .fcg-showcase-step-trigger) {
+    min-height: 2.75rem;
+    text-align: left;
+}
+
 @media (max-width: 639px) {
     body .fcg-dropdown-nav > div {
         min-height: 3.75rem;
