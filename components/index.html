@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FCG · Component registry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #111827;
+    --accent: #f97316;
+    --bg: #ffffff;
+    --bg-soft: #f3f4f6;
+    --fg: #0f1114;
+    --muted: #6b7280;
+    --muted-2: #4b5563;
+    --border: #e5e7eb;
+    --r-md: 8px;
+    --r-2xl: 32px;
+    --r-pill: 9999px;
+    --shadow-xl: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.08) 0px 8px 10px -6px;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --dur-sm: 150ms;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 1080px; margin: 0 auto; padding: 96px 32px 160px; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-weight: 500;
+    font-size: 72px;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    margin: 16px 0 24px;
+  }
+  .lede {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--muted-2);
+    max-width: 640px;
+    line-height: 1.55;
+    margin: 0 0 80px;
+  }
+  h2 {
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin: 64px 0 32px;
+  }
+  .section-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .registry {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--border);
+  }
+  .registry li {
+    border-bottom: 1px solid var(--border);
+  }
+  .registry a {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 32px;
+    align-items: baseline;
+    padding: 24px 0;
+    text-decoration: none;
+    color: var(--fg);
+    transition: color var(--dur-sm) var(--ease);
+  }
+  .registry a:hover { color: var(--accent); }
+  .registry a:hover .arrow { transform: translateX(4px); color: var(--accent); }
+  .registry .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .registry .label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .registry .name {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .registry .desc {
+    font-size: 14px;
+    color: var(--muted-2);
+    line-height: 1.5;
+  }
+  .registry .desc em {
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 500;
+  }
+  .registry .arrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--muted);
+    transition: transform var(--dur-sm) var(--ease), color var(--dur-sm) var(--ease);
+  }
+  .closer {
+    margin-top: 96px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 640px) {
+    h1 { font-size: 48px; }
+    .registry a { grid-template-columns: 1fr; gap: 8px; }
+    .registry .num, .registry .arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="eyebrow">Components / registry</div>
+      <h1>The component library.</h1>
+      <p class="lede">Plug-and-play HTML files. Re-styled from 21st.dev primitives to FCG tokens and voice. Each file opens standalone, ships its own :root, and previews on white.</p>
+    </header>
+
+    <section>
+      <div class="section-head">
+        <h2>Batch A · structure &amp; story</h2>
+        <span class="section-meta">6 files · drop-in</span>
+      </div>
+
+      <ul class="registry">
+        <li>
+          <a href="about-section.html">
+            <span class="num">01</span>
+            <span class="label">
+              <span class="name">About section</span>
+              <span class="desc">Origin posture and the network's reach. <em>Asia-native. Globally connected.</em></span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="case-study.html">
+            <span class="num">02</span>
+            <span class="label">
+              <span class="name">Case study</span>
+              <span class="desc">A customer migration told in metrics and a pull-quote. <em>Scale that earns the claim.</em></span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="feature-grid.html">
+            <span class="num">03</span>
+            <span class="label">
+              <span class="name">Feature grid</span>
+              <span class="desc">Six numbered cards. The connection layer, six moves deep. <em>Already connected.</em></span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="features-with-section.html">
+            <span class="num">04</span>
+            <span class="label">
+              <span class="name">Features with section</span>
+              <span class="desc">Hero claim plus a four-card capability block. One dark card carries the scale.</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="accordion.html">
+            <span class="num">05</span>
+            <span class="label">
+              <span class="name">Accordion</span>
+              <span class="desc">Single-open shell with chevron rotation. Topic labels in sentence case, panels in fragments.</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="faq.html">
+            <span class="num">06</span>
+            <span class="label">
+              <span class="name">FAQ</span>
+              <span class="desc">Six questions about the network. Divider rows, mono numerals, infrastructure-density.</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Batch B · features &amp; capability</h2>
+        <span class="section-meta">6 files · drop-in</span>
+      </div>
+
+      <ul class="registry">
+        <li>
+          <a href="features-section-page.html">
+            <span class="num">07</span>
+            <span class="label">
+              <span class="name">Features section · Page-style</span>
+              <span class="desc">Hero card with a routing diagram, then four supporting cards. <em>The infrastructure behind how travel actually works.</em></span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="features-classic.html">
+            <span class="num">08</span>
+            <span class="label">
+              <span class="name">Features · Classic</span>
+              <span class="desc">Three numbered product cards, one per stack layer. <em>Connect · Operate · Experience.</em></span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="features-ai-chat.html">
+            <span class="num">09</span>
+            <span class="label">
+              <span class="name">Features · AI chat</span>
+              <span class="desc">A contract-mapping dialogue rendered as alternating soft cards. <em>AgreeEase maps clauses to fields.</em></span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="features-9.html">
+            <span class="num">10</span>
+            <span class="label">
+              <span class="name">Features · 9</span>
+              <span class="desc">Alternating illustration · text rows across the three audience cohorts.</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="feature-carousel.html">
+            <span class="num">11</span>
+            <span class="label">
+              <span class="name">Feature carousel</span>
+              <span class="desc">Pill rail on the left, product card on the right. Four slides across G-Link, F-Link, Atlas TMC OS, AgreeEase.</span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="bento-features.html">
+            <span class="num">12</span>
+            <span class="label">
+              <span class="name">Bento · Product features</span>
+              <span class="desc">Asymmetric grid. Stat headline, two wide cells, one tall dark rail, two small cells. <em>4.3M+ hotels.</em></span>
+            </span>
+            <span class="arrow">&rarr;</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <p class="closer">&gt; Component registry · batches A &amp; B · v2</p>
+  </main>
+</body>
+</html>

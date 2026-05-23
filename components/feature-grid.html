@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FCG · Feature grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Colors — from design-tokens.json */
+    --primary: #111827;
+    --primary-hover: #141b2b;
+    --primary-focus: #2e3848;
+    --accent: #f97316;
+    --bg: #ffffff;
+    --bg-soft: #f3f4f6;
+    --bg-dark: #050505;
+    --card-dark: #121212;
+    --fg: #0f1114;
+    --muted: #6b7280;
+    --muted-2: #4b5563;
+    --border: #e5e7eb;
+    --border-dark: #2a2a2a;
+    --border-soft: rgba(0,0,0,0.06);
+
+    /* Radii */
+    --r-xs: 2px;
+    --r-md: 8px;
+    --r-lg: 15px;
+    --r-xl: 24px;
+    --r-2xl: 32px;
+    --r-pill: 9999px;
+
+    /* Shadows */
+    --shadow-card: rgba(0, 0, 0, 0.15) 0px 0px 10px 0px;
+    --shadow-soft: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    --shadow-glow-accent: rgba(249, 115, 22, 0.4) 0px 0px 8px 0px;
+    --shadow-xl: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.08) 0px 8px 10px -6px;
+
+    /* Motion */
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --dur-sm: 150ms;
+    --dur-md: 300ms;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === COMPONENT: feature grid === */
+  .fcg-features {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 96px 32px 128px;
+  }
+
+  .fcg-features-head {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: end;
+    gap: 48px;
+    padding-bottom: 40px;
+    margin-bottom: 56px;
+    border-bottom: 1px solid var(--border);
+  }
+  .fcg-features-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+  }
+  .fcg-features-title {
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    color: var(--fg);
+    margin: 0 0 20px;
+    max-width: 18ch;
+  }
+  .fcg-features-clarifier {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--muted-2);
+    margin: 0;
+    max-width: 52ch;
+  }
+  .fcg-features-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-self: end;
+  }
+  .fcg-features-btn {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    border: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    border-radius: var(--r-pill);
+    transition:
+      background-color var(--dur-sm) var(--ease),
+      color var(--dur-sm) var(--ease),
+      transform var(--dur-sm) var(--ease);
+  }
+  .fcg-features-btn:focus-visible { outline: 2px solid #e9f1fb; outline-offset: 2px; }
+  .fcg-features-btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+    padding: 16px 32px;
+  }
+  .fcg-features-btn-primary:hover { background: var(--primary-hover); transform: scale(1.004); }
+  .fcg-features-btn-secondary {
+    background: rgba(0,0,0,0.06);
+    color: var(--primary);
+    padding: 14px 28px;
+  }
+  .fcg-features-btn-secondary:hover { background: rgba(0,0,0,0.09); }
+  .fcg-features-arrow {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none; stroke-width: 1.6;
+  }
+
+  /* Grid */
+  .fcg-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* Card — adapted card-product anatomy */
+  .fcg-features-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: var(--r-2xl);
+    border: 1px solid rgba(0,0,0,0);
+    padding: 40px;
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--dur-sm) var(--ease), box-shadow var(--dur-sm) var(--ease);
+  }
+  .fcg-features-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      rgba(0,0,0,0.12) 0px 28px 32px -6px,
+      rgba(0,0,0,0.1) 0px 10px 14px -8px;
+  }
+
+  .fcg-features-num {
+    position: absolute;
+    top: 32px; right: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 28px;
+    color: var(--border);
+    letter-spacing: -0.02em;
+  }
+
+  .fcg-features-icon {
+    width: 48px; height: 48px;
+    border-radius: var(--r-md);
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--primary);
+    margin-bottom: 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .fcg-features-rings {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 280px; height: 280px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 1;
+  }
+  .fcg-features-ring {
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+  }
+  .fcg-features-ring.r2 { inset: 40px; }
+  .fcg-features-ring.r3 { inset: 80px; }
+  .fcg-features-dot {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: var(--muted);
+    border-radius: 9999px;
+  }
+  .fcg-features-dot.d1 { top: -3px; left: 50%; transform: translateX(-50%); }
+  .fcg-features-dot.d2 { top: 50%; right: -3px; transform: translateY(-50%); }
+  .fcg-features-dot.d3 { bottom: -3px; left: 30%; }
+
+  .fcg-features-h3 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    position: relative;
+    z-index: 2;
+  }
+  .fcg-features-body {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--muted-2);
+    margin: 0 0 24px;
+    position: relative;
+    z-index: 2;
+  }
+  .fcg-features-body em {
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 500;
+  }
+  .fcg-features-meta {
+    margin-top: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+    background: #ffffff;
+  }
+  .fcg-features-meta-val { color: var(--fg); font-weight: 500; }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .fcg-features-grid { grid-template-columns: repeat(2, 1fr); }
+    .fcg-features-title { font-size: 44px; }
+  }
+  @media (max-width: 900px) {
+    .fcg-features { padding: 64px 24px 96px; }
+    .fcg-features-head {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 32px;
+    }
+    .fcg-features-actions { justify-self: start; }
+    .fcg-features-grid { grid-template-columns: 1fr; }
+    .fcg-features-title { font-size: 40px; }
+    .fcg-features-card { min-height: 380px; padding: 32px; }
+    .fcg-features-num { top: 24px; right: 24px; font-size: 24px; }
+    .fcg-features-rings { width: 220px; height: 220px; }
+    .fcg-features-icon { margin-bottom: 96px; }
+  }
+</style>
+</head>
+<body>
+  <!-- ============ COMPONENT MARKUP START ============ -->
+  <section class="fcg-features" aria-labelledby="fcg-features-title">
+    <header class="fcg-features-head">
+      <div>
+        <p class="fcg-features-eyebrow">CONNECTION LAYER · FEATURES</p>
+        <h2 class="fcg-features-title" id="fcg-features-title">The infrastructure behind how travel actually works.</h2>
+        <p class="fcg-features-clarifier">Six layers of the FCG connection stack. Open by design. Asia-native. Globally connected.</p>
+      </div>
+      <div class="fcg-features-actions">
+        <a href="#book" class="fcg-features-btn fcg-features-btn-primary">
+          Book a demo
+          <svg class="fcg-features-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#architecture" class="fcg-features-btn fcg-features-btn-secondary">Explore the architecture</a>
+      </div>
+    </header>
+
+    <div class="fcg-features-grid">
+
+      <!-- 01 Unified supply API -->
+      <article class="fcg-features-card">
+        <div class="fcg-features-num">01</div>
+        <div class="fcg-features-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12h6M14 12h6M12 4v6M12 14v6"/>
+            <circle cx="12" cy="12" r="2"/>
+          </svg>
+        </div>
+        <div class="fcg-features-rings" aria-hidden="true">
+          <div class="fcg-features-ring"></div>
+          <div class="fcg-features-ring r2"></div>
+          <div class="fcg-features-ring r3"></div>
+          <div class="fcg-features-dot d1"></div>
+          <div class="fcg-features-dot d2"></div>
+          <div class="fcg-features-dot d3"></div>
+        </div>
+        <h3 class="fcg-features-h3">Unified supply API</h3>
+        <p class="fcg-features-body">GDS, NDC, LCC direct, and channel managers. One authenticated call. <em>One connection to all of it.</em></p>
+        <div class="fcg-features-meta">
+          <span>Layer</span>
+          <span class="fcg-features-meta-val">API · GraphQL</span>
+        </div>
+      </article>
+
+      <!-- 02 Content deduplication -->
+      <article class="fcg-features-card">
+        <div class="fcg-features-num">02</div>
+        <div class="fcg-features-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="12" height="12" rx="2"/>
+            <rect x="9" y="9" width="12" height="12" rx="2"/>
+          </svg>
+        </div>
+        <div class="fcg-features-rings" aria-hidden="true">
+          <div class="fcg-features-ring"></div>
+          <div class="fcg-features-ring r2"></div>
+          <div class="fcg-features-ring r3"></div>
+          <div class="fcg-features-dot d2"></div>
+          <div class="fcg-features-dot d3"></div>
+        </div>
+        <h3 class="fcg-features-h3">Hotel content deduplication</h3>
+        <p class="fcg-features-body">Property identity resolved across sources. Room types normalised. Rates reconciled. <em>Not three listings for the same hotel.</em></p>
+        <div class="fcg-features-meta">
+          <span>Layer</span>
+          <span class="fcg-features-meta-val">Content · G-Link</span>
+        </div>
+      </article>
+
+      <!-- 03 NDC + GDS routing -->
+      <article class="fcg-features-card">
+        <div class="fcg-features-num">03</div>
+        <div class="fcg-features-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="5" cy="6" r="2"/>
+            <circle cx="19" cy="6" r="2"/>
+            <circle cx="12" cy="18" r="2"/>
+            <path d="M7 6h10M6 7l5 9M18 7l-5 9"/>
+          </svg>
+        </div>
+        <div class="fcg-features-rings" aria-hidden="true">
+          <div class="fcg-features-ring"></div>
+          <div class="fcg-features-ring r2"></div>
+          <div class="fcg-features-ring r3"></div>
+          <div class="fcg-features-dot d1"></div>
+          <div class="fcg-features-dot d3"></div>
+        </div>
+        <h3 class="fcg-features-h3">NDC + GDS routing</h3>
+        <p class="fcg-features-body">NDC sits alongside the GDS path, not in place of it. Fare families and ancillaries normalised across both. <em>Every major airline reachable in one query.</em></p>
+        <div class="fcg-features-meta">
+          <span>Layer</span>
+          <span class="fcg-features-meta-val">Routing · F-Link</span>
+        </div>
+      </article>
+
+      <!-- 04 Negotiated rate management -->
+      <article class="fcg-features-card">
+        <div class="fcg-features-num">04</div>
+        <div class="fcg-features-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v18M7 7h7a3 3 0 010 6H8a3 3 0 000 6h9"/>
+          </svg>
+        </div>
+        <div class="fcg-features-rings" aria-hidden="true">
+          <div class="fcg-features-ring"></div>
+          <div class="fcg-features-ring r2"></div>
+          <div class="fcg-features-ring r3"></div>
+          <div class="fcg-features-dot d1"></div>
+          <div class="fcg-features-dot d2"></div>
+        </div>
+        <h3 class="fcg-features-h3">Negotiated rate management</h3>
+        <p class="fcg-features-body">Corporate, RFP, and private fares pulled back from hotels and carriers. Client-scoped at query time. <em>The corporate-rate path wholesalers structurally can't supply.</em></p>
+        <div class="fcg-features-meta">
+          <span>Layer</span>
+          <span class="fcg-features-meta-val">Rates · Corporate</span>
+        </div>
+      </article>
+
+      <!-- 05 Booking audit + ops -->
+      <article class="fcg-features-card">
+        <div class="fcg-features-num">05</div>
+        <div class="fcg-features-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="16" rx="2"/>
+            <path d="M8 10h8M8 14h5M8 18h3"/>
+            <path d="M16 16l2 2 3-4"/>
+          </svg>
+        </div>
+        <div class="fcg-features-rings" aria-hidden="true">
+          <div class="fcg-features-ring"></div>
+          <div class="fcg-features-ring r2"></div>
+          <div class="fcg-features-ring r3"></div>
+          <div class="fcg-features-dot d2"></div>
+          <div class="fcg-features-dot d3"></div>
+        </div>
+        <h3 class="fcg-features-h3">Booking audit + ops layer</h3>
+        <p class="fcg-features-body">Booking-on-behalf trails. PNR servicing across sources. Incident routing into one queue. <em>Everything in one place. Nothing missed.</em></p>
+        <div class="fcg-features-meta">
+          <span>Layer</span>
+          <span class="fcg-features-meta-val">Operations · Atlas</span>
+        </div>
+      </article>
+
+      <!-- 06 Sandbox + dev env -->
+      <article class="fcg-features-card">
+        <div class="fcg-features-num">06</div>
+        <div class="fcg-features-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/>
+          </svg>
+        </div>
+        <div class="fcg-features-rings" aria-hidden="true">
+          <div class="fcg-features-ring"></div>
+          <div class="fcg-features-ring r2"></div>
+          <div class="fcg-features-ring r3"></div>
+          <div class="fcg-features-dot d1"></div>
+          <div class="fcg-features-dot d2"></div>
+          <div class="fcg-features-dot d3"></div>
+        </div>
+        <h3 class="fcg-features-h3">Sandbox + developer environment</h3>
+        <p class="fcg-features-body">Keys issued within 24 hours. Live paths against real sources. <em>Live in days, not quarters.</em></p>
+        <div class="fcg-features-meta">
+          <span>Layer</span>
+          <span class="fcg-features-meta-val">Developer · Sandbox</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+  <!-- ============ COMPONENT MARKUP END ============ -->
+</body>
+</html>

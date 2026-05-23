@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FCG · Features · Classic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* === FCG TOKENS — :root and base body verbatim from components.html === */
+    :root {
+      /* Colors — from design-tokens.json */
+      --primary: #111827;
+      --primary-hover: #141b2b;
+      --primary-focus: #2e3848;
+      --accent: #f97316;
+      --bg: #ffffff;
+      --bg-soft: #f3f4f6;
+      --bg-dark: #050505;
+      --card-dark: #121212;
+      --fg: #0f1114;
+      --muted: #6b7280;
+      --muted-2: #4b5563;
+      --border: #e5e7eb;
+      --border-dark: #2a2a2a;
+      --border-soft: rgba(0,0,0,0.06);
+
+      /* Radii */
+      --r-xs: 2px;
+      --r-md: 8px;
+      --r-lg: 15px;
+      --r-xl: 24px;
+      --r-2xl: 32px;
+      --r-pill: 9999px;
+
+      /* Shadows */
+      --shadow-card: rgba(0, 0, 0, 0.15) 0px 0px 10px 0px;
+      --shadow-soft: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+      --shadow-glow-accent: rgba(249, 115, 22, 0.4) 0px 0px 8px 0px;
+      --shadow-xl: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.08) 0px 8px 10px -6px;
+
+      /* Motion */
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur-sm: 150ms;
+      --dur-md: 300ms;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === COMPONENT-SCOPED STYLES === */
+    .fcg-feat-classic {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 32px 128px;
+    }
+
+    .fcg-feat-classic-head {
+      max-width: 760px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+
+    .fcg-feat-classic-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 0 0 20px;
+    }
+
+    .fcg-feat-classic-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 48px;
+      font-weight: 500;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--primary);
+      margin: 0 0 20px;
+    }
+
+    .fcg-feat-classic-title em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .fcg-feat-classic-lede {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.55;
+      color: var(--muted-2);
+      margin: 0;
+    }
+
+    .fcg-feat-classic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* Primary product card — radius 32, padding 40, shadow-xl */
+    .fcg-feat-classic-card {
+      position: relative;
+      background: #ffffff;
+      border-radius: var(--r-2xl);
+      padding: 40px;
+      box-shadow: var(--shadow-xl);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .fcg-feat-classic-card-num {
+      position: absolute;
+      top: 32px;
+      right: 32px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 30px;
+      color: var(--border);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .fcg-feat-classic-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--r-md);
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin-bottom: 24px;
+    }
+
+    .fcg-feat-classic-card-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Image placeholder rendered as a soft card */
+    .fcg-feat-classic-card-visual {
+      position: relative;
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 28px;
+      height: 168px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .fcg-feat-classic-card-visual::before {
+      content: "";
+      position: absolute;
+      inset: 16px 16px 44px 16px;
+      border-radius: 10px;
+      background:
+        linear-gradient(135deg, rgba(17,24,39,0.06) 0%, rgba(17,24,39,0.02) 60%),
+        repeating-linear-gradient(
+          0deg,
+          transparent 0,
+          transparent 22px,
+          rgba(17,24,39,0.06) 22px,
+          rgba(17,24,39,0.06) 23px
+        );
+    }
+
+    .fcg-feat-classic-card-visual-meta {
+      position: relative;
+      z-index: 1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted-2);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .fcg-feat-classic-card-h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: var(--primary);
+      margin: 0 0 12px;
+    }
+
+    .fcg-feat-classic-card-body {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--muted-2);
+      margin: 0 0 24px;
+    }
+
+    .fcg-feat-classic-card-body em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .fcg-feat-classic-card-meta {
+      margin-top: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Footer actions */
+    .fcg-feat-classic-actions {
+      margin-top: 56px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .fcg-feat-classic-btn {
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      transition:
+        background-color var(--dur-sm) var(--ease),
+        color var(--dur-sm) var(--ease),
+        transform var(--dur-sm) var(--ease);
+    }
+
+    .fcg-feat-classic-btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 16px 32px;
+      border-radius: var(--r-pill);
+    }
+    .fcg-feat-classic-btn-primary:hover {
+      background: var(--primary-hover);
+      transform: scale(1.004);
+    }
+
+    .fcg-feat-classic-btn-secondary {
+      background: rgba(0, 0, 0, 0.06);
+      color: var(--primary);
+      padding: 14px 28px;
+      border-radius: var(--r-pill);
+    }
+    .fcg-feat-classic-btn-secondary:hover {
+      background: rgba(0, 0, 0, 0.09);
+    }
+
+    .fcg-feat-classic-arrow {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+    }
+
+    .fcg-feat-classic-prompt {
+      margin-top: 40px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 960px) {
+      .fcg-feat-classic-grid { grid-template-columns: 1fr; }
+      .fcg-feat-classic-title { font-size: 36px; }
+      .fcg-feat-classic { padding: 64px 24px 96px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ============ COMPONENT MARKUP START ============ -->
+  <section class="fcg-feat-classic">
+
+    <header class="fcg-feat-classic-head">
+      <p class="fcg-feat-classic-eyebrow">Connect · Operate · Experience</p>
+      <h2 class="fcg-feat-classic-title">The infrastructure behind how travel <em>actually</em> works.</h2>
+      <p class="fcg-feat-classic-lede">Three layers of the stack. One open connection.</p>
+    </header>
+
+    <div class="fcg-feat-classic-grid">
+
+      <!-- Card 01 -->
+      <article class="fcg-feat-classic-card">
+        <span class="fcg-feat-classic-card-num">01</span>
+
+        <div class="fcg-feat-classic-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 7h16M4 12h16M4 17h10"/>
+            <circle cx="18" cy="17" r="2"/>
+          </svg>
+        </div>
+
+        <div class="fcg-feat-classic-card-visual" aria-hidden="true">
+          <span class="fcg-feat-classic-card-visual-meta">Fig · Supply graph</span>
+        </div>
+
+        <h3 class="fcg-feat-classic-card-h3">Connect the supply layer.</h3>
+        <p class="fcg-feat-classic-card-body">4.3M+ hotels. 24.9M+ room types. Every major airline. One open connection routes the lot — <em>deduplicated at the source</em>.</p>
+
+        <div class="fcg-feat-classic-card-meta">
+          <span>Layer</span>
+          <span>Supply · G-Link</span>
+        </div>
+      </article>
+
+      <!-- Card 02 -->
+      <article class="fcg-feat-classic-card">
+        <span class="fcg-feat-classic-card-num">02</span>
+
+        <div class="fcg-feat-classic-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="14" rx="2"/>
+            <path d="M3 9h18M8 14h4"/>
+          </svg>
+        </div>
+
+        <div class="fcg-feat-classic-card-visual" aria-hidden="true">
+          <span class="fcg-feat-classic-card-visual-meta">Fig · Operations console</span>
+        </div>
+
+        <h3 class="fcg-feat-classic-card-h3">Operate the TMC stack.</h3>
+        <p class="fcg-feat-classic-card-body">Atlas TMC OS replaces the spreadsheet, the inbox, the legacy system. Every client, every booking, every incident — <em>in one operational layer</em>.</p>
+
+        <div class="fcg-feat-classic-card-meta">
+          <span>Layer</span>
+          <span>Mid · Atlas TMC OS</span>
+        </div>
+      </article>
+
+      <!-- Card 03 -->
+      <article class="fcg-feat-classic-card">
+        <span class="fcg-feat-classic-card-num">03</span>
+
+        <div class="fcg-feat-classic-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="8"/>
+            <path d="M2 12h4M18 12h4M12 2v4M12 18v4"/>
+          </svg>
+        </div>
+
+        <div class="fcg-feat-classic-card-visual" aria-hidden="true">
+          <span class="fcg-feat-classic-card-visual-meta">Fig · Routing diagram</span>
+        </div>
+
+        <h3 class="fcg-feat-classic-card-h3">Experience the front end.</h3>
+        <p class="fcg-feat-classic-card-body">G-Link and F-Link route bookings to the traveller and the agent. Policy-enforced. APAC-native. <em>Live in days, not quarters</em>.</p>
+
+        <div class="fcg-feat-classic-card-meta">
+          <span>Layer</span>
+          <span>Front · G-Link / F-Link</span>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="fcg-feat-classic-actions">
+      <a class="fcg-feat-classic-btn fcg-feat-classic-btn-primary" href="#">
+        Book a demo
+        <svg class="fcg-feat-classic-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a class="fcg-feat-classic-btn fcg-feat-classic-btn-secondary" href="#">
+        Explore the architecture
+      </a>
+    </div>
+
+    <p class="fcg-feat-classic-prompt">&gt; 300+ travel brands. Already connected.</p>
+
+  </section>
+  <!-- ============ COMPONENT MARKUP END ============ -->
+</body>
+</html>

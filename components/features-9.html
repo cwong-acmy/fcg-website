@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FCG · Features · 9</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* === FCG TOKENS (verbatim from components.html) === */
+    :root {
+      --primary: #111827;
+      --primary-hover: #141b2b;
+      --primary-focus: #2e3848;
+      --accent: #f97316;
+      --bg: #ffffff;
+      --bg-soft: #f3f4f6;
+      --bg-dark: #050505;
+      --card-dark: #121212;
+      --fg: #0f1114;
+      --muted: #6b7280;
+      --muted-2: #4b5563;
+      --border: #e5e7eb;
+      --border-dark: #2a2a2a;
+      --border-soft: rgba(0,0,0,0.06);
+
+      --r-xs: 2px;
+      --r-md: 8px;
+      --r-lg: 15px;
+      --r-xl: 24px;
+      --r-2xl: 32px;
+      --r-pill: 9999px;
+
+      --shadow-card: rgba(0, 0, 0, 0.15) 0px 0px 10px 0px;
+      --shadow-soft: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+      --shadow-glow-accent: rgba(249, 115, 22, 0.4) 0px 0px 8px 0px;
+      --shadow-xl: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.08) 0px 8px 10px -6px;
+
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur-sm: 150ms;
+      --dur-md: 300ms;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === COMPONENT-SCOPED STYLES === */
+    .fcg-feat9 {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 128px 32px;
+    }
+
+    /* Intro */
+    .fcg-feat9-intro {
+      max-width: 720px;
+      margin: 0 auto 96px;
+      text-align: center;
+    }
+    .fcg-feat9-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 24px;
+    }
+    .fcg-feat9-h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 48px;
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      color: var(--fg);
+      margin: 0 0 16px;
+    }
+    .fcg-feat9-h2 em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+    .fcg-feat9-lede {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--muted-2);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Rows */
+    .fcg-feat9-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    .fcg-feat9-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 32px;
+      align-items: stretch;
+    }
+    .fcg-feat9-illus {
+      grid-column: span 2 / span 2;
+    }
+    .fcg-feat9-text {
+      grid-column: span 3 / span 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8px 0;
+    }
+
+    /* Illustration card (primary product card) */
+    .fcg-feat9-card {
+      position: relative;
+      background: #ffffff;
+      border-radius: var(--r-2xl);
+      padding: 40px;
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform var(--dur-sm) var(--ease);
+    }
+    .fcg-feat9-card:hover { transform: scale(1.004); }
+
+    .fcg-feat9-card .fcg-feat9-num {
+      position: absolute;
+      top: 28px; right: 32px;
+      font-family: 'Inter', sans-serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--border);
+      letter-spacing: -0.02em;
+    }
+    .fcg-feat9-icon-tile {
+      width: 48px; height: 48px;
+      border-radius: var(--r-md);
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--primary);
+    }
+
+    /* Inline soft-card stack inside the illustration card */
+    .fcg-feat9-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 32px;
+    }
+    .fcg-feat9-soft {
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .fcg-feat9-soft-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .fcg-feat9-soft-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .fcg-feat9-soft-dot {
+      width: 6px; height: 6px;
+      border-radius: 9999px;
+      background: var(--accent);
+      box-shadow: var(--shadow-glow-accent);
+      display: inline-block;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    /* Connection diagram (illustration variant) */
+    .fcg-feat9-diag {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+    .fcg-feat9-node {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+    .fcg-feat9-node.fcg-feat9-node-center {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .fcg-feat9-arrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Meta strip at card bottom */
+    .fcg-feat9-meta {
+      margin-top: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Text column */
+    .fcg-feat9-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 16px;
+    }
+    .fcg-feat9-h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+      margin: 0 0 12px;
+    }
+    .fcg-feat9-h3 em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+    .fcg-feat9-clarifier {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--muted-2);
+      line-height: 1.55;
+      margin: 0 0 20px;
+    }
+    .fcg-feat9-clarifier em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+    .fcg-feat9-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .fcg-feat9-bullets li {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding-left: 16px;
+      position: relative;
+    }
+    .fcg-feat9-bullets li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* CTA row below the feature rows */
+    .fcg-feat9-cta {
+      margin-top: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .fcg-feat9-btn {
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      transition:
+        background-color var(--dur-sm) var(--ease),
+        color var(--dur-sm) var(--ease),
+        transform var(--dur-sm) var(--ease);
+    }
+    .fcg-feat9-btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 16px 32px;
+      border-radius: var(--r-pill);
+    }
+    .fcg-feat9-btn-primary:hover {
+      background: var(--primary-hover);
+      transform: scale(1.004);
+    }
+    .fcg-feat9-btn-secondary {
+      background: rgba(0, 0, 0, 0.06);
+      color: var(--primary);
+      padding: 14px 28px;
+      border-radius: var(--r-pill);
+    }
+    .fcg-feat9-btn-secondary:hover { background: rgba(0, 0, 0, 0.09); }
+    .fcg-feat9-arrow-icon {
+      width: 16px; height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .fcg-feat9 { padding: 80px 24px; }
+      .fcg-feat9-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .fcg-feat9-illus, .fcg-feat9-text {
+        grid-column: span 1 / span 1;
+      }
+      .fcg-feat9-h2 { font-size: 36px; }
+      .fcg-feat9-h3 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="fcg-feat9" aria-labelledby="fcg-feat9-title">
+
+    <!-- Intro -->
+    <div class="fcg-feat9-intro">
+      <p class="fcg-feat9-eyebrow">Capabilities · 03</p>
+      <h2 class="fcg-feat9-h2" id="fcg-feat9-title">The infrastructure behind how travel <em>actually works</em>.</h2>
+      <p class="fcg-feat9-lede">Three layers. One open network. Connect supply, route bookings, operate the program.</p>
+    </div>
+
+    <!-- Rows -->
+    <div class="fcg-feat9-rows">
+
+      <!-- Row 01 -->
+      <article class="fcg-feat9-row">
+        <div class="fcg-feat9-illus">
+          <div class="fcg-feat9-card">
+            <div class="fcg-feat9-num">01</div>
+            <div class="fcg-feat9-icon-tile" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6" cy="12" r="2.5"/>
+                <circle cx="18" cy="6" r="2.5"/>
+                <circle cx="18" cy="18" r="2.5"/>
+                <path d="M8.5 11l7-4M8.5 13l7 4"/>
+              </svg>
+            </div>
+            <div class="fcg-feat9-stack">
+              <div class="fcg-feat9-soft">
+                <span class="fcg-feat9-soft-label">Hotels</span>
+                <span class="fcg-feat9-soft-value">4.3M+</span>
+              </div>
+              <div class="fcg-feat9-soft">
+                <span class="fcg-feat9-soft-label">Room types</span>
+                <span class="fcg-feat9-soft-value">24.9M+</span>
+              </div>
+              <div class="fcg-feat9-soft">
+                <span class="fcg-feat9-soft-label">Airlines</span>
+                <span class="fcg-feat9-soft-value"><span class="fcg-feat9-soft-dot"></span>Every major</span>
+              </div>
+            </div>
+            <div class="fcg-feat9-meta">
+              <span>Layer</span>
+              <span>Supply / G-Link</span>
+            </div>
+          </div>
+        </div>
+        <div class="fcg-feat9-text">
+          <p class="fcg-feat9-tag">For builders &amp; platforms</p>
+          <h3 class="fcg-feat9-h3">The inventory that <em>everything connects to</em>.</h3>
+          <p class="fcg-feat9-clarifier">G-Link consolidates global supply into one deduplicated API. Hotels, rooms, airlines. Already mapped.</p>
+          <ul class="fcg-feat9-bullets">
+            <li>One API · all supply</li>
+            <li>Deduplicated content</li>
+            <li>APAC-native coverage</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Row 02 -->
+      <article class="fcg-feat9-row">
+        <div class="fcg-feat9-illus">
+          <div class="fcg-feat9-card">
+            <div class="fcg-feat9-num">02</div>
+            <div class="fcg-feat9-icon-tile" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7h18M3 12h18M3 17h18"/>
+                <circle cx="7" cy="7" r="1.2" fill="currentColor"/>
+                <circle cx="14" cy="12" r="1.2" fill="currentColor"/>
+                <circle cx="10" cy="17" r="1.2" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="fcg-feat9-diag">
+              <div class="fcg-feat9-node">Source A</div>
+              <div class="fcg-feat9-arrow">&gt;</div>
+              <div class="fcg-feat9-node fcg-feat9-node-center">F-Link</div>
+            </div>
+            <div class="fcg-feat9-diag" style="margin-top:0;">
+              <div class="fcg-feat9-node">Source B</div>
+              <div class="fcg-feat9-arrow">&gt;</div>
+              <div class="fcg-feat9-node">Booking</div>
+            </div>
+            <div class="fcg-feat9-meta">
+              <span>Layer</span>
+              <span>Routing / F-Link</span>
+            </div>
+          </div>
+        </div>
+        <div class="fcg-feat9-text">
+          <p class="fcg-feat9-tag">For TMCs &amp; Travel Programs</p>
+          <h3 class="fcg-feat9-h3">Open connections, not <em>locked platforms</em>.</h3>
+          <p class="fcg-feat9-clarifier">F-Link routes bookings across sources without rewriting the stack. Policy stays put. Suppliers stay swappable.</p>
+          <ul class="fcg-feat9-bullets">
+            <li>Source-agnostic routing</li>
+            <li>Negotiated rates preserved</li>
+            <li>Full audit trail</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Row 03 -->
+      <article class="fcg-feat9-row">
+        <div class="fcg-feat9-illus">
+          <div class="fcg-feat9-card">
+            <div class="fcg-feat9-num">03</div>
+            <div class="fcg-feat9-icon-tile" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="16" rx="2"/>
+                <path d="M3 9h18M8 14h4M8 17h8"/>
+              </svg>
+            </div>
+            <div class="fcg-feat9-stack">
+              <div class="fcg-feat9-soft">
+                <span class="fcg-feat9-soft-label">Clients</span>
+                <span class="fcg-feat9-soft-value">300+</span>
+              </div>
+              <div class="fcg-feat9-soft">
+                <span class="fcg-feat9-soft-label">Status</span>
+                <span class="fcg-feat9-soft-value"><span class="fcg-feat9-soft-dot"></span>Live network</span>
+              </div>
+              <div class="fcg-feat9-soft">
+                <span class="fcg-feat9-soft-label">Deploy</span>
+                <span class="fcg-feat9-soft-value">Days · not quarters</span>
+              </div>
+            </div>
+            <div class="fcg-feat9-meta">
+              <span>Layer</span>
+              <span>Operate / Atlas TMC OS</span>
+            </div>
+          </div>
+        </div>
+        <div class="fcg-feat9-text">
+          <p class="fcg-feat9-tag">For Operators</p>
+          <h3 class="fcg-feat9-h3">Modernize the right part of the <em>stack first</em>.</h3>
+          <p class="fcg-feat9-clarifier">Atlas TMC OS replaces the spreadsheet, the inbox, the legacy system. Every client. Every booking. Every incident.</p>
+          <ul class="fcg-feat9-bullets">
+            <li>Unified operations console</li>
+            <li>Incident + audit trail</li>
+            <li>Scale that earns the claim</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="fcg-feat9-cta">
+      <a class="fcg-feat9-btn fcg-feat9-btn-primary" href="#book">
+        Book a demo
+        <svg class="fcg-feat9-arrow-icon" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a class="fcg-feat9-btn fcg-feat9-btn-secondary" href="#architecture">Explore the architecture</a>
+    </div>
+
+  </section>
+</body>
+</html>

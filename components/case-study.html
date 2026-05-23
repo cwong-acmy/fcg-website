@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FCG · Case study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* === FCG TOKENS — verbatim from components.html === */
+    :root {
+      /* Colors — from design-tokens.json */
+      --primary: #111827;
+      --primary-hover: #141b2b;
+      --primary-focus: #2e3848;
+      --accent: #f97316;
+      --bg: #ffffff;
+      --bg-soft: #f3f4f6;
+      --bg-dark: #050505;
+      --card-dark: #121212;
+      --fg: #0f1114;
+      --muted: #6b7280;
+      --muted-2: #4b5563;
+      --border: #e5e7eb;
+      --border-dark: #2a2a2a;
+      --border-soft: rgba(0,0,0,0.06);
+
+      /* Radii */
+      --r-xs: 2px;
+      --r-md: 8px;
+      --r-lg: 15px;
+      --r-xl: 24px;
+      --r-2xl: 32px;
+      --r-pill: 9999px;
+
+      /* Shadows */
+      --shadow-card: rgba(0, 0, 0, 0.15) 0px 0px 10px 0px;
+      --shadow-soft: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+      --shadow-glow-accent: rgba(249, 115, 22, 0.4) 0px 0px 8px 0px;
+      --shadow-xl: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.08) 0px 8px 10px -6px;
+
+      /* Motion */
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur-sm: 150ms;
+      --dur-md: 300ms;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === COMPONENT-SCOPED STYLES === */
+    .fcg-case-study {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 32px 128px;
+    }
+
+    /* Header block */
+    .fcg-case-study-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .fcg-case-study-eyebrow-dot {
+      width: 6px; height: 6px;
+      border-radius: var(--r-pill);
+      background: var(--accent);
+      box-shadow: var(--shadow-glow-accent);
+    }
+    .fcg-case-study-hero {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 64px;
+      align-items: end;
+      margin: 24px 0 64px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .fcg-case-study-claim {
+      font-size: 64px;
+      font-weight: 500;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin: 0;
+      color: var(--fg);
+    }
+    .fcg-case-study-clarifier {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--muted-2);
+      line-height: 1.55;
+      margin: 0;
+      max-width: 460px;
+    }
+    .fcg-case-study-clarifier em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* Bento grid — primary card + metric tiles */
+    .fcg-case-study-bento {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: minmax(180px, auto);
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    .fcg-case-study-feature {
+      grid-column: span 2;
+      grid-row: span 2;
+      background: #ffffff;
+      border-radius: var(--r-2xl);
+      padding: 40px;
+      box-shadow: var(--shadow-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+    }
+    .fcg-case-study-feature-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    .fcg-case-study-feature-meta strong {
+      color: var(--fg);
+      font-weight: 500;
+    }
+    .fcg-case-study-feature-body {
+      margin-top: 32px;
+    }
+    .fcg-case-study-feature h3 {
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin: 0 0 16px;
+      color: var(--fg);
+    }
+    .fcg-case-study-feature p {
+      font-size: 14px;
+      color: var(--muted-2);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .fcg-case-study-feature p em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+    .fcg-case-study-feature-foot {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    .fcg-case-study-feature-arrow {
+      display: inline-flex;
+      width: 36px; height: 36px;
+      border-radius: var(--r-pill);
+      background: var(--bg-soft);
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+    .fcg-case-study-feature-arrow svg {
+      width: 16px; height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+    }
+
+    /* Metric tile */
+    .fcg-case-study-metric {
+      grid-column: span 1;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--r-2xl);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 180px;
+    }
+    .fcg-case-study-metric-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    .fcg-case-study-metric-value {
+      font-size: 48px;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--fg);
+      margin: 24px 0 12px;
+    }
+    .fcg-case-study-metric-value .plus {
+      color: var(--accent);
+      margin-left: 2px;
+    }
+    .fcg-case-study-metric-note {
+      font-size: 13px;
+      color: var(--muted-2);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Visual placeholder card (replaces the original image tile) */
+    .fcg-case-study-visual {
+      grid-column: span 2;
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: var(--r-2xl);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 180px;
+      position: relative;
+      overflow: hidden;
+    }
+    .fcg-case-study-visual-frame {
+      flex: 1;
+      border: 1px dashed rgba(0,0,0,0.18);
+      border-radius: var(--r-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .fcg-case-study-visual-cap {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Narrative block (dark card) */
+    .fcg-case-study-narrative {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+    .fcg-case-study-narrative-main {
+      background: var(--card-dark);
+      color: #ffffff;
+      border: 1px solid var(--border-dark);
+      border-radius: var(--r-2xl);
+      padding: 40px;
+    }
+    .fcg-case-study-narrative-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 24px;
+    }
+    .fcg-case-study-narrative-main h3 {
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin: 0 0 24px;
+      color: #ffffff;
+    }
+    .fcg-case-study-narrative-main .beat {
+      margin: 0 0 20px;
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.75);
+    }
+    .fcg-case-study-narrative-main .beat:last-child { margin-bottom: 0; }
+    .fcg-case-study-narrative-main .beat em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+    .fcg-case-study-narrative-main .beat strong {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    /* Pull-quote card */
+    .fcg-case-study-quote {
+      background: #ffffff;
+      border-radius: var(--r-2xl);
+      padding: 40px;
+      box-shadow: var(--shadow-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .fcg-case-study-quote-mark {
+      font-family: 'Inter', sans-serif;
+      font-size: 64px;
+      font-weight: 500;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .fcg-case-study-quote-body {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      margin: 0 0 32px;
+    }
+    .fcg-case-study-quote-body em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+    .fcg-case-study-quote-attrib {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .fcg-case-study-quote-avatar {
+      width: 44px; height: 44px;
+      border-radius: var(--r-pill);
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--primary);
+      letter-spacing: 0.05em;
+    }
+    .fcg-case-study-quote-who {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.3;
+    }
+    .fcg-case-study-quote-who .name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--fg);
+    }
+    .fcg-case-study-quote-who .role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    /* CTA strip */
+    .fcg-case-study-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 40px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--r-2xl);
+    }
+    .fcg-case-study-cta-text {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .fcg-case-study-cta-prompt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    .fcg-case-study-cta-head {
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: var(--fg);
+      margin: 0;
+    }
+    .fcg-case-study-cta-head em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+    .fcg-case-study-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    /* Buttons (component-scoped) */
+    .fcg-case-study-btn {
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      transition:
+        background-color var(--dur-sm) var(--ease),
+        color var(--dur-sm) var(--ease),
+        transform var(--dur-sm) var(--ease);
+    }
+    .fcg-case-study-btn:focus-visible {
+      outline: 2px solid #e9f1fb;
+      outline-offset: 2px;
+    }
+    .fcg-case-study-btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 16px 32px;
+      border-radius: var(--r-pill);
+    }
+    .fcg-case-study-btn-primary:hover {
+      background: var(--primary-hover);
+      transform: scale(1.004);
+    }
+    .fcg-case-study-btn-secondary {
+      background: rgba(0,0,0,0.06);
+      color: var(--primary);
+      padding: 14px 28px;
+      border-radius: var(--r-pill);
+    }
+    .fcg-case-study-btn-secondary:hover {
+      background: rgba(0,0,0,0.09);
+    }
+    .fcg-case-study-btn-icon {
+      width: 16px; height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+    }
+
+    /* Closing prompt line */
+    .fcg-case-study-prompt {
+      margin-top: 48px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-align: center;
+    }
+    .fcg-case-study-prompt a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color var(--dur-sm) var(--ease), border-color var(--dur-sm) var(--ease);
+    }
+    .fcg-case-study-prompt a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .fcg-case-study-hero { grid-template-columns: 1fr; gap: 24px; }
+      .fcg-case-study-claim { font-size: 48px; }
+      .fcg-case-study-bento { grid-template-columns: repeat(2, 1fr); }
+      .fcg-case-study-feature { grid-column: span 2; }
+      .fcg-case-study-visual { grid-column: span 2; }
+      .fcg-case-study-narrative { grid-template-columns: 1fr; }
+      .fcg-case-study-cta { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 640px) {
+      .fcg-case-study { padding: 64px 20px 96px; }
+      .fcg-case-study-claim { font-size: 40px; }
+      .fcg-case-study-bento { grid-template-columns: 1fr; }
+      .fcg-case-study-metric { grid-column: span 1; }
+      .fcg-case-study-feature { grid-column: span 1; }
+      .fcg-case-study-visual { grid-column: span 1; }
+      .fcg-case-study-actions { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ============ COMPONENT MARKUP START ============ -->
+  <section class="fcg-case-study" aria-labelledby="fcg-case-study-claim">
+
+    <!-- Header -->
+    <header>
+      <div class="fcg-case-study-eyebrow">
+        <span class="fcg-case-study-eyebrow-dot" aria-hidden="true"></span>
+        Case study · APAC TMC · Atlas TMC OS
+      </div>
+      <div class="fcg-case-study-hero">
+        <h2 id="fcg-case-study-claim" class="fcg-case-study-claim">
+          Hong Kong TMC, off the legacy stack in one quarter.
+        </h2>
+        <p class="fcg-case-study-clarifier">
+          A 60-agent corporate desk replaced a fragmented mid-office with Atlas TMC OS. Live across four markets. <em>Already connected</em> to G-Link supply and F-Link content.
+        </p>
+      </div>
+    </header>
+
+    <!-- Bento: feature card + metric tiles + visual -->
+    <div class="fcg-case-study-bento">
+
+      <!-- Feature card -->
+      <article class="fcg-case-study-feature" aria-label="Featured case">
+        <div class="fcg-case-study-feature-meta">
+          <strong>Crescent Corporate Travel</strong>
+          <span>Hong Kong SAR · 60 agents</span>
+        </div>
+        <div class="fcg-case-study-feature-body">
+          <h3>Connected supply replaced four GDS workarounds.</h3>
+          <p>
+            One operating layer. Real inventory. Negotiated rates live on the same screen as published fares. The mid-office stopped reconciling. The desk stopped switching tabs. <em>The system started answering for itself.</em>
+          </p>
+        </div>
+        <div class="fcg-case-study-feature-foot">
+          <span class="fcg-case-study-feature-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+          <span>Connect · Operate · Experience</span>
+        </div>
+      </article>
+
+      <!-- Metric tiles -->
+      <article class="fcg-case-study-metric">
+        <div class="fcg-case-study-metric-label">Mid-office hours saved</div>
+        <div class="fcg-case-study-metric-value">62<span class="plus">%</span></div>
+        <p class="fcg-case-study-metric-note">Reconciliation and rate-loading collapsed into Atlas.</p>
+      </article>
+
+      <article class="fcg-case-study-metric">
+        <div class="fcg-case-study-metric-label">Supply paths live</div>
+        <div class="fcg-case-study-metric-value">12<span class="plus">+</span></div>
+        <p class="fcg-case-study-metric-note">Through G-Link. Air, hotel, ground. One contract surface.</p>
+      </article>
+
+      <article class="fcg-case-study-metric">
+        <div class="fcg-case-study-metric-label">Time to first live booking</div>
+        <div class="fcg-case-study-metric-value">11<span class="plus">d</span></div>
+        <p class="fcg-case-study-metric-note">From kickoff. Sandbox to production. Zero migrated tickets lost.</p>
+      </article>
+
+      <article class="fcg-case-study-metric">
+        <div class="fcg-case-study-metric-label">Annual transacted volume</div>
+        <div class="fcg-case-study-metric-value">$48M<span class="plus">+</span></div>
+        <p class="fcg-case-study-metric-note">Now routed through Atlas. Across Hong Kong · Singapore · KL · Shenzhen.</p>
+      </article>
+
+      <!-- Supporting visual -->
+      <article class="fcg-case-study-visual" aria-label="Client visual placeholder">
+        <div class="fcg-case-study-visual-frame">
+          Client visual · 16:9
+        </div>
+        <div class="fcg-case-study-visual-cap">
+          <span>Atlas TMC OS · Unified desk</span>
+          <span>Region: APAC</span>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Narrative + quote -->
+    <div class="fcg-case-study-narrative">
+
+      <article class="fcg-case-study-narrative-main">
+        <div class="fcg-case-study-narrative-meta">The migration · 11 days</div>
+        <h3>Modernize the right part of the stack first.</h3>
+        <p class="beat">
+          <strong>Before.</strong> Four GDS sessions. A separate hotel aggregator. Negotiated rates in spreadsheets. A mid-office reconciling tickets every morning. Every market ran its own version of the same workaround.
+        </p>
+        <p class="beat">
+          <strong>The connection.</strong> Atlas TMC OS deployed in a sandbox on day one. G-Link routed supply through one contract surface. F-Link deduplicated content. AgreeEase replaced manual rate-loading on day five. <em>No legacy data left behind.</em>
+        </p>
+        <p class="beat">
+          <strong>After.</strong> One desk. One inbox. One source of truth for every market the team operates in. The mid-office moved from reconciliation to oversight. Duty-of-care alerts route to the right agent on the first try.
+        </p>
+      </article>
+
+      <article class="fcg-case-study-quote">
+        <div class="fcg-case-study-quote-mark" aria-hidden="true">"</div>
+        <blockquote class="fcg-case-study-quote-body">
+          The migration was supposed to take two quarters. Atlas was live in eleven days. <em>The desk stopped asking which system to open.</em>
+        </blockquote>
+        <footer class="fcg-case-study-quote-attrib">
+          <span class="fcg-case-study-quote-avatar" aria-hidden="true">CK</span>
+          <span class="fcg-case-study-quote-who">
+            <span class="name">Carmen Kwok</span>
+            <span class="role">VP of operations · Crescent Corporate Travel</span>
+          </span>
+        </footer>
+      </article>
+
+    </div>
+
+    <!-- CTA strip -->
+    <div class="fcg-case-study-cta">
+      <div class="fcg-case-study-cta-text">
+        <span class="fcg-case-study-cta-prompt">For TMCs &amp; travel programs</span>
+        <h3 class="fcg-case-study-cta-head">Scale that earns the claim. <em>Already connected.</em></h3>
+      </div>
+      <div class="fcg-case-study-actions">
+        <a href="#" class="fcg-case-study-btn fcg-case-study-btn-primary">
+          Book a demo
+          <svg class="fcg-case-study-btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="fcg-case-study-btn fcg-case-study-btn-secondary">
+          Read the architecture
+        </a>
+      </div>
+    </div>
+
+    <!-- Closing arrow prompt -->
+    <p class="fcg-case-study-prompt">
+      &gt; <a href="#">See the supply paths</a>
+    </p>
+
+  </section>
+  <!-- ============ COMPONENT MARKUP END ============ -->
+</body>
+</html>

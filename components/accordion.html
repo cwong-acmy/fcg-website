@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FCG · Accordion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Colors — from design-tokens.json */
+    --primary: #111827;
+    --primary-hover: #141b2b;
+    --primary-focus: #2e3848;
+    --accent: #f97316;
+    --bg: #ffffff;
+    --bg-soft: #f3f4f6;
+    --bg-dark: #050505;
+    --card-dark: #121212;
+    --fg: #0f1114;
+    --muted: #6b7280;
+    --muted-2: #4b5563;
+    --border: #e5e7eb;
+    --border-dark: #2a2a2a;
+    --border-soft: rgba(0,0,0,0.06);
+
+    /* Radii */
+    --r-xs: 2px;
+    --r-md: 8px;
+    --r-lg: 15px;
+    --r-xl: 24px;
+    --r-2xl: 32px;
+    --r-pill: 9999px;
+
+    /* Shadows */
+    --shadow-card: rgba(0, 0, 0, 0.15) 0px 0px 10px 0px;
+    --shadow-soft: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    --shadow-glow-accent: rgba(249, 115, 22, 0.4) 0px 0px 8px 0px;
+    --shadow-xl: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.08) 0px 8px 10px -6px;
+
+    /* Motion */
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --dur-sm: 150ms;
+    --dur-md: 300ms;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === COMPONENT-SCOPED STYLES === */
+  .fcg-accordion-page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 96px 32px 128px;
+  }
+
+  .fcg-accordion-section-head {
+    margin-bottom: 48px;
+  }
+  .fcg-accordion-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .fcg-accordion-section-claim {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: var(--primary);
+    margin: 0 0 12px;
+  }
+  .fcg-accordion-section-clarifier {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--muted-2);
+    margin: 0;
+    max-width: 640px;
+  }
+
+  /* Shell — the framing card around the whole accordion */
+  .fcg-accordion-shell {
+    background: var(--bg);
+    border-radius: var(--r-2xl);
+    box-shadow: var(--shadow-xl);
+    padding: 8px 0;
+    overflow: hidden;
+  }
+
+  /* Each item */
+  .fcg-accordion-item {
+    border-bottom: 1px solid var(--border);
+  }
+  .fcg-accordion-item:last-child {
+    border-bottom: 0;
+  }
+
+  /* Trigger row */
+  .fcg-accordion-trigger {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    color: var(--primary);
+    transition: color var(--dur-sm) var(--ease);
+  }
+  .fcg-accordion-trigger:focus-visible {
+    outline: 2px solid #e9f1fb;
+    outline-offset: -2px;
+  }
+  .fcg-accordion-trigger:hover .fcg-accordion-label {
+    color: var(--accent);
+  }
+
+  .fcg-accordion-label-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .fcg-accordion-cat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .fcg-accordion-label {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+    transition: color var(--dur-sm) var(--ease);
+  }
+
+  /* Chevron */
+  .fcg-accordion-chevron {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    stroke: var(--primary);
+    stroke-width: 1.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform var(--dur-md) var(--ease);
+  }
+  .fcg-accordion-item[data-state="open"] .fcg-accordion-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Panel — animated via max-height + opacity */
+  .fcg-accordion-panel {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+      max-height var(--dur-md) var(--ease),
+      opacity var(--dur-md) var(--ease);
+  }
+  .fcg-accordion-item[data-state="open"] .fcg-accordion-panel {
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  .fcg-accordion-panel-inner {
+    padding: 0 32px 28px;
+  }
+  .fcg-accordion-body {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--muted-2);
+    margin: 0;
+  }
+  .fcg-accordion-body em {
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 500;
+  }
+  .fcg-accordion-body + .fcg-accordion-body {
+    margin-top: 8px;
+  }
+  .fcg-accordion-list {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .fcg-accordion-list li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--muted-2);
+    padding-left: 16px;
+    position: relative;
+  }
+  .fcg-accordion-list li::before {
+    content: "·";
+    position: absolute;
+    left: 4px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* CTA row beneath accordion */
+  .fcg-accordion-ctas {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+  .fcg-accordion-btn {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    border: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--r-pill);
+    text-decoration: none;
+    transition:
+      background-color var(--dur-sm) var(--ease),
+      color var(--dur-sm) var(--ease),
+      transform var(--dur-sm) var(--ease);
+  }
+  .fcg-accordion-btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+    padding: 16px 32px;
+  }
+  .fcg-accordion-btn-primary:hover {
+    background: var(--primary-hover);
+    transform: scale(1.004);
+  }
+  .fcg-accordion-btn-secondary {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--primary);
+    padding: 14px 28px;
+  }
+  .fcg-accordion-btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.09);
+  }
+  .fcg-accordion-end {
+    margin-top: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .fcg-accordion-page { padding: 64px 20px 96px; }
+    .fcg-accordion-trigger { padding: 20px 20px; gap: 16px; }
+    .fcg-accordion-panel-inner { padding: 0 20px 24px; }
+    .fcg-accordion-label { font-size: 16px; }
+    .fcg-accordion-section-claim { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+  <!-- ============ COMPONENT MARKUP START ============ -->
+  <main class="fcg-accordion-page">
+    <header class="fcg-accordion-section-head">
+      <div class="fcg-accordion-eyebrow">Architecture · FAQ</div>
+      <h2 class="fcg-accordion-section-claim">Open connections, not locked platforms.</h2>
+      <p class="fcg-accordion-section-clarifier">Five surfaces of the network — how supply, engagement, and migration paths come together.</p>
+    </header>
+
+    <section class="fcg-accordion" aria-label="Architecture details">
+      <div class="fcg-accordion-shell">
+
+        <div class="fcg-accordion-item" data-state="open">
+          <button class="fcg-accordion-trigger" aria-expanded="true" aria-controls="fcg-acc-panel-1" id="fcg-acc-trigger-1">
+            <span class="fcg-accordion-label-wrap">
+              <span class="fcg-accordion-cat">01 · Layer</span>
+              <span class="fcg-accordion-label">The connection layer</span>
+            </span>
+            <svg class="fcg-accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="fcg-accordion-panel" id="fcg-acc-panel-1" role="region" aria-labelledby="fcg-acc-trigger-1">
+            <div class="fcg-accordion-panel-inner">
+              <p class="fcg-accordion-body">One API to <em>4.3M+ hotels, 24.9M+ room types, and every major airline</em>. Direct contracts and aggregator routes resolved at the layer, not at the integration. 300+ travel brands, TMCs, and hotel groups. Already connected.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fcg-accordion-item" data-state="closed">
+          <button class="fcg-accordion-trigger" aria-expanded="false" aria-controls="fcg-acc-panel-2" id="fcg-acc-trigger-2">
+            <span class="fcg-accordion-label-wrap">
+              <span class="fcg-accordion-cat">02 · Supply</span>
+              <span class="fcg-accordion-label">Supply normalisation and dedup</span>
+            </span>
+            <svg class="fcg-accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="fcg-accordion-panel" id="fcg-acc-panel-2" role="region" aria-labelledby="fcg-acc-trigger-2">
+            <div class="fcg-accordion-panel-inner">
+              <p class="fcg-accordion-body">Content arrives messy. The layer normalises it. Property records, room types, and rates collapsed into one canonical inventory.</p>
+              <ul class="fcg-accordion-list">
+                <li>Hotel matching across GDS, NDC, and direct feeds</li>
+                <li>Room-type reconciliation with audit trails</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="fcg-accordion-item" data-state="closed">
+          <button class="fcg-accordion-trigger" aria-expanded="false" aria-controls="fcg-acc-panel-3" id="fcg-acc-trigger-3">
+            <span class="fcg-accordion-label-wrap">
+              <span class="fcg-accordion-cat">03 · Engagement</span>
+              <span class="fcg-accordion-label">Engagement models</span>
+            </span>
+            <svg class="fcg-accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="fcg-accordion-panel" id="fcg-acc-panel-3" role="region" aria-labelledby="fcg-acc-trigger-3">
+            <div class="fcg-accordion-panel-inner">
+              <p class="fcg-accordion-body">Four engagement types, mapped to where you are in the stack. G-Link for global supply. F-Link for fulfilment routing. Atlas TMC OS for operators rebuilding from the floor up. AgreeEase for contract logic.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fcg-accordion-item" data-state="closed">
+          <button class="fcg-accordion-trigger" aria-expanded="false" aria-controls="fcg-acc-panel-4" id="fcg-acc-trigger-4">
+            <span class="fcg-accordion-label-wrap">
+              <span class="fcg-accordion-cat">04 · Migration</span>
+              <span class="fcg-accordion-label">Atlas TMC OS migration paths</span>
+            </span>
+            <svg class="fcg-accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="fcg-accordion-panel" id="fcg-acc-panel-4" role="region" aria-labelledby="fcg-acc-trigger-4">
+            <div class="fcg-accordion-panel-inner">
+              <p class="fcg-accordion-body">Three paths off legacy mid-office systems. Side-by-side, module swap, or full cutover. Discovery call first. Operational audit second. Deployment plan third — from pilot office to global rollout.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fcg-accordion-item" data-state="closed">
+          <button class="fcg-accordion-trigger" aria-expanded="false" aria-controls="fcg-acc-panel-5" id="fcg-acc-trigger-5">
+            <span class="fcg-accordion-label-wrap">
+              <span class="fcg-accordion-cat">05 · Developer</span>
+              <span class="fcg-accordion-label">Sandbox and developer access</span>
+            </span>
+            <svg class="fcg-accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="fcg-accordion-panel" id="fcg-acc-panel-5" role="region" aria-labelledby="fcg-acc-trigger-5">
+            <div class="fcg-accordion-panel-inner">
+              <p class="fcg-accordion-body">Sandbox keys live within a day of request. Full schema, real shape responses, no production weight. API reference covers connection, supply, booking, and reconciliation surfaces.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="fcg-accordion-ctas">
+        <a class="fcg-accordion-btn fcg-accordion-btn-primary" href="#">Book a demo</a>
+        <a class="fcg-accordion-btn fcg-accordion-btn-secondary" href="#">Explore the architecture</a>
+      </div>
+      <div class="fcg-accordion-end">&gt; Asia-native. Globally connected.</div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var items = document.querySelectorAll('.fcg-accordion-item');
+      items.forEach(function (item) {
+        var trigger = item.querySelector('.fcg-accordion-trigger');
+        trigger.addEventListener('click', function () {
+          var isOpen = item.getAttribute('data-state') === 'open';
+          // Single-open behaviour: close all others first
+          items.forEach(function (other) {
+            other.setAttribute('data-state', 'closed');
+            var t = other.querySelector('.fcg-accordion-trigger');
+            if (t) t.setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.setAttribute('data-state', 'open');
+            trigger.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
+  </script>
+  <!-- ============ COMPONENT MARKUP END ============ -->
+</body>
+</html>
