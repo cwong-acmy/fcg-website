@@ -4,11 +4,9 @@
     <script>
         (function () {
             try {
-                const savedTheme = localStorage.getItem("theme");
-                if (savedTheme === "dark" || savedTheme === "light") {
-                    document.documentElement.setAttribute("data-theme", savedTheme);
-                    document.documentElement.classList.toggle("dark", savedTheme === "dark");
-                }
+                document.documentElement.setAttribute("data-theme", "light");
+                document.documentElement.classList.remove("dark");
+                localStorage.removeItem("theme");
             } catch (error) {}
         })();
     </script>
@@ -2272,7 +2270,7 @@
       <style>
         @keyframes type {
           0%, 10% { width: 0; }
-          40%, 90% { width: 24ch; }
+          40%, 90% { width: 100%; }
           100% { width: 0; }
         }
         @keyframes blink {
@@ -2280,17 +2278,26 @@
           50% { border-color: #fff; }
         }
         .typewriter-text {
+          display: inline-flex;
+          justify-content: flex-start;
+          width: 24ch;
+          max-width: 100%;
+        }
+        .typewriter-copy {
           display: inline-block;
           overflow: hidden;
           white-space: nowrap;
           border-right: 3px solid #fff;
-          width: 24ch;
+          width: 100%;
           animation: type 5s steps(24, end) infinite, blink 0.8s step-end infinite;
+        }
+        html[data-theme="light"] .typewriter-copy {
+          border-right-color: #0F1114;
         }
       </style>
 
       <h2 class="text-4xl md:text-5xl font-normal text-white tracking-tight mb-6 font-mono typewriter-text">
-        &gt; Start a conversation.
+        <span class="typewriter-copy">&gt; Start a conversation.</span>
       </h2>
 
       <p class="text-neutral-400 max-w-lg font-light leading-relaxed mb-10">
@@ -2334,20 +2341,24 @@
                 <p class="mt-2">TRAVEL_INFRASTRUCTURE</p>
             </div>
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
-                <span class="text-white mb-2">Platform</span>
-                <a href="../api-access.html" class="hover:text-white transition-colors">API Access</a>
-                <a href="../ai-booking-tool.html" class="hover:text-white transition-colors">AI Booking Tool</a>
-                <a href="../atlas.html" class="hover:text-white transition-colors">AtlasOS</a>
-                <a href="../agent-booking-tool.html" class="hover:text-white transition-colors">Agent Booking Tool</a>
+                <span class="text-white mb-2">Products</span>
+                <a href="glink-v4.html" class="hover:text-white transition-colors">G-Link</a>
+                <a href="flink-v4.html" class="hover:text-white transition-colors">F-Link</a>
+                <a href="../whitelabel.html" class="hover:text-white transition-colors">White-label</a>
                 <a href="../corporate-booking-tool.html" class="hover:text-white transition-colors">Corporate Booking Tool</a>
+                <a href="../agent-booking-tool.html" class="hover:text-white transition-colors">Agent Booking Tool</a>
+                <a href="../ai-booking-tool.html" class="hover:text-white transition-colors">AI Booking Tool</a>
+                <a href="../ai-mapping.html" class="hover:text-white transition-colors">AI Mapping</a>
                 <a href="../agreeease.html" class="hover:text-white transition-colors">AgreeEase</a>
+                <a href="../atlas.html" class="hover:text-white transition-colors">AtlasOS</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
                 <span class="text-white mb-2">Solutions</span>
-                <a href="../whitelabel.html" class="hover:text-white transition-colors">White-label</a>
-                <a href="../advisory-implementation.html" class="hover:text-white transition-colors">Advisory &amp; Implementation</a>
-                <a href="../ai-mapping.html" class="hover:text-white transition-colors">AI Mapping</a>
+                <a href="../atlas.html" class="hover:text-white transition-colors">TMCs</a>
+                <a href="../whitelabel.html" class="hover:text-white transition-colors">OTAs</a>
+                <a href="../ai-booking-tool.html" class="hover:text-white transition-colors">AI Apps</a>
+                <a href="../api-access.html" class="hover:text-white transition-colors">B2B Platforms</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
@@ -2735,8 +2746,6 @@
         (function () {
             const themeToggle = document.getElementById("themeToggle");
             const html = document.documentElement;
-            const savedTheme = localStorage.getItem("theme");
-            const activeTheme = savedTheme === "dark" || savedTheme === "light" ? savedTheme : "light";
 
             function applyTheme(theme) {
                 const isDark = theme === "dark";
@@ -2745,12 +2754,12 @@
                 if (themeToggle) themeToggle.checked = isDark;
             }
 
-            applyTheme(activeTheme);
+            applyTheme("light");
+            localStorage.removeItem("theme");
 
             if (themeToggle) {
                 themeToggle.addEventListener("change", function () {
                     const newTheme = this.checked ? "dark" : "light";
-                    localStorage.setItem("theme", newTheme);
                     applyTheme(newTheme);
                 });
             }
