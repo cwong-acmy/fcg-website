@@ -955,6 +955,149 @@
         html[data-theme="light"] [style*="border-bottom:1px solid rgba(255,255,255,.08)"] {
             border-color: var(--color-border) !important;
         }
+
+        /* Draft product pages use hard-coded dark inline styles; mirror index.html's theme behavior. */
+        html[data-theme="light"] .product-shell,
+        html[data-theme="light"] .product-shell section[style*="background:#050505"],
+        html[data-theme="light"] .product-shell section[style*="background: #050505"],
+        html[data-theme="light"] .product-shell section[style*="background:#030303"],
+        html[data-theme="light"] .product-shell section[style*="background: #030303"],
+        html[data-theme="light"] .product-shell section[style*="background:#0a0a0a"],
+        html[data-theme="light"] .product-shell section[style*="background: #0a0a0a"],
+        html[data-theme="light"] .product-shell section[style*="background:#000"],
+        html[data-theme="light"] .product-shell section[style*="background: #000"] {
+            background: var(--color-bg) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="color:#fff"],
+        html[data-theme="light"] .product-shell [style*="color: #fff"],
+        html[data-theme="light"] .product-shell [style*="color:#ffffff"],
+        html[data-theme="light"] .product-shell [style*="color: #ffffff"] {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="color:rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="color: rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="color:rgba(255, 255, 255"],
+        html[data-theme="light"] .product-shell [style*="color: rgba(255, 255, 255"] {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="border-top:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-top: 1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-bottom:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-bottom: 1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border: 1px solid rgba(255,255,255"] {
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-flink-copy h1,
+            .v2-flink-port strong,
+            .v2-flink-row .body strong,
+            .v2-flink-stat strong,
+            .v2-flink-bundle h2,
+            .v2-flink-proof h2,
+            .v2-flink-proof-card strong,
+            .v2-flink-cap-head h2,
+            .v2-flink-cap-item h3,
+            .v2-flink-cap-no,
+            .v2-flink-routes h2,
+            .v2-flink-route-card h3,
+            .v2-flink-scope h2,
+            .v2-flink-scope-card-head strong,
+            .v2-flink-scope-list li strong,
+            .v2-flink-faq-head h2,
+            .v2-flink-faq-q,
+            .v2-flink-faq-prompt
+        ) {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-flink-badge,
+            .v2-flink-copy p,
+            .v2-flink-panel-head .v2-flink-tag,
+            .v2-flink-panel-head small,
+            .v2-flink-port span,
+            .v2-flink-row .body span,
+            .v2-flink-row.muted .tag,
+            .v2-flink-stat span,
+            .v2-flink-bundle p,
+            .v2-flink-proof p.lede,
+            .v2-flink-proof-eyebrow,
+            .v2-flink-proof-card .label,
+            .v2-flink-proof-card .meta,
+            .v2-flink-proof-note,
+            .v2-flink-cap-eyebrow,
+            .v2-flink-cap-head p,
+            .v2-flink-cap-item p,
+            .v2-flink-cap-tag,
+            .v2-flink-routes p,
+            .v2-flink-scope p.lede,
+            .v2-flink-scope-eyebrow,
+            .v2-flink-scope-list li,
+            .v2-flink-faq-head p,
+            .v2-flink-faq-eyebrow,
+            .v2-flink-faq-num,
+            .v2-flink-faq-a
+        ) {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-flink-badge,
+            .v2-flink-panel,
+            .v2-flink-row,
+            .v2-flink-stat,
+            .v2-flink-proof-card,
+            .v2-flink-proof-note,
+            .v2-flink-cap-tag,
+            .v2-flink-scope-card,
+            .v2-flink-faq-btn-secondary
+        ) {
+            background: var(--color-card) !important;
+            border-color: var(--color-border) !important;
+            box-shadow: none !important;
+        }
+
+        html[data-theme="light"] .v2-flink-panel::after {
+            box-shadow: inset 0 0 0 1px rgba(15, 17, 20, 0.08) !important;
+        }
+
+        html[data-theme="light"] .v2-flink-bg {
+            background-image:
+                linear-gradient(rgba(15, 17, 20, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15, 17, 20, 0.07) 1px, transparent 1px) !important;
+        }
+
+        html[data-theme="light"] .v2-flink-line iconify-icon {
+            background: var(--color-bg) !important;
+        }
+
+        html[data-theme="light"] .v2-flink-line::before,
+        html[data-theme="light"] .v2-flink-cap-head,
+        html[data-theme="light"] .v2-flink-cap-item,
+        html[data-theme="light"] .v2-flink-scope-card-head,
+        html[data-theme="light"] .v2-flink-faq-list,
+        html[data-theme="light"] .v2-flink-faq-item,
+        html[data-theme="light"] .v2-flink-faq-foot {
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] :is(.v2-flink-btn-primary, .v2-flink-bundle-cta, .v2-flink-faq-btn-primary) {
+            background: var(--color-fg) !important;
+            color: var(--color-bg) !important;
+        }
+
+        html[data-theme="light"] :is(.v2-flink-btn-secondary, .v2-flink-faq-btn-secondary) {
+            background: var(--color-card) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
+        }
         /* ===== END V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
 
         /* ===== END GLOBAL LIGHT MODE OVERRIDES ===== */
