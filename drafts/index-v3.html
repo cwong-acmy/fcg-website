@@ -4,9 +4,11 @@
     <script>
         (function () {
             try {
-                document.documentElement.setAttribute("data-theme", "light");
-                document.documentElement.classList.remove("dark");
-                localStorage.removeItem("theme");
+                const savedTheme = localStorage.getItem("theme");
+                if (savedTheme === "dark" || savedTheme === "light") {
+                    document.documentElement.setAttribute("data-theme", savedTheme);
+                    document.documentElement.classList.toggle("dark", savedTheme === "dark");
+                }
             } catch (error) {}
         })();
     </script>
@@ -2754,12 +2756,15 @@
                 if (themeToggle) themeToggle.checked = isDark;
             }
 
-            applyTheme("light");
-            localStorage.removeItem("theme");
+            const savedTheme = localStorage.getItem("theme");
+            const activeTheme = savedTheme === "dark" || savedTheme === "light" ? savedTheme : "light";
+
+            applyTheme(activeTheme);
 
             if (themeToggle) {
                 themeToggle.addEventListener("change", function () {
                     const newTheme = this.checked ? "dark" : "light";
+                    localStorage.setItem("theme", newTheme);
                     applyTheme(newTheme);
                 });
             }
