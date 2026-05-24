@@ -14,8 +14,8 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F-Link — Air supply for the routes global APIs handle worst · FCG Group</title>
-    <meta name="description" content="F-Link is FCG's air ticket API. Anchored on Travelsky and Zhifei. Co-routed with G-Link through one mid-office. China-route depth first. Early stage, honestly scoped.">
+    <title>G-Link · The hotel supply layer corporate travel runs on · FCG Group</title>
+    <meta name="description" content="G-Link is FCG's hotel supply API. One integration across GDS, direct hotel, bedbank, and Asia-direct supply. Corporate-rate ready. 4.3M+ mapped hotels. 43 suppliers in the pipeline.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -921,16 +921,31 @@
             height: 18px;
         }
 
+        /* ===== V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
+        /* Bucket D highlighted card uses inline gradient with near-black stop */
+        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] {
+            background: linear-gradient(180deg, rgba(249,115,22,0.08), rgba(255,255,255,0.92)) !important;
+            border-color: rgba(249,115,22,0.35) !important;
+        }
+        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] p,
+        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] h3 {
+            color: var(--color-fg) !important;
+        }
+        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] .code-tag {
+            color: var(--color-muted) !important;
+        }
+        /* ===== END V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
+
         /* ===== END GLOBAL LIGHT MODE OVERRIDES ===== */
     </style>
-    <link rel="stylesheet" href="assets/css/fcg-brand-theme.css">
+    <link rel="stylesheet" href="../assets/css/fcg-brand-theme.css">
 </head>
 <body class="bg-background text-foreground antialiased">
     <!-- ===== MARINE HEADER SECTION ===== -->
     <nav class="marine-header-section fcg-dropdown-nav fixed top-0 z-50 w-full border-b">
         <div class="w-full px-4 md:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center gap-8">
-                <a href="index.html" class="flex items-center" style="color: var(--color-fg);" aria-label="FCG Group home">
+                <a href="../index.html" class="flex items-center" style="color: var(--color-fg);" aria-label="FCG Group home">
                     <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 28px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="currentColor"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="currentColor"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="currentColor"/></svg>
                 </a>
 
@@ -946,7 +961,7 @@
                                     <h3 class="fcg-products-group-heading">For builders & platforms</h3>
                                     <div class="fcg-products-group-title">Connect</div>
                                     <div class="fcg-products-list">
-                                        <a href="api-access.html" class="fcg-products-link">
+                                        <a href="../api-access.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:code-scan-linear" width="19" height="19"></iconify-icon></div>
                                             <div><p>API Access</p><span>Connect to G-Link and F-Link directly</span></div>
                                         </a>
@@ -956,15 +971,15 @@
                                     <h3 class="fcg-products-group-heading">For TMCs & Travel Programs</h3>
                                     <div class="fcg-products-group-title">Experience</div>
                                     <div class="fcg-products-list">
-                                        <a href="corporate-booking-tool.html" class="fcg-products-link">
+                                        <a href="../corporate-booking-tool.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
                                             <div><p>Corporate Booking Tool</p><span>Modern booking for managed travel programs</span></div>
                                         </a>
-                                        <a href="agreeease.html" class="fcg-products-link">
+                                        <a href="../agreeease.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:chart-2-linear" width="19" height="19"></iconify-icon></div>
                                             <div><p>AgreeEase</p><span>AI hotel sourcing, RFPs, and rate workflows</span></div>
                                         </a>
-                                        <a href="ai-booking-tool.html" class="fcg-products-link">
+                                        <a href="../ai-booking-tool.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:cpu-bolt-linear" width="19" height="19"></iconify-icon></div>
                                             <div><p>AI Booking Tool</p><span>Connect AI to live travel inventory</span></div>
                                         </a>
@@ -974,11 +989,11 @@
                                     <h3 class="fcg-products-group-heading">For Operators</h3>
                                     <div class="fcg-products-group-title">Operate</div>
                                     <div class="fcg-products-list">
-                                        <a href="atlas.html" class="fcg-products-link">
+                                        <a href="../atlas.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
                                             <div><p>Atlas TMC OS</p><span>Connect operational surfaces into one hub</span></div>
                                         </a>
-                                        <a href="agent-booking-tool.html" class="fcg-products-link">
+                                        <a href="../agent-booking-tool.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:case-round-linear" width="19" height="19"></iconify-icon></div>
                                             <div><p>Agent Booking Tool</p><span>Search and book every supplier in one flow</span></div>
                                         </a>
@@ -994,15 +1009,15 @@
                         </button>
                         <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
                             <div class="space-y-6 overflow-hidden">
-                                <a href="whitelabel.html" class="fcg-menu-link flex items-start gap-3">
+                                <a href="../whitelabel.html" class="fcg-menu-link flex items-start gap-3">
                                     <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:box-linear" width="19" height="19"></iconify-icon></div>
                                     <div><p class="text-sm font-medium">Whitelabel</p><span class="text-xs">Launch with a ready-made travel platform</span></div>
                                 </a>
-                                <a href="advisory-implementation.html" class="fcg-menu-link flex items-start gap-3">
+                                <a href="../advisory-implementation.html" class="fcg-menu-link flex items-start gap-3">
                                     <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:compass-linear" width="19" height="19"></iconify-icon></div>
                                     <div><p class="text-sm font-medium">Advisory &amp; Implementation</p><span class="text-xs">Plan, configure, and deploy the right stack</span></div>
                                 </a>
-                                <a href="ai-mapping.html" class="fcg-menu-link flex items-start gap-3">
+                                <a href="../ai-mapping.html" class="fcg-menu-link flex items-start gap-3">
                                     <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:magic-stick-3-linear" width="19" height="19"></iconify-icon></div>
                                     <div><p class="text-sm font-medium">AI Mapping</p><span class="text-xs">Clean hotel, room, and supplier data</span></div>
                                 </a>
@@ -1010,7 +1025,7 @@
                         </div>
                     </li>
                     <li class="fcg-dropdown-item relative">
-                        <a href="about.html" class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5">
+                        <a href="../about.html" class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5">
                             <span>About</span>
                         </a>
                     </li>
@@ -1158,6 +1173,79 @@
     gap: 14px;
     margin-top: 34px;
     flex-wrap: wrap;
+  }
+  .fcg-pricing-rows {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 3rem;
+  }
+  .fcg-pricing-rows article {
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 14px;
+    background: rgba(255,255,255,.02);
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+  .fcg-pricing-rows .fcg-pricing-label {
+    color: rgba(255,255,255,.6) !important;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .fcg-pricing-rows .fcg-pricing-value {
+    color: #fff !important;
+    font-family: 'Sora', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .fcg-pricing-rows .fcg-pricing-sub {
+    color: rgba(255,255,255,.5) !important;
+    font-size: .85rem;
+    line-height: 1.5;
+  }
+  .fcg-pricing-foot {
+    color: rgba(255,255,255,.45) !important;
+    font-size: .8rem;
+    margin-top: 1.25rem;
+    line-height: 1.6;
+  }
+  html[data-theme="light"] .fcg-pricing-rows article { background: rgba(15,17,20,.02); border-color: rgba(15,17,20,.1); }
+  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-label { color: rgba(15,17,20,.55) !important; }
+  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-value { color: var(--color-fg) !important; }
+  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-sub { color: rgba(15,17,20,.55) !important; }
+  html[data-theme="light"] .fcg-pricing-foot { color: rgba(15,17,20,.55) !important; }
+  .fcg-objection-q {
+    color: #fb923c !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    margin-bottom: .85rem;
+    font-weight: 500;
+  }
+  html[data-theme="light"] .fcg-objection-q { color: #fb923c !important; }
+  .fcg-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+  }
+  .fcg-logo-row span {
+    color: rgba(255,255,255,.65) !important;
+    font-family: 'Sora', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: .01em;
+  }
+  html[data-theme="light"] .fcg-logo-row span { color: rgba(15,17,20,.7) !important; }
+  @media (max-width: 768px) {
+    .fcg-pricing-rows { grid-template-columns: 1fr; }
   }
   .fcg-hero2-preview-wrap {
     position: relative;
@@ -2405,196 +2493,99 @@
   }
 </style>
 <main class="product-shell">
-  <section id="capabilities" style="position:relative;overflow:hidden;background:#050505;color:#fff;padding:8rem 1.5rem 6.5rem;">
-    <style>
-      .v2-flink-hero { position:relative; z-index:1; max-width: 80rem; margin: 0 auto; display:grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items:center; gap: 4.5rem; }
-      @media (max-width: 980px) { .v2-flink-hero { grid-template-columns: 1fr; gap: 3rem; } }
-      .v2-flink-bg { position:absolute; inset:0; pointer-events:none; opacity:.55;
-        background-image:
-          linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
-        background-size: 56px 56px;
-        mask-image: radial-gradient(ellipse at 70% 50%, #000 30%, transparent 70%);
-      }
-      .v2-flink-glow { position:absolute; top:-20%; right:-10%; width: 50rem; height: 50rem; pointer-events:none;
-        background: radial-gradient(circle, rgba(249,115,22,.22), transparent 60%);
-        filter: blur(40px);
-      }
-      .v2-flink-badge { display:inline-flex; align-items:center; gap:.6rem; padding:.55rem 1rem; border:1px solid rgba(255,255,255,.14); border-radius: 999px; background: rgba(255,255,255,.04); font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.04em; color:rgba(255,255,255,.74); margin-bottom: 2rem; }
-      .v2-flink-badge::before { content:""; width:6px; height:6px; border-radius:9999px; background:#fb923c; box-shadow: 0 0 12px rgba(249,115,22,.7); }
-      .v2-flink-copy h1 { color:#fff; font-size: clamp(2.4rem, 5vw, 3.85rem); font-weight: 500; letter-spacing:-.02em; line-height: 1.04; margin: 0 0 1.5rem; }
-      .v2-flink-copy h1 em { font-style:normal; color:#fb923c; }
-      .v2-flink-copy p { color: rgba(255,255,255,.66); font-size: 1.025rem; line-height: 1.65; max-width: 36rem; margin: 0; }
-      .v2-flink-cta { display:flex; align-items:center; flex-wrap:wrap; gap:.75rem; margin-top: 2.25rem; }
-      .v2-flink-btn { display:inline-flex; align-items:center; gap:.5rem; padding: .9rem 1.5rem; border-radius: 9999px; font-size: 14px; font-weight: 500; transition: transform 180ms ease, background 180ms ease, border-color 180ms ease; }
-      .v2-flink-btn-primary { background:#fff; color:#0a0a0a; }
-      .v2-flink-btn-primary:hover { transform: scale(1.01); }
-      .v2-flink-btn-secondary { background: rgba(255,255,255,.05); color:#fff; border:1px solid rgba(255,255,255,.14); }
-      .v2-flink-btn-secondary:hover { border-color: rgba(255,255,255,.3); }
+  <section id="capabilities" class="fcg-hero2">
+    <div class="fcg-hero2-glow" aria-hidden="true"><span></span><span></span><span></span></div>
 
-      .v2-flink-panel { position:relative; border:1px solid rgba(255,255,255,.1); border-radius: 28px; background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)); box-shadow: 0 30px 80px rgba(0,0,0,.45); padding: 1.75rem; }
-      .v2-flink-panel::after { content:""; position:absolute; inset:0; border-radius: 28px; pointer-events:none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05); }
-      .v2-flink-panel-head { display:flex; align-items:center; justify-content:space-between; padding-bottom: 1rem; border-bottom: 1px dashed rgba(255,255,255,.1); margin-bottom: 1.25rem; }
-      .v2-flink-panel-head .v2-flink-tag { display:inline-flex; align-items:center; gap:.45rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing:.06em; color:rgba(255,255,255,.55); text-transform: uppercase; }
-      .v2-flink-panel-head .v2-flink-tag::before { content:""; width:6px; height:6px; border-radius:9999px; background:#22c55e; box-shadow: 0 0 12px rgba(34,197,94,.7); }
-      .v2-flink-panel-head small { color:rgba(255,255,255,.4); font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.06em; text-transform: uppercase; }
-
-      .v2-flink-route { display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap:1.25rem; padding: 1rem 0 1.25rem; }
-      .v2-flink-port { text-align:center; }
-      .v2-flink-port strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 2rem; font-weight: 400; letter-spacing:.04em; line-height: 1; }
-      .v2-flink-port span { display:block; margin-top:.3rem; color:rgba(255,255,255,.5); font-size: 10.5px; letter-spacing:.14em; text-transform:uppercase; }
-      .v2-flink-line { position:relative; height:30px; }
-      .v2-flink-line::before { content:""; position:absolute; left:0; right:0; top:50%; border-top: 1px dashed rgba(255,255,255,.22); }
-      .v2-flink-line iconify-icon { position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); color:#fb923c; background:#050505; padding: 0 .35rem; }
-
-      .v2-flink-stack { display:flex; flex-direction:column; gap:.65rem; margin-top:.4rem; }
-      .v2-flink-row { display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap:.85rem; padding: .85rem .95rem; border:1px solid rgba(255,255,255,.08); border-radius: 14px; background: rgba(255,255,255,.025); }
-      .v2-flink-row .dot { width:.55rem; height:.55rem; border-radius:9999px; background:#fb923c; box-shadow: 0 0 10px rgba(249,115,22,.6); }
-      .v2-flink-row .body { display:flex; flex-direction:column; gap:.15rem; }
-      .v2-flink-row .body strong { color:#fff; font-size: .92rem; font-weight: 500; line-height:1.25; }
-      .v2-flink-row .body span { color:rgba(255,255,255,.5); font-size:.78rem; line-height:1.3; }
-      .v2-flink-row .tag { display:inline-flex; align-items:center; padding:.35rem .55rem; border-radius:9999px; background: rgba(249,115,22,.12); color:#fb923c; font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.04em; }
-      .v2-flink-row.muted .dot { background: rgba(255,255,255,.4); box-shadow: none; }
-      .v2-flink-row.muted .tag { background: rgba(255,255,255,.06); color: rgba(255,255,255,.55); }
-
-      .v2-flink-stats { display:grid; grid-template-columns: repeat(3, 1fr); gap:.65rem; margin-top: 1.1rem; }
-      .v2-flink-stat { border:1px solid rgba(255,255,255,.08); border-radius: 12px; background: rgba(255,255,255,.025); padding: .8rem .85rem; }
-      .v2-flink-stat strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 500; }
-      .v2-flink-stat span { display:block; margin-top:.25rem; color:rgba(255,255,255,.42); font-size: 10.5px; letter-spacing:.08em; text-transform: uppercase; }
-    </style>
-
-    <div class="v2-flink-glow" aria-hidden="true"></div>
-    <div class="v2-flink-bg" aria-hidden="true"></div>
-
-    <div class="v2-flink-hero">
-      <div class="v2-flink-copy">
-        <div class="v2-flink-badge">Product · F-Link</div>
-        <h1>Air supply for the routes <em>global APIs handle worst.</em></h1>
-        <p>F-Link is FCG's air ticket API — anchored on Travelsky and Zhifei, white-labeled into the same CBT that consumes G-Link. One vendor for hotel and air. One mid-office for both. Early stage, honestly scoped — China-route depth comes first.</p>
-        <div class="v2-flink-cta">
-          <a href="#getting-started" class="v2-flink-btn v2-flink-btn-primary">Book a demo<iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
-          <a href="#supply-buckets" class="v2-flink-btn v2-flink-btn-secondary">See where F-Link fits</a>
+    <div class="fcg-hero2-content">
+      <div class="fcg-hero2-copy-column">
+        <div class="fcg-hero2-badge">
+          Product · G-Link
+          <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
+        </div>
+        <h1>One API. Every corporate-rate hotel supply path. Built for TMCs.</h1>
+        <p class="fcg-hero2-copy">G-Link is the hotel API for TMCs serving corporate travelers. Four supply paths in one pipe. GDS, direct hotel, bedbank, Asia-direct. Corporate-rate ready. 4.3M+ mapped hotels. Deployed inside Jin Jiang, Atour, Home Inns.</p>
+        <div class="fcg-hero2-actions">
+          <a href="#getting-started" class="fcg-hero2-button fcg-hero2-button-primary">Schedule a walkthrough</a>
+          <a href="../api-access.html" class="fcg-hero2-button fcg-hero2-button-secondary">Read the API docs</a>
         </div>
       </div>
 
-      <div class="v2-flink-panel" aria-label="F-Link routing preview">
-        <div class="v2-flink-panel-head">
-          <div class="v2-flink-tag">F-Link · Live routing</div>
-          <small>route 4F · 06:55 → 09:40</small>
-        </div>
+      <div class="fcg-hero2-preview-wrap">
+        <div class="fcg-hero2-preview fcg-hero2-code-preview">
+          <div class="fcg-hero2-code-window" aria-label="G-Link API code example">
+            <div class="fcg-hero2-code-bar">
+              <div class="fcg-hero2-window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span>g-link / live supply</span>
+            </div>
+            <pre class="fcg-hero2-code-body"><code><span class="code-keyword">const</span> glink = <span class="code-keyword">new</span> GLink({
+  <span class="code-property">apiKey</span>: process.env.<span class="code-property">FCG_KEY</span>,
+  <span class="code-property">region</span>: <span class="code-string">"APAC"</span>
+});
 
-        <div class="v2-flink-route">
-          <div class="v2-flink-port"><strong>PVG</strong><span>Shanghai</span></div>
-          <div class="v2-flink-line"><iconify-icon icon="solar:plain-2-linear" width="20" height="20"></iconify-icon></div>
-          <div class="v2-flink-port"><strong>HKG</strong><span>Hong Kong</span></div>
-        </div>
+<span class="code-keyword">await</span> glink.<span class="code-method">hotels</span>.<span class="code-method">search</span>({
+  <span class="code-property">destination</span>: <span class="code-string">"HKG"</span>,
+  <span class="code-property">rateTypes</span>: [<span class="code-string">"corporate"</span>, <span class="code-string">"public"</span>],
+  <span class="code-property">supply</span>: [<span class="code-string">"gds"</span>, <span class="code-string">"direct"</span>, <span class="code-string">"asia"</span>],
+  <span class="code-property">preferCorporateRate</span>: <span class="code-keyword">true</span>
+});
 
-        <div class="v2-flink-stack">
-          <div class="v2-flink-row">
-            <span class="dot"></span>
-            <div class="body"><strong>Travelsky · primary anchor</strong><span>China gatekeeper · direct integration</span></div>
-            <span class="tag">LIVE</span>
+<span class="code-comment">// Four supply buckets. One pipe. Corporate-rate routed.</span></code></pre>
+            <div class="fcg-hero2-code-footer" aria-hidden="true">
+              <div class="fcg-hero2-code-chip"><span>Supply</span><strong>4.3M+ hotels</strong></div>
+              <div class="fcg-hero2-code-chip"><span>Network</span><strong>43 suppliers · 13 live</strong></div>
+              <div class="fcg-hero2-code-chip"><span>Asia</span><strong>4 chains deployed</strong></div>
+            </div>
           </div>
-          <div class="v2-flink-row">
-            <span class="dot"></span>
-            <div class="body"><strong>Zhifei · white-label partnership</strong><span>Front-end consistency with CBT</span></div>
-            <span class="tag">LIVE</span>
-          </div>
-          <div class="v2-flink-row muted">
-            <span class="dot"></span>
-            <div class="body"><strong>Bundled with G-Link mid-office</strong><span>Shared 天工 BMS for events</span></div>
-            <span class="tag">ATTACHED</span>
-          </div>
-        </div>
-
-        <div class="v2-flink-stats">
-          <div class="v2-flink-stat"><strong>2</strong><span>Anchor suppliers</span></div>
-          <div class="v2-flink-stat"><strong>China+APAC</strong><span>Route depth</span></div>
-          <div class="v2-flink-stat"><strong>1 BMS</strong><span>Hotel + Air</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="api-capabilities" style="position:relative;background:#050505;color:#fff;padding:7rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);">
-    <style>
-      .v2-flink-cap { max-width: 70rem; margin: 0 auto; }
-      .v2-flink-cap-head { display:grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 3rem; align-items:end; margin-bottom: 3.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(255,255,255,.1); }
-      @media (max-width: 820px) { .v2-flink-cap-head { grid-template-columns: 1fr; gap: 1.5rem; } }
-      .v2-flink-cap-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; color: rgba(255,255,255,.55); text-transform: uppercase; margin-bottom: 1rem; }
-      .v2-flink-cap-eyebrow::before { content:""; width: 1.6rem; height: 1px; background: rgba(255,255,255,.3); }
-      .v2-flink-cap-head h2 { color:#fff; font-size: clamp(2rem, 3.4vw, 2.85rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.06; margin: 0; }
-      .v2-flink-cap-head p { color: rgba(255,255,255,.62); font-size: 1rem; line-height: 1.7; margin: 0; }
-
-      .v2-flink-cap-list { display:flex; flex-direction:column; }
-      .v2-flink-cap-item { display:grid; grid-template-columns: 5.5rem minmax(0,1fr) 11rem; gap: 2.25rem; align-items:flex-start; padding: 2.25rem 0; border-bottom: 1px solid rgba(255,255,255,.08); transition: background 200ms ease; }
-      .v2-flink-cap-item:last-child { border-bottom: 0; }
-      .v2-flink-cap-item:hover { background: linear-gradient(90deg, rgba(249,115,22,.04), transparent 60%); }
-      @media (max-width: 820px) { .v2-flink-cap-item { grid-template-columns: 1fr; gap: .85rem; padding: 1.75rem 0; } }
-      .v2-flink-cap-no { font-family:'JetBrains Mono', monospace; font-size: 2.1rem; font-weight: 400; color: #fff; letter-spacing: -.02em; line-height: 1; padding-top: .15rem; opacity: .85; }
-      .v2-flink-cap-item .body { display:flex; flex-direction:column; gap: .65rem; }
-      .v2-flink-cap-item h3 { color:#fff; font-size: 1.3rem; font-weight: 500; letter-spacing: -.01em; margin: 0; line-height: 1.3; }
-      .v2-flink-cap-item p { color: rgba(255,255,255,.6); font-size: .95rem; line-height: 1.65; margin: 0; max-width: 36rem; }
-      .v2-flink-cap-tag { display:inline-flex; align-items:center; gap:.5rem; align-self: flex-start; padding: .55rem .85rem; border: 1px solid rgba(255,255,255,.12); border-radius: 9999px; background: rgba(255,255,255,.03); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .06em; color: rgba(255,255,255,.55); text-transform: uppercase; justify-self: flex-start; }
-      .v2-flink-cap-tag iconify-icon { color: #fb923c; }
-      .v2-flink-cap-item.feature .v2-flink-cap-no { color: #fb923c; }
-      .v2-flink-cap-item.feature .v2-flink-cap-tag { border-color: rgba(249,115,22,.35); background: rgba(249,115,22,.08); color: #fb923c; }
-    </style>
-
-    <div class="v2-flink-cap">
-      <div class="v2-flink-cap-head fade-up">
-        <div>
-          <div class="v2-flink-cap-eyebrow">Where F-Link earns its weight</div>
-          <h2>The routes everyone else gets wrong.</h2>
-        </div>
-        <p>F-Link is one API for air ticket supply, anchored on China's primary distribution backbone and routed through the same mid-office as G-Link. The headline isn't breadth — it's structural fit for the air paths global API competitors hand off.</p>
+  <section class="fcg-marketing-section" aria-label="Deployed across leading suppliers and chains" style="padding:4rem 1.5rem;">
+    <div class="fcg-marketing-inner" style="max-width:72rem;">
+      <div class="fcg-marketing-eyebrow">Connected to</div>
+      <div class="fcg-logo-row">
+        <span>Sabre</span>
+        <span>Jin Jiang</span>
+        <span>Atour</span>
+        <span>Home Inns</span>
+        <span>Hotelbeds</span>
+        <span>RateHawk</span>
+        <span>Shiji</span>
+        <span>HyperGuest</span>
       </div>
+    </div>
+  </section>
 
-      <div class="v2-flink-cap-list">
-        <div class="v2-flink-cap-item fade-up">
-          <div class="v2-flink-cap-no">01</div>
-          <div class="body">
-            <h3>Travelsky and Zhifei, white-labeled into the same CBT that consumes G-Link</h3>
-            <p>Travelsky is the gatekeeper of Chinese air ticket distribution and is not trivially addressable from outside China. F-Link integrates directly — front-end consistency between FCG's CBT and Zhifei's own white-label, with internal operators routed through the unified CBT to consolidate volume and data through F-Link.</p>
-          </div>
-          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:plain-2-linear" width="14" height="14"></iconify-icon>F-Link</span>
-        </div>
+  <section id="api-capabilities" class="fcg-marketing-section">
+    <div class="fcg-marketing-inner" style="max-width:72rem;">
+      <header class="fcg-marketing-header fade-up">
+        <div class="fcg-marketing-eyebrow">What's behind the door</div>
+        <h2 class="fcg-marketing-title">The supply network <span>is the product.</span></h2>
+        <p>G-Link is one API. Behind it: four supply paths. Corporate rates through GDS and direct hotel. Direct deployments inside Jin Jiang, Atour, and Home Inns. A mid-office that handles what happens after the booking.</p>
+      </header>
 
-        <div class="v2-flink-cap-item fade-up">
-          <div class="v2-flink-cap-no">02</div>
-          <div class="body">
-            <h3>Single vendor for hotel and air</h3>
-            <p>For TMCs already on G-Link, adding F-Link is one commercial relationship, one developer surface, and one integration partnership — not a separate air vendor to negotiate, integrate, and operate.</p>
-          </div>
-          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:link-circle-linear" width="14" height="14"></iconify-icon>Bundle</span>
-        </div>
-
-        <div class="v2-flink-cap-item fade-up">
-          <div class="v2-flink-cap-no">03</div>
-          <div class="body">
-            <h3>Same three doors as G-Link</h3>
-            <p>Skills, API, or SDK through the Open Platform. The F-Link MCP version of the API is exposed today — the recommended path for AI-driven integration. Next versioning to be announced.</p>
-          </div>
-          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:layers-minimalistic-linear" width="14" height="14"></iconify-icon>Open Platform</span>
-        </div>
-
-        <div class="v2-flink-cap-item fade-up">
-          <div class="v2-flink-cap-no">04</div>
-          <div class="body">
-            <h3>One mid-office, hotel and air · 天工</h3>
-            <p>Air bookings flow into the same Tian Gong BMS that handles hotel mid-office events — cancellations, reschedules, traveler emergencies, refund flows. Not a second operational stack to staff and learn.</p>
-          </div>
-          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:settings-linear" width="14" height="14"></iconify-icon>Operations</span>
-        </div>
-
-        <div class="v2-flink-cap-item feature fade-up">
-          <div class="v2-flink-cap-no">05</div>
-          <div class="body">
-            <h3>Honest about scope · early stage</h3>
-            <p>Two-person team. Roughly 5/10 maturity. Investment is scaled to where it pays off first — China-routed flows where global air APIs hand off, and bundles for TMCs already on G-Link. We don't lead with F-Link. We grow into it.</p>
-          </div>
-          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:info-circle-linear" width="14" height="14"></iconify-icon>Status</span>
-        </div>
+      <div class="fcg-marketing-features fade-up">
+        <article class="fcg-marketing-feature">
+          <h3>4.3M+ mapped hotels. Across every supply path that matters.</h3>
+          <p>GDS, direct hotel and NDC, bedbank aggregators, and Asia-direct supply. Connected through one open layer. Property mapping, currency normalisation, and content reconciliation, exposed as a single bookable feed. One integration replaces 180+ days of work per source.</p>
+        </article>
+        <article class="fcg-marketing-feature">
+          <h3>Corporate-rate access, not just inventory</h3>
+          <p>RFP-negotiated rates flow through GDS and direct hotel. The only channels that carry them. Wholesalers cannot deliver this. For large corporates, that's ~70% of booking volume.</p>
+        </article>
+        <article class="fcg-marketing-feature">
+          <h3>China and Asia depth no global player can match</h3>
+          <p>Direct G-Link deployments inside Jin Jiang, Atour, and Home Inns. China = 58% of Asia travel. Built and negotiated from inside the region, not retrofitted.</p>
+        </article>
+        <article class="fcg-marketing-feature">
+          <h3>Mid-office event handling, not just bookings · 天工</h3>
+          <p>Cancellations, holds, reschedules, and traveler emergencies are handled by the Tian Gong BMS. Direct-where-possible routing keeps accountability traceable end-to-end. Nothing lost in a re-routing chain.</p>
+        </article>
+        <article class="fcg-marketing-feature">
+          <h3>Quality-scored sources, not flat markups</h3>
+          <p>An internal data platform ranks supplier cancellation success, confirmation reliability, and price stability. Bookings flow through the most dependable path. ML-driven rate routing is the next step.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -2604,27 +2595,27 @@
       <header class="fcg-integration-header fade-up">
         <div class="fcg-integration-eyebrow">Three doors · Same backend</div>
         <h2 class="fcg-integration-title"><span>Skills, API, or SDK.</span><br>Self-serve registration. Natural-language integration.</h2>
-        <p>The Open Platform exposes F-Link through the same three integration methods that serve G-Link and the TMC API. Skills is the recommended default — the F-Link MCP version of the API is exposed today for AI-driven integration. API and SDK remain fully supported.</p>
+        <p>The Open Platform exposes G-Link through three integration paths. Skills is the recommended default. A developer describes the integration in plain English. AI generates the code from FCG's live docs. API and SDK are both production-ready.</p>
       </header>
 
       <div class="fcg-flow-grid fade-up">
         <div class="fcg-flow-step">
           <div class="fcg-flow-step-number">01</div>
           <h3>Skills · AI-native</h3>
-          <p>Paste a Skills command into your local AI tool. Describe the air search and booking flow in plain English. The model reads our docs and writes the integration against the F-Link MCP surface.</p>
-          <div class="code-tag">/skill fcg-flink</div>
+          <p>Paste a Skills command into your local AI tool. Describe the flow in plain English. The model reads our docs and writes the integration. Closer to one prompt than one project.</p>
+          <div class="code-tag">/skill fcg-glink</div>
         </div>
         <div class="fcg-flow-step">
           <div class="fcg-flow-step-number">02</div>
-          <h3>API · MCP version</h3>
-          <p>F-Link MCP version of the API is exposed today. Traditional REST integration for full control. Next versioning to be announced as F-Link matures.</p>
-          <div class="code-tag">POST /flink/air/search</div>
+          <h3>API · Versioned REST</h3>
+          <p>Traditional REST. V2 live. V3 in design, aligned to international standards. Full control for custom logic.</p>
+          <div class="code-tag">POST /v2/hotels/search</div>
         </div>
         <div class="fcg-flow-step">
           <div class="fcg-flow-step-number">03</div>
           <h3>SDK · Managed surface</h3>
-          <p>Typed primitives for air search, pricing, booking, and ticketing. Less boilerplate, faster onboarding for standard stacks already running G-Link's SDK.</p>
-          <div class="code-tag">npm i @fcg/flink</div>
+          <p>Typed primitives for search, rate resolution, booking, and mid-office events. Less boilerplate. Faster onboarding for standard stacks.</p>
+          <div class="code-tag">npm i @fcg/glink</div>
         </div>
       </div>
 
@@ -2633,76 +2624,115 @@
           <div class="fcg-code-dot"></div>
           <div class="fcg-code-dot"></div>
           <div class="fcg-code-dot"></div>
-          <span>flink-search.js</span>
+          <span>glink-search.js</span>
         </div>
-        <pre class="fcg-code-body"><code><span class="code-comment">// Search F-Link -- China-routed air, bundled with G-Link</span>
-<span class="code-key">const</span> results <span class="code-punct">=</span> <span class="code-key">await</span> flink<span class="code-punct">.</span><span class="code-method">air</span><span class="code-punct">.</span><span class="code-method">search</span><span class="code-punct">({</span>
-  <span class="code-key">origin</span><span class="code-punct">:</span>        <span class="code-string">"PVG"</span><span class="code-punct">,</span>
-  <span class="code-key">destination</span><span class="code-punct">:</span>   <span class="code-string">"HKG"</span><span class="code-punct">,</span>
-  <span class="code-key">departDate</span><span class="code-punct">:</span>    <span class="code-string">"2026-06-15"</span><span class="code-punct">,</span>
-  <span class="code-key">returnDate</span><span class="code-punct">:</span>    <span class="code-string">"2026-06-18"</span><span class="code-punct">,</span>
-  <span class="code-key">passengers</span><span class="code-punct">:</span>    <span class="code-number">1</span><span class="code-punct">,</span>
-  <span class="code-key">supply</span><span class="code-punct">:</span>        <span class="code-punct">[</span><span class="code-string">"travelsky"</span><span class="code-punct">,</span> <span class="code-string">"zhifei"</span><span class="code-punct">],</span>
-  <span class="code-key">bundleWith</span><span class="code-punct">:</span>    <span class="code-string">"glink"</span>
+        <pre class="fcg-code-body"><code><span class="code-comment">// Search G-Link -- four supply buckets, one call</span>
+<span class="code-key">const</span> results <span class="code-punct">=</span> <span class="code-key">await</span> glink<span class="code-punct">.</span><span class="code-method">hotels</span><span class="code-punct">.</span><span class="code-method">search</span><span class="code-punct">({</span>
+  <span class="code-key">destination</span><span class="code-punct">:</span>          <span class="code-string">"HKG"</span><span class="code-punct">,</span>
+  <span class="code-key">checkIn</span><span class="code-punct">:</span>              <span class="code-string">"2026-06-15"</span><span class="code-punct">,</span>
+  <span class="code-key">checkOut</span><span class="code-punct">:</span>             <span class="code-string">"2026-06-18"</span><span class="code-punct">,</span>
+  <span class="code-key">guests</span><span class="code-punct">:</span>               <span class="code-number">2</span><span class="code-punct">,</span>
+  <span class="code-key">preferCorporateRate</span><span class="code-punct">:</span>  <span class="code-key">true</span><span class="code-punct">,</span>
+  <span class="code-key">supply</span><span class="code-punct">:</span>               <span class="code-punct">[</span><span class="code-string">"gds"</span><span class="code-punct">,</span> <span class="code-string">"direct"</span><span class="code-punct">,</span> <span class="code-string">"bedbank"</span><span class="code-punct">,</span> <span class="code-string">"asia"</span><span class="code-punct">]</span>
 <span class="code-punct">});</span>
 
-<span class="code-comment">// Travelsky-routed. Shared BMS with G-Link.</span>
-console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>itineraries<span class="code-punct">.</span>length<span class="code-punct">);</span>   <span class="code-comment">// 38</span>
-console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>routedVia<span class="code-punct">);</span>           <span class="code-comment">// "travelsky"</span>
-console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>bundleEligible<span class="code-punct">);</span>      <span class="code-comment">// true</span></code></pre>
+<span class="code-comment">// 1,247 properties. RFP rates resolved. Deduplicated. Bookable.</span>
+console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>properties<span class="code-punct">.</span>length<span class="code-punct">);</span>     <span class="code-comment">// 1247</span>
+console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>corporateRatesHit<span class="code-punct">);</span>  <span class="code-comment">// 412</span>
+console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>buckets<span class="code-punct">);</span>             <span class="code-comment">// ["gds","direct","bedbank","asia"]</span></code></pre>
       </div>
     </div>
   </section>
 
-  <section id="supply-buckets" class="fcg-marketing-section">
+  <section id="supply-buckets" class="px-6 md:px-12 py-28 bg-[#000] border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 fade-up">
+        <div>
+          <div class="product-kicker text-xs text-orange-500 mb-4">Supply · Buckets</div>
+          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Four buckets. One pipe.</h2>
+        </div>
+        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Each bucket plays a different role. The combination is the moat. It's what every TMC actually buys when they integrate G-Link.</p>
+      </div>
+
+      <div class="fcg-flow-grid fade-up" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+        <div class="fcg-flow-step" style="text-align:left;">
+          <div class="fcg-flow-step-number">A</div>
+          <h3>The only channel that carries corporate rates.</h3>
+          <p style="margin:0 0 1.25rem;max-width:none;">RFP-negotiated rates do not pass through wholesale. For any large corporate, ~70% of bookings live here. Direct GDS integrations carry the rate types that disqualify every B2B wholesaler from serving corporate travel.</p>
+          <div class="code-tag">Bucket A · GDS Direct · Sabre · SabreABC live · Amadeus roadmap</div>
+        </div>
+
+        <div class="fcg-flow-step" style="text-align:left;">
+          <div class="fcg-flow-step-number">B</div>
+          <h3>The shortest accountability chain.</h3>
+          <p style="margin:0 0 1.25rem;max-width:none;">Direct contracts, channel managers, and G-Link deployed inside top Chinese hotel chains. The second path for corporate-negotiated rates. The most reliable channel in the stack when something goes wrong.</p>
+          <div class="code-tag">Bucket B · Direct Hotel &amp; NDC · HyperGuest · Shiji · Jin Jiang · Atour · Home Inns</div>
+        </div>
+
+        <div class="fcg-flow-step" style="text-align:left;">
+          <div class="fcg-flow-step-number">C</div>
+          <h3>Long-tail coverage. Not the moat.</h3>
+          <p style="margin:0 0 1.25rem;max-width:none;">Leisure-grade breadth for the long tail of properties not addressable elsewhere. Necessary for coverage. Wholesalers cannot deliver corporate-negotiated rates, and re-routing chains drop accountability. Included for breadth. Never sold as the value.</p>
+          <div class="code-tag">Bucket C · Bedbank · RateHawk · EPS · MIKI · Hotelbeds · Bedsonline live</div>
+        </div>
+
+        <div class="fcg-flow-step" style="text-align:left;border:1px solid rgba(249,115,22,0.3);background:linear-gradient(180deg,rgba(249,115,22,0.06),rgba(5,5,5,0.92));">
+          <div class="fcg-flow-step-number">D</div>
+          <h3>The bucket no global player can match.</h3>
+          <p style="margin:0 0 1.25rem;max-width:none;">Direct relationships with Chinese hotel chains, Chinese B2B platforms, and Asia-specialty suppliers. Built from inside the region. Not retrofitted from outside. China = <span style="color:#fb923c;">58%</span> of Asia travel. The most durable advantage in the stack.</p>
+          <div class="code-tag">Bucket D · China &amp; Asia Direct · Heytrip · Huitravel · Meituan · Dida live</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="fcg-marketing-section" aria-label="Common questions from TMC evaluation teams">
     <div class="fcg-marketing-inner" style="max-width:72rem;">
       <header class="fcg-marketing-header fade-up">
-        <div class="fcg-marketing-eyebrow">Air · Paths</div>
-        <h2 class="fcg-marketing-title">Where F-Link <span>fits.</span></h2>
-        <p>F-Link doesn't compete on global air breadth. It earns its weight on China-routed flows global APIs handle worst — and as the simplest air path for TMCs already on G-Link.</p>
+        <div class="fcg-marketing-eyebrow">For TMC eval teams</div>
+        <h2 class="fcg-marketing-title">The three questions <span>every TMC asks before integrating.</span></h2>
       </header>
 
-      <div class="fcg-marketing-features fade-up" style="grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem 4rem;">
+      <div class="fcg-marketing-features fade-up">
         <article class="fcg-marketing-feature">
-          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
-            <iconify-icon icon="solar:plain-2-linear" width="18" height="18"></iconify-icon>
-            Path A · Travelsky / Zhifei
-          </div>
-          <h3>The path global air APIs hand off.</h3>
-          <p>Travelsky is the gatekeeper of Chinese air ticket distribution — structurally not addressable from outside Asia without local relationships. F-Link integrates directly through the Travelsky / Zhifei partnership, with front-end consistency between FCG's CBT and Zhifei's own white-label.</p>
-          <p style="margin-top:1rem;color:rgba(255,255,255,.4)!important;font-size:.9rem;line-height:1.6;">Travelsky / Zhifei · Live · Unified CBT consumes F-Link directly · Internal TC operators routed through F-Link.</p>
+          <div class="fcg-objection-q">"We already use Hotelbeds or Didatravel."</div>
+          <h3>Wholesalers give you leisure inventory. They cannot carry corporate-negotiated rates.</h3>
+          <p>RFP rates only flow through GDS and direct hotel. For a large corporate, that is roughly 70% of booking volume unreachable through wholesale. G-Link adds the corporate-rate layer wholesalers structurally cannot deliver.</p>
         </article>
-
         <article class="fcg-marketing-feature">
-          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
-            <iconify-icon icon="solar:global-linear" width="18" height="18"></iconify-icon>
-            Path B · China outbound &amp; APAC
-          </div>
-          <h3>Routes anchored in Asia.</h3>
-          <p>China outbound and intra-APAC routes are the structural reason F-Link exists. Global air APIs cover them poorly because Travelsky integration, Chinese ticketing norms, and regional commercial relationships are not retrofittable from outside. F-Link is positioned where competitors hand off.</p>
-          <p style="margin-top:1rem;color:rgba(255,255,255,.4)!important;font-size:.9rem;line-height:1.6;">China domestic + outbound · APAC routes with Chinese carriers · Local payment, currency, ticketing native.</p>
+          <div class="fcg-objection-q">"We already use Spotnana or Nuitee."</div>
+          <h3>Most large TMCs multiplex APIs. The real question is your Asia exposure.</h3>
+          <p>If China sits in your client mix, your current API has a gap G-Link is built to close. Direct deployments inside Jin Jiang, Atour, and Home Inns. China is 58% of Asia travel and no global player has comparable depth.</p>
         </article>
-
         <article class="fcg-marketing-feature">
-          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
-            <iconify-icon icon="solar:link-circle-linear" width="18" height="18"></iconify-icon>
-            Path C · Co-routed with G-Link
-          </div>
-          <h3>One vendor. One mid-office. Hotel and air.</h3>
-          <p>For TMCs already integrating G-Link, F-Link is the simplest path to single-vendor coverage. Same Open Platform, same developer surface, same Tian Gong BMS for cancellations, reschedules, and traveler emergencies — air and hotel handled in one operational stack.</p>
-          <p style="margin-top:1rem;color:rgba(255,255,255,.4)!important;font-size:.9rem;line-height:1.6;">Single commercial relationship · Shared 天工 Tian Gong BMS · Same three doors as G-Link.</p>
-        </article>
-
-        <article class="fcg-marketing-feature">
-          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
-            <iconify-icon icon="solar:map-arrow-up-linear" width="18" height="18"></iconify-icon>
-            Path D · Air partners roadmap
-          </div>
-          <h3>Honest about what's next.</h3>
-          <p>F-Link is early stage and the team is two people. Additional air partners are added as they ship — not promised. Investment scales with the demand pattern we see: China-routed first, regional second, global breadth last.</p>
-          <p style="margin-top:1rem;color:rgba(255,255,255,.4)!important;font-size:.9rem;line-height:1.6;">MCP version exposed, next versioning TBA · Documented as shipped, no promised inventory · Default air layer for AI booking agents in Asia.</p>
+          <div class="fcg-objection-q">"Our dev team is already stretched thin."</div>
+          <h3>Skills lets a new developer integrate without talking to FCG.</h3>
+          <p>Three integration paths share the same backend. Skills (AI-native, natural-language), API (versioned REST), and SDK (managed surface). A new developer can ship the first working search call without talking to FCG. No human handoff required to start.</p>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section class="fcg-integration-section" aria-label="Published pricing">
+    <div class="fcg-integration-inner">
+      <header class="fcg-integration-header fade-up">
+        <div class="fcg-integration-eyebrow">Published pricing</div>
+        <h2 class="fcg-integration-title"><span>Public pricing,</span><br>not contact-sales gates.</h2>
+        <p>Standardized pricing across the API. No "contact sales" gate to qualify. Tiered by product surface: G-Link only, full OBT suite, white-label, or RFP delivery via Accomy.</p>
+      </header>
+
+      <div class="fcg-pricing-rows fade-up">
+        <article>
+          <div class="fcg-pricing-label">One-time setup</div>
+          <div class="fcg-pricing-value">From $8,000</div>
+          <div class="fcg-pricing-sub">Covers supplier activation, sandbox onboarding, and integration support.</div>
+        </article>
+        <article>
+          <div class="fcg-pricing-label">Monthly subscription</div>
+          <div class="fcg-pricing-value">$3,000 to $4,000</div>
+          <div class="fcg-pricing-sub">Tiered by product scope. G-Link only sits at the lower end of the range.</div>
+        </article>
+      </div>
+      <p class="fcg-pricing-foot fade-up">Directional. Final tiers depend on product scope and supplier activation. RFP delivery via Accomy is priced separately as a service.</p>
     </div>
   </section>
 </main>
@@ -2711,10 +2741,10 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
       <section id="getting-started" class="fcg-mobile-feature border-t border-white/10">
         <div class="fcg-mobile-inner">
           <header class="fcg-mobile-heading fade-up">
-            <div class="fcg-main-icon"><iconify-icon icon="solar:plain-2-linear" width="28" height="28"></iconify-icon></div>
+            <div class="fcg-main-icon"><iconify-icon icon="solar:code-square-linear" width="28" height="28"></iconify-icon></div>
             <div class="fcg-mobile-eyebrow">Get connected</div>
             <h2>Open connections, not locked platforms.</h2>
-            <p class="fcg-mobile-subcopy">F-Link bundles with G-Link for TMCs that need both hotel and air through one vendor — or stands alone for TMCs whose Asia exposure makes China air routing the question to solve.</p>
+            <p class="fcg-mobile-subcopy">300+ travel brands, TMCs, and hotel groups. Already connected. From a single sandbox call to the largest TMC migration. The layer corporate travel runs on, ready when the integration is.</p>
           </header>
 
           <div class="fcg-feature-grid">
@@ -2722,7 +2752,8 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
               <div class="fcg-feature-icon"><iconify-icon icon="solar:key-minimalistic-square-linear" width="22" height="22"></iconify-icon></div>
               <div>
                 <h3>Register on the Open Platform</h3>
-                <p>The same developer portal that serves G-Link and the TMC API. Self-serve registration. Sandbox credentials and live docs in one place. No human handoff to start integrating.</p>
+                <p>Self-serve developer registration. Sandbox credentials and live docs in one place. No human handoff to start integrating.</p>
+                <a href="../api-access.html" class="fcg-store-button" style="margin-top:14px;display:inline-flex;width:auto;"><iconify-icon icon="solar:key-minimalistic-square-linear" width="16" height="16"></iconify-icon>Open the platform</a>
               </div>
             </article>
 
@@ -2730,33 +2761,33 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
               <div class="fcg-feature-icon"><iconify-icon icon="solar:magic-stick-3-linear" width="22" height="22"></iconify-icon></div>
               <div>
                 <h3>Integrate via Skills, API, or SDK</h3>
-                <p>The F-Link MCP version of the API is live today. Skills is the recommended default — describe the air flow in natural language, AI writes the code against live docs.</p>
+                <p>Three doors, one backend. Skills is the recommended default. Describe the integration in plain English. AI writes the code against live docs.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
               <div class="fcg-feature-icon"><iconify-icon icon="solar:test-tube-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Test against China and APAC routes</h3>
-                <p>Run a Travelsky-routed air search end-to-end. Price, book, and ticket through the F-Link MCP surface. Confirm a sandbox itinerary against the Tian Gong BMS.</p>
+                <h3>Test against the four supply buckets</h3>
+                <p>Run a search that routes through GDS, direct hotel, bedbank, and Asia-direct. Resolve corporate rates. Confirm a sandbox booking end-to-end.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:link-circle-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:rocket-2-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Bundle with G-Link or stand alone</h3>
-                <p>One commercial relationship for hotel and air. One Open Platform login. One mid-office for both inventory types. Or take F-Link on its own where China-route depth is the question.</p>
+                <h3>Move to production</h3>
+                <p>Switch to production credentials once the connection is validated. Commercial terms, supplier activation, and Asia coverage handled in parallel.</p>
               </div>
             </article>
           </div>
 
           <div class="fcg-mobile-cta fade-up">
-            <h3>Air supply, where Travelsky integration matters.</h3>
-            <p>Book a demo to walk through the Travelsky path, China-routed air search, and the G-Link bundle — or jump straight into a sandbox.</p>
+            <h3>The supply layer corporate travel runs on.</h3>
+            <p>Book a walkthrough of the four supply buckets, corporate-rate routing, and Asia depth. Or skip the call and pull sandbox credentials.</p>
             <div class="fcg-store-actions">
-              <a href="#contact" class="fcg-store-button"><iconify-icon icon="solar:calendar-mark-linear" width="18" height="18"></iconify-icon>Book a demo</a>
-              <a href="#supply-buckets" class="fcg-store-button"><iconify-icon icon="solar:routing-2-linear" width="18" height="18"></iconify-icon>See where F-Link fits</a>
+              <a href="#capabilities" class="fcg-store-button"><iconify-icon icon="solar:calendar-mark-linear" width="18" height="18"></iconify-icon>Schedule a walkthrough</a>
+              <a href="../api-access.html" class="fcg-store-button"><iconify-icon icon="solar:key-minimalistic-square-linear" width="18" height="18"></iconify-icon>Register for sandbox</a>
             </div>
           </div>
         </div>
@@ -2776,24 +2807,24 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
             </div>
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
                 <span class="text-white mb-2">Platform</span>
-                <a href="api-access.html" class="hover:text-white transition-colors">API Access</a>
-                <a href="ai-booking-tool.html" class="hover:text-white transition-colors">AI Booking Tool</a>
-                <a href="atlas.html" class="hover:text-white transition-colors">Atlas TMC OS</a>
-                <a href="agent-booking-tool.html" class="hover:text-white transition-colors">Agent Booking Tool</a>
-                <a href="corporate-booking-tool.html" class="hover:text-white transition-colors">Corporate Booking Tool</a>
-                <a href="agreeease.html" class="hover:text-white transition-colors">AgreeEase</a>
+                <a href="../api-access.html" class="hover:text-white transition-colors">API Access</a>
+                <a href="../ai-booking-tool.html" class="hover:text-white transition-colors">AI Booking Tool</a>
+                <a href="../atlas.html" class="hover:text-white transition-colors">Atlas TMC OS</a>
+                <a href="../agent-booking-tool.html" class="hover:text-white transition-colors">Agent Booking Tool</a>
+                <a href="../corporate-booking-tool.html" class="hover:text-white transition-colors">Corporate Booking Tool</a>
+                <a href="../agreeease.html" class="hover:text-white transition-colors">AgreeEase</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
                 <span class="text-white mb-2">Solutions</span>
-                <a href="whitelabel.html" class="hover:text-white transition-colors">Whitelabel</a>
-                <a href="advisory-implementation.html" class="hover:text-white transition-colors">Advisory &amp; Implementation</a>
-                <a href="ai-mapping.html" class="hover:text-white transition-colors">AI Mapping</a>
+                <a href="../whitelabel.html" class="hover:text-white transition-colors">Whitelabel</a>
+                <a href="../advisory-implementation.html" class="hover:text-white transition-colors">Advisory &amp; Implementation</a>
+                <a href="../ai-mapping.html" class="hover:text-white transition-colors">AI Mapping</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
                 <span class="text-white mb-2">Company</span>
-                <a href="about.html" class="hover:text-white transition-colors">About</a>
+                <a href="../about.html" class="hover:text-white transition-colors">About</a>
                 <a href="mailto:hello@fusionconnectgroup.com" class="hover:text-white transition-colors">Contact</a>
             </div>
 
