@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FCG · Pulse Beams</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Page reset + centering shell ===== */
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #121212; /* FCG dark surface — replaces original bg-slate-950 (#020617) */
+      color: #ffffff;
+    }
+
+    /* ===== PulseBeams container =====
+       Original Tailwind: "w-full h-screen relative flex items-center justify-center antialiased overflow-hidden" + "bg-slate-950"
+       Original bg-slate-950 (#020617) → FCG dark surface #121212. */
+    .pulse-beams {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+      background: #121212;
+    }
+
+    /* children wrapper: "relative z-10" */
+    .pulse-beams-children {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* svg wrapper: "absolute inset-0 flex items-center justify-center" */
+    .pulse-beams-svg-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pulse-beams-svg-wrap svg {
+      display: block;
+      flex-shrink: 0;
+    }
+
+    /* base path stroke — original baseColor = var(--slate-800) ≈ #1e293b
+       → FCG dark border #2a2a2a */
+    .pulse-beams-path-base {
+      stroke: #2a2a2a;
+      stroke-width: 1;
+      fill: none;
+    }
+    /* overlay animated path */
+    .pulse-beams-path-pulse {
+      stroke-width: 2;
+      stroke-linecap: round;
+      fill: none;
+    }
+    /* connection point circles — fill=baseColor, stroke=accentColor (var(--slate-600) ≈ #475569)
+       → FCG: fill #2a2a2a, stroke rgba(255,255,255,0.25) */
+    .pulse-beams-node {
+      fill: #2a2a2a;
+      stroke: rgba(255,255,255,0.35);
+    }
+
+    /* ===== Button (original Tailwind, ported verbatim) =====
+       Original: bg-slate-800 w-[320px] z-40 h-[120px] no-underline group cursor-pointer
+                 relative shadow-2xl shadow-zinc-900 rounded-full p-px text-xs font-semibold
+                 leading-6 text-white inline-block
+       bg-slate-800 (#1e293b) → #2a2a2a (FCG dark border tone)
+       shadow-zinc-900 (#18181b) → keep dark glow */
+    .pulse-beams-btn {
+      background: #2a2a2a;
+      width: 320px;
+      z-index: 40;
+      height: 120px;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
+      border-radius: 9999px;
+      padding: 1px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1.5rem;
+      color: #ffffff;
+      display: inline-block;
+      border: 0;
+      font-family: inherit;
+    }
+    /* span: absolute inset-0 overflow-hidden rounded-full */
+    .pulse-beams-btn-glow-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: 9999px;
+    }
+    /* span: absolute inset-0 rounded-full
+       bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)]
+       opacity-0 transition-opacity duration-500 group-hover:opacity-100
+       cyan rgba(56,189,248,0.6) → FCG accent rgba(249,115,22,0.6) */
+    .pulse-beams-btn-glow {
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      background-image: radial-gradient(75% 100% at 50% 0%, rgba(249,115,22,0.6) 0%, rgba(249,115,22,0) 75%);
+      opacity: 0;
+      transition: opacity 500ms;
+    }
+    .pulse-beams-btn:hover .pulse-beams-btn-glow { opacity: 1; }
+
+    /* div: relative flex justify-center w-[320px] text-center space-x-2 h-[120px]
+            items-center z-10 rounded-full bg-zinc-950 py-0.5 px-4 ring-1 ring-white/10
+       bg-zinc-950 (#09090b) → #121212 (FCG dark surface) */
+    .pulse-beams-btn-inner {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      width: 320px;
+      text-align: center;
+      height: 120px;
+      align-items: center;
+      z-index: 10;
+      border-radius: 9999px;
+      background: #121212;
+      padding: 0.125rem 1rem;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.10);
+    }
+    .pulse-beams-btn-inner > * + * { margin-left: 0.5rem; } /* space-x-2 */
+
+    /* span: md:text-4xl text-base inline-block bg-clip-text text-transparent
+            bg-gradient-to-r from-neutral-300 via-neutral-600 to-neutral-300
+       Neutral gray gradient → keep neutral (color, not the accent beam) */
+    .pulse-beams-btn-label {
+      font-size: 1rem;
+      display: inline-block;
+      background: linear-gradient(to right, #d4d4d4, #525252, #d4d4d4);
+      -webkit-background-clip: text;
+              background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+    @media (min-width: 768px) {
+      .pulse-beams-btn-label { font-size: 2.25rem; line-height: 2.5rem; }
+    }
+
+    /* ===== Gradient stop animation =====
+       Original framer-motion animates linearGradient x1/x2/y1/y2 keyframes.
+       Ported to SVG SMIL <animate> on each gradient — same duration (2s),
+       ease=linear, repeatDelay=2s ⇒ implemented via dur=4s with keyTimes that
+       hold steady for the second half, matching the visual cadence. */
+  </style>
+</head>
+<body>
+
+  <!-- PulseBeams (className "bg-slate-950" recolored to FCG dark surface) -->
+  <div class="pulse-beams">
+
+    <!-- children wrapper: relative z-10 -->
+    <div class="pulse-beams-children">
+      <!-- button (original Aceternity demo, recolored) -->
+      <button class="pulse-beams-btn">
+        <span class="pulse-beams-btn-glow-wrap">
+          <span class="pulse-beams-btn-glow"></span>
+        </span>
+        <div class="pulse-beams-btn-inner">
+          <span class="pulse-beams-btn-label">Connect</span>
+        </div>
+      </button>
+    </div>
+
+    <!-- svg wrapper: absolute inset-0 flex items-center justify-center -->
+    <div class="pulse-beams-svg-wrap">
+      <svg
+        width="858"
+        height="434"
+        viewBox="0 0 858 434"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <!-- ===== Beam 1 ===== -->
+        <path class="pulse-beams-path-base" d="M269 220.5H16.5C10.9772 220.5 6.5 224.977 6.5 230.5V398.5" />
+        <path class="pulse-beams-path-pulse" d="M269 220.5H16.5C10.9772 220.5 6.5 224.977 6.5 230.5V398.5" stroke="url(#grad0)" />
+        <circle class="pulse-beams-node" cx="6.5" cy="398.5" r="6" />
+        <circle class="pulse-beams-node" cx="269" cy="220.5" r="6" />
+
+        <!-- ===== Beam 2 ===== -->
+        <path class="pulse-beams-path-base" d="M568 200H841C846.523 200 851 195.523 851 190V40" />
+        <path class="pulse-beams-path-pulse" d="M568 200H841C846.523 200 851 195.523 851 190V40" stroke="url(#grad1)" />
+        <circle class="pulse-beams-node" cx="851" cy="34" r="6.5" />
+        <circle class="pulse-beams-node" cx="568" cy="200" r="6" />
+
+        <!-- ===== Beam 3 ===== -->
+        <path class="pulse-beams-path-base" d="M425.5 274V333C425.5 338.523 421.023 343 415.5 343H152C146.477 343 142 347.477 142 353V426.5" />
+        <path class="pulse-beams-path-pulse" d="M425.5 274V333C425.5 338.523 421.023 343 415.5 343H152C146.477 343 142 347.477 142 353V426.5" stroke="url(#grad2)" />
+        <circle class="pulse-beams-node" cx="142" cy="427" r="6.5" />
+        <circle class="pulse-beams-node" cx="425.5" cy="274" r="6" />
+
+        <!-- ===== Beam 4 ===== -->
+        <path class="pulse-beams-path-base" d="M493 274V333.226C493 338.749 497.477 343.226 503 343.226H760C765.523 343.226 770 347.703 770 353.226V427" />
+        <path class="pulse-beams-path-pulse" d="M493 274V333.226C493 338.749 497.477 343.226 503 343.226H760C765.523 343.226 770 347.703 770 353.226V427" stroke="url(#grad3)" />
+        <circle class="pulse-beams-node" cx="770" cy="427" r="6.5" />
+        <circle class="pulse-beams-node" cx="493" cy="274" r="6" />
+
+        <!-- ===== Beam 5 ===== -->
+        <path class="pulse-beams-path-base" d="M380 168V17C380 11.4772 384.477 7 390 7H414" />
+        <path class="pulse-beams-path-pulse" d="M380 168V17C380 11.4772 384.477 7 390 7H414" stroke="url(#grad4)" />
+        <circle class="pulse-beams-node" cx="420.5" cy="6.5" r="6" />
+        <circle class="pulse-beams-node" cx="380" cy="168" r="6" />
+
+        <defs>
+          <!--
+            GradientColors stops — original:
+              start  #18CCFC (cyan)
+              middle #6344F5 (purple)
+              end    #AE48FF (magenta)
+            Recolored to FCG accent dominant + white highlight:
+              start  #f97316 (accent orange)
+              middle #f97316
+              end    #ffffff (moving highlight)
+            Stop offsets/opacities preserved exactly.
+          -->
+
+          <!-- grad0 — Beam 1 -->
+          <linearGradient id="grad0" gradientUnits="userSpaceOnUse"
+            x1="0%" x2="0%" y1="80%" y2="100%">
+            <stop offset="0%"   stop-color="#f97316" stop-opacity="0"/>
+            <stop offset="20%"  stop-color="#f97316" stop-opacity="1"/>
+            <stop offset="50%"  stop-color="#f97316" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+            <animate attributeName="x1" values="0%;0%;200%;200%" keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="x2" values="0%;0%;180%;180%" keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="y1" values="80%;0%;0%;0%"    keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="y2" values="100%;20%;20%;20%" keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+          </linearGradient>
+
+          <!-- grad1 — Beam 2 -->
+          <linearGradient id="grad1" gradientUnits="userSpaceOnUse"
+            x1="20%" x2="0%" y1="80%" y2="100%">
+            <stop offset="0%"   stop-color="#f97316" stop-opacity="0"/>
+            <stop offset="20%"  stop-color="#f97316" stop-opacity="1"/>
+            <stop offset="50%"  stop-color="#f97316" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+            <animate attributeName="x1" values="20%;100%;100%;100%" keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="x2" values="0%;90%;90%;90%"     keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="y1" values="80%;80%;-20%;-20%"  keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="y2" values="100%;100%;0%;0%"    keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+          </linearGradient>
+
+          <!-- grad2 — Beam 3 -->
+          <linearGradient id="grad2" gradientUnits="userSpaceOnUse"
+            x1="20%" x2="0%" y1="80%" y2="100%">
+            <stop offset="0%"   stop-color="#f97316" stop-opacity="0"/>
+            <stop offset="20%"  stop-color="#f97316" stop-opacity="1"/>
+            <stop offset="50%"  stop-color="#f97316" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+            <animate attributeName="x1" values="20%;100%;100%;100%" keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="x2" values="0%;90%;90%;90%"     keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="y1" values="80%;80%;-20%;-20%"  keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="y2" values="100%;100%;0%;0%"    keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+          </linearGradient>
+
+          <!-- grad3 — Beam 4 (static config in original demo) -->
+          <linearGradient id="grad3" gradientUnits="userSpaceOnUse"
+            x1="0%" x2="10%" y1="-40%" y2="-20%">
+            <stop offset="0%"   stop-color="#f97316" stop-opacity="0"/>
+            <stop offset="20%"  stop-color="#f97316" stop-opacity="1"/>
+            <stop offset="50%"  stop-color="#f97316" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+          </linearGradient>
+
+          <!-- grad4 — Beam 5 -->
+          <linearGradient id="grad4" gradientUnits="userSpaceOnUse"
+            x1="40%" x2="10%" y1="0%" y2="20%">
+            <stop offset="0%"   stop-color="#f97316" stop-opacity="0"/>
+            <stop offset="20%"  stop-color="#f97316" stop-opacity="1"/>
+            <stop offset="50%"  stop-color="#f97316" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+            <animate attributeName="x1" values="40%;0%;0%;0%"     keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="x2" values="10%;0%;0%;0%"     keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="y1" values="0%;0%;180%;180%"  keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="y2" values="20%;20%;200%;200%" keyTimes="0;0.25;0.5;1" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+  </div>
+
+</body>
+</html>

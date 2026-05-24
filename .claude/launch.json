@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "fcg-static",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "cd '/Users/crystalwong/Desktop/Claude/03.Code Projects/FCG Website' && exec python3 -m http.server 8766"],
+      "port": 8766
+    }
+  ]
+}

@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FCG · Radar Effect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #121212;
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Outer wrapper: flex min-h-screen w-full items-center justify-center bg-black */
+    .scene {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      background: #121212;
+    }
+
+    /* Stage: relative flex h-96 w-full max-w-3xl flex-col items-center justify-center space-y-4 overflow-hidden px-4 */
+    .stage {
+      position: relative;
+      display: flex;
+      height: 24rem; /* h-96 */
+      width: 100%;
+      max-width: 48rem; /* max-w-3xl */
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .stage > * + * { margin-top: 1rem; } /* space-y-4 */
+
+    /* Row wrappers */
+    .row-wide { margin-left: auto; margin-right: auto; width: 100%; max-width: 48rem; } /* max-w-3xl */
+    .row-narrow { margin-left: auto; margin-right: auto; width: 100%; max-width: 28rem; } /* max-w-md */
+    .row-inner {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Mobile: space-x-10 + justify-center */
+    .row-inner > * + * { margin-left: 2.5rem; }
+    @media (min-width: 768px) {
+      /* md: justify-between + space-x-0 */
+      .row-inner { justify-content: space-between; }
+      .row-inner > * + * { margin-left: 0; }
+    }
+
+    /* IconContainer: relative z-50 flex flex-col items-center justify-center space-y-2
+       initial { opacity: 0, scale: 0.95 } animate { opacity: 1, scale: 1 } duration: 0.2 delay: prop */
+    .icon-container {
+      position: relative;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.95);
+      animation: ic-in 0.2s ease-out forwards;
+    }
+    .icon-container > * + * { margin-top: 0.5rem; }
+
+    @keyframes ic-in {
+      from { opacity: 0; transform: scale(0.95); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    /* Icon tile: h-12 w-12 rounded-2xl border border-slate-700 bg-slate-800 shadow-inner
+       Recolor: slate-700/800 -> #2a2a2a (FCG dark border) */
+    .icon-tile {
+      display: flex;
+      height: 3rem;
+      width: 3rem;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1rem;
+      border: 1px solid #2a2a2a;
+      background: #2a2a2a;
+      box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+    }
+    .icon-tile svg {
+      height: 2rem;
+      width: 2rem;
+      color: rgba(255, 255, 255, 0.6); /* was text-slate-600 */
+      fill: currentColor;
+    }
+
+    /* Label: hidden rounded-md px-2 py-1 md:block; text-center text-xs font-bold text-slate-400 */
+    .icon-label {
+      display: none;
+      border-radius: 0.375rem;
+      padding: 0.25rem 0.5rem;
+    }
+    @media (min-width: 768px) {
+      .icon-label { display: block; }
+    }
+    .icon-label-text {
+      text-align: center;
+      font-size: 0.75rem;
+      line-height: 1rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.6); /* was text-slate-400 */
+    }
+
+    /* Radar root: relative flex h-20 w-20 items-center justify-center rounded-full + absolute -bottom-12 */
+    .radar {
+      position: absolute;
+      bottom: -3rem; /* -bottom-12 */
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      height: 5rem;
+      width: 5rem;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+    }
+
+    /* Rotating sweep:
+       animate-radar-spin absolute right-1/2 top-1/2 z-40 flex h-[5px] w-[400px] items-end justify-center overflow-hidden bg-transparent
+       transformOrigin: right center
+       @keyframes radar-spin { from: rotate(20deg); to: rotate(380deg); }
+       animation: radar-spin 10s linear infinite; */
+    .radar-sweep {
+      position: absolute;
+      right: 50%;
+      top: 50%;
+      z-index: 40;
+      display: flex;
+      height: 5px;
+      width: 400px;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+      background: transparent;
+      transform-origin: right center;
+      animation: radar-spin 10s linear infinite;
+    }
+    @keyframes radar-spin {
+      from { transform: rotate(20deg); }
+      to   { transform: rotate(380deg); }
+    }
+    /* Sweep gradient line: relative z-40 h-[1px] w-full bg-gradient-to-r from-transparent via-sky-600 to-transparent
+       Recolor: via-sky-600 -> #f97316 (FCG accent) */
+    .radar-sweep-line {
+      position: relative;
+      z-index: 40;
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(to right, transparent, #f97316, transparent);
+    }
+
+    /* Concentric circles: absolute inset-0 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-neutral-200
+       Per-ring inline style: size = (idx+1) * 5rem, border alpha = 1 - (idx+1) * 0.1
+       Entrance: opacity 0 -> 1, duration 0.2, delay idx * 0.1
+       Original border color rgba(71, 85, 105, X) (slate-600) -> white at same alpha */
+    .radar-circle {
+      position: absolute;
+      inset: 0;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 9999px;
+      opacity: 0;
+      animation: circle-in 0.2s ease-out forwards;
+    }
+    @keyframes circle-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* Bottom divider:
+       absolute bottom-0 z-[41] h-px w-full bg-gradient-to-r from-transparent via-slate-700 to-transparent
+       Recolor: via-slate-700 -> #2a2a2a */
+    .stage-divider {
+      position: absolute;
+      bottom: 0;
+      z-index: 41;
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(to right, transparent, #2a2a2a, transparent);
+    }
+  </style>
+</head>
+<body>
+  <!-- Ported from 21st.dev / Aceternity radar-effect demo. Pure HTML/CSS. Colors only changed to FCG palette. -->
+  <div class="scene">
+    <div class="stage">
+
+      <!-- Row 1 -->
+      <div class="row-wide">
+        <div class="row-inner">
+          <!-- IconContainer text="Web Development" delay={0.2} icon=HiDocumentText -->
+          <div class="icon-container" style="animation-delay: 0.2s;">
+            <div class="icon-tile">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="icon-label"><div class="icon-label-text">Web Development</div></div>
+          </div>
+
+          <!-- IconContainer delay={0.4} text="Mobile apps" icon=AiFillDollarCircle -->
+          <div class="icon-container" style="animation-delay: 0.4s;">
+            <div class="icon-tile">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="true">
+                <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm93.4 588.1c-14.1 18.7-33.2 33.1-57.4 43.1-15.4 6.4-32.2 10.4-50.4 12.2V760c0 4.4-3.6 8-8 8h-32.5c-4.4 0-8-3.6-8-7.9l.2-52.4c-21.3-2.1-39.7-6-55.2-11.6-26-9.4-46.4-23.3-61.2-41.6-14.7-18.3-22.8-39.5-24.3-63.6-.1-2.3 1.7-4.3 4-4.3H407c2 0 3.7 1.5 4 3.5 1.7 12.4 5.8 23.2 12.3 32.5 9.5 13.7 23.1 23.7 40.6 30.1V548.5l-21.9-5.7c-29.5-7.8-52.2-18-67.8-30.6-15.8-12.8-23.7-31.7-23.7-56.6 0-22 9-40.5 26.9-55.5S417 374.3 447 372V317c0-4.4 3.6-8 8-8h32.3c4.4 0 8 3.6 8 8v54.8c19.7 1.8 37.2 6.1 52.6 13.1 24 10.8 42.4 26.1 55.1 45.9 7.4 11.4 12.2 24.4 14.5 39 .4 2.4-1.5 4.6-4 4.6h-50.9c-1.9 0-3.5-1.3-3.9-3.1-2.2-9.3-6.4-17.1-12.6-23.4-9-9.2-21.3-15.6-36.9-19.2v117.6l24 5.7c33.4 7.9 58.2 18.7 74.5 32.4 16.4 13.7 24.5 33.4 24.5 58.9.1 24-7 44.7-21.2 63.5zM492.9 422.7c-13.5 1.8-24.4 6.1-32.5 12.8-8.1 6.8-12.2 15.7-12.2 26.7 0 11.4 3.5 20.3 10.4 26.7 6.9 6.4 18.4 12 34.2 16.7v-82.9zm63.3 219c8.6-7.1 12.9-16.5 12.9-28.4 0-12.7-3.7-22.2-11.1-28.6-7.4-6.4-19.3-12.1-35.6-17.1v91.6c14.3-2 25.6-7.1 33.8-14.5z"/>
+              </svg>
+            </div>
+            <div class="icon-label"><div class="icon-label-text">Mobile apps</div></div>
+          </div>
+
+          <!-- IconContainer text="Designing" delay={0.3} icon=BsClipboardDataFill -->
+          <div class="icon-container" style="animation-delay: 0.3s;">
+            <div class="icon-tile">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1z"/>
+                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A1.5 1.5 0 0 1 10.5 4h-5A1.5 1.5 0 0 1 4 2.5v-1zm6.5 9a.5.5 0 0 1-1 0V7a.5.5 0 0 1 1 0v3.5zm-3 0a.5.5 0 0 1-1 0V8a.5.5 0 0 1 1 0v2.5zm-2 0a.5.5 0 0 1-1 0V9a.5.5 0 0 1 1 0v1.5zm6 0a.5.5 0 0 1-1 0V6a.5.5 0 0 1 1 0v4.5z"/>
+              </svg>
+            </div>
+            <div class="icon-label"><div class="icon-label-text">Designing</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="row-narrow">
+        <div class="row-inner">
+          <!-- IconContainer text="Maintenence" delay={0.5} icon=BiSolidReport -->
+          <div class="icon-container" style="animation-delay: 0.5s;">
+            <div class="icon-tile">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19 2H9c-1.103 0-2 .897-2 2v3H5c-1.103 0-2 .897-2 2v11c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-3h2c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM5 20V9h10l.002 11H5zm14-5h-2V9c0-1.103-.897-2-2-2H9V4h10v11z"/>
+                <path d="M7 11h6v2H7zm0 4h6v2H7z"/>
+              </svg>
+            </div>
+            <div class="icon-label"><div class="icon-label-text">Maintenence</div></div>
+          </div>
+
+          <!-- IconContainer text="Server management" delay={0.8} icon=HiMiniDocumentArrowUp -->
+          <div class="icon-container" style="animation-delay: 0.8s;">
+            <div class="icon-tile">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M3 3.5A1.5 1.5 0 014.5 2h6.879a1.5 1.5 0 011.06.44l4.122 4.12A1.5 1.5 0 0117 7.622V16.5a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 013 16.5v-13zM13.25 9a.75.75 0 01.53.22l2.25 2.25a.75.75 0 11-1.06 1.06l-.97-.97v3.69a.75.75 0 01-1.5 0v-3.69l-.97.97a.75.75 0 11-1.06-1.06l2.25-2.25A.75.75 0 0113.25 9z"/>
+              </svg>
+            </div>
+            <div class="icon-label"><div class="icon-label-text">Server management</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="row-wide">
+        <div class="row-inner">
+          <!-- IconContainer delay={0.6} text="GitHub Integration" icon=HiDocumentReport -->
+          <div class="icon-container" style="animation-delay: 0.6s;">
+            <div class="icon-tile">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm2 3a1 1 0 011-1h4a1 1 0 110 2H9a1 1 0 01-1-1zm-1-7a1 1 0 100 2h.01a1 1 0 100-2H7zm2-1a1 1 0 011 1v3a1 1 0 11-2 0V6a1 1 0 011-1zm4 8a1 1 0 100 2h.01a1 1 0 100-2H13zm-2-5a1 1 0 011-1h.01a1 1 0 110 2H12a1 1 0 01-1-1z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="icon-label"><div class="icon-label-text">GitHub Integration</div></div>
+          </div>
+
+          <!-- IconContainer delay={0.7} text="CMS Integration" icon=RiFilePaper2Fill -->
+          <div class="icon-container" style="animation-delay: 0.7s;">
+            <div class="icon-tile">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M21 8v12.993A1 1 0 0 1 20.007 22H3.993A.993.993 0 0 1 3 21.008V2.992C3 2.444 3.447 2 3.999 2H15v5a1 1 0 0 0 1 1h5zm0-2h-4V2.003L21 6zM8 7v2h3V7H8zm0 4v2h8v-2H8zm0 4v2h8v-2H8z"/>
+              </svg>
+            </div>
+            <div class="icon-label"><div class="icon-label-text">CMS Integration</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Radar className="absolute -bottom-12" -->
+      <div class="radar">
+        <!-- Rotating sweep line -->
+        <div class="radar-sweep">
+          <div class="radar-sweep-line"></div>
+        </div>
+        <!-- 8 concentric circles: size = (idx+1)*5rem, border alpha = 1 - (idx+1)*0.1
+             Original border rgba(71,85,105,a) (slate-600) -> white at same alpha -->
+        <div class="radar-circle" style="height:5rem;  width:5rem;  border:1px solid rgba(255,255,255,0.9); animation-delay:0s;"></div>
+        <div class="radar-circle" style="height:10rem; width:10rem; border:1px solid rgba(255,255,255,0.8); animation-delay:0.1s;"></div>
+        <div class="radar-circle" style="height:15rem; width:15rem; border:1px solid rgba(255,255,255,0.7); animation-delay:0.2s;"></div>
+        <div class="radar-circle" style="height:20rem; width:20rem; border:1px solid rgba(255,255,255,0.6); animation-delay:0.3s;"></div>
+        <div class="radar-circle" style="height:25rem; width:25rem; border:1px solid rgba(255,255,255,0.5); animation-delay:0.4s;"></div>
+        <div class="radar-circle" style="height:30rem; width:30rem; border:1px solid rgba(255,255,255,0.4); animation-delay:0.5s;"></div>
+        <div class="radar-circle" style="height:35rem; width:35rem; border:1px solid rgba(255,255,255,0.3); animation-delay:0.6s;"></div>
+        <div class="radar-circle" style="height:40rem; width:40rem; border:1px solid rgba(255,255,255,0.2); animation-delay:0.7s;"></div>
+      </div>
+
+      <!-- Bottom divider -->
+      <div class="stage-divider"></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,693 @@
+{
+  "colors": {
+    "all": [
+      {
+        "hex": "#e5e7eb",
+        "rgb": {
+          "r": 229,
+          "g": 231,
+          "b": 235,
+          "a": 1
+        },
+        "hsl": {
+          "h": 220,
+          "s": 13,
+          "l": 91
+        },
+        "count": 881,
+        "contexts": [
+          "border",
+          "background",
+          "text"
+        ]
+      },
+      {
+        "hex": "#0f1114",
+        "rgb": {
+          "r": 15,
+          "g": 17,
+          "b": 20,
+          "a": 1
+        },
+        "hsl": {
+          "h": 216,
+          "s": 14,
+          "l": 7
+        },
+        "count": 711,
+        "contexts": [
+          "text",
+          "border",
+          "background"
+        ]
+      },
+      {
+        "hex": "#111827",
+        "rgb": {
+          "r": 17,
+          "g": 24,
+          "b": 39,
+          "a": 1
+        },
+        "hsl": {
+          "h": 221,
+          "s": 39,
+          "l": 11
+        },
+        "count": 204,
+        "contexts": [
+          "text",
+          "background",
+          "border"
+        ]
+      },
+      {
+        "hex": "#6b7280",
+        "rgb": {
+          "r": 107,
+          "g": 114,
+          "b": 128,
+          "a": 1
+        },
+        "hsl": {
+          "h": 220,
+          "s": 9,
+          "l": 46
+        },
+        "count": 204,
+        "contexts": [
+          "text",
+          "border",
+          "background"
+        ]
+      },
+      {
+        "hex": "#000000",
+        "rgb": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 1
+        },
+        "hsl": {
+          "h": 0,
+          "s": 0,
+          "l": 0
+        },
+        "count": 163,
+        "contexts": [
+          "text",
+          "border",
+          "background"
+        ]
+      },
+      {
+        "hex": "#4b5563",
+        "rgb": {
+          "r": 75,
+          "g": 85,
+          "b": 99,
+          "a": 1
+        },
+        "hsl": {
+          "h": 215,
+          "s": 14,
+          "l": 34
+        },
+        "count": 155,
+        "contexts": [
+          "text",
+          "border"
+        ]
+      },
+      {
+        "hex": "#ffffff",
+        "rgb": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 1
+        },
+        "hsl": {
+          "h": 0,
+          "s": 0,
+          "l": 100
+        },
+        "count": 134,
+        "contexts": [
+          "background",
+          "text",
+          "border"
+        ]
+      },
+      {
+        "hex": "#d1d5db",
+        "rgb": {
+          "r": 209,
+          "g": 213,
+          "b": 219,
+          "a": 1
+        },
+        "hsl": {
+          "h": 216,
+          "s": 12,
+          "l": 84
+        },
+        "count": 130,
+        "contexts": [
+          "border",
+          "background",
+          "text"
+        ]
+      },
+      {
+        "hex": "#f97316",
+        "rgb": {
+          "r": 249,
+          "g": 115,
+          "b": 22,
+          "a": 1
+        },
+        "hsl": {
+          "h": 25,
+          "s": 95,
+          "l": 53
+        },
+        "count": 60,
+        "contexts": [
+          "text",
+          "border",
+          "background"
+        ]
+      },
+      {
+        "hex": "#f3f4f6",
+        "rgb": {
+          "r": 243,
+          "g": 244,
+          "b": 246,
+          "a": 0.9
+        },
+        "hsl": {
+          "h": 220,
+          "s": 14,
+          "l": 96
+        },
+        "count": 17,
+        "contexts": [
+          "background"
+        ]
+      },
+      {
+        "hex": "#888888",
+        "rgb": {
+          "r": 136,
+          "g": 136,
+          "b": 136,
+          "a": 1
+        },
+        "hsl": {
+          "h": 0,
+          "s": 0,
+          "l": 53
+        },
+        "count": 14,
+        "contexts": [
+          "text"
+        ]
+      },
+      {
+        "hex": "#9ca3af",
+        "rgb": {
+          "r": 156,
+          "g": 163,
+          "b": 175,
+          "a": 1
+        },
+        "hsl": {
+          "h": 218,
+          "s": 11,
+          "l": 65
+        },
+        "count": 14,
+        "contexts": [
+          "background",
+          "text"
+        ]
+      },
+      {
+        "hex": "#2a2a2a",
+        "rgb": {
+          "r": 42,
+          "g": 42,
+          "b": 42,
+          "a": 1
+        },
+        "hsl": {
+          "h": 0,
+          "s": 0,
+          "l": 16
+        },
+        "count": 7,
+        "contexts": [
+          "border",
+          "background"
+        ]
+      },
+      {
+        "hex": "#374151",
+        "rgb": {
+          "r": 55,
+          "g": 65,
+          "b": 81,
+          "a": 1
+        },
+        "hsl": {
+          "h": 217,
+          "s": 19,
+          "l": 27
+        },
+        "count": 5,
+        "contexts": [
+          "text",
+          "background"
+        ]
+      }
+    ]
+  },
+  "regions": [
+    {
+      "role": "hero",
+      "tag": "section",
+      "bounds": {
+        "x": 0,
+        "y": -13180,
+        "w": 1280,
+        "h": 946
+      },
+      "heading": "The travel operating system for modern operators.",
+      "buttonCount": 1,
+      "cardCount": 6,
+      "className": "relative z-10 min-h-[100dvh] pt-32 pb-16 px-6 md:px-12 flex flex-col justify-center w-full"
+    },
+    {
+      "role": "nav",
+      "tag": "nav",
+      "bounds": {
+        "x": 16,
+        "y": -12202,
+        "w": 1248,
+        "h": 46
+      },
+      "heading": null,
+      "buttonCount": 0,
+      "cardCount": 5,
+      "className": "absolute top-4 inset-x-0 z-50 flex items-center justify-between px-4 md:px-8 w-full max-w-[1440px] mx-auto"
+    },
+    {
+      "role": "content",
+      "tag": "section",
+      "bounds": {
+        "x": 0,
+        "y": -11514,
+        "w": 1280,
+        "h": 710.5
+      },
+      "heading": "The systems, the team, and the volume are already in place with unbeatable inventory depth.",
+      "buttonCount": 0,
+      "cardCount": 8,
+      "className": "py-24 md:py-32 px-6 md:px-12 max-w-[1440px] mx-auto"
+    },
+    {
+      "role": "content",
+      "tag": "section",
+      "bounds": {
+        "x": 0,
+        "y": -10803.5,
+        "w": 1280,
+        "h": 888
+      },
+      "heading": "One Platform. Five Integrated Solutions.",
+      "buttonCount": 0,
+      "cardCount": 48,
+      "className": "py-24 overflow-hidden"
+    },
+    {
+      "role": "features",
+      "tag": "section",
+      "bounds": {
+        "x": 0,
+        "y": -9915.5,
+        "w": 1280,
+        "h": 693
+      },
+      "heading": "Supply. Book. Settle. Done.",
+      "buttonCount": 0,
+      "cardCount": 8,
+      "className": "py-24 px-6 md:px-12 max-w-[1440px] mx-auto relative"
+    },
+    {
+      "role": "nav",
+      "tag": "nav",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 65
+      },
+      "heading": null,
+      "buttonCount": 0,
+      "cardCount": 7,
+      "className": "marine-header-section fixed top-0 z-50 w-full border-b"
+    },
+    {
+      "role": "testimonials",
+      "tag": "section",
+      "bounds": {
+        "x": 0,
+        "y": -9174.5,
+        "w": 1280,
+        "h": 987.75
+      },
+      "heading": "360° COVERAGE",
+      "buttonCount": 0,
+      "cardCount": 14,
+      "className": "bg-[#000] z-10 pt-32 pr-6 pb-32 pl-6 relative overflow-visible"
+    },
+    {
+      "role": "content",
+      "tag": "section",
+      "bounds": {
+        "x": 0,
+        "y": -8186.75,
+        "w": 1280,
+        "h": 1368
+      },
+      "heading": "The Network at a Glance",
+      "buttonCount": 0,
+      "cardCount": 12,
+      "className": "z-10 py-32 relative bg-[#000]"
+    },
+    {
+      "role": "content",
+      "tag": "section",
+      "bounds": {
+        "x": 0,
+        "y": -4256.75,
+        "w": 1280,
+        "h": 979
+      },
+      "heading": "BOOKING TOOLS",
+      "buttonCount": 0,
+      "cardCount": 4,
+      "className": "z-10 overflow-hidden group bg-[#000] border-white/10 border-t pt-40 pb-40 relative"
+    },
+    {
+      "role": "content",
+      "tag": "section",
+      "bounds": {
+        "x": 0,
+        "y": -3277.75,
+        "w": 1280,
+        "h": 1136.5
+      },
+      "heading": "Travel infrastructure, end to end.",
+      "buttonCount": 0,
+      "cardCount": 7,
+      "className": "overflow-hidden flex flex-col min-h-screen select-none text-white bg-[#000] border-white/10 border-t pt-32 pb-32 relative items-center justify-center"
+    },
+    {
+      "role": "content",
+      "tag": "section",
+      "bounds": {
+        "x": 0,
+        "y": -2141.25,
+        "w": 1280,
+        "h": 1987.5
+      },
+      "heading": "Infrastructure that scales across borders and markets.",
+      "buttonCount": 0,
+      "cardCount": 15,
+      "className": "antialiased selection:bg-neutral-800 selection:text-white flex flex-col min-h-screen w-full items-center"
+    },
+    {
+      "role": "content",
+      "tag": "main",
+      "bounds": {
+        "x": 64,
+        "y": -2141.25,
+        "w": 1152,
+        "h": 1987.5
+      },
+      "heading": "Infrastructure that scales across borders and markets.",
+      "buttonCount": 0,
+      "cardCount": 15,
+      "className": "w-full max-w-6xl mx-auto border-x border-neutral-900 relative min-h-screen flex flex-col"
+    },
+    {
+      "role": "nav",
+      "tag": "header",
+      "bounds": {
+        "x": 65,
+        "y": -2141.25,
+        "w": 1150,
+        "h": 529.5
+      },
+      "heading": "Infrastructure that scales across borders and markets.",
+      "buttonCount": 0,
+      "cardCount": 1,
+      "className": "pt-40 pb-24 px-6 md:px-12 relative z-10 flex flex-col items-center text-center w-full overflow-hidden"
+    },
+    {
+      "role": "footer",
+      "tag": "footer",
+      "bounds": {
+        "x": 0,
+        "y": -153.75,
+        "w": 1280,
+        "h": 547
+      },
+      "heading": "> Ready to modernize?",
+      "buttonCount": 2,
+      "cardCount": 7,
+      "className": "flex flex-col w-full bg-[#000]"
+    },
+    {
+      "role": "footer",
+      "tag": "footer",
+      "bounds": {
+        "x": 0,
+        "y": 393.25,
+        "w": 1280,
+        "h": 406.265625
+      },
+      "heading": null,
+      "buttonCount": 0,
+      "cardCount": 3,
+      "className": "w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec"
+    }
+  ],
+  "componentClusters": [
+    {
+      "kind": "button",
+      "structuralHash": "button>iconify-icon",
+      "instanceCount": 1,
+      "variants": [
+        {
+          "css": {
+            "background": "rgb(17, 24, 39)",
+            "color": "rgb(255, 255, 255)",
+            "padding": "16px 32px 16px 32px",
+            "borderRadius": "9999px",
+            "border": "0px solid rgb(229, 231, 235)",
+            "fontSize": "14px",
+            "fontWeight": "500"
+          },
+          "instanceCount": 1
+        }
+      ]
+    },
+    {
+      "kind": "card",
+      "structuralHash": "div>div>div",
+      "instanceCount": 5,
+      "variants": [
+        {
+          "css": {
+            "background": "rgba(0, 0, 0, 0.05)",
+            "color": "rgb(15, 17, 20)",
+            "padding": "16px 16px 16px 16px",
+            "borderRadius": "16px",
+            "border": "1px solid rgba(0, 0, 0, 0.12)",
+            "fontSize": "16px",
+            "fontWeight": "400"
+          },
+          "instanceCount": 5
+        }
+      ]
+    },
+    {
+      "kind": "card",
+      "structuralHash": "div>div>h3>p",
+      "instanceCount": 3,
+      "variants": [
+        {
+          "css": {
+            "background": "rgb(18, 18, 18)",
+            "color": "rgb(15, 17, 20)",
+            "padding": "40px 40px 40px 40px",
+            "borderRadius": "32px",
+            "border": "1px solid rgb(42, 42, 42)",
+            "fontSize": "16px",
+            "fontWeight": "400"
+          },
+          "instanceCount": 3
+        }
+      ]
+    },
+    {
+      "kind": "card",
+      "structuralHash": "div>div>div>div>span>div",
+      "instanceCount": 5,
+      "variants": [
+        {
+          "css": {
+            "background": "rgb(255, 255, 255)",
+            "color": "rgb(15, 17, 20)",
+            "padding": "40px 40px 40px 40px",
+            "borderRadius": "32px",
+            "border": "1px solid rgba(0, 0, 0, 0)",
+            "fontSize": "16px",
+            "fontWeight": "400"
+          },
+          "instanceCount": 5
+        }
+      ]
+    },
+    {
+      "kind": "button",
+      "structuralHash": "button>span",
+      "instanceCount": 2,
+      "variants": [
+        {
+          "css": {
+            "background": "rgb(17, 24, 39)",
+            "color": "rgb(255, 255, 255)",
+            "padding": "14px 32px 14px 32px",
+            "borderRadius": "9999px",
+            "border": "0px solid rgb(229, 231, 235)",
+            "fontSize": "14px",
+            "fontWeight": "500"
+          },
+          "instanceCount": 2
+        }
+      ]
+    }
+  ],
+  "accessibility": {
+    "remediation": [
+      {
+        "fg": "#6b7280",
+        "bg": "#f3f4f6",
+        "ratio": 4.39,
+        "rule": "AA-normal",
+        "suggestion": {
+          "replace": "fg",
+          "color": "#000000",
+          "newRatio": 19.08
+        }
+      }
+    ]
+  },
+  "cssHealth": {
+    "sheets": [
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap",
+        "totalBytes": 10028,
+        "usedBytes": 0,
+        "unusedBytes": 10028,
+        "unusedPercent": 100
+      },
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap",
+        "totalBytes": 3316,
+        "usedBytes": 0,
+        "unusedBytes": 3316,
+        "unusedPercent": 100
+      },
+      {
+        "url": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap",
+        "totalBytes": 5042,
+        "usedBytes": 0,
+        "unusedBytes": 5042,
+        "unusedPercent": 100
+      },
+      {
+        "url": "https://hostmyclaudehtml.com/p/_Y67ztwQOo",
+        "totalBytes": 25849,
+        "usedBytes": 16953,
+        "unusedBytes": 8896,
+        "unusedPercent": 34
+      },
+      {
+        "url": "https://hostmyclaudehtml.com/p/_Y67ztwQOo",
+        "totalBytes": 1743,
+        "usedBytes": 0,
+        "unusedBytes": 1743,
+        "unusedPercent": 100
+      },
+      {
+        "url": "https://hostmyclaudehtml.com/p/_Y67ztwQOo",
+        "totalBytes": 3680,
+        "usedBytes": 3425,
+        "unusedBytes": 255,
+        "unusedPercent": 7
+      },
+      {
+        "url": "https://hostmyclaudehtml.com/p/_Y67ztwQOo",
+        "totalBytes": 4547,
+        "usedBytes": 2298,
+        "unusedBytes": 2249,
+        "unusedPercent": 49
+      },
+      {
+        "url": "https://hostmyclaudehtml.com/p/_Y67ztwQOo",
+        "totalBytes": 541,
+        "usedBytes": 267,
+        "unusedBytes": 274,
+        "unusedPercent": 51
+      }
+    ],
+    "totalBytes": 54746,
+    "usedBytes": 22943,
+    "unusedBytes": 31803,
+    "unusedPercent": 58,
+    "importantCount": 121,
+    "duplicates": 334,
+    "vendorPrefixes": {
+      "webkit": 17,
+      "moz": 0,
+      "ms": 1,
+      "o": 0
+    },
+    "keyframes": [],
+    "specificity": {
+      "max": [
+        1,
+        5,
+        14
+      ],
+      "average": [
+        0.03,
+        1.27,
+        1.07
+      ],
+      "count": 323
+    },
+    "issues": [
+      "121 !important rules",
+      "334 duplicate declarations",
+      "58% unused CSS"
+    ]
+  }
+}

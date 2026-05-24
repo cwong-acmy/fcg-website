@@ -1,0 +1,42 @@
+{
+  "tone": "neutral",
+  "pronoun": "you-only",
+  "headingStyle": "Title Case",
+  "headingLengthClass": "tight",
+  "ctaVerbs": [
+    {
+      "value": "book",
+      "count": 2
+    },
+    {
+      "value": "schedule",
+      "count": 1
+    }
+  ],
+  "buttonPatterns": [
+    {
+      "value": "book a demo",
+      "count": 2
+    },
+    {
+      "value": "schedule a call",
+      "count": 1
+    }
+  ],
+  "sampleHeadings": [
+    "The travel operating system for modern operators.",
+    "The systems, the team, and the volume are already in place with unbeatable inventory depth.",
+    "One Platform. Five Integrated Solutions.",
+    "AgreeEase",
+    "Atlas",
+    "Advisory Services",
+    "Travakey",
+    "Supply. Book. Settle. Done.",
+    "Asia-native. Globally ready.",
+    "Operate at scale."
+  ],
+  "stats": {
+    "buttons": 3,
+    "headings": 38
+  }
+}

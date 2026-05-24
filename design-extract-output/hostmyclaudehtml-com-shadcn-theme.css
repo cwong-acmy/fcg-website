@@ -1,0 +1,17 @@
+/* shadcn/ui Theme — extracted from https://hostmyclaudehtml.com/p/_Y67ztwQOo */
+/* Paste into your globals.css */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --primary: 221 39% 11%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 25 95% 53%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 217 19% 27%;
+    --muted-foreground: 220 13% 91%;
+    --border: 215 14% 34%;
+    --radius: 8px;
+  }
+}
