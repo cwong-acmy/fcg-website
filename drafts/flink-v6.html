@@ -1,0 +1,3710 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script>
+        (function () {
+            try {
+                const savedTheme = localStorage.getItem("theme");
+                if (savedTheme === "dark" || savedTheme === "light") {
+                    document.documentElement.setAttribute("data-theme", savedTheme);
+                    document.documentElement.classList.toggle("dark", savedTheme === "dark");
+                }
+            } catch (error) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F&#8209;Link · Air supply for China and APAC routes · FCG Group</title>
+    <meta name="description" content="F&#8209;Link connects Travelsky and GDS air paths through FCG's Open Platform and shared mid-office. Built for China and APAC route depth.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Marine header font normalization -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#080805',
+                        foreground: '#ffffff',
+                        accent: '#F97316',
+                        card: '#121212',
+                        border: '#2A2A2A',
+                        muted: '#888888'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Sora', 'sans-serif'],
+                        mono: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --color-bg: #080805;
+            --color-fg: #ffffff;
+            --color-card: #121212;
+            --color-border: #2A2A2A;
+            --color-muted: #888888;
+        }
+
+        html[data-theme="light"] {
+            --color-bg: #FFFFFF;
+            --color-fg: #0F1114;
+            --color-accent: #F97316;
+            --color-card: #F3F4F6;
+            --color-border: #D1D5DB;
+            --color-muted: #6B7280;
+        }
+
+        ::selection {
+            background: rgba(249, 115, 22, 0.15);
+            color: inherit;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Theme-aware color overrides */
+        html[data-theme="light"] .text-white {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-400 {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-500 {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-300 {
+            color: var(--color-fg) !important;
+        }
+
+        /* Logo theme styling */
+        img[alt="agreeease"] {
+            filter: brightness(1);
+        }
+
+        html[data-theme="light"] img[alt="agreeease"] {
+            filter: brightness(0) saturate(100%);
+        }
+
+        html[data-theme="light"] .bg-white {
+            background-color: var(--color-bg) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-950 {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .bg-zinc-200 {
+            background-color: var(--color-card) !important;
+        }
+
+        html[data-theme="light"] .bg-black\/5 {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .font-mono-jb {
+            font-family: 'Inter', sans-serif;
+        }
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            animation: gridMove 20s linear infinite;
+        }
+        .bg-grid-small {
+            background-size: 10px 10px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .text-shimmer {
+            background: linear-gradient(to right, #64748b 20%, #ffffff 40%, #ffffff 60%, #64748b 80%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+        .anim-bar-1 { animation: barPulse1 2s ease-in-out infinite alternate; }
+        .anim-bar-2 { animation: barPulse2 2.5s ease-in-out infinite alternate; }
+        .anim-bar-3 { animation: barPulse3 1.8s ease-in-out infinite alternate; }
+        .anim-bar-4 { animation: barPulse4 2.2s ease-in-out infinite alternate; }
+        .anim-bar-5 { animation: barPulse5 2.7s ease-in-out infinite alternate; }
+        @keyframes barPulse1 { 0% { height: 30%; } 100% { height: 70%; } }
+        @keyframes barPulse2 { 0% { height: 60%; } 100% { height: 95%; } }
+        @keyframes barPulse3 { 0% { height: 40%; } 100% { height: 80%; } }
+        @keyframes barPulse4 { 0% { height: 75%; } 100% { height: 45%; } }
+        @keyframes barPulse5 { 0% { height: 50%; } 100% { height: 85%; } }
+        .layer-float-1 { animation: floatLayer 4s ease-in-out infinite; }
+        .layer-float-2 { animation: floatLayer 4s ease-in-out infinite 0.5s; }
+        .layer-float-3 { animation: floatLayer 4s ease-in-out infinite 1s; }
+        @keyframes floatLayer {
+            0%, 100% { transform: translateY(0) rotateX(45deg) rotateZ(-45deg); }
+            50% { transform: translateY(-10px) rotateX(45deg) rotateZ(-45deg); }
+        }
+        .dot-grid {
+            background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 12px 12px;
+        }
+
+        /* ===== MARINE HEADER SECTION STYLES ===== */
+        .marine-header-section {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+        }
+        .marine-header-section .font-mono {
+            font-family: 'Inter', sans-serif;
+        }
+        .surface-glass {
+            background: rgba(24, 24, 27, 0.3);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+        html[data-theme="light"] .surface-glass {
+            background: rgba(243, 244, 246, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.05), 0 20px 40px -15px rgba(0, 0, 0, 0.12);
+        }
+        .marine-transition-colors {
+            transition-property: color, background-color, border-color;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        .marine-transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        .fcg-dropdown-nav {
+            background: rgba(255, 255, 255, 0.86);
+            border-color: rgba(15, 17, 20, 0.1);
+            box-shadow: 0 18px 45px rgba(15, 17, 20, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        html[data-theme="dark"] .fcg-dropdown-nav {
+            background: rgba(8, 8, 5, 0.82);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
+        }
+        .fcg-nav-shell {
+            background: rgba(15, 17, 20, 0.04);
+            border: 1px solid rgba(15, 17, 20, 0.08);
+            border-radius: 999px;
+            padding: 3px;
+        }
+        html[data-theme="dark"] .fcg-nav-shell {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .fcg-nav-trigger {
+            color: var(--color-muted);
+            border-radius: 999px;
+            position: relative;
+            transition: color 240ms ease, background-color 240ms ease;
+        }
+        .fcg-dropdown-item::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 12px;
+        }
+        .fcg-dropdown-item:hover .fcg-nav-trigger {
+            color: var(--color-fg);
+            background: rgba(249, 115, 22, 0.1);
+        }
+        .fcg-nav-chevron {
+            transition: transform 180ms ease;
+        }
+        .fcg-dropdown-item:hover .fcg-nav-chevron {
+            transform: rotate(180deg);
+        }
+        .fcg-dropdown-panel {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px) scale(0.98);
+            transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 28px 70px rgba(15, 17, 20, 0.18);
+            min-width: max-content;
+        }
+        html[data-theme="dark"] .fcg-dropdown-panel {
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.36);
+        }
+        .fcg-dropdown-item:hover .fcg-dropdown-panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .fcg-menu-icon {
+            border-color: var(--color-border);
+            color: var(--color-fg);
+            transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+        }
+        .fcg-menu-link:hover .fcg-menu-icon {
+            background: #F97316;
+            border-color: #F97316;
+            color: #ffffff;
+        }
+        .fcg-menu-link p {
+            color: var(--color-fg);
+        }
+        .fcg-menu-link span {
+            color: var(--color-muted);
+            transition: color 180ms ease;
+        }
+        .fcg-menu-link:hover span {
+            color: var(--color-fg);
+        }
+        .fcg-products-mega {
+            width: min(92vw, 980px);
+            max-width: calc(100vw - 48px);
+            padding: 28px;
+        }
+        .fcg-products-mega-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
+        }
+        .fcg-products-group {
+            min-width: 0;
+        }
+        .fcg-products-group-heading {
+            color: var(--color-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        .fcg-products-group-title {
+            color: var(--color-fg);
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .fcg-products-list {
+            display: grid;
+            gap: 16px;
+        }
+        .fcg-products-link {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            min-width: 0;
+            text-decoration: none;
+        }
+        .fcg-products-link p {
+            color: var(--color-fg);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.25;
+            margin: 0 0 3px;
+        }
+        .fcg-products-link span {
+            color: var(--color-muted);
+            display: block;
+            font-size: 12px;
+            line-height: 1.35;
+            max-width: 210px;
+            transition: color 180ms ease;
+        }
+        .fcg-products-link:hover span {
+            color: var(--color-fg);
+        }
+        .fcg-products-link:hover .fcg-menu-icon {
+            background: #F97316;
+            border-color: #F97316;
+            color: #ffffff;
+        }
+        @media (max-width: 900px) {
+            .fcg-products-mega {
+                width: min(92vw, 680px);
+            }
+            .fcg-products-mega-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @keyframes marine-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .marine-animate-pulse {
+            animation: marine-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        /* ===== END MARINE HEADER SECTION STYLES ===== */
+
+        /* ===== MARINE DATA STREAM STYLES ===== */
+        .marine-animate-marquee {
+            animation: marquee 20s linear infinite;
+            will-change: transform;
+        }
+        /* ===== END MARINE DATA STREAM STYLES ===== */
+
+        /* ===== MARINE HERO SECTION STYLES ===== */
+        .marine-hero-section {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+        }
+        .marine-hero-section .font-mono {
+            font-family: 'Inter', sans-serif;
+        }
+        @keyframes sweep {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes ping-slow {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(2); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; will-change: transform; }
+        .animate-sweep { animation: sweep 4s linear infinite; transform-origin: center; will-change: transform; }
+        .animate-ping-slow { animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite; will-change: transform, opacity; }
+        /* ===== END MARINE HERO SECTION STYLES ===== */
+
+        /* ===== GLOBAL LIGHT MODE OVERRIDES ===== */
+
+        /* --- 1. CORE BACKGROUND & TEXT PRIMITIVES --- */
+        html[data-theme="light"] .marine-hero-section,
+        html[data-theme="light"] .bg-background {
+            background-color: var(--color-bg) !important;
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .bg-\[\#000\],
+        html[data-theme="light"] .bg-\[\#0a0a0a\],
+        html[data-theme="light"] .bg-\[\#050505\],
+        html[data-theme="light"] .bg-black {
+            background-color: #FFFFFF !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-900 {
+            background-color: #F3F4F6 !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-950\/40 {
+            background-color: rgba(243, 244, 246, 0.5) !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-900\/90 {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-950\/80 {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-900\/30 {
+            background-color: rgba(243, 244, 246, 0.4) !important;
+        }
+
+        html[data-theme="light"] .bg-white\/5,
+        html[data-theme="light"] .bg-white\/\[0\.01\],
+        html[data-theme="light"] .bg-white\/\[0\.02\],
+        html[data-theme="light"] .bg-white\/\[0\.03\],
+        html[data-theme="light"] .bg-white\/\[0\.04\],
+        html[data-theme="light"] .bg-white\/\[0\.05\] {
+            background-color: rgba(0, 0, 0, 0.06) !important;
+        }
+
+        html[data-theme="light"] .bg-black\/50,
+        html[data-theme="light"] .bg-black\/80,
+        html[data-theme="light"] .bg-black\/45 {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        /* Text color overrides: white -> dark */
+        html[data-theme="light"] .text-white {
+            color: #111827 !important;
+        }
+
+        html[data-theme="light"] .text-zinc-950 {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-400,
+        html[data-theme="light"] .text-zinc-500 {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .text-zinc-300 {
+            color: #374151 !important;
+        }
+
+        html[data-theme="light"] .text-neutral-100,
+        html[data-theme="light"] .text-neutral-200,
+        html[data-theme="light"] .text-neutral-300 {
+            color: #111827 !important;
+        }
+
+        html[data-theme="light"] .text-neutral-400 {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .text-neutral-500 {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .text-neutral-600 {
+            color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .text-neutral-800 {
+            color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] .text-white\/10,
+        html[data-theme="light"] .text-white\/20 {
+            color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        html[data-theme="light"] .text-white\/30 {
+            color: rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .text-white\/50 {
+            color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .text-white\/80 {
+            color: #4B5563 !important;
+        }
+
+        html[data-theme="light"] .text-white\/90 {
+            color: #374151 !important;
+        }
+
+        /* --- 2. BORDER OVERRIDES --- */
+        html[data-theme="light"] .border-white\/5,
+        html[data-theme="light"] .border-white\/10,
+        html[data-theme="light"] .border-white\/\[0\.05\],
+        html[data-theme="light"] .border-white\/\[0\.08\],
+        html[data-theme="light"] .border-white\/15,
+        html[data-theme="light"] .border-white\/20 {
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .border-neutral-800,
+        html[data-theme="light"] .border-neutral-800\/50,
+        html[data-theme="light"] .border-neutral-800\/60,
+        html[data-theme="light"] .border-neutral-900,
+        html[data-theme="light"] .border-neutral-700 {
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .hover\:border-white\/20:hover,
+        html[data-theme="light"] .hover\:border-white\/30:hover {
+            border-color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .border-t.border-white\/10 {
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .border-b.border-white\/10 {
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .border-b.border-white\/5 {
+            border-color: #E5E7EB !important;
+        }
+
+        /* --- 3. GLASS PANELS --- */
+        html[data-theme="light"] .glass-panel {
+            background: rgba(0, 0, 0, 0.05) !important;
+            border: 1px solid rgba(0, 0, 0, 0.12) !important;
+        }
+
+        html[data-theme="light"] .surface-glass {
+            background: rgba(243, 244, 246, 0.9) !important;
+            border: 1px solid rgba(0, 0, 0, 0.12) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 20px 40px -15px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        /* --- 4. GRID PATTERNS --- */
+        html[data-theme="light"] .bg-grid {
+            background-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px) !important;
+        }
+
+        html[data-theme="light"] .bg-grid-small {
+            background-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px) !important;
+        }
+
+        html[data-theme="light"] .dot-grid {
+            background-image: radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px) !important;
+        }
+
+        /* --- 5. TEXT SHIMMER --- */
+        html[data-theme="light"] .text-shimmer {
+            background: linear-gradient(to right, #94a3b8 20%, #0F1114 40%, #0F1114 60%, #94a3b8 80%) !important;
+            background-size: 200% auto !important;
+            color: transparent !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+        }
+
+        /* --- 6. MARINE HERO: GLOBE LIGHT MODE (colors inverted via JS) --- */
+
+        /* --- 7. MARINE DATA STREAM --- */
+        html[data-theme="light"] .from-zinc-950 {
+            --tw-gradient-from: #F9FAFB !important;
+        }
+
+        /* --- 8. NAVBAR BUTTONS --- */
+        html[data-theme="light"] button.bg-white {
+            background-color: #111827 !important;
+            color: #FFFFFF !important;
+        }
+
+        html[data-theme="light"] button.hover\:bg-neutral-200:hover,
+        html[data-theme="light"] button.hover\:bg-zinc-200:hover {
+            background-color: #374151 !important;
+        }
+
+        html[data-theme="light"] .hover\:text-white\/70:hover {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .hover\:bg-white\/10:hover {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        /* --- 9. SHADOWS --- */
+        html[data-theme="light"] .shadow-2xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .shadow-xl {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        html[data-theme="light"] .shadow-inner {
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_0_30px_rgba\(255\,255\,255\,0\.2\)\] {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_0_32px_rgba\(255\,255\,255\,0\.1\)\] {
+            box-shadow: 0 0 32px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_0_10px_\#fff\] {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_0_20px_rgba\(255\,255\,255\,0\.2\)\] {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_10px_30px_rgba\(0\,0\,0\,0\.5\)\] {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[-30px_30px_50px_rgba\(0\,0\,0\,0\.8\)\] {
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        /* --- 10. SCHEMA CARD ENHANCED (HORIZONTAL SCROLL) --- */
+        html[data-theme="light"] .schema-card-enhanced {
+            background-color: #FFFFFF !important;
+            background-image: linear-gradient(#FFFFFF, #FFFFFF), linear-gradient(to bottom right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.06)) !important;
+        }
+
+        html[data-theme="light"] .schema-card-enhanced:hover {
+            background-color: #F9FAFB !important;
+            background-image: linear-gradient(#F9FAFB, #F9FAFB), linear-gradient(to bottom right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.12)) !important;
+        }
+
+        html[data-theme="light"] .schema-card-enhanced > span.text-6xl {
+            color: rgba(0, 0, 0, 0.06) !important;
+        }
+
+        html[data-theme="light"] .schema-card-enhanced:hover > span.text-6xl {
+            color: rgba(0, 0, 0, 0.12) !important;
+        }
+
+        html[data-theme="light"] #h-scroll-section,
+        html[data-theme="light"] #h-scroll-section > .sticky {
+            background-color: #FFFFFF !important;
+        }
+
+        html[data-theme="light"] #h-scroll-progress {
+            background-color: #111827 !important;
+        }
+
+        /* --- 11. SCHEMA ANIMATION COLORS --- */
+        html[data-theme="light"] .schema-vignette {
+            background: radial-gradient(circle at center,
+                rgba(255, 255, 255, 0) 30%,
+                rgba(255, 255, 255, 0.18) 58%,
+                rgba(255, 255, 255, 0.42) 80%,
+                rgba(255, 255, 255, 0.72) 100%) !important;
+        }
+
+        html[data-theme="light"] .schema-node-clean {
+            background: rgba(15, 17, 20, 0.8) !important;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .schema-pulse-dot,
+        html[data-theme="light"] .schema-pulse-dot-pos {
+            background: #374151 !important;
+        }
+
+        /* --- 12. BACKGROUND COLOR UTILITIES --- */
+        html[data-theme="light"] .bg-white\/10 {
+            background-color: rgba(0, 0, 0, 0.07) !important;
+        }
+
+        html[data-theme="light"] .bg-white\/20 {
+            background-color: #E5E7EB !important;
+        }
+
+        html[data-theme="light"] .bg-white\/40 {
+            background-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .bg-white\/60 {
+            background-color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .bg-white\/80 {
+            background-color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-800 {
+            background-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-800\/50 {
+            background-color: rgba(209, 213, 219, 0.5) !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-800\/30 {
+            background-color: #E5E7EB !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-500 {
+            background-color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-600 {
+            background-color: #D1D5DB !important;
+        }
+
+        /* --- 13. ORBITAL FEATURE SECTION --- */
+        html[data-theme="light"] .border-white\/15 {
+            border-color: #D1D5DB !important;
+        }
+
+        /* SVG path strokes */
+        html[data-theme="light"] path[stroke="rgba(255,255,255,0.4)"],
+        html[data-theme="light"] path[stroke="rgba(255,255,255,0.6)"] {
+            stroke: rgba(0, 0, 0, 0.25) !important;
+        }
+
+        /* --- 14. PROGRESSIVE GRID EXPANSION --- */
+        html[data-theme="light"] #expansion-container {
+            border-color: #D1D5DB !important;
+            background-color: rgba(243, 244, 246, 0.5) !important;
+        }
+
+        html[data-theme="light"] svg.text-neutral-800,
+        html[data-theme="light"] svg.text-neutral-700 {
+            color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] #hero-badge {
+            background-color: #F3F4F6 !important;
+            border-color: #D1D5DB !important;
+            color: #6B7280 !important;
+        }
+
+        /* --- 15. TYPEWRITER / BLINK CURSOR --- */
+        html[data-theme="light"] .typewriter-text {
+            border-right-color: #0F1114 !important;
+            color: #111827 !important;
+        }
+
+        /* --- 16. CTA & FOOTER --- */
+        html[data-theme="light"] footer.bg-\[\#000\] {
+            background-color: #FFFFFF !important;
+        }
+
+        html[data-theme="light"] footer.bg-black {
+            background-color: #F3F4F6 !important;
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] footer.bg-black .text-textsec,
+        html[data-theme="light"] footer.bg-black a {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] footer.bg-black a:hover {
+            color: #111827 !important;
+        }
+
+        html[data-theme="light"] footer.bg-black .text-white\/30 {
+            color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] footer.bg-black svg path {
+            fill: #000000 !important;
+        }
+
+        /* --- 17. GRADIENT OVERRIDES --- */
+        html[data-theme="light"] .bg-gradient-to-t.from-background\/90 {
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3), transparent) !important;
+        }
+
+        html[data-theme="light"] .bg-gradient-to-b.from-background\/40 {
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.9)) !important;
+        }
+
+        html[data-theme="light"] .bg-gradient-to-t.from-neutral-950\/40 {
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent) !important;
+        }
+
+        html[data-theme="light"] .bg-gradient-to-l.from-white\/5 {
+            background-image: linear-gradient(to left, rgba(0, 0, 0, 0.02), transparent) !important;
+        }
+
+        /* --- 18. SELECTION COLORS --- */
+        html[data-theme="light"] .selection\:bg-neutral-800 *::selection {
+            background: rgba(249, 115, 22, 0.15) !important;
+            color: inherit !important;
+        }
+
+        /* --- 19. MARQUEE TEXT STROKE --- */
+        html[data-theme="light"] h2[style*="-webkit-text-stroke: 1px rgba(255,255,255"] {
+            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* --- 20. PROJECT CARD OVERLAYS --- */
+        html[data-theme="light"] .bg-gradient-to-t.from-black {
+            background-image: linear-gradient(to top, #FFFFFF, rgba(255, 255, 255, 0.4), transparent) !important;
+        }
+
+        /* --- 21. COUNTER SPAN COLOR --- */
+        html[data-theme="light"] .counter span {
+            color: #9CA3AF !important;
+        }
+
+        /* --- 22. RADIAL GRADIENT OVERLAYS --- */
+        html[data-theme="light"] .bg-\[radial-gradient\(circle_at_top_right\,rgba\(255\,255\,255\,0\.05\)\,transparent_50\%\)\] {
+            background: radial-gradient(circle at top right, rgba(0, 0, 0, 0.03), transparent 50%) !important;
+        }
+
+        html[data-theme="light"] .bg-\[radial-gradient\(circle_at_center\,rgba\(255\,255\,255\,0\.06\)\,transparent_42\%\)\] {
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.03), transparent 42%) !important;
+        }
+
+        /* --- 23. ANIMATED BAR OVERRIDES --- */
+        html[data-theme="light"] .group:hover .group-hover\:bg-white {
+            background-color: #374151 !important;
+        }
+
+        html[data-theme="light"] .group-hover\:bg-white\/\[0\.04\]:hover {
+            background-color: rgba(249, 250, 251, 0.5) !important;
+        }
+
+        html[data-theme="light"] .group:hover .group-hover\:bg-white\/10 {
+            background-color: rgba(0, 0, 0, 0.04) !important;
+        }
+
+        /* ===== V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
+        /* Section wrappers use inline background:#050505;color:#fff */
+        html[data-theme="light"] section[style*="background:#050505"],
+        html[data-theme="light"] section[style*="background:#0a0a0a"],
+        html[data-theme="light"] section[style*="background:#000"] {
+            background: var(--color-bg) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
+        }
+        /* Inline white text inside dark sections */
+        html[data-theme="light"] section[style*="color:#fff"] [style*="color:#fff"],
+        html[data-theme="light"] [style*="color:#fff"] {
+            color: var(--color-fg) !important;
+        }
+        /* Muted white inline */
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.4)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.5)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.6)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.7)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.8)"] {
+            color: var(--color-muted) !important;
+        }
+        /* Inline-styled icon backgrounds that sit on top of route lines */
+        html[data-theme="light"] .v2-flink-line iconify-icon,
+        html[data-theme="light"] .v2-flink-route-line iconify-icon {
+            background: var(--color-bg) !important;
+        }
+        /* Route/divider lines drawn with rgba white become invisible in light mode */
+        html[data-theme="light"] [style*="background:rgba(255,255,255,.08)"],
+        html[data-theme="light"] [style*="background:rgba(255,255,255,.1)"],
+        html[data-theme="light"] [style*="border-top:1px solid rgba(255,255,255,.08)"],
+        html[data-theme="light"] [style*="border-bottom:1px solid rgba(255,255,255,.08)"] {
+            border-color: var(--color-border) !important;
+        }
+
+        /* Draft product pages use hard-coded dark inline styles; mirror index.html's theme behavior. */
+        html[data-theme="light"] .product-shell,
+        html[data-theme="light"] .product-shell section[style*="background:#050505"],
+        html[data-theme="light"] .product-shell section[style*="background: #050505"],
+        html[data-theme="light"] .product-shell section[style*="background:#030303"],
+        html[data-theme="light"] .product-shell section[style*="background: #030303"],
+        html[data-theme="light"] .product-shell section[style*="background:#0a0a0a"],
+        html[data-theme="light"] .product-shell section[style*="background: #0a0a0a"],
+        html[data-theme="light"] .product-shell section[style*="background:#000"],
+        html[data-theme="light"] .product-shell section[style*="background: #000"] {
+            background: var(--color-bg) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="color:#fff"],
+        html[data-theme="light"] .product-shell [style*="color: #fff"],
+        html[data-theme="light"] .product-shell [style*="color:#ffffff"],
+        html[data-theme="light"] .product-shell [style*="color: #ffffff"] {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="color:rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="color: rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="color:rgba(255, 255, 255"],
+        html[data-theme="light"] .product-shell [style*="color: rgba(255, 255, 255"] {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="border-top:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-top: 1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-bottom:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-bottom: 1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border: 1px solid rgba(255,255,255"] {
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-flink-copy h1,
+            .v2-flink-port strong,
+            .v2-flink-row .body strong,
+            .v2-flink-stat strong,
+            .v2-flink-bundle h2,
+            .v2-flink-proof h2,
+            .v2-flink-proof-card strong,
+            .v2-flink-cap-head h2,
+            .v2-flink-cap-item h3,
+            .v2-flink-cap-no,
+            .v2-flink-routes h2,
+            .v2-flink-route-card h3,
+            .v2-flink-scope h2,
+            .v2-flink-scope-card-head strong,
+            .v2-flink-scope-list li strong,
+            .v2-flink-faq-head h2,
+            .v2-flink-faq-q,
+            .v2-flink-faq-prompt
+        ) {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-flink-badge,
+            .v2-flink-copy p,
+            .v2-flink-panel-head .v2-flink-tag,
+            .v2-flink-panel-head small,
+            .v2-flink-port span,
+            .v2-flink-row .body span,
+            .v2-flink-row.muted .tag,
+            .v2-flink-stat span,
+            .v2-flink-bundle p,
+            .v2-flink-proof p.lede,
+            .v2-flink-proof-eyebrow,
+            .v2-flink-proof-card .label,
+            .v2-flink-proof-card .meta,
+            .v2-flink-proof-note,
+            .v2-flink-cap-eyebrow,
+            .v2-flink-cap-head p,
+            .v2-flink-cap-item p,
+            .v2-flink-cap-tag,
+            .v2-flink-routes p,
+            .v2-flink-scope p.lede,
+            .v2-flink-scope-eyebrow,
+            .v2-flink-scope-list li,
+            .v2-flink-faq-head p,
+            .v2-flink-faq-eyebrow,
+            .v2-flink-faq-num,
+            .v2-flink-faq-a
+        ) {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-flink-badge,
+            .v2-flink-panel,
+            .v2-flink-row,
+            .v2-flink-stat,
+            .v2-flink-proof-card,
+            .v2-flink-proof-note,
+            .v2-flink-cap-tag,
+            .v2-flink-scope-card,
+            .v2-flink-faq-btn-secondary
+        ) {
+            background: var(--color-card) !important;
+            border-color: var(--color-border) !important;
+            box-shadow: none !important;
+        }
+
+        html[data-theme="light"] .v2-flink-panel::after {
+            box-shadow: inset 0 0 0 1px rgba(15, 17, 20, 0.08) !important;
+        }
+
+        html[data-theme="light"] .v2-flink-bg {
+            background-image:
+                linear-gradient(rgba(15, 17, 20, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15, 17, 20, 0.07) 1px, transparent 1px) !important;
+        }
+
+        html[data-theme="light"] .v2-flink-line iconify-icon {
+            background: var(--color-bg) !important;
+        }
+
+        html[data-theme="light"] .v2-flink-line::before,
+        html[data-theme="light"] .v2-flink-cap-head,
+        html[data-theme="light"] .v2-flink-cap-item,
+        html[data-theme="light"] .v2-flink-scope-card-head,
+        html[data-theme="light"] .v2-flink-faq-list,
+        html[data-theme="light"] .v2-flink-faq-item,
+        html[data-theme="light"] .v2-flink-faq-foot {
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] :is(.v2-flink-btn-primary, .v2-flink-bundle-cta, .v2-flink-faq-btn-primary) {
+            background: var(--color-fg) !important;
+            color: var(--color-bg) !important;
+        }
+
+        html[data-theme="light"] :is(.v2-flink-btn-secondary, .v2-flink-faq-btn-secondary) {
+            background: var(--color-card) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
+        }
+        /* ===== END V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
+
+        /* ===== END GLOBAL LIGHT MODE OVERRIDES ===== */
+    </style>
+    <link rel="stylesheet" href="../assets/css/fcg-brand-theme.css">
+</head>
+<body class="bg-background text-foreground antialiased">
+    <!-- ===== MARINE HEADER SECTION ===== -->
+    <nav class="marine-header-section fcg-dropdown-nav fixed top-0 z-50 w-full border-b">
+        <div class="w-full px-4 md:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="../index.html" class="flex items-center" style="color: var(--color-fg);" aria-label="FCG Group home">
+                    <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 28px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="currentColor"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="currentColor"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="currentColor"/></svg>
+                </a>
+
+                <ul class="fcg-nav-shell hidden md:flex items-center gap-0 text-sm font-normal">
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>Products</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel fcg-products-mega absolute left-0 top-full mt-2 rounded-2xl">
+                            <div class="fcg-products-mega-grid">
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For builders & platforms</h3>
+                                    <div class="fcg-products-group-title">Connect</div>
+                                    <div class="fcg-products-list">
+                                        <a href="../api-access.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:code-scan-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>API Access</p><span>Connect to G&#8209;Link and F&#8209;Link directly</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For TMCs & Travel Programs</h3>
+                                    <div class="fcg-products-group-title">Experience</div>
+                                    <div class="fcg-products-list">
+                                        <a href="../corporate-booking-tool.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Corporate Booking Tool</p><span>Modern booking for managed travel programs</span></div>
+                                        </a>
+                                        <a href="../agreeease.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:chart-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>AgreeEase</p><span>AI hotel sourcing, RFPs, and rate workflows</span></div>
+                                        </a>
+                                        <a href="../ai-booking-tool.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:cpu-bolt-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>AI Booking Tool</p><span>Connect AI to live travel inventory</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For Operators</h3>
+                                    <div class="fcg-products-group-title">Operate</div>
+                                    <div class="fcg-products-list">
+                                        <a href="../atlas.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Atlas TMC OS</p><span>Connect operational surfaces into one hub</span></div>
+                                        </a>
+                                        <a href="../agent-booking-tool.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:case-round-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Agent Booking Tool</p><span>Search and book every supplier in one flow</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>Solutions</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
+                            <div class="space-y-6 overflow-hidden">
+                                <a href="../whitelabel.html" class="fcg-menu-link flex items-start gap-3">
+                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:box-linear" width="19" height="19"></iconify-icon></div>
+                                    <div><p class="text-sm font-medium">Whitelabel</p><span class="text-xs">Launch with a ready-made travel platform</span></div>
+                                </a>
+                                <a href="../advisory-implementation.html" class="fcg-menu-link flex items-start gap-3">
+                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:compass-linear" width="19" height="19"></iconify-icon></div>
+                                    <div><p class="text-sm font-medium">Advisory &amp; Implementation</p><span class="text-xs">Plan, configure, and deploy the right stack</span></div>
+                                </a>
+                                <a href="../ai-mapping.html" class="fcg-menu-link flex items-start gap-3">
+                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:magic-stick-3-linear" width="19" height="19"></iconify-icon></div>
+                                    <div><p class="text-sm font-medium">AI Mapping</p><span class="text-xs">Clean hotel, room, and supplier data</span></div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fcg-dropdown-item relative">
+                        <a href="../about.html" class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5">
+                            <span>About</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="flex items-center gap-4 md:gap-6">
+                <div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono tracking-tight" style="background-color: rgba(249, 115, 22, 0.1); border: 1px solid rgba(249, 115, 22, 0.2); color: #F97316;">
+                    <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background-color: #F97316;"></span>
+                    LIVE.NETWORK
+                </div>
+
+                <label id="themeToggleControl" class="flex items-center gap-3 cursor-pointer group">
+                    <span class="text-xs font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors hidden sm:block uppercase">MODE</span>
+                    <div class="relative">
+                        <input type="checkbox" id="themeToggle" class="sr-only peer" checked>
+                        <div class="w-10 h-5 rounded-full peer peer-checked:bg-orange-900/40 border transition-all bg-zinc-800 border-white/10"></div>
+                        <div class="absolute left-1 top-1 w-3 h-3 bg-zinc-500 rounded-full peer-checked:translate-x-5 peer-checked:bg-orange-500 transition-all shadow-[0_0_8px_rgba(249,115,22,0.4)] peer-checked:shadow-[0_0_12px_rgba(249,115,22,0.8)]"></div>
+                    </div>
+                </label>
+                <a href="#capabilities" class="md:hidden w-10 h-10 rounded-full border flex items-center justify-center" style="border-color: var(--color-border); color: var(--color-fg);" aria-label="Open page sections">
+                    <iconify-icon icon="solar:hamburger-menu-linear" width="20" height="20"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- ===== END MARINE HEADER SECTION ===== -->
+<style>
+  .fcg-hero2 {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #030303;
+    color: #fff;
+  }
+  .fcg-hero2 * { color: inherit; }
+  .fcg-hero2-glow {
+    position: absolute;
+    right: -18rem;
+    top: -4rem;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    filter: blur(24px);
+    pointer-events: none;
+  }
+  .fcg-hero2-glow span {
+    display: block;
+    height: 10rem;
+    border-radius: 999px;
+    filter: blur(6rem);
+    opacity: .78;
+  }
+  .fcg-hero2-glow span:nth-child(1) { width: 60rem; background: linear-gradient(to bottom, #f97316, #0ea5e9); }
+  .fcg-hero2-glow span:nth-child(2) { width: 90rem; background: linear-gradient(to bottom, #be123c, #facc15); }
+  .fcg-hero2-glow span:nth-child(3) { width: 60rem; background: linear-gradient(to bottom, #f59e0b, #06b6d4); }
+  .fcg-hero2::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: .18;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,.38) 1px, transparent 0),
+      linear-gradient(to bottom, rgba(3,3,3,0), rgba(3,3,3,.92));
+    background-size: 18px 18px, 100% 100%;
+  }
+  .fcg-hero2-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    border-radius: 999px;
+    padding: 0 28px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  }
+  .fcg-hero2-button:hover { transform: translateY(-1px); }
+  .fcg-hero2-button-primary {
+    background: #fff;
+    color: #050505;
+  }
+  .fcg-hero2-button-secondary {
+    border: 1px solid rgba(255,255,255,.22);
+    color: #fff;
+    background: rgba(255,255,255,.04);
+  }
+  .fcg-hero2-button-secondary:hover { background: rgba(255,255,255,.1); }
+  .fcg-hero2-content {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: minmax(0, .92fr) minmax(440px, 1.08fr);
+    align-items: center;
+    gap: 64px;
+    max-width: 1280px;
+    margin: 0 auto;
+    min-height: 88vh;
+    padding: 124px 24px 78px;
+    text-align: left;
+  }
+  .fcg-hero2-copy-column {
+    max-width: 680px;
+  }
+  .fcg-hero2-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.12);
+    padding: 9px 16px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .fcg-hero2 h1 {
+    max-width: 720px;
+    margin: 28px 0 0;
+    color: #fff !important;
+    font-size: clamp(2.35rem, 3.5vw, 3.75rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+  .fcg-hero2-copy {
+    max-width: 640px;
+    margin: 22px 0 0;
+    color: rgba(255,255,255,.72) !important;
+    font-size: clamp(1rem, 1.5vw, 1.18rem);
+    line-height: 1.7;
+  }
+  .fcg-hero2-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+    margin-top: 34px;
+    flex-wrap: wrap;
+  }
+  .fcg-hero2-preview-wrap {
+    position: relative;
+    width: 100%;
+    margin: 0;
+  }
+  .fcg-hero2-preview-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    background: rgba(255,255,255,.48);
+    filter: blur(8rem);
+    opacity: .24;
+  }
+  .fcg-hero2-preview {
+    position: relative;
+    overflow: visible;
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(7,7,7,.88);
+    box-shadow: 0 30px 90px rgba(0,0,0,.34);
+    padding: 14px;
+  }
+  .fcg-hero2-code-preview {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+  }
+  .fcg-hero2-preview img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center top;
+    border-radius: 14px;
+    opacity: .98;
+    filter: none;
+  }
+  .fcg-hero2-preview-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    align-items: stretch;
+    gap: 12px;
+    margin-top: 14px;
+    padding: 0;
+    background: transparent;
+  }
+  .fcg-hero2-preview-card {
+    min-height: 88px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 14px;
+    text-align: left;
+  }
+  .fcg-hero2-preview-card span {
+    display: block;
+    margin-bottom: 10px;
+    color: #fb923c;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+  .fcg-hero2-preview-card strong {
+    display: block;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .fcg-hero2-preview-card .stat-value {
+    display: block;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .fcg-hero2-preview-card .stat-label {
+    display: block;
+    color: rgba(255,255,255,.62);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .fcg-hero2-code-window {
+    position: relative;
+    min-height: min(56vh, 520px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: #121827;
+    box-shadow: 0 30px 90px rgba(0,0,0,.45);
+    overflow: hidden;
+  }
+  .fcg-hero2-code-window::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(249,115,22,.18), transparent 24%),
+      linear-gradient(135deg, rgba(255,255,255,.06), transparent 42%);
+  }
+  .fcg-hero2-code-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    color: rgba(255,255,255,.58);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .fcg-hero2-window-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .fcg-hero2-window-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+  }
+  .fcg-hero2-window-dots span:nth-child(1) { background: #fb7185; }
+  .fcg-hero2-window-dots span:nth-child(2) { background: #fbbf24; }
+  .fcg-hero2-window-dots span:nth-child(3) { background: #22c55e; }
+  .fcg-hero2-code-body {
+    position: relative;
+    margin: 0;
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    color: #e5e7eb;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(.84rem, 1.25vw, 1rem);
+    line-height: 1.9;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .fcg-hero2-code-body .code-keyword { color: #fb7185; }
+  .fcg-hero2-code-body .code-method { color: #60a5fa; }
+  .fcg-hero2-code-body .code-string { color: #34d399; }
+  .fcg-hero2-code-body .code-number { color: #f59e0b; }
+  .fcg-hero2-code-body .code-property { color: #38bdf8; }
+  .fcg-hero2-code-body .code-comment { color: #94a3b8; }
+  .fcg-hero2-code-footer {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px;
+    padding: 0 clamp(1.5rem, 4vw, 2.75rem) clamp(1.5rem, 4vw, 2.75rem);
+  }
+  .fcg-hero2-code-chip {
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.06);
+    padding: 14px;
+  }
+  .fcg-hero2-code-chip span {
+    display: block;
+    color: #fb923c;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .fcg-hero2-code-chip strong {
+    display: block;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .product-shell { background: var(--color-bg); color: var(--color-fg); }
+  .product-kicker { font-family: 'Inter', sans-serif; letter-spacing: .18em; text-transform: uppercase; }
+  .product-card {
+    background: rgba(0,0,0,.4);
+    border: 1px solid rgba(255,255,255,.15);
+    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+  .product-card:hover {
+    background: rgba(0,0,0,.52);
+    border-color: rgba(255,255,255,.4);
+    transform: translateY(-2px);
+  }
+  html[data-theme="light"] .product-card {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 50px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .product-card:hover {
+    background: rgba(255,255,255,.92);
+    border-color: rgba(15,17,20,.24);
+  }
+  .product-panel { background: #050505; border: 1px solid rgba(255,255,255,.1); }
+  html[data-theme="light"] .product-panel { background: #f9fafb; border-color: #d1d5db; }
+  .product-line { background: linear-gradient(90deg, transparent, rgba(249,115,22,.55), transparent); }
+  #decision-paths,
+  #product-map {
+    padding-top: 5.5rem !important;
+    padding-bottom: 5.5rem !important;
+  }
+  #decision-paths > div,
+  #product-map > div {
+    max-width: 72rem;
+  }
+  #decision-paths .product-card,
+  #product-map .product-card {
+    border-radius: 16px !important;
+    padding: 1.25rem !important;
+  }
+  #decision-paths .product-card h3,
+  #product-map .product-card h3 {
+    font-size: 1.08rem !important;
+    line-height: 1.25 !important;
+  }
+  #decision-paths .product-card p,
+  #product-map .product-card p,
+  #product-map .product-card li {
+    font-size: .88rem !important;
+    line-height: 1.6 !important;
+  }
+  #decision-paths .product-card .product-kicker,
+  #product-map .product-card .product-kicker {
+    font-size: .63rem !important;
+  }
+  #decision-paths .space-y-5 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .75rem;
+  }
+  #decision-paths .space-y-5 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0 !important;
+  }
+  #decision-paths .product-card {
+    display: flex !important;
+    min-height: 18rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0 !important;
+  }
+  #decision-paths .product-card > p {
+    margin-top: .85rem;
+  }
+  #decision-paths .product-card > div:last-child {
+    margin-top: auto;
+    border-radius: 14px !important;
+    padding: 1rem !important;
+  }
+  #decision-paths .product-card .text-lg {
+    font-size: .98rem !important;
+    line-height: 1.3 !important;
+  }
+  #product-map .grid {
+    gap: .75rem !important;
+  }
+  #product-map .product-card {
+    min-height: 18.5rem;
+  }
+  #product-map .product-card .w-12 {
+    width: 2.5rem !important;
+  }
+  #product-map .product-card .h-12 {
+    height: 2.5rem !important;
+  }
+  #product-map .product-card .mb-6 {
+    margin-bottom: 1rem !important;
+  }
+  #product-map .product-card .gap-5 {
+    gap: .9rem !important;
+  }
+  #product-map .product-card .pt-5 {
+    padding-top: 1rem !important;
+  }
+  #product-map .product-card .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: .6rem !important;
+  }
+  html[data-theme="light"] #decision-paths .product-card > div:last-child {
+    background: rgba(255,255,255,.68) !important;
+    border-color: rgba(15,17,20,.1) !important;
+  }
+  @media (max-width: 980px) {
+    #decision-paths .space-y-5 {
+      grid-template-columns: 1fr;
+    }
+    #decision-paths .product-card,
+    #product-map .product-card {
+      min-height: auto;
+    }
+  }
+  .fcg-bento {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(125% 125% at 50% 10%, #000000 40%, #010133 100%);
+    color: #fff;
+  }
+  .fcg-bento::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 22%, rgba(249,115,22,.14), transparent 28%),
+      linear-gradient(to bottom, rgba(0,0,0,.04), rgba(0,0,0,.55));
+  }
+  .fcg-bento-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+  }
+  .fcg-bento-spiral {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .3;
+    mix-blend-mode: screen;
+    mask-image: radial-gradient(circle at center, rgba(255,255,255,1), rgba(255,255,255,.1) 60%, transparent 75%);
+    -webkit-mask-image: radial-gradient(circle at center, rgba(255,255,255,1), rgba(255,255,255,.1) 60%, transparent 75%);
+  }
+  .fcg-bento-header {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .fcg-bento-kicker {
+    color: #fb923c;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .18em;
+    margin-bottom: .9rem;
+    text-transform: uppercase;
+  }
+  .fcg-bento h2 {
+    color: #fff !important;
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+  .fcg-bento-subcopy {
+    color: rgba(255,255,255,.7) !important;
+    max-width: 31rem;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .fcg-bento-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-rows: minmax(120px, auto);
+    gap: .75rem;
+  }
+  .fcg-bento-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(0,0,0,.4);
+    padding: 1.25rem;
+    transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+  }
+  .fcg-bento-card:hover {
+    border-color: rgba(255,255,255,.4);
+    background: rgba(0,0,0,.52);
+    transform: translateY(-2px);
+  }
+  .fcg-bento-card::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 16px;
+    opacity: 0;
+    pointer-events: none;
+    mask-image: radial-gradient(180px 180px at var(--x, 50%) var(--y, 50%), white, transparent);
+    -webkit-mask-image: radial-gradient(180px 180px at var(--x, 50%) var(--y, 50%), white, transparent);
+    transition: opacity 180ms ease;
+  }
+  .fcg-bento-card:hover::after { opacity: 1; }
+  .fcg-bento-card-large {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+  .fcg-bento-card-small { grid-column: span 2; }
+  .fcg-bento-card-wide { grid-column: span 3; }
+  .fcg-bento-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    margin-bottom: .7rem;
+  }
+  .fcg-bento-dot {
+    flex: 0 0 auto;
+    width: .55rem;
+    height: .55rem;
+    margin-top: .38rem;
+    border-radius: 999px;
+    background: #fb923c;
+    box-shadow: 0 0 18px rgba(249,115,22,.45);
+    color: transparent;
+    font-size: 0;
+  }
+  .fcg-bento-card h3 {
+    min-width: 0;
+    color: #fff !important;
+    font-size: clamp(1rem, 1.7vw, 1.22rem);
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .fcg-bento-meta {
+    flex: 0 0 auto;
+    margin-left: auto;
+    margin-top: .12rem;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 999px;
+    color: rgba(255,255,255,.62);
+    font-size: 10px;
+    letter-spacing: .12em;
+    line-height: 1;
+    padding: .35rem .5rem;
+    text-transform: uppercase;
+  }
+  .fcg-bento-card p {
+    color: rgba(255,255,255,.7) !important;
+    font-size: 14px;
+    line-height: 1.65;
+    max-width: 48rem;
+  }
+  .fcg-marketing-section {
+    position: relative;
+    overflow: hidden;
+    background: #050505;
+    color: #fff;
+    padding: 6rem 1.5rem 6rem;
+  }
+  .fcg-marketing-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 16%, rgba(249,115,22,.16), transparent 26%),
+      radial-gradient(circle at 86% 66%, rgba(14,165,233,.14), transparent 30%);
+  }
+  .fcg-marketing-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 54.25rem;
+    margin: 0 auto;
+  }
+  .fcg-marketing-header {
+    max-width: 54.25rem;
+    margin-bottom: 3.75rem;
+  }
+  .fcg-marketing-eyebrow,
+  .fcg-mobile-eyebrow {
+    color: #fb923c;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .18em;
+    margin-bottom: .85rem;
+    text-transform: uppercase;
+  }
+  .fcg-marketing-title,
+  .fcg-mobile-feature h2 {
+    color: #fff !important;
+    font-size: clamp(2.1rem, 2.6vw, 2.7rem);
+    font-weight: 650;
+    letter-spacing: 0;
+    line-height: 1.05;
+  }
+  .fcg-marketing-title span {
+    color: rgba(255,255,255,.48);
+  }
+  .fcg-marketing-header p,
+  .fcg-mobile-subcopy {
+    color: rgba(255,255,255,.68) !important;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-top: 1rem;
+    max-width: 42rem;
+  }
+  .fcg-ai-showcase {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 29.15rem;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 18px;
+    background:
+      linear-gradient(135deg, rgba(255,226,190,.18), rgba(249,168,212,.14) 36%, rgba(125,211,252,.22) 78%, rgba(45,212,191,.2)),
+      #141414;
+    box-shadow: 0 24px 70px rgba(0,0,0,.28);
+  }
+  .fcg-ai-showcase::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .16;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.9) 1px, transparent 0);
+    background-size: 3px 3px;
+  }
+  .fcg-ai-card {
+    position: relative;
+    z-index: 1;
+    width: min(100% - 2rem, 26.5rem);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 16px;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 14px 28px rgba(0,0,0,.18);
+    color: #050505;
+    padding: 1.75rem;
+  }
+  .fcg-ai-spark {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    color: #c084fc;
+  }
+  .fcg-ai-prompt {
+    color: #050505 !important;
+    font-size: 1.08rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .fcg-ai-stats {
+    display: grid;
+    gap: .7rem;
+    margin: 1.35rem 0 1.55rem;
+  }
+  .fcg-ai-stat {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    color: #71717a;
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+  .fcg-ai-stat strong {
+    color: #050505;
+    font-weight: 700;
+  }
+  .fcg-ai-input {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 1rem;
+    border-radius: 14px;
+    background: #f1f1f2;
+    padding: 1rem 1rem .9rem;
+  }
+  .fcg-ai-placeholder {
+    color: #777;
+    font-size: 1.05rem;
+    margin-bottom: 1.1rem;
+  }
+  .fcg-ai-tools {
+    display: flex;
+    gap: .7rem;
+  }
+  .fcg-ai-tool,
+  .fcg-ai-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+  }
+  .fcg-ai-tool {
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid rgba(0,0,0,.08);
+    background: rgba(255,255,255,.42);
+    color: #050505;
+  }
+  .fcg-ai-submit {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: #050505;
+    color: #fff;
+  }
+  .fcg-marketing-features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4rem;
+    margin-top: 3.9rem;
+  }
+  .fcg-marketing-feature h3 {
+    color: #fff !important;
+    font-size: 1.5rem;
+    font-weight: 650;
+    line-height: 1.1;
+  }
+  .fcg-marketing-feature p {
+    color: rgba(255,255,255,.54) !important;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    margin-top: 1rem;
+  }
+  .fcg-integration-section {
+    position: relative;
+    overflow: hidden;
+    background: #050505;
+    color: #fff;
+    padding: 6rem 1.5rem;
+  }
+  .fcg-integration-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 16%, rgba(249,115,22,.16), transparent 26%),
+      radial-gradient(circle at 86% 66%, rgba(14,165,233,.14), transparent 30%);
+  }
+  .fcg-integration-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+  .fcg-integration-header {
+    max-width: 54.25rem;
+    margin-bottom: 3.75rem;
+  }
+  .fcg-integration-eyebrow {
+    color: #fb923c;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .18em;
+    margin-bottom: .85rem;
+    text-transform: uppercase;
+  }
+  .fcg-integration-title {
+    color: #fff !important;
+    font-size: clamp(2.1rem, 2.6vw, 2.7rem);
+    font-weight: 650;
+    letter-spacing: 0;
+    line-height: 1.05;
+  }
+  .fcg-integration-title span {
+    color: rgba(255,255,255,.48);
+  }
+  .fcg-integration-header p {
+    color: rgba(255,255,255,.68) !important;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-top: 1rem;
+    max-width: 42rem;
+  }
+  .fcg-flow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.06);
+  }
+  .fcg-flow-step {
+    position: relative;
+    padding: 2.5rem 2rem;
+    background: rgba(5,5,5,.92);
+    text-align: center;
+  }
+  .fcg-flow-step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: rgba(249,115,22,.12);
+    border: 1px solid rgba(249,115,22,.24);
+    color: #fb923c;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+  }
+  .fcg-flow-step h3 {
+    color: #fff !important;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: .65rem;
+  }
+  .fcg-flow-step p {
+    color: rgba(255,255,255,.54) !important;
+    font-size: .95rem;
+    line-height: 1.55;
+    max-width: 22rem;
+    margin: 0 auto;
+  }
+  .fcg-flow-step .code-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .3rem .65rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,.55);
+    letter-spacing: .02em;
+  }
+  .fcg-code-preview {
+    margin-top: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+  .fcg-code-bar {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.02);
+  }
+  .fcg-code-dot {
+    width: .5rem;
+    height: .5rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,.15);
+  }
+  .fcg-code-bar span {
+    margin-left: auto;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,.35);
+    letter-spacing: .08em;
+  }
+  .fcg-code-body {
+    padding: 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .fcg-code-body .code-comment { color: rgba(255,255,255,.3); }
+  .fcg-code-body .code-key { color: #fb923c; }
+  .fcg-code-body .code-string { color: #34d399; }
+  .fcg-code-body .code-method { color: #60a5fa; }
+  .fcg-code-body .code-number { color: #c084fc; }
+  .fcg-code-body .code-punct { color: rgba(255,255,255,.5); }
+  .fcg-mobile-feature {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    padding: 6.5rem 1.5rem;
+  }
+  .fcg-mobile-feature::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom, rgba(255,255,255,.04), transparent 22%),
+      radial-gradient(circle at 50% 0%, rgba(249,115,22,.16), transparent 30%);
+  }
+  .fcg-mobile-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+  .fcg-mobile-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .fcg-main-icon,
+  .fcg-feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: rgba(249,115,22,.12);
+    color: #fb923c;
+  }
+  .fcg-main-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: 1rem;
+  }
+  .fcg-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    margin: 4rem auto 0;
+  }
+  .fcg-feature-row {
+    display: flex;
+    gap: 1.15rem;
+    text-align: left;
+  }
+  .fcg-feature-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    flex: 0 0 auto;
+  }
+  .fcg-feature-row h3 {
+    color: #fff !important;
+    font-size: 1rem;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+  .fcg-feature-row p {
+    color: rgba(255,255,255,.62) !important;
+    font-size: .95rem;
+    line-height: 1.65;
+    margin-top: .25rem;
+  }
+  .fcg-mobile-cta {
+    margin-top: 4rem;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 22px;
+    background: rgba(255,255,255,.04);
+    padding: 2rem;
+    text-align: center;
+  }
+  .fcg-mobile-cta h3 {
+    color: #fff !important;
+    font-size: 1.35rem;
+    font-weight: 650;
+  }
+  .fcg-mobile-cta p {
+    color: rgba(255,255,255,.62) !important;
+    line-height: 1.65;
+    margin: .6rem auto 0;
+    max-width: 36rem;
+  }
+  .fcg-store-actions {
+    display: flex;
+    justify-content: center;
+    gap: .85rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+  .fcg-store-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    min-height: 44px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 999px;
+    color: #fff;
+    background: rgba(255,255,255,.04);
+    font-size: .9rem;
+    font-weight: 600;
+    padding: 0 1.15rem;
+    text-decoration: none;
+    transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  }
+  .fcg-store-button:hover {
+    transform: translateY(-1px);
+    background: rgba(255,255,255,.09);
+    border-color: rgba(255,255,255,.26);
+  }
+
+  html[data-theme="light"] .fcg-hero2 {
+    background:
+      radial-gradient(circle at 78% 18%, rgba(249,115,22,.16), transparent 30%),
+      radial-gradient(circle at 92% 42%, rgba(14,165,233,.13), transparent 28%),
+      linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #eef2f7 100%);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-hero2-glow span {
+    opacity: .42;
+  }
+  html[data-theme="light"] .fcg-hero2::after {
+    opacity: .35;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(15,17,20,.16) 1px, transparent 0),
+      linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.72));
+  }
+  html[data-theme="light"] .fcg-hero2-badge {
+    background: rgba(255,255,255,.78);
+    border-color: rgba(15,17,20,.12);
+    color: #374151;
+    box-shadow: 0 14px 40px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-hero2 h1 {
+    color: #0f1114 !important;
+  }
+  html[data-theme="light"] .fcg-hero2-copy {
+    color: #4b5563 !important;
+  }
+  html[data-theme="light"] .fcg-hero2-button-primary {
+    background: #0f1114;
+    color: #ffffff;
+    box-shadow: 0 16px 35px rgba(15,17,20,.16);
+  }
+  html[data-theme="light"] .fcg-hero2-button-secondary {
+    background: rgba(255,255,255,.76);
+    border-color: rgba(15,17,20,.14);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-hero2-button-secondary:hover {
+    background: #ffffff;
+  }
+  html[data-theme="light"] .fcg-hero2-preview-wrap::before {
+    background: rgba(15,17,20,.18);
+    opacity: .18;
+  }
+  html[data-theme="light"] .fcg-hero2-preview {
+    background: rgba(255,255,255,.82);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 30px 80px rgba(15,17,20,.1);
+  }
+  html[data-theme="light"] .fcg-hero2-code-preview {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+  html[data-theme="light"] .fcg-hero2-preview-grid {
+    background: rgba(255,255,255,.88);
+  }
+  html[data-theme="light"] .fcg-hero2-preview-card {
+    background: rgba(255,255,255,.74);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 45px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-hero2-preview-card strong,
+  html[data-theme="light"] .fcg-hero2-preview-card .stat-value {
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-hero2-preview-card .stat-label {
+    color: #6b7280;
+  }
+  html[data-theme="light"] .fcg-hero2-code-window {
+    background: rgba(255,255,255,.92);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 30px 80px rgba(15,17,20,.14);
+  }
+  html[data-theme="light"] .fcg-hero2-code-window::before {
+    background:
+      radial-gradient(circle at 18% 12%, rgba(249,115,22,.1), transparent 24%),
+      linear-gradient(135deg, rgba(15,17,20,.035), transparent 42%);
+  }
+  html[data-theme="light"] .fcg-hero2-code-bar {
+    border-color: rgba(15,17,20,.1);
+    color: #9ca3af;
+  }
+  html[data-theme="light"] .fcg-hero2-code-body {
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-hero2-code-body .code-keyword { color: #ef4444; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-method { color: #0f4ea3; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-string { color: #047857; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-number { color: #ea580c; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-property { color: #0369a1; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-comment { color: #9ca3af; }
+  html[data-theme="light"] .fcg-hero2-code-chip {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.1);
+    box-shadow: 0 14px 32px rgba(15,17,20,.07);
+  }
+  html[data-theme="light"] .fcg-hero2-code-chip strong {
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-bento {
+    background:
+      radial-gradient(circle at 52% 10%, rgba(249,115,22,.12), transparent 32%),
+      radial-gradient(125% 125% at 50% 10%, #ffffff 38%, #edf5ff 100%);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-bento::after {
+    background:
+      radial-gradient(circle at 18% 22%, rgba(249,115,22,.12), transparent 28%),
+      linear-gradient(to bottom, rgba(255,255,255,.08), rgba(255,255,255,.58));
+  }
+  html[data-theme="light"] .fcg-bento-spiral {
+    opacity: .16;
+    mix-blend-mode: multiply;
+  }
+  html[data-theme="light"] #fcgBentoSpiral {
+    color: #0f172a;
+  }
+  html[data-theme="light"] #fcgBentoSpiral circle {
+    fill: #0f172a;
+  }
+  html[data-theme="light"] .fcg-bento h2,
+  html[data-theme="light"] .fcg-bento-card h3 {
+    color: #0f1114 !important;
+  }
+  html[data-theme="light"] .fcg-bento-subcopy,
+  html[data-theme="light"] .fcg-bento-card p {
+    color: #4b5563 !important;
+  }
+  html[data-theme="light"] .fcg-bento-card {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 50px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-bento-card:hover {
+    background: rgba(255,255,255,.92);
+    border-color: rgba(15,17,20,.24);
+  }
+  html[data-theme="light"] .fcg-bento-card::after {
+    border-color: rgba(15,17,20,.16);
+  }
+  html[data-theme="light"] .fcg-bento-dot {
+    background: #ea580c;
+    box-shadow: 0 0 18px rgba(249,115,22,.28);
+  }
+  html[data-theme="light"] .fcg-bento-meta {
+    border-color: rgba(15,17,20,.14);
+    color: #6b7280;
+    background: rgba(255,255,255,.52);
+  }
+  html[data-theme="light"] .fcg-marketing-section {
+    background: #ffffff;
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-marketing-section::before {
+    display: none;
+  }
+  html[data-theme="light"] .fcg-marketing-title,
+  html[data-theme="light"] .fcg-mobile-feature h2,
+  html[data-theme="light"] .fcg-marketing-feature h3,
+  html[data-theme="light"] .fcg-feature-row h3,
+  html[data-theme="light"] .fcg-mobile-cta h3 {
+    color: #0f1114 !important;
+  }
+  html[data-theme="light"] .fcg-marketing-title span {
+    color: #737373;
+  }
+  html[data-theme="light"] .fcg-marketing-header p,
+  html[data-theme="light"] .fcg-marketing-feature p,
+  html[data-theme="light"] .fcg-mobile-subcopy,
+  html[data-theme="light"] .fcg-feature-row p,
+  html[data-theme="light"] .fcg-mobile-cta p {
+    color: #737373 !important;
+  }
+  html[data-theme="light"] .fcg-ai-showcase {
+    background:
+      linear-gradient(135deg, rgba(255,240,209,.9), rgba(252,201,196,.8) 34%, rgba(207,233,240,.86) 72%, rgba(106,203,213,.78)),
+      #f7f7f7;
+    border-color: #d9d9dd;
+    box-shadow: 0 10px 26px rgba(15,17,20,.14);
+  }
+  html[data-theme="light"] .fcg-ai-showcase::after {
+    opacity: .18;
+    background-image: radial-gradient(circle at 1px 1px, rgba(15,17,20,.28) 1px, transparent 0);
+  }
+  html[data-theme="light"] .fcg-ai-card {
+    background: rgba(255,255,255,.94);
+    border-color: rgba(15,17,20,.13);
+    box-shadow: 0 10px 20px rgba(15,17,20,.18);
+  }
+  html[data-theme="light"] .fcg-ai-prompt,
+  html[data-theme="light"] .fcg-ai-stat strong {
+    color: #050505 !important;
+  }
+  html[data-theme="light"] .fcg-ai-stat,
+  html[data-theme="light"] .fcg-ai-placeholder {
+    color: #737373;
+  }
+  html[data-theme="light"] .fcg-ai-input {
+    background: #f1f1f2;
+  }
+  html[data-theme="light"] .fcg-ai-tool {
+    background: rgba(255,255,255,.55);
+    border-color: rgba(15,17,20,.08);
+    color: #050505;
+  }
+  html[data-theme="light"] .fcg-ai-submit {
+    background: #050505;
+    color: #ffffff;
+  }
+  html[data-theme="light"] .fcg-integration-section {
+    background: #ffffff;
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-integration-section::before {
+    display: none;
+  }
+  html[data-theme="light"] .fcg-integration-title,
+  html[data-theme="light"] .fcg-flow-step h3 {
+    color: #0f1114 !important;
+  }
+  html[data-theme="light"] .fcg-integration-title span {
+    color: #737373;
+  }
+  html[data-theme="light"] .fcg-integration-header p,
+  html[data-theme="light"] .fcg-flow-step p {
+    color: #737373 !important;
+  }
+  html[data-theme="light"] .fcg-flow-grid {
+    background: rgba(0,0,0,.06);
+    border-color: rgba(15,17,20,.12);
+  }
+  html[data-theme="light"] .fcg-flow-step {
+    background: rgba(255,255,255,.94);
+  }
+  html[data-theme="light"] .fcg-flow-step .code-tag {
+    background: rgba(0,0,0,.04);
+    border-color: rgba(15,17,20,.1);
+    color: #6b7280;
+  }
+  html[data-theme="light"] .fcg-code-preview {
+    background: #f9fafb;
+    border-color: #d1d5db;
+  }
+  html[data-theme="light"] .fcg-code-bar {
+    background: rgba(0,0,0,.03);
+    border-color: #e5e7eb;
+  }
+  html[data-theme="light"] .fcg-code-dot {
+    background: rgba(0,0,0,.12);
+  }
+  html[data-theme="light"] .fcg-code-bar span {
+    color: #9ca3af;
+  }
+  html[data-theme="light"] .fcg-code-body .code-comment { color: #9ca3af; }
+  html[data-theme="light"] .fcg-code-body .code-key { color: #ea580c; }
+  html[data-theme="light"] .fcg-code-body .code-string { color: #059669; }
+  html[data-theme="light"] .fcg-code-body .code-method { color: #2563eb; }
+  html[data-theme="light"] .fcg-code-body .code-number { color: #7c3aed; }
+  html[data-theme="light"] .fcg-code-body .code-punct { color: #6b7280; }
+  html[data-theme="light"] .fcg-mobile-cta {
+    background: rgba(255,255,255,.78);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 24px 70px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-mobile-feature {
+    background: #ffffff;
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-mobile-feature::before {
+    background:
+      linear-gradient(to bottom, rgba(15,17,20,.035), transparent 22%),
+      radial-gradient(circle at 50% 0%, rgba(249,115,22,.12), transparent 30%);
+  }
+  html[data-theme="light"] .fcg-store-button {
+    background: rgba(255,255,255,.8);
+    border-color: rgba(15,17,20,.14);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-store-button:hover {
+    background: #ffffff;
+    border-color: rgba(15,17,20,.24);
+  }
+  @media (max-width: 980px) {
+    .fcg-hero2-content {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      padding-top: 128px;
+      padding-bottom: 72px;
+      text-align: left;
+    }
+    .fcg-hero2-copy-column { max-width: 760px; }
+    .fcg-hero2 h1 { margin-top: 34px; max-width: 760px; }
+    .fcg-hero2-copy { max-width: 720px; }
+    .fcg-hero2-actions { align-items: stretch; flex-direction: column; }
+    .fcg-hero2-actions .fcg-hero2-button { width: 100%; }
+    .fcg-hero2-preview-grid {
+      position: relative;
+      grid-template-columns: 1fr;
+      padding: 0;
+      background: transparent;
+    }
+    html[data-theme="light"] .fcg-hero2-preview-grid {
+      background: transparent;
+    }
+    .fcg-hero2-preview img { height: auto; }
+    .fcg-hero2-preview-card { min-height: auto; }
+    .fcg-hero2-code-window { min-height: auto; }
+    .fcg-hero2-code-footer { grid-template-columns: 1fr; }
+    .fcg-bento-inner { padding: 4.5rem 1.25rem; }
+    .fcg-bento-header { align-items: flex-start; flex-direction: column; }
+    .fcg-bento-grid { grid-template-columns: 1fr; }
+    .fcg-bento-card-large,
+    .fcg-bento-card-small,
+    .fcg-bento-card-wide {
+      grid-column: auto;
+      grid-row: auto;
+    }
+    .fcg-marketing-section,
+    .fcg-integration-section,
+    .fcg-mobile-feature {
+      padding: 4.5rem 1.25rem;
+    }
+    .fcg-flow-grid {
+      grid-template-columns: 1fr;
+    }
+    .fcg-feature-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .fcg-marketing-title {
+      font-size: clamp(2rem, 8.5vw, 2.65rem) !important;
+    }
+    .fcg-marketing-header {
+      margin-bottom: 2.5rem;
+    }
+    .fcg-ai-showcase {
+      min-height: 28rem;
+    }
+    .fcg-ai-card {
+      padding: 1.35rem;
+    }
+    .fcg-ai-input {
+      grid-template-columns: 1fr;
+    }
+    .fcg-marketing-features {
+      grid-template-columns: 1fr;
+      gap: 2.4rem;
+      margin-top: 3rem;
+    }
+    .fcg-store-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .fcg-store-button {
+      width: 100%;
+    }
+  }
+</style>
+<main class="product-shell">
+  <section id="capabilities" style="position:relative;overflow:hidden;background:#050505;color:#fff;padding:8rem 1.5rem 6.5rem;">
+    <style>
+      .v2-flink-hero { position:relative; z-index:1; max-width: 80rem; margin: 0 auto; display:grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items:center; gap: 4.5rem; }
+      @media (max-width: 980px) { .v2-flink-hero { grid-template-columns: 1fr; gap: 3rem; } }
+      .v2-flink-bg { position:absolute; inset:0; pointer-events:none; opacity:.55;
+        background-image:
+          linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: radial-gradient(ellipse at 70% 50%, #000 30%, transparent 70%);
+      }
+      .v2-flink-glow { position:absolute; top:-20%; right:-10%; width: 50rem; height: 50rem; pointer-events:none;
+        background: radial-gradient(circle, rgba(249,115,22,.22), transparent 60%);
+        filter: blur(40px);
+      }
+      .v2-flink-badge { display:inline-flex; align-items:center; gap:.6rem; padding:.55rem 1rem; border:1px solid rgba(255,255,255,.14); border-radius: 999px; background: rgba(255,255,255,.04); font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.04em; color:rgba(255,255,255,.74); margin-bottom: 2rem; }
+      .v2-flink-badge::before { content:""; width:6px; height:6px; border-radius:9999px; background:#fb923c; box-shadow: 0 0 12px rgba(249,115,22,.7); }
+      .v2-flink-copy h1 { color:#fff; font-size: clamp(2.3rem, 4.2vw, 3.45rem); font-weight: 500; letter-spacing:-.02em; line-height: 1.06; margin: 0 0 1.35rem; }
+      .v2-flink-copy h1 em { font-style:normal; color:#fb923c; }
+      .v2-flink-copy p { color: rgba(255,255,255,.66); font-size: 1.025rem; line-height: 1.65; max-width: 36rem; margin: 0; }
+      .v2-flink-cta { display:flex; align-items:center; flex-wrap:wrap; gap:.75rem; margin-top: 2.25rem; }
+      .v2-flink-btn { display:inline-flex; align-items:center; gap:.5rem; padding: .9rem 1.5rem; border-radius: 9999px; font-size: 14px; font-weight: 500; transition: transform 180ms ease, background 180ms ease, border-color 180ms ease; }
+      .v2-flink-btn-primary { background:#fff; color:#0a0a0a; }
+      .v2-flink-btn-primary:hover { transform: scale(1.01); }
+      .v2-flink-btn-secondary { background: rgba(255,255,255,.05); color:#fff; border:1px solid rgba(255,255,255,.14); }
+      .v2-flink-btn-secondary:hover { border-color: rgba(255,255,255,.3); }
+
+      .v2-flink-panel { position:relative; border:1px solid rgba(255,255,255,.1); border-radius: 28px; background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)); box-shadow: 0 30px 80px rgba(0,0,0,.45); padding: 1.75rem; }
+      .v2-flink-panel::after { content:""; position:absolute; inset:0; border-radius: 28px; pointer-events:none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05); }
+      .v2-flink-panel-head { display:flex; align-items:center; justify-content:space-between; padding-bottom: 1rem; border-bottom: 1px dashed rgba(255,255,255,.1); margin-bottom: 1.25rem; }
+      .v2-flink-panel-head .v2-flink-tag { display:inline-flex; align-items:center; gap:.45rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing:.06em; color:rgba(255,255,255,.55); text-transform: uppercase; }
+      .v2-flink-panel-head .v2-flink-tag::before { content:""; width:6px; height:6px; border-radius:9999px; background:#22c55e; box-shadow: 0 0 12px rgba(34,197,94,.7); }
+      .v2-flink-panel-head small { color:rgba(255,255,255,.4); font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.06em; text-transform: uppercase; }
+
+      .v2-flink-route { display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap:1.25rem; padding: 1rem 0 1.25rem; }
+      .v2-flink-port { text-align:center; }
+      .v2-flink-port strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 2rem; font-weight: 400; letter-spacing:.04em; line-height: 1; }
+      .v2-flink-port span { display:block; margin-top:.3rem; color:rgba(255,255,255,.5); font-size: 10.5px; letter-spacing:.14em; text-transform:uppercase; }
+      .v2-flink-line { position:relative; height:30px; }
+      .v2-flink-line::before { content:""; position:absolute; left:0; right:0; top:50%; border-top: 1px dashed rgba(255,255,255,.22); }
+      .v2-flink-line iconify-icon { position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); color:#fb923c; background:#050505; padding: 0 .35rem; }
+
+      .v2-flink-stack { display:flex; flex-direction:column; gap:.65rem; margin-top:.4rem; }
+      .v2-flink-row { display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap:.85rem; padding: .85rem .95rem; border:1px solid rgba(255,255,255,.08); border-radius: 14px; background: rgba(255,255,255,.025); }
+      .v2-flink-row .dot { width:.55rem; height:.55rem; border-radius:9999px; background:#fb923c; box-shadow: 0 0 10px rgba(249,115,22,.6); }
+      .v2-flink-row .body { display:flex; flex-direction:column; gap:.15rem; }
+      .v2-flink-row .body strong { color:#fff; font-size: .92rem; font-weight: 500; line-height:1.25; }
+      .v2-flink-row .body span { color:rgba(255,255,255,.5); font-size:.78rem; line-height:1.3; }
+      .v2-flink-row .tag { display:inline-flex; align-items:center; padding:.35rem .55rem; border-radius:9999px; background: rgba(249,115,22,.12); color:#fb923c; font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.04em; }
+      .v2-flink-row.muted .dot { background: rgba(255,255,255,.4); box-shadow: none; }
+      .v2-flink-row.muted .tag { background: rgba(255,255,255,.06); color: rgba(255,255,255,.55); }
+
+      .v2-flink-stats { display:grid; grid-template-columns: repeat(3, 1fr); gap:.65rem; margin-top: 1.1rem; }
+      .v2-flink-stat { border:1px solid rgba(255,255,255,.08); border-radius: 12px; background: rgba(255,255,255,.025); padding: .8rem .85rem; }
+      .v2-flink-stat strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 500; }
+      .v2-flink-stat span { display:block; margin-top:.25rem; color:rgba(255,255,255,.42); font-size: 10.5px; letter-spacing:.08em; text-transform: uppercase; }
+    </style>
+
+    <div class="v2-flink-glow" aria-hidden="true"></div>
+    <div class="v2-flink-bg" aria-hidden="true"></div>
+
+    <div class="v2-flink-hero">
+      <div class="v2-flink-copy">
+        <div class="v2-flink-badge">Product · F&#8209;Link</div>
+        <h1>Air supply for China and APAC routes.</h1>
+        <p>F&#8209;Link connects Travelsky and GDS air paths through the same Open Platform and mid-office as G&#8209;Link. Use it where global air APIs hand off China and regional routes.</p>
+        <div class="v2-flink-cta">
+          <a href="#getting-started" class="v2-flink-btn v2-flink-btn-primary">See a route demo<iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
+          <a href="#supply-buckets" class="v2-flink-btn v2-flink-btn-secondary">See where F&#8209;Link fits</a>
+        </div>
+      </div>
+
+      <div class="v2-flink-panel" aria-label="F&#8209;Link routing preview">
+        <div class="v2-flink-panel-head">
+          <div class="v2-flink-tag">F&#8209;Link · Live routing</div>
+          <small>route 4F · 06:55 → 09:40</small>
+        </div>
+
+        <div class="v2-flink-route">
+          <div class="v2-flink-port"><strong>PVG</strong><span>Shanghai</span></div>
+          <div class="v2-flink-line"><iconify-icon icon="solar:plain-2-linear" width="20" height="20"></iconify-icon></div>
+          <div class="v2-flink-port"><strong>HKG</strong><span>Hong Kong</span></div>
+        </div>
+
+        <div class="v2-flink-stack">
+          <div class="v2-flink-row">
+            <span class="dot"></span>
+            <div class="body"><strong>Travelsky · primary anchor</strong><span>China gatekeeper · direct integration</span></div>
+            <span class="tag">LIVE</span>
+          </div>
+          <div class="v2-flink-row">
+            <span class="dot"></span>
+            <div class="body"><strong>Sabre · Amadeus · Travelport</strong><span>Global GDS alignment</span></div>
+            <span class="tag">LIVE</span>
+          </div>
+          <div class="v2-flink-row muted">
+            <span class="dot"></span>
+            <div class="body"><strong>Bundled with G&#8209;Link mid-office</strong><span>Shared BMS for events</span></div>
+            <span class="tag">ATTACHED</span>
+          </div>
+        </div>
+
+        <div class="v2-flink-stats">
+          <div class="v2-flink-stat"><strong>2</strong><span>Anchor suppliers</span></div>
+          <div class="v2-flink-stat"><strong>China+APAC</strong><span>Route depth</span></div>
+          <div class="v2-flink-stat"><strong>1 BMS</strong><span>Hotel + Air</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== G-LINK BUNDLE EXPRESS PATH ===== -->
+  <section id="flink-bundle" style="position:relative;background:#050505;color:#fff;padding:3.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);">
+    <style>
+      .v2-flink-bundle { max-width: 80rem; margin: 0 auto; position: relative; border: 1px solid rgba(249,115,22,.22); border-radius: 22px; background: linear-gradient(120deg, rgba(249,115,22,.08), rgba(255,255,255,.015) 60%); padding: 2rem 2.25rem; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: center; }
+      @media (max-width: 820px) { .v2-flink-bundle { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.75rem 1.5rem; } }
+      .v2-flink-bundle-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'Inter',sans-serif; font-size: 11px; letter-spacing:.16em; color:#fb923c; text-transform:uppercase; margin-bottom: .75rem; }
+      .v2-flink-bundle-eyebrow iconify-icon { color: #fb923c; }
+      .v2-flink-bundle h2 { color:#fff; font-size: clamp(1.45rem, 2.2vw, 1.85rem); font-weight: 500; letter-spacing:-.015em; line-height: 1.15; margin: 0 0 .75rem; }
+      .v2-flink-bundle p { color: rgba(255,255,255,.62); font-size: .98rem; line-height: 1.55; margin: 0; max-width: 44rem; }
+      .v2-flink-bundle-cta { display:inline-flex; align-items:center; gap:.5rem; padding: .9rem 1.4rem; border-radius: 9999px; background: #fff; color: #0a0a0a; font-size: 14px; font-weight: 500; white-space: nowrap; transition: transform 180ms ease; }
+      .v2-flink-bundle-cta:hover { transform: scale(1.02); }
+      html[data-theme="light"] .v2-flink-bundle { background: linear-gradient(120deg, rgba(249,115,22,.08), rgba(0,0,0,.02) 60%); border-color: rgba(249,115,22,.35); }
+      html[data-theme="light"] .v2-flink-bundle h2 { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-bundle p { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-bundle-cta { background: #0f1114; color: #fff; }
+    </style>
+    <div class="v2-flink-bundle fade-up">
+      <div>
+        <div class="v2-flink-bundle-eyebrow"><iconify-icon icon="solar:link-circle-linear" width="14" height="14"></iconify-icon>For TMCs already on G&#8209;Link</div>
+        <h2>Add F&#8209;Link in one commercial relationship.</h2>
+        <p>One contract, one Open Platform login, and one mid-office for hotel and air. The fastest air path for TMCs already using G&#8209;Link.</p>
+      </div>
+      <a href="#contact" class="v2-flink-bundle-cta">See the bundle terms<iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
+    </div>
+  </section>
+
+  <!-- ===== TRUST / PROOF STRIP ===== -->
+  <section id="flink-proof" style="position:relative;background:#050505;color:#fff;padding:4.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);">
+    <style>
+      .v2-flink-proof { max-width: 80rem; margin: 0 auto; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 4rem; align-items: center; }
+      @media (max-width: 980px) { .v2-flink-proof { grid-template-columns: 1fr; gap: 2.5rem; } }
+      .v2-flink-proof-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing:.12em; color: rgba(255,255,255,.55); text-transform: uppercase; margin-bottom: 1rem; }
+      .v2-flink-proof-eyebrow::before { content:""; width:1.6rem; height:1px; background: rgba(255,255,255,.3); }
+      .v2-flink-proof h2 { color:#fff; font-size: clamp(1.7rem, 2.6vw, 2.2rem); font-weight: 500; letter-spacing:-.018em; line-height: 1.15; margin: 0 0 1rem; }
+      .v2-flink-proof p.lede { color: rgba(255,255,255,.62); font-size: 1rem; line-height: 1.6; margin: 0; max-width: 30rem; }
+      .v2-flink-proof-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+      .v2-flink-proof-card { border: 1px solid rgba(255,255,255,.08); border-radius: 16px; background: rgba(255,255,255,.025); padding: 1.4rem 1.4rem 1.3rem; min-height: 9.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; }
+      .v2-flink-proof-card strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 1.65rem; font-weight: 500; letter-spacing: -.01em; line-height: 1; }
+      .v2-flink-proof-card .label { color: rgba(255,255,255,.78); font-size: .92rem; font-weight: 500; line-height: 1.3; margin-top: .55rem; }
+      .v2-flink-proof-card .meta { color: rgba(255,255,255,.45); font-size: .78rem; line-height: 1.45; }
+      .v2-flink-proof-card.accent strong { color: #fb923c; }
+      .v2-flink-proof-card.accent { border-color: rgba(249,115,22,.28); background: rgba(249,115,22,.06); }
+      .v2-flink-proof-note { margin-top: 1.6rem; padding: 1.1rem 1.25rem; border: 1px dashed rgba(255,255,255,.14); border-radius: 14px; background: rgba(255,255,255,.02); color: rgba(255,255,255,.62); font-size: .88rem; line-height: 1.55; display:flex; align-items:flex-start; gap:.75rem; }
+      .v2-flink-proof-note iconify-icon { color: #fb923c; flex-shrink: 0; margin-top: .15rem; }
+      html[data-theme="light"] .v2-flink-proof h2 { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-proof p.lede,
+      html[data-theme="light"] .v2-flink-proof-eyebrow { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-proof-card { background: #fff; border-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-proof-card strong { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-proof-card .label { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-proof-card .meta { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-proof-card.accent { background: rgba(249,115,22,.08); border-color: rgba(249,115,22,.35); }
+      html[data-theme="light"] .v2-flink-proof-note { background: #f3f4f6; border-color: #e5e7eb; color: #4b5563; }
+    </style>
+    <div class="v2-flink-proof">
+      <div class="fade-up">
+        <div class="v2-flink-proof-eyebrow">Where F&#8209;Link stands today</div>
+        <h2>New product. Mature backbone.</h2>
+        <p class="lede">F&#8209;Link is new. The infrastructure underneath is not: Travelsky integration, the shared mid-office, and the Open Platform already support G&#8209;Link.</p>
+      </div>
+      <div class="fade-up">
+        <div class="v2-flink-proof-grid">
+          <div class="v2-flink-proof-card accent">
+            <strong>2</strong>
+            <div>
+              <div class="label">Anchor suppliers, live in production</div>
+              <div class="meta">Travelsky direct · Sabre · Amadeus · Travelport</div>
+            </div>
+          </div>
+          <div class="v2-flink-proof-card">
+            <strong>BMS</strong>
+            <div>
+              <div class="label">Shared mid-office with G&#8209;Link</div>
+              <div class="meta">Battle-tested for hotel events · same backbone now handling air</div>
+            </div>
+          </div>
+          <div class="v2-flink-proof-card">
+            <strong>3 doors</strong>
+            <div>
+              <div class="label">Skills, API, SDK · same Open Platform</div>
+              <div class="meta">F&#8209;Link MCP version of the API exposed today</div>
+            </div>
+          </div>
+          <div class="v2-flink-proof-card">
+            <strong>1 contract</strong>
+            <div>
+              <div class="label">Bundled commercial path with G&#8209;Link</div>
+              <div class="meta">One vendor, one mid-office, one Open Platform login</div>
+            </div>
+          </div>
+        </div>
+        <div class="v2-flink-proof-note">
+          <iconify-icon icon="solar:info-circle-linear" width="16" height="16"></iconify-icon>
+          <span>F&#8209;Link is an early-stage product. We surface what's shipped, not what's promised. Investment scales with China-routed demand first; regional and broader APAC follow.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="api-capabilities" style="position:relative;background:#050505;color:#fff;padding:7rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);">
+    <style>
+      .v2-flink-cap { max-width: 70rem; margin: 0 auto; }
+      .v2-flink-cap-head { display:grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 3rem; align-items:end; margin-bottom: 3.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+      @media (max-width: 820px) { .v2-flink-cap-head { grid-template-columns: 1fr; gap: 1.5rem; } }
+      .v2-flink-cap-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; color: rgba(255,255,255,.55); text-transform: uppercase; margin-bottom: 1rem; }
+      .v2-flink-cap-eyebrow::before { content:""; width: 1.6rem; height: 1px; background: rgba(255,255,255,.3); }
+      .v2-flink-cap-head h2 { color:#fff; font-size: clamp(2rem, 3.4vw, 2.85rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.06; margin: 0; }
+      .v2-flink-cap-head p { color: rgba(255,255,255,.62); font-size: 1rem; line-height: 1.7; margin: 0; }
+
+      .v2-flink-cap-list { display:flex; flex-direction:column; }
+      .v2-flink-cap-item { display:grid; grid-template-columns: 5.5rem minmax(0,1fr) 11rem; gap: 2.25rem; align-items:flex-start; padding: 2.25rem 0; border-bottom: 1px solid rgba(255,255,255,.08); transition: background 200ms ease; }
+      .v2-flink-cap-item:last-child { border-bottom: 0; }
+      .v2-flink-cap-item:hover { background: linear-gradient(90deg, rgba(249,115,22,.04), transparent 60%); }
+      @media (max-width: 820px) { .v2-flink-cap-item { grid-template-columns: 1fr; gap: .85rem; padding: 1.75rem 0; } }
+      .v2-flink-cap-no { font-family:'JetBrains Mono', monospace; font-size: 2.1rem; font-weight: 400; color: #fff; letter-spacing: -.02em; line-height: 1; padding-top: .15rem; opacity: .85; }
+      .v2-flink-cap-item .body { display:flex; flex-direction:column; gap: .65rem; }
+      .v2-flink-cap-item h3 { color:#fff; font-size: 1.3rem; font-weight: 500; letter-spacing: -.01em; margin: 0; line-height: 1.3; }
+      .v2-flink-cap-item p { color: rgba(255,255,255,.6); font-size: .95rem; line-height: 1.65; margin: 0; max-width: 36rem; }
+      .v2-flink-cap-tag { display:inline-flex; align-items:center; gap:.5rem; align-self: flex-start; padding: .55rem .85rem; border: 1px solid rgba(255,255,255,.12); border-radius: 9999px; background: rgba(255,255,255,.03); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .06em; color: rgba(255,255,255,.55); text-transform: uppercase; justify-self: flex-start; }
+      .v2-flink-cap-tag iconify-icon { color: #fb923c; }
+      .v2-flink-cap-item.feature .v2-flink-cap-no { color: #fb923c; }
+      .v2-flink-cap-item.feature .v2-flink-cap-tag { border-color: rgba(249,115,22,.35); background: rgba(249,115,22,.08); color: #fb923c; }
+    </style>
+
+    <div class="v2-flink-cap">
+      <div class="v2-flink-cap-head fade-up">
+        <div>
+          <div class="v2-flink-cap-eyebrow">Best fit</div>
+          <h2>Built for routes global APIs miss.</h2>
+        </div>
+        <p>F&#8209;Link focuses on air paths where China distribution, regional ticketing, and bundled hotel-air operations matter more than broad global coverage.</p>
+      </div>
+
+      <div class="v2-flink-cap-list">
+        <div class="v2-flink-cap-item fade-up">
+          <div class="v2-flink-cap-no">01</div>
+          <div class="body">
+            <h3>Travelsky and GDS in one air layer</h3>
+            <p>F&#8209;Link integrates with China's primary air distribution path while keeping the GDS context TMCs already understand.</p>
+          </div>
+          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:plain-2-linear" width="14" height="14"></iconify-icon>F&#8209;Link</span>
+        </div>
+
+        <div class="v2-flink-cap-item fade-up">
+          <div class="v2-flink-cap-no">02</div>
+          <div class="body">
+            <h3>Single vendor for hotel and air</h3>
+            <p>For TMCs already on G&#8209;Link, adding F&#8209;Link is one commercial relationship, one developer surface, and one integration partnership, not a separate air vendor to negotiate, integrate, and operate.</p>
+          </div>
+          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:link-circle-linear" width="14" height="14"></iconify-icon>Bundle</span>
+        </div>
+
+        <div class="v2-flink-cap-item fade-up">
+          <div class="v2-flink-cap-no">03</div>
+          <div class="body">
+            <h3>Same three doors as G&#8209;Link</h3>
+            <p>Skills, API, or SDK through the Open Platform. The F&#8209;Link MCP surface is live today for AI-driven integration.</p>
+          </div>
+          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:layers-minimalistic-linear" width="14" height="14"></iconify-icon>Open Platform</span>
+        </div>
+
+        <div class="v2-flink-cap-item fade-up">
+          <div class="v2-flink-cap-no">04</div>
+          <div class="body">
+            <h3>One mid-office, hotel and air</h3>
+            <p>Air bookings flow into the same BMS that handles hotel mid-office events: cancellations, reschedules, traveler emergencies, refund flows. Not a second operational stack to staff and learn.</p>
+          </div>
+          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:settings-linear" width="14" height="14"></iconify-icon>Operations</span>
+        </div>
+
+        <div class="v2-flink-cap-item feature fade-up">
+          <div class="v2-flink-cap-no">05</div>
+          <div class="body">
+            <h3>Focused scope, early stage</h3>
+            <p>F&#8209;Link is early stage and intentionally focused. Investment scales first around China-routed flows and TMCs already using G&#8209;Link.</p>
+          </div>
+          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:info-circle-linear" width="14" height="14"></iconify-icon>Status</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="fcg-integration-section">
+    <div class="fcg-integration-inner">
+      <header class="fcg-integration-header fade-up">
+        <div class="fcg-integration-eyebrow">Integration</div>
+        <h2 class="fcg-integration-title"><span>Skills, API, or SDK.</span><br>Three ways into F&#8209;Link.</h2>
+        <p>The Open Platform exposes F&#8209;Link through the same three integration methods that serve G&#8209;Link and the TMC API. Skills is the recommended default, the F&#8209;Link MCP version of the API is exposed today for AI-driven integration. API and SDK remain fully supported.</p>
+      </header>
+
+      <div class="fcg-flow-grid fade-up">
+        <div class="fcg-flow-step">
+          <div class="fcg-flow-step-number">01</div>
+          <h3>Skills · AI-native</h3>
+          <p>Paste a Skills command into your local AI tool. Describe the air search and booking flow in plain English. The model reads our docs and writes the integration against the F&#8209;Link MCP surface.</p>
+          <div class="code-tag">/skill fcg-flink</div>
+        </div>
+        <div class="fcg-flow-step">
+          <div class="fcg-flow-step-number">02</div>
+          <h3>API · MCP version</h3>
+          <p>F&#8209;Link MCP version of the API is exposed today. Traditional REST integration for full control. Next versioning to be announced as F&#8209;Link matures.</p>
+          <div class="code-tag">POST /flink/air/search</div>
+        </div>
+        <div class="fcg-flow-step">
+          <div class="fcg-flow-step-number">03</div>
+          <h3>SDK · Managed surface</h3>
+          <p>Typed primitives for air search, pricing, booking, and ticketing. Less boilerplate, faster onboarding for standard stacks already running G&#8209;Link's SDK.</p>
+          <div class="code-tag">npm i @fcg/flink</div>
+        </div>
+      </div>
+
+      <div class="fcg-code-preview fade-up">
+        <div class="fcg-code-bar">
+          <div class="fcg-code-dot"></div>
+          <div class="fcg-code-dot"></div>
+          <div class="fcg-code-dot"></div>
+          <span>flink-search.js</span>
+        </div>
+        <pre class="fcg-code-body"><code><span class="code-comment">// Search F&#8209;Link -- China-routed air, bundled with G&#8209;Link</span>
+<span class="code-key">const</span> results <span class="code-punct">=</span> <span class="code-key">await</span> flink<span class="code-punct">.</span><span class="code-method">air</span><span class="code-punct">.</span><span class="code-method">search</span><span class="code-punct">({</span>
+  <span class="code-key">origin</span><span class="code-punct">:</span>        <span class="code-string">"PVG"</span><span class="code-punct">,</span>
+  <span class="code-key">destination</span><span class="code-punct">:</span>   <span class="code-string">"HKG"</span><span class="code-punct">,</span>
+  <span class="code-key">departDate</span><span class="code-punct">:</span>    <span class="code-string">"2026-06-15"</span><span class="code-punct">,</span>
+  <span class="code-key">returnDate</span><span class="code-punct">:</span>    <span class="code-string">"2026-06-18"</span><span class="code-punct">,</span>
+  <span class="code-key">passengers</span><span class="code-punct">:</span>    <span class="code-number">1</span><span class="code-punct">,</span>
+  <span class="code-key">supply</span><span class="code-punct">:</span>        <span class="code-punct">[</span><span class="code-string">"travelsky"</span><span class="code-punct">,</span> <span class="code-string">"zhifei"</span><span class="code-punct">],</span>
+  <span class="code-key">bundleWith</span><span class="code-punct">:</span>    <span class="code-string">"glink"</span>
+<span class="code-punct">});</span>
+
+<span class="code-comment">// Travelsky-routed. Shared BMS with G&#8209;Link.</span>
+console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>itineraries<span class="code-punct">.</span>length<span class="code-punct">);</span>   <span class="code-comment">// 38</span>
+console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>routedVia<span class="code-punct">);</span>           <span class="code-comment">// "travelsky"</span>
+console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>bundleEligible<span class="code-punct">);</span>      <span class="code-comment">// true</span></code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LIVE PVG ROUTES PREVIEW ===== -->
+  <section id="flink-routes" style="position:relative;background:#050505;color:#fff;padding:6.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);overflow:hidden;">
+    <style>
+      .v2-flink-routes { max-width: 80rem; margin: 0 auto; position: relative; z-index: 1; }
+      .v2-flink-routes-glow { position:absolute; top:-15%; left:-10%; width: 45rem; height: 45rem; pointer-events:none; background: radial-gradient(circle, rgba(14,165,233,.12), transparent 60%); filter: blur(60px); }
+      .v2-flink-routes-head { display:grid; grid-template-columns: minmax(0,1fr) auto; gap: 2rem; align-items: end; margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+      @media (max-width: 820px) { .v2-flink-routes-head { grid-template-columns: 1fr; gap: 1.25rem; align-items: flex-start; } }
+      .v2-flink-routes-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; color: rgba(255,255,255,.55); text-transform: uppercase; margin-bottom: 1rem; }
+      .v2-flink-routes-eyebrow::before { content:""; width: 1.6rem; height: 1px; background: rgba(255,255,255,.3); }
+      .v2-flink-routes-head h2 { color:#fff; font-size: clamp(2rem, 3.2vw, 2.65rem); font-weight: 500; letter-spacing:-.018em; line-height: 1.1; margin: 0 0 .85rem; max-width: 36rem; }
+      .v2-flink-routes-head p { color: rgba(255,255,255,.62); font-size: 1rem; line-height: 1.6; margin: 0; max-width: 32rem; }
+      .v2-flink-routes-live { display:inline-flex; align-items:center; gap:.55rem; padding: .55rem .95rem; border-radius: 9999px; background: rgba(34,197,94,.1); color: #22c55e; font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing:.06em; text-transform: uppercase; white-space: nowrap; }
+      .v2-flink-routes-live::before { content:""; width:7px; height:7px; border-radius:9999px; background:#22c55e; box-shadow: 0 0 12px rgba(34,197,94,.8); animation: pulse-dot 2s ease-in-out infinite; }
+      @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+
+      .v2-flink-routes-grid { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+      @media (max-width: 980px) { .v2-flink-routes-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 640px) { .v2-flink-routes-grid { grid-template-columns: 1fr; } }
+
+      .v2-flink-route-card { position:relative; border: 1px solid rgba(255,255,255,.1); border-radius: 20px; background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.012)); padding: 1.5rem 1.5rem 1.35rem; display: flex; flex-direction: column; gap: 1.1rem; transition: border-color 220ms ease, transform 220ms ease, background 220ms ease; }
+      .v2-flink-route-card:hover { border-color: rgba(249,115,22,.35); transform: translateY(-2px); }
+      .v2-flink-route-card.featured { border-color: rgba(249,115,22,.32); background: linear-gradient(180deg, rgba(249,115,22,.08), rgba(255,255,255,.012)); }
+      .v2-flink-route-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: .85rem; border-bottom: 1px dashed rgba(255,255,255,.1); }
+      .v2-flink-route-head .v2-flink-route-id { font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.06em; color: rgba(255,255,255,.5); text-transform: uppercase; }
+      .v2-flink-route-head .v2-flink-route-status { display:inline-flex; align-items:center; gap:.4rem; font-family:'JetBrains Mono', monospace; font-size: 10px; letter-spacing:.06em; color: #22c55e; text-transform: uppercase; }
+      .v2-flink-route-head .v2-flink-route-status::before { content:""; width:5px; height:5px; border-radius:9999px; background:#22c55e; box-shadow: 0 0 8px rgba(34,197,94,.7); }
+      .v2-flink-route-card.featured .v2-flink-route-status { color: #fb923c; }
+      .v2-flink-route-card.featured .v2-flink-route-status::before { background: #fb923c; box-shadow: 0 0 8px rgba(249,115,22,.7); }
+
+      .v2-flink-route-airports { display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap: 1rem; }
+      .v2-flink-route-port strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 1.65rem; font-weight: 400; letter-spacing:.04em; line-height: 1; }
+      .v2-flink-route-port span { display:block; margin-top:.3rem; color: rgba(255,255,255,.5); font-size: 9.5px; letter-spacing:.12em; text-transform: uppercase; }
+      .v2-flink-route-port.dest { text-align: right; }
+      .v2-flink-route-line { position:relative; height: 22px; }
+      .v2-flink-route-line::before { content:""; position:absolute; left:0; right:0; top:50%; border-top: 1px dashed rgba(255,255,255,.2); }
+      .v2-flink-route-line iconify-icon { position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); color:#fb923c; background:#050505; padding: 0 .35rem; font-size: 16px; }
+      .v2-flink-route-card.featured .v2-flink-route-line iconify-icon { background: #1a0f08; }
+
+      .v2-flink-route-meta { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+      .v2-flink-route-meta-item { font-family:'JetBrains Mono', monospace; }
+      .v2-flink-route-meta-item .k { display:block; color: rgba(255,255,255,.4); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .2rem; }
+      .v2-flink-route-meta-item .v { color: #fff; font-size: .82rem; font-weight: 500; letter-spacing: .02em; }
+
+      .v2-flink-route-supply { display:flex; flex-wrap: wrap; gap: .4rem; }
+      .v2-flink-route-supply span { display:inline-flex; align-items:center; gap:.35rem; padding: .3rem .55rem; border-radius: 6px; background: rgba(249,115,22,.1); color: #fb923c; font-family:'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase; }
+      .v2-flink-route-supply span.muted { background: rgba(255,255,255,.05); color: rgba(255,255,255,.55); }
+
+      .v2-flink-routes-foot { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center; padding-top: 1.75rem; border-top: 1px dashed rgba(255,255,255,.1); }
+      .v2-flink-routes-foot p { color: rgba(255,255,255,.55); font-size: .9rem; line-height: 1.55; margin: 0; max-width: 38rem; }
+      .v2-flink-routes-foot p em { color: #fb923c; font-style: normal; font-weight: 500; }
+      .v2-flink-routes-foot a { display:inline-flex; align-items:center; gap:.5rem; padding: .8rem 1.3rem; border-radius: 9999px; background: rgba(255,255,255,.06); color: #fff; border: 1px solid rgba(255,255,255,.14); font-size: 13px; font-weight: 500; white-space: nowrap; transition: border-color 180ms ease; }
+      .v2-flink-routes-foot a:hover { border-color: rgba(255,255,255,.3); }
+
+      html[data-theme="light"] #flink-routes { background: #ffffff; border-top-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-routes-glow { opacity: .35; }
+      html[data-theme="light"] .v2-flink-routes-head { border-bottom-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-routes-head h2 { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-routes-head p,
+      html[data-theme="light"] .v2-flink-routes-eyebrow { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-route-card { background: #fff; border-color: #e5e7eb; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+      html[data-theme="light"] .v2-flink-route-card:hover { border-color: rgba(249,115,22,.4); }
+      html[data-theme="light"] .v2-flink-route-card.featured { background: linear-gradient(180deg, rgba(249,115,22,.07), #fff 80%); border-color: rgba(249,115,22,.4); }
+      html[data-theme="light"] .v2-flink-route-head { border-bottom-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-route-head .v2-flink-route-id { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-route-port strong { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-route-port span { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-route-line::before { border-top-color: #d1d5db; }
+      html[data-theme="light"] .v2-flink-route-line iconify-icon { background: #fff; }
+      html[data-theme="light"] .v2-flink-route-card.featured .v2-flink-route-line iconify-icon { background: #fff8f1; }
+      html[data-theme="light"] .v2-flink-route-meta-item .k { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-route-meta-item .v { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-route-supply span.muted { background: #f3f4f6; color: #4b5563; }
+      html[data-theme="light"] .v2-flink-routes-foot { border-top-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-routes-foot p { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-routes-foot a { background: #f3f4f6; color: #0f1114; border-color: #e5e7eb; }
+    </style>
+
+    <div class="v2-flink-routes-glow" aria-hidden="true"></div>
+
+    <div class="v2-flink-routes">
+      <header class="v2-flink-routes-head fade-up">
+        <div>
+          <div class="v2-flink-routes-eyebrow">Sandbox routes</div>
+          <h2>China and APAC route examples.</h2>
+          <p>A sample of China-anchored air paths running through the F&#8209;Link MCP surface, with Travelsky and global GDS context behind the flow.</p>
+        </div>
+        <span class="v2-flink-routes-live">F&#8209;Link · Live routing</span>
+      </header>
+
+      <div class="v2-flink-routes-grid">
+        <article class="v2-flink-route-card featured fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 4F · 06:55 → 09:40</span>
+            <span class="v2-flink-route-status">Featured</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PVG</strong><span>Shanghai</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>HKG</strong><span>Hong Kong</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">2h 45m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">CX · CA · MU</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span>Amadeus</span>
+            <span class="muted">G&#8209;Link bundle</span>
+          </div>
+        </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 8F · 08:20 → 12:55</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PVG</strong><span>Shanghai</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>NRT</strong><span>Tokyo</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">3h 35m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">JL · MU · NH</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span class="muted">APAC outbound</span>
+          </div>
+        </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 12F · 14:10 → 19:25</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PVG</strong><span>Shanghai</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>SIN</strong><span>Singapore</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">5h 15m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">SQ · MU · CA</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span class="muted">APAC outbound</span>
+          </div>
+        </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 21F · 09:35 → 11:15</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PEK</strong><span>Beijing</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>PVG</strong><span>Shanghai</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">2h 20m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">CA · MU · CZ</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span>Travelport</span>
+            <span class="muted">China domestic</span>
+          </div>
+        </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 33F · 23:50 → 03:25+1</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PVG</strong><span>Shanghai</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>BKK</strong><span>Bangkok</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">5h 35m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">TG · MU · 9C</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span class="muted">APAC outbound</span>
+          </div>
+        </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 45F · 11:40 → 15:10</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>CAN</strong><span>Guangzhou</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>KUL</strong><span>Kuala Lumpur</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">4h 30m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">MH · CZ · AK</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span class="muted">APAC outbound</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="v2-flink-routes-foot fade-up">
+        <p>A representative slice of China-anchored paths is available in the sandbox today. Full coverage map and supplier matrix are available in the developer portal.</p>
+        <a href="#getting-started"><iconify-icon icon="solar:test-tube-linear" width="16" height="16"></iconify-icon>Test these routes in sandbox</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="supply-buckets" class="fcg-marketing-section">
+    <div class="fcg-marketing-inner" style="max-width:72rem;">
+      <header class="fcg-marketing-header fade-up">
+        <div class="fcg-marketing-eyebrow">Air · Paths</div>
+        <h2 class="fcg-marketing-title">Where F&#8209;Link <span>fits.</span></h2>
+        <p>F&#8209;Link is not a global air breadth play. It fits China-routed flows, APAC exposure, and TMCs that already use G&#8209;Link.</p>
+      </header>
+
+      <div class="fcg-marketing-features fade-up" style="grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem 4rem;">
+        <article class="fcg-marketing-feature">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
+            <iconify-icon icon="solar:plain-2-linear" width="18" height="18"></iconify-icon>
+            Path A · Travelsky / GDS
+          </div>
+          <h3>Where global air APIs hand off</h3>
+          <p>Travelsky is the gatekeeper of Chinese air ticket distribution, structurally not addressable from outside Asia without local relationships. F&#8209;Link integrates directly through the Travelsky path, with front-end consistency between FCG's CBT and the broader GDS environment.</p>
+          <p style="margin-top:1rem;color:rgba(255,255,255,.4)!important;font-size:.9rem;line-height:1.6;">Travelsky · Sabre · Amadeus · Travelport · Unified CBT consumes F&#8209;Link directly · Internal TC operators routed through F&#8209;Link.</p>
+        </article>
+
+        <article class="fcg-marketing-feature">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
+            <iconify-icon icon="solar:global-linear" width="18" height="18"></iconify-icon>
+            Path B · China outbound &amp; APAC
+          </div>
+          <h3>Routes anchored in Asia</h3>
+          <p>China outbound and intra-APAC routes are the structural reason F&#8209;Link exists. Travelsky, local ticketing norms, and regional commercial relationships are hard to retrofit from outside.</p>
+          <p style="margin-top:1rem;color:rgba(255,255,255,.4)!important;font-size:.9rem;line-height:1.6;">China domestic + outbound · APAC routes with regional carriers · Local payment, currency, ticketing native.</p>
+        </article>
+
+        <article class="fcg-marketing-feature">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
+            <iconify-icon icon="solar:link-circle-linear" width="18" height="18"></iconify-icon>
+            Path C · Co-routed with G&#8209;Link
+          </div>
+          <h3>One vendor for hotel and air</h3>
+          <p>For TMCs already integrating G&#8209;Link, F&#8209;Link is the simplest path to single-vendor coverage. Same Open Platform, same developer surface, same BMS for cancellations, reschedules, and traveler emergencies, air and hotel handled in one operational stack.</p>
+          <p style="margin-top:1rem;color:rgba(255,255,255,.4)!important;font-size:.9rem;line-height:1.6;">Single commercial relationship · Shared BMS · Same three doors as G&#8209;Link.</p>
+        </article>
+
+        <article class="fcg-marketing-feature">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
+            <iconify-icon icon="solar:map-arrow-up-linear" width="18" height="18"></iconify-icon>
+            Path D · Air partners roadmap
+          </div>
+          <h3>Clear about what is next</h3>
+          <p>F&#8209;Link is early stage. Additional air partners are added as they ship, with China-routed demand first and broader regional depth second.</p>
+          <p style="margin-top:1rem;color:rgba(255,255,255,.4)!important;font-size:.9rem;line-height:1.6;">MCP version exposed, next versioning TBA · Documented as shipped, no promised inventory · Default air layer for AI booking agents in Asia.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCOPE CLARITY · BUILT FOR / NOT BUILT FOR ===== -->
+  <section id="flink-scope" class="fcg-marketing-section" style="padding: 7rem 1.5rem;">
+    <style>
+      .v2-flink-scope { max-width: 72rem; margin: 0 auto; }
+      .v2-flink-scope-head { max-width: 44rem; margin-bottom: 3.5rem; }
+      .v2-flink-scope-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing:.12em; color: rgba(255,255,255,.55); text-transform: uppercase; margin-bottom: 1rem; }
+      .v2-flink-scope-eyebrow::before { content:""; width: 1.6rem; height: 1px; background: rgba(255,255,255,.3); }
+      .v2-flink-scope h2 { color:#fff; font-size: clamp(2rem, 3.2vw, 2.65rem); font-weight: 500; letter-spacing:-.018em; line-height: 1.1; margin: 0 0 1rem; }
+      .v2-flink-scope p.lede { color: rgba(255,255,255,.62); font-size: 1.02rem; line-height: 1.6; margin: 0; }
+      .v2-flink-scope-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+      @media (max-width: 820px) { .v2-flink-scope-grid { grid-template-columns: 1fr; } }
+      .v2-flink-scope-card { border: 1px solid rgba(255,255,255,.1); border-radius: 22px; padding: 2.25rem 2rem; background: rgba(255,255,255,.02); }
+      .v2-flink-scope-card.yes { border-color: rgba(249,115,22,.32); background: linear-gradient(160deg, rgba(249,115,22,.07), rgba(255,255,255,.015)); }
+      .v2-flink-scope-card-head { display:flex; align-items:center; gap:.7rem; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px dashed rgba(255,255,255,.12); }
+      .v2-flink-scope-card-head iconify-icon { font-size: 1.5rem; }
+      .v2-flink-scope-card.yes .v2-flink-scope-card-head iconify-icon { color: #fb923c; }
+      .v2-flink-scope-card.no .v2-flink-scope-card-head iconify-icon { color: rgba(255,255,255,.45); }
+      .v2-flink-scope-card-head strong { font-family:'Inter',sans-serif; font-size: 1.05rem; font-weight: 500; color:#fff; letter-spacing: -.005em; }
+      .v2-flink-scope-card.no .v2-flink-scope-card-head strong { color: rgba(255,255,255,.7); }
+      .v2-flink-scope-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: 1rem; }
+      .v2-flink-scope-list li { display:grid; grid-template-columns: 1.1rem 1fr; gap: .85rem; align-items: flex-start; color: rgba(255,255,255,.78); font-size: .98rem; line-height: 1.45; }
+      .v2-flink-scope-list li iconify-icon { margin-top: .2rem; font-size: 1rem; }
+      .v2-flink-scope-card.yes .v2-flink-scope-list li iconify-icon { color: #fb923c; }
+      .v2-flink-scope-card.no .v2-flink-scope-list li { color: rgba(255,255,255,.5); }
+      .v2-flink-scope-card.no .v2-flink-scope-list li iconify-icon { color: rgba(255,255,255,.4); }
+      .v2-flink-scope-list li strong { color:#fff; font-weight: 500; }
+      .v2-flink-scope-card.no .v2-flink-scope-list li strong { color: rgba(255,255,255,.7); }
+      html[data-theme="light"] .v2-flink-scope h2 { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-scope p.lede,
+      html[data-theme="light"] .v2-flink-scope-eyebrow { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-scope-card { background: #fff; border-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-scope-card.yes { background: linear-gradient(160deg, rgba(249,115,22,.07), #ffffff 60%); border-color: rgba(249,115,22,.4); }
+      html[data-theme="light"] .v2-flink-scope-card-head { border-bottom-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-scope-card-head strong { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-scope-card.no .v2-flink-scope-card-head strong { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-scope-list li { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-scope-list li strong { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-scope-card.no .v2-flink-scope-list li { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-scope-card.no .v2-flink-scope-list li strong { color: #4b5563; }
+    </style>
+    <div class="v2-flink-scope">
+      <div class="v2-flink-scope-head fade-up">
+        <div class="v2-flink-scope-eyebrow">Scope</div>
+        <h2>Focused by design.</h2>
+        <p class="lede">A fast disqualifier before you book time. F&#8209;Link earns its weight where global air APIs hand off, and as the air layer for TMCs already on G&#8209;Link. Everywhere else, we'll be honest about it.</p>
+      </div>
+
+      <div class="v2-flink-scope-grid">
+        <div class="v2-flink-scope-card yes fade-up">
+          <div class="v2-flink-scope-card-head">
+            <iconify-icon icon="solar:check-circle-bold"></iconify-icon>
+            <strong>F&#8209;Link is built for</strong>
+          </div>
+          <ul class="v2-flink-scope-list">
+            <li><iconify-icon icon="solar:plain-2-linear"></iconify-icon><span><strong>TMCs with Asia or China-route exposure:</strong> domestic, outbound, or APAC with regional carriers.</span></li>
+            <li><iconify-icon icon="solar:link-circle-linear"></iconify-icon><span><strong>TMCs already on G&#8209;Link</strong> who want air through the same vendor, contract, and mid-office.</span></li>
+            <li><iconify-icon icon="solar:cpu-bolt-linear"></iconify-icon><span><strong>Teams building AI booking agents</strong> that need Travelsky-routed air via the MCP API surface.</span></li>
+            <li><iconify-icon icon="solar:routing-2-linear"></iconify-icon><span><strong>TMCs where Travelsky access is the gap</strong> their current global API can't close.</span></li>
+          </ul>
+        </div>
+
+        <div class="v2-flink-scope-card no fade-up">
+          <div class="v2-flink-scope-card-head">
+            <iconify-icon icon="solar:close-circle-linear"></iconify-icon>
+            <strong>F&#8209;Link is not built for</strong>
+          </div>
+          <ul class="v2-flink-scope-list">
+            <li><iconify-icon icon="solar:minus-circle-linear"></iconify-icon><span><strong>Global all-route coverage as the headline.</strong> If China and APAC aren't in your route mix, F&#8209;Link won't be the biggest lever you can pull today.</span></li>
+            <li><iconify-icon icon="solar:minus-circle-linear"></iconify-icon><span><strong>Leisure-first OTAs.</strong> F&#8209;Link routes corporate-travel-grade air. Wrong shape of customer.</span></li>
+            <li><iconify-icon icon="solar:minus-circle-linear"></iconify-icon><span><strong>US-domestic-only TMCs with no Asia exposure.</strong> Your existing global air API will outperform us on those lanes.</span></li>
+            <li><iconify-icon icon="solar:minus-circle-linear"></iconify-icon><span><strong>"Replace everything" projects.</strong> F&#8209;Link augments. Most TMCs multiplex air APIs, that's how we expect to be deployed.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OBJECTION-HANDLING FAQ ===== -->
+  <section id="flink-faq" class="v2-flink-faq" aria-labelledby="v2-flink-faq-title">
+    <style>
+      .v2-flink-faq { position: relative; background: #050505; color: #fff; padding: 7rem 1.5rem 8rem; border-top: 1px solid rgba(255,255,255,.08); }
+      .v2-flink-faq-inner { max-width: 64rem; margin: 0 auto; }
+      .v2-flink-faq-head { max-width: 44rem; margin: 0 auto 4rem; text-align: center; }
+      .v2-flink-faq-eyebrow { font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; color: rgba(255,255,255,.55); text-transform: uppercase; margin-bottom: 1rem; }
+      .v2-flink-faq-head h2 { color:#fff; font-size: clamp(2rem, 3.2vw, 2.65rem); font-weight: 500; letter-spacing:-.018em; line-height: 1.1; margin: 0 0 1rem; }
+      .v2-flink-faq-head p { color: rgba(255,255,255,.62); font-size: 1.02rem; line-height: 1.6; margin: 0; }
+      .v2-flink-faq-list { max-width: 56rem; margin: 0 auto; border-top: 1px solid rgba(255,255,255,.1); }
+      .v2-flink-faq-item { border-bottom: 1px solid rgba(255,255,255,.1); }
+      .v2-flink-faq-trigger { width: 100%; background: transparent; border: 0; padding: 1.75rem 0; display: grid; grid-template-columns: 3rem 1fr 1.5rem; gap: 1.25rem; align-items: baseline; cursor: pointer; text-align: left; font-family: inherit; color: #fff; transition: color 150ms cubic-bezier(0.4,0,0.2,1); }
+      .v2-flink-faq-num { font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: rgba(255,255,255,.5); letter-spacing: .05em; padding-top: .3rem; }
+      .v2-flink-faq-q { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 500; line-height: 1.4; letter-spacing: -.01em; color: #fff; margin: 0; transition: color 150ms ease; }
+      .v2-flink-faq-trigger:hover .v2-flink-faq-q { color: #fb923c; }
+      .v2-flink-faq-chev { width: 16px; height: 16px; color: rgba(255,255,255,.55); transition: transform 150ms ease, color 150ms ease; justify-self: end; align-self: center; }
+      .v2-flink-faq-item[data-open="true"] .v2-flink-faq-chev { transform: rotate(180deg); color: #fb923c; }
+      .v2-flink-faq-panel { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 300ms cubic-bezier(0.4,0,0.2,1), opacity 150ms ease; }
+      .v2-flink-faq-item[data-open="true"] .v2-flink-faq-panel { opacity: 1; }
+      .v2-flink-faq-panel-inner { display: grid; grid-template-columns: 3rem 1fr 1.5rem; gap: 1.25rem; padding: 0 0 1.75rem; }
+      .v2-flink-faq-a { font-size: .95rem; line-height: 1.65; color: rgba(255,255,255,.66); margin: 0; max-width: 40rem; }
+      .v2-flink-faq-a em { color: #fb923c; font-weight: 500; font-style: normal; }
+      .v2-flink-faq-a p + p { margin-top: .75rem; }
+      .v2-flink-faq-foot { max-width: 56rem; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,.1); display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; justify-content: space-between; }
+      .v2-flink-faq-prompt { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 500; color: #fff; letter-spacing: -.005em; margin: 0; }
+      .v2-flink-faq-prompt::before { content: "> "; color: rgba(255,255,255,.5); font-family: 'JetBrains Mono', monospace; font-weight: 400; }
+      .v2-flink-faq-actions { display: flex; gap: .65rem; flex-wrap: wrap; }
+      .v2-flink-faq-btn { font-family: inherit; font-size: 14px; font-weight: 500; border-radius: 9999px; border: 0; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; padding: .9rem 1.5rem; transition: background 150ms ease, transform 150ms ease; }
+      .v2-flink-faq-btn-primary { background: #fff; color: #0a0a0a; }
+      .v2-flink-faq-btn-primary:hover { transform: scale(1.02); }
+      .v2-flink-faq-btn-secondary { background: rgba(255,255,255,.06); color: #fff; border: 1px solid rgba(255,255,255,.14); }
+      .v2-flink-faq-btn-secondary:hover { border-color: rgba(255,255,255,.3); }
+      @media (max-width: 768px) {
+        .v2-flink-faq { padding: 5rem 1.25rem 6rem; }
+        .v2-flink-faq-trigger, .v2-flink-faq-panel-inner { grid-template-columns: 2.25rem 1fr 1.25rem; gap: .85rem; }
+        .v2-flink-faq-foot { flex-direction: column; align-items: flex-start; }
+      }
+      html[data-theme="light"] .v2-flink-faq { background: #ffffff; color: #0f1114; border-top-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-faq-head h2 { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-faq-head p,
+      html[data-theme="light"] .v2-flink-faq-eyebrow { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-faq-list { border-top-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-faq-item { border-bottom-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-faq-q { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-faq-num { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-faq-chev { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-faq-a { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-faq-foot { border-top-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-faq-prompt { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-faq-btn-primary { background: #0f1114; color: #fff; }
+      html[data-theme="light"] .v2-flink-faq-btn-secondary { background: rgba(0,0,0,.06); color: #0f1114; border-color: rgba(0,0,0,.1); }
+    </style>
+    <div class="v2-flink-faq-inner">
+      <header class="v2-flink-faq-head fade-up">
+        <div class="v2-flink-faq-eyebrow">FAQ · Common objections</div>
+        <h2 id="v2-flink-faq-title">Common F&#8209;Link questions.</h2>
+        <p>Clear answers on scope, reliability, integration, and fit.</p>
+      </header>
+
+      <div class="v2-flink-faq-list" role="list">
+        <article class="v2-flink-faq-item" data-open="true" role="listitem">
+          <button class="v2-flink-faq-trigger" aria-expanded="true" aria-controls="v2-flink-faq-p1" id="v2-flink-faq-t1">
+            <span class="v2-flink-faq-num">01</span>
+            <h3 class="v2-flink-faq-q">Is F&#8209;Link mature enough to use?</h3>
+            <svg class="v2-flink-faq-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="v2-flink-faq-panel" id="v2-flink-faq-p1" role="region" aria-labelledby="v2-flink-faq-t1">
+            <div class="v2-flink-faq-panel-inner">
+              <div></div>
+              <div>
+                <p class="v2-flink-faq-a">The team shipping air features is two people. The infrastructure they ship onto isn't. F&#8209;Link rides the same Open Platform, mid-office, and operational stack as G&#8209;Link, which is in full production at TMC scale today.</p>
+                <p class="v2-flink-faq-a"><em>Treat F&#8209;Link as a focused extension of a mature platform</em>, not as a standalone startup. We're explicit about scope so you can size the bet honestly.</p>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="v2-flink-faq-item" role="listitem">
+          <button class="v2-flink-faq-trigger" aria-expanded="false" aria-controls="v2-flink-faq-p2" id="v2-flink-faq-t2">
+            <span class="v2-flink-faq-num">02</span>
+            <h3 class="v2-flink-faq-q">How are SLA and booking issues handled?</h3>
+            <svg class="v2-flink-faq-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="v2-flink-faq-panel" id="v2-flink-faq-p2" role="region" aria-labelledby="v2-flink-faq-t2">
+            <div class="v2-flink-faq-panel-inner">
+              <div></div>
+              <div>
+                <p class="v2-flink-faq-a">Air bookings flow into the same mid-office that runs hotel events for G&#8209;Link: cancellations, reschedules, refund flows, and traveler emergencies. <em>One operational stack, one escalation path</em>, staffed by the same operators who handle hotel today.</p>
+                <p class="v2-flink-faq-a">SLA terms are scoped per deployment. Ask in the demo, we'll show G&#8209;Link's production numbers as the reference floor.</p>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="v2-flink-faq-item" role="listitem">
+          <button class="v2-flink-faq-trigger" aria-expanded="false" aria-controls="v2-flink-faq-p3" id="v2-flink-faq-t3">
+            <span class="v2-flink-faq-num">03</span>
+            <h3 class="v2-flink-faq-q">How long does integration actually take?</h3>
+            <svg class="v2-flink-faq-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="v2-flink-faq-panel" id="v2-flink-faq-p3" role="region" aria-labelledby="v2-flink-faq-t3">
+            <div class="v2-flink-faq-panel-inner">
+              <div></div>
+              <div>
+                <p class="v2-flink-faq-a">Skills integration is the fastest path: paste a Skills command into your local AI tool, describe the air flow in natural language, the model writes against the F&#8209;Link MCP surface. Working prototype <em>in hours, not weeks</em>.</p>
+                <p class="v2-flink-faq-a">For traditional API or SDK integrations, a sandbox-to-production cutover is typically <em>2–6 weeks</em> depending on your booking pipeline. TMCs already on G&#8209;Link cut that roughly in half: same auth, same Open Platform login, same docs surface.</p>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="v2-flink-faq-item" role="listitem">
+          <button class="v2-flink-faq-trigger" aria-expanded="false" aria-controls="v2-flink-faq-p4" id="v2-flink-faq-t4">
+            <span class="v2-flink-faq-num">04</span>
+            <h3 class="v2-flink-faq-q">What if my routes aren't China-heavy?</h3>
+            <svg class="v2-flink-faq-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="v2-flink-faq-panel" id="v2-flink-faq-p4" role="region" aria-labelledby="v2-flink-faq-t4">
+            <div class="v2-flink-faq-panel-inner">
+              <div></div>
+              <div>
+                <p class="v2-flink-faq-a">Then F&#8209;Link probably isn't the biggest lever you can pull today, and we'll tell you that in the demo. <em>F&#8209;Link doesn't try to compete on global air breadth.</em></p>
+                <p class="v2-flink-faq-a">Two cases where it still makes sense: (1) you're already on G&#8209;Link and want air through one commercial relationship, or (2) any portion of your client mix touches China or APAC and your current global API hands those routes off poorly.</p>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="v2-flink-faq-item" role="listitem">
+          <button class="v2-flink-faq-trigger" aria-expanded="false" aria-controls="v2-flink-faq-p5" id="v2-flink-faq-t5">
+            <span class="v2-flink-faq-num">05</span>
+            <h3 class="v2-flink-faq-q">How is F&#8209;Link priced?</h3>
+            <svg class="v2-flink-faq-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="v2-flink-faq-panel" id="v2-flink-faq-p5" role="region" aria-labelledby="v2-flink-faq-t5">
+            <div class="v2-flink-faq-panel-inner">
+              <div></div>
+              <div>
+                <p class="v2-flink-faq-a">Standardized pricing structure: a setup fee plus a monthly platform subscription, tiered by product line (F&#8209;Link standalone vs. G&#8209;Link + F&#8209;Link bundle vs. full OBT suite). <em>The bundle path with G&#8209;Link is the most cost-efficient air entry</em> for TMCs already integrated.</p>
+                <p class="v2-flink-faq-a">Commercial terms are scoped in the demo against your projected volume. We don't sell on price-per-ticket, we sell on China-route access and bundled operations.</p>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="v2-flink-faq-item" role="listitem">
+          <button class="v2-flink-faq-trigger" aria-expanded="false" aria-controls="v2-flink-faq-p6" id="v2-flink-faq-t6">
+            <span class="v2-flink-faq-num">06</span>
+            <h3 class="v2-flink-faq-q">Do I have to rip out my existing air API?</h3>
+            <svg class="v2-flink-faq-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="v2-flink-faq-panel" id="v2-flink-faq-p6" role="region" aria-labelledby="v2-flink-faq-t6">
+            <div class="v2-flink-faq-panel-inner">
+              <div></div>
+              <div>
+                <p class="v2-flink-faq-a">No. Most large TMCs multiplex air APIs, that's how we expect F&#8209;Link to be deployed. Route China and APAC flows through F&#8209;Link; keep your existing global API for everything else. <em>F&#8209;Link is additive, not a replacement.</em></p>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+    </div>
+
+    <script>
+      (function () {
+        const items = document.querySelectorAll('#flink-faq .v2-flink-faq-item');
+        function setOpen(item, open) {
+          const panel = item.querySelector('.v2-flink-faq-panel');
+          const trigger = item.querySelector('.v2-flink-faq-trigger');
+          item.setAttribute('data-open', open ? 'true' : 'false');
+          trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+          panel.style.maxHeight = open ? panel.scrollHeight + 'px' : '0px';
+        }
+        items.forEach((item) => { setOpen(item, item.getAttribute('data-open') === 'true'); });
+        items.forEach((item) => {
+          item.querySelector('.v2-flink-faq-trigger').addEventListener('click', () => {
+            setOpen(item, item.getAttribute('data-open') !== 'true');
+          });
+        });
+        window.addEventListener('resize', () => {
+          items.forEach((item) => {
+            if (item.getAttribute('data-open') === 'true') {
+              const panel = item.querySelector('.v2-flink-faq-panel');
+              panel.style.maxHeight = panel.scrollHeight + 'px';
+            }
+          });
+        });
+      })();
+    </script>
+  </section>
+</main>
+<!-- ===== API ACCESS CTA SECTION ===== -->
+    <footer id="contact" class="flex flex-col w-full">
+      <section id="getting-started" class="fcg-mobile-feature border-t border-white/10">
+        <div class="fcg-mobile-inner">
+          <header class="fcg-mobile-heading fade-up">
+            <div class="fcg-main-icon"><iconify-icon icon="solar:plain-2-linear" width="28" height="28"></iconify-icon></div>
+            <div class="fcg-mobile-eyebrow">Get connected</div>
+            <h2>Connect F&#8209;Link.</h2>
+            <p class="fcg-mobile-subcopy">Bundle F&#8209;Link with G&#8209;Link for one hotel-and-air relationship, or use it standalone where China and APAC route depth matter.</p>
+          </header>
+
+          <div class="fcg-feature-grid">
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:key-minimalistic-square-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Register on the Open Platform</h3>
+                <p>The same developer portal that serves G&#8209;Link and TMC API. Sandbox credentials and live docs in one place.</p>
+              </div>
+            </article>
+
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:magic-stick-3-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Integrate via Skills, API, or SDK</h3>
+                <p>The F&#8209;Link MCP surface is live today. Describe the air flow in natural language and generate code from live docs.</p>
+              </div>
+            </article>
+
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:test-tube-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Test against China and APAC routes</h3>
+                <p>Run a Travelsky-routed air search end-to-end. Price, book, ticket, and confirm the itinerary against the shared BMS.</p>
+              </div>
+            </article>
+
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:link-circle-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Bundle with G&#8209;Link or stand alone</h3>
+                <p>Use one commercial relationship, one Open Platform login, and one mid-office for both inventory types.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="fcg-mobile-cta fade-up">
+            <h3>Air supply for China and APAC routes.</h3>
+            <p>Walk through the Travelsky path, China-routed air search, and the G&#8209;Link bundle.</p>
+            <div class="fcg-store-actions">
+              <a href="#contact" class="fcg-store-button"><iconify-icon icon="solar:calendar-mark-linear" width="18" height="18"></iconify-icon>Book a 20-min walkthrough</a>
+              <a href="#flink-bundle" class="fcg-store-button"><iconify-icon icon="solar:link-circle-linear" width="18" height="18"></iconify-icon>Already on G&#8209;Link? See the bundle</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
+    <!-- ===== END API ACCESS CTA SECTION ===== -->
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">
+        <div class="max-w-[100rem] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-[4rem] md:gap-[2rem]">
+
+            <div class="col-span-1 md:col-span-3 flex flex-col items-start gap-4">
+                <div class="flex items-center gap-3">
+                    <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 24px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="white"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="white"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="white"/></svg>
+                </div>
+                <p class="mt-2">TRAVEL_INFRASTRUCTURE</p>
+            </div>
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="text-white mb-2">Platform</span>
+                <a href="../api-access.html" class="hover:text-white transition-colors">API Access</a>
+                <a href="../ai-booking-tool.html" class="hover:text-white transition-colors">AI Booking Tool</a>
+                <a href="../atlas.html" class="hover:text-white transition-colors">Atlas TMC OS</a>
+                <a href="../agent-booking-tool.html" class="hover:text-white transition-colors">Agent Booking Tool</a>
+                <a href="../corporate-booking-tool.html" class="hover:text-white transition-colors">Corporate Booking Tool</a>
+                <a href="../agreeease.html" class="hover:text-white transition-colors">AgreeEase</a>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="text-white mb-2">Solutions</span>
+                <a href="../whitelabel.html" class="hover:text-white transition-colors">Whitelabel</a>
+                <a href="../advisory-implementation.html" class="hover:text-white transition-colors">Advisory &amp; Implementation</a>
+                <a href="../ai-mapping.html" class="hover:text-white transition-colors">AI Mapping</a>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="text-white mb-2">Company</span>
+                <a href="../about.html" class="hover:text-white transition-colors">About</a>
+                <a href="mailto:hello@fusionconnectgroup.com" class="hover:text-white transition-colors">Contact</a>
+            </div>
+
+            <div class="col-span-1 md:col-span-3 flex flex-col md:items-end gap-4">
+                <span class="text-white mb-2">Connect</span>
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                <span class="mt-4 text-white/30">© 2026 FCG Group. All rights reserved.</span>
+            </div>
+
+        </div>
+    </footer>
+
+
+<!-- Interactivity scripts -->
+    <script>
+      // Reveal elements on scroll
+      const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                  observer.unobserve(entry.target);
+              }
+          });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-up, .scale-in').forEach(el => observer.observe(el));
+
+      function renderFcgBentoSpiral() {
+          const spiralMount = document.getElementById('fcgBentoSpiral');
+          if (!spiralMount) return;
+
+          const size = 620;
+          const points = 800;
+          const dotRadius = 1.6;
+          const duration = 3;
+          const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+          const center = size / 2;
+          const maxRadius = center - 4 - dotRadius;
+          const svgNS = 'http://www.w3.org/2000/svg';
+          const svg = document.createElementNS(svgNS, 'svg');
+
+          svg.setAttribute('width', String(size));
+          svg.setAttribute('height', String(size));
+          svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+          svg.setAttribute('role', 'presentation');
+
+          for (let i = 0; i < points; i++) {
+              const idx = i + 0.5;
+              const frac = idx / points;
+              const radius = Math.sqrt(frac) * maxRadius;
+              const theta = idx * goldenAngle;
+              const x = center + radius * Math.cos(theta);
+              const y = center + radius * Math.sin(theta);
+              const circle = document.createElementNS(svgNS, 'circle');
+
+              circle.setAttribute('cx', x.toFixed(3));
+              circle.setAttribute('cy', y.toFixed(3));
+              circle.setAttribute('r', String(dotRadius));
+              circle.setAttribute('fill', 'currentColor');
+              circle.setAttribute('opacity', '0.6');
+
+              const animRadius = document.createElementNS(svgNS, 'animate');
+              animRadius.setAttribute('attributeName', 'r');
+              animRadius.setAttribute('values', `${dotRadius * 0.5};${dotRadius * 1.35};${dotRadius * 0.5}`);
+              animRadius.setAttribute('dur', `${duration}s`);
+              animRadius.setAttribute('begin', `${(frac * duration).toFixed(3)}s`);
+              animRadius.setAttribute('repeatCount', 'indefinite');
+              circle.appendChild(animRadius);
+
+              const animOpacity = document.createElementNS(svgNS, 'animate');
+              animOpacity.setAttribute('attributeName', 'opacity');
+              animOpacity.setAttribute('values', '0.25;0.9;0.25');
+              animOpacity.setAttribute('dur', `${duration}s`);
+              animOpacity.setAttribute('begin', `${(frac * duration).toFixed(3)}s`);
+              animOpacity.setAttribute('repeatCount', 'indefinite');
+              circle.appendChild(animOpacity);
+
+              svg.appendChild(circle);
+          }
+
+          spiralMount.innerHTML = '';
+          spiralMount.appendChild(svg);
+      }
+
+      renderFcgBentoSpiral();
+
+      document.querySelectorAll('.fcg-bento-card').forEach(card => {
+          card.addEventListener('mousemove', event => {
+              const rect = card.getBoundingClientRect();
+              card.style.setProperty('--x', `${event.clientX - rect.left}px`);
+              card.style.setProperty('--y', `${event.clientY - rect.top}px`);
+          });
+      });
+
+      // Counter animation (with IntersectionObserver cleanup)
+      const counters = document.querySelectorAll('.counter');
+      counters.forEach(counter => {
+          const target = parseFloat(counter.getAttribute('data-target'));
+          let current = target - 0.5;
+          let intervalId = null;
+
+          function startCounter() {
+              if (intervalId) return;
+              intervalId = setInterval(() => {
+                  const jitter = (Math.random() - 0.5) * 0.02;
+                  let val = current + jitter;
+                  if (val > target) val = target;
+                  if (val < target - 0.1) val = target - 0.1;
+                  current = val;
+                  counter.innerHTML = current.toFixed(2) + '<span class="text-lg text-neutral-500">%</span>';
+              }, 150);
+          }
+
+          function stopCounter() {
+              if (intervalId) { clearInterval(intervalId); intervalId = null; }
+          }
+
+          const counterObserver = new IntersectionObserver(([entry]) => {
+              entry.isIntersecting ? startCounter() : stopCounter();
+          });
+          counterObserver.observe(counter);
+      });
+    </script>
+
+
+<!-- ===== THEME TOGGLE SCRIPT ===== -->
+    <script>
+        (function () {
+            const themeToggle = document.getElementById("themeToggle");
+            const html = document.documentElement;
+            const savedTheme = localStorage.getItem("theme");
+            const activeTheme = savedTheme === "dark" || savedTheme === "light" ? savedTheme : "light";
+
+            function applyTheme(theme) {
+                const isDark = theme === "dark";
+                html.setAttribute("data-theme", theme);
+                html.classList.toggle("dark", isDark);
+                if (themeToggle) themeToggle.checked = isDark;
+            }
+
+            applyTheme(activeTheme);
+
+            if (themeToggle) {
+                themeToggle.addEventListener("change", function () {
+                    const newTheme = this.checked ? "dark" : "light";
+                    localStorage.setItem("theme", newTheme);
+                    applyTheme(newTheme);
+                });
+            }
+        })();
+    </script>
+    <!-- ===== END THEME TOGGLE SCRIPT ===== -->
+</body>
+</html>
