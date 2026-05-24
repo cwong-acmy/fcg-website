@@ -1229,21 +1229,50 @@
     font-weight: 500;
   }
   html[data-theme="light"] .fcg-objection-q { color: #fb923c !important; }
-  .fcg-logo-row {
-    display: flex;
-    align-items: center;
-    gap: 2.5rem;
-    flex-wrap: wrap;
-    margin-top: 2.5rem;
+  .partner-plus::before,
+  .partner-plus::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: #0F1114;
+    transform: translate(-50%, -50%);
   }
-  .fcg-logo-row span {
-    color: rgba(255,255,255,.65) !important;
-    font-family: 'Sora', sans-serif;
-    font-size: 1rem;
+  .partner-plus::before {
+    width: 18px;
+    height: 1px;
+  }
+  .partner-plus::after {
+    width: 1px;
+    height: 18px;
+  }
+  .partner-grid-section {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+  }
+  .partner-grid-title {
+    color: var(--color-muted);
+  }
+  .partner-grid-title strong {
+    color: var(--color-fg);
     font-weight: 500;
-    letter-spacing: .01em;
   }
-  html[data-theme="light"] .fcg-logo-row span { color: rgba(15,17,20,.7) !important; }
+  .partner-logo-band,
+  .partner-logo-grid,
+  .partner-logo-card {
+    border-color: var(--color-border) !important;
+  }
+  .partner-logo-card:nth-child(odd) {
+    background-color: var(--color-card);
+  }
+  html[data-theme="dark"] .partner-logo-card img.partner-logo-invert-dark {
+    filter: invert(1) grayscale(1) brightness(1.4);
+    opacity: .9;
+  }
+  html[data-theme="dark"] .partner-plus::before,
+  html[data-theme="dark"] .partner-plus::after {
+    background: var(--color-fg);
+  }
   @media (max-width: 768px) {
     .fcg-pricing-rows { grid-template-columns: 1fr; }
   }
@@ -2503,7 +2532,7 @@
           <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
         </div>
         <h1>One API. Every corporate-rate hotel supply path. Built for TMCs.</h1>
-        <p class="fcg-hero2-copy">G-Link is the hotel API for TMCs serving corporate travelers. Four supply paths in one pipe. GDS, direct hotel, bedbank, Asia-direct. Corporate-rate ready. 4.3M+ mapped hotels. Deployed inside Jin Jiang, Atour, Home Inns.</p>
+        <p class="fcg-hero2-copy">G-Link is the hotel API for TMCs serving corporate travelers. Four supply paths in one pipe. GDS, direct hotel, bedbank, Asia-direct. Corporate-rate ready. 4.3M+ mapped hotels. Connected through Sabre, Amadeus, Travelport, direct hotel, and bedbank paths.</p>
         <div class="fcg-hero2-actions">
           <a href="#getting-started" class="fcg-hero2-button fcg-hero2-button-primary">Schedule a walkthrough</a>
           <a href="../api-access.html" class="fcg-hero2-button fcg-hero2-button-secondary">Read the API docs</a>
@@ -2541,18 +2570,42 @@
     </div>
   </section>
 
-  <section class="fcg-marketing-section" aria-label="Deployed across leading suppliers and chains" style="padding:4rem 1.5rem;">
-    <div class="fcg-marketing-inner" style="max-width:72rem;">
-      <div class="fcg-marketing-eyebrow">Connected to</div>
-      <div class="fcg-logo-row">
-        <span>Sabre</span>
-        <span>Jin Jiang</span>
-        <span>Atour</span>
-        <span>Home Inns</span>
-        <span>Hotelbeds</span>
-        <span>RateHawk</span>
-        <span>Shiji</span>
-        <span>HyperGuest</span>
+  <section class="partner-grid-section relative z-10 pt-10 pb-10 md:pt-12 md:pb-16" aria-label="Deployed across leading suppliers and chains">
+    <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
+      <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
+        300+ travel brands, TMCs, and hotel groups. <strong>Already connected.</strong>
+      </h2>
+    </div>
+    <div class="partner-logo-band border-y">
+      <div class="partner-logo-grid relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x">
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
+          <img alt="Promate Logo" class="pointer-events-none max-h-12 md:max-h-14 max-w-[150px] select-none object-contain md:max-w-[170px]" src="../assets/images/logos/promate.svg">
+          <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
+        </div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r">
+          <img alt="TikTok Logo" class="pointer-events-none max-h-7 md:max-h-8 max-w-[150px] select-none object-contain md:max-w-[170px] partner-logo-invert-dark" src="../assets/images/logos/tiktok.svg">
+        </div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
+          <img alt="Alibaba Logo" class="pointer-events-none max-h-8 md:max-h-9 max-w-[150px] select-none object-contain md:max-w-[170px]" src="../assets/images/logos/alibaba.svg">
+          <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
+          <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -left-3 -bottom-3 hidden md:block" aria-hidden="true"></span>
+        </div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b">
+          <img alt="Lenovo Logo" class="pointer-events-none max-h-7 md:max-h-8 max-w-[150px] select-none object-contain md:max-w-[170px]" src="../assets/images/logos/lenovo.svg">
+        </div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b md:border-b-0">
+          <img alt="Bank of Singapore Logo" class="pointer-events-none max-h-8 md:max-h-9 max-w-[150px] select-none object-contain md:max-w-[170px]" src="../assets/images/logos/bank-of-singapore.svg">
+          <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3 md:hidden" aria-hidden="true"></span>
+        </div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r md:border-b-0">
+          <img alt="ByteDance Logo" class="pointer-events-none max-h-7 md:max-h-8 max-w-[150px] select-none object-contain md:max-w-[170px]" src="../assets/images/logos/bytedance.svg">
+        </div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r">
+          <img alt="IHG Hotels and Resorts Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/IHG_Hotels_%26_Resorts_logo.svg">
+        </div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8">
+          <img alt="Marriott International Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/Marriott_International.svg">
+        </div>
       </div>
     </div>
   </section>
@@ -2562,7 +2615,7 @@
       <header class="fcg-marketing-header fade-up">
         <div class="fcg-marketing-eyebrow">What's behind the door</div>
         <h2 class="fcg-marketing-title">The supply network <span>is the product.</span></h2>
-        <p>G-Link is one API. Behind it: four supply paths. Corporate rates through GDS and direct hotel. Direct deployments inside Jin Jiang, Atour, and Home Inns. A mid-office that handles what happens after the booking.</p>
+        <p>G-Link is one API. Behind it: four supply paths. Corporate rates through GDS and direct hotel. Core GDS paths through Sabre, Amadeus, and Travelport. A mid-office that handles what happens after the booking.</p>
       </header>
 
       <div class="fcg-marketing-features fade-up">
@@ -2575,12 +2628,12 @@
           <p>RFP-negotiated rates flow through GDS and direct hotel. The only channels that carry them. Wholesalers cannot deliver this. For large corporates, that's ~70% of booking volume.</p>
         </article>
         <article class="fcg-marketing-feature">
-          <h3>China and Asia depth no global player can match</h3>
-          <p>Direct G-Link deployments inside Jin Jiang, Atour, and Home Inns. China = 58% of Asia travel. Built and negotiated from inside the region, not retrofitted.</p>
+          <h3>Regional depth around global GDS access</h3>
+          <p>G-Link combines Chinese hotel chains with Sabre, Amadeus, Travelport, direct hotel, and channel-manager connections. China = 58% of Asia travel. Built and negotiated from inside the region, not retrofitted.</p>
         </article>
         <article class="fcg-marketing-feature">
-          <h3>Mid-office event handling, not just bookings · 天工</h3>
-          <p>Cancellations, holds, reschedules, and traveler emergencies are handled by the Tian Gong BMS. Direct-where-possible routing keeps accountability traceable end-to-end. Nothing lost in a re-routing chain.</p>
+          <h3>Mid-office event handling, not just bookings</h3>
+          <p>Cancellations, holds, reschedules, and traveler emergencies are handled by the BMS. Direct-where-possible routing keeps accountability traceable end-to-end. Nothing lost in a re-routing chain.</p>
         </article>
         <article class="fcg-marketing-feature">
           <h3>Quality-scored sources, not flat markups</h3>
@@ -2659,28 +2712,28 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
           <div class="fcg-flow-step-number">A</div>
           <h3>The only channel that carries corporate rates.</h3>
           <p style="margin:0 0 1.25rem;max-width:none;">RFP-negotiated rates do not pass through wholesale. For any large corporate, ~70% of bookings live here. Direct GDS integrations carry the rate types that disqualify every B2B wholesaler from serving corporate travel.</p>
-          <div class="code-tag">Bucket A · GDS Direct · Sabre · SabreABC live · Amadeus roadmap</div>
+          <div class="code-tag">Bucket A · GDS Direct · Sabre · Amadeus · Travelport</div>
         </div>
 
         <div class="fcg-flow-step" style="text-align:left;">
           <div class="fcg-flow-step-number">B</div>
           <h3>The shortest accountability chain.</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Direct contracts, channel managers, and G-Link deployed inside top Chinese hotel chains. The second path for corporate-negotiated rates. The most reliable channel in the stack when something goes wrong.</p>
-          <div class="code-tag">Bucket B · Direct Hotel &amp; NDC · HyperGuest · Shiji · Jin Jiang · Atour · Home Inns</div>
+          <p style="margin:0 0 1.25rem;max-width:none;">Direct contracts, channel managers, and GDS-connected hotel paths. The second path for corporate-negotiated rates. The most reliable channel in the stack when something goes wrong.</p>
+          <div class="code-tag">Bucket B · Direct Hotel &amp; NDC · Sabre · Amadeus · Travelport</div>
         </div>
 
         <div class="fcg-flow-step" style="text-align:left;">
           <div class="fcg-flow-step-number">C</div>
           <h3>Long-tail coverage. Not the moat.</h3>
           <p style="margin:0 0 1.25rem;max-width:none;">Leisure-grade breadth for the long tail of properties not addressable elsewhere. Necessary for coverage. Wholesalers cannot deliver corporate-negotiated rates, and re-routing chains drop accountability. Included for breadth. Never sold as the value.</p>
-          <div class="code-tag">Bucket C · Bedbank · RateHawk · EPS · MIKI · Hotelbeds · Bedsonline live</div>
+          <div class="code-tag">Bucket C · Bedbank coverage · Sabre · Amadeus · Travelport context</div>
         </div>
 
         <div class="fcg-flow-step" style="text-align:left;border:1px solid rgba(249,115,22,0.3);background:linear-gradient(180deg,rgba(249,115,22,0.06),rgba(5,5,5,0.92));">
           <div class="fcg-flow-step-number">D</div>
           <h3>The bucket no global player can match.</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Direct relationships with Chinese hotel chains, Chinese B2B platforms, and Asia-specialty suppliers. Built from inside the region. Not retrofitted from outside. China = <span style="color:#fb923c;">58%</span> of Asia travel. The most durable advantage in the stack.</p>
-          <div class="code-tag">Bucket D · China &amp; Asia Direct · Heytrip · Huitravel · Meituan · Dida live</div>
+          <p style="margin:0 0 1.25rem;max-width:none;">Chinese hotel chains, GDS context, and Asia-specialty connections. Built from inside the region. Not retrofitted from outside. China = <span style="color:#fb923c;">58%</span> of Asia travel. The most durable advantage in the stack.</p>
+          <div class="code-tag">Bucket D · China &amp; Asia Direct · Sabre · Amadeus · Travelport</div>
         </div>
       </div>
     </div>
@@ -2694,14 +2747,14 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
 
       <div class="fcg-marketing-features fade-up">
         <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"We already use Hotelbeds or Didatravel."</div>
+          <div class="fcg-objection-q">"We already use another wholesaler."</div>
           <h3>Wholesalers give you leisure inventory. They cannot carry corporate-negotiated rates.</h3>
           <p>RFP rates only flow through GDS and direct hotel. For a large corporate, that is roughly 70% of booking volume unreachable through wholesale. G-Link adds the corporate-rate layer wholesalers structurally cannot deliver.</p>
         </article>
         <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"We already use Spotnana or Nuitee."</div>
+          <div class="fcg-objection-q">"We already use another travel platform."</div>
           <h3>Most large TMCs multiplex APIs. The real question is your Asia exposure.</h3>
-          <p>If China sits in your client mix, your current API has a gap G-Link is built to close. Direct deployments inside Jin Jiang, Atour, and Home Inns. China is 58% of Asia travel and no global player has comparable depth.</p>
+          <p>If China sits in your client mix, your current API may have a gap G-Link is built to close. G-Link combines Chinese hotel chains with Sabre, Amadeus, Travelport, direct hotel, and channel-manager connections. China is 58% of Asia travel and no global player has comparable depth.</p>
         </article>
         <article class="fcg-marketing-feature">
           <div class="fcg-objection-q">"Our dev team is already stretched thin."</div>

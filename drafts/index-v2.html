@@ -1014,33 +1014,33 @@
         const PartnerGrid = () => {
             const logos = [
                 {
-                    src: "https://static.wixstatic.com/media/6f8e7e_f844282625cb466d8c9580ec35a3645b~mv2.jpg/v1/crop/x_386,y_592,w_3524,h_3344/fill/w_274,h_260,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/PST_Travel-Secondary2.jpg",
-                    alt: "PST Travel Logo",
+                    src: "../assets/images/logos/promate.svg",
+                    alt: "Promate Logo",
                     className: "max-h-12 md:max-h-14"
                 },
                 {
-                    src: "https://cdn.prod.website-files.com/68553d1dd8ca0b336f66b55c/69e8a0b042a0c29ce4b7f0f9_2026%20CTL%20logo_Colour_Tran%20bg%20(2).png",
-                    alt: "Connexus Travel Logo",
-                    className: "max-h-10 md:max-h-12"
+                    src: "../assets/images/logos/tiktok.svg",
+                    alt: "TikTok Logo",
+                    className: "max-h-7 md:max-h-8 partner-logo-invert-dark"
                 },
                 {
-                    src: "assets/images/logos/alibaba.svg",
+                    src: "../assets/images/logos/alibaba.svg",
                     alt: "Alibaba Logo"
                 },
                 {
-                    src: "https://commons.wikimedia.org/wiki/Special:FilePath/ByteDance_logo_English.svg",
+                    src: "../assets/images/logos/lenovo.svg",
+                    alt: "Lenovo Logo",
+                    className: "max-h-7 md:max-h-8"
+                },
+                {
+                    src: "../assets/images/logos/bank-of-singapore.svg",
+                    alt: "Bank of Singapore Logo",
+                    className: "max-h-8 md:max-h-9"
+                },
+                {
+                    src: "../assets/images/logos/bytedance.svg",
                     alt: "ByteDance Logo",
-                    invertOnDark: true
-                },
-                {
-                    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Amadeus_Organization_logo_2024.svg",
-                    alt: "Amadeus Logo",
-                    className: "max-h-10 md:max-h-12"
-                },
-                {
-                    src: "https://companieslogo.com/img/orig/HTHT_BIG-d42ec412.svg?t=1720244492",
-                    alt: "Huazhu Group Logo",
-                    className: "max-h-10 md:max-h-12"
+                    className: "max-h-7 md:max-h-8"
                 },
                 {
                     src: "https://commons.wikimedia.org/wiki/Special:FilePath/IHG_Hotels_%26_Resorts_logo.svg",
@@ -1135,7 +1135,7 @@
                 { number: "4.3", suffix: "M+", label: "hotels mapped across GDS, direct, and Asia-direct supply" },
                 { number: "43", suffix: "", label: "supply sources in the G-Link pipeline" },
                 { number: "58", suffix: "%", label: "of Asia travel spend = China. Connected directly." },
-                { number: "3", suffix: "", label: "Chinese hotel chains running on G-Link: Jin Jiang, Atour, Home Inns" }
+                { number: "3", suffix: "", label: "Core GDS paths highlighted across the network: Sabre, Amadeus, Travelport" }
             ];
             return (
                 <section className="py-24 md:py-32 px-6 md:px-12 max-w-[1440px] mx-auto">
@@ -1199,13 +1199,13 @@
         const FeaturedModels = () => {
             const apis = [
                 { name: "G-Link", brand: "Hotel supply", price: "The supply layer", hp: "4.3M+ hotels", mileage: "GDS + Direct + Asia", location: "Corporate rates", image: '<svg width="340" height="340" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="450" cy="720" r="370"/><circle cx="480" cy="720" r="400"/><circle cx="510" cy="720" r="430"/><circle cx="540" cy="720" r="460"/><circle cx="570" cy="720" r="490"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>' },
-                { name: "F-Link", brand: "Air supply", price: "The air layer", hp: "Travelsky / Zhifei", mileage: "China-route ready", location: "Bundles with G-Link", image: '<svg width="340" height="340" viewBox="100 250 1000 900" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="240" y1="790" x2="960" y2="790" stroke-dasharray="1 18" stroke-width="4"/><line x1="600" y1="380" x2="600" y2="970" stroke-dasharray="1 18" stroke-width="4"/><line x1="430" y1="930" x2="600" y2="790" stroke-dasharray="1 18" stroke-width="4"/><ellipse cx="420" cy="730" rx="80" ry="220"/><ellipse cx="815" cy="700" rx="115" ry="360"/><line x1="420" y1="510" x2="600" y2="790"/><line x1="420" y1="950" x2="600" y2="790"/><line x1="600" y1="790" x2="815" y2="340"/><line x1="600" y1="790" x2="815" y2="1060"/></g></svg>' },
+                { name: "F-Link", brand: "Air supply", price: "The air layer", hp: "Travelsky + GDS", mileage: "China-route ready", location: "Bundles with G-Link", image: '<svg width="340" height="340" viewBox="100 250 1000 900" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="240" y1="790" x2="960" y2="790" stroke-dasharray="1 18" stroke-width="4"/><line x1="600" y1="380" x2="600" y2="970" stroke-dasharray="1 18" stroke-width="4"/><line x1="430" y1="930" x2="600" y2="790" stroke-dasharray="1 18" stroke-width="4"/><ellipse cx="420" cy="730" rx="80" ry="220"/><ellipse cx="815" cy="700" rx="115" ry="360"/><line x1="420" y1="510" x2="600" y2="790"/><line x1="420" y1="950" x2="600" y2="790"/><line x1="600" y1="790" x2="815" y2="340"/><line x1="600" y1="790" x2="815" y2="1060"/></g></svg>' },
                 { name: "TMC API", brand: "TMC modules", price: "White-label modules", hp: "Expense · Duty of care", mileage: "Reporting · Approvals", location: "Plug-and-play", image: '<svg width="340" height="340" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)" opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="48" y="48" width="110" height="110" rx="14"/><rect x="182" y="48" width="110" height="110" rx="14"/><rect x="48" y="182" width="110" height="110" rx="14"/><rect x="182" y="182" width="110" height="110" rx="14"/></g></svg>' }
             ];
             const suite = [
                 { name: "Corporate Booking Tool", desc: "Front-end for corporate travelers. Policy engine, mobile-first, branded by the TMC.", icon: "solar:map-point-wave-linear" },
                 { name: "Agent Booking Tool", desc: "Multi-source search for TMC agents. One workflow across every supplier.", icon: "solar:case-round-linear" },
-                { name: "Tianji RFP", desc: "Corporate rate workflows. Licensed to TMCs running their own sourcing.", icon: "solar:chart-2-linear" },
+                { name: "RFP workflows", desc: "Corporate rate workflows. Licensed to TMCs running their own sourcing.", icon: "solar:chart-2-linear" },
                 { name: "White-label front-end", desc: "Ship a branded TMC site in days, not quarters. Template-based today, AI-assisted generation in development.", icon: "solar:palette-linear" }
             ];
             return (
@@ -1253,8 +1253,8 @@
         const Benefits = () => {
             const features = [
                 { icon: "solar:cpu-bolt-linear", title: "Not a wholesaler.", desc: "Wholesalers can sell inventory. They cannot deliver corporate-negotiated rates — hotels do not pass RFP rates through wholesale channels. For large corporates, ~70% of bookings are corporate rates. G-Link routes them through GDS and direct hotel paths." },
-                { icon: "solar:chart-square-linear", title: "Asia-native. Globally connected.", desc: "China = 58% of Asia travel spend. Different platforms, payments, norms. G-Link is deployed directly inside Jin Jiang, Atour, and Home Inns — not via wholesale chains. Years of in-region work behind every connection." },
-                { icon: "solar:code-scan-linear", title: "Bookings stay accountable.", desc: "Wholesale chains re-route A→B→C→D and lose accountability on cancellations and changes. Corporate travel demands traceable bookings, mid-office event handling, and reliable servicing. Tian Gong BMS handles what happens after the booking." }
+                { icon: "solar:chart-square-linear", title: "Asia-native. Globally connected.", desc: "China = 58% of Asia travel spend. Different platforms, payments, norms. G-Link combines Chinese hotel chains with Sabre, Amadeus, and Travelport access instead of relying only on wholesale chains. Years of in-region work behind every connection." },
+                { icon: "solar:code-scan-linear", title: "Bookings stay accountable.", desc: "Wholesale chains re-route A→B→C→D and lose accountability on cancellations and changes. Corporate travel demands traceable bookings, mid-office event handling, and reliable servicing. The BMS handles what happens after the booking." }
             ];
             return (
                 <section className="py-24 px-6 md:px-12 max-w-[1440px] mx-auto relative">
@@ -1374,17 +1374,21 @@
                         </button>
                         <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
                             <div class="space-y-6 overflow-hidden">
+                                <a href="../atlas.html" class="fcg-menu-link flex items-start gap-3">
+                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:users-group-rounded-bold-duotone" width="19" height="19"></iconify-icon></div>
+                                    <div><p class="text-sm font-medium">TMCs</p><span class="text-xs">Corporate travel operators and agencies</span></div>
+                                </a>
                                 <a href="../whitelabel.html" class="fcg-menu-link flex items-start gap-3">
-                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:box-linear" width="19" height="19"></iconify-icon></div>
-                                    <div><p class="text-sm font-medium">White-label</p><span class="text-xs">Launch with a ready-made travel platform</span></div>
+                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:global-linear" width="19" height="19"></iconify-icon></div>
+                                    <div><p class="text-sm font-medium">OTAs</p><span class="text-xs">Online travel agencies and marketplaces</span></div>
                                 </a>
-                                <a href="../advisory-implementation.html" class="fcg-menu-link flex items-start gap-3">
-                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:compass-linear" width="19" height="19"></iconify-icon></div>
-                                    <div><p class="text-sm font-medium">Advisory &amp; Implementation</p><span class="text-xs">Plan, configure, and deploy the right stack</span></div>
+                                <a href="../ai-booking-tool.html" class="fcg-menu-link flex items-start gap-3">
+                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:plug-circle-linear" width="19" height="19"></iconify-icon></div>
+                                    <div><p class="text-sm font-medium">AI Apps</p><span class="text-xs">AI travel apps and agent workflows</span></div>
                                 </a>
-                                <a href="../ai-mapping.html" class="fcg-menu-link flex items-start gap-3">
-                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:magic-stick-3-linear" width="19" height="19"></iconify-icon></div>
-                                    <div><p class="text-sm font-medium">AI Mapping</p><span class="text-xs">Clean hotel, room, and supplier data</span></div>
+                                <a href="../api-access.html" class="fcg-menu-link flex items-start gap-3">
+                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:layers-minimalistic-linear" width="19" height="19"></iconify-icon></div>
+                                    <div><p class="text-sm font-medium">B2B Platforms</p><span class="text-xs">Travel infrastructure for B2B products</span></div>
                                 </a>
                             </div>
                         </div>
@@ -1563,7 +1567,7 @@
                   F-Link: air supply for TMCs
                 </h3>
                 <p class="text-sm text-neutral-400 font-light leading-relaxed mb-8 flex-1 relative z-10">
-                  China air is hard for global players. Travelsky and Zhifei gate Chinese air distribution. F-Link is the simplest path to single-vendor coverage for TMCs already on G-Link — especially in China-routing scenarios where global air APIs struggle.
+                  China air is hard for global players. Travelsky anchors Chinese air distribution. F-Link is the simplest path to single-vendor coverage for TMCs already on G-Link — especially in China-routing scenarios where global air APIs struggle.
                 </p>
 
                 <!-- Code Terminal Lines -->
@@ -2245,7 +2249,7 @@
                     For TMCs without a platform
                   </h3>
                   <p class="mt-1 text-xs text-neutral-500 font-normal leading-relaxed">
-                    Take the full OBT suite: CBT for corporate travelers, ABT for TMC agents, Tianji for RFPs, BMS for mid-office events, white-label front-end. Live in days, not quarters.
+                    Take the full OBT suite: CBT for corporate travelers, ABT for TMC agents, RFP workflows, BMS for mid-office events, white-label front-end. Live in days, not quarters.
                   </p>
                 </div>
               </div>
@@ -2314,7 +2318,7 @@
                       For TMCs &amp; travel programs
                     </h3>
                     <p class="mt-1 text-xs text-neutral-600 font-normal">
-                      CBT, ABT, BMS, Tianji RFP, white-label front-end. Branded by the TMC.
+                      CBT, ABT, BMS, RFP workflows, white-label front-end. Branded by the TMC.
                     </p>
                   </div>
                   <!-- Mini Bar Chart -->
