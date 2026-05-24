@@ -2057,6 +2057,19 @@
     font-weight: 650;
     line-height: 1.1;
   }
+  .fcg-marketing-feature {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 18px;
+    background: rgba(255,255,255,.025);
+    padding: 1.5rem;
+    min-height: 13.5rem;
+    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+  .fcg-marketing-feature:hover {
+    border-color: rgba(255,255,255,.32);
+    background: rgba(255,255,255,.045);
+    transform: translateY(-1px);
+  }
   .fcg-marketing-feature p {
     color: rgba(255,255,255,.54) !important;
     font-size: 1.05rem;
@@ -2523,6 +2536,15 @@
   html[data-theme="light"] .fcg-mobile-cta p {
     color: #737373 !important;
   }
+  html[data-theme="light"] .fcg-marketing-feature {
+    background: rgba(255,255,255,.82);
+    border-color: rgba(15,17,20,.14);
+    box-shadow: 0 18px 45px rgba(15,17,20,.07);
+  }
+  html[data-theme="light"] .fcg-marketing-feature:hover {
+    background: #ffffff;
+    border-color: rgba(15,17,20,.28);
+  }
   html[data-theme="light"] .fcg-ai-showcase {
     background:
       linear-gradient(135deg, rgba(255,240,209,.9), rgba(252,201,196,.8) 34%, rgba(207,233,240,.86) 72%, rgba(106,203,213,.78)),
@@ -2730,7 +2752,7 @@
           <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
         </div>
         <h1>Hotel supply for corporate travel.</h1>
-        <p class="fcg-hero2-copy">One API for GDS, direct hotel, bedbank, and Asia-direct supply. Corporate-rate ready, mapped across 4.3M+ hotels, with a mid-office behind every booking.</p>
+        <p class="fcg-hero2-copy">One API for GDS, direct hotel, bedbank, and Asia-direct supply. Corporate rates, 4.3M+ mapped hotels, and a mid-office behind every booking.</p>
         <div class="fcg-hero2-actions">
           <a href="#getting-started" class="fcg-hero2-button fcg-hero2-button-primary">Schedule a walkthrough</a>
           <a href="../api-access.html" class="fcg-hero2-button fcg-hero2-button-secondary">Read the API docs</a>
@@ -2813,25 +2835,25 @@
       <header class="fcg-marketing-header fade-up">
         <div class="fcg-marketing-eyebrow">Supply layer</div>
         <h2 class="fcg-marketing-title">One API. <span>Four supply paths.</span></h2>
-        <p>G&#8209;Link connects the hotel paths a TMC needs: GDS, direct hotel, bedbank, and Asia-direct. Corporate rates, mapped content, and post-booking events run through one layer.</p>
+        <p>G&#8209;Link brings the hotel paths a TMC needs into one layer: GDS, direct hotel, bedbank, and Asia-direct. Rates, content, and post-booking events stay connected.</p>
       </header>
 
       <div class="fcg-marketing-features fade-up">
         <article class="fcg-marketing-feature">
           <h3>4.3M+ mapped hotels</h3>
-          <p>GDS, direct hotel, bedbank, and Asia-direct supply are exposed as one bookable feed. Mapping, currency, and content reconciliation sit behind the API.</p>
+          <p>GDS, direct hotel, bedbank, and Asia-direct supply appear as one bookable feed, with mapping, currency, and content reconciliation handled behind the API.</p>
         </article>
         <article class="fcg-marketing-feature">
           <h3>Corporate rates, not just inventory</h3>
-          <p>RFP-negotiated rates flow through GDS and direct hotel. Wholesalers cannot carry those rates. For large corporates, that is roughly 70% of booking volume.</p>
+          <p>RFP-negotiated rates flow through GDS and direct hotel. Wholesalers cannot carry them, and for large corporates they can represent roughly 70% of booking volume.</p>
         </article>
         <article class="fcg-marketing-feature">
           <h3>Asia depth around global GDS</h3>
-          <p>G&#8209;Link combines Chinese hotel chains with Sabre, Amadeus, Travelport, direct hotel, and channel-manager connections. Built from inside the region, not added later.</p>
+          <p>G&#8209;Link combines Chinese hotel chains with Sabre, Amadeus, Travelport, direct hotel, and channel-manager connections. Built in-region from the start.</p>
         </article>
         <article class="fcg-marketing-feature">
           <h3>Mid-office handling after booking</h3>
-          <p>Cancellations, holds, reschedules, and traveler emergencies run through the BMS. Direct-where-possible routing keeps accountability traceable.</p>
+          <p>Cancellations, holds, reschedules, and traveler emergencies run through the BMS. Direct routing keeps accountability traceable.</p>
         </article>
         <article class="fcg-marketing-feature">
           <h3>Quality-scored sources</h3>
@@ -2846,14 +2868,14 @@
       <header class="fcg-integration-header fade-up">
         <div class="fcg-integration-eyebrow">Integration</div>
         <h2 class="fcg-integration-title"><span>Skills, API, or SDK.</span><br>Three ways into the same supply layer.</h2>
-        <p>The Open Platform exposes G&#8209;Link through three integration paths. Skills is the fastest start: describe the flow in plain English and generate code from live docs. API and SDK remain production-ready.</p>
+        <p>The Open Platform exposes G&#8209;Link through three paths. Skills is the fastest start: describe the flow in plain English and generate code from live docs. API and SDK stay production-ready.</p>
       </header>
 
       <div class="fcg-flow-grid fade-up">
         <div class="fcg-flow-step">
           <div class="fcg-flow-step-number">01</div>
           <h3>Skills · AI-native</h3>
-          <p>Paste a Skills command into your AI tool. Describe the hotel flow. The model reads the docs and writes the integration.</p>
+          <p>Paste a Skills command into your AI tool. Describe the hotel flow. The model reads the docs and drafts the integration.</p>
           <div class="code-tag">/skill fcg-glink</div>
         </div>
         <div class="fcg-flow-step">
@@ -2916,18 +2938,18 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
         <div class="fcg-flow-step" style="text-align:left;">
           <div class="fcg-flow-step-number">B</div>
           <h3>Direct hotel paths</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Direct contracts, channel managers, and GDS-connected hotel paths. The most reliable channel in the stack when something goes wrong.</p>
+          <p style="margin:0 0 1.25rem;max-width:none;">Direct contracts, channel managers, and GDS-connected hotel paths. The most accountable channel when something goes wrong.</p>
           <div class="code-tag">Bucket B · Direct Hotel &amp; NDC · Sabre · Amadeus · Travelport</div>
         </div>
 
         <div class="fcg-flow-step" style="text-align:left;">
           <div class="fcg-flow-step-number">C</div>
           <h3>Long-tail coverage</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Breadth for properties not covered elsewhere. Useful for coverage, but not sold as the core value.</p>
+          <p style="margin:0 0 1.25rem;max-width:none;">Breadth for properties not covered elsewhere. Useful for reach, not positioned as the core value.</p>
           <div class="code-tag">Bucket C · Bedbank coverage · Sabre · Amadeus · Travelport context</div>
         </div>
 
-        <div class="fcg-flow-step" style="text-align:left;border:1px solid rgba(249,115,22,0.3);background:linear-gradient(180deg,rgba(249,115,22,0.06),rgba(5,5,5,0.92));">
+        <div class="fcg-flow-step" style="text-align:left;">
           <div class="fcg-flow-step-number">D</div>
           <h3>China and Asia direct</h3>
           <p style="margin:0 0 1.25rem;max-width:none;">Chinese hotel chains, GDS context, and Asia-specialty connections. Built from inside the region, not retrofitted from outside.</p>
@@ -2947,17 +2969,17 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
         <article class="fcg-marketing-feature">
           <div class="fcg-objection-q">"We already use another wholesaler."</div>
           <h3>Wholesalers cannot carry corporate-negotiated rates.</h3>
-          <p>RFP rates only flow through GDS and direct hotel. For a large corporate, that is roughly 70% of booking volume unreachable through wholesale. G&#8209;Link adds the corporate-rate layer wholesalers structurally cannot deliver.</p>
+          <p>RFP rates only flow through GDS and direct hotel. For a large corporate, roughly 70% of booking volume can sit outside wholesale. G&#8209;Link adds the corporate-rate layer wholesalers cannot deliver.</p>
         </article>
         <article class="fcg-marketing-feature">
           <div class="fcg-objection-q">"We already use another travel platform."</div>
           <h3>Most large TMCs already multiplex APIs.</h3>
-          <p>If China sits in your client mix, your current API may have a gap G&#8209;Link is built to close. G&#8209;Link combines Chinese hotel chains with Sabre, Amadeus, Travelport, direct hotel, and channel-manager connections. China is 58% of Asia travel and no global player has comparable depth.</p>
+          <p>If China sits in your client mix, your current API may have a gap G&#8209;Link is built to close. It combines Chinese hotel chains with Sabre, Amadeus, Travelport, direct hotel, and channel-manager connections. China is 58% of Asia travel, and depth matters.</p>
         </article>
         <article class="fcg-marketing-feature">
           <div class="fcg-objection-q">"Our dev team is already stretched thin."</div>
           <h3>Skills helps developers start without a handoff.</h3>
-          <p>Three integration paths share the same backend. Skills (AI-native, natural-language), API (versioned REST), and SDK (managed surface). A new developer can ship the first working search call without talking to FCG. No human handoff required to start.</p>
+          <p>Skills, API, and SDK share the same backend. A new developer can ship the first working search call from live docs, without a handoff from FCG.</p>
         </article>
       </div>
     </div>
@@ -2968,7 +2990,7 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
       <header class="fcg-integration-header fade-up">
         <div class="fcg-integration-eyebrow">Commercial model</div>
         <h2 class="fcg-integration-title"><span>Clear packaging.</span><br>Scoped by product surface.</h2>
-        <p>Standardized commercial structure across the API. No "contact sales" gate to qualify. Tiered by product surface: G&#8209;Link only, full OBT suite, white-label, or RFP delivery support.</p>
+        <p>Standardized commercial structure across the API, tiered by product surface: G&#8209;Link only, full OBT suite, white-label, or RFP delivery support.</p>
       </header>
 
       <div class="fcg-pricing-rows fade-up">
@@ -2996,7 +3018,7 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
             <div class="fcg-main-icon"><iconify-icon icon="solar:code-square-linear" width="28" height="28"></iconify-icon></div>
             <div class="fcg-mobile-eyebrow">Get connected</div>
             <h2>Connect G&#8209;Link.</h2>
-            <p class="fcg-mobile-subcopy">Start in the sandbox, test the four supply paths, and move to production with one hotel supply layer for corporate travel.</p>
+            <p class="fcg-mobile-subcopy">Start in sandbox, test the four supply paths, and move to production with one hotel supply layer for corporate travel.</p>
           </header>
 
           <div class="fcg-feature-grid">
