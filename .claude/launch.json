@@ -4,7 +4,7 @@
     {
       "name": "fcg-static",
       "runtimeExecutable": "/bin/sh",
-      "runtimeArgs": ["-c", "cd '/Users/crystalwong/Desktop/Claude/03.Code Projects/FCG Website' && exec python3 -m http.server 8766"],
+      "runtimeArgs": ["-c", "cd /tmp && exec python3 -m http.server 8766 -d '/Users/crystalwong/Desktop/Claude/03.Code Projects/FCG Website'"],
       "port": 8766
     }
   ]
