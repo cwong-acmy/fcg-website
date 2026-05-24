@@ -14,8 +14,8 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G-Link · The hotel supply layer corporate travel runs on · FCG Group</title>
-    <meta name="description" content="G-Link is FCG's hotel supply API. One integration across GDS, direct hotel, bedbank, and Asia-direct supply. Corporate-rate ready. 4.3M+ mapped hotels. 43 suppliers in the pipeline.">
+    <title>F-Link · Air supply for China and APAC routes · FCG Group</title>
+    <meta name="description" content="F-Link connects Travelsky and GDS air paths through FCG's Open Platform and shared mid-office. Built for China and APAC route depth.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -901,38 +901,182 @@
             background-color: rgba(0, 0, 0, 0.04) !important;
         }
 
-        .partner-plus::before,
-        .partner-plus::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            background: #0F1114;
-            transform: translate(-50%, -50%);
-        }
-
-        .partner-plus::before {
-            width: 18px;
-            height: 1px;
-        }
-
-        .partner-plus::after {
-            width: 1px;
-            height: 18px;
-        }
-
         /* ===== V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
-        /* Bucket D highlighted card uses inline gradient with near-black stop */
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] {
-            background: linear-gradient(180deg, rgba(249,115,22,0.08), rgba(255,255,255,0.92)) !important;
-            border-color: rgba(249,115,22,0.35) !important;
+        /* Section wrappers use inline background:#050505;color:#fff */
+        html[data-theme="light"] section[style*="background:#050505"],
+        html[data-theme="light"] section[style*="background:#0a0a0a"],
+        html[data-theme="light"] section[style*="background:#000"] {
+            background: var(--color-bg) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
         }
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] p,
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] h3 {
+        /* Inline white text inside dark sections */
+        html[data-theme="light"] section[style*="color:#fff"] [style*="color:#fff"],
+        html[data-theme="light"] [style*="color:#fff"] {
             color: var(--color-fg) !important;
         }
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] .code-tag {
+        /* Muted white inline */
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.4)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.5)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.6)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.7)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.8)"] {
             color: var(--color-muted) !important;
+        }
+        /* Inline-styled icon backgrounds that sit on top of route lines */
+        html[data-theme="light"] .v2-flink-line iconify-icon,
+        html[data-theme="light"] .v2-flink-route-line iconify-icon {
+            background: var(--color-bg) !important;
+        }
+        /* Route/divider lines drawn with rgba white become invisible in light mode */
+        html[data-theme="light"] [style*="background:rgba(255,255,255,.08)"],
+        html[data-theme="light"] [style*="background:rgba(255,255,255,.1)"],
+        html[data-theme="light"] [style*="border-top:1px solid rgba(255,255,255,.08)"],
+        html[data-theme="light"] [style*="border-bottom:1px solid rgba(255,255,255,.08)"] {
+            border-color: var(--color-border) !important;
+        }
+
+        /* Draft product pages use hard-coded dark inline styles; mirror index.html's theme behavior. */
+        html[data-theme="light"] .product-shell,
+        html[data-theme="light"] .product-shell section[style*="background:#050505"],
+        html[data-theme="light"] .product-shell section[style*="background: #050505"],
+        html[data-theme="light"] .product-shell section[style*="background:#030303"],
+        html[data-theme="light"] .product-shell section[style*="background: #030303"],
+        html[data-theme="light"] .product-shell section[style*="background:#0a0a0a"],
+        html[data-theme="light"] .product-shell section[style*="background: #0a0a0a"],
+        html[data-theme="light"] .product-shell section[style*="background:#000"],
+        html[data-theme="light"] .product-shell section[style*="background: #000"] {
+            background: var(--color-bg) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="color:#fff"],
+        html[data-theme="light"] .product-shell [style*="color: #fff"],
+        html[data-theme="light"] .product-shell [style*="color:#ffffff"],
+        html[data-theme="light"] .product-shell [style*="color: #ffffff"] {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="color:rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="color: rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="color:rgba(255, 255, 255"],
+        html[data-theme="light"] .product-shell [style*="color: rgba(255, 255, 255"] {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="border-top:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-top: 1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-bottom:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-bottom: 1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border: 1px solid rgba(255,255,255"] {
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-flink-copy h1,
+            .v2-flink-port strong,
+            .v2-flink-row .body strong,
+            .v2-flink-stat strong,
+            .v2-flink-bundle h2,
+            .v2-flink-proof h2,
+            .v2-flink-proof-card strong,
+            .v2-flink-cap-head h2,
+            .v2-flink-cap-item h3,
+            .v2-flink-cap-no,
+            .v2-flink-routes h2,
+            .v2-flink-route-card h3,
+            .v2-flink-scope h2,
+            .v2-flink-scope-card-head strong,
+            .v2-flink-scope-list li strong,
+            .v2-flink-faq-head h2,
+            .v2-flink-faq-q,
+            .v2-flink-faq-prompt
+        ) {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-flink-badge,
+            .v2-flink-copy p,
+            .v2-flink-panel-head .v2-flink-tag,
+            .v2-flink-panel-head small,
+            .v2-flink-port span,
+            .v2-flink-row .body span,
+            .v2-flink-row.muted .tag,
+            .v2-flink-stat span,
+            .v2-flink-bundle p,
+            .v2-flink-proof p.lede,
+            .v2-flink-proof-eyebrow,
+            .v2-flink-proof-card .label,
+            .v2-flink-proof-card .meta,
+            .v2-flink-proof-note,
+            .v2-flink-cap-eyebrow,
+            .v2-flink-cap-head p,
+            .v2-flink-cap-item p,
+            .v2-flink-cap-tag,
+            .v2-flink-routes p,
+            .v2-flink-scope p.lede,
+            .v2-flink-scope-eyebrow,
+            .v2-flink-scope-list li,
+            .v2-flink-faq-head p,
+            .v2-flink-faq-eyebrow,
+            .v2-flink-faq-num,
+            .v2-flink-faq-a
+        ) {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-flink-badge,
+            .v2-flink-panel,
+            .v2-flink-row,
+            .v2-flink-stat,
+            .v2-flink-proof-card,
+            .v2-flink-proof-note,
+            .v2-flink-cap-tag,
+            .v2-flink-scope-card,
+            .v2-flink-faq-btn-secondary
+        ) {
+            background: var(--color-card) !important;
+            border-color: var(--color-border) !important;
+            box-shadow: none !important;
+        }
+
+        html[data-theme="light"] .v2-flink-panel::after {
+            box-shadow: inset 0 0 0 1px rgba(15, 17, 20, 0.08) !important;
+        }
+
+        html[data-theme="light"] .v2-flink-bg {
+            background-image:
+                linear-gradient(rgba(15, 17, 20, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15, 17, 20, 0.07) 1px, transparent 1px) !important;
+        }
+
+        html[data-theme="light"] .v2-flink-line iconify-icon {
+            background: var(--color-bg) !important;
+        }
+
+        html[data-theme="light"] .v2-flink-line::before,
+        html[data-theme="light"] .v2-flink-cap-head,
+        html[data-theme="light"] .v2-flink-cap-item,
+        html[data-theme="light"] .v2-flink-scope-card-head,
+        html[data-theme="light"] .v2-flink-faq-list,
+        html[data-theme="light"] .v2-flink-faq-item,
+        html[data-theme="light"] .v2-flink-faq-foot {
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] :is(.v2-flink-btn-primary, .v2-flink-bundle-cta, .v2-flink-faq-btn-primary) {
+            background: var(--color-fg) !important;
+            color: var(--color-bg) !important;
+        }
+
+        html[data-theme="light"] :is(.v2-flink-btn-secondary, .v2-flink-faq-btn-secondary) {
+            background: var(--color-card) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
         }
         /* ===== END V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
 
@@ -1154,7 +1298,7 @@
     max-width: 720px;
     margin: 28px 0 0;
     color: #fff !important;
-    font-size: clamp(2.55rem, 4vw, 4.45rem);
+    font-size: clamp(2.35rem, 3.5vw, 3.75rem);
     font-weight: 600;
     line-height: 1.05;
     letter-spacing: 0;
@@ -1173,108 +1317,6 @@
     gap: 14px;
     margin-top: 34px;
     flex-wrap: wrap;
-  }
-  .fcg-pricing-rows {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-    margin-top: 3rem;
-  }
-  .fcg-pricing-rows article {
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 14px;
-    background: rgba(255,255,255,.02);
-    padding: 1.5rem 1.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-  }
-  .fcg-pricing-rows .fcg-pricing-label {
-    color: rgba(255,255,255,.6) !important;
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  .fcg-pricing-rows .fcg-pricing-value {
-    color: #fff !important;
-    font-family: 'Sora', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    line-height: 1.1;
-  }
-  .fcg-pricing-rows .fcg-pricing-sub {
-    color: rgba(255,255,255,.5) !important;
-    font-size: .85rem;
-    line-height: 1.5;
-  }
-  .fcg-pricing-foot {
-    color: rgba(255,255,255,.45) !important;
-    font-size: .8rem;
-    margin-top: 1.25rem;
-    line-height: 1.6;
-  }
-  html[data-theme="light"] .fcg-pricing-rows article { background: rgba(15,17,20,.02); border-color: rgba(15,17,20,.1); }
-  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-label { color: rgba(15,17,20,.55) !important; }
-  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-value { color: var(--color-fg) !important; }
-  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-sub { color: rgba(15,17,20,.55) !important; }
-  html[data-theme="light"] .fcg-pricing-foot { color: rgba(15,17,20,.55) !important; }
-  .fcg-objection-q {
-    color: #fb923c !important;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    margin-bottom: .85rem;
-    font-weight: 500;
-  }
-  html[data-theme="light"] .fcg-objection-q { color: #fb923c !important; }
-  .partner-plus::before,
-  .partner-plus::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    background: #0F1114;
-    transform: translate(-50%, -50%);
-  }
-  .partner-plus::before {
-    width: 18px;
-    height: 1px;
-  }
-  .partner-plus::after {
-    width: 1px;
-    height: 18px;
-  }
-  .partner-grid-section {
-    background-color: var(--color-bg);
-    color: var(--color-fg);
-  }
-  .partner-grid-title {
-    color: var(--color-muted);
-  }
-  .partner-grid-title strong {
-    color: var(--color-fg);
-    font-weight: 500;
-  }
-  .partner-logo-band,
-  .partner-logo-grid,
-  .partner-logo-card {
-    border-color: var(--color-border) !important;
-  }
-  .partner-logo-card:nth-child(odd) {
-    background-color: var(--color-card);
-  }
-  html[data-theme="dark"] .partner-logo-card img.partner-logo-invert-dark {
-    filter: invert(1) grayscale(1) brightness(1.4);
-    opacity: .9;
-  }
-  html[data-theme="dark"] .partner-plus::before,
-  html[data-theme="dark"] .partner-plus::after {
-    background: var(--color-fg);
-  }
-  @media (max-width: 768px) {
-    .fcg-pricing-rows { grid-template-columns: 1fr; }
   }
   .fcg-hero2-preview-wrap {
     position: relative;
@@ -1629,8 +1671,8 @@
   }
   .fcg-bento h2 {
     color: #fff !important;
-    font-size: clamp(2.3rem, 5vw, 4.7rem);
-    font-weight: 700;
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    font-weight: 500;
     letter-spacing: 0;
     line-height: 1;
   }
@@ -1761,7 +1803,7 @@
   .fcg-marketing-title,
   .fcg-mobile-feature h2 {
     color: #fff !important;
-    font-size: clamp(2.6rem, 3vw, 3.25rem);
+    font-size: clamp(2.1rem, 2.6vw, 2.7rem);
     font-weight: 650;
     letter-spacing: 0;
     line-height: 1.05;
@@ -1931,7 +1973,7 @@
   }
   .fcg-integration-title {
     color: #fff !important;
-    font-size: clamp(2.6rem, 3vw, 3.25rem);
+    font-size: clamp(2.1rem, 2.6vw, 2.7rem);
     font-weight: 650;
     letter-spacing: 0;
     line-height: 1.05;
@@ -2493,7 +2535,7 @@
       gap: 1.5rem;
     }
     .fcg-marketing-title {
-      font-size: clamp(2.35rem, 11vw, 3.25rem) !important;
+      font-size: clamp(2rem, 8.5vw, 2.65rem) !important;
     }
     .fcg-marketing-header {
       margin-bottom: 2.5rem;
@@ -2522,123 +2564,295 @@
   }
 </style>
 <main class="product-shell">
-  <section id="capabilities" class="fcg-hero2">
-    <div class="fcg-hero2-glow" aria-hidden="true"><span></span><span></span><span></span></div>
+  <section id="capabilities" style="position:relative;overflow:hidden;background:#050505;color:#fff;padding:8rem 1.5rem 6.5rem;">
+    <style>
+      .v2-flink-hero { position:relative; z-index:1; max-width: 80rem; margin: 0 auto; display:grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items:center; gap: 4.5rem; }
+      @media (max-width: 980px) { .v2-flink-hero { grid-template-columns: 1fr; gap: 3rem; } }
+      .v2-flink-bg { position:absolute; inset:0; pointer-events:none; opacity:.55;
+        background-image:
+          linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: radial-gradient(ellipse at 70% 50%, #000 30%, transparent 70%);
+      }
+      .v2-flink-glow { position:absolute; top:-20%; right:-10%; width: 50rem; height: 50rem; pointer-events:none;
+        background: radial-gradient(circle, rgba(249,115,22,.22), transparent 60%);
+        filter: blur(40px);
+      }
+      .v2-flink-badge { display:inline-flex; align-items:center; gap:.6rem; padding:.55rem 1rem; border:1px solid rgba(255,255,255,.14); border-radius: 999px; background: rgba(255,255,255,.04); font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.04em; color:rgba(255,255,255,.74); margin-bottom: 2rem; }
+      .v2-flink-badge::before { content:""; width:6px; height:6px; border-radius:9999px; background:#fb923c; box-shadow: 0 0 12px rgba(249,115,22,.7); }
+      .v2-flink-copy h1 { color:#fff; font-size: clamp(2.3rem, 4.2vw, 3.45rem); font-weight: 500; letter-spacing:-.02em; line-height: 1.06; margin: 0 0 1.35rem; }
+      .v2-flink-copy h1 em { font-style:normal; color:#fb923c; }
+      .v2-flink-copy p { color: rgba(255,255,255,.66); font-size: 1.025rem; line-height: 1.65; max-width: 36rem; margin: 0; }
+      .v2-flink-cta { display:flex; align-items:center; flex-wrap:wrap; gap:.75rem; margin-top: 2.25rem; }
+      .v2-flink-btn { display:inline-flex; align-items:center; gap:.5rem; padding: .9rem 1.5rem; border-radius: 9999px; font-size: 14px; font-weight: 500; transition: transform 180ms ease, background 180ms ease, border-color 180ms ease; }
+      .v2-flink-btn-primary { background:#fff; color:#0a0a0a; }
+      .v2-flink-btn-primary:hover { transform: scale(1.01); }
+      .v2-flink-btn-secondary { background: rgba(255,255,255,.05); color:#fff; border:1px solid rgba(255,255,255,.14); }
+      .v2-flink-btn-secondary:hover { border-color: rgba(255,255,255,.3); }
 
-    <div class="fcg-hero2-content">
-      <div class="fcg-hero2-copy-column">
-        <div class="fcg-hero2-badge">
-          Product · G-Link
-          <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
-        </div>
-        <h1>One API. Every corporate-rate hotel supply path. Built for TMCs.</h1>
-        <p class="fcg-hero2-copy">G-Link is the hotel API for TMCs serving corporate travelers. Four supply paths in one pipe. GDS, direct hotel, bedbank, Asia-direct. Corporate-rate ready. 4.3M+ mapped hotels. Connected through Sabre, Amadeus, Travelport, direct hotel, and bedbank paths.</p>
-        <div class="fcg-hero2-actions">
-          <a href="#getting-started" class="fcg-hero2-button fcg-hero2-button-primary">Schedule a walkthrough</a>
-          <a href="../api-access.html" class="fcg-hero2-button fcg-hero2-button-secondary">Read the API docs</a>
+      .v2-flink-panel { position:relative; border:1px solid rgba(255,255,255,.1); border-radius: 28px; background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)); box-shadow: 0 30px 80px rgba(0,0,0,.45); padding: 1.75rem; }
+      .v2-flink-panel::after { content:""; position:absolute; inset:0; border-radius: 28px; pointer-events:none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05); }
+      .v2-flink-panel-head { display:flex; align-items:center; justify-content:space-between; padding-bottom: 1rem; border-bottom: 1px dashed rgba(255,255,255,.1); margin-bottom: 1.25rem; }
+      .v2-flink-panel-head .v2-flink-tag { display:inline-flex; align-items:center; gap:.45rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing:.06em; color:rgba(255,255,255,.55); text-transform: uppercase; }
+      .v2-flink-panel-head .v2-flink-tag::before { content:""; width:6px; height:6px; border-radius:9999px; background:#22c55e; box-shadow: 0 0 12px rgba(34,197,94,.7); }
+      .v2-flink-panel-head small { color:rgba(255,255,255,.4); font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.06em; text-transform: uppercase; }
+
+      .v2-flink-route { display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap:1.25rem; padding: 1rem 0 1.25rem; }
+      .v2-flink-port { text-align:center; }
+      .v2-flink-port strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 2rem; font-weight: 400; letter-spacing:.04em; line-height: 1; }
+      .v2-flink-port span { display:block; margin-top:.3rem; color:rgba(255,255,255,.5); font-size: 10.5px; letter-spacing:.14em; text-transform:uppercase; }
+      .v2-flink-line { position:relative; height:30px; }
+      .v2-flink-line::before { content:""; position:absolute; left:0; right:0; top:50%; border-top: 1px dashed rgba(255,255,255,.22); }
+      .v2-flink-line iconify-icon { position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); color:#fb923c; background:#050505; padding: 0 .35rem; }
+
+      .v2-flink-stack { display:flex; flex-direction:column; gap:.65rem; margin-top:.4rem; }
+      .v2-flink-row { display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap:.85rem; padding: .85rem .95rem; border:1px solid rgba(255,255,255,.08); border-radius: 14px; background: rgba(255,255,255,.025); }
+      .v2-flink-row .dot { width:.55rem; height:.55rem; border-radius:9999px; background:#fb923c; box-shadow: 0 0 10px rgba(249,115,22,.6); }
+      .v2-flink-row .body { display:flex; flex-direction:column; gap:.15rem; }
+      .v2-flink-row .body strong { color:#fff; font-size: .92rem; font-weight: 500; line-height:1.25; }
+      .v2-flink-row .body span { color:rgba(255,255,255,.5); font-size:.78rem; line-height:1.3; }
+      .v2-flink-row .tag { display:inline-flex; align-items:center; padding:.35rem .55rem; border-radius:9999px; background: rgba(249,115,22,.12); color:#fb923c; font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.04em; }
+      .v2-flink-row.muted .dot { background: rgba(255,255,255,.4); box-shadow: none; }
+      .v2-flink-row.muted .tag { background: rgba(255,255,255,.06); color: rgba(255,255,255,.55); }
+
+      .v2-flink-stats { display:grid; grid-template-columns: repeat(3, 1fr); gap:.65rem; margin-top: 1.1rem; }
+      .v2-flink-stat { border:1px solid rgba(255,255,255,.08); border-radius: 12px; background: rgba(255,255,255,.025); padding: .8rem .85rem; }
+      .v2-flink-stat strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 500; }
+      .v2-flink-stat span { display:block; margin-top:.25rem; color:rgba(255,255,255,.42); font-size: 10.5px; letter-spacing:.08em; text-transform: uppercase; }
+    </style>
+
+    <div class="v2-flink-glow" aria-hidden="true"></div>
+    <div class="v2-flink-bg" aria-hidden="true"></div>
+
+    <div class="v2-flink-hero">
+      <div class="v2-flink-copy">
+        <div class="v2-flink-badge">Product · F-Link</div>
+        <h1>Air supply for China and APAC routes.</h1>
+        <p>F-Link connects Travelsky and GDS air paths through the same Open Platform and mid-office as G-Link. Use it where global air APIs hand off China and regional routes.</p>
+        <div class="v2-flink-cta">
+          <a href="#getting-started" class="v2-flink-btn v2-flink-btn-primary">See a route demo<iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
+          <a href="#supply-buckets" class="v2-flink-btn v2-flink-btn-secondary">See where F-Link fits</a>
         </div>
       </div>
 
-      <div class="fcg-hero2-preview-wrap">
-        <div class="fcg-hero2-preview fcg-hero2-code-preview">
-          <div class="fcg-hero2-code-window" aria-label="G-Link API code example">
-            <div class="fcg-hero2-code-bar">
-              <div class="fcg-hero2-window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-              <span>g-link / live supply</span>
+      <div class="v2-flink-panel" aria-label="F-Link routing preview">
+        <div class="v2-flink-panel-head">
+          <div class="v2-flink-tag">F-Link · Live routing</div>
+          <small>route 4F · 06:55 → 09:40</small>
+        </div>
+
+        <div class="v2-flink-route">
+          <div class="v2-flink-port"><strong>PVG</strong><span>Shanghai</span></div>
+          <div class="v2-flink-line"><iconify-icon icon="solar:plain-2-linear" width="20" height="20"></iconify-icon></div>
+          <div class="v2-flink-port"><strong>HKG</strong><span>Hong Kong</span></div>
+        </div>
+
+        <div class="v2-flink-stack">
+          <div class="v2-flink-row">
+            <span class="dot"></span>
+            <div class="body"><strong>Travelsky · primary anchor</strong><span>China gatekeeper · direct integration</span></div>
+            <span class="tag">LIVE</span>
+          </div>
+          <div class="v2-flink-row">
+            <span class="dot"></span>
+            <div class="body"><strong>Sabre · Amadeus · Travelport</strong><span>Global GDS alignment</span></div>
+            <span class="tag">LIVE</span>
+          </div>
+          <div class="v2-flink-row muted">
+            <span class="dot"></span>
+            <div class="body"><strong>Bundled with G-Link mid-office</strong><span>Shared BMS for events</span></div>
+            <span class="tag">ATTACHED</span>
+          </div>
+        </div>
+
+        <div class="v2-flink-stats">
+          <div class="v2-flink-stat"><strong>2</strong><span>Anchor suppliers</span></div>
+          <div class="v2-flink-stat"><strong>China+APAC</strong><span>Route depth</span></div>
+          <div class="v2-flink-stat"><strong>1 BMS</strong><span>Hotel + Air</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== G-LINK BUNDLE EXPRESS PATH ===== -->
+  <section id="flink-bundle" style="position:relative;background:#050505;color:#fff;padding:3.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);">
+    <style>
+      .v2-flink-bundle { max-width: 80rem; margin: 0 auto; position: relative; border: 1px solid rgba(249,115,22,.22); border-radius: 22px; background: linear-gradient(120deg, rgba(249,115,22,.08), rgba(255,255,255,.015) 60%); padding: 2rem 2.25rem; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: center; }
+      @media (max-width: 820px) { .v2-flink-bundle { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.75rem 1.5rem; } }
+      .v2-flink-bundle-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'Inter',sans-serif; font-size: 11px; letter-spacing:.16em; color:#fb923c; text-transform:uppercase; margin-bottom: .75rem; }
+      .v2-flink-bundle-eyebrow iconify-icon { color: #fb923c; }
+      .v2-flink-bundle h2 { color:#fff; font-size: clamp(1.45rem, 2.2vw, 1.85rem); font-weight: 500; letter-spacing:-.015em; line-height: 1.15; margin: 0 0 .75rem; }
+      .v2-flink-bundle p { color: rgba(255,255,255,.62); font-size: .98rem; line-height: 1.55; margin: 0; max-width: 44rem; }
+      .v2-flink-bundle-cta { display:inline-flex; align-items:center; gap:.5rem; padding: .9rem 1.4rem; border-radius: 9999px; background: #fff; color: #0a0a0a; font-size: 14px; font-weight: 500; white-space: nowrap; transition: transform 180ms ease; }
+      .v2-flink-bundle-cta:hover { transform: scale(1.02); }
+      html[data-theme="light"] .v2-flink-bundle { background: linear-gradient(120deg, rgba(249,115,22,.08), rgba(0,0,0,.02) 60%); border-color: rgba(249,115,22,.35); }
+      html[data-theme="light"] .v2-flink-bundle h2 { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-bundle p { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-bundle-cta { background: #0f1114; color: #fff; }
+    </style>
+    <div class="v2-flink-bundle fade-up">
+      <div>
+        <div class="v2-flink-bundle-eyebrow"><iconify-icon icon="solar:link-circle-linear" width="14" height="14"></iconify-icon>For TMCs already on G-Link</div>
+        <h2>Add F-Link in one commercial relationship.</h2>
+        <p>One contract, one Open Platform login, and one mid-office for hotel and air. The fastest air path for TMCs already using G-Link.</p>
+      </div>
+      <a href="#contact" class="v2-flink-bundle-cta">See the bundle terms<iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
+    </div>
+  </section>
+
+  <!-- ===== TRUST / PROOF STRIP ===== -->
+  <section id="flink-proof" style="position:relative;background:#050505;color:#fff;padding:4.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);">
+    <style>
+      .v2-flink-proof { max-width: 80rem; margin: 0 auto; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 4rem; align-items: center; }
+      @media (max-width: 980px) { .v2-flink-proof { grid-template-columns: 1fr; gap: 2.5rem; } }
+      .v2-flink-proof-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing:.12em; color: rgba(255,255,255,.55); text-transform: uppercase; margin-bottom: 1rem; }
+      .v2-flink-proof-eyebrow::before { content:""; width:1.6rem; height:1px; background: rgba(255,255,255,.3); }
+      .v2-flink-proof h2 { color:#fff; font-size: clamp(1.7rem, 2.6vw, 2.2rem); font-weight: 500; letter-spacing:-.018em; line-height: 1.15; margin: 0 0 1rem; }
+      .v2-flink-proof p.lede { color: rgba(255,255,255,.62); font-size: 1rem; line-height: 1.6; margin: 0; max-width: 30rem; }
+      .v2-flink-proof-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+      .v2-flink-proof-card { border: 1px solid rgba(255,255,255,.08); border-radius: 16px; background: rgba(255,255,255,.025); padding: 1.4rem 1.4rem 1.3rem; min-height: 9.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; }
+      .v2-flink-proof-card strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 1.65rem; font-weight: 500; letter-spacing: -.01em; line-height: 1; }
+      .v2-flink-proof-card .label { color: rgba(255,255,255,.78); font-size: .92rem; font-weight: 500; line-height: 1.3; margin-top: .55rem; }
+      .v2-flink-proof-card .meta { color: rgba(255,255,255,.45); font-size: .78rem; line-height: 1.45; }
+      .v2-flink-proof-card.accent strong { color: #fb923c; }
+      .v2-flink-proof-card.accent { border-color: rgba(249,115,22,.28); background: rgba(249,115,22,.06); }
+      .v2-flink-proof-note { margin-top: 1.6rem; padding: 1.1rem 1.25rem; border: 1px dashed rgba(255,255,255,.14); border-radius: 14px; background: rgba(255,255,255,.02); color: rgba(255,255,255,.62); font-size: .88rem; line-height: 1.55; display:flex; align-items:flex-start; gap:.75rem; }
+      .v2-flink-proof-note iconify-icon { color: #fb923c; flex-shrink: 0; margin-top: .15rem; }
+      html[data-theme="light"] .v2-flink-proof h2 { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-proof p.lede,
+      html[data-theme="light"] .v2-flink-proof-eyebrow { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-proof-card { background: #fff; border-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-proof-card strong { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-proof-card .label { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-proof-card .meta { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-proof-card.accent { background: rgba(249,115,22,.08); border-color: rgba(249,115,22,.35); }
+      html[data-theme="light"] .v2-flink-proof-note { background: #f3f4f6; border-color: #e5e7eb; color: #4b5563; }
+    </style>
+    <div class="v2-flink-proof">
+      <div class="fade-up">
+        <div class="v2-flink-proof-eyebrow">Where F-Link stands today</div>
+        <h2>New product. Mature backbone.</h2>
+        <p class="lede">F-Link is new. The infrastructure underneath is not: Travelsky integration, the shared mid-office, and the Open Platform already support G-Link.</p>
+      </div>
+      <div class="fade-up">
+        <div class="v2-flink-proof-grid">
+          <div class="v2-flink-proof-card accent">
+            <strong>2</strong>
+            <div>
+              <div class="label">Anchor suppliers, live in production</div>
+              <div class="meta">Travelsky direct · Sabre · Amadeus · Travelport</div>
             </div>
-            <pre class="fcg-hero2-code-body"><code><span class="code-keyword">const</span> glink = <span class="code-keyword">new</span> GLink({
-  <span class="code-property">apiKey</span>: process.env.<span class="code-property">FCG_KEY</span>,
-  <span class="code-property">region</span>: <span class="code-string">"APAC"</span>
-});
-
-<span class="code-keyword">await</span> glink.<span class="code-method">hotels</span>.<span class="code-method">search</span>({
-  <span class="code-property">destination</span>: <span class="code-string">"HKG"</span>,
-  <span class="code-property">rateTypes</span>: [<span class="code-string">"corporate"</span>, <span class="code-string">"public"</span>],
-  <span class="code-property">supply</span>: [<span class="code-string">"gds"</span>, <span class="code-string">"direct"</span>, <span class="code-string">"asia"</span>],
-  <span class="code-property">preferCorporateRate</span>: <span class="code-keyword">true</span>
-});
-
-<span class="code-comment">// Four supply buckets. One pipe. Corporate-rate routed.</span></code></pre>
-            <div class="fcg-hero2-code-footer" aria-hidden="true">
-              <div class="fcg-hero2-code-chip"><span>Supply</span><strong>4.3M+ hotels</strong></div>
-              <div class="fcg-hero2-code-chip"><span>Network</span><strong>43 suppliers · 13 live</strong></div>
-              <div class="fcg-hero2-code-chip"><span>Asia</span><strong>4 chains deployed</strong></div>
+          </div>
+          <div class="v2-flink-proof-card">
+            <strong>BMS</strong>
+            <div>
+              <div class="label">Shared mid-office with G-Link</div>
+              <div class="meta">Battle-tested for hotel events · same backbone now handling air</div>
+            </div>
+          </div>
+          <div class="v2-flink-proof-card">
+            <strong>3 doors</strong>
+            <div>
+              <div class="label">Skills, API, SDK · same Open Platform</div>
+              <div class="meta">F-Link MCP version of the API exposed today</div>
+            </div>
+          </div>
+          <div class="v2-flink-proof-card">
+            <strong>1 contract</strong>
+            <div>
+              <div class="label">Bundled commercial path with G-Link</div>
+              <div class="meta">One vendor, one mid-office, one Open Platform login</div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="partner-grid-section relative z-10 pt-10 pb-10 md:pt-12 md:pb-16" aria-label="Deployed across leading suppliers and chains">
-    <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
-      <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
-        300+ travel brands, TMCs, and hotel groups. <strong>Already connected.</strong>
-      </h2>
-    </div>
-    <div class="partner-logo-band border-y">
-      <div class="partner-logo-grid relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x">
-        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
-          <img alt="Promate Logo" class="pointer-events-none max-h-12 md:max-h-14 max-w-[150px] select-none object-contain md:max-w-[170px]" src="../assets/images/logos/promate.svg">
-          <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
-        </div>
-        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r">
-          <img alt="TikTok Logo" class="pointer-events-none max-h-7 md:max-h-8 max-w-[150px] select-none object-contain md:max-w-[170px] partner-logo-invert-dark" src="../assets/images/logos/tiktok.svg">
-        </div>
-        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
-          <img alt="Alibaba Logo" class="pointer-events-none max-h-8 md:max-h-9 max-w-[150px] select-none object-contain md:max-w-[170px]" src="../assets/images/logos/alibaba.svg">
-          <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
-          <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -left-3 -bottom-3 hidden md:block" aria-hidden="true"></span>
-        </div>
-        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b">
-          <img alt="Lenovo Logo" class="pointer-events-none max-h-7 md:max-h-8 max-w-[150px] select-none object-contain md:max-w-[170px]" src="../assets/images/logos/lenovo.svg">
-        </div>
-        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b md:border-b-0">
-          <img alt="Bank of Singapore Logo" class="pointer-events-none max-h-8 md:max-h-9 max-w-[150px] select-none object-contain md:max-w-[170px]" src="../assets/images/logos/bank-of-singapore.svg">
-          <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3 md:hidden" aria-hidden="true"></span>
-        </div>
-        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r md:border-b-0">
-          <img alt="ByteDance Logo" class="pointer-events-none max-h-7 md:max-h-8 max-w-[150px] select-none object-contain md:max-w-[170px]" src="../assets/images/logos/bytedance.svg">
-        </div>
-        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r">
-          <img alt="IHG Hotels and Resorts Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/IHG_Hotels_%26_Resorts_logo.svg">
-        </div>
-        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8">
-          <img alt="Marriott International Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/Marriott_International.svg">
+        <div class="v2-flink-proof-note">
+          <iconify-icon icon="solar:info-circle-linear" width="16" height="16"></iconify-icon>
+          <span>F-Link is an early-stage product. We surface what's shipped, not what's promised. Investment scales with China-routed demand first; regional and broader APAC follow.</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="api-capabilities" class="fcg-marketing-section">
-    <div class="fcg-marketing-inner" style="max-width:72rem;">
-      <header class="fcg-marketing-header fade-up">
-        <div class="fcg-marketing-eyebrow">What's behind the door</div>
-        <h2 class="fcg-marketing-title">The supply network <span>is the product.</span></h2>
-        <p>G-Link is one API. Behind it: four supply paths. Corporate rates through GDS and direct hotel. Core GDS paths through Sabre, Amadeus, and Travelport. A mid-office that handles what happens after the booking.</p>
-      </header>
+  <section id="api-capabilities" style="position:relative;background:#050505;color:#fff;padding:7rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);">
+    <style>
+      .v2-flink-cap { max-width: 70rem; margin: 0 auto; }
+      .v2-flink-cap-head { display:grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 3rem; align-items:end; margin-bottom: 3.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+      @media (max-width: 820px) { .v2-flink-cap-head { grid-template-columns: 1fr; gap: 1.5rem; } }
+      .v2-flink-cap-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; color: rgba(255,255,255,.55); text-transform: uppercase; margin-bottom: 1rem; }
+      .v2-flink-cap-eyebrow::before { content:""; width: 1.6rem; height: 1px; background: rgba(255,255,255,.3); }
+      .v2-flink-cap-head h2 { color:#fff; font-size: clamp(2rem, 3.4vw, 2.85rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.06; margin: 0; }
+      .v2-flink-cap-head p { color: rgba(255,255,255,.62); font-size: 1rem; line-height: 1.7; margin: 0; }
 
-      <div class="fcg-marketing-features fade-up">
-        <article class="fcg-marketing-feature">
-          <h3>4.3M+ mapped hotels. Across every supply path that matters.</h3>
-          <p>GDS, direct hotel and NDC, bedbank aggregators, and Asia-direct supply. Connected through one open layer. Property mapping, currency normalisation, and content reconciliation, exposed as a single bookable feed. One integration replaces 180+ days of work per source.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <h3>Corporate-rate access, not just inventory</h3>
-          <p>RFP-negotiated rates flow through GDS and direct hotel. The only channels that carry them. Wholesalers cannot deliver this. For large corporates, that's ~70% of booking volume.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <h3>Regional depth around global GDS access</h3>
-          <p>G-Link combines Chinese hotel chains with Sabre, Amadeus, Travelport, direct hotel, and channel-manager connections. China = 58% of Asia travel. Built and negotiated from inside the region, not retrofitted.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <h3>Mid-office event handling, not just bookings</h3>
-          <p>Cancellations, holds, reschedules, and traveler emergencies are handled by the BMS. Direct-where-possible routing keeps accountability traceable end-to-end. Nothing lost in a re-routing chain.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <h3>Quality-scored sources, not flat markups</h3>
-          <p>An internal data platform ranks supplier cancellation success, confirmation reliability, and price stability. Bookings flow through the most dependable path. ML-driven rate routing is the next step.</p>
-        </article>
+      .v2-flink-cap-list { display:flex; flex-direction:column; }
+      .v2-flink-cap-item { display:grid; grid-template-columns: 5.5rem minmax(0,1fr) 11rem; gap: 2.25rem; align-items:flex-start; padding: 2.25rem 0; border-bottom: 1px solid rgba(255,255,255,.08); transition: background 200ms ease; }
+      .v2-flink-cap-item:last-child { border-bottom: 0; }
+      .v2-flink-cap-item:hover { background: linear-gradient(90deg, rgba(249,115,22,.04), transparent 60%); }
+      @media (max-width: 820px) { .v2-flink-cap-item { grid-template-columns: 1fr; gap: .85rem; padding: 1.75rem 0; } }
+      .v2-flink-cap-no { font-family:'JetBrains Mono', monospace; font-size: 2.1rem; font-weight: 400; color: #fff; letter-spacing: -.02em; line-height: 1; padding-top: .15rem; opacity: .85; }
+      .v2-flink-cap-item .body { display:flex; flex-direction:column; gap: .65rem; }
+      .v2-flink-cap-item h3 { color:#fff; font-size: 1.3rem; font-weight: 500; letter-spacing: -.01em; margin: 0; line-height: 1.3; }
+      .v2-flink-cap-item p { color: rgba(255,255,255,.6); font-size: .95rem; line-height: 1.65; margin: 0; max-width: 36rem; }
+      .v2-flink-cap-tag { display:inline-flex; align-items:center; gap:.5rem; align-self: flex-start; padding: .55rem .85rem; border: 1px solid rgba(255,255,255,.12); border-radius: 9999px; background: rgba(255,255,255,.03); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .06em; color: rgba(255,255,255,.55); text-transform: uppercase; justify-self: flex-start; }
+      .v2-flink-cap-tag iconify-icon { color: #fb923c; }
+      .v2-flink-cap-item.feature .v2-flink-cap-no { color: #fb923c; }
+      .v2-flink-cap-item.feature .v2-flink-cap-tag { border-color: rgba(249,115,22,.35); background: rgba(249,115,22,.08); color: #fb923c; }
+    </style>
+
+    <div class="v2-flink-cap">
+      <div class="v2-flink-cap-head fade-up">
+        <div>
+          <div class="v2-flink-cap-eyebrow">Best fit</div>
+          <h2>Built for routes global APIs miss.</h2>
+        </div>
+        <p>F-Link focuses on air paths where China distribution, regional ticketing, and bundled hotel-air operations matter more than broad global coverage.</p>
+      </div>
+
+      <div class="v2-flink-cap-list">
+        <div class="v2-flink-cap-item fade-up">
+          <div class="v2-flink-cap-no">01</div>
+          <div class="body">
+            <h3>Travelsky and GDS in one air layer</h3>
+            <p>F-Link integrates with China's primary air distribution path while keeping the GDS context TMCs already understand.</p>
+          </div>
+          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:plain-2-linear" width="14" height="14"></iconify-icon>F-Link</span>
+        </div>
+
+        <div class="v2-flink-cap-item fade-up">
+          <div class="v2-flink-cap-no">02</div>
+          <div class="body">
+            <h3>Single vendor for hotel and air</h3>
+            <p>For TMCs already on G-Link, adding F-Link is one commercial relationship, one developer surface, and one integration partnership, not a separate air vendor to negotiate, integrate, and operate.</p>
+          </div>
+          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:link-circle-linear" width="14" height="14"></iconify-icon>Bundle</span>
+        </div>
+
+        <div class="v2-flink-cap-item fade-up">
+          <div class="v2-flink-cap-no">03</div>
+          <div class="body">
+            <h3>Same three doors as G-Link</h3>
+            <p>Skills, API, or SDK through the Open Platform. The F-Link MCP surface is live today for AI-driven integration.</p>
+          </div>
+          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:layers-minimalistic-linear" width="14" height="14"></iconify-icon>Open Platform</span>
+        </div>
+
+        <div class="v2-flink-cap-item fade-up">
+          <div class="v2-flink-cap-no">04</div>
+          <div class="body">
+            <h3>One mid-office, hotel and air</h3>
+            <p>Air bookings flow into the same BMS that handles hotel mid-office events: cancellations, reschedules, traveler emergencies, refund flows. Not a second operational stack to staff and learn.</p>
+          </div>
+          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:settings-linear" width="14" height="14"></iconify-icon>Operations</span>
+        </div>
+
+        <div class="v2-flink-cap-item feature fade-up">
+          <div class="v2-flink-cap-no">05</div>
+          <div class="body">
+            <h3>Focused scope, early stage</h3>
+            <p>F-Link is early stage and intentionally focused. Investment scales first around China-routed flows and TMCs already using G-Link.</p>
+          </div>
+          <span class="v2-flink-cap-tag"><iconify-icon icon="solar:info-circle-linear" width="14" height="14"></iconify-icon>Status</span>
+        </div>
       </div>
     </div>
   </section>
@@ -2646,29 +2860,29 @@
   <section id="how-it-works" class="fcg-integration-section">
     <div class="fcg-integration-inner">
       <header class="fcg-integration-header fade-up">
-        <div class="fcg-integration-eyebrow">Three doors · Same backend</div>
-        <h2 class="fcg-integration-title"><span>Skills, API, or SDK.</span><br>Self-serve registration. Natural-language integration.</h2>
-        <p>The Open Platform exposes G-Link through three integration paths. Skills is the recommended default. A developer describes the integration in plain English. AI generates the code from FCG's live docs. API and SDK are both production-ready.</p>
+        <div class="fcg-integration-eyebrow">Integration</div>
+        <h2 class="fcg-integration-title"><span>Skills, API, or SDK.</span><br>Three ways into F-Link.</h2>
+        <p>The Open Platform exposes F-Link through the same three integration methods that serve G-Link and the TMC API. Skills is the recommended default, the F-Link MCP version of the API is exposed today for AI-driven integration. API and SDK remain fully supported.</p>
       </header>
 
       <div class="fcg-flow-grid fade-up">
         <div class="fcg-flow-step">
           <div class="fcg-flow-step-number">01</div>
           <h3>Skills · AI-native</h3>
-          <p>Paste a Skills command into your local AI tool. Describe the flow in plain English. The model reads our docs and writes the integration. Closer to one prompt than one project.</p>
-          <div class="code-tag">/skill fcg-glink</div>
+          <p>Paste a Skills command into your local AI tool. Describe the air search and booking flow in plain English. The model reads our docs and writes the integration against the F-Link MCP surface.</p>
+          <div class="code-tag">/skill fcg-flink</div>
         </div>
         <div class="fcg-flow-step">
           <div class="fcg-flow-step-number">02</div>
-          <h3>API · Versioned REST</h3>
-          <p>Traditional REST. V2 live. V3 in design, aligned to international standards. Full control for custom logic.</p>
-          <div class="code-tag">POST /v2/hotels/search</div>
+          <h3>API · MCP version</h3>
+          <p>F-Link MCP version of the API is exposed today. Traditional REST integration for full control. Next versioning to be announced as F-Link matures.</p>
+          <div class="code-tag">POST /flink/air/search</div>
         </div>
         <div class="fcg-flow-step">
           <div class="fcg-flow-step-number">03</div>
           <h3>SDK · Managed surface</h3>
-          <p>Typed primitives for search, rate resolution, booking, and mid-office events. Less boilerplate. Faster onboarding for standard stacks.</p>
-          <div class="code-tag">npm i @fcg/glink</div>
+          <p>Typed primitives for air search, pricing, booking, and ticketing. Less boilerplate, faster onboarding for standard stacks already running G-Link's SDK.</p>
+          <div class="code-tag">npm i @fcg/flink</div>
         </div>
       </div>
 
@@ -2677,116 +2891,579 @@
           <div class="fcg-code-dot"></div>
           <div class="fcg-code-dot"></div>
           <div class="fcg-code-dot"></div>
-          <span>glink-search.js</span>
+          <span>flink-search.js</span>
         </div>
-        <pre class="fcg-code-body"><code><span class="code-comment">// Search G-Link -- four supply buckets, one call</span>
-<span class="code-key">const</span> results <span class="code-punct">=</span> <span class="code-key">await</span> glink<span class="code-punct">.</span><span class="code-method">hotels</span><span class="code-punct">.</span><span class="code-method">search</span><span class="code-punct">({</span>
-  <span class="code-key">destination</span><span class="code-punct">:</span>          <span class="code-string">"HKG"</span><span class="code-punct">,</span>
-  <span class="code-key">checkIn</span><span class="code-punct">:</span>              <span class="code-string">"2026-06-15"</span><span class="code-punct">,</span>
-  <span class="code-key">checkOut</span><span class="code-punct">:</span>             <span class="code-string">"2026-06-18"</span><span class="code-punct">,</span>
-  <span class="code-key">guests</span><span class="code-punct">:</span>               <span class="code-number">2</span><span class="code-punct">,</span>
-  <span class="code-key">preferCorporateRate</span><span class="code-punct">:</span>  <span class="code-key">true</span><span class="code-punct">,</span>
-  <span class="code-key">supply</span><span class="code-punct">:</span>               <span class="code-punct">[</span><span class="code-string">"gds"</span><span class="code-punct">,</span> <span class="code-string">"direct"</span><span class="code-punct">,</span> <span class="code-string">"bedbank"</span><span class="code-punct">,</span> <span class="code-string">"asia"</span><span class="code-punct">]</span>
+        <pre class="fcg-code-body"><code><span class="code-comment">// Search F-Link -- China-routed air, bundled with G-Link</span>
+<span class="code-key">const</span> results <span class="code-punct">=</span> <span class="code-key">await</span> flink<span class="code-punct">.</span><span class="code-method">air</span><span class="code-punct">.</span><span class="code-method">search</span><span class="code-punct">({</span>
+  <span class="code-key">origin</span><span class="code-punct">:</span>        <span class="code-string">"PVG"</span><span class="code-punct">,</span>
+  <span class="code-key">destination</span><span class="code-punct">:</span>   <span class="code-string">"HKG"</span><span class="code-punct">,</span>
+  <span class="code-key">departDate</span><span class="code-punct">:</span>    <span class="code-string">"2026-06-15"</span><span class="code-punct">,</span>
+  <span class="code-key">returnDate</span><span class="code-punct">:</span>    <span class="code-string">"2026-06-18"</span><span class="code-punct">,</span>
+  <span class="code-key">passengers</span><span class="code-punct">:</span>    <span class="code-number">1</span><span class="code-punct">,</span>
+  <span class="code-key">supply</span><span class="code-punct">:</span>        <span class="code-punct">[</span><span class="code-string">"travelsky"</span><span class="code-punct">,</span> <span class="code-string">"zhifei"</span><span class="code-punct">],</span>
+  <span class="code-key">bundleWith</span><span class="code-punct">:</span>    <span class="code-string">"glink"</span>
 <span class="code-punct">});</span>
 
-<span class="code-comment">// 1,247 properties. RFP rates resolved. Deduplicated. Bookable.</span>
-console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>properties<span class="code-punct">.</span>length<span class="code-punct">);</span>     <span class="code-comment">// 1247</span>
-console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>corporateRatesHit<span class="code-punct">);</span>  <span class="code-comment">// 412</span>
-console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>buckets<span class="code-punct">);</span>             <span class="code-comment">// ["gds","direct","bedbank","asia"]</span></code></pre>
+<span class="code-comment">// Travelsky-routed. Shared BMS with G-Link.</span>
+console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>itineraries<span class="code-punct">.</span>length<span class="code-punct">);</span>   <span class="code-comment">// 38</span>
+console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>routedVia<span class="code-punct">);</span>           <span class="code-comment">// "travelsky"</span>
+console<span class="code-punct">.</span><span class="code-method">log</span><span class="code-punct">(</span>results<span class="code-punct">.</span>bundleEligible<span class="code-punct">);</span>      <span class="code-comment">// true</span></code></pre>
       </div>
     </div>
   </section>
 
-  <section id="supply-buckets" class="px-6 md:px-12 py-28 bg-[#000] border-t border-white/10">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 fade-up">
+  <!-- ===== LIVE PVG ROUTES PREVIEW ===== -->
+  <section id="flink-routes" style="position:relative;background:#050505;color:#fff;padding:6.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);overflow:hidden;">
+    <style>
+      .v2-flink-routes { max-width: 80rem; margin: 0 auto; position: relative; z-index: 1; }
+      .v2-flink-routes-glow { position:absolute; top:-15%; left:-10%; width: 45rem; height: 45rem; pointer-events:none; background: radial-gradient(circle, rgba(14,165,233,.12), transparent 60%); filter: blur(60px); }
+      .v2-flink-routes-head { display:grid; grid-template-columns: minmax(0,1fr) auto; gap: 2rem; align-items: end; margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+      @media (max-width: 820px) { .v2-flink-routes-head { grid-template-columns: 1fr; gap: 1.25rem; align-items: flex-start; } }
+      .v2-flink-routes-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; color: rgba(255,255,255,.55); text-transform: uppercase; margin-bottom: 1rem; }
+      .v2-flink-routes-eyebrow::before { content:""; width: 1.6rem; height: 1px; background: rgba(255,255,255,.3); }
+      .v2-flink-routes-head h2 { color:#fff; font-size: clamp(2rem, 3.2vw, 2.65rem); font-weight: 500; letter-spacing:-.018em; line-height: 1.1; margin: 0 0 .85rem; max-width: 36rem; }
+      .v2-flink-routes-head p { color: rgba(255,255,255,.62); font-size: 1rem; line-height: 1.6; margin: 0; max-width: 32rem; }
+      .v2-flink-routes-live { display:inline-flex; align-items:center; gap:.55rem; padding: .55rem .95rem; border-radius: 9999px; background: rgba(34,197,94,.1); color: #22c55e; font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing:.06em; text-transform: uppercase; white-space: nowrap; }
+      .v2-flink-routes-live::before { content:""; width:7px; height:7px; border-radius:9999px; background:#22c55e; box-shadow: 0 0 12px rgba(34,197,94,.8); animation: pulse-dot 2s ease-in-out infinite; }
+      @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+
+      .v2-flink-routes-grid { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+      @media (max-width: 980px) { .v2-flink-routes-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 640px) { .v2-flink-routes-grid { grid-template-columns: 1fr; } }
+
+      .v2-flink-route-card { position:relative; border: 1px solid rgba(255,255,255,.1); border-radius: 20px; background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.012)); padding: 1.5rem 1.5rem 1.35rem; display: flex; flex-direction: column; gap: 1.1rem; transition: border-color 220ms ease, transform 220ms ease, background 220ms ease; }
+      .v2-flink-route-card:hover { border-color: rgba(249,115,22,.35); transform: translateY(-2px); }
+      .v2-flink-route-card.featured { border-color: rgba(249,115,22,.32); background: linear-gradient(180deg, rgba(249,115,22,.08), rgba(255,255,255,.012)); }
+      .v2-flink-route-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: .85rem; border-bottom: 1px dashed rgba(255,255,255,.1); }
+      .v2-flink-route-head .v2-flink-route-id { font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.06em; color: rgba(255,255,255,.5); text-transform: uppercase; }
+      .v2-flink-route-head .v2-flink-route-status { display:inline-flex; align-items:center; gap:.4rem; font-family:'JetBrains Mono', monospace; font-size: 10px; letter-spacing:.06em; color: #22c55e; text-transform: uppercase; }
+      .v2-flink-route-head .v2-flink-route-status::before { content:""; width:5px; height:5px; border-radius:9999px; background:#22c55e; box-shadow: 0 0 8px rgba(34,197,94,.7); }
+      .v2-flink-route-card.featured .v2-flink-route-status { color: #fb923c; }
+      .v2-flink-route-card.featured .v2-flink-route-status::before { background: #fb923c; box-shadow: 0 0 8px rgba(249,115,22,.7); }
+
+      .v2-flink-route-airports { display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap: 1rem; }
+      .v2-flink-route-port strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 1.65rem; font-weight: 400; letter-spacing:.04em; line-height: 1; }
+      .v2-flink-route-port span { display:block; margin-top:.3rem; color: rgba(255,255,255,.5); font-size: 9.5px; letter-spacing:.12em; text-transform: uppercase; }
+      .v2-flink-route-port.dest { text-align: right; }
+      .v2-flink-route-line { position:relative; height: 22px; }
+      .v2-flink-route-line::before { content:""; position:absolute; left:0; right:0; top:50%; border-top: 1px dashed rgba(255,255,255,.2); }
+      .v2-flink-route-line iconify-icon { position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); color:#fb923c; background:#050505; padding: 0 .35rem; font-size: 16px; }
+      .v2-flink-route-card.featured .v2-flink-route-line iconify-icon { background: #1a0f08; }
+
+      .v2-flink-route-meta { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+      .v2-flink-route-meta-item { font-family:'JetBrains Mono', monospace; }
+      .v2-flink-route-meta-item .k { display:block; color: rgba(255,255,255,.4); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .2rem; }
+      .v2-flink-route-meta-item .v { color: #fff; font-size: .82rem; font-weight: 500; letter-spacing: .02em; }
+
+      .v2-flink-route-supply { display:flex; flex-wrap: wrap; gap: .4rem; }
+      .v2-flink-route-supply span { display:inline-flex; align-items:center; gap:.35rem; padding: .3rem .55rem; border-radius: 6px; background: rgba(249,115,22,.1); color: #fb923c; font-family:'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase; }
+      .v2-flink-route-supply span.muted { background: rgba(255,255,255,.05); color: rgba(255,255,255,.55); }
+
+      .v2-flink-routes-foot { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center; padding-top: 1.75rem; border-top: 1px dashed rgba(255,255,255,.1); }
+      .v2-flink-routes-foot p { color: rgba(255,255,255,.55); font-size: .9rem; line-height: 1.55; margin: 0; max-width: 38rem; }
+      .v2-flink-routes-foot p em { color: #fb923c; font-style: normal; font-weight: 500; }
+      .v2-flink-routes-foot a { display:inline-flex; align-items:center; gap:.5rem; padding: .8rem 1.3rem; border-radius: 9999px; background: rgba(255,255,255,.06); color: #fff; border: 1px solid rgba(255,255,255,.14); font-size: 13px; font-weight: 500; white-space: nowrap; transition: border-color 180ms ease; }
+      .v2-flink-routes-foot a:hover { border-color: rgba(255,255,255,.3); }
+
+      html[data-theme="light"] #flink-routes { background: #ffffff; border-top-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-routes-glow { opacity: .35; }
+      html[data-theme="light"] .v2-flink-routes-head { border-bottom-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-routes-head h2 { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-routes-head p,
+      html[data-theme="light"] .v2-flink-routes-eyebrow { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-route-card { background: #fff; border-color: #e5e7eb; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+      html[data-theme="light"] .v2-flink-route-card:hover { border-color: rgba(249,115,22,.4); }
+      html[data-theme="light"] .v2-flink-route-card.featured { background: linear-gradient(180deg, rgba(249,115,22,.07), #fff 80%); border-color: rgba(249,115,22,.4); }
+      html[data-theme="light"] .v2-flink-route-head { border-bottom-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-route-head .v2-flink-route-id { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-route-port strong { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-route-port span { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-route-line::before { border-top-color: #d1d5db; }
+      html[data-theme="light"] .v2-flink-route-line iconify-icon { background: #fff; }
+      html[data-theme="light"] .v2-flink-route-card.featured .v2-flink-route-line iconify-icon { background: #fff8f1; }
+      html[data-theme="light"] .v2-flink-route-meta-item .k { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-route-meta-item .v { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-route-supply span.muted { background: #f3f4f6; color: #4b5563; }
+      html[data-theme="light"] .v2-flink-routes-foot { border-top-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-routes-foot p { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-routes-foot a { background: #f3f4f6; color: #0f1114; border-color: #e5e7eb; }
+    </style>
+
+    <div class="v2-flink-routes-glow" aria-hidden="true"></div>
+
+    <div class="v2-flink-routes">
+      <header class="v2-flink-routes-head fade-up">
         <div>
-          <div class="product-kicker text-xs text-orange-500 mb-4">Supply · Buckets</div>
-          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Four buckets. One pipe.</h2>
+          <div class="v2-flink-routes-eyebrow">Sandbox routes</div>
+          <h2>China and APAC route examples.</h2>
+          <p>A sample of China-anchored air paths running through the F-Link MCP surface, with Travelsky and global GDS context behind the flow.</p>
         </div>
-        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Each bucket plays a different role. The combination is the moat. It's what every TMC actually buys when they integrate G-Link.</p>
+        <span class="v2-flink-routes-live">F-Link · Live routing</span>
+      </header>
+
+      <div class="v2-flink-routes-grid">
+        <article class="v2-flink-route-card featured fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 4F · 06:55 → 09:40</span>
+            <span class="v2-flink-route-status">Featured</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PVG</strong><span>Shanghai</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>HKG</strong><span>Hong Kong</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">2h 45m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">CX · CA · MU</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span>Amadeus</span>
+            <span class="muted">G-Link bundle</span>
+          </div>
+        </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 8F · 08:20 → 12:55</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PVG</strong><span>Shanghai</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>NRT</strong><span>Tokyo</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">3h 35m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">JL · MU · NH</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span class="muted">APAC outbound</span>
+          </div>
+        </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 12F · 14:10 → 19:25</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PVG</strong><span>Shanghai</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>SIN</strong><span>Singapore</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">5h 15m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">SQ · MU · CA</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span class="muted">APAC outbound</span>
+          </div>
+        </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 21F · 09:35 → 11:15</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PEK</strong><span>Beijing</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>PVG</strong><span>Shanghai</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">2h 20m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">CA · MU · CZ</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span>Travelport</span>
+            <span class="muted">China domestic</span>
+          </div>
+        </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 33F · 23:50 → 03:25+1</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PVG</strong><span>Shanghai</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>BKK</strong><span>Bangkok</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">5h 35m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">TG · MU · 9C</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span class="muted">APAC outbound</span>
+          </div>
+        </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 45F · 11:40 → 15:10</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>CAN</strong><span>Guangzhou</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>KUL</strong><span>Kuala Lumpur</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">4h 30m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">MH · CZ · AK</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span class="muted">APAC outbound</span>
+          </div>
+        </article>
       </div>
 
-      <div class="fcg-flow-grid fade-up" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">A</div>
-          <h3>The only channel that carries corporate rates.</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">RFP-negotiated rates do not pass through wholesale. For any large corporate, ~70% of bookings live here. Direct GDS integrations carry the rate types that disqualify every B2B wholesaler from serving corporate travel.</p>
-          <div class="code-tag">Bucket A · GDS Direct · Sabre · Amadeus · Travelport</div>
-        </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">B</div>
-          <h3>The shortest accountability chain.</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Direct contracts, channel managers, and GDS-connected hotel paths. The second path for corporate-negotiated rates. The most reliable channel in the stack when something goes wrong.</p>
-          <div class="code-tag">Bucket B · Direct Hotel &amp; NDC · Sabre · Amadeus · Travelport</div>
-        </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">C</div>
-          <h3>Long-tail coverage. Not the moat.</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Leisure-grade breadth for the long tail of properties not addressable elsewhere. Necessary for coverage. Wholesalers cannot deliver corporate-negotiated rates, and re-routing chains drop accountability. Included for breadth. Never sold as the value.</p>
-          <div class="code-tag">Bucket C · Bedbank coverage · Sabre · Amadeus · Travelport context</div>
-        </div>
-
-        <div class="fcg-flow-step" style="text-align:left;border:1px solid rgba(249,115,22,0.3);background:linear-gradient(180deg,rgba(249,115,22,0.06),rgba(5,5,5,0.92));">
-          <div class="fcg-flow-step-number">D</div>
-          <h3>The bucket no global player can match.</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Chinese hotel chains, GDS context, and Asia-specialty connections. Built from inside the region. Not retrofitted from outside. China = <span style="color:#fb923c;">58%</span> of Asia travel. The most durable advantage in the stack.</p>
-          <div class="code-tag">Bucket D · China &amp; Asia Direct · Sabre · Amadeus · Travelport</div>
-        </div>
+      <div class="v2-flink-routes-foot fade-up">
+        <p>A representative slice of China-anchored paths is available in the sandbox today. Full coverage map and supplier matrix are available in the developer portal.</p>
+        <a href="#getting-started"><iconify-icon icon="solar:test-tube-linear" width="16" height="16"></iconify-icon>Test these routes in sandbox</a>
       </div>
     </div>
   </section>
-  <section class="fcg-marketing-section" aria-label="Common questions from TMC evaluation teams">
+
+  <section id="supply-buckets" class="fcg-marketing-section">
     <div class="fcg-marketing-inner" style="max-width:72rem;">
       <header class="fcg-marketing-header fade-up">
-        <div class="fcg-marketing-eyebrow">For TMC eval teams</div>
-        <h2 class="fcg-marketing-title">The three questions <span>every TMC asks before integrating.</span></h2>
+        <div class="fcg-marketing-eyebrow">Air · Paths</div>
+        <h2 class="fcg-marketing-title">Where F-Link <span>fits.</span></h2>
+        <p>F-Link is not a global air breadth play. It fits China-routed flows, APAC exposure, and TMCs that already use G-Link.</p>
       </header>
 
-      <div class="fcg-marketing-features fade-up">
+      <div class="fcg-marketing-features fade-up" style="grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem 4rem;">
         <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"We already use another wholesaler."</div>
-          <h3>Wholesalers give you leisure inventory. They cannot carry corporate-negotiated rates.</h3>
-          <p>RFP rates only flow through GDS and direct hotel. For a large corporate, that is roughly 70% of booking volume unreachable through wholesale. G-Link adds the corporate-rate layer wholesalers structurally cannot deliver.</p>
+          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
+            <iconify-icon icon="solar:plain-2-linear" width="18" height="18"></iconify-icon>
+            Path A · Travelsky / GDS
+          </div>
+          <h3>Where global air APIs hand off</h3>
+          <p>Travelsky is the gatekeeper of Chinese air ticket distribution, structurally not addressable from outside Asia without local relationships. F-Link integrates directly through the Travelsky path, with front-end consistency between FCG's CBT and the broader GDS environment.</p>
+          <p style="margin-top:1rem;color:rgba(255,255,255,.4)!important;font-size:.9rem;line-height:1.6;">Travelsky · Sabre · Amadeus · Travelport · Unified CBT consumes F-Link directly · Internal TC operators routed through F-Link.</p>
         </article>
+
         <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"We already use another travel platform."</div>
-          <h3>Most large TMCs multiplex APIs. The real question is your Asia exposure.</h3>
-          <p>If China sits in your client mix, your current API may have a gap G-Link is built to close. G-Link combines Chinese hotel chains with Sabre, Amadeus, Travelport, direct hotel, and channel-manager connections. China is 58% of Asia travel and no global player has comparable depth.</p>
+          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
+            <iconify-icon icon="solar:global-linear" width="18" height="18"></iconify-icon>
+            Path B · China outbound &amp; APAC
+          </div>
+          <h3>Routes anchored in Asia</h3>
+          <p>China outbound and intra-APAC routes are the structural reason F-Link exists. Travelsky, local ticketing norms, and regional commercial relationships are hard to retrofit from outside.</p>
+          <p style="margin-top:1rem;color:rgba(255,255,255,.4)!important;font-size:.9rem;line-height:1.6;">China domestic + outbound · APAC routes with regional carriers · Local payment, currency, ticketing native.</p>
         </article>
+
         <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"Our dev team is already stretched thin."</div>
-          <h3>Skills lets a new developer integrate without talking to FCG.</h3>
-          <p>Three integration paths share the same backend. Skills (AI-native, natural-language), API (versioned REST), and SDK (managed surface). A new developer can ship the first working search call without talking to FCG. No human handoff required to start.</p>
+          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
+            <iconify-icon icon="solar:link-circle-linear" width="18" height="18"></iconify-icon>
+            Path C · Co-routed with G-Link
+          </div>
+          <h3>One vendor for hotel and air</h3>
+          <p>For TMCs already integrating G-Link, F-Link is the simplest path to single-vendor coverage. Same Open Platform, same developer surface, same BMS for cancellations, reschedules, and traveler emergencies, air and hotel handled in one operational stack.</p>
+          <p style="margin-top:1rem;color:rgba(255,255,255,.4)!important;font-size:.9rem;line-height:1.6;">Single commercial relationship · Shared BMS · Same three doors as G-Link.</p>
+        </article>
+
+        <article class="fcg-marketing-feature">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
+            <iconify-icon icon="solar:map-arrow-up-linear" width="18" height="18"></iconify-icon>
+            Path D · Air partners roadmap
+          </div>
+          <h3>Clear about what is next</h3>
+          <p>F-Link is early stage. Additional air partners are added as they ship, with China-routed demand first and broader regional depth second.</p>
+          <p style="margin-top:1rem;color:rgba(255,255,255,.4)!important;font-size:.9rem;line-height:1.6;">MCP version exposed, next versioning TBA · Documented as shipped, no promised inventory · Default air layer for AI booking agents in Asia.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="fcg-integration-section" aria-label="Commercial model">
-    <div class="fcg-integration-inner">
-      <header class="fcg-integration-header fade-up">
-        <div class="fcg-integration-eyebrow">Commercial model</div>
-        <h2 class="fcg-integration-title"><span>Clear packaging,</span><br>not contact-sales gates.</h2>
-        <p>Standardized commercial structure across the API. No "contact sales" gate to qualify. Tiered by product surface: G-Link only, full OBT suite, white-label, or RFP delivery support.</p>
+  <!-- ===== SCOPE CLARITY · BUILT FOR / NOT BUILT FOR ===== -->
+  <section id="flink-scope" class="fcg-marketing-section" style="padding: 7rem 1.5rem;">
+    <style>
+      .v2-flink-scope { max-width: 72rem; margin: 0 auto; }
+      .v2-flink-scope-head { max-width: 44rem; margin-bottom: 3.5rem; }
+      .v2-flink-scope-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing:.12em; color: rgba(255,255,255,.55); text-transform: uppercase; margin-bottom: 1rem; }
+      .v2-flink-scope-eyebrow::before { content:""; width: 1.6rem; height: 1px; background: rgba(255,255,255,.3); }
+      .v2-flink-scope h2 { color:#fff; font-size: clamp(2rem, 3.2vw, 2.65rem); font-weight: 500; letter-spacing:-.018em; line-height: 1.1; margin: 0 0 1rem; }
+      .v2-flink-scope p.lede { color: rgba(255,255,255,.62); font-size: 1.02rem; line-height: 1.6; margin: 0; }
+      .v2-flink-scope-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+      @media (max-width: 820px) { .v2-flink-scope-grid { grid-template-columns: 1fr; } }
+      .v2-flink-scope-card { border: 1px solid rgba(255,255,255,.1); border-radius: 22px; padding: 2.25rem 2rem; background: rgba(255,255,255,.02); }
+      .v2-flink-scope-card.yes { border-color: rgba(249,115,22,.32); background: linear-gradient(160deg, rgba(249,115,22,.07), rgba(255,255,255,.015)); }
+      .v2-flink-scope-card-head { display:flex; align-items:center; gap:.7rem; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px dashed rgba(255,255,255,.12); }
+      .v2-flink-scope-card-head iconify-icon { font-size: 1.5rem; }
+      .v2-flink-scope-card.yes .v2-flink-scope-card-head iconify-icon { color: #fb923c; }
+      .v2-flink-scope-card.no .v2-flink-scope-card-head iconify-icon { color: rgba(255,255,255,.45); }
+      .v2-flink-scope-card-head strong { font-family:'Inter',sans-serif; font-size: 1.05rem; font-weight: 500; color:#fff; letter-spacing: -.005em; }
+      .v2-flink-scope-card.no .v2-flink-scope-card-head strong { color: rgba(255,255,255,.7); }
+      .v2-flink-scope-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: 1rem; }
+      .v2-flink-scope-list li { display:grid; grid-template-columns: 1.1rem 1fr; gap: .85rem; align-items: flex-start; color: rgba(255,255,255,.78); font-size: .98rem; line-height: 1.45; }
+      .v2-flink-scope-list li iconify-icon { margin-top: .2rem; font-size: 1rem; }
+      .v2-flink-scope-card.yes .v2-flink-scope-list li iconify-icon { color: #fb923c; }
+      .v2-flink-scope-card.no .v2-flink-scope-list li { color: rgba(255,255,255,.5); }
+      .v2-flink-scope-card.no .v2-flink-scope-list li iconify-icon { color: rgba(255,255,255,.4); }
+      .v2-flink-scope-list li strong { color:#fff; font-weight: 500; }
+      .v2-flink-scope-card.no .v2-flink-scope-list li strong { color: rgba(255,255,255,.7); }
+      html[data-theme="light"] .v2-flink-scope h2 { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-scope p.lede,
+      html[data-theme="light"] .v2-flink-scope-eyebrow { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-scope-card { background: #fff; border-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-scope-card.yes { background: linear-gradient(160deg, rgba(249,115,22,.07), #ffffff 60%); border-color: rgba(249,115,22,.4); }
+      html[data-theme="light"] .v2-flink-scope-card-head { border-bottom-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-scope-card-head strong { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-scope-card.no .v2-flink-scope-card-head strong { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-scope-list li { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-scope-list li strong { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-scope-card.no .v2-flink-scope-list li { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-scope-card.no .v2-flink-scope-list li strong { color: #4b5563; }
+    </style>
+    <div class="v2-flink-scope">
+      <div class="v2-flink-scope-head fade-up">
+        <div class="v2-flink-scope-eyebrow">Scope</div>
+        <h2>Focused by design.</h2>
+        <p class="lede">A fast disqualifier before you book time. F-Link earns its weight where global air APIs hand off, and as the air layer for TMCs already on G-Link. Everywhere else, we'll be honest about it.</p>
+      </div>
+
+      <div class="v2-flink-scope-grid">
+        <div class="v2-flink-scope-card yes fade-up">
+          <div class="v2-flink-scope-card-head">
+            <iconify-icon icon="solar:check-circle-bold"></iconify-icon>
+            <strong>F-Link is built for</strong>
+          </div>
+          <ul class="v2-flink-scope-list">
+            <li><iconify-icon icon="solar:plain-2-linear"></iconify-icon><span><strong>TMCs with Asia or China-route exposure:</strong> domestic, outbound, or APAC with regional carriers.</span></li>
+            <li><iconify-icon icon="solar:link-circle-linear"></iconify-icon><span><strong>TMCs already on G-Link</strong> who want air through the same vendor, contract, and mid-office.</span></li>
+            <li><iconify-icon icon="solar:cpu-bolt-linear"></iconify-icon><span><strong>Teams building AI booking agents</strong> that need Travelsky-routed air via the MCP API surface.</span></li>
+            <li><iconify-icon icon="solar:routing-2-linear"></iconify-icon><span><strong>TMCs where Travelsky access is the gap</strong> their current global API can't close.</span></li>
+          </ul>
+        </div>
+
+        <div class="v2-flink-scope-card no fade-up">
+          <div class="v2-flink-scope-card-head">
+            <iconify-icon icon="solar:close-circle-linear"></iconify-icon>
+            <strong>F-Link is not built for</strong>
+          </div>
+          <ul class="v2-flink-scope-list">
+            <li><iconify-icon icon="solar:minus-circle-linear"></iconify-icon><span><strong>Global all-route coverage as the headline.</strong> If China and APAC aren't in your route mix, F-Link won't be the biggest lever you can pull today.</span></li>
+            <li><iconify-icon icon="solar:minus-circle-linear"></iconify-icon><span><strong>Leisure-first OTAs.</strong> F-Link routes corporate-travel-grade air. Wrong shape of customer.</span></li>
+            <li><iconify-icon icon="solar:minus-circle-linear"></iconify-icon><span><strong>US-domestic-only TMCs with no Asia exposure.</strong> Your existing global air API will outperform us on those lanes.</span></li>
+            <li><iconify-icon icon="solar:minus-circle-linear"></iconify-icon><span><strong>"Replace everything" projects.</strong> F-Link augments. Most TMCs multiplex air APIs, that's how we expect to be deployed.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OBJECTION-HANDLING FAQ ===== -->
+  <section id="flink-faq" class="v2-flink-faq" aria-labelledby="v2-flink-faq-title">
+    <style>
+      .v2-flink-faq { position: relative; background: #050505; color: #fff; padding: 7rem 1.5rem 8rem; border-top: 1px solid rgba(255,255,255,.08); }
+      .v2-flink-faq-inner { max-width: 64rem; margin: 0 auto; }
+      .v2-flink-faq-head { max-width: 44rem; margin: 0 auto 4rem; text-align: center; }
+      .v2-flink-faq-eyebrow { font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; color: rgba(255,255,255,.55); text-transform: uppercase; margin-bottom: 1rem; }
+      .v2-flink-faq-head h2 { color:#fff; font-size: clamp(2rem, 3.2vw, 2.65rem); font-weight: 500; letter-spacing:-.018em; line-height: 1.1; margin: 0 0 1rem; }
+      .v2-flink-faq-head p { color: rgba(255,255,255,.62); font-size: 1.02rem; line-height: 1.6; margin: 0; }
+      .v2-flink-faq-list { max-width: 56rem; margin: 0 auto; border-top: 1px solid rgba(255,255,255,.1); }
+      .v2-flink-faq-item { border-bottom: 1px solid rgba(255,255,255,.1); }
+      .v2-flink-faq-trigger { width: 100%; background: transparent; border: 0; padding: 1.75rem 0; display: grid; grid-template-columns: 3rem 1fr 1.5rem; gap: 1.25rem; align-items: baseline; cursor: pointer; text-align: left; font-family: inherit; color: #fff; transition: color 150ms cubic-bezier(0.4,0,0.2,1); }
+      .v2-flink-faq-num { font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: rgba(255,255,255,.5); letter-spacing: .05em; padding-top: .3rem; }
+      .v2-flink-faq-q { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 500; line-height: 1.4; letter-spacing: -.01em; color: #fff; margin: 0; transition: color 150ms ease; }
+      .v2-flink-faq-trigger:hover .v2-flink-faq-q { color: #fb923c; }
+      .v2-flink-faq-chev { width: 16px; height: 16px; color: rgba(255,255,255,.55); transition: transform 150ms ease, color 150ms ease; justify-self: end; align-self: center; }
+      .v2-flink-faq-item[data-open="true"] .v2-flink-faq-chev { transform: rotate(180deg); color: #fb923c; }
+      .v2-flink-faq-panel { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 300ms cubic-bezier(0.4,0,0.2,1), opacity 150ms ease; }
+      .v2-flink-faq-item[data-open="true"] .v2-flink-faq-panel { opacity: 1; }
+      .v2-flink-faq-panel-inner { display: grid; grid-template-columns: 3rem 1fr 1.5rem; gap: 1.25rem; padding: 0 0 1.75rem; }
+      .v2-flink-faq-a { font-size: .95rem; line-height: 1.65; color: rgba(255,255,255,.66); margin: 0; max-width: 40rem; }
+      .v2-flink-faq-a em { color: #fb923c; font-weight: 500; font-style: normal; }
+      .v2-flink-faq-a p + p { margin-top: .75rem; }
+      .v2-flink-faq-foot { max-width: 56rem; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,.1); display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; justify-content: space-between; }
+      .v2-flink-faq-prompt { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 500; color: #fff; letter-spacing: -.005em; margin: 0; }
+      .v2-flink-faq-prompt::before { content: "> "; color: rgba(255,255,255,.5); font-family: 'JetBrains Mono', monospace; font-weight: 400; }
+      .v2-flink-faq-actions { display: flex; gap: .65rem; flex-wrap: wrap; }
+      .v2-flink-faq-btn { font-family: inherit; font-size: 14px; font-weight: 500; border-radius: 9999px; border: 0; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; padding: .9rem 1.5rem; transition: background 150ms ease, transform 150ms ease; }
+      .v2-flink-faq-btn-primary { background: #fff; color: #0a0a0a; }
+      .v2-flink-faq-btn-primary:hover { transform: scale(1.02); }
+      .v2-flink-faq-btn-secondary { background: rgba(255,255,255,.06); color: #fff; border: 1px solid rgba(255,255,255,.14); }
+      .v2-flink-faq-btn-secondary:hover { border-color: rgba(255,255,255,.3); }
+      @media (max-width: 768px) {
+        .v2-flink-faq { padding: 5rem 1.25rem 6rem; }
+        .v2-flink-faq-trigger, .v2-flink-faq-panel-inner { grid-template-columns: 2.25rem 1fr 1.25rem; gap: .85rem; }
+        .v2-flink-faq-foot { flex-direction: column; align-items: flex-start; }
+      }
+      html[data-theme="light"] .v2-flink-faq { background: #ffffff; color: #0f1114; border-top-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-faq-head h2 { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-faq-head p,
+      html[data-theme="light"] .v2-flink-faq-eyebrow { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-faq-list { border-top-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-faq-item { border-bottom-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-faq-q { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-faq-num { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-faq-chev { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-faq-a { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-faq-foot { border-top-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-faq-prompt { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-faq-btn-primary { background: #0f1114; color: #fff; }
+      html[data-theme="light"] .v2-flink-faq-btn-secondary { background: rgba(0,0,0,.06); color: #0f1114; border-color: rgba(0,0,0,.1); }
+    </style>
+    <div class="v2-flink-faq-inner">
+      <header class="v2-flink-faq-head fade-up">
+        <div class="v2-flink-faq-eyebrow">FAQ · Common objections</div>
+        <h2 id="v2-flink-faq-title">Common F-Link questions.</h2>
+        <p>Clear answers on scope, reliability, integration, and fit.</p>
       </header>
 
-      <div class="fcg-pricing-rows fade-up">
-        <article>
-          <div class="fcg-pricing-label">One-time setup</div>
-          <div class="fcg-pricing-value">Scoped by launch needs</div>
-          <div class="fcg-pricing-sub">Covers supplier activation, sandbox onboarding, and integration support.</div>
+      <div class="v2-flink-faq-list" role="list">
+        <article class="v2-flink-faq-item" data-open="true" role="listitem">
+          <button class="v2-flink-faq-trigger" aria-expanded="true" aria-controls="v2-flink-faq-p1" id="v2-flink-faq-t1">
+            <span class="v2-flink-faq-num">01</span>
+            <h3 class="v2-flink-faq-q">Is F-Link mature enough to use?</h3>
+            <svg class="v2-flink-faq-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="v2-flink-faq-panel" id="v2-flink-faq-p1" role="region" aria-labelledby="v2-flink-faq-t1">
+            <div class="v2-flink-faq-panel-inner">
+              <div></div>
+              <div>
+                <p class="v2-flink-faq-a">The team shipping air features is two people. The infrastructure they ship onto isn't. F-Link rides the same Open Platform, mid-office, and operational stack as G-Link, which is in full production at TMC scale today.</p>
+                <p class="v2-flink-faq-a"><em>Treat F-Link as a focused extension of a mature platform</em>, not as a standalone startup. We're explicit about scope so you can size the bet honestly.</p>
+              </div>
+              <div></div>
+            </div>
+          </div>
         </article>
-        <article>
-          <div class="fcg-pricing-label">Monthly subscription</div>
-          <div class="fcg-pricing-value">Tiered by product scope</div>
-          <div class="fcg-pricing-sub">Tiered by product scope. G-Link only sits at the lower end of the range.</div>
+
+        <article class="v2-flink-faq-item" role="listitem">
+          <button class="v2-flink-faq-trigger" aria-expanded="false" aria-controls="v2-flink-faq-p2" id="v2-flink-faq-t2">
+            <span class="v2-flink-faq-num">02</span>
+            <h3 class="v2-flink-faq-q">How are SLA and booking issues handled?</h3>
+            <svg class="v2-flink-faq-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="v2-flink-faq-panel" id="v2-flink-faq-p2" role="region" aria-labelledby="v2-flink-faq-t2">
+            <div class="v2-flink-faq-panel-inner">
+              <div></div>
+              <div>
+                <p class="v2-flink-faq-a">Air bookings flow into the same mid-office that runs hotel events for G-Link: cancellations, reschedules, refund flows, and traveler emergencies. <em>One operational stack, one escalation path</em>, staffed by the same operators who handle hotel today.</p>
+                <p class="v2-flink-faq-a">SLA terms are scoped per deployment. Ask in the demo, we'll show G-Link's production numbers as the reference floor.</p>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="v2-flink-faq-item" role="listitem">
+          <button class="v2-flink-faq-trigger" aria-expanded="false" aria-controls="v2-flink-faq-p3" id="v2-flink-faq-t3">
+            <span class="v2-flink-faq-num">03</span>
+            <h3 class="v2-flink-faq-q">How long does integration actually take?</h3>
+            <svg class="v2-flink-faq-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="v2-flink-faq-panel" id="v2-flink-faq-p3" role="region" aria-labelledby="v2-flink-faq-t3">
+            <div class="v2-flink-faq-panel-inner">
+              <div></div>
+              <div>
+                <p class="v2-flink-faq-a">Skills integration is the fastest path: paste a Skills command into your local AI tool, describe the air flow in natural language, the model writes against the F-Link MCP surface. Working prototype <em>in hours, not weeks</em>.</p>
+                <p class="v2-flink-faq-a">For traditional API or SDK integrations, a sandbox-to-production cutover is typically <em>2–6 weeks</em> depending on your booking pipeline. TMCs already on G-Link cut that roughly in half: same auth, same Open Platform login, same docs surface.</p>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="v2-flink-faq-item" role="listitem">
+          <button class="v2-flink-faq-trigger" aria-expanded="false" aria-controls="v2-flink-faq-p4" id="v2-flink-faq-t4">
+            <span class="v2-flink-faq-num">04</span>
+            <h3 class="v2-flink-faq-q">What if my routes aren't China-heavy?</h3>
+            <svg class="v2-flink-faq-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="v2-flink-faq-panel" id="v2-flink-faq-p4" role="region" aria-labelledby="v2-flink-faq-t4">
+            <div class="v2-flink-faq-panel-inner">
+              <div></div>
+              <div>
+                <p class="v2-flink-faq-a">Then F-Link probably isn't the biggest lever you can pull today, and we'll tell you that in the demo. <em>F-Link doesn't try to compete on global air breadth.</em></p>
+                <p class="v2-flink-faq-a">Two cases where it still makes sense: (1) you're already on G-Link and want air through one commercial relationship, or (2) any portion of your client mix touches China or APAC and your current global API hands those routes off poorly.</p>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="v2-flink-faq-item" role="listitem">
+          <button class="v2-flink-faq-trigger" aria-expanded="false" aria-controls="v2-flink-faq-p5" id="v2-flink-faq-t5">
+            <span class="v2-flink-faq-num">05</span>
+            <h3 class="v2-flink-faq-q">How is F-Link priced?</h3>
+            <svg class="v2-flink-faq-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="v2-flink-faq-panel" id="v2-flink-faq-p5" role="region" aria-labelledby="v2-flink-faq-t5">
+            <div class="v2-flink-faq-panel-inner">
+              <div></div>
+              <div>
+                <p class="v2-flink-faq-a">Standardized pricing structure: a setup fee plus a monthly platform subscription, tiered by product line (F-Link standalone vs. G-Link + F-Link bundle vs. full OBT suite). <em>The bundle path with G-Link is the most cost-efficient air entry</em> for TMCs already integrated.</p>
+                <p class="v2-flink-faq-a">Commercial terms are scoped in the demo against your projected volume. We don't sell on price-per-ticket, we sell on China-route access and bundled operations.</p>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="v2-flink-faq-item" role="listitem">
+          <button class="v2-flink-faq-trigger" aria-expanded="false" aria-controls="v2-flink-faq-p6" id="v2-flink-faq-t6">
+            <span class="v2-flink-faq-num">06</span>
+            <h3 class="v2-flink-faq-q">Do I have to rip out my existing air API?</h3>
+            <svg class="v2-flink-faq-chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="v2-flink-faq-panel" id="v2-flink-faq-p6" role="region" aria-labelledby="v2-flink-faq-t6">
+            <div class="v2-flink-faq-panel-inner">
+              <div></div>
+              <div>
+                <p class="v2-flink-faq-a">No. Most large TMCs multiplex air APIs, that's how we expect F-Link to be deployed. Route China and APAC flows through F-Link; keep your existing global API for everything else. <em>F-Link is additive, not a replacement.</em></p>
+              </div>
+              <div></div>
+            </div>
+          </div>
         </article>
       </div>
-      <p class="fcg-pricing-foot fade-up">Final tiers depend on product scope, supplier activation, and any implementation support required.</p>
+
+      <footer class="v2-flink-faq-foot fade-up">
+        <p class="v2-flink-faq-prompt">A question we haven't answered?</p>
+        <div class="v2-flink-faq-actions">
+          <a class="v2-flink-faq-btn v2-flink-faq-btn-primary" href="#contact">Ask in a 20-min demo<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="v2-flink-faq-btn v2-flink-faq-btn-secondary" href="#flink-bundle">See the G-Link bundle</a>
+        </div>
+      </footer>
     </div>
+
+    <script>
+      (function () {
+        const items = document.querySelectorAll('#flink-faq .v2-flink-faq-item');
+        function setOpen(item, open) {
+          const panel = item.querySelector('.v2-flink-faq-panel');
+          const trigger = item.querySelector('.v2-flink-faq-trigger');
+          item.setAttribute('data-open', open ? 'true' : 'false');
+          trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+          panel.style.maxHeight = open ? panel.scrollHeight + 'px' : '0px';
+        }
+        items.forEach((item) => { setOpen(item, item.getAttribute('data-open') === 'true'); });
+        items.forEach((item) => {
+          item.querySelector('.v2-flink-faq-trigger').addEventListener('click', () => {
+            setOpen(item, item.getAttribute('data-open') !== 'true');
+          });
+        });
+        window.addEventListener('resize', () => {
+          items.forEach((item) => {
+            if (item.getAttribute('data-open') === 'true') {
+              const panel = item.querySelector('.v2-flink-faq-panel');
+              panel.style.maxHeight = panel.scrollHeight + 'px';
+            }
+          });
+        });
+      })();
+    </script>
   </section>
 </main>
 <!-- ===== API ACCESS CTA SECTION ===== -->
@@ -2794,10 +3471,10 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
       <section id="getting-started" class="fcg-mobile-feature border-t border-white/10">
         <div class="fcg-mobile-inner">
           <header class="fcg-mobile-heading fade-up">
-            <div class="fcg-main-icon"><iconify-icon icon="solar:code-square-linear" width="28" height="28"></iconify-icon></div>
+            <div class="fcg-main-icon"><iconify-icon icon="solar:plain-2-linear" width="28" height="28"></iconify-icon></div>
             <div class="fcg-mobile-eyebrow">Get connected</div>
-            <h2>Open connections, not locked platforms.</h2>
-            <p class="fcg-mobile-subcopy">300+ travel brands, TMCs, and hotel groups. Already connected. From a single sandbox call to the largest TMC migration. The layer corporate travel runs on, ready when the integration is.</p>
+            <h2>Connect F-Link.</h2>
+            <p class="fcg-mobile-subcopy">Bundle F-Link with G-Link for one hotel-and-air relationship, or use it standalone where China and APAC route depth matter.</p>
           </header>
 
           <div class="fcg-feature-grid">
@@ -2805,8 +3482,7 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
               <div class="fcg-feature-icon"><iconify-icon icon="solar:key-minimalistic-square-linear" width="22" height="22"></iconify-icon></div>
               <div>
                 <h3>Register on the Open Platform</h3>
-                <p>Self-serve developer registration. Sandbox credentials and live docs in one place. No human handoff to start integrating.</p>
-                <a href="../api-access.html" class="fcg-store-button" style="margin-top:14px;display:inline-flex;width:auto;"><iconify-icon icon="solar:key-minimalistic-square-linear" width="16" height="16"></iconify-icon>Open the platform</a>
+                <p>The same developer portal that serves G-Link and TMC API. Sandbox credentials and live docs in one place.</p>
               </div>
             </article>
 
@@ -2814,33 +3490,33 @@ console<span class="code-punct">.</span><span class="code-method">log</span><spa
               <div class="fcg-feature-icon"><iconify-icon icon="solar:magic-stick-3-linear" width="22" height="22"></iconify-icon></div>
               <div>
                 <h3>Integrate via Skills, API, or SDK</h3>
-                <p>Three doors, one backend. Skills is the recommended default. Describe the integration in plain English. AI writes the code against live docs.</p>
+                <p>The F-Link MCP surface is live today. Describe the air flow in natural language and generate code from live docs.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
               <div class="fcg-feature-icon"><iconify-icon icon="solar:test-tube-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Test against the four supply buckets</h3>
-                <p>Run a search that routes through GDS, direct hotel, bedbank, and Asia-direct. Resolve corporate rates. Confirm a sandbox booking end-to-end.</p>
+                <h3>Test against China and APAC routes</h3>
+                <p>Run a Travelsky-routed air search end-to-end. Price, book, ticket, and confirm the itinerary against the shared BMS.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:rocket-2-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:link-circle-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Move to production</h3>
-                <p>Switch to production credentials once the connection is validated. Commercial terms, supplier activation, and Asia coverage handled in parallel.</p>
+                <h3>Bundle with G-Link or stand alone</h3>
+                <p>Use one commercial relationship, one Open Platform login, and one mid-office for both inventory types.</p>
               </div>
             </article>
           </div>
 
           <div class="fcg-mobile-cta fade-up">
-            <h3>The supply layer corporate travel runs on.</h3>
-            <p>Book a walkthrough of the four supply buckets, corporate-rate routing, and Asia depth. Or skip the call and pull sandbox credentials.</p>
+            <h3>Air supply for China and APAC routes.</h3>
+            <p>Walk through the Travelsky path, China-routed air search, and the G-Link bundle.</p>
             <div class="fcg-store-actions">
-              <a href="#capabilities" class="fcg-store-button"><iconify-icon icon="solar:calendar-mark-linear" width="18" height="18"></iconify-icon>Schedule a walkthrough</a>
-              <a href="../api-access.html" class="fcg-store-button"><iconify-icon icon="solar:key-minimalistic-square-linear" width="18" height="18"></iconify-icon>Register for sandbox</a>
+              <a href="#contact" class="fcg-store-button"><iconify-icon icon="solar:calendar-mark-linear" width="18" height="18"></iconify-icon>Book a 20-min walkthrough</a>
+              <a href="#flink-bundle" class="fcg-store-button"><iconify-icon icon="solar:link-circle-linear" width="18" height="18"></iconify-icon>Already on G-Link? See the bundle</a>
             </div>
           </div>
         </div>
