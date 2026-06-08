@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.setAttribute("data-theme", t);
+                    document.documentElement.classList.toggle("dark", t === "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCG template · Steps (how it works)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../template-shell.css">
+</head>
+<body>
+    <button class="tpl-theme-toggle" data-theme-toggle aria-label="Toggle theme"><span data-theme-label>Light</span></button>
+
+    <div class="tpl-label">
+        <strong>10 · Steps — how it works</strong>
+        <span>page types: segment landing, about</span>
+        <span class="nuitee-ref">nuitee ref: /solutions/* · /about-us</span>
+    </div>
+
+    <!-- STRUCTURE: section head (eyebrow + claim + clarifier), then 4 numbered
+         steps stacked vertically. Each: mono numeral chip + title + one line.
+         Copy density: ultra-lean — one line per step, high whitespace. -->
+    <section class="tpl-section">
+        <div class="tpl-inner">
+            <header class="reveal" style="max-width:42rem; margin-bottom:3.5rem;">
+                <p class="tpl-eyebrow-dash"><span class="slot">How it works</span></p>
+                <h2 class="tpl-h2"><span class="slot">H2: bold claim, sentence case, &le;8 words</span></h2>
+                <p class="tpl-clarifier"><span class="slot">one clarifier line, &le;20 words</span></p>
+            </header>
+
+            <div class="tpl-stack" style="gap:2rem;">
+                <div class="tpl-step reveal" data-delay="1">
+                    <div class="tpl-step-num">01</div>
+                    <div>
+                        <h3 class="tpl-h3"><span class="slot">step title, 1-3 words</span></h3>
+                        <p class="tpl-lead" style="margin:.5rem 0 0;"><span class="slot">one line — what happens at this step</span></p>
+                    </div>
+                </div>
+
+                <div class="tpl-step reveal" data-delay="2">
+                    <div class="tpl-step-num">02</div>
+                    <div>
+                        <h3 class="tpl-h3"><span class="slot">step title, 1-3 words</span></h3>
+                        <p class="tpl-lead" style="margin:.5rem 0 0;"><span class="slot">one line — what happens at this step</span></p>
+                    </div>
+                </div>
+
+                <div class="tpl-step reveal" data-delay="3">
+                    <div class="tpl-step-num">03</div>
+                    <div>
+                        <h3 class="tpl-h3"><span class="slot">step title, 1-3 words</span></h3>
+                        <p class="tpl-lead" style="margin:.5rem 0 0;"><span class="slot">one line — what happens at this step</span></p>
+                    </div>
+                </div>
+
+                <div class="tpl-step reveal" data-delay="3">
+                    <div class="tpl-step-num">04</div>
+                    <div>
+                        <h3 class="tpl-h3"><span class="slot">step title, 1-3 words</span></h3>
+                        <p class="tpl-lead" style="margin:.5rem 0 0;"><span class="slot">one line — what happens at this step</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../template-shell.js"></script>
+</body>
+</html>

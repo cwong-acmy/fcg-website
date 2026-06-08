@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.setAttribute("data-theme", t);
+                    document.documentElement.classList.toggle("dark", t === "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCG template · FAQ accordion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../template-shell.css">
+</head>
+<body>
+    <button class="tpl-theme-toggle" data-theme-toggle aria-label="Toggle theme"><span data-theme-label>Light</span></button>
+
+    <div class="tpl-label">
+        <strong>13 · FAQ accordion</strong>
+        <span>page types: segment landing, product detail</span>
+        <span class="nuitee-ref">nuitee ref: /solutions/*</span>
+    </div>
+
+    <!-- STRUCTURE: narrow column. Section head (claim + optional clarifier), then a
+         native <details> accordion of 5 rows sharing name="faq" (single-open).
+         Copy density: short Q + 1-2 line A per row. -->
+    <section class="tpl-section">
+        <div class="tpl-inner">
+            <header class="reveal" style="max-width:42rem; margin-bottom:3rem;">
+                <p class="tpl-eyebrow-dash"><span class="slot">FAQ</span></p>
+                <h2 class="tpl-h2"><span class="slot">H2: bold claim, sentence case, &le;8 words</span></h2>
+                <p class="tpl-clarifier"><span class="slot">optional clarifier line, &le;20 words</span></p>
+            </header>
+
+            <div class="tpl-faq reveal" data-delay="1">
+                <details name="faq" open>
+                    <summary><span class="slot">Q: concise question, sentence case</span><span class="sign">+</span></summary>
+                    <div class="answer"><span class="slot">A: one short clarifying answer, &le;2 lines</span></div>
+                </details>
+                <details name="faq">
+                    <summary><span class="slot">Q: concise question, sentence case</span><span class="sign">+</span></summary>
+                    <div class="answer"><span class="slot">A: one short clarifying answer, &le;2 lines</span></div>
+                </details>
+                <details name="faq">
+                    <summary><span class="slot">Q: concise question, sentence case</span><span class="sign">+</span></summary>
+                    <div class="answer"><span class="slot">A: one short clarifying answer, &le;2 lines</span></div>
+                </details>
+                <details name="faq">
+                    <summary><span class="slot">Q: concise question, sentence case</span><span class="sign">+</span></summary>
+                    <div class="answer"><span class="slot">A: one short clarifying answer, &le;2 lines</span></div>
+                </details>
+                <details name="faq">
+                    <summary><span class="slot">Q: concise question, sentence case</span><span class="sign">+</span></summary>
+                    <div class="answer"><span class="slot">A: one short clarifying answer, &le;2 lines</span></div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <script src="../template-shell.js"></script>
+</body>
+</html>

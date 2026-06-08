@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.setAttribute("data-theme", t);
+                    document.documentElement.classList.toggle("dark", t === "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCG template · Logo strip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../template-shell.css">
+</head>
+<body>
+    <button class="tpl-theme-toggle" data-theme-toggle aria-label="Toggle theme"><span data-theme-label>Light</span></button>
+
+    <div class="tpl-label">
+        <strong>03 · Logo strip</strong>
+        <span>page types: homepage, product hub</span>
+        <span class="nuitee-ref">nuitee ref: / · /connect</span>
+    </div>
+
+    <!-- STRUCTURE: one centered trust line, then a single bordered row of 4 logo cells.
+         Copy density: ~5% text — the logos carry it. No CTA. -->
+    <section class="tpl-section">
+        <div class="tpl-inner-wide">
+            <p class="tpl-eyebrow reveal" style="text-align:center; margin-bottom:2rem;">
+                <span class="slot">NN+ travel brands, TMCs, and hotel groups — <em>already connected</em></span>
+            </p>
+
+            <div class="tpl-logo-grid rows-1 reveal" data-delay="1">
+                <div class="tpl-logo-cell">
+                    <div class="gb gb-logo">[ partner logo — real SVG/PNG ]</div>
+                </div>
+                <div class="tpl-logo-cell">
+                    <div class="gb gb-logo">[ partner logo — real SVG/PNG ]</div>
+                </div>
+                <div class="tpl-logo-cell">
+                    <div class="gb gb-logo">[ partner logo — real SVG/PNG ]</div>
+                </div>
+                <div class="tpl-logo-cell">
+                    <div class="gb gb-logo">[ partner logo — real SVG/PNG ]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../template-shell.js"></script>
+</body>
+</html>

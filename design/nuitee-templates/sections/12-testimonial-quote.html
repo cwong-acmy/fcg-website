@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.setAttribute("data-theme", t);
+                    document.documentElement.classList.toggle("dark", t === "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCG template · Testimonial quote</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../template-shell.css">
+</head>
+<body>
+    <button class="tpl-theme-toggle" data-theme-toggle aria-label="Toggle theme"><span data-theme-label>Light</span></button>
+
+    <div class="tpl-label">
+        <strong>12 · Testimonial quote</strong>
+        <span>page types: segment landing, product detail</span>
+        <span class="nuitee-ref">nuitee ref: /solutions/independent-hotels</span>
+    </div>
+
+    <!-- STRUCTURE: single centered pull-quote. Customer logo, quote mark,
+         one-outcome quote, attribution. High whitespace, copy carries it. -->
+    <section class="tpl-section tpl-center">
+        <div class="tpl-inner">
+            <div class="gb gb-logo reveal" style="margin:0 auto 1.5rem;">[ customer logo — real SVG/PNG ]</div>
+
+            <div class="tpl-quote-mark reveal" data-delay="1">&ldquo;</div>
+
+            <p class="tpl-quote-body reveal" data-delay="2">
+                <span class="slot">pull-quote: one outcome sentence, &le;25 words, their voice</span>
+            </p>
+
+            <p class="tpl-quote-attr reveal" data-delay="3">
+                <span class="slot">Name · Role, Company</span>
+            </p>
+        </div>
+    </section>
+
+    <script src="../template-shell.js"></script>
+</body>
+</html>

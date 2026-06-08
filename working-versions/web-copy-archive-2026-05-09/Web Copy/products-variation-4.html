@@ -1,21 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <script>
-        (function () {
-            try {
-                const savedTheme = localStorage.getItem("theme");
-                if (savedTheme === "dark" || savedTheme === "light") {
-                    document.documentElement.setAttribute("data-theme", savedTheme);
-                    document.documentElement.classList.toggle("dark", savedTheme === "dark");
-                }
-            } catch (error) {}
-        })();
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G&#8209;Link · Hotel supply for corporate travel · FCG Group</title>
-    <meta name="description" content="G&#8209;Link is FCG's hotel supply API for corporate travel. One integration across GDS, direct hotel, bedbank, and Asia-direct supply.">
+    <title>FCG Group - Travel Infrastructure</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -23,7 +11,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Marine header font normalization -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Marine Header Fonts (system monospace, no external import needed) -->
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -44,8 +33,7 @@
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        display: ['Sora', 'sans-serif'],
-                        mono: ['Inter', 'sans-serif']
+                        display: ['Sora', 'sans-serif']
                     }
                 }
             }
@@ -138,7 +126,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .font-mono-jb {
-            font-family: 'Inter', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
         }
         .bg-grid {
             background-size: 40px 40px;
@@ -220,12 +208,12 @@
 
         /* ===== MARINE HEADER SECTION STYLES ===== */
         .marine-header-section {
-            font-family: 'Inter', sans-serif;
+            font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
             background-color: var(--color-bg);
             color: var(--color-fg);
         }
         .marine-header-section .font-mono {
-            font-family: 'Inter', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
         }
         .surface-glass {
             background: rgba(24, 24, 27, 0.3);
@@ -348,7 +336,7 @@
         }
         .fcg-products-group-heading {
             color: var(--color-muted);
-            font-family: 'Inter', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 10px;
             letter-spacing: 0.18em;
             line-height: 1.4;
@@ -428,7 +416,7 @@
             color: var(--color-fg);
         }
         .marine-hero-section .font-mono {
-            font-family: 'Inter', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
         }
         @keyframes sweep {
             from { transform: rotate(0deg); }
@@ -921,35 +909,56 @@
             height: 18px;
         }
 
-        /* ===== V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
-        /* Bucket D highlighted card uses inline gradient with near-black stop */
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] {
-            background: linear-gradient(180deg, rgba(249,115,22,0.08), rgba(255,255,255,0.92)) !important;
-            border-color: rgba(249,115,22,0.35) !important;
-        }
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] p,
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] h3 {
-            color: var(--color-fg) !important;
-        }
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] .code-tag {
-            color: var(--color-muted) !important;
-        }
-        /* ===== END V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
-
         /* ===== END GLOBAL LIGHT MODE OVERRIDES ===== */
     </style>
-    <link rel="stylesheet" href="../assets/css/fcg-brand-theme.css">
 </head>
 <body class="bg-background text-foreground antialiased">
-    <!-- ===== MARINE HEADER SECTION ===== -->
     <nav class="marine-header-section fcg-dropdown-nav fixed top-0 z-50 w-full border-b">
         <div class="w-full px-4 md:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center gap-8">
-                <a href="../index.html" class="flex items-center" style="color: var(--color-fg);" aria-label="FCG Group home">
+                <!-- Logo -->
+                <div class="flex items-center" style="color: var(--color-fg);">
                     <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 28px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="currentColor"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="currentColor"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="currentColor"/></svg>
-                </a>
+                </div>
 
+                <!-- Desktop Dropdown Navigation -->
                 <ul class="fcg-nav-shell hidden md:flex items-center gap-0 text-sm font-normal">
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>About</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
+                            <div class="flex gap-9 overflow-hidden">
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">FCG Group</h3>
+                                    <div class="space-y-6">
+                                        <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:global-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Asian travel network</p><span class="text-xs">Supply depth across key regional markets</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Operator infrastructure</p><span class="text-xs">Tools built around real travel workflows</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Markets</h3>
+                                    <div class="space-y-6">
+                                        <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Regional coverage</p><span class="text-xs">Singapore, Hong Kong, Shenzhen and more</span></div>
+                                        </a>
+                                        <a href="#decision-paths" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:compass-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Expansion model</p><span class="text-xs">How FCG scales supply and operations</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                     <li class="fcg-dropdown-item relative">
                         <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
                             <span>Products</span>
@@ -958,56 +967,56 @@
                         <div class="fcg-dropdown-panel fcg-products-mega absolute left-0 top-full mt-2 rounded-2xl">
                             <div class="fcg-products-mega-grid">
                                 <div class="fcg-products-group">
-                                    <h3 class="fcg-products-group-heading">For builders &amp; platforms</h3>
+                                    <h3 class="fcg-products-group-heading">For TMCs & operators</h3>
                                     <div class="fcg-products-group-title">Connect</div>
                                     <div class="fcg-products-list">
-                                        <a href="glink-v4.html" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:server-square-cloud-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>G-Link</p><span>Hotel supply and distribution API</span></div>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:cpu-bolt-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>AgreeEase</p><span>AI hotel sourcing and RFP workflows</span></div>
                                         </a>
-                                        <a href="flink-v4.html" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:plain-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>F-Link</p><span>Air supply and flight content API</span></div>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Atlas</p><span>TMC operating system for bookings and service</span></div>
                                         </a>
-                                        <a href="../whitelabel.html" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:code-scan-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>White-label</p><span>Launch with a ready-made travel platform</span></div>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:case-round-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Allbon</p><span>Corporate booking platform for business travel</span></div>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="fcg-products-group">
-                                    <h3 class="fcg-products-group-heading">For TMCs &amp; travel programs</h3>
+                                    <h3 class="fcg-products-group-heading">For travel suppliers</h3>
+                                    <div class="fcg-products-group-title">Operate</div>
+                                    <div class="fcg-products-list">
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:box-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Travakey</p><span>Resource APIs and supplier connectivity</span></div>
+                                        </a>
+                                        <a href="#decision-paths" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:chart-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Smart Distribution</p><span>Rate control and marketplace access</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:card-transfer-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Payment Solutions</p><span>Secure settlement and processing tools</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For mapping & optimization</h3>
                                     <div class="fcg-products-group-title">Experience</div>
                                     <div class="fcg-products-list">
-                                        <a href="../corporate-booking-tool.html" class="fcg-products-link">
+                                        <a href="#product-map" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>Corporate Booking Tool</p><span>Modern booking for managed travel programs</span></div>
+                                            <div><p>Hotel Mapping</p><span>Clean, standardized property records</span></div>
                                         </a>
-                                        <a href="../agent-booking-tool.html" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:case-round-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>Agent Booking Tool</p><span>Search and book every supplier in one flow</span></div>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:bed-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Room Mapping</p><span>Full clarity across room types and suppliers</span></div>
                                         </a>
-                                        <a href="../ai-booking-tool.html" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:cpu-bolt-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>AI Booking Tool</p><span>Connect AI to live travel inventory</span></div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="fcg-products-group">
-                                    <h3 class="fcg-products-group-heading">For mapping &amp; optimization</h3>
-                                    <div class="fcg-products-group-title">Optimize</div>
-                                    <div class="fcg-products-list">
-                                        <a href="../ai-mapping.html" class="fcg-products-link">
+                                        <a href="#product-map" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:magic-stick-3-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>AI Mapping</p><span>Clean hotel, room, and supplier data</span></div>
-                                        </a>
-                                        <a href="../agreeease.html" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:chart-2-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>AgreeEase</p><span>AI hotel sourcing, RFPs, and rate workflows</span></div>
-                                        </a>
-                                        <a href="../atlas.html" class="fcg-products-link">
-                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>AtlasOS</p><span>Connect operational surfaces into one hub</span></div>
+                                            <div><p>Content Optimization</p><span>Enrich, standardize, and improve conversion</span></div>
                                         </a>
                                     </div>
                                 </div>
@@ -1016,45 +1025,53 @@
                     </li>
                     <li class="fcg-dropdown-item relative">
                         <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
-                            <span>Solutions</span>
+                            <span>Technology</span>
                             <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
                         </button>
                         <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
-                            <div class="space-y-6 overflow-hidden">
-                                <a href="../atlas.html" class="fcg-menu-link flex items-start gap-3">
-                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:users-group-rounded-bold-duotone" width="19" height="19"></iconify-icon></div>
-                                    <div><p class="text-sm font-medium">TMCs</p><span class="text-xs">Corporate travel operators and agencies</span></div>
-                                </a>
-                                <a href="../whitelabel.html" class="fcg-menu-link flex items-start gap-3">
-                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:global-linear" width="19" height="19"></iconify-icon></div>
-                                    <div><p class="text-sm font-medium">OTAs</p><span class="text-xs">Online travel agencies and marketplaces</span></div>
-                                </a>
-                                <a href="../ai-booking-tool.html" class="fcg-menu-link flex items-start gap-3">
-                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:plug-circle-linear" width="19" height="19"></iconify-icon></div>
-                                    <div><p class="text-sm font-medium">AI Apps</p><span class="text-xs">AI travel apps and agent workflows</span></div>
-                                </a>
-                                <a href="../api-access.html" class="fcg-menu-link flex items-start gap-3">
-                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:layers-minimalistic-linear" width="19" height="19"></iconify-icon></div>
-                                    <div><p class="text-sm font-medium">B2B Platforms</p><span class="text-xs">Travel infrastructure for B2B products</span></div>
-                                </a>
+                            <div class="flex gap-9 overflow-hidden">
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Platform</h3>
+                                    <div class="space-y-6">
+                                        <a href="#product-map" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:shield-check-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Reliable workflows</p><span class="text-xs">Structured processes for sourcing teams</span></div>
+                                        </a>
+                                        <a href="#decision-paths" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:eye-scan-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Data visibility</p><span class="text-xs">See where requests and supply stand</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Automation</h3>
+                                    <div class="space-y-6">
+                                        <a href="#product-map" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:rocket-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Faster responses</p><span class="text-xs">Reduce manual sourcing and follow-ups</span></div>
+                                        </a>
+                                        <a href="#decision-paths" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:palette-round-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Custom workflows</p><span class="text-xs">Adapt the system around real teams</span></div>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </li>
-                    <li class="fcg-dropdown-item relative">
-                        <a href="../about.html" class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5">
-                            <span>About</span>
-                        </a>
                     </li>
                 </ul>
             </div>
 
+            <!-- Right: Status & Toggle -->
             <div class="flex items-center gap-4 md:gap-6">
+                <!-- System Status Badge -->
                 <div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono tracking-tight" style="background-color: rgba(249, 115, 22, 0.1); border: 1px solid rgba(249, 115, 22, 0.2); color: #F97316;">
                     <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background-color: #F97316;"></span>
                     LIVE.NETWORK
                 </div>
 
-                <label id="themeToggleControl" class="flex items-center gap-3 cursor-pointer group">
+                <!-- Custom Toggle Switch -->
+                <label class="flex items-center gap-3 cursor-pointer group">
                     <span class="text-xs font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors hidden sm:block uppercase">MODE</span>
                     <div class="relative">
                         <input type="checkbox" id="themeToggle" class="sr-only peer" checked>
@@ -1068,7 +1085,6 @@
             </div>
         </div>
     </nav>
-    <!-- ===== END MARINE HEADER SECTION ===== -->
 <style>
   .fcg-hero2 {
     position: relative;
@@ -1139,17 +1155,17 @@
     position: relative;
     z-index: 10;
     display: grid;
-    grid-template-columns: minmax(0, .92fr) minmax(440px, 1.08fr);
+    grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr);
     align-items: center;
-    gap: 64px;
+    gap: 56px;
     max-width: 1280px;
     margin: 0 auto;
-    min-height: 88vh;
-    padding: 124px 24px 78px;
+    min-height: 100vh;
+    padding: 132px 24px 96px;
     text-align: left;
   }
   .fcg-hero2-copy-column {
-    max-width: 680px;
+    max-width: 620px;
   }
   .fcg-hero2-badge {
     display: inline-flex;
@@ -1167,17 +1183,17 @@
     -webkit-backdrop-filter: blur(12px);
   }
   .fcg-hero2 h1 {
-    max-width: 720px;
-    margin: 28px 0 0;
+    max-width: 620px;
+    margin: 36px 0 0;
     color: #fff !important;
-    font-size: clamp(2.35rem, 3.5vw, 3.75rem);
+    font-size: clamp(3rem, 5.2vw, 5.8rem);
     font-weight: 600;
-    line-height: 1.05;
+    line-height: 1;
     letter-spacing: 0;
   }
   .fcg-hero2-copy {
-    max-width: 640px;
-    margin: 22px 0 0;
+    max-width: 590px;
+    margin: 26px 0 0;
     color: rgba(255,255,255,.72) !important;
     font-size: clamp(1rem, 1.5vw, 1.18rem);
     line-height: 1.7;
@@ -1187,110 +1203,8 @@
     align-items: center;
     justify-content: flex-start;
     gap: 14px;
-    margin-top: 34px;
+    margin-top: 40px;
     flex-wrap: wrap;
-  }
-  .fcg-pricing-rows {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-    margin-top: 3rem;
-  }
-  .fcg-pricing-rows article {
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 14px;
-    background: rgba(255,255,255,.02);
-    padding: 1.5rem 1.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-  }
-  .fcg-pricing-rows .fcg-pricing-label {
-    color: rgba(255,255,255,.6) !important;
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  .fcg-pricing-rows .fcg-pricing-value {
-    color: #fff !important;
-    font-family: 'Sora', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    line-height: 1.1;
-  }
-  .fcg-pricing-rows .fcg-pricing-sub {
-    color: rgba(255,255,255,.5) !important;
-    font-size: .85rem;
-    line-height: 1.5;
-  }
-  .fcg-pricing-foot {
-    color: rgba(255,255,255,.45) !important;
-    font-size: .8rem;
-    margin-top: 1.25rem;
-    line-height: 1.6;
-  }
-  html[data-theme="light"] .fcg-pricing-rows article { background: rgba(15,17,20,.02); border-color: rgba(15,17,20,.1); }
-  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-label { color: rgba(15,17,20,.55) !important; }
-  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-value { color: var(--color-fg) !important; }
-  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-sub { color: rgba(15,17,20,.55) !important; }
-  html[data-theme="light"] .fcg-pricing-foot { color: rgba(15,17,20,.55) !important; }
-  .fcg-objection-q {
-    color: #fb923c !important;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    margin-bottom: .85rem;
-    font-weight: 500;
-  }
-  html[data-theme="light"] .fcg-objection-q { color: #fb923c !important; }
-  .partner-plus::before,
-  .partner-plus::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    background: #0F1114;
-    transform: translate(-50%, -50%);
-  }
-  .partner-plus::before {
-    width: 18px;
-    height: 1px;
-  }
-  .partner-plus::after {
-    width: 1px;
-    height: 18px;
-  }
-  .partner-grid-section {
-    background-color: var(--color-bg);
-    color: var(--color-fg);
-  }
-  .partner-grid-title {
-    color: var(--color-muted);
-  }
-  .partner-grid-title strong {
-    color: var(--color-fg);
-    font-weight: 500;
-  }
-  .partner-logo-band,
-  .partner-logo-grid,
-  .partner-logo-card {
-    border-color: var(--color-border) !important;
-  }
-  .partner-logo-card:nth-child(odd) {
-    background-color: var(--color-card);
-  }
-  html[data-theme="dark"] .partner-logo-card img.partner-logo-invert-dark {
-    filter: invert(1) grayscale(1) brightness(1.4);
-    opacity: .9;
-  }
-  html[data-theme="dark"] .partner-plus::before,
-  html[data-theme="dark"] .partner-plus::after {
-    background: var(--color-fg);
-  }
-  @media (max-width: 768px) {
-    .fcg-pricing-rows { grid-template-columns: 1fr; }
   }
   .fcg-hero2-preview-wrap {
     position: relative;
@@ -1308,179 +1222,47 @@
   }
   .fcg-hero2-preview {
     position: relative;
-    overflow: visible;
-    border-radius: 22px;
+    overflow: hidden;
+    border-radius: 18px;
     border: 1px solid rgba(255,255,255,.14);
     background: rgba(7,7,7,.88);
-    box-shadow: 0 30px 90px rgba(0,0,0,.34);
-    padding: 14px;
-  }
-  .fcg-hero2-code-preview {
-    overflow: visible;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
+    box-shadow: 0 30px 90px rgba(0,0,0,.45);
   }
   .fcg-hero2-preview img {
     display: block;
     width: 100%;
-    height: auto;
-    object-fit: contain;
-    object-position: center top;
-    border-radius: 14px;
-    opacity: .98;
-    filter: none;
-  }
-  .fcg-hero2-video-frame {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.12);
-    background: linear-gradient(135deg, rgba(249,115,22,.14), rgba(255,255,255,.04));
-  }
-  .fcg-hero2-video-frame video {
-    width: 100%;
-    height: 100%;
+    height: min(64vh, 560px);
     object-fit: cover;
-    display: block;
-  }
-  .fcg-hero2-video-placeholder {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    background:
-      repeating-linear-gradient(45deg, rgba(255,255,255,.025) 0 12px, transparent 12px 24px),
-      rgba(7,7,7,.55);
-  }
-  .fcg-hero2-video-play {
-    width: 66px;
-    height: 66px;
-    border-radius: 999px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    background: rgba(249,115,22,.92);
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 10px 32px rgba(249,115,22,.38);
-    transition: transform .25s ease;
-  }
-  .fcg-hero2-video-play:hover { transform: scale(1.06); }
-  .fcg-hero2-video-label {
-    color: #fff;
-    font-size: 15px;
-    font-weight: 500;
-  }
-  .fcg-hero2-video-note {
-    color: rgba(255,255,255,.5);
-    font-size: 11px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-  }
-  html[data-theme="light"] .fcg-hero2-video-placeholder {
-    background:
-      repeating-linear-gradient(45deg, rgba(0,0,0,.03) 0 12px, transparent 12px 24px),
-      rgba(243,244,246,.7);
-  }
-  html[data-theme="light"] .fcg-hero2-video-label { color: #0F1114; }
-  html[data-theme="light"] .fcg-hero2-video-note { color: rgba(15,17,20,.5); }
-  .supplier-logo-placeholder {
-    font-family: 'Sora', 'Inter', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: .01em;
-    color: rgba(255,255,255,.52);
-    border: 1px dashed rgba(255,255,255,.22);
-    border-radius: 8px;
-    padding: 9px 16px;
-    white-space: nowrap;
-  }
-  html[data-theme="light"] .supplier-logo-placeholder {
-    color: rgba(15,17,20,.5);
-    border-color: rgba(0,0,0,.18);
-  }
-  .supplier-logo-real {
-    max-height: 34px;
-    max-width: 150px;
-    object-fit: contain;
-    opacity: .92;
-  }
-  .supplier-logo-mono {
-    max-height: 34px;
-    max-width: 150px;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: .82;
-    transition: opacity .2s ease;
-  }
-  .supplier-logo-mono:hover { opacity: 1; }
-  html[data-theme="light"] .supplier-logo-mono {
-    filter: brightness(0);
-    opacity: .68;
-  }
-  .fcg-marketing-feature-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fb923c;
-    background: rgba(249,115,22,.1);
-    border: 1px solid rgba(249,115,22,.2);
-    margin-bottom: 1.1rem;
-  }
-  html[data-theme="light"] .fcg-marketing-feature-icon {
-    background: rgba(249,115,22,.08);
-    border-color: rgba(249,115,22,.25);
-  }
-  .fcg-supply-illustration {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2.5rem 2rem;
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,.1);
-    background: rgba(255,255,255,.02);
-    margin-top: 2.5rem;
-  }
-  .fcg-supply-illustration svg { width: min(420px, 80%); height: auto; }
-  html[data-theme="light"] .fcg-supply-illustration {
-    border-color: rgba(15,17,20,.1);
-    background: rgba(15,17,20,.02);
+    opacity: .64;
+    filter: grayscale(1) contrast(1.05);
   }
   .fcg-hero2-preview-grid {
-    position: relative;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: grid;
     grid-template-columns: repeat(2, minmax(0,1fr));
     align-items: stretch;
-    gap: 12px;
-    margin-top: 14px;
-    padding: 0;
-    background: transparent;
+    gap: 14px;
+    padding: 24px;
+    background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.38), transparent);
   }
   .fcg-hero2-preview-card {
-    min-height: 88px;
+    min-height: 124px;
     border-radius: 14px;
     border: 1px solid rgba(255,255,255,.14);
     background: rgba(255,255,255,.08);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    padding: 14px;
+    padding: 18px;
     text-align: left;
   }
   .fcg-hero2-preview-card span {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
     color: #fb923c;
-    font-family: 'Inter', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     letter-spacing: .18em;
     text-transform: uppercase;
@@ -1488,209 +1270,12 @@
   .fcg-hero2-preview-card strong {
     display: block;
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 1.25;
   }
-  .fcg-hero2-preview-card .stat-value {
-    display: block;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-size: 28px;
-    font-weight: 600;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .fcg-hero2-preview-card .stat-label {
-    display: block;
-    color: rgba(255,255,255,.62);
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.4;
-  }
-  .fcg-hero2-code-footer {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0,1fr));
-    gap: 12px;
-    padding: 0 clamp(1.5rem, 4vw, 2.75rem) clamp(1.5rem, 4vw, 2.75rem);
-  }
-  .fcg-hero2-code-chip {
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.06);
-    padding: 14px;
-  }
-  .fcg-hero2-code-chip span {
-    display: block;
-    color: #fb923c;
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .fcg-hero2-code-chip strong {
-    display: block;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.25;
-  }
-  .glink-radar-scene {
-    position: relative;
-    min-height: min(56vh, 520px);
-    width: 100%;
-    overflow: hidden;
-    border-radius: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-  .glink-radar-stage {
-    position: relative;
-    display: flex;
-    min-height: min(56vh, 520px);
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    overflow: hidden;
-    padding: 3rem 1.25rem 5.5rem;
-  }
-  .glink-radar-row-wide,
-  .glink-radar-row-narrow {
-    position: relative;
-    z-index: 50;
-    width: 100%;
-  }
-  .glink-radar-row-wide { max-width: 42rem; }
-  .glink-radar-row-narrow { max-width: 27rem; }
-  .glink-radar-row-inner {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.25rem;
-  }
-  .glink-radar-node {
-    position: relative;
-    z-index: 50;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-    opacity: 0;
-    transform: scale(.95);
-    animation: glink-radar-node-in .2s ease-out forwards;
-  }
-  @keyframes glink-radar-node-in {
-    from { opacity: 0; transform: scale(.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  .glink-radar-tile {
-    display: flex;
-    height: 3rem;
-    width: 3rem;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1rem;
-    border: 1px solid rgba(255,255,255,.14);
-    background: rgba(255,255,255,.08);
-    color: rgba(255,255,255,.68);
-    box-shadow: inset 0 2px 10px rgba(255,255,255,.04), 0 12px 30px rgba(0,0,0,.18);
-  }
-  .glink-radar-label {
-    color: rgba(255,255,255,.62);
-    font-size: .75rem;
-    font-weight: 700;
-    line-height: 1rem;
-    text-align: center;
-    white-space: nowrap;
-  }
-  .glink-radar-core {
-    position: absolute;
-    bottom: 4.75rem;
-    left: 50%;
-    z-index: 20;
-    display: flex;
-    height: 5rem;
-    width: 5rem;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    transform: translateX(-50%);
-    pointer-events: none;
-  }
-  .glink-radar-sweep {
-    position: absolute;
-    right: 50%;
-    top: 50%;
-    z-index: 40;
-    display: flex;
-    height: 5px;
-    width: 400px;
-    align-items: flex-end;
-    justify-content: center;
-    overflow: hidden;
-    background: transparent;
-    transform-origin: right center;
-    animation: glink-radar-spin 10s linear infinite;
-  }
-  @keyframes glink-radar-spin {
-    from { transform: rotate(20deg); }
-    to { transform: rotate(380deg); }
-  }
-  .glink-radar-sweep-line {
-    position: relative;
-    z-index: 40;
-    height: 1px;
-    width: 100%;
-    background: linear-gradient(to right, transparent, #f97316, transparent);
-  }
-  .glink-radar-circle {
-    position: absolute;
-    inset: 0;
-    left: 50%;
-    top: 50%;
-    border-radius: 9999px;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    animation: glink-radar-circle-in .2s ease-out forwards;
-  }
-  @keyframes glink-radar-circle-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  .glink-radar-divider {
-    position: absolute;
-    bottom: 0;
-    z-index: 41;
-    display: none;
-    height: 1px;
-    width: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,.28), transparent);
-  }
-  .glink-radar-section {
-    position: relative;
-    z-index: 10;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    padding: 7rem 0 1.25rem;
-    background: var(--color-bg);
-    border-top: 0;
-  }
-  .glink-radar-inner {
-    width: 100%;
-    margin: 0 auto;
-  }
-  .glink-radar-section + .fcg-mobile-cta {
-    margin-top: 2rem;
-  }
   .product-shell { background: var(--color-bg); color: var(--color-fg); }
-  .product-kicker { font-family: 'Inter', sans-serif; letter-spacing: .18em; text-transform: uppercase; }
+  .product-kicker { font-family: 'JetBrains Mono', monospace; letter-spacing: .18em; text-transform: uppercase; }
   .product-card {
     background: rgba(0,0,0,.4);
     border: 1px solid rgba(255,255,255,.15);
@@ -1851,7 +1436,7 @@
   }
   .fcg-bento-kicker {
     color: #fb923c;
-    font-family: 'Inter', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     letter-spacing: .18em;
     margin-bottom: .9rem;
@@ -1859,8 +1444,8 @@
   }
   .fcg-bento h2 {
     color: #fff !important;
-    font-size: clamp(2rem, 3.2vw, 3rem);
-    font-weight: 500;
+    font-size: clamp(2.3rem, 5vw, 4.7rem);
+    font-weight: 700;
     letter-spacing: 0;
     line-height: 1;
   }
@@ -1982,7 +1567,7 @@
   .fcg-marketing-eyebrow,
   .fcg-mobile-eyebrow {
     color: #fb923c;
-    font-family: 'Inter', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     letter-spacing: .18em;
     margin-bottom: .85rem;
@@ -1991,7 +1576,7 @@
   .fcg-marketing-title,
   .fcg-mobile-feature h2 {
     color: #fff !important;
-    font-size: clamp(2.1rem, 2.6vw, 2.7rem);
+    font-size: clamp(2.6rem, 3vw, 3.25rem);
     font-weight: 650;
     letter-spacing: 0;
     line-height: 1.05;
@@ -2119,131 +1704,11 @@
     font-weight: 650;
     line-height: 1.1;
   }
-  .fcg-marketing-feature {
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: 18px;
-    background: rgba(255,255,255,.025);
-    padding: 1.5rem;
-    min-height: 13.5rem;
-    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
-  }
-  .fcg-marketing-feature:hover {
-    border-color: rgba(255,255,255,.32);
-    background: rgba(255,255,255,.045);
-    transform: translateY(-1px);
-  }
   .fcg-marketing-feature p {
     color: rgba(255,255,255,.54) !important;
     font-size: 1.05rem;
     line-height: 1.45;
     margin-top: 1rem;
-  }
-  .fcg-integration-section {
-    position: relative;
-    overflow: hidden;
-    background: #050505;
-    color: #fff;
-    padding: 6rem 1.5rem;
-  }
-  .fcg-integration-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(circle at 18% 16%, rgba(249,115,22,.16), transparent 26%),
-      radial-gradient(circle at 86% 66%, rgba(14,165,233,.14), transparent 30%);
-  }
-  .fcg-integration-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 72rem;
-    margin: 0 auto;
-  }
-  .fcg-integration-header {
-    max-width: 54.25rem;
-    margin-bottom: 3.75rem;
-  }
-  .fcg-integration-eyebrow {
-    color: #fb923c;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    letter-spacing: .18em;
-    margin-bottom: .85rem;
-    text-transform: uppercase;
-  }
-  .fcg-integration-title {
-    color: #fff !important;
-    font-size: clamp(2.1rem, 2.6vw, 2.7rem);
-    font-weight: 650;
-    letter-spacing: 0;
-    line-height: 1.05;
-  }
-  .fcg-integration-title span {
-    color: rgba(255,255,255,.48);
-  }
-  .fcg-integration-header p {
-    color: rgba(255,255,255,.68) !important;
-    font-size: 15px;
-    line-height: 1.7;
-    margin-top: 1rem;
-    max-width: 42rem;
-  }
-  .fcg-flow-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1px;
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.06);
-  }
-  .fcg-flow-step {
-    position: relative;
-    padding: 2.5rem 2rem;
-    background: rgba(5,5,5,.92);
-    text-align: center;
-  }
-  .fcg-flow-step-number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 999px;
-    background: rgba(249,115,22,.12);
-    border: 1px solid rgba(249,115,22,.24);
-    color: #fb923c;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 1.25rem;
-  }
-  .fcg-flow-step h3 {
-    color: #fff !important;
-    font-size: 1.25rem;
-    font-weight: 600;
-    line-height: 1.25;
-    margin-bottom: .65rem;
-  }
-  .fcg-flow-step p {
-    color: rgba(255,255,255,.54) !important;
-    font-size: .95rem;
-    line-height: 1.55;
-    max-width: 22rem;
-    margin: 0 auto;
-  }
-  .fcg-flow-step .code-tag {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: .3rem .65rem;
-    border-radius: 6px;
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.1);
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    color: rgba(255,255,255,.55);
-    letter-spacing: .02em;
   }
   .fcg-mobile-feature {
     position: relative;
@@ -2411,54 +1876,22 @@
   html[data-theme="light"] .fcg-hero2-preview {
     background: rgba(255,255,255,.82);
     border-color: rgba(15,17,20,.12);
-    box-shadow: 0 30px 80px rgba(15,17,20,.1);
+    box-shadow: 0 30px 80px rgba(15,17,20,.13);
   }
-  html[data-theme="light"] .fcg-hero2-code-preview {
-    background: transparent;
-    border-color: transparent;
-    box-shadow: none;
+  html[data-theme="light"] .fcg-hero2-preview img {
+    opacity: .86;
+    filter: grayscale(.8) contrast(1.02);
   }
   html[data-theme="light"] .fcg-hero2-preview-grid {
-    background: rgba(255,255,255,.88);
+    background: linear-gradient(to top, rgba(255,255,255,.94), rgba(255,255,255,.5), transparent);
   }
   html[data-theme="light"] .fcg-hero2-preview-card {
     background: rgba(255,255,255,.74);
     border-color: rgba(15,17,20,.12);
     box-shadow: 0 18px 45px rgba(15,17,20,.08);
   }
-  html[data-theme="light"] .fcg-hero2-preview-card strong,
-  html[data-theme="light"] .fcg-hero2-preview-card .stat-value {
+  html[data-theme="light"] .fcg-hero2-preview-card strong {
     color: #0f1114;
-  }
-  html[data-theme="light"] .fcg-hero2-preview-card .stat-label {
-    color: #6b7280;
-  }
-  html[data-theme="light"] .fcg-hero2-code-chip {
-    background: rgba(255,255,255,.72);
-    border-color: rgba(15,17,20,.1);
-    box-shadow: 0 14px 32px rgba(15,17,20,.07);
-  }
-  html[data-theme="light"] .fcg-hero2-code-chip strong {
-    color: #0f1114;
-  }
-  html[data-theme="light"] .glink-radar-scene {
-    background: transparent;
-    box-shadow: none;
-  }
-  html[data-theme="light"] .glink-radar-tile {
-    background: rgba(255,255,255,.74);
-    border-color: rgba(15,17,20,.12);
-    color: #4b5563;
-    box-shadow: 0 14px 32px rgba(15,17,20,.07);
-  }
-  html[data-theme="light"] .glink-radar-label {
-    color: #6b7280;
-  }
-  html[data-theme="light"] .glink-radar-circle {
-    border-color: rgba(15,17,20,.18) !important;
-  }
-  html[data-theme="light"] .glink-radar-divider {
-    background: linear-gradient(to right, transparent, rgba(15,17,20,.18), transparent);
   }
   html[data-theme="light"] .fcg-bento {
     background:
@@ -2534,15 +1967,6 @@
   html[data-theme="light"] .fcg-mobile-cta p {
     color: #737373 !important;
   }
-  html[data-theme="light"] .fcg-marketing-feature {
-    background: rgba(255,255,255,.82);
-    border-color: rgba(15,17,20,.14);
-    box-shadow: 0 18px 45px rgba(15,17,20,.07);
-  }
-  html[data-theme="light"] .fcg-marketing-feature:hover {
-    background: #ffffff;
-    border-color: rgba(15,17,20,.28);
-  }
   html[data-theme="light"] .fcg-ai-showcase {
     background:
       linear-gradient(135deg, rgba(255,240,209,.9), rgba(252,201,196,.8) 34%, rgba(207,233,240,.86) 72%, rgba(106,203,213,.78)),
@@ -2578,36 +2002,6 @@
   html[data-theme="light"] .fcg-ai-submit {
     background: #050505;
     color: #ffffff;
-  }
-  html[data-theme="light"] .fcg-integration-section {
-    background: #ffffff;
-    color: #0f1114;
-  }
-  html[data-theme="light"] .fcg-integration-section::before {
-    display: none;
-  }
-  html[data-theme="light"] .fcg-integration-title,
-  html[data-theme="light"] .fcg-flow-step h3 {
-    color: #0f1114 !important;
-  }
-  html[data-theme="light"] .fcg-integration-title span {
-    color: #737373;
-  }
-  html[data-theme="light"] .fcg-integration-header p,
-  html[data-theme="light"] .fcg-flow-step p {
-    color: #737373 !important;
-  }
-  html[data-theme="light"] .fcg-flow-grid {
-    background: rgba(0,0,0,.06);
-    border-color: rgba(15,17,20,.12);
-  }
-  html[data-theme="light"] .fcg-flow-step {
-    background: rgba(255,255,255,.94);
-  }
-  html[data-theme="light"] .fcg-flow-step .code-tag {
-    background: rgba(0,0,0,.04);
-    border-color: rgba(15,17,20,.1);
-    color: #6b7280;
   }
   html[data-theme="light"] .fcg-mobile-cta {
     background: rgba(255,255,255,.78);
@@ -2648,26 +2042,14 @@
     .fcg-hero2-preview-grid {
       position: relative;
       grid-template-columns: 1fr;
-      padding: 0;
-      background: transparent;
+      padding: 16px;
+      background: rgba(0,0,0,.84);
     }
     html[data-theme="light"] .fcg-hero2-preview-grid {
-      background: transparent;
+      background: rgba(255,255,255,.88);
     }
-    .fcg-hero2-preview img { height: auto; }
+    .fcg-hero2-preview img { display: none; }
     .fcg-hero2-preview-card { min-height: auto; }
-    .fcg-hero2-code-footer { grid-template-columns: 1fr; }
-    .glink-radar-section { padding: 5.5rem 0 1rem; }
-    .glink-radar-scene,
-    .glink-radar-stage {
-      min-height: 420px;
-    }
-    .glink-radar-row-inner {
-      gap: .9rem;
-    }
-    .glink-radar-label {
-      display: none;
-    }
     .fcg-bento-inner { padding: 4.5rem 1.25rem; }
     .fcg-bento-header { align-items: flex-start; flex-direction: column; }
     .fcg-bento-grid { grid-template-columns: 1fr; }
@@ -2678,19 +2060,15 @@
       grid-row: auto;
     }
     .fcg-marketing-section,
-    .fcg-integration-section,
     .fcg-mobile-feature {
       padding: 4.5rem 1.25rem;
-    }
-    .fcg-flow-grid {
-      grid-template-columns: 1fr;
     }
     .fcg-feature-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
     }
     .fcg-marketing-title {
-      font-size: clamp(2rem, 8.5vw, 2.65rem) !important;
+      font-size: clamp(2.35rem, 11vw, 3.25rem) !important;
     }
     .fcg-marketing-header {
       margin-bottom: 2.5rem;
@@ -2725,706 +2103,326 @@
     <div class="fcg-hero2-content">
       <div class="fcg-hero2-copy-column">
         <div class="fcg-hero2-badge">
-          Product · G&#8209;Link
+          Travel infrastructure for operators, TMCs, and suppliers
           <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
         </div>
-        <h1>Hotel supply for corporate travel.</h1>
-        <p class="fcg-hero2-copy">One API for GDS, direct hotel, bedbank, and Asia-direct supply. Corporate rates, 4.3M+ mapped hotels, and a mid-office behind every booking.</p>
+        <h1>One product layer for modern travel operations.</h1>
+        <p class="fcg-hero2-copy">FCG helps travel teams move from fragmented tools and manual workflows to a connected infrastructure stack for booking, sourcing, mapping, distribution, and service operations.</p>
         <div class="fcg-hero2-actions">
-          <a href="#getting-started" class="fcg-hero2-button fcg-hero2-button-primary">Schedule a walkthrough</a>
-          <a href="../api-access.html" class="fcg-hero2-button fcg-hero2-button-secondary">Read the API docs</a>
+          <a href="#decision-paths" class="fcg-hero2-button fcg-hero2-button-primary">Explore use cases</a>
+          <a href="#product-map" class="fcg-hero2-button fcg-hero2-button-secondary">View product map</a>
         </div>
       </div>
 
       <div class="fcg-hero2-preview-wrap">
-        <div class="fcg-hero2-preview fcg-hero2-video-preview">
-          <div class="fcg-hero2-video-frame" aria-label="G&#8209;Link product walkthrough">
-            <!-- Swap this placeholder for the real walkthrough video:
-                 <video src="../assets/video/glink-walkthrough.mp4" poster="../assets/images/glink-walkthrough-poster.jpg" controls playsinline></video> -->
-            <div class="fcg-hero2-video-placeholder">
-              <button class="fcg-hero2-video-play" aria-label="Play product walkthrough">
-                <iconify-icon icon="solar:play-bold" width="26" height="26"></iconify-icon>
-              </button>
-              <span class="fcg-hero2-video-label">G&#8209;Link product walkthrough</span>
-              <span class="fcg-hero2-video-note">Video placeholder · drop in walkthrough.mp4</span>
-            </div>
-          </div>
-          <div class="fcg-hero2-code-footer" aria-hidden="true">
-            <div class="fcg-hero2-code-chip"><span>Supply</span><strong>4.3M+ hotels</strong></div>
-            <div class="fcg-hero2-code-chip"><span>Network</span><strong>43 suppliers · 13 live</strong></div>
-            <div class="fcg-hero2-code-chip"><span>Asia</span><strong>4 chains deployed</strong></div>
+        <div class="fcg-hero2-preview">
+          <img src="assets/images/frame-mid.svg" alt="FCG product interface preview">
+          <div class="fcg-hero2-preview-grid">
+            <article class="fcg-hero2-preview-card"><span>Experience</span><strong>Corporate and AI booking tools</strong></article>
+            <article class="fcg-hero2-preview-card"><span>Operate</span><strong>Atlas TMC OS and agent workflows</strong></article>
+            <article class="fcg-hero2-preview-card"><span>Connect</span><strong>G-Link, F-Link, and supplier data</strong></article>
+            <article class="fcg-hero2-preview-card"><span>Optimize</span><strong>AgreeEase and AI mapping</strong></article>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== SUPPLY SOURCES LOGO STRIP ===== -->
-  <section class="partner-grid-section relative z-10 pt-10 pb-12 md:pt-12 md:pb-16" aria-label="Hotel supply sources connected through G-Link">
-    <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
-      <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
-        One API. <strong>Every major supply source.</strong>
-      </h2>
-      <p class="mx-auto mt-3 max-w-xl text-sm text-zinc-400">Global and China hotel groups, connected through one G&#8209;Link integration.</p>
+  <section id="product-capabilities" class="fcg-bento">
+    <div class="fcg-bento-spiral" aria-hidden="true">
+      <div id="fcgBentoSpiral"></div>
     </div>
-    <div class="partner-logo-band border-y">
-      <div class="mx-auto flex max-w-[1040px] flex-wrap items-center justify-center gap-x-10 gap-y-8 px-6 py-10 md:gap-x-14">
-        <span class="supplier-logo-placeholder">Narada</span>
-        <span class="supplier-logo-placeholder">New Century</span>
-        <img alt="Kempinski Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/kempinski.svg">
-        <img alt="Hyatt Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/hyatt.svg">
-        <span class="supplier-logo-placeholder">Ji Hotel</span>
-        <span class="supplier-logo-placeholder">Homeinns</span>
-        <img alt="Marriott International Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/marriott.svg">
-        <span class="supplier-logo-placeholder">Vienna Hotel</span>
-        <img alt="Hilton Hotels and Resorts Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/hilton.svg">
-        <img alt="Shangri-La Hotels and Resorts Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/shangri-la.svg">
-        <img alt="Accor Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/accor.svg">
-        <img alt="Atour Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/atour.svg">
-        <span class="supplier-logo-placeholder">Dossen</span>
-        <img alt="Jin Jiang International Logo" class="supplier-logo-real select-none pointer-events-none" src="../assets/images/logos/jinjiang-international.jpg">
-        <img alt="IHG Hotels and Resorts Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/ihg.svg">
-        <span class="supplier-logo-placeholder">CTG Hotel</span>
-        <span class="supplier-logo-placeholder">Green Tree Inn</span>
-        <span class="supplier-logo-placeholder">Inzone</span>
+    <div class="fcg-bento-inner">
+      <header class="fcg-bento-header fade-up">
+        <div>
+          <div class="fcg-bento-kicker">Product Capabilities</div>
+          <h2>Bento view of the FCG stack.</h2>
+        </div>
+        <p class="fcg-bento-subcopy">A compact map of what sits underneath the product suite: traveler experience, agent operations, supplier connectivity, rate intelligence, and content quality.</p>
+      </header>
+
+      <div class="fcg-bento-grid">
+        <article class="fcg-bento-card fcg-bento-card-large fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>One operating layer from booking to service</h3>
+            <span class="fcg-bento-meta">Core</span>
+          </header>
+          <p>Connect client requests, traveler profiles, policy checks, quotes, bookings, queues, reporting, and post-trip service in one operational surface instead of scattered tools.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-small fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Modern traveler experience</h3>
+            <span class="fcg-bento-meta">UX</span>
+          </header>
+          <p>Corporate and AI booking flows give travelers faster self-service while keeping policy and approval logic visible.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-small fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Agent workflow control</h3>
+            <span class="fcg-bento-meta">Ops</span>
+          </header>
+          <p>Atlas and agent tools reduce screen switching, manual quote building, and invisible queue work.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-wide fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Clean supply connectivity</h3>
+            <span class="fcg-bento-meta">API</span>
+          </header>
+          <p>G-Link and F-Link normalize hotel and flight supply across providers, regions, fare families, rooms, and negotiated rates.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-wide fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Rate and content intelligence</h3>
+            <span class="fcg-bento-meta">AI</span>
+          </header>
+          <p>AgreeEase and AI Mapping help teams source rates, verify availability, remove duplicates, and improve content quality before it reaches the booking flow.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <section id="api-capabilities" class="fcg-marketing-section">
-    <div class="fcg-marketing-inner" style="max-width:72rem;">
+  <section id="performance-signals" class="fcg-marketing-section">
+    <div class="fcg-marketing-inner">
       <header class="fcg-marketing-header fade-up">
-        <div class="fcg-marketing-eyebrow">Supply layer</div>
-        <h2 class="fcg-marketing-title">One API. <span>Four supply paths.</span></h2>
-        <p>G&#8209;Link brings the hotel paths a TMC needs into one layer: GDS, direct hotel, bedbank, and Asia-direct. Rates, content, and post-booking events stay connected.</p>
+        <h2 class="fcg-marketing-title"><span>Empowering travel teams</span><br>with AI-driven operations</h2>
       </header>
 
-      <div class="fcg-marketing-features fade-up">
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:buildings-2-linear" width="22" height="22"></iconify-icon></div>
-          <h3>4.3M+ mapped hotels</h3>
-          <p>Four supply paths as one bookable, deduplicated feed.</p>
+      <div class="fcg-ai-showcase fade-up">
+        <article class="fcg-ai-card" aria-label="AI operations assistant preview">
+          <div class="fcg-ai-spark"><iconify-icon icon="solar:stars-bold-duotone" width="26" height="26"></iconify-icon></div>
+          <h3 class="fcg-ai-prompt">How can we reduce manual servicing time while keeping policy, rates, and supplier data aligned?</h3>
+
+          <div class="fcg-ai-stats">
+            <div class="fcg-ai-stat"><iconify-icon icon="solar:star-shine-bold-duotone" width="22" height="22"></iconify-icon><span><strong>90+</strong> integrations</span></div>
+            <div class="fcg-ai-stat"><iconify-icon icon="solar:user-check-bold-duotone" width="22" height="22"></iconify-icon><span><strong>56%</strong> productivity boost</span></div>
+            <div class="fcg-ai-stat"><iconify-icon icon="solar:headphones-round-sound-bold-duotone" width="22" height="22"></iconify-icon><span><strong>24/7</strong> operations visibility</span></div>
+          </div>
+
+          <div class="fcg-ai-input">
+            <div>
+              <div class="fcg-ai-placeholder">Ask FCG Assistant</div>
+              <div class="fcg-ai-tools">
+                <span class="fcg-ai-tool"><iconify-icon icon="solar:add-circle-linear" width="26" height="26"></iconify-icon></span>
+                <span class="fcg-ai-tool"><iconify-icon icon="solar:global-linear" width="25" height="25"></iconify-icon></span>
+              </div>
+            </div>
+            <span class="fcg-ai-submit"><iconify-icon icon="solar:arrow-up-linear" width="24" height="24"></iconify-icon></span>
+          </div>
         </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:tag-price-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Corporate rates, not just inventory</h3>
-          <p>RFP rates wholesalers can't carry, up to 70% of corporate volume.</p>
+      </div>
+
+      <div class="fcg-marketing-features">
+        <article class="fcg-marketing-feature fade-up">
+          <h3>Generate options</h3>
+          <p>Turn fragmented requests, policies, and supplier rules into clear itinerary and sourcing options.</p>
         </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:global-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Asia depth around global GDS</h3>
-          <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
+        <article class="fcg-marketing-feature fade-up">
+          <h3>Improve workflows</h3>
+          <p>Help agents move faster with cleaner queues, fewer handoffs, and more reliable operational context.</p>
         </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Mid-office after booking</h3>
-          <p>Cancellations, holds, and reschedules handled through the BMS.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:ranking-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Quality-scored sources</h3>
-          <p>Bookings route to the most dependable supply path.</p>
+        <article class="fcg-marketing-feature fade-up">
+          <h3>Design rollouts</h3>
+          <p>Map each module to the buyer pain, market requirement, and team workflow that matters first.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section id="how-it-works" class="fcg-integration-section">
-    <div class="fcg-integration-inner">
-      <header class="fcg-integration-header fade-up">
-        <div class="fcg-integration-eyebrow">Integration</div>
-        <h2 class="fcg-integration-title"><span>Skills, API, or SDK.</span><br>Three ways into the same supply layer.</h2>
-        <p>The Open Platform exposes G&#8209;Link three ways. Skills is the fastest start.</p>
-      </header>
-
-      <div class="fcg-flow-grid fade-up">
-        <div class="fcg-flow-step">
-          <div class="fcg-flow-step-number">01</div>
-          <h3>Skills · AI-native</h3>
-          <p>Describe the flow in plain English. AI drafts it from live docs.</p>
-          <div class="code-tag">/skill fcg-glink</div>
-        </div>
-        <div class="fcg-flow-step">
-          <div class="fcg-flow-step-number">02</div>
-          <h3>API · Versioned REST</h3>
-          <p>Full control over search, rates, and booking.</p>
-          <div class="code-tag">POST /v2/hotels/search</div>
-        </div>
-        <div class="fcg-flow-step">
-          <div class="fcg-flow-step-number">03</div>
-          <h3>SDK · Managed surface</h3>
-          <p>Typed primitives for standard stacks, less boilerplate.</p>
-          <div class="code-tag">npm i @fcg/glink</div>
-        </div>
+  <section id="decision-paths" class="px-6 md:px-12 py-28 bg-[#050505] border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-3xl mb-16 fade-up">
+        <div class="product-kicker text-xs text-orange-500 mb-4">Decision Paths</div>
+        <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Three reasons buyers start a product conversation.</h2>
       </div>
-
-      <div class="fcg-supply-illustration fade-up" aria-label="Many supply sources resolving into one G-Link layer">
-        <svg width="340" height="340" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)" opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="450" cy="720" r="370"/><circle cx="480" cy="720" r="400"/><circle cx="510" cy="720" r="430"/><circle cx="540" cy="720" r="460"/><circle cx="570" cy="720" r="490"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>
+      <div class="space-y-5">
+        <article class="product-card rounded-3xl p-6 md:p-8 fade-up grid lg:grid-cols-[.55fr_1fr_.85fr] gap-6 items-start">
+          <div>
+            <div class="product-kicker text-[10px] text-orange-500 mb-2">Path 01</div>
+            <h3 class="text-2xl text-white font-medium tracking-tight">Improve traveler adoption</h3>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed">Travelers bypass slow legacy tools, creating policy leakage, reporting gaps, and weak duty of care.</p>
+          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
+            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Recommended product</div>
+            <div class="text-lg text-white font-medium mb-3">Corporate Booking Tool + AI Booking Tool</div>
+            <p class="text-sm text-neutral-400 leading-relaxed">Modern self-service and conversational booking bring travelers back into the managed program.</p>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-6 md:p-8 fade-up grid lg:grid-cols-[.55fr_1fr_.85fr] gap-6 items-start">
+          <div>
+            <div class="product-kicker text-[10px] text-orange-500 mb-2">Path 02</div>
+            <h3 class="text-2xl text-white font-medium tracking-tight">Free agent teams from tool sprawl</h3>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed">Agents work across six screens, queues are invisible, reporting is manual, and margins compress as every client adds more labor.</p>
+          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
+            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Recommended product</div>
+            <div class="text-lg text-white font-medium mb-3">Atlas TMC OS + Agent Booking Tool</div>
+            <p class="text-sm text-neutral-400 leading-relaxed">One operational surface connects clients, requests, queues, bookings, incidents, and reports.</p>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-6 md:p-8 fade-up grid lg:grid-cols-[.55fr_1fr_.85fr] gap-6 items-start">
+          <div>
+            <div class="product-kicker text-[10px] text-orange-500 mb-2">Path 03</div>
+            <h3 class="text-2xl text-white font-medium tracking-tight">Clean supply and rates</h3>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed">Supplier data, negotiated rates, and content quality break down when teams manage hotels, flights, and RFPs across disconnected tools.</p>
+          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
+            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Recommended product</div>
+            <div class="text-lg text-white font-medium mb-3">G-Link + F-Link + AgreeEase + AI Mapping</div>
+            <p class="text-sm text-neutral-400 leading-relaxed">Mapped supply, structured sourcing, and content intelligence make rates cleaner and easier to use.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section id="supply-buckets" class="px-6 md:px-12 py-28 bg-[#000] border-t border-white/10">
+  <section id="product-map" class="px-6 md:px-12 py-28 bg-[#000] border-t border-white/10">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 fade-up">
         <div>
-          <div class="product-kicker text-xs text-orange-500 mb-4">Supply · Buckets</div>
-          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Four supply paths.</h2>
+          <div class="product-kicker text-xs text-orange-500 mb-4">Product Map</div>
+          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Four product groups, mapped to buyer pains.</h2>
         </div>
-        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Each path plays a different role. Together, one accountable layer.</p>
+        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Compact enough for scanning, while still connecting each product area to the problem it solves.</p>
       </div>
-
-      <div class="fcg-flow-grid fade-up" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">A</div>
-          <h3>Corporate-rate GDS</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">RFP rates wholesale can't carry, through direct GDS.</p>
-          <div class="code-tag">Bucket A · GDS direct</div>
-        </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">B</div>
-          <h3>Direct hotel paths</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Direct contracts and channel managers. The most accountable channel.</p>
-          <div class="code-tag">Bucket B · Direct hotel &amp; NDC</div>
-        </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">C</div>
-          <h3>Long-tail coverage</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Bedbank breadth for properties not covered elsewhere.</p>
-          <div class="code-tag">Bucket C · Bedbank</div>
-        </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">D</div>
-          <h3>China and Asia direct</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Chinese chains and Asia-specialty connections. Built in-region.</p>
-          <div class="code-tag">Bucket D · China &amp; Asia direct</div>
-        </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <article class="product-card rounded-3xl p-7 fade-up">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:case-round-linear" width="23" height="23"></iconify-icon></div>
+            <div>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Experience</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Booking Experience</h3>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Corporate Booking Tool and AI Booking Tool help travelers book faster while staying inside policy.</p>
+          <div class="border-t border-white/10 pt-5">
+            <ul class="space-y-3">
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Mobile-first flight, hotel, and ground booking</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Natural-language trip intake and itinerary generation</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Policy-aware approvals and agent handoff</span></li>
+            </ul>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-7 fade-up">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="23" height="23"></iconify-icon></div>
+            <div>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Operate</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Agent Operations</h3>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Atlas TMC OS and Agent Booking Tool reduce screen switching, queue blind spots, and manual quote work.</p>
+          <div class="border-t border-white/10 pt-5">
+            <ul class="space-y-3">
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Unified search across flights, hotels, rail, and ground</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>OpsHub for traveler CRM, booking pipeline, and queues</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Inbox, SLA, GDS, supplier, finance, HR, and SSO workflows</span></li>
+            </ul>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-7 fade-up">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:plane-linear" width="23" height="23"></iconify-icon></div>
+            <div>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Connect</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Supply Connectivity</h3>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">G-Link and F-Link normalize hotel and flight supply across providers, regions, fare families, and rooms.</p>
+          <div class="border-t border-white/10 pt-5">
+            <ul class="space-y-3">
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Multi-source hotel aggregation and deduplication</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>GDS, NDC, LCC direct, and aggregator content</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Booking stability, PNR reconciliation, and rate layering</span></li>
+            </ul>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-7 fade-up">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:magic-stick-3-linear" width="23" height="23"></iconify-icon></div>
+            <div>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Intelligence</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Rates and Mapping</h3>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">AgreeEase and AI Mapping make sourcing, negotiated rates, property records, and room content easier to manage.</p>
+          <div class="border-t border-white/10 pt-5">
+            <ul class="space-y-3">
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Structured RFP issuance and supplier comparison</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Rate load verification and contract tracking</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>AI-powered property, provider, and room-level matching</span></li>
+            </ul>
+          </div>
+        </article>
       </div>
     </div>
   </section>
-  <section class="fcg-marketing-section" aria-label="Common questions from TMC evaluation teams">
-    <div class="fcg-marketing-inner" style="max-width:72rem;">
-      <header class="fcg-marketing-header fade-up">
-        <div class="fcg-marketing-eyebrow">Evaluation</div>
-        <h2 class="fcg-marketing-title">What TMCs <span>ask first.</span></h2>
-      </header>
-
-      <div class="fcg-marketing-features fade-up">
-        <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"We already use another wholesaler."</div>
-          <h3>Wholesalers cannot carry corporate-negotiated rates.</h3>
-          <p>RFP rates only flow through GDS and direct hotel, up to 70% of corporate volume. G&#8209;Link adds the layer wholesalers can't.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"We already use another travel platform."</div>
-          <h3>Most large TMCs already multiplex APIs.</h3>
-          <p>If China is in your client mix, G&#8209;Link closes the gap: Chinese chains plus global GDS. China is 58% of Asia travel.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"Our dev team is already stretched thin."</div>
-          <h3>Skills helps developers start without a handoff.</h3>
-          <p>Skills, API, and SDK share one backend. Ship the first search call from live docs, no handoff.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="fcg-integration-section" aria-label="Commercial model">
-    <div class="fcg-integration-inner">
-      <header class="fcg-integration-header fade-up">
-        <div class="fcg-integration-eyebrow">Commercial model</div>
-        <h2 class="fcg-integration-title"><span>Clear packaging.</span><br>Scoped by product surface.</h2>
-        <p>Tiered by product surface: G&#8209;Link only, full OBT suite, white-label, or RFP support.</p>
-      </header>
-
-      <div class="fcg-pricing-rows fade-up">
-        <article>
-          <div class="fcg-pricing-label">One-time setup</div>
-          <div class="fcg-pricing-value">Scoped by launch needs</div>
-          <div class="fcg-pricing-sub">Supplier activation, sandbox onboarding, and integration support.</div>
-        </article>
-        <article>
-          <div class="fcg-pricing-label">Monthly subscription</div>
-          <div class="fcg-pricing-value">Tiered by product scope</div>
-          <div class="fcg-pricing-sub">G&#8209;Link only sits at the lower end of the range.</div>
-        </article>
-      </div>
-      <p class="fcg-pricing-foot fade-up">Final tiers depend on product scope and supplier activation.</p>
-    </div>
-  </section>
-
 </main>
-<!-- ===== API ACCESS CTA SECTION ===== -->
+<!-- ===== MODULAR ROLLOUT CTA SECTION ===== -->
     <footer id="contact" class="flex flex-col w-full">
-      <section id="getting-started" class="fcg-mobile-feature border-t border-white/10">
+      <section id="mobile-workflows" class="fcg-mobile-feature border-t border-white/10">
         <div class="fcg-mobile-inner">
           <header class="fcg-mobile-heading fade-up">
-            <div class="fcg-main-icon"><iconify-icon icon="solar:code-square-linear" width="28" height="28"></iconify-icon></div>
-            <div class="fcg-mobile-eyebrow">Get connected</div>
-            <h2>Connect G&#8209;Link.</h2>
-            <p class="fcg-mobile-subcopy">Start in sandbox, test the four supply paths, move to production.</p>
+            <div class="fcg-main-icon"><iconify-icon icon="solar:smartphone-update-linear" width="28" height="28"></iconify-icon></div>
+            <div class="fcg-mobile-eyebrow">Modular Rollout</div>
+            <h2>Deploy the stack one workflow at a time.</h2>
+            <p class="fcg-mobile-subcopy">The FCG product suite can start with the pain point that matters most: booking adoption, agent operations, supplier connectivity, rate intelligence, or content quality.</p>
           </header>
 
           <div class="fcg-feature-grid">
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:key-minimalistic-square-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:routing-3-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Register on the Open Platform</h3>
-                <p>Self-serve sandbox credentials and live docs. No handoff.</p>
+                <h3>Start with the highest-friction workflow</h3>
+                <p>Use the product map to choose the first module based on where teams lose time, margin, visibility, or traveler adoption.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:magic-stick-3-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:layers-minimalistic-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Integrate via Skills, API, or SDK</h3>
-                <p>Three doors, one backend. Skills is the default: describe it, AI writes the code.</p>
+                <h3>Layer tools without replacing everything</h3>
+                <p>Each product is designed to connect with existing operating systems, supplier flows, and market-specific processes.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:test-tube-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:chart-square-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Test against the four supply buckets</h3>
-                <p>Run a search across all four paths and confirm a sandbox booking.</p>
+                <h3>Track adoption and operational lift</h3>
+                <p>Measure improvements through usage, queue movement, rate availability, content quality, and service turnaround.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:rocket-2-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:shield-network-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Move to production</h3>
-                <p>Switch to production once validated. Commercial terms handled in parallel.</p>
+                <h3>Scale across regional complexity</h3>
+                <p>Support different teams, suppliers, languages, and market requirements without turning the rollout into a full rebuild.</p>
               </div>
             </article>
           </div>
 
-          <section class="glink-radar-section" aria-label="G&#8209;Link supply radar">
-            <div class="glink-radar-inner">
-              <div class="glink-radar-scene">
-                <div class="glink-radar-stage">
-                  <div class="glink-radar-row-wide">
-                    <div class="glink-radar-row-inner">
-                      <div class="glink-radar-node" style="animation-delay: .2s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:compass-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">GDS</div>
-                      </div>
-                      <div class="glink-radar-node" style="animation-delay: .3s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:buildings-2-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Direct hotel</div>
-                      </div>
-                      <div class="glink-radar-node" style="animation-delay: .4s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:box-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Bedbank</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="glink-radar-row-narrow">
-                    <div class="glink-radar-row-inner">
-                      <div class="glink-radar-node" style="animation-delay: .5s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:chart-2-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Corporate rates</div>
-                      </div>
-                      <div class="glink-radar-node" style="animation-delay: .6s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:map-point-wave-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Asia direct</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="glink-radar-row-wide">
-                    <div class="glink-radar-row-inner">
-                      <div class="glink-radar-node" style="animation-delay: .7s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:case-round-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">TMCs</div>
-                      </div>
-                      <div class="glink-radar-node" style="animation-delay: .8s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:cpu-bolt-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Mid-office</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="glink-radar-core" aria-hidden="true">
-                    <div class="glink-radar-sweep">
-                      <div class="glink-radar-sweep-line"></div>
-                    </div>
-                    <div class="glink-radar-circle" style="height:5rem;width:5rem;border:1px solid rgba(255,255,255,.9);animation-delay:0s;"></div>
-                    <div class="glink-radar-circle" style="height:10rem;width:10rem;border:1px solid rgba(255,255,255,.8);animation-delay:.1s;"></div>
-                    <div class="glink-radar-circle" style="height:15rem;width:15rem;border:1px solid rgba(255,255,255,.7);animation-delay:.2s;"></div>
-                    <div class="glink-radar-circle" style="height:20rem;width:20rem;border:1px solid rgba(255,255,255,.6);animation-delay:.3s;"></div>
-                    <div class="glink-radar-circle" style="height:25rem;width:25rem;border:1px solid rgba(255,255,255,.5);animation-delay:.4s;"></div>
-                    <div class="glink-radar-circle" style="height:30rem;width:30rem;border:1px solid rgba(255,255,255,.4);animation-delay:.5s;"></div>
-                    <div class="glink-radar-circle" style="height:35rem;width:35rem;border:1px solid rgba(255,255,255,.3);animation-delay:.6s;"></div>
-                    <div class="glink-radar-circle" style="height:40rem;width:40rem;border:1px solid rgba(255,255,255,.2);animation-delay:.7s;"></div>
-                  </div>
-
-                  <div class="glink-radar-divider" aria-hidden="true"></div>
-                </div>
-              </div>
-            </div>
-          </section>
-
           <div class="fcg-mobile-cta fade-up">
-            <h3>Hotel supply, ready to integrate.</h3>
-            <p>Walk through corporate-rate routing, Asia depth, and the sandbox path to production.</p>
+            <h3>Choose the first module with confidence.</h3>
+            <p>Use the sections above to connect buyer pain points with the right product combination before starting a deeper conversation.</p>
             <div class="fcg-store-actions">
-              <a href="#capabilities" class="fcg-store-button"><iconify-icon icon="solar:calendar-mark-linear" width="18" height="18"></iconify-icon>Schedule a walkthrough</a>
-              <a href="../api-access.html" class="fcg-store-button"><iconify-icon icon="solar:key-minimalistic-square-linear" width="18" height="18"></iconify-icon>Register for sandbox</a>
+              <a href="#decision-paths" class="fcg-store-button"><iconify-icon icon="solar:compass-linear" width="18" height="18"></iconify-icon>Explore decision paths</a>
+              <a href="#product-map" class="fcg-store-button"><iconify-icon icon="solar:map-linear" width="18" height="18"></iconify-icon>View product map</a>
             </div>
           </div>
         </div>
       </section>
     </footer>
-    <!-- ===== END API ACCESS CTA SECTION ===== -->
-
-    <!-- ===== NUITEE-LAYOUT COMPARISON BLOCK (NEW · for review) ===== -->
-    <style>
-      .nl-block { background: var(--color-bg); color: var(--color-fg); font-family: 'Inter', system-ui, sans-serif; }
-      .nl-inner { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
-      .nl-inner-wide { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
-      .nl-section { padding: 5.5rem 0; border-top: 1px solid var(--color-border); }
-      .nl-eyebrow { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: #F97316; font-weight: 600; margin-bottom: 1rem; }
-      .nl-h2 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.7rem, 3.4vw, 2.6rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.1; margin: 0; }
-      .nl-h2 span { color: #F97316; }
-      .nl-lead { color: var(--color-muted); font-size: 1rem; line-height: 1.6; max-width: 40rem; margin: 1rem 0 0; }
-      .nl-greybox {
-        width: 100%; min-height: 22rem; border-radius: 1rem;
-        border: 1px dashed var(--color-border);
-        background:
-          repeating-linear-gradient(45deg, transparent, transparent 11px, rgba(136,136,136,.06) 11px, rgba(136,136,136,.06) 12px),
-          var(--color-card);
-        display: flex; align-items: center; justify-content: center; text-align: center;
-        color: var(--color-muted); font-size: .82rem; letter-spacing: .04em; padding: 2rem;
-      }
-      .nl-greybox span { max-width: 16rem; }
-
-      /* Divider strip */
-      .nl-divider { background: var(--color-card); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
-      .nl-divider-inner { max-width: 80rem; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; gap: .7rem; }
-      .nl-divider .nl-dot { width: .55rem; height: .55rem; border-radius: 999px; background: #F97316; flex: none; }
-      .nl-divider strong { font-size: .82rem; font-weight: 600; letter-spacing: .02em; }
-      .nl-divider em { font-style: normal; color: var(--color-muted); font-size: .82rem; }
-
-      /* Hero (split) */
-      .nl-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center; }
-      .nl-pill { display: inline-flex; align-items: center; gap: .5rem; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--color-fg); border: 1px solid var(--color-border); border-radius: 999px; padding: .4rem .85rem; }
-      .nl-pill .nl-dot { width: .5rem; height: .5rem; border-radius: 999px; background: #F97316; }
-      .nl-h1 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(2.1rem, 4.6vw, 3.3rem); font-weight: 500; letter-spacing: -.025em; line-height: 1.05; margin: 1.6rem 0 0; }
-      .nl-h1 em { font-style: normal; color: #F97316; }
-      .nl-clarifier { color: var(--color-muted); font-size: 1.05rem; line-height: 1.6; margin: 1.1rem 0 0; max-width: 32rem; }
-      .nl-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.9rem; }
-      .nl-btn { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; padding: .8rem 1.5rem; font-size: .9rem; font-weight: 500; text-decoration: none; transition: transform .2s ease, opacity .2s ease; }
-      .nl-btn:hover { transform: translateY(-1px); }
-      .nl-btn-primary { background: #F97316; color: #0F1114; }
-      .nl-btn-secondary { background: transparent; color: var(--color-fg); border: 1px solid var(--color-border); }
-
-      /* Advantage 3-up */
-      .nl-adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
-      .nl-card { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 1rem; padding: 1.75rem; }
-      .nl-card-icon { width: 2.6rem; height: 2.6rem; display: flex; align-items: center; justify-content: center; border-radius: .7rem; border: 1px solid var(--color-border); color: #F97316; margin-bottom: 1.1rem; }
-      .nl-card h3 { font-size: 1.05rem; font-weight: 600; margin: 0 0 .5rem; letter-spacing: -.01em; }
-      .nl-card p { color: var(--color-muted); font-size: .92rem; line-height: 1.55; margin: 0; }
-
-      /* Stats band */
-      .nl-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
-      .nl-stat { border-left: 2px solid #F97316; padding-left: 1.1rem; }
-      .nl-stat-num { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; letter-spacing: -.02em; line-height: 1; }
-      .nl-stat-label { color: var(--color-muted); font-size: .86rem; line-height: 1.45; margin-top: .55rem; }
-
-      /* Capability 4-up (metric + visual) */
-      .nl-cap-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
-      .nl-cap { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 1rem; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.1rem; }
-      .nl-cap-metric { font-family: 'Sora', 'Inter', sans-serif; font-size: 1.7rem; font-weight: 500; letter-spacing: -.02em; }
-      .nl-cap h3 { font-size: 1rem; font-weight: 600; margin: 0; }
-      .nl-cap p { color: var(--color-muted); font-size: .9rem; line-height: 1.55; margin: 0; }
-      .nl-cap-visual { min-height: 8rem; border-radius: .75rem; border: 1px dashed var(--color-border);
-        background: repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(136,136,136,.06) 9px, rgba(136,136,136,.06) 10px), var(--color-bg);
-        display: flex; align-items: center; justify-content: center; color: var(--color-muted); font-size: .72rem; letter-spacing: .04em; text-align: center; padding: 1rem; }
-
-      /* Feature split (alternating) */
-      .nl-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-      .nl-feature + .nl-feature { margin-top: 4.5rem; }
-      .nl-feature.nl-reverse .nl-feature-media { order: -1; }
-      .nl-feature h3 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.12; margin: .8rem 0 0; }
-      .nl-feature p { color: var(--color-muted); font-size: 1rem; line-height: 1.6; margin: 1rem 0 0; max-width: 30rem; }
-      .nl-feature-list { list-style: none; padding: 0; margin: 1.4rem 0 0; display: flex; flex-direction: column; gap: .7rem; }
-      .nl-feature-list li { display: flex; align-items: flex-start; gap: .6rem; font-size: .92rem; color: var(--color-fg); }
-      .nl-feature-list iconify-icon { color: #F97316; flex: none; margin-top: .15rem; }
-
-      /* Final CTA band */
-      .nl-cta { text-align: center; padding: 6rem 1.5rem; border-top: 1px solid var(--color-border); background: var(--color-card); }
-      .nl-cta h2 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 500; letter-spacing: -.025em; margin: 0 auto; max-width: 28rem; line-height: 1.1; }
-      .nl-cta p { color: var(--color-muted); font-size: 1.05rem; margin: 1.1rem auto 0; max-width: 34rem; line-height: 1.6; }
-      .nl-cta .nl-actions { justify-content: center; }
-
-      @media (max-width: 860px) {
-        .nl-hero, .nl-feature, .nl-feature.nl-reverse { grid-template-columns: 1fr; gap: 2rem; }
-        .nl-feature.nl-reverse .nl-feature-media { order: 0; }
-        .nl-adv-grid, .nl-stats, .nl-cap-grid { grid-template-columns: 1fr; }
-        .nl-stats { gap: 1.6rem; }
-      }
-    </style>
-
-    <div class="nl-block">
-      <!-- 1 · Labelled divider strip -->
-      <div class="nl-divider">
-        <div class="nl-divider-inner">
-          <span class="nl-dot" aria-hidden="true"></span>
-          <strong>New layout · Nuitee-ordered (G&#8209;Link)</strong>
-          <em>— same content, re-sequenced for review</em>
-        </div>
-      </div>
-
-      <!-- 2 · Split hero -->
-      <section class="nl-section" aria-label="G-Link hero (Nuitee layout)">
-        <div class="nl-inner-wide">
-          <div class="nl-hero">
-            <div class="fade-up">
-              <span class="nl-pill"><span class="nl-dot" aria-hidden="true"></span> Product · G&#8209;Link</span>
-              <h1 class="nl-h1">Hotel supply for <em>corporate travel.</em></h1>
-              <p class="nl-clarifier">One API for GDS, direct hotel, bedbank, and Asia-direct supply. Corporate rates, 4.3M+ mapped hotels, and a mid-office behind every booking.</p>
-              <div class="nl-actions">
-                <a class="nl-btn nl-btn-primary" href="#getting-started">Schedule a walkthrough <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
-                <a class="nl-btn nl-btn-secondary" href="../api-access.html"><iconify-icon icon="solar:code-square-linear" width="16" height="16"></iconify-icon> Read the API docs</a>
-              </div>
-            </div>
-            <div class="nl-greybox scale-in" aria-label="Product walkthrough placeholder">
-              <svg width="240" height="240" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="var(--color-fg)" opacity="0.16" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="480" cy="720" r="400"/><circle cx="540" cy="720" r="460"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3 · Three core advantages -->
-      <section class="nl-section" aria-label="Core advantages">
-        <div class="nl-inner">
-          <div class="fade-up">
-            <div class="nl-eyebrow">Why G&#8209;Link</div>
-            <h2 class="nl-h2">One layer. <span>Three things wholesalers can't do.</span></h2>
-          </div>
-          <div class="nl-adv-grid fade-up">
-            <article class="nl-card">
-              <div class="nl-card-icon"><iconify-icon icon="solar:tag-price-linear" width="22" height="22"></iconify-icon></div>
-              <h3>Corporate rates</h3>
-              <p>RFP rates wholesalers can't carry, up to 70% of corporate volume.</p>
-            </article>
-            <article class="nl-card">
-              <div class="nl-card-icon"><iconify-icon icon="solar:global-linear" width="22" height="22"></iconify-icon></div>
-              <h3>Asia depth</h3>
-              <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
-            </article>
-            <article class="nl-card">
-              <div class="nl-card-icon"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
-              <h3>Mid-office included</h3>
-              <p>Cancellations, holds, and reschedules handled through the BMS.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4 · Stats band (static numerals) -->
-      <section class="nl-section" aria-label="Supply network at a glance">
-        <div class="nl-inner">
-          <div class="fade-up">
-            <div class="nl-eyebrow">By the numbers</div>
-            <h2 class="nl-h2">Supply network <span>at a glance.</span></h2>
-          </div>
-          <div class="nl-stats fade-up">
-            <div class="nl-stat">
-              <div class="nl-stat-num">4.3M+</div>
-              <div class="nl-stat-label">Mapped hotels across four supply paths</div>
-            </div>
-            <div class="nl-stat">
-              <div class="nl-stat-num">43 · 13</div>
-              <div class="nl-stat-label">Suppliers connected, 13 live today</div>
-            </div>
-            <div class="nl-stat">
-              <div class="nl-stat-num">4</div>
-              <div class="nl-stat-label">Supply paths in one bookable feed</div>
-            </div>
-            <div class="nl-stat">
-              <div class="nl-stat-num">58%</div>
-              <div class="nl-stat-label">China's share of Asia travel</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5 · Four capability cards (metric + visual) -->
-      <section class="nl-section" aria-label="Platform capabilities">
-        <div class="nl-inner">
-          <div class="fade-up">
-            <div class="nl-eyebrow">Capabilities</div>
-            <h2 class="nl-h2">What the supply layer <span>actually does.</span></h2>
-          </div>
-          <div class="nl-cap-grid fade-up">
-            <article class="nl-cap">
-              <div class="nl-cap-metric">4.3M+ hotels</div>
-              <div>
-                <h3>Mapping engine</h3>
-                <p>Four supply paths deduplicated into one bookable feed.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ mapping engine view — real screenshot to be supplied ]</span></div>
-            </article>
-            <article class="nl-cap">
-              <div class="nl-cap-metric">43 suppliers</div>
-              <div>
-                <h3>Coverage</h3>
-                <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ coverage map — real screenshot to be supplied ]</span></div>
-            </article>
-            <article class="nl-cap">
-              <div class="nl-cap-metric">up to 70%</div>
-              <div>
-                <h3>Corporate rates</h3>
-                <p>RFP rates wholesalers can't carry, routed through GDS and direct hotel.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ rate routing view — real screenshot to be supplied ]</span></div>
-            </article>
-            <article class="nl-cap">
-              <div class="nl-cap-metric">Mid-office</div>
-              <div>
-                <h3>After booking</h3>
-                <p>Cancellations, holds, and reschedules handled through the BMS.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ mid-office / BMS view — real screenshot to be supplied ]</span></div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- 6 · Alternating feature-split blocks -->
-      <section class="nl-section" aria-label="How G-Link works">
-        <div class="nl-inner-wide">
-          <!-- 6a · Supply layer -->
-          <div class="nl-feature fade-up">
-            <div>
-              <div class="nl-eyebrow">Supply layer</div>
-              <h3>One API. Four supply paths.</h3>
-              <p>G&#8209;Link brings the hotel paths a TMC needs into one layer: GDS, direct hotel, bedbank, and Asia-direct. Rates, content, and post-booking events stay connected.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:check-circle-linear" width="18" height="18"></iconify-icon> 4.3M+ mapped hotels as one deduplicated feed</li>
-                <li><iconify-icon icon="solar:check-circle-linear" width="18" height="18"></iconify-icon> Quality-scored sources route to the most dependable path</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ supply layer diagram — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-
-          <!-- 6b · Integration -->
-          <div class="nl-feature nl-reverse fade-up">
-            <div>
-              <div class="nl-eyebrow">Integration</div>
-              <h3>Skills, API, or SDK.</h3>
-              <p>The Open Platform exposes G&#8209;Link three ways. Skills is the fastest start — describe the flow in plain English and AI drafts it from live docs.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:magic-stick-3-linear" width="18" height="18"></iconify-icon> Skills · AI-native, fastest start</li>
-                <li><iconify-icon icon="solar:code-linear" width="18" height="18"></iconify-icon> API · versioned REST, full control</li>
-                <li><iconify-icon icon="solar:box-linear" width="18" height="18"></iconify-icon> SDK · typed primitives, less boilerplate</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ integration / docs view — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-
-          <!-- 6c · Supply buckets -->
-          <div class="nl-feature fade-up">
-            <div>
-              <div class="nl-eyebrow">Supply · Buckets</div>
-              <h3>Four supply paths.</h3>
-              <p>Each path plays a different role. Together, one accountable layer.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:compass-linear" width="18" height="18"></iconify-icon> A · Corporate-rate GDS</li>
-                <li><iconify-icon icon="solar:buildings-2-linear" width="18" height="18"></iconify-icon> B · Direct hotel &amp; NDC</li>
-                <li><iconify-icon icon="solar:box-linear" width="18" height="18"></iconify-icon> C · Bedbank long-tail coverage</li>
-                <li><iconify-icon icon="solar:map-point-wave-linear" width="18" height="18"></iconify-icon> D · China &amp; Asia direct</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ supply buckets view — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-
-          <!-- 6d · Commercial model -->
-          <div class="nl-feature nl-reverse fade-up">
-            <div>
-              <div class="nl-eyebrow">Commercial model</div>
-              <h3>Clear packaging.</h3>
-              <p>Tiered by product surface: G&#8209;Link only, full OBT suite, white-label, or RFP support. Final tiers depend on product scope and supplier activation.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:tag-linear" width="18" height="18"></iconify-icon> One-time setup, scoped by launch needs</li>
-                <li><iconify-icon icon="solar:wallet-money-linear" width="18" height="18"></iconify-icon> Monthly subscription, tiered by product scope</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ pricing / packaging view — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 7 · Homepage partner grid (plain HTML) -->
-      <section class="partner-grid-section relative z-10 nl-section" aria-label="Travel brands connected through FCG">
-        <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
-          <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
-            300+ travel brands, TMCs, and hotel groups. <strong>Already connected.</strong>
-          </h2>
-        </div>
-        <div class="partner-logo-band border-y">
-          <div class="partner-logo-grid relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x">
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
-              <img alt="PST Travel Logo" class="pointer-events-none max-h-12 max-w-[150px] select-none object-contain md:max-h-14 md:max-w-[170px]" src="https://static.wixstatic.com/media/6f8e7e_f844282625cb466d8c9580ec35a3645b~mv2.jpg/v1/crop/x_386,y_592,w_3524,h_3344/fill/w_274,h_260,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/PST_Travel-Secondary2.jpg">
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r">
-              <img alt="Connexus Travel Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://cdn.prod.website-files.com/68553d1dd8ca0b336f66b55c/69e8a0b042a0c29ce4b7f0f9_2026%20CTL%20logo_Colour_Tran%20bg%20(2).png">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
-              <img alt="Alibaba Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px]" src="../assets/images/logos/alibaba.svg">
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -left-3 -bottom-3 hidden md:block" aria-hidden="true"></span>
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b">
-              <img alt="ByteDance Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/ByteDance_logo_English.svg">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b md:border-b-0">
-              <img alt="Amadeus Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://commons.wikimedia.org/wiki/Special:FilePath/Amadeus_Organization_logo_2024.svg">
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3 md:hidden" aria-hidden="true"></span>
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r md:border-b-0">
-              <img alt="Huazhu Group Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://companieslogo.com/img/orig/HTHT_BIG-d42ec412.svg?t=1720244492">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r">
-              <img alt="IHG Hotels and Resorts Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/IHG_Hotels_%26_Resorts_logo.svg">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8">
-              <img alt="Marriott International Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/Marriott_International.svg">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 8 · Final CTA band -->
-      <section class="nl-cta" aria-label="Get connected with G-Link">
-        <div class="fade-up">
-          <h2>Hotel supply, ready to integrate.</h2>
-          <p>Walk through corporate-rate routing, Asia depth, and the sandbox path to production.</p>
-          <div class="nl-actions">
-            <a class="nl-btn nl-btn-primary" href="#capabilities"><iconify-icon icon="solar:calendar-mark-linear" width="16" height="16"></iconify-icon> Schedule a walkthrough</a>
-            <a class="nl-btn nl-btn-secondary" href="../api-access.html"><iconify-icon icon="solar:key-minimalistic-square-linear" width="16" height="16"></iconify-icon> Register for sandbox</a>
-          </div>
-        </div>
-      </section>
-    </div>
-    <!-- ===== END NUITEE-LAYOUT COMPARISON BLOCK ===== -->
+    <!-- ===== END MODULAR ROLLOUT CTA SECTION ===== -->
 
     <!-- FOOTER -->
     <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">
@@ -3436,35 +2434,35 @@
                 </div>
                 <p class="mt-2">TRAVEL_INFRASTRUCTURE</p>
             </div>
+
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
-                <span class="text-white mb-2">Products</span>
-                <a href="glink-v4.html" class="hover:text-white transition-colors">G-Link</a>
-                <a href="flink-v4.html" class="hover:text-white transition-colors">F-Link</a>
-                <a href="../whitelabel.html" class="hover:text-white transition-colors">White-label</a>
-                <a href="../corporate-booking-tool.html" class="hover:text-white transition-colors">Corporate Booking Tool</a>
-                <a href="../agent-booking-tool.html" class="hover:text-white transition-colors">Agent Booking Tool</a>
-                <a href="../ai-booking-tool.html" class="hover:text-white transition-colors">AI Booking Tool</a>
-                <a href="../ai-mapping.html" class="hover:text-white transition-colors">AI Mapping</a>
-                <a href="../agreeease.html" class="hover:text-white transition-colors">AgreeEase</a>
-                <a href="../atlas.html" class="hover:text-white transition-colors">AtlasOS</a>
+                <span class="text-white mb-2">Platform</span>
+                <a href="#" class="hover:text-white transition-colors">Corporate Booking Tool</a>
+                <a href="#" class="hover:text-white transition-colors">Agent Booking Tool</a>
+                <a href="#" class="hover:text-white transition-colors">AI Booking Tool</a>
+                <a href="#" class="hover:text-white transition-colors">Atlas TMC OS</a>
+                <a href="#" class="hover:text-white transition-colors">G-Link</a>
+                <a href="#" class="hover:text-white transition-colors">F-Link</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
                 <span class="text-white mb-2">Solutions</span>
-                <a href="../atlas.html" class="hover:text-white transition-colors">TMCs</a>
-                <a href="../whitelabel.html" class="hover:text-white transition-colors">OTAs</a>
-                <a href="../ai-booking-tool.html" class="hover:text-white transition-colors">AI Apps</a>
-                <a href="../api-access.html" class="hover:text-white transition-colors">B2B Platforms</a>
+                <a href="#" class="hover:text-white transition-colors">AgreeEase</a>
+                <a href="#" class="hover:text-white transition-colors">AI Mapping</a>
+                <a href="#" class="hover:text-white transition-colors">Advisory &amp; Implementation</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
                 <span class="text-white mb-2">Company</span>
-                <a href="../about.html" class="hover:text-white transition-colors">About</a>
-                <a href="mailto:hello@fusionconnectgroup.com" class="hover:text-white transition-colors">Contact</a>
+                <a href="#" class="hover:text-white transition-colors">About</a>
+                <a href="#" class="hover:text-white transition-colors">Careers</a>
+                <a href="#" class="hover:text-white transition-colors">Contact</a>
+                <a href="#" class="hover:text-white transition-colors">Press</a>
             </div>
 
             <div class="col-span-1 md:col-span-3 flex flex-col md:items-end gap-4">
                 <span class="text-white mb-2">Connect</span>
+                <a href="#" class="hover:text-white/60 transition-colors"><iconify-icon icon="solar:link-linear"></iconify-icon> LinkedIn</a>
                 <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
                 <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
                 <span class="mt-4 text-white/30">© 2026 FCG Group. All rights reserved.</span>
@@ -3473,7 +2471,7 @@
         </div>
     </footer>
 
-
+    
 <!-- Interactivity scripts -->
     <script>
       // Reveal elements on scroll
@@ -3591,32 +2589,24 @@
       });
     </script>
 
-
+    
 <!-- ===== THEME TOGGLE SCRIPT ===== -->
     <script>
-        (function () {
-            const themeToggle = document.getElementById("themeToggle");
-            const html = document.documentElement;
-            const savedTheme = localStorage.getItem("theme");
-            const activeTheme = savedTheme === "dark" || savedTheme === "light" ? savedTheme : "light";
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
 
-            function applyTheme(theme) {
-                const isDark = theme === "dark";
-                html.setAttribute("data-theme", theme);
-                html.classList.toggle("dark", isDark);
-                if (themeToggle) themeToggle.checked = isDark;
-            }
+        // Always start in light mode
+        html.setAttribute('data-theme', 'light');
+        if (themeToggle) themeToggle.checked = false;
+        localStorage.removeItem('theme');
 
-            applyTheme(activeTheme);
-
-            if (themeToggle) {
-                themeToggle.addEventListener("change", function () {
-                    const newTheme = this.checked ? "dark" : "light";
-                    localStorage.setItem("theme", newTheme);
-                    applyTheme(newTheme);
-                });
-            }
-        })();
+        // Toggle theme on checkbox change (checked = dark, unchecked = light)
+        if (themeToggle) {
+            themeToggle.addEventListener('change', function() {
+                const newTheme = this.checked ? 'dark' : 'light';
+                html.setAttribute('data-theme', newTheme);
+            });
+        }
     </script>
     <!-- ===== END THEME TOGGLE SCRIPT ===== -->
 </body>

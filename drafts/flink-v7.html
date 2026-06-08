@@ -14,8 +14,8 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G&#8209;Link · Hotel supply for corporate travel · FCG Group</title>
-    <meta name="description" content="G&#8209;Link is FCG's hotel supply API for corporate travel. One integration across GDS, direct hotel, bedbank, and Asia-direct supply.">
+    <title>F&#8209;Link · The China and APAC air content the rest of travel can't reach · FCG Group</title>
+    <meta name="description" content="F&#8209;Link is FCG's air supply API for China and APAC — Travelsky-routed Chinese carriers, regional airlines, and global GDS in one connection. Built on FCG's China travel roots since 2013.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -901,38 +901,182 @@
             background-color: rgba(0, 0, 0, 0.04) !important;
         }
 
-        .partner-plus::before,
-        .partner-plus::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            background: #0F1114;
-            transform: translate(-50%, -50%);
-        }
-
-        .partner-plus::before {
-            width: 18px;
-            height: 1px;
-        }
-
-        .partner-plus::after {
-            width: 1px;
-            height: 18px;
-        }
-
         /* ===== V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
-        /* Bucket D highlighted card uses inline gradient with near-black stop */
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] {
-            background: linear-gradient(180deg, rgba(249,115,22,0.08), rgba(255,255,255,0.92)) !important;
-            border-color: rgba(249,115,22,0.35) !important;
+        /* Section wrappers use inline background:#050505;color:#fff */
+        html[data-theme="light"] section[style*="background:#050505"],
+        html[data-theme="light"] section[style*="background:#0a0a0a"],
+        html[data-theme="light"] section[style*="background:#000"] {
+            background: var(--color-bg) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
         }
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] p,
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] h3 {
+        /* Inline white text inside dark sections */
+        html[data-theme="light"] section[style*="color:#fff"] [style*="color:#fff"],
+        html[data-theme="light"] [style*="color:#fff"] {
             color: var(--color-fg) !important;
         }
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] .code-tag {
+        /* Muted white inline */
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.4)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.5)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.6)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.7)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.8)"] {
             color: var(--color-muted) !important;
+        }
+        /* Inline-styled icon backgrounds that sit on top of route lines */
+        html[data-theme="light"] .v2-flink-line iconify-icon,
+        html[data-theme="light"] .v2-flink-route-line iconify-icon {
+            background: var(--color-bg) !important;
+        }
+        /* Route/divider lines drawn with rgba white become invisible in light mode */
+        html[data-theme="light"] [style*="background:rgba(255,255,255,.08)"],
+        html[data-theme="light"] [style*="background:rgba(255,255,255,.1)"],
+        html[data-theme="light"] [style*="border-top:1px solid rgba(255,255,255,.08)"],
+        html[data-theme="light"] [style*="border-bottom:1px solid rgba(255,255,255,.08)"] {
+            border-color: var(--color-border) !important;
+        }
+
+        /* Draft product pages use hard-coded dark inline styles; mirror index.html's theme behavior. */
+        html[data-theme="light"] .product-shell,
+        html[data-theme="light"] .product-shell section[style*="background:#050505"],
+        html[data-theme="light"] .product-shell section[style*="background: #050505"],
+        html[data-theme="light"] .product-shell section[style*="background:#030303"],
+        html[data-theme="light"] .product-shell section[style*="background: #030303"],
+        html[data-theme="light"] .product-shell section[style*="background:#0a0a0a"],
+        html[data-theme="light"] .product-shell section[style*="background: #0a0a0a"],
+        html[data-theme="light"] .product-shell section[style*="background:#000"],
+        html[data-theme="light"] .product-shell section[style*="background: #000"] {
+            background: var(--color-bg) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="color:#fff"],
+        html[data-theme="light"] .product-shell [style*="color: #fff"],
+        html[data-theme="light"] .product-shell [style*="color:#ffffff"],
+        html[data-theme="light"] .product-shell [style*="color: #ffffff"] {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="color:rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="color: rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="color:rgba(255, 255, 255"],
+        html[data-theme="light"] .product-shell [style*="color: rgba(255, 255, 255"] {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="border-top:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-top: 1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-bottom:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-bottom: 1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border: 1px solid rgba(255,255,255"] {
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-flink-copy h1,
+            .v2-flink-port strong,
+            .v2-flink-row .body strong,
+            .v2-flink-stat strong,
+            .v2-flink-bundle h2,
+            .v2-flink-proof h2,
+            .v2-flink-proof-card strong,
+            .v2-flink-cap-head h2,
+            .v2-flink-cap-item h3,
+            .v2-flink-cap-no,
+            .v2-flink-routes h2,
+            .v2-flink-route-card h3,
+            .v2-flink-scope h2,
+            .v2-flink-scope-card-head strong,
+            .v2-flink-scope-list li strong,
+            .v2-flink-faq-head h2,
+            .v2-flink-faq-q,
+            .v2-flink-faq-prompt
+        ) {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-flink-badge,
+            .v2-flink-copy p,
+            .v2-flink-panel-head .v2-flink-tag,
+            .v2-flink-panel-head small,
+            .v2-flink-port span,
+            .v2-flink-row .body span,
+            .v2-flink-row.muted .tag,
+            .v2-flink-stat span,
+            .v2-flink-bundle p,
+            .v2-flink-proof p.lede,
+            .v2-flink-proof-eyebrow,
+            .v2-flink-proof-card .label,
+            .v2-flink-proof-card .meta,
+            .v2-flink-proof-note,
+            .v2-flink-cap-eyebrow,
+            .v2-flink-cap-head p,
+            .v2-flink-cap-item p,
+            .v2-flink-cap-tag,
+            .v2-flink-routes p,
+            .v2-flink-scope p.lede,
+            .v2-flink-scope-eyebrow,
+            .v2-flink-scope-list li,
+            .v2-flink-faq-head p,
+            .v2-flink-faq-eyebrow,
+            .v2-flink-faq-num,
+            .v2-flink-faq-a
+        ) {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-flink-badge,
+            .v2-flink-panel,
+            .v2-flink-row,
+            .v2-flink-stat,
+            .v2-flink-proof-card,
+            .v2-flink-proof-note,
+            .v2-flink-cap-tag,
+            .v2-flink-scope-card,
+            .v2-flink-faq-btn-secondary
+        ) {
+            background: var(--color-card) !important;
+            border-color: var(--color-border) !important;
+            box-shadow: none !important;
+        }
+
+        html[data-theme="light"] .v2-flink-panel::after {
+            box-shadow: inset 0 0 0 1px rgba(15, 17, 20, 0.08) !important;
+        }
+
+        html[data-theme="light"] .v2-flink-bg {
+            background-image:
+                linear-gradient(rgba(15, 17, 20, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15, 17, 20, 0.07) 1px, transparent 1px) !important;
+        }
+
+        html[data-theme="light"] .v2-flink-line iconify-icon {
+            background: var(--color-bg) !important;
+        }
+
+        html[data-theme="light"] .v2-flink-line::before,
+        html[data-theme="light"] .v2-flink-cap-head,
+        html[data-theme="light"] .v2-flink-cap-item,
+        html[data-theme="light"] .v2-flink-scope-card-head,
+        html[data-theme="light"] .v2-flink-faq-list,
+        html[data-theme="light"] .v2-flink-faq-item,
+        html[data-theme="light"] .v2-flink-faq-foot {
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] :is(.v2-flink-btn-primary, .v2-flink-bundle-cta, .v2-flink-faq-btn-primary) {
+            background: var(--color-fg) !important;
+            color: var(--color-bg) !important;
+        }
+
+        html[data-theme="light"] :is(.v2-flink-btn-secondary, .v2-flink-faq-btn-secondary) {
+            background: var(--color-card) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
         }
         /* ===== END V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
 
@@ -1190,108 +1334,6 @@
     margin-top: 34px;
     flex-wrap: wrap;
   }
-  .fcg-pricing-rows {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-    margin-top: 3rem;
-  }
-  .fcg-pricing-rows article {
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 14px;
-    background: rgba(255,255,255,.02);
-    padding: 1.5rem 1.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-  }
-  .fcg-pricing-rows .fcg-pricing-label {
-    color: rgba(255,255,255,.6) !important;
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  .fcg-pricing-rows .fcg-pricing-value {
-    color: #fff !important;
-    font-family: 'Sora', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    line-height: 1.1;
-  }
-  .fcg-pricing-rows .fcg-pricing-sub {
-    color: rgba(255,255,255,.5) !important;
-    font-size: .85rem;
-    line-height: 1.5;
-  }
-  .fcg-pricing-foot {
-    color: rgba(255,255,255,.45) !important;
-    font-size: .8rem;
-    margin-top: 1.25rem;
-    line-height: 1.6;
-  }
-  html[data-theme="light"] .fcg-pricing-rows article { background: rgba(15,17,20,.02); border-color: rgba(15,17,20,.1); }
-  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-label { color: rgba(15,17,20,.55) !important; }
-  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-value { color: var(--color-fg) !important; }
-  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-sub { color: rgba(15,17,20,.55) !important; }
-  html[data-theme="light"] .fcg-pricing-foot { color: rgba(15,17,20,.55) !important; }
-  .fcg-objection-q {
-    color: #fb923c !important;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    margin-bottom: .85rem;
-    font-weight: 500;
-  }
-  html[data-theme="light"] .fcg-objection-q { color: #fb923c !important; }
-  .partner-plus::before,
-  .partner-plus::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    background: #0F1114;
-    transform: translate(-50%, -50%);
-  }
-  .partner-plus::before {
-    width: 18px;
-    height: 1px;
-  }
-  .partner-plus::after {
-    width: 1px;
-    height: 18px;
-  }
-  .partner-grid-section {
-    background-color: var(--color-bg);
-    color: var(--color-fg);
-  }
-  .partner-grid-title {
-    color: var(--color-muted);
-  }
-  .partner-grid-title strong {
-    color: var(--color-fg);
-    font-weight: 500;
-  }
-  .partner-logo-band,
-  .partner-logo-grid,
-  .partner-logo-card {
-    border-color: var(--color-border) !important;
-  }
-  .partner-logo-card:nth-child(odd) {
-    background-color: var(--color-card);
-  }
-  html[data-theme="dark"] .partner-logo-card img.partner-logo-invert-dark {
-    filter: invert(1) grayscale(1) brightness(1.4);
-    opacity: .9;
-  }
-  html[data-theme="dark"] .partner-plus::before,
-  html[data-theme="dark"] .partner-plus::after {
-    background: var(--color-fg);
-  }
-  @media (max-width: 768px) {
-    .fcg-pricing-rows { grid-template-columns: 1fr; }
-  }
   .fcg-hero2-preview-wrap {
     position: relative;
     width: 100%;
@@ -1331,130 +1373,6 @@
     border-radius: 14px;
     opacity: .98;
     filter: none;
-  }
-  .fcg-hero2-video-frame {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.12);
-    background: linear-gradient(135deg, rgba(249,115,22,.14), rgba(255,255,255,.04));
-  }
-  .fcg-hero2-video-frame video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .fcg-hero2-video-placeholder {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    background:
-      repeating-linear-gradient(45deg, rgba(255,255,255,.025) 0 12px, transparent 12px 24px),
-      rgba(7,7,7,.55);
-  }
-  .fcg-hero2-video-play {
-    width: 66px;
-    height: 66px;
-    border-radius: 999px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    background: rgba(249,115,22,.92);
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 10px 32px rgba(249,115,22,.38);
-    transition: transform .25s ease;
-  }
-  .fcg-hero2-video-play:hover { transform: scale(1.06); }
-  .fcg-hero2-video-label {
-    color: #fff;
-    font-size: 15px;
-    font-weight: 500;
-  }
-  .fcg-hero2-video-note {
-    color: rgba(255,255,255,.5);
-    font-size: 11px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-  }
-  html[data-theme="light"] .fcg-hero2-video-placeholder {
-    background:
-      repeating-linear-gradient(45deg, rgba(0,0,0,.03) 0 12px, transparent 12px 24px),
-      rgba(243,244,246,.7);
-  }
-  html[data-theme="light"] .fcg-hero2-video-label { color: #0F1114; }
-  html[data-theme="light"] .fcg-hero2-video-note { color: rgba(15,17,20,.5); }
-  .supplier-logo-placeholder {
-    font-family: 'Sora', 'Inter', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: .01em;
-    color: rgba(255,255,255,.52);
-    border: 1px dashed rgba(255,255,255,.22);
-    border-radius: 8px;
-    padding: 9px 16px;
-    white-space: nowrap;
-  }
-  html[data-theme="light"] .supplier-logo-placeholder {
-    color: rgba(15,17,20,.5);
-    border-color: rgba(0,0,0,.18);
-  }
-  .supplier-logo-real {
-    max-height: 34px;
-    max-width: 150px;
-    object-fit: contain;
-    opacity: .92;
-  }
-  .supplier-logo-mono {
-    max-height: 34px;
-    max-width: 150px;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: .82;
-    transition: opacity .2s ease;
-  }
-  .supplier-logo-mono:hover { opacity: 1; }
-  html[data-theme="light"] .supplier-logo-mono {
-    filter: brightness(0);
-    opacity: .68;
-  }
-  .fcg-marketing-feature-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fb923c;
-    background: rgba(249,115,22,.1);
-    border: 1px solid rgba(249,115,22,.2);
-    margin-bottom: 1.1rem;
-  }
-  html[data-theme="light"] .fcg-marketing-feature-icon {
-    background: rgba(249,115,22,.08);
-    border-color: rgba(249,115,22,.25);
-  }
-  .fcg-supply-illustration {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2.5rem 2rem;
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,.1);
-    background: rgba(255,255,255,.02);
-    margin-top: 2.5rem;
-  }
-  .fcg-supply-illustration svg { width: min(420px, 80%); height: auto; }
-  html[data-theme="light"] .fcg-supply-illustration {
-    border-color: rgba(15,17,20,.1);
-    background: rgba(15,17,20,.02);
   }
   .fcg-hero2-preview-grid {
     position: relative;
@@ -1508,6 +1426,68 @@
     font-weight: 400;
     line-height: 1.4;
   }
+  .fcg-hero2-code-window {
+    position: relative;
+    min-height: min(56vh, 520px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: #121827;
+    box-shadow: 0 30px 90px rgba(0,0,0,.45);
+    overflow: hidden;
+  }
+  .fcg-hero2-code-window::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(249,115,22,.18), transparent 24%),
+      linear-gradient(135deg, rgba(255,255,255,.06), transparent 42%);
+  }
+  .fcg-hero2-code-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    color: rgba(255,255,255,.58);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .fcg-hero2-window-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .fcg-hero2-window-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+  }
+  .fcg-hero2-window-dots span:nth-child(1) { background: #fb7185; }
+  .fcg-hero2-window-dots span:nth-child(2) { background: #fbbf24; }
+  .fcg-hero2-window-dots span:nth-child(3) { background: #22c55e; }
+  .fcg-hero2-code-body {
+    position: relative;
+    margin: 0;
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    color: #e5e7eb;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(.84rem, 1.25vw, 1rem);
+    line-height: 1.9;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .fcg-hero2-code-body .code-keyword { color: #fb7185; }
+  .fcg-hero2-code-body .code-method { color: #60a5fa; }
+  .fcg-hero2-code-body .code-string { color: #34d399; }
+  .fcg-hero2-code-body .code-number { color: #f59e0b; }
+  .fcg-hero2-code-body .code-property { color: #38bdf8; }
+  .fcg-hero2-code-body .code-comment { color: #94a3b8; }
   .fcg-hero2-code-footer {
     position: relative;
     display: grid;
@@ -1536,158 +1516,6 @@
     font-size: 15px;
     font-weight: 600;
     line-height: 1.25;
-  }
-  .glink-radar-scene {
-    position: relative;
-    min-height: min(56vh, 520px);
-    width: 100%;
-    overflow: hidden;
-    border-radius: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-  .glink-radar-stage {
-    position: relative;
-    display: flex;
-    min-height: min(56vh, 520px);
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    overflow: hidden;
-    padding: 3rem 1.25rem 5.5rem;
-  }
-  .glink-radar-row-wide,
-  .glink-radar-row-narrow {
-    position: relative;
-    z-index: 50;
-    width: 100%;
-  }
-  .glink-radar-row-wide { max-width: 42rem; }
-  .glink-radar-row-narrow { max-width: 27rem; }
-  .glink-radar-row-inner {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.25rem;
-  }
-  .glink-radar-node {
-    position: relative;
-    z-index: 50;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-    opacity: 0;
-    transform: scale(.95);
-    animation: glink-radar-node-in .2s ease-out forwards;
-  }
-  @keyframes glink-radar-node-in {
-    from { opacity: 0; transform: scale(.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  .glink-radar-tile {
-    display: flex;
-    height: 3rem;
-    width: 3rem;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1rem;
-    border: 1px solid rgba(255,255,255,.14);
-    background: rgba(255,255,255,.08);
-    color: rgba(255,255,255,.68);
-    box-shadow: inset 0 2px 10px rgba(255,255,255,.04), 0 12px 30px rgba(0,0,0,.18);
-  }
-  .glink-radar-label {
-    color: rgba(255,255,255,.62);
-    font-size: .75rem;
-    font-weight: 700;
-    line-height: 1rem;
-    text-align: center;
-    white-space: nowrap;
-  }
-  .glink-radar-core {
-    position: absolute;
-    bottom: 4.75rem;
-    left: 50%;
-    z-index: 20;
-    display: flex;
-    height: 5rem;
-    width: 5rem;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    transform: translateX(-50%);
-    pointer-events: none;
-  }
-  .glink-radar-sweep {
-    position: absolute;
-    right: 50%;
-    top: 50%;
-    z-index: 40;
-    display: flex;
-    height: 5px;
-    width: 400px;
-    align-items: flex-end;
-    justify-content: center;
-    overflow: hidden;
-    background: transparent;
-    transform-origin: right center;
-    animation: glink-radar-spin 10s linear infinite;
-  }
-  @keyframes glink-radar-spin {
-    from { transform: rotate(20deg); }
-    to { transform: rotate(380deg); }
-  }
-  .glink-radar-sweep-line {
-    position: relative;
-    z-index: 40;
-    height: 1px;
-    width: 100%;
-    background: linear-gradient(to right, transparent, #f97316, transparent);
-  }
-  .glink-radar-circle {
-    position: absolute;
-    inset: 0;
-    left: 50%;
-    top: 50%;
-    border-radius: 9999px;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    animation: glink-radar-circle-in .2s ease-out forwards;
-  }
-  @keyframes glink-radar-circle-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  .glink-radar-divider {
-    position: absolute;
-    bottom: 0;
-    z-index: 41;
-    display: none;
-    height: 1px;
-    width: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,.28), transparent);
-  }
-  .glink-radar-section {
-    position: relative;
-    z-index: 10;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    padding: 7rem 0 1.25rem;
-    background: var(--color-bg);
-    border-top: 0;
-  }
-  .glink-radar-inner {
-    width: 100%;
-    margin: 0 auto;
-  }
-  .glink-radar-section + .fcg-mobile-cta {
-    margin-top: 2rem;
   }
   .product-shell { background: var(--color-bg); color: var(--color-fg); }
   .product-kicker { font-family: 'Inter', sans-serif; letter-spacing: .18em; text-transform: uppercase; }
@@ -2119,19 +1947,6 @@
     font-weight: 650;
     line-height: 1.1;
   }
-  .fcg-marketing-feature {
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: 18px;
-    background: rgba(255,255,255,.025);
-    padding: 1.5rem;
-    min-height: 13.5rem;
-    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
-  }
-  .fcg-marketing-feature:hover {
-    border-color: rgba(255,255,255,.32);
-    background: rgba(255,255,255,.045);
-    transform: translateY(-1px);
-  }
   .fcg-marketing-feature p {
     color: rgba(255,255,255,.54) !important;
     font-size: 1.05rem;
@@ -2245,6 +2060,47 @@
     color: rgba(255,255,255,.55);
     letter-spacing: .02em;
   }
+  .fcg-code-preview {
+    margin-top: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+  .fcg-code-bar {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.02);
+  }
+  .fcg-code-dot {
+    width: .5rem;
+    height: .5rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,.15);
+  }
+  .fcg-code-bar span {
+    margin-left: auto;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,.35);
+    letter-spacing: .08em;
+  }
+  .fcg-code-body {
+    padding: 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .fcg-code-body .code-comment { color: rgba(255,255,255,.3); }
+  .fcg-code-body .code-key { color: #fb923c; }
+  .fcg-code-body .code-string { color: #34d399; }
+  .fcg-code-body .code-method { color: #60a5fa; }
+  .fcg-code-body .code-number { color: #c084fc; }
+  .fcg-code-body .code-punct { color: rgba(255,255,255,.5); }
   .fcg-mobile-feature {
     position: relative;
     overflow: hidden;
@@ -2433,6 +2289,29 @@
   html[data-theme="light"] .fcg-hero2-preview-card .stat-label {
     color: #6b7280;
   }
+  html[data-theme="light"] .fcg-hero2-code-window {
+    background: rgba(255,255,255,.92);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 30px 80px rgba(15,17,20,.14);
+  }
+  html[data-theme="light"] .fcg-hero2-code-window::before {
+    background:
+      radial-gradient(circle at 18% 12%, rgba(249,115,22,.1), transparent 24%),
+      linear-gradient(135deg, rgba(15,17,20,.035), transparent 42%);
+  }
+  html[data-theme="light"] .fcg-hero2-code-bar {
+    border-color: rgba(15,17,20,.1);
+    color: #9ca3af;
+  }
+  html[data-theme="light"] .fcg-hero2-code-body {
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-hero2-code-body .code-keyword { color: #ef4444; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-method { color: #0f4ea3; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-string { color: #047857; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-number { color: #ea580c; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-property { color: #0369a1; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-comment { color: #9ca3af; }
   html[data-theme="light"] .fcg-hero2-code-chip {
     background: rgba(255,255,255,.72);
     border-color: rgba(15,17,20,.1);
@@ -2440,25 +2319,6 @@
   }
   html[data-theme="light"] .fcg-hero2-code-chip strong {
     color: #0f1114;
-  }
-  html[data-theme="light"] .glink-radar-scene {
-    background: transparent;
-    box-shadow: none;
-  }
-  html[data-theme="light"] .glink-radar-tile {
-    background: rgba(255,255,255,.74);
-    border-color: rgba(15,17,20,.12);
-    color: #4b5563;
-    box-shadow: 0 14px 32px rgba(15,17,20,.07);
-  }
-  html[data-theme="light"] .glink-radar-label {
-    color: #6b7280;
-  }
-  html[data-theme="light"] .glink-radar-circle {
-    border-color: rgba(15,17,20,.18) !important;
-  }
-  html[data-theme="light"] .glink-radar-divider {
-    background: linear-gradient(to right, transparent, rgba(15,17,20,.18), transparent);
   }
   html[data-theme="light"] .fcg-bento {
     background:
@@ -2534,15 +2394,6 @@
   html[data-theme="light"] .fcg-mobile-cta p {
     color: #737373 !important;
   }
-  html[data-theme="light"] .fcg-marketing-feature {
-    background: rgba(255,255,255,.82);
-    border-color: rgba(15,17,20,.14);
-    box-shadow: 0 18px 45px rgba(15,17,20,.07);
-  }
-  html[data-theme="light"] .fcg-marketing-feature:hover {
-    background: #ffffff;
-    border-color: rgba(15,17,20,.28);
-  }
   html[data-theme="light"] .fcg-ai-showcase {
     background:
       linear-gradient(135deg, rgba(255,240,209,.9), rgba(252,201,196,.8) 34%, rgba(207,233,240,.86) 72%, rgba(106,203,213,.78)),
@@ -2609,6 +2460,26 @@
     border-color: rgba(15,17,20,.1);
     color: #6b7280;
   }
+  html[data-theme="light"] .fcg-code-preview {
+    background: #f9fafb;
+    border-color: #d1d5db;
+  }
+  html[data-theme="light"] .fcg-code-bar {
+    background: rgba(0,0,0,.03);
+    border-color: #e5e7eb;
+  }
+  html[data-theme="light"] .fcg-code-dot {
+    background: rgba(0,0,0,.12);
+  }
+  html[data-theme="light"] .fcg-code-bar span {
+    color: #9ca3af;
+  }
+  html[data-theme="light"] .fcg-code-body .code-comment { color: #9ca3af; }
+  html[data-theme="light"] .fcg-code-body .code-key { color: #ea580c; }
+  html[data-theme="light"] .fcg-code-body .code-string { color: #059669; }
+  html[data-theme="light"] .fcg-code-body .code-method { color: #2563eb; }
+  html[data-theme="light"] .fcg-code-body .code-number { color: #7c3aed; }
+  html[data-theme="light"] .fcg-code-body .code-punct { color: #6b7280; }
   html[data-theme="light"] .fcg-mobile-cta {
     background: rgba(255,255,255,.78);
     border-color: rgba(15,17,20,.12);
@@ -2656,18 +2527,8 @@
     }
     .fcg-hero2-preview img { height: auto; }
     .fcg-hero2-preview-card { min-height: auto; }
+    .fcg-hero2-code-window { min-height: auto; }
     .fcg-hero2-code-footer { grid-template-columns: 1fr; }
-    .glink-radar-section { padding: 5.5rem 0 1rem; }
-    .glink-radar-scene,
-    .glink-radar-stage {
-      min-height: 420px;
-    }
-    .glink-radar-row-inner {
-      gap: .9rem;
-    }
-    .glink-radar-label {
-      display: none;
-    }
     .fcg-bento-inner { padding: 4.5rem 1.25rem; }
     .fcg-bento-header { align-items: flex-start; flex-direction: column; }
     .fcg-bento-grid { grid-template-columns: 1fr; }
@@ -2719,253 +2580,630 @@
   }
 </style>
 <main class="product-shell">
-  <section id="capabilities" class="fcg-hero2">
-    <div class="fcg-hero2-glow" aria-hidden="true"><span></span><span></span><span></span></div>
+  <section id="capabilities" style="position:relative;overflow:hidden;padding:8rem 1.5rem 6.5rem;">
+    <style>
+      .v2-flink-hero { position:relative; z-index:1; max-width: 80rem; margin: 0 auto; display:grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items:center; gap: 4.5rem; }
+      @media (max-width: 980px) { .v2-flink-hero { grid-template-columns: 1fr; gap: 3rem; } }
+      .v2-flink-bg { position:absolute; inset:0; pointer-events:none; opacity:.55;
+        background-image:
+          linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: radial-gradient(ellipse at 70% 50%, #000 30%, transparent 70%);
+      }
+      .v2-flink-glow { position:absolute; top:-20%; right:-10%; width: 50rem; height: 50rem; pointer-events:none;
+        background: radial-gradient(circle, rgba(249,115,22,.22), transparent 60%);
+        filter: blur(40px);
+      }
+      .v2-flink-badge { display:inline-flex; align-items:center; gap:.6rem; padding:.55rem 1rem; border:1px solid rgba(255,255,255,.14); border-radius: 999px; background: rgba(255,255,255,.04); font-family:'Inter',sans-serif; font-size:12px; letter-spacing:.04em; color:rgba(255,255,255,.74); margin-bottom: 2rem; }
+      .v2-flink-badge::before { content:""; width:6px; height:6px; border-radius:9999px; background:#fb923c; box-shadow: 0 0 12px rgba(249,115,22,.7); }
+      .v2-flink-copy h1 { color:#fff; font-size: clamp(2.3rem, 4.2vw, 3.45rem); font-weight: 500; letter-spacing:-.02em; line-height: 1.06; margin: 0 0 1.35rem; }
+      .v2-flink-copy h1 em { font-style:normal; color:#fb923c; }
+      .v2-flink-copy p { color: rgba(255,255,255,.66); font-size: 1.025rem; line-height: 1.65; max-width: 36rem; margin: 0; }
+      .v2-flink-cta { display:flex; align-items:center; flex-wrap:wrap; gap:.75rem; margin-top: 2.25rem; }
+      .v2-flink-btn { display:inline-flex; align-items:center; gap:.5rem; padding: .9rem 1.5rem; border-radius: 9999px; font-size: 14px; font-weight: 500; transition: transform 180ms ease, background 180ms ease, border-color 180ms ease; }
+      .v2-flink-btn-primary { background:#fff; color:#0a0a0a; }
+      .v2-flink-btn-primary:hover { transform: scale(1.01); }
+      .v2-flink-btn-secondary { background: rgba(255,255,255,.05); color:#fff; border:1px solid rgba(255,255,255,.14); }
+      .v2-flink-btn-secondary:hover { border-color: rgba(255,255,255,.3); }
 
-    <div class="fcg-hero2-content">
-      <div class="fcg-hero2-copy-column">
-        <div class="fcg-hero2-badge">
-          Product · G&#8209;Link
-          <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
-        </div>
-        <h1>Hotel supply for corporate travel.</h1>
-        <p class="fcg-hero2-copy">One API for GDS, direct hotel, bedbank, and Asia-direct supply. Corporate rates, 4.3M+ mapped hotels, and a mid-office behind every booking.</p>
-        <div class="fcg-hero2-actions">
-          <a href="#getting-started" class="fcg-hero2-button fcg-hero2-button-primary">Schedule a walkthrough</a>
-          <a href="../api-access.html" class="fcg-hero2-button fcg-hero2-button-secondary">Read the API docs</a>
+      .v2-flink-panel { position:relative; border:1px solid rgba(255,255,255,.1); border-radius: 28px; background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)); box-shadow: 0 30px 80px rgba(0,0,0,.45); padding: 1.75rem; }
+      .v2-flink-panel::after { content:""; position:absolute; inset:0; border-radius: 28px; pointer-events:none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05); }
+      .v2-flink-panel-head { display:flex; align-items:center; justify-content:space-between; padding-bottom: 1rem; border-bottom: 1px dashed rgba(255,255,255,.1); margin-bottom: 1.25rem; }
+      .v2-flink-panel-head .v2-flink-tag { display:inline-flex; align-items:center; gap:.45rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing:.06em; color:rgba(255,255,255,.55); text-transform: uppercase; }
+      .v2-flink-panel-head .v2-flink-tag::before { content:""; width:6px; height:6px; border-radius:9999px; background:#22c55e; box-shadow: 0 0 12px rgba(34,197,94,.7); }
+      .v2-flink-panel-head small { color:rgba(255,255,255,.4); font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.06em; text-transform: uppercase; }
+
+      .v2-flink-route { display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap:1.25rem; padding: 1rem 0 1.25rem; }
+      .v2-flink-port { text-align:center; }
+      .v2-flink-port strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 2rem; font-weight: 400; letter-spacing:.04em; line-height: 1; }
+      .v2-flink-port span { display:block; margin-top:.3rem; color:rgba(255,255,255,.5); font-size: 10.5px; letter-spacing:.14em; text-transform:uppercase; }
+      .v2-flink-line { position:relative; height:30px; }
+      .v2-flink-line::before { content:""; position:absolute; left:0; right:0; top:50%; border-top: 1px dashed rgba(255,255,255,.22); }
+      .v2-flink-line iconify-icon { position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); color:#fb923c; background:#050505; padding: 0 .35rem; }
+
+      .v2-flink-stack { display:flex; flex-direction:column; gap:.65rem; margin-top:.4rem; }
+      .v2-flink-row { display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap:.85rem; padding: .85rem .95rem; border:1px solid rgba(255,255,255,.08); border-radius: 14px; background: rgba(255,255,255,.025); }
+      .v2-flink-row .dot { width:.55rem; height:.55rem; border-radius:9999px; background:#fb923c; box-shadow: 0 0 10px rgba(249,115,22,.6); }
+      .v2-flink-row .body { display:flex; flex-direction:column; gap:.15rem; }
+      .v2-flink-row .body strong { color:#fff; font-size: .92rem; font-weight: 500; line-height:1.25; }
+      .v2-flink-row .body span { color:rgba(255,255,255,.5); font-size:.78rem; line-height:1.3; }
+      .v2-flink-row .tag { display:inline-flex; align-items:center; padding:.35rem .55rem; border-radius:9999px; background: rgba(249,115,22,.12); color:#fb923c; font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.04em; }
+      .v2-flink-row.muted .dot { background: rgba(255,255,255,.4); box-shadow: none; }
+      .v2-flink-row.muted .tag { background: rgba(255,255,255,.06); color: rgba(255,255,255,.55); }
+
+      .v2-flink-stats { display:grid; grid-template-columns: repeat(3, 1fr); gap:.65rem; margin-top: 1.1rem; }
+      .v2-flink-stat { border:1px solid rgba(255,255,255,.08); border-radius: 12px; background: rgba(255,255,255,.025); padding: .8rem .85rem; }
+      .v2-flink-stat strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 500; }
+      .v2-flink-stat span { display:block; margin-top:.25rem; color:rgba(255,255,255,.42); font-size: 10.5px; letter-spacing:.08em; text-transform: uppercase; }
+
+      .v2-flink-video-frame { position:relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow:hidden; border:1px solid rgba(255,255,255,.12); background: linear-gradient(135deg, rgba(249,115,22,.16), rgba(255,255,255,.04)); }
+      .v2-flink-video-frame video { width:100%; height:100%; object-fit:cover; display:block; }
+      .v2-flink-video-ph { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+        background: repeating-linear-gradient(45deg, rgba(255,255,255,.025) 0 12px, transparent 12px 24px), rgba(7,7,7,.55); }
+      .v2-flink-video-play { width:66px; height:66px; border-radius:999px; display:flex; align-items:center; justify-content:center; color:#fff; background: rgba(249,115,22,.92); border:none; cursor:pointer; box-shadow: 0 10px 32px rgba(249,115,22,.38); transition: transform .25s ease; }
+      .v2-flink-video-play:hover { transform: scale(1.06); }
+      .v2-flink-video-label { color:#fff; font-size:15px; font-weight:500; }
+      .v2-flink-video-note { color: rgba(255,255,255,.5); font-size:11px; letter-spacing:.14em; text-transform:uppercase; }
+      html[data-theme="light"] .v2-flink-video-ph { background: repeating-linear-gradient(45deg, rgba(0,0,0,.03) 0 12px, transparent 12px 24px), rgba(243,244,246,.7); }
+      html[data-theme="light"] .v2-flink-video-label { color:#0F1114; }
+      html[data-theme="light"] .v2-flink-video-note { color: rgba(15,17,20,.5); }
+
+      /* base bg/color moved off the inline style so light theme can override (v7 theme-aware) */
+      #capabilities { background:#050505; color:#fff; }
+      html[data-theme="light"] #capabilities { background:#fff; color:#0f1114; }
+      html[data-theme="light"] .v2-flink-bg { background-image:
+          linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0,0,0,.04) 1px, transparent 1px); }
+      html[data-theme="light"] .v2-flink-glow { opacity:.5; }
+      html[data-theme="light"] .v2-flink-badge { border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); color:#4b5563; }
+      html[data-theme="light"] .v2-flink-copy h1 { color:#0f1114; }
+      html[data-theme="light"] .v2-flink-copy p { color:#4b5563; }
+      html[data-theme="light"] .v2-flink-btn-primary { background:#0f1114; color:#fff; }
+      html[data-theme="light"] .v2-flink-btn-secondary { background:transparent; color:#0f1114; border-color:#d1d5db; }
+      html[data-theme="light"] .v2-flink-btn-secondary:hover { border-color:#0f1114; }
+      html[data-theme="light"] .v2-flink-panel { border-color:#e5e7eb; background:#fff; box-shadow:0 20px 50px rgba(0,0,0,.08); }
+      html[data-theme="light"] .v2-flink-panel::after { box-shadow: inset 0 0 0 1px rgba(0,0,0,.04); }
+      html[data-theme="light"] .v2-flink-panel-head { border-bottom-color:#e5e7eb; }
+      html[data-theme="light"] .v2-flink-panel-head .v2-flink-tag { color:#6b7280; }
+      html[data-theme="light"] .v2-flink-panel-head small { color:#9ca3af; }
+      html[data-theme="light"] .v2-flink-stat { border-color:#e5e7eb; background:#fff; }
+      html[data-theme="light"] .v2-flink-stat strong { color:#0f1114; }
+      html[data-theme="light"] .v2-flink-stat span { color:#6b7280; }
+      html[data-theme="light"] .v2-flink-video-frame { border-color:#e5e7eb; background: linear-gradient(135deg, rgba(249,115,22,.10), rgba(0,0,0,.02)); }
+    </style>
+
+    <div class="v2-flink-glow" aria-hidden="true"></div>
+    <div class="v2-flink-bg" aria-hidden="true"></div>
+
+    <div class="v2-flink-hero">
+      <div class="v2-flink-copy">
+        <div class="v2-flink-badge">Where China meets global travel · F&#8209;Link</div>
+        <h1>The China and APAC air content the rest of travel can't reach.</h1>
+        <p>Travelsky-routed Chinese carriers, regional APAC airlines, and global GDS &mdash; the air inventory global platforms can't reach, through one connection.</p>
+        <div class="v2-flink-cta">
+          <a href="#getting-started" class="v2-flink-btn v2-flink-btn-primary">See a route demo<iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
+          <a href="#supply-buckets" class="v2-flink-btn v2-flink-btn-secondary">See where F&#8209;Link fits</a>
         </div>
       </div>
 
-      <div class="fcg-hero2-preview-wrap">
-        <div class="fcg-hero2-preview fcg-hero2-video-preview">
-          <div class="fcg-hero2-video-frame" aria-label="G&#8209;Link product walkthrough">
-            <!-- Swap this placeholder for the real walkthrough video:
-                 <video src="../assets/video/glink-walkthrough.mp4" poster="../assets/images/glink-walkthrough-poster.jpg" controls playsinline></video> -->
-            <div class="fcg-hero2-video-placeholder">
-              <button class="fcg-hero2-video-play" aria-label="Play product walkthrough">
-                <iconify-icon icon="solar:play-bold" width="26" height="26"></iconify-icon>
-              </button>
-              <span class="fcg-hero2-video-label">G&#8209;Link product walkthrough</span>
-              <span class="fcg-hero2-video-note">Video placeholder · drop in walkthrough.mp4</span>
+      <div class="v2-flink-panel" aria-label="F&#8209;Link product walkthrough">
+        <div class="v2-flink-panel-head">
+          <div class="v2-flink-tag">F&#8209;Link · Product walkthrough</div>
+          <small>2 min overview</small>
+        </div>
+
+        <div class="v2-flink-video-frame" aria-label="F&#8209;Link product walkthrough">
+          <!-- Swap this placeholder for the real walkthrough video:
+               <video src="../assets/video/flink-walkthrough.mp4" poster="../assets/images/flink-walkthrough-poster.jpg" controls playsinline></video> -->
+          <div class="v2-flink-video-ph">
+            <button class="v2-flink-video-play" aria-label="Play product walkthrough">
+              <iconify-icon icon="solar:play-bold" width="26" height="26"></iconify-icon>
+            </button>
+            <span class="v2-flink-video-label">F&#8209;Link product walkthrough</span>
+            <span class="v2-flink-video-note">Video placeholder · drop in walkthrough.mp4</span>
+          </div>
+        </div>
+
+        <div class="v2-flink-stats">
+          <div class="v2-flink-stat"><strong>2</strong><span>Anchor suppliers</span></div>
+          <div class="v2-flink-stat"><strong>China+APAC</strong><span>Route depth</span></div>
+          <div class="v2-flink-stat"><strong>1 BMS</strong><span>Hotel + Air</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Shared styles for the relocated partner-grid + integration sections (scoped nl- prefix, theme-aware) -->
+    <style>
+      /* NUITEE-LAYOUT COMPARISON BLOCK — scoped styles (nl- prefix) */
+      .nl-divider { display:flex; align-items:center; justify-content:center; gap:.85rem; flex-wrap:wrap; padding:1rem 1.5rem; background: var(--color-card); border-top:1px solid var(--color-border); border-bottom:1px dashed var(--color-border); }
+      .nl-divider-dot { width:.5rem; height:.5rem; border-radius:9999px; background:#F97316; box-shadow:0 0 0 4px rgba(249,115,22,.15); }
+      .nl-divider-label { font-family:'Sora','Inter',sans-serif; font-size:13px; font-weight:500; color: var(--color-fg); letter-spacing:.02em; }
+      .nl-divider-meta { font-family:'Inter',ui-monospace,monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color: var(--color-muted); }
+
+      .nl-section { background: var(--color-bg); color: var(--color-fg); padding: 7rem 1.5rem; border-top: 1px solid var(--color-border); }
+      .nl-inner { max-width: 72rem; margin: 0 auto; }
+      .nl-head { max-width: 44rem; margin-bottom: 3rem; }
+      .nl-eyebrow { display:inline-flex; align-items:center; gap:.6rem; font-family:'Inter',ui-monospace,monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color: var(--color-muted); margin-bottom:1rem; }
+      .nl-eyebrow::before { content:""; width:1.6rem; height:1px; background: var(--color-border); }
+      .nl-h2 { font-family:'Sora','Inter',sans-serif; font-size: clamp(1.9rem,3vw,2.6rem); font-weight:500; letter-spacing:-.02em; line-height:1.08; margin:0; color: var(--color-fg); }
+      .nl-h2 .accent { color:#F97316; }
+      .nl-clarifier { color: var(--color-muted); font-size:1rem; line-height:1.65; margin:1rem 0 0; max-width:40rem; }
+
+      .nl-actions { display:flex; flex-wrap:wrap; gap:.85rem; margin-top:2rem; }
+      .nl-btn { display:inline-flex; align-items:center; gap:.5rem; padding:.85rem 1.4rem; border-radius:9999px; font-size:14px; font-weight:500; transition: transform .18s ease, border-color .18s ease; text-decoration:none; }
+      .nl-btn-primary { background: var(--color-fg); color: var(--color-bg); }
+      .nl-btn-primary:hover { transform: scale(1.02); }
+      .nl-btn-secondary { background: transparent; color: var(--color-fg); border:1px solid var(--color-border); }
+      .nl-btn-secondary:hover { border-color: var(--color-fg); }
+
+      /* Hero split */
+      .nl-hero { display:grid; grid-template-columns: 1.05fr .95fr; gap:3.5rem; align-items:center; }
+      @media (max-width:900px){ .nl-hero { grid-template-columns:1fr; gap:2.5rem; } }
+      .nl-pill { display:inline-flex; align-items:center; gap:.5rem; padding:.45rem .9rem; border-radius:9999px; border:1px solid var(--color-border); background: var(--color-card); font-size:12px; color: var(--color-fg); }
+      .nl-pill .dot { width:.45rem; height:.45rem; border-radius:9999px; background:#F97316; }
+      .nl-h1 { font-family:'Sora','Inter',sans-serif; font-size: clamp(2.1rem,4vw,3.1rem); font-weight:500; letter-spacing:-.025em; line-height:1.06; margin:1.5rem 0 0; color: var(--color-fg); }
+      .nl-media { position:relative; border:1px dashed var(--color-border); border-radius:18px; background: var(--color-card); aspect-ratio:16/10; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem; text-align:center; padding:1.5rem; }
+      .nl-media .nl-media-icon { color:#F97316; }
+      .nl-media .nl-media-label { color: var(--color-fg); font-size:14px; font-weight:500; }
+      .nl-media .nl-media-note { color: var(--color-muted); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; }
+      .nl-hero-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:.65rem; margin-top:1rem; }
+      .nl-stat { border:1px solid var(--color-border); border-radius:12px; background: var(--color-bg); padding:.9rem; }
+      .nl-stat strong { display:block; font-family:'Sora','Inter',sans-serif; font-size:1.25rem; font-weight:500; color: var(--color-fg); line-height:1.1; }
+      .nl-stat span { display:block; margin-top:.3rem; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color: var(--color-muted); }
+
+      /* Card grids */
+      .nl-grid { display:grid; gap:1.25rem; }
+      .nl-grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      @media (max-width:820px){ .nl-grid-2 { grid-template-columns:1fr; } }
+      .nl-card { border:1px solid var(--color-border); border-radius:18px; background: var(--color-card); padding:1.75rem; }
+      .nl-icon { display:inline-flex; align-items:center; justify-content:center; width:2.6rem; height:2.6rem; border-radius:12px; border:1px solid var(--color-border); color:#F97316; margin-bottom:1.1rem; }
+      .nl-card h3 { font-family:'Sora','Inter',sans-serif; font-size:1.15rem; font-weight:500; letter-spacing:-.01em; margin:0; color: var(--color-fg); }
+      .nl-card p { color: var(--color-muted); font-size:.93rem; line-height:1.6; margin:.6rem 0 0; }
+
+      /* Feature list (stacked) */
+      .nl-feature-list { border-top:1px solid var(--color-border); }
+      .nl-feature-row { display:grid; grid-template-columns: 3rem minmax(0,1fr) auto; gap:1.75rem; align-items:start; padding:2rem 0; border-bottom:1px solid var(--color-border); }
+      @media (max-width:820px){ .nl-feature-row { grid-template-columns:1fr; gap:.75rem; } }
+      .nl-feature-no { font-family:'Sora','Inter',sans-serif; font-size:1.6rem; font-weight:400; color: var(--color-muted); line-height:1; }
+      .nl-feature-row h3 { font-family:'Sora','Inter',sans-serif; font-size:1.2rem; font-weight:500; margin:0; color: var(--color-fg); }
+      .nl-feature-row p { color: var(--color-muted); font-size:.93rem; line-height:1.6; margin:.5rem 0 0; max-width:36rem; }
+      .nl-code-tag { display:inline-flex; align-items:center; padding:.5rem .8rem; border-radius:9999px; border:1px solid var(--color-border); background: var(--color-bg); font-family:'Inter',ui-monospace,monospace; font-size:11.5px; color: var(--color-muted); white-space:nowrap; align-self:flex-start; }
+
+      /* Dense supply tile grid */
+      .nl-tile-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:1rem; }
+      @media (max-width:900px){ .nl-tile-grid { grid-template-columns: repeat(2,1fr); } }
+      @media (max-width:560px){ .nl-tile-grid { grid-template-columns: 1fr; } }
+      .nl-tile { border:1px solid var(--color-border); border-radius:14px; background: var(--color-card); padding:1.4rem; }
+      .nl-tile-icon { color:#F97316; margin-bottom:.85rem; display:block; }
+      .nl-tile h3 { font-family:'Sora','Inter',sans-serif; font-size:1.02rem; font-weight:500; margin:0; color: var(--color-fg); }
+      .nl-tile p { color: var(--color-muted); font-size:.85rem; line-height:1.5; margin:.4rem 0 0; }
+
+      /* Homepage partner grid */
+      .nl-partner-title { color: var(--color-muted); font-size: clamp(1.5rem,2.4vw,1.9rem); font-weight:500; text-align:center; letter-spacing:-.01em; margin:0 auto; max-width:40rem; font-family:'Sora','Inter',sans-serif; }
+      .nl-partner-title strong { color: var(--color-fg); font-weight:500; }
+      .nl-partner-grid { display:grid; grid-template-columns: repeat(2,1fr); gap:1px; background: var(--color-border); border:1px solid var(--color-border); border-radius:18px; overflow:hidden; margin-top:2.5rem; }
+      @media (min-width:768px){ .nl-partner-grid { grid-template-columns: repeat(4,1fr); } }
+      .nl-partner-cell { position:relative; display:flex; align-items:center; justify-content:center; padding:2.25rem 1.5rem; background: var(--color-bg); min-height:7rem; }
+      .nl-partner-logo { max-width:78%; object-fit:contain; opacity:.85; transition:opacity .2s ease; }
+      .nl-partner-cell:hover .nl-partner-logo { opacity:1; }
+      html[data-theme="dark"] .partner-logo-invert-dark { filter: brightness(0) invert(1); }
+      .nl-partner-plus { position:absolute; top:.7rem; right:.8rem; color: var(--color-muted); opacity:.45; }
+
+      /* Final CTA band */
+      .nl-final { text-align:center; }
+      .nl-final-inner { max-width:46rem; margin:0 auto; display:flex; flex-direction:column; align-items:center; }
+      .nl-final .nl-h2 { margin-top:1.5rem; }
+      .nl-final .nl-clarifier { margin-left:auto; margin-right:auto; }
+      .nl-final .nl-actions { justify-content:center; }
+      .nl-final-glow { position:absolute; left:50%; top:0; width:38rem; height:18rem; transform:translateX(-50%); background:radial-gradient(closest-side, rgba(249,115,22,.10), transparent 70%); pointer-events:none; }
+
+      /* Partner logo grid · standardized to index-v4 build */
+      .partner-grid-section { background-color: var(--color-bg); color: var(--color-fg); }
+      .partner-grid-title { color: var(--color-muted); }
+      .partner-grid-title strong { color: var(--color-fg); font-weight: 500; }
+      .partner-logo-band, .partner-logo-grid, .partner-logo-card { border-color: var(--color-border) !important; }
+      .partner-logo-card:nth-child(odd) { background-color: var(--color-card); }
+      .partner-plus::before, .partner-plus::after { content: ""; position: absolute; left: 50%; top: 50%; background: #0F1114; transform: translate(-50%, -50%); }
+      .partner-plus::before { width: 18px; height: 1px; }
+      .partner-plus::after { width: 1px; height: 18px; }
+      html[data-theme="dark"] .partner-logo-card img.partner-logo-invert-dark { filter: invert(1) grayscale(1) brightness(1.4); opacity: 0.9; }
+      html[data-theme="dark"] .partner-plus::before, html[data-theme="dark"] .partner-plus::after { background: var(--color-fg); }
+      .partner-logo-text { color: var(--color-fg); font-family: Inter, sans-serif; font-size: 1.45rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; text-align: center; white-space: nowrap; }
+      .partner-logo-text.is-long { font-size: 1.05rem; letter-spacing: -0.025em; }
+      .partner-logo-lockup { display: inline-flex; align-items: center; gap: .55rem; }
+      .partner-logo-lockup .partner-logo-text { font-size: 1.2rem; }
+    </style>
+
+    <!-- Partner grid · 300+ brands -->
+    <section class="partner-grid-section relative z-10 pt-10 pb-10 md:pt-12 md:pb-16">
+      <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
+        <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
+          300+ travel brands, TMCs, and hotel groups. <strong>Already connected.</strong>
+        </h2>
+      </div>
+      <div class="partner-logo-band border-y">
+        <div class="partner-logo-grid relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x">
+          <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
+            <img alt="Amadeus Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://commons.wikimedia.org/wiki/Special:FilePath/Amadeus_Organization_logo_2024.svg">
+            <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
+          </div>
+          <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r">
+            <img alt="Sabre Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="../assets/images/logos/sabre.svg">
+          </div>
+          <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
+            <img alt="Delta Air Lines Logo" class="pointer-events-none max-h-9 max-w-[150px] select-none object-contain md:max-h-10 md:max-w-[170px] partner-logo-invert-dark" src="../assets/images/logos/delta.svg">
+            <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
+            <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -left-3 -bottom-3 hidden md:block" aria-hidden="true"></span>
+          </div>
+          <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b">
+            <img alt="United Airlines Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="../assets/images/logos/united.svg">
+          </div>
+          <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b md:border-b-0">
+            <img alt="Lufthansa Logo" class="pointer-events-none max-h-9 max-w-[150px] select-none object-contain md:max-h-10 md:max-w-[170px] partner-logo-invert-dark" src="../assets/images/logos/lufthansa.svg">
+            <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3 md:hidden" aria-hidden="true"></span>
+          </div>
+          <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r md:border-b-0">
+            <img alt="Air France Logo" class="pointer-events-none max-h-7 max-w-[150px] select-none object-contain md:max-h-8 md:max-w-[170px] partner-logo-invert-dark" src="../assets/images/logos/air-france.svg">
+          </div>
+          <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r">
+            <img alt="Singapore Airlines Logo" class="pointer-events-none max-h-9 max-w-[150px] select-none object-contain md:max-h-10 md:max-w-[170px] partner-logo-invert-dark" src="../assets/images/logos/singapore-airlines.svg">
+          </div>
+          <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8">
+            <img alt="Air China Logo" class="pointer-events-none max-h-9 max-w-[150px] select-none object-contain md:max-h-10 md:max-w-[170px] partner-logo-invert-dark" src="../assets/images/logos/air-china.svg">
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <section id="supply-buckets" class="fcg-marketing-section">
+    <div class="fcg-marketing-inner" style="max-width:72rem;">
+      <header class="fcg-marketing-header fade-up">
+        <div class="fcg-marketing-eyebrow">Air · Paths</div>
+        <h2 class="fcg-marketing-title">Where F&#8209;Link <span>fits.</span></h2>
+        <p>F&#8209;Link is not a global breadth play. It fits China-routed flows, APAC exposure, and TMCs already using G&#8209;Link.</p>
+      </header>
+
+      <div class="fcg-marketing-features fade-up" style="grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem 4rem;">
+        <article class="fcg-marketing-feature">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
+            <iconify-icon icon="solar:plain-2-linear" width="18" height="18"></iconify-icon>
+            Path A · Travelsky / GDS
+          </div>
+          <h3>Where global air APIs hand off</h3>
+          <p>Travelsky anchors Chinese air ticket distribution. F&#8209;Link connects through that path while keeping FCG's CBT and the broader GDS environment consistent.</p>
+          <p style="margin-top:1rem;color:var(--color-muted)!important;font-size:.9rem;line-height:1.6;">Travelsky &amp; Sabre live · more GDS on roadmap · Unified CBT consumes F&#8209;Link directly · Internal TC operators routed through F&#8209;Link.</p>
+        </article>
+
+        <article class="fcg-marketing-feature">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
+            <iconify-icon icon="solar:global-linear" width="18" height="18"></iconify-icon>
+            Path B · China outbound &amp; APAC
+          </div>
+          <h3>Routes anchored in Asia</h3>
+          <p>China outbound and intra-APAC routes are why F&#8209;Link exists. Travelsky, local ticketing norms, and regional commercial relationships are hard to retrofit from outside.</p>
+          <p style="margin-top:1rem;color:var(--color-muted)!important;font-size:.9rem;line-height:1.6;">China domestic + outbound · APAC routes with regional carriers · Local payment, currency, ticketing native.</p>
+        </article>
+
+        <article class="fcg-marketing-feature">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
+            <iconify-icon icon="solar:link-circle-linear" width="18" height="18"></iconify-icon>
+            Path C · Co-routed with G&#8209;Link
+          </div>
+          <h3>One vendor for hotel and air</h3>
+          <p>For TMCs already integrating G&#8209;Link, F&#8209;Link is the simplest path to single-vendor coverage. Same Open Platform, same developer surface, same BMS for air and hotel operations.</p>
+          <p style="margin-top:1rem;color:var(--color-muted)!important;font-size:.9rem;line-height:1.6;">Single commercial relationship · Shared BMS · Same three doors as G&#8209;Link.</p>
+        </article>
+
+        <article class="fcg-marketing-feature">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.16em;color:#fb923c;text-transform:uppercase;margin-bottom:1rem;">
+            <iconify-icon icon="solar:map-arrow-up-linear" width="18" height="18"></iconify-icon>
+            Path D · Air partners roadmap
+          </div>
+          <h3>Clear about what is next</h3>
+          <p>Additional air partners are added as they ship, with China-routed demand first and broader regional depth second.</p>
+          <p style="margin-top:1rem;color:var(--color-muted)!important;font-size:.9rem;line-height:1.6;">MCP version exposed, next versioning TBA · Documented as shipped, no promised inventory · Default air layer for AI booking agents in Asia.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== G-LINK BUNDLE EXPRESS PATH ===== -->
+  <section id="flink-bundle" style="position:relative;background:#050505;color:#fff;padding:3.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);">
+    <style>
+      .v2-flink-bundle { max-width: 80rem; margin: 0 auto; position: relative; border: 1px solid rgba(249,115,22,.22); border-radius: 22px; background: linear-gradient(120deg, rgba(249,115,22,.08), rgba(255,255,255,.015) 60%); padding: 2rem 2.25rem; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: center; }
+      @media (max-width: 820px) { .v2-flink-bundle { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.75rem 1.5rem; } }
+      .v2-flink-bundle-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'Inter',sans-serif; font-size: 11px; letter-spacing:.16em; color:#fb923c; text-transform:uppercase; margin-bottom: .75rem; }
+      .v2-flink-bundle-eyebrow iconify-icon { color: #fb923c; }
+      .v2-flink-bundle h2 { color:#fff; font-size: clamp(1.45rem, 2.2vw, 1.85rem); font-weight: 500; letter-spacing:-.015em; line-height: 1.15; margin: 0 0 .75rem; }
+      .v2-flink-bundle p { color: rgba(255,255,255,.62); font-size: .98rem; line-height: 1.55; margin: 0; max-width: 44rem; }
+      .v2-flink-bundle-cta { display:inline-flex; align-items:center; gap:.5rem; padding: .9rem 1.4rem; border-radius: 9999px; background: #fff; color: #0a0a0a; font-size: 14px; font-weight: 500; white-space: nowrap; transition: transform 180ms ease; }
+      .v2-flink-bundle-cta:hover { transform: scale(1.02); }
+      html[data-theme="light"] .v2-flink-bundle { background: linear-gradient(120deg, rgba(249,115,22,.08), rgba(0,0,0,.02) 60%); border-color: rgba(249,115,22,.35); }
+      html[data-theme="light"] .v2-flink-bundle h2 { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-bundle p { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-bundle-cta { background: #0f1114; color: #fff; }
+    </style>
+    <div class="v2-flink-bundle fade-up">
+      <div>
+        <div class="v2-flink-bundle-eyebrow"><iconify-icon icon="solar:link-circle-linear" width="14" height="14"></iconify-icon>For TMCs already on G&#8209;Link</div>
+        <h2>Add F&#8209;Link in one commercial relationship.</h2>
+        <p>One contract, one Open Platform login, and one mid-office for hotel and air. A faster air path for TMCs already using G&#8209;Link.</p>
+      </div>
+      <a href="#contact" class="v2-flink-bundle-cta">See the bundle terms<iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
+    </div>
+  </section>
+
+    <!-- 3 · Product features (stacked) + CTA (06-feature-tabs equivalent · testimonial omitted, no real quote on page) -->
+    <section class="nl-section">
+      <div class="nl-inner">
+        <header class="nl-head fade-up">
+          <div class="nl-eyebrow">Integration</div>
+          <h2 class="nl-h2">Skills, API, or SDK. <span class="accent">Three ways into F&#8209;Link.</span></h2>
+          <p class="nl-clarifier">Same Open Platform as G&#8209;Link. Skills is the fastest start; the F&#8209;Link MCP surface is live today, with API and SDK support alongside it.</p>
+        </header>
+        <div class="nl-feature-list">
+          <div class="nl-feature-row fade-up">
+            <div class="nl-feature-no">01</div>
+            <div>
+              <h3>Skills &middot; AI-native</h3>
+              <p>Paste a Skills command into your AI tool. Describe the air search and booking flow in plain English. The model reads the docs and drafts the integration.</p>
             </div>
+            <span class="nl-code-tag">/skill fcg-flink</span>
           </div>
-          <div class="fcg-hero2-code-footer" aria-hidden="true">
-            <div class="fcg-hero2-code-chip"><span>Supply</span><strong>4.3M+ hotels</strong></div>
-            <div class="fcg-hero2-code-chip"><span>Network</span><strong>43 suppliers · 13 live</strong></div>
-            <div class="fcg-hero2-code-chip"><span>Asia</span><strong>4 chains deployed</strong></div>
+          <div class="nl-feature-row fade-up">
+            <div class="nl-feature-no">02</div>
+            <div>
+              <h3>API &middot; MCP version</h3>
+              <p>The F&#8209;Link MCP surface is live today. Traditional REST remains available for teams that need full control.</p>
+            </div>
+            <span class="nl-code-tag">POST /flink/air/search</span>
+          </div>
+          <div class="nl-feature-row fade-up">
+            <div class="nl-feature-no">03</div>
+            <div>
+              <h3>SDK &middot; Managed surface</h3>
+              <p>Typed primitives for air search, pricing, booking, and ticketing. Less boilerplate for stacks already running G&#8209;Link's SDK.</p>
+            </div>
+            <span class="nl-code-tag">npm i @fcg/flink</span>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SUPPLY SOURCES LOGO STRIP ===== -->
-  <section class="partner-grid-section relative z-10 pt-10 pb-12 md:pt-12 md:pb-16" aria-label="Hotel supply sources connected through G-Link">
-    <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
-      <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
-        One API. <strong>Every major supply source.</strong>
-      </h2>
-      <p class="mx-auto mt-3 max-w-xl text-sm text-zinc-400">Global and China hotel groups, connected through one G&#8209;Link integration.</p>
-    </div>
-    <div class="partner-logo-band border-y">
-      <div class="mx-auto flex max-w-[1040px] flex-wrap items-center justify-center gap-x-10 gap-y-8 px-6 py-10 md:gap-x-14">
-        <span class="supplier-logo-placeholder">Narada</span>
-        <span class="supplier-logo-placeholder">New Century</span>
-        <img alt="Kempinski Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/kempinski.svg">
-        <img alt="Hyatt Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/hyatt.svg">
-        <span class="supplier-logo-placeholder">Ji Hotel</span>
-        <span class="supplier-logo-placeholder">Homeinns</span>
-        <img alt="Marriott International Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/marriott.svg">
-        <span class="supplier-logo-placeholder">Vienna Hotel</span>
-        <img alt="Hilton Hotels and Resorts Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/hilton.svg">
-        <img alt="Shangri-La Hotels and Resorts Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/shangri-la.svg">
-        <img alt="Accor Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/accor.svg">
-        <img alt="Atour Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/atour.svg">
-        <span class="supplier-logo-placeholder">Dossen</span>
-        <img alt="Jin Jiang International Logo" class="supplier-logo-real select-none pointer-events-none" src="../assets/images/logos/jinjiang-international.jpg">
-        <img alt="IHG Hotels and Resorts Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/ihg.svg">
-        <span class="supplier-logo-placeholder">CTG Hotel</span>
-        <span class="supplier-logo-placeholder">Green Tree Inn</span>
-        <span class="supplier-logo-placeholder">Inzone</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="api-capabilities" class="fcg-marketing-section">
-    <div class="fcg-marketing-inner" style="max-width:72rem;">
-      <header class="fcg-marketing-header fade-up">
-        <div class="fcg-marketing-eyebrow">Supply layer</div>
-        <h2 class="fcg-marketing-title">One API. <span>Four supply paths.</span></h2>
-        <p>G&#8209;Link brings the hotel paths a TMC needs into one layer: GDS, direct hotel, bedbank, and Asia-direct. Rates, content, and post-booking events stay connected.</p>
-      </header>
-
-      <div class="fcg-marketing-features fade-up">
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:buildings-2-linear" width="22" height="22"></iconify-icon></div>
-          <h3>4.3M+ mapped hotels</h3>
-          <p>Four supply paths as one bookable, deduplicated feed.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:tag-price-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Corporate rates, not just inventory</h3>
-          <p>RFP rates wholesalers can't carry, up to 70% of corporate volume.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:global-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Asia depth around global GDS</h3>
-          <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Mid-office after booking</h3>
-          <p>Cancellations, holds, and reschedules handled through the BMS.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:ranking-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Quality-scored sources</h3>
-          <p>Bookings route to the most dependable supply path.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="how-it-works" class="fcg-integration-section">
-    <div class="fcg-integration-inner">
-      <header class="fcg-integration-header fade-up">
-        <div class="fcg-integration-eyebrow">Integration</div>
-        <h2 class="fcg-integration-title"><span>Skills, API, or SDK.</span><br>Three ways into the same supply layer.</h2>
-        <p>The Open Platform exposes G&#8209;Link three ways. Skills is the fastest start.</p>
-      </header>
-
-      <div class="fcg-flow-grid fade-up">
-        <div class="fcg-flow-step">
-          <div class="fcg-flow-step-number">01</div>
-          <h3>Skills · AI-native</h3>
-          <p>Describe the flow in plain English. AI drafts it from live docs.</p>
-          <div class="code-tag">/skill fcg-glink</div>
-        </div>
-        <div class="fcg-flow-step">
-          <div class="fcg-flow-step-number">02</div>
-          <h3>API · Versioned REST</h3>
-          <p>Full control over search, rates, and booking.</p>
-          <div class="code-tag">POST /v2/hotels/search</div>
-        </div>
-        <div class="fcg-flow-step">
-          <div class="fcg-flow-step-number">03</div>
-          <h3>SDK · Managed surface</h3>
-          <p>Typed primitives for standard stacks, less boilerplate.</p>
-          <div class="code-tag">npm i @fcg/glink</div>
+        <div class="nl-actions fade-up">
+          <a class="nl-btn nl-btn-primary" href="#getting-started">Book a 20-min walkthrough <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
         </div>
       </div>
+    </section>
 
-      <div class="fcg-supply-illustration fade-up" aria-label="Many supply sources resolving into one G-Link layer">
-        <svg width="340" height="340" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)" opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="450" cy="720" r="370"/><circle cx="480" cy="720" r="400"/><circle cx="510" cy="720" r="430"/><circle cx="540" cy="720" r="460"/><circle cx="570" cy="720" r="490"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>
-      </div>
-    </div>
-  </section>
+  <!-- ===== LIVE PVG ROUTES PREVIEW ===== -->
+  <section id="flink-routes" style="position:relative;background:#050505;color:#fff;padding:6.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);overflow:hidden;">
+    <style>
+      .v2-flink-routes { max-width: 80rem; margin: 0 auto; position: relative; z-index: 1; }
+      .v2-flink-routes-glow { position:absolute; top:-15%; left:-10%; width: 45rem; height: 45rem; pointer-events:none; background: radial-gradient(circle, rgba(14,165,233,.12), transparent 60%); filter: blur(60px); }
+      .v2-flink-routes-head { display:grid; grid-template-columns: minmax(0,1fr) auto; gap: 2rem; align-items: end; margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+      @media (max-width: 820px) { .v2-flink-routes-head { grid-template-columns: 1fr; gap: 1.25rem; align-items: flex-start; } }
+      .v2-flink-routes-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; color: rgba(255,255,255,.55); text-transform: uppercase; margin-bottom: 1rem; }
+      .v2-flink-routes-eyebrow::before { content:""; width: 1.6rem; height: 1px; background: rgba(255,255,255,.3); }
+      .v2-flink-routes-head h2 { color:#fff; font-size: clamp(2rem, 3.2vw, 2.65rem); font-weight: 500; letter-spacing:-.018em; line-height: 1.1; margin: 0 0 .85rem; max-width: 36rem; }
+      .v2-flink-routes-head p { color: rgba(255,255,255,.62); font-size: 1rem; line-height: 1.6; margin: 0; max-width: 32rem; }
+      .v2-flink-routes-live { display:inline-flex; align-items:center; gap:.55rem; padding: .55rem .95rem; border-radius: 9999px; background: rgba(34,197,94,.1); color: #22c55e; font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing:.06em; text-transform: uppercase; white-space: nowrap; }
+      .v2-flink-routes-live::before { content:""; width:7px; height:7px; border-radius:9999px; background:#22c55e; box-shadow: 0 0 12px rgba(34,197,94,.8); animation: pulse-dot 2s ease-in-out infinite; }
+      @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
 
-  <section id="supply-buckets" class="px-6 md:px-12 py-28 bg-[#000] border-t border-white/10">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 fade-up">
+      .v2-flink-routes-grid { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+      @media (max-width: 980px) { .v2-flink-routes-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 640px) { .v2-flink-routes-grid { grid-template-columns: 1fr; } }
+
+      .v2-flink-route-card { position:relative; border: 1px solid rgba(255,255,255,.1); border-radius: 20px; background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.012)); padding: 1.5rem 1.5rem 1.35rem; display: flex; flex-direction: column; gap: 1.1rem; transition: border-color 220ms ease, transform 220ms ease, background 220ms ease; }
+      .v2-flink-route-card:hover { border-color: rgba(249,115,22,.35); transform: translateY(-2px); }
+      .v2-flink-route-card.featured { border-color: rgba(249,115,22,.32); background: linear-gradient(180deg, rgba(249,115,22,.08), rgba(255,255,255,.012)); }
+      .v2-flink-route-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: .85rem; border-bottom: 1px dashed rgba(255,255,255,.1); }
+      .v2-flink-route-head .v2-flink-route-id { font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.06em; color: rgba(255,255,255,.5); text-transform: uppercase; }
+      .v2-flink-route-head .v2-flink-route-status { display:inline-flex; align-items:center; gap:.4rem; font-family:'JetBrains Mono', monospace; font-size: 10px; letter-spacing:.06em; color: #22c55e; text-transform: uppercase; }
+      .v2-flink-route-head .v2-flink-route-status::before { content:""; width:5px; height:5px; border-radius:9999px; background:#22c55e; box-shadow: 0 0 8px rgba(34,197,94,.7); }
+      .v2-flink-route-card.featured .v2-flink-route-status { color: #fb923c; }
+      .v2-flink-route-card.featured .v2-flink-route-status::before { background: #fb923c; box-shadow: 0 0 8px rgba(249,115,22,.7); }
+
+      .v2-flink-route-airports { display:grid; grid-template-columns: auto 1fr auto; align-items:center; gap: 1rem; }
+      .v2-flink-route-port strong { display:block; color:#fff; font-family:'JetBrains Mono', monospace; font-size: 1.65rem; font-weight: 400; letter-spacing:.04em; line-height: 1; }
+      .v2-flink-route-port span { display:block; margin-top:.3rem; color: rgba(255,255,255,.5); font-size: 9.5px; letter-spacing:.12em; text-transform: uppercase; }
+      .v2-flink-route-port.dest { text-align: right; }
+      .v2-flink-route-line { position:relative; height: 22px; }
+      .v2-flink-route-line::before { content:""; position:absolute; left:0; right:0; top:50%; border-top: 1px dashed rgba(255,255,255,.2); }
+      .v2-flink-route-line iconify-icon { position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); color:#fb923c; background:#050505; padding: 0 .35rem; font-size: 16px; }
+      .v2-flink-route-card.featured .v2-flink-route-line iconify-icon { background: #1a0f08; }
+
+      .v2-flink-route-meta { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+      .v2-flink-route-meta-item { font-family:'JetBrains Mono', monospace; }
+      .v2-flink-route-meta-item .k { display:block; color: rgba(255,255,255,.4); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .2rem; }
+      .v2-flink-route-meta-item .v { color: #fff; font-size: .82rem; font-weight: 500; letter-spacing: .02em; }
+
+      .v2-flink-route-supply { display:flex; flex-wrap: wrap; gap: .4rem; }
+      .v2-flink-route-supply span { display:inline-flex; align-items:center; gap:.35rem; padding: .3rem .55rem; border-radius: 6px; background: rgba(249,115,22,.1); color: #fb923c; font-family:'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase; }
+      .v2-flink-route-supply span.muted { background: rgba(255,255,255,.05); color: rgba(255,255,255,.55); }
+
+      .v2-flink-routes-foot { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center; padding-top: 1.75rem; border-top: 1px dashed rgba(255,255,255,.1); }
+      .v2-flink-routes-foot p { color: rgba(255,255,255,.55); font-size: .9rem; line-height: 1.55; margin: 0; max-width: 38rem; }
+      .v2-flink-routes-foot p em { color: #fb923c; font-style: normal; font-weight: 500; }
+      .v2-flink-routes-foot a { display:inline-flex; align-items:center; gap:.5rem; padding: .8rem 1.3rem; border-radius: 9999px; background: rgba(255,255,255,.06); color: #fff; border: 1px solid rgba(255,255,255,.14); font-size: 13px; font-weight: 500; white-space: nowrap; transition: border-color 180ms ease; }
+      .v2-flink-routes-foot a:hover { border-color: rgba(255,255,255,.3); }
+
+      html[data-theme="light"] #flink-routes { background: #ffffff; border-top-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-routes-glow { opacity: .35; }
+      html[data-theme="light"] .v2-flink-routes-head { border-bottom-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-routes-head h2 { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-routes-head p,
+      html[data-theme="light"] .v2-flink-routes-eyebrow { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-route-card { background: #fff; border-color: #e5e7eb; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+      html[data-theme="light"] .v2-flink-route-card:hover { border-color: rgba(249,115,22,.4); }
+      html[data-theme="light"] .v2-flink-route-card.featured { background: linear-gradient(180deg, rgba(249,115,22,.07), #fff 80%); border-color: rgba(249,115,22,.4); }
+      html[data-theme="light"] .v2-flink-route-head { border-bottom-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-route-head .v2-flink-route-id { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-route-port strong { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-route-port span { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-route-line::before { border-top-color: #d1d5db; }
+      html[data-theme="light"] .v2-flink-route-line iconify-icon { background: #fff; }
+      html[data-theme="light"] .v2-flink-route-card.featured .v2-flink-route-line iconify-icon { background: #fff8f1; }
+      html[data-theme="light"] .v2-flink-route-meta-item .k { color: #6b7280; }
+      html[data-theme="light"] .v2-flink-route-meta-item .v { color: #0f1114; }
+      html[data-theme="light"] .v2-flink-route-supply span.muted { background: #f3f4f6; color: #4b5563; }
+      html[data-theme="light"] .v2-flink-routes-foot { border-top-color: #e5e7eb; }
+      html[data-theme="light"] .v2-flink-routes-foot p { color: #4b5563; }
+      html[data-theme="light"] .v2-flink-routes-foot a { background: #f3f4f6; color: #0f1114; border-color: #e5e7eb; }
+    </style>
+
+    <div class="v2-flink-routes-glow" aria-hidden="true"></div>
+
+    <div class="v2-flink-routes">
+      <header class="v2-flink-routes-head fade-up">
         <div>
-          <div class="product-kicker text-xs text-orange-500 mb-4">Supply · Buckets</div>
-          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Four supply paths.</h2>
+          <div class="v2-flink-routes-eyebrow">Sandbox routes</div>
+          <h2>China and APAC route examples.</h2>
+          <p>A sample of China-anchored air paths running through the F&#8209;Link MCP surface, with Travelsky and global GDS context behind each flow.</p>
         </div>
-        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Each path plays a different role. Together, one accountable layer.</p>
-      </div>
-
-      <div class="fcg-flow-grid fade-up" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">A</div>
-          <h3>Corporate-rate GDS</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">RFP rates wholesale can't carry, through direct GDS.</p>
-          <div class="code-tag">Bucket A · GDS direct</div>
-        </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">B</div>
-          <h3>Direct hotel paths</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Direct contracts and channel managers. The most accountable channel.</p>
-          <div class="code-tag">Bucket B · Direct hotel &amp; NDC</div>
-        </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">C</div>
-          <h3>Long-tail coverage</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Bedbank breadth for properties not covered elsewhere.</p>
-          <div class="code-tag">Bucket C · Bedbank</div>
-        </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">D</div>
-          <h3>China and Asia direct</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Chinese chains and Asia-specialty connections. Built in-region.</p>
-          <div class="code-tag">Bucket D · China &amp; Asia direct</div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="fcg-marketing-section" aria-label="Common questions from TMC evaluation teams">
-    <div class="fcg-marketing-inner" style="max-width:72rem;">
-      <header class="fcg-marketing-header fade-up">
-        <div class="fcg-marketing-eyebrow">Evaluation</div>
-        <h2 class="fcg-marketing-title">What TMCs <span>ask first.</span></h2>
+        <span class="v2-flink-routes-live">F&#8209;Link · Live routing</span>
       </header>
 
-      <div class="fcg-marketing-features fade-up">
-        <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"We already use another wholesaler."</div>
-          <h3>Wholesalers cannot carry corporate-negotiated rates.</h3>
-          <p>RFP rates only flow through GDS and direct hotel, up to 70% of corporate volume. G&#8209;Link adds the layer wholesalers can't.</p>
+      <div class="v2-flink-routes-grid">
+        <article class="v2-flink-route-card featured fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 4F · 06:55 → 09:40</span>
+            <span class="v2-flink-route-status">Featured</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PVG</strong><span>Shanghai</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>HKG</strong><span>Hong Kong</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">2h 45m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">CX · CA · MU</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span>Sabre</span>
+            <span class="muted">G&#8209;Link bundle</span>
+          </div>
         </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"We already use another travel platform."</div>
-          <h3>Most large TMCs already multiplex APIs.</h3>
-          <p>If China is in your client mix, G&#8209;Link closes the gap: Chinese chains plus global GDS. China is 58% of Asia travel.</p>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 8F · 08:20 → 12:55</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PVG</strong><span>Shanghai</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>NRT</strong><span>Tokyo</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">3h 35m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">JL · MU · NH</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span class="muted">APAC outbound</span>
+          </div>
         </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"Our dev team is already stretched thin."</div>
-          <h3>Skills helps developers start without a handoff.</h3>
-          <p>Skills, API, and SDK share one backend. Ship the first search call from live docs, no handoff.</p>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 12F · 14:10 → 19:25</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PVG</strong><span>Shanghai</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>SIN</strong><span>Singapore</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">5h 15m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">SQ · MU · CA</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span class="muted">APAC outbound</span>
+          </div>
         </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 21F · 09:35 → 11:15</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PEK</strong><span>Beijing</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>PVG</strong><span>Shanghai</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">2h 20m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">CA · MU · CZ</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span>Travelport</span>
+            <span class="muted">China domestic</span>
+          </div>
+        </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 33F · 23:50 → 03:25+1</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>PVG</strong><span>Shanghai</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>BKK</strong><span>Bangkok</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">5h 35m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">TG · MU · 9C</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span class="muted">APAC outbound</span>
+          </div>
+        </article>
+
+        <article class="v2-flink-route-card fade-up">
+          <div class="v2-flink-route-head">
+            <span class="v2-flink-route-id">route 45F · 11:40 → 15:10</span>
+            <span class="v2-flink-route-status">Live</span>
+          </div>
+          <div class="v2-flink-route-airports">
+            <div class="v2-flink-route-port"><strong>CAN</strong><span>Guangzhou</span></div>
+            <div class="v2-flink-route-line"><iconify-icon icon="solar:plain-2-linear"></iconify-icon></div>
+            <div class="v2-flink-route-port dest"><strong>KUL</strong><span>Kuala Lumpur</span></div>
+          </div>
+          <div class="v2-flink-route-meta">
+            <div class="v2-flink-route-meta-item"><span class="k">Duration</span><span class="v">4h 30m</span></div>
+            <div class="v2-flink-route-meta-item"><span class="k">Carriers</span><span class="v">MH · CZ · AK</span></div>
+          </div>
+          <div class="v2-flink-route-supply">
+            <span>Travelsky</span>
+            <span class="muted">APAC outbound</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="v2-flink-routes-foot fade-up">
+        <p>A representative slice of China-anchored paths is available in sandbox today. The full coverage map and supplier matrix are in the developer portal.</p>
+        <a href="#getting-started"><iconify-icon icon="solar:test-tube-linear" width="16" height="16"></iconify-icon>Test these routes in sandbox</a>
       </div>
     </div>
   </section>
 
-  <section class="fcg-integration-section" aria-label="Commercial model">
-    <div class="fcg-integration-inner">
-      <header class="fcg-integration-header fade-up">
-        <div class="fcg-integration-eyebrow">Commercial model</div>
-        <h2 class="fcg-integration-title"><span>Clear packaging.</span><br>Scoped by product surface.</h2>
-        <p>Tiered by product surface: G&#8209;Link only, full OBT suite, white-label, or RFP support.</p>
-      </header>
-
-      <div class="fcg-pricing-rows fade-up">
-        <article>
-          <div class="fcg-pricing-label">One-time setup</div>
-          <div class="fcg-pricing-value">Scoped by launch needs</div>
-          <div class="fcg-pricing-sub">Supplier activation, sandbox onboarding, and integration support.</div>
-        </article>
-        <article>
-          <div class="fcg-pricing-label">Monthly subscription</div>
-          <div class="fcg-pricing-value">Tiered by product scope</div>
-          <div class="fcg-pricing-sub">G&#8209;Link only sits at the lower end of the range.</div>
-        </article>
-      </div>
-      <p class="fcg-pricing-foot fade-up">Final tiers depend on product scope and supplier activation.</p>
-    </div>
-  </section>
-
-</main>
 <!-- ===== API ACCESS CTA SECTION ===== -->
     <footer id="contact" class="flex flex-col w-full">
       <section id="getting-started" class="fcg-mobile-feature border-t border-white/10">
         <div class="fcg-mobile-inner">
           <header class="fcg-mobile-heading fade-up">
-            <div class="fcg-main-icon"><iconify-icon icon="solar:code-square-linear" width="28" height="28"></iconify-icon></div>
+            <div class="fcg-main-icon"><iconify-icon icon="solar:plain-2-linear" width="28" height="28"></iconify-icon></div>
             <div class="fcg-mobile-eyebrow">Get connected</div>
-            <h2>Connect G&#8209;Link.</h2>
-            <p class="fcg-mobile-subcopy">Start in sandbox, test the four supply paths, move to production.</p>
+            <h2>Connect F&#8209;Link.</h2>
+            <p class="fcg-mobile-subcopy">Bundle F&#8209;Link with G&#8209;Link for one hotel-and-air relationship, or use it standalone where China and APAC route depth matter.</p>
           </header>
 
           <div class="fcg-feature-grid">
@@ -2973,7 +3211,7 @@
               <div class="fcg-feature-icon"><iconify-icon icon="solar:key-minimalistic-square-linear" width="22" height="22"></iconify-icon></div>
               <div>
                 <h3>Register on the Open Platform</h3>
-                <p>Self-serve sandbox credentials and live docs. No handoff.</p>
+                <p>The same developer portal that serves G&#8209;Link and TMC API. Sandbox credentials and live docs in one place.</p>
               </div>
             </article>
 
@@ -2981,450 +3219,39 @@
               <div class="fcg-feature-icon"><iconify-icon icon="solar:magic-stick-3-linear" width="22" height="22"></iconify-icon></div>
               <div>
                 <h3>Integrate via Skills, API, or SDK</h3>
-                <p>Three doors, one backend. Skills is the default: describe it, AI writes the code.</p>
+                <p>The F&#8209;Link MCP surface is live today. Describe the air flow in natural language and generate code from live docs.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
               <div class="fcg-feature-icon"><iconify-icon icon="solar:test-tube-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Test against the four supply buckets</h3>
-                <p>Run a search across all four paths and confirm a sandbox booking.</p>
+                <h3>Test against China and APAC routes</h3>
+                <p>Run a Travelsky-routed air search end-to-end. Price, book, ticket, and confirm the itinerary against the shared BMS.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
-              <div class="fcg-feature-icon"><iconify-icon icon="solar:rocket-2-linear" width="22" height="22"></iconify-icon></div>
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:link-circle-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Move to production</h3>
-                <p>Switch to production once validated. Commercial terms handled in parallel.</p>
+                <h3>Bundle with G&#8209;Link or stand alone</h3>
+                <p>Use one commercial relationship, one Open Platform login, and one mid-office for both inventory types.</p>
               </div>
             </article>
           </div>
 
-          <section class="glink-radar-section" aria-label="G&#8209;Link supply radar">
-            <div class="glink-radar-inner">
-              <div class="glink-radar-scene">
-                <div class="glink-radar-stage">
-                  <div class="glink-radar-row-wide">
-                    <div class="glink-radar-row-inner">
-                      <div class="glink-radar-node" style="animation-delay: .2s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:compass-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">GDS</div>
-                      </div>
-                      <div class="glink-radar-node" style="animation-delay: .3s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:buildings-2-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Direct hotel</div>
-                      </div>
-                      <div class="glink-radar-node" style="animation-delay: .4s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:box-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Bedbank</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="glink-radar-row-narrow">
-                    <div class="glink-radar-row-inner">
-                      <div class="glink-radar-node" style="animation-delay: .5s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:chart-2-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Corporate rates</div>
-                      </div>
-                      <div class="glink-radar-node" style="animation-delay: .6s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:map-point-wave-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Asia direct</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="glink-radar-row-wide">
-                    <div class="glink-radar-row-inner">
-                      <div class="glink-radar-node" style="animation-delay: .7s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:case-round-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">TMCs</div>
-                      </div>
-                      <div class="glink-radar-node" style="animation-delay: .8s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:cpu-bolt-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Mid-office</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="glink-radar-core" aria-hidden="true">
-                    <div class="glink-radar-sweep">
-                      <div class="glink-radar-sweep-line"></div>
-                    </div>
-                    <div class="glink-radar-circle" style="height:5rem;width:5rem;border:1px solid rgba(255,255,255,.9);animation-delay:0s;"></div>
-                    <div class="glink-radar-circle" style="height:10rem;width:10rem;border:1px solid rgba(255,255,255,.8);animation-delay:.1s;"></div>
-                    <div class="glink-radar-circle" style="height:15rem;width:15rem;border:1px solid rgba(255,255,255,.7);animation-delay:.2s;"></div>
-                    <div class="glink-radar-circle" style="height:20rem;width:20rem;border:1px solid rgba(255,255,255,.6);animation-delay:.3s;"></div>
-                    <div class="glink-radar-circle" style="height:25rem;width:25rem;border:1px solid rgba(255,255,255,.5);animation-delay:.4s;"></div>
-                    <div class="glink-radar-circle" style="height:30rem;width:30rem;border:1px solid rgba(255,255,255,.4);animation-delay:.5s;"></div>
-                    <div class="glink-radar-circle" style="height:35rem;width:35rem;border:1px solid rgba(255,255,255,.3);animation-delay:.6s;"></div>
-                    <div class="glink-radar-circle" style="height:40rem;width:40rem;border:1px solid rgba(255,255,255,.2);animation-delay:.7s;"></div>
-                  </div>
-
-                  <div class="glink-radar-divider" aria-hidden="true"></div>
-                </div>
-              </div>
-            </div>
-          </section>
-
           <div class="fcg-mobile-cta fade-up">
-            <h3>Hotel supply, ready to integrate.</h3>
-            <p>Walk through corporate-rate routing, Asia depth, and the sandbox path to production.</p>
+            <h3>Air supply for China and APAC routes.</h3>
+            <p>Walk through the Travelsky path, China-routed air search, and the G&#8209;Link bundle.</p>
             <div class="fcg-store-actions">
-              <a href="#capabilities" class="fcg-store-button"><iconify-icon icon="solar:calendar-mark-linear" width="18" height="18"></iconify-icon>Schedule a walkthrough</a>
-              <a href="../api-access.html" class="fcg-store-button"><iconify-icon icon="solar:key-minimalistic-square-linear" width="18" height="18"></iconify-icon>Register for sandbox</a>
+              <a href="#contact" class="fcg-store-button"><iconify-icon icon="solar:calendar-mark-linear" width="18" height="18"></iconify-icon>Book a 20-min walkthrough</a>
+              <a href="#flink-bundle" class="fcg-store-button"><iconify-icon icon="solar:link-circle-linear" width="18" height="18"></iconify-icon>Already on G&#8209;Link? See the bundle</a>
             </div>
           </div>
         </div>
       </section>
     </footer>
     <!-- ===== END API ACCESS CTA SECTION ===== -->
-
-    <!-- ===== NUITEE-LAYOUT COMPARISON BLOCK (NEW · for review) ===== -->
-    <style>
-      .nl-block { background: var(--color-bg); color: var(--color-fg); font-family: 'Inter', system-ui, sans-serif; }
-      .nl-inner { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
-      .nl-inner-wide { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
-      .nl-section { padding: 5.5rem 0; border-top: 1px solid var(--color-border); }
-      .nl-eyebrow { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: #F97316; font-weight: 600; margin-bottom: 1rem; }
-      .nl-h2 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.7rem, 3.4vw, 2.6rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.1; margin: 0; }
-      .nl-h2 span { color: #F97316; }
-      .nl-lead { color: var(--color-muted); font-size: 1rem; line-height: 1.6; max-width: 40rem; margin: 1rem 0 0; }
-      .nl-greybox {
-        width: 100%; min-height: 22rem; border-radius: 1rem;
-        border: 1px dashed var(--color-border);
-        background:
-          repeating-linear-gradient(45deg, transparent, transparent 11px, rgba(136,136,136,.06) 11px, rgba(136,136,136,.06) 12px),
-          var(--color-card);
-        display: flex; align-items: center; justify-content: center; text-align: center;
-        color: var(--color-muted); font-size: .82rem; letter-spacing: .04em; padding: 2rem;
-      }
-      .nl-greybox span { max-width: 16rem; }
-
-      /* Divider strip */
-      .nl-divider { background: var(--color-card); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
-      .nl-divider-inner { max-width: 80rem; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; gap: .7rem; }
-      .nl-divider .nl-dot { width: .55rem; height: .55rem; border-radius: 999px; background: #F97316; flex: none; }
-      .nl-divider strong { font-size: .82rem; font-weight: 600; letter-spacing: .02em; }
-      .nl-divider em { font-style: normal; color: var(--color-muted); font-size: .82rem; }
-
-      /* Hero (split) */
-      .nl-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center; }
-      .nl-pill { display: inline-flex; align-items: center; gap: .5rem; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--color-fg); border: 1px solid var(--color-border); border-radius: 999px; padding: .4rem .85rem; }
-      .nl-pill .nl-dot { width: .5rem; height: .5rem; border-radius: 999px; background: #F97316; }
-      .nl-h1 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(2.1rem, 4.6vw, 3.3rem); font-weight: 500; letter-spacing: -.025em; line-height: 1.05; margin: 1.6rem 0 0; }
-      .nl-h1 em { font-style: normal; color: #F97316; }
-      .nl-clarifier { color: var(--color-muted); font-size: 1.05rem; line-height: 1.6; margin: 1.1rem 0 0; max-width: 32rem; }
-      .nl-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.9rem; }
-      .nl-btn { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; padding: .8rem 1.5rem; font-size: .9rem; font-weight: 500; text-decoration: none; transition: transform .2s ease, opacity .2s ease; }
-      .nl-btn:hover { transform: translateY(-1px); }
-      .nl-btn-primary { background: #F97316; color: #0F1114; }
-      .nl-btn-secondary { background: transparent; color: var(--color-fg); border: 1px solid var(--color-border); }
-
-      /* Advantage 3-up */
-      .nl-adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
-      .nl-card { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 1rem; padding: 1.75rem; }
-      .nl-card-icon { width: 2.6rem; height: 2.6rem; display: flex; align-items: center; justify-content: center; border-radius: .7rem; border: 1px solid var(--color-border); color: #F97316; margin-bottom: 1.1rem; }
-      .nl-card h3 { font-size: 1.05rem; font-weight: 600; margin: 0 0 .5rem; letter-spacing: -.01em; }
-      .nl-card p { color: var(--color-muted); font-size: .92rem; line-height: 1.55; margin: 0; }
-
-      /* Stats band */
-      .nl-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
-      .nl-stat { border-left: 2px solid #F97316; padding-left: 1.1rem; }
-      .nl-stat-num { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; letter-spacing: -.02em; line-height: 1; }
-      .nl-stat-label { color: var(--color-muted); font-size: .86rem; line-height: 1.45; margin-top: .55rem; }
-
-      /* Capability 4-up (metric + visual) */
-      .nl-cap-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
-      .nl-cap { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 1rem; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.1rem; }
-      .nl-cap-metric { font-family: 'Sora', 'Inter', sans-serif; font-size: 1.7rem; font-weight: 500; letter-spacing: -.02em; }
-      .nl-cap h3 { font-size: 1rem; font-weight: 600; margin: 0; }
-      .nl-cap p { color: var(--color-muted); font-size: .9rem; line-height: 1.55; margin: 0; }
-      .nl-cap-visual { min-height: 8rem; border-radius: .75rem; border: 1px dashed var(--color-border);
-        background: repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(136,136,136,.06) 9px, rgba(136,136,136,.06) 10px), var(--color-bg);
-        display: flex; align-items: center; justify-content: center; color: var(--color-muted); font-size: .72rem; letter-spacing: .04em; text-align: center; padding: 1rem; }
-
-      /* Feature split (alternating) */
-      .nl-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-      .nl-feature + .nl-feature { margin-top: 4.5rem; }
-      .nl-feature.nl-reverse .nl-feature-media { order: -1; }
-      .nl-feature h3 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.12; margin: .8rem 0 0; }
-      .nl-feature p { color: var(--color-muted); font-size: 1rem; line-height: 1.6; margin: 1rem 0 0; max-width: 30rem; }
-      .nl-feature-list { list-style: none; padding: 0; margin: 1.4rem 0 0; display: flex; flex-direction: column; gap: .7rem; }
-      .nl-feature-list li { display: flex; align-items: flex-start; gap: .6rem; font-size: .92rem; color: var(--color-fg); }
-      .nl-feature-list iconify-icon { color: #F97316; flex: none; margin-top: .15rem; }
-
-      /* Final CTA band */
-      .nl-cta { text-align: center; padding: 6rem 1.5rem; border-top: 1px solid var(--color-border); background: var(--color-card); }
-      .nl-cta h2 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 500; letter-spacing: -.025em; margin: 0 auto; max-width: 28rem; line-height: 1.1; }
-      .nl-cta p { color: var(--color-muted); font-size: 1.05rem; margin: 1.1rem auto 0; max-width: 34rem; line-height: 1.6; }
-      .nl-cta .nl-actions { justify-content: center; }
-
-      @media (max-width: 860px) {
-        .nl-hero, .nl-feature, .nl-feature.nl-reverse { grid-template-columns: 1fr; gap: 2rem; }
-        .nl-feature.nl-reverse .nl-feature-media { order: 0; }
-        .nl-adv-grid, .nl-stats, .nl-cap-grid { grid-template-columns: 1fr; }
-        .nl-stats { gap: 1.6rem; }
-      }
-    </style>
-
-    <div class="nl-block">
-      <!-- 1 · Labelled divider strip -->
-      <div class="nl-divider">
-        <div class="nl-divider-inner">
-          <span class="nl-dot" aria-hidden="true"></span>
-          <strong>New layout · Nuitee-ordered (G&#8209;Link)</strong>
-          <em>— same content, re-sequenced for review</em>
-        </div>
-      </div>
-
-      <!-- 2 · Split hero -->
-      <section class="nl-section" aria-label="G-Link hero (Nuitee layout)">
-        <div class="nl-inner-wide">
-          <div class="nl-hero">
-            <div class="fade-up">
-              <span class="nl-pill"><span class="nl-dot" aria-hidden="true"></span> Product · G&#8209;Link</span>
-              <h1 class="nl-h1">Hotel supply for <em>corporate travel.</em></h1>
-              <p class="nl-clarifier">One API for GDS, direct hotel, bedbank, and Asia-direct supply. Corporate rates, 4.3M+ mapped hotels, and a mid-office behind every booking.</p>
-              <div class="nl-actions">
-                <a class="nl-btn nl-btn-primary" href="#getting-started">Schedule a walkthrough <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
-                <a class="nl-btn nl-btn-secondary" href="../api-access.html"><iconify-icon icon="solar:code-square-linear" width="16" height="16"></iconify-icon> Read the API docs</a>
-              </div>
-            </div>
-            <div class="nl-greybox scale-in" aria-label="Product walkthrough placeholder">
-              <svg width="240" height="240" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="var(--color-fg)" opacity="0.16" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="480" cy="720" r="400"/><circle cx="540" cy="720" r="460"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3 · Three core advantages -->
-      <section class="nl-section" aria-label="Core advantages">
-        <div class="nl-inner">
-          <div class="fade-up">
-            <div class="nl-eyebrow">Why G&#8209;Link</div>
-            <h2 class="nl-h2">One layer. <span>Three things wholesalers can't do.</span></h2>
-          </div>
-          <div class="nl-adv-grid fade-up">
-            <article class="nl-card">
-              <div class="nl-card-icon"><iconify-icon icon="solar:tag-price-linear" width="22" height="22"></iconify-icon></div>
-              <h3>Corporate rates</h3>
-              <p>RFP rates wholesalers can't carry, up to 70% of corporate volume.</p>
-            </article>
-            <article class="nl-card">
-              <div class="nl-card-icon"><iconify-icon icon="solar:global-linear" width="22" height="22"></iconify-icon></div>
-              <h3>Asia depth</h3>
-              <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
-            </article>
-            <article class="nl-card">
-              <div class="nl-card-icon"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
-              <h3>Mid-office included</h3>
-              <p>Cancellations, holds, and reschedules handled through the BMS.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4 · Stats band (static numerals) -->
-      <section class="nl-section" aria-label="Supply network at a glance">
-        <div class="nl-inner">
-          <div class="fade-up">
-            <div class="nl-eyebrow">By the numbers</div>
-            <h2 class="nl-h2">Supply network <span>at a glance.</span></h2>
-          </div>
-          <div class="nl-stats fade-up">
-            <div class="nl-stat">
-              <div class="nl-stat-num">4.3M+</div>
-              <div class="nl-stat-label">Mapped hotels across four supply paths</div>
-            </div>
-            <div class="nl-stat">
-              <div class="nl-stat-num">43 · 13</div>
-              <div class="nl-stat-label">Suppliers connected, 13 live today</div>
-            </div>
-            <div class="nl-stat">
-              <div class="nl-stat-num">4</div>
-              <div class="nl-stat-label">Supply paths in one bookable feed</div>
-            </div>
-            <div class="nl-stat">
-              <div class="nl-stat-num">58%</div>
-              <div class="nl-stat-label">China's share of Asia travel</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5 · Four capability cards (metric + visual) -->
-      <section class="nl-section" aria-label="Platform capabilities">
-        <div class="nl-inner">
-          <div class="fade-up">
-            <div class="nl-eyebrow">Capabilities</div>
-            <h2 class="nl-h2">What the supply layer <span>actually does.</span></h2>
-          </div>
-          <div class="nl-cap-grid fade-up">
-            <article class="nl-cap">
-              <div class="nl-cap-metric">4.3M+ hotels</div>
-              <div>
-                <h3>Mapping engine</h3>
-                <p>Four supply paths deduplicated into one bookable feed.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ mapping engine view — real screenshot to be supplied ]</span></div>
-            </article>
-            <article class="nl-cap">
-              <div class="nl-cap-metric">43 suppliers</div>
-              <div>
-                <h3>Coverage</h3>
-                <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ coverage map — real screenshot to be supplied ]</span></div>
-            </article>
-            <article class="nl-cap">
-              <div class="nl-cap-metric">up to 70%</div>
-              <div>
-                <h3>Corporate rates</h3>
-                <p>RFP rates wholesalers can't carry, routed through GDS and direct hotel.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ rate routing view — real screenshot to be supplied ]</span></div>
-            </article>
-            <article class="nl-cap">
-              <div class="nl-cap-metric">Mid-office</div>
-              <div>
-                <h3>After booking</h3>
-                <p>Cancellations, holds, and reschedules handled through the BMS.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ mid-office / BMS view — real screenshot to be supplied ]</span></div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- 6 · Alternating feature-split blocks -->
-      <section class="nl-section" aria-label="How G-Link works">
-        <div class="nl-inner-wide">
-          <!-- 6a · Supply layer -->
-          <div class="nl-feature fade-up">
-            <div>
-              <div class="nl-eyebrow">Supply layer</div>
-              <h3>One API. Four supply paths.</h3>
-              <p>G&#8209;Link brings the hotel paths a TMC needs into one layer: GDS, direct hotel, bedbank, and Asia-direct. Rates, content, and post-booking events stay connected.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:check-circle-linear" width="18" height="18"></iconify-icon> 4.3M+ mapped hotels as one deduplicated feed</li>
-                <li><iconify-icon icon="solar:check-circle-linear" width="18" height="18"></iconify-icon> Quality-scored sources route to the most dependable path</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ supply layer diagram — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-
-          <!-- 6b · Integration -->
-          <div class="nl-feature nl-reverse fade-up">
-            <div>
-              <div class="nl-eyebrow">Integration</div>
-              <h3>Skills, API, or SDK.</h3>
-              <p>The Open Platform exposes G&#8209;Link three ways. Skills is the fastest start — describe the flow in plain English and AI drafts it from live docs.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:magic-stick-3-linear" width="18" height="18"></iconify-icon> Skills · AI-native, fastest start</li>
-                <li><iconify-icon icon="solar:code-linear" width="18" height="18"></iconify-icon> API · versioned REST, full control</li>
-                <li><iconify-icon icon="solar:box-linear" width="18" height="18"></iconify-icon> SDK · typed primitives, less boilerplate</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ integration / docs view — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-
-          <!-- 6c · Supply buckets -->
-          <div class="nl-feature fade-up">
-            <div>
-              <div class="nl-eyebrow">Supply · Buckets</div>
-              <h3>Four supply paths.</h3>
-              <p>Each path plays a different role. Together, one accountable layer.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:compass-linear" width="18" height="18"></iconify-icon> A · Corporate-rate GDS</li>
-                <li><iconify-icon icon="solar:buildings-2-linear" width="18" height="18"></iconify-icon> B · Direct hotel &amp; NDC</li>
-                <li><iconify-icon icon="solar:box-linear" width="18" height="18"></iconify-icon> C · Bedbank long-tail coverage</li>
-                <li><iconify-icon icon="solar:map-point-wave-linear" width="18" height="18"></iconify-icon> D · China &amp; Asia direct</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ supply buckets view — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-
-          <!-- 6d · Commercial model -->
-          <div class="nl-feature nl-reverse fade-up">
-            <div>
-              <div class="nl-eyebrow">Commercial model</div>
-              <h3>Clear packaging.</h3>
-              <p>Tiered by product surface: G&#8209;Link only, full OBT suite, white-label, or RFP support. Final tiers depend on product scope and supplier activation.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:tag-linear" width="18" height="18"></iconify-icon> One-time setup, scoped by launch needs</li>
-                <li><iconify-icon icon="solar:wallet-money-linear" width="18" height="18"></iconify-icon> Monthly subscription, tiered by product scope</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ pricing / packaging view — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 7 · Homepage partner grid (plain HTML) -->
-      <section class="partner-grid-section relative z-10 nl-section" aria-label="Travel brands connected through FCG">
-        <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
-          <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
-            300+ travel brands, TMCs, and hotel groups. <strong>Already connected.</strong>
-          </h2>
-        </div>
-        <div class="partner-logo-band border-y">
-          <div class="partner-logo-grid relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x">
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
-              <img alt="PST Travel Logo" class="pointer-events-none max-h-12 max-w-[150px] select-none object-contain md:max-h-14 md:max-w-[170px]" src="https://static.wixstatic.com/media/6f8e7e_f844282625cb466d8c9580ec35a3645b~mv2.jpg/v1/crop/x_386,y_592,w_3524,h_3344/fill/w_274,h_260,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/PST_Travel-Secondary2.jpg">
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r">
-              <img alt="Connexus Travel Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://cdn.prod.website-files.com/68553d1dd8ca0b336f66b55c/69e8a0b042a0c29ce4b7f0f9_2026%20CTL%20logo_Colour_Tran%20bg%20(2).png">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
-              <img alt="Alibaba Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px]" src="../assets/images/logos/alibaba.svg">
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -left-3 -bottom-3 hidden md:block" aria-hidden="true"></span>
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b">
-              <img alt="ByteDance Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/ByteDance_logo_English.svg">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b md:border-b-0">
-              <img alt="Amadeus Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://commons.wikimedia.org/wiki/Special:FilePath/Amadeus_Organization_logo_2024.svg">
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3 md:hidden" aria-hidden="true"></span>
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r md:border-b-0">
-              <img alt="Huazhu Group Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://companieslogo.com/img/orig/HTHT_BIG-d42ec412.svg?t=1720244492">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r">
-              <img alt="IHG Hotels and Resorts Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/IHG_Hotels_%26_Resorts_logo.svg">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8">
-              <img alt="Marriott International Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/Marriott_International.svg">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 8 · Final CTA band -->
-      <section class="nl-cta" aria-label="Get connected with G-Link">
-        <div class="fade-up">
-          <h2>Hotel supply, ready to integrate.</h2>
-          <p>Walk through corporate-rate routing, Asia depth, and the sandbox path to production.</p>
-          <div class="nl-actions">
-            <a class="nl-btn nl-btn-primary" href="#capabilities"><iconify-icon icon="solar:calendar-mark-linear" width="16" height="16"></iconify-icon> Schedule a walkthrough</a>
-            <a class="nl-btn nl-btn-secondary" href="../api-access.html"><iconify-icon icon="solar:key-minimalistic-square-linear" width="16" height="16"></iconify-icon> Register for sandbox</a>
-          </div>
-        </div>
-      </section>
-    </div>
-    <!-- ===== END NUITEE-LAYOUT COMPARISON BLOCK ===== -->
 
     <!-- FOOTER -->
     <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">

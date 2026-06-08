@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.setAttribute("data-theme", t);
+                    document.documentElement.classList.toggle("dark", t === "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCG template · Solutions tile grid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../template-shell.css">
+</head>
+<body>
+    <button class="tpl-theme-toggle" data-theme-toggle aria-label="Toggle theme"><span data-theme-label>Light</span></button>
+
+    <div class="tpl-label">
+        <strong>11 · Solutions tile grid</strong>
+        <span>page types: homepage, segment hub</span>
+        <span class="nuitee-ref">nuitee ref: /solutions/*</span>
+    </div>
+
+    <!-- STRUCTURE: section head (claim + clarifier), then dense 3-up grid of 6 tiles.
+         Each tile: icon, 2-3 word segment title, ONE line, an explore link.
+         Copy density: sparse — one line per tile. -->
+    <section class="tpl-section">
+        <div class="tpl-inner-wide">
+            <header class="reveal" style="max-width:42rem; margin-bottom:3rem;">
+                <p class="tpl-eyebrow-dash"><span class="slot">Solutions</span></p>
+                <h2 class="tpl-h2"><span class="slot">H2: bold claim, sentence case, &le;8 words</span></h2>
+                <p class="tpl-clarifier"><span class="slot">one clarifier line, &le;20 words — system-described, no "you"</span></p>
+            </header>
+
+            <div class="tpl-grid tpl-grid-3">
+                <article class="tpl-card reveal" data-delay="1">
+                    <div class="tpl-icon-tile">&#9633;</div>
+                    <h3 class="tpl-h3"><span class="slot">segment title · 2-3 words</span></h3>
+                    <p class="tpl-lead" style="margin:.75rem 0 0;"><span class="slot">one line — who it serves</span></p>
+                    <div class="tpl-meta"><a href="#" style="color:inherit;text-decoration:none;"><span class="slot">Explore</span> &rarr;</a></div>
+                </article>
+
+                <article class="tpl-card reveal" data-delay="2">
+                    <div class="tpl-icon-tile">&#9678;</div>
+                    <h3 class="tpl-h3"><span class="slot">segment title · 2-3 words</span></h3>
+                    <p class="tpl-lead" style="margin:.75rem 0 0;"><span class="slot">one line — who it serves</span></p>
+                    <div class="tpl-meta"><a href="#" style="color:inherit;text-decoration:none;"><span class="slot">Explore</span> &rarr;</a></div>
+                </article>
+
+                <article class="tpl-card reveal" data-delay="3">
+                    <div class="tpl-icon-tile">&#9711;</div>
+                    <h3 class="tpl-h3"><span class="slot">segment title · 2-3 words</span></h3>
+                    <p class="tpl-lead" style="margin:.75rem 0 0;"><span class="slot">one line — who it serves</span></p>
+                    <div class="tpl-meta"><a href="#" style="color:inherit;text-decoration:none;"><span class="slot">Explore</span> &rarr;</a></div>
+                </article>
+
+                <article class="tpl-card reveal" data-delay="1">
+                    <div class="tpl-icon-tile">&#9636;</div>
+                    <h3 class="tpl-h3"><span class="slot">segment title · 2-3 words</span></h3>
+                    <p class="tpl-lead" style="margin:.75rem 0 0;"><span class="slot">one line — who it serves</span></p>
+                    <div class="tpl-meta"><a href="#" style="color:inherit;text-decoration:none;"><span class="slot">Explore</span> &rarr;</a></div>
+                </article>
+
+                <article class="tpl-card reveal" data-delay="2">
+                    <div class="tpl-icon-tile">&#9633;</div>
+                    <h3 class="tpl-h3"><span class="slot">segment title · 2-3 words</span></h3>
+                    <p class="tpl-lead" style="margin:.75rem 0 0;"><span class="slot">one line — who it serves</span></p>
+                    <div class="tpl-meta"><a href="#" style="color:inherit;text-decoration:none;"><span class="slot">Explore</span> &rarr;</a></div>
+                </article>
+
+                <article class="tpl-card reveal" data-delay="3">
+                    <div class="tpl-icon-tile">&#9678;</div>
+                    <h3 class="tpl-h3"><span class="slot">segment title · 2-3 words</span></h3>
+                    <p class="tpl-lead" style="margin:.75rem 0 0;"><span class="slot">one line — who it serves</span></p>
+                    <div class="tpl-meta"><a href="#" style="color:inherit;text-decoration:none;"><span class="slot">Explore</span> &rarr;</a></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <script src="../template-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>FCG Deck · Product breakdown</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080805; --fg:#f7f7f2; --muted:#a1a1aa; --soft:#71717a;
+    --accent:#f97316; --border:rgba(255,255,255,0.10);
+    --card:linear-gradient(180deg,rgba(255,255,255,0.065),rgba(255,255,255,0.025));
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);color:var(--fg);
+    font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;}
+  em{color:var(--accent);font-style:normal;font-weight:500;}
+  .slide{width:1920px;height:1080px;padding:104px 120px;display:flex;flex-direction:column;}
+  .head{display:flex;align-items:flex-end;justify-content:space-between;}
+  .eyebrow{font-size:15px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--soft);}
+  .eyebrow .ix{color:var(--accent);}
+  h2{font-size:68px;font-weight:600;line-height:1.04;letter-spacing:-0.025em;margin-top:24px;}
+  .cta-pair{display:flex;gap:16px;}
+  .btn{border-radius:999px;font-size:18px;font-weight:500;padding:16px 32px;border:1px solid transparent;white-space:nowrap;}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 14px 34px rgba(249,115,22,0.22);}
+  .btn-secondary{background:rgba(255,255,255,0.04);border-color:var(--border);color:#fff;}
+  .cards{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .pcard{background:var(--card);border:1px solid var(--border);border-radius:30px;padding:48px 44px;display:flex;flex-direction:column;gap:20px;position:relative;}
+  .pcard .num{position:absolute;top:36px;right:40px;font-size:56px;font-weight:600;color:rgba(255,255,255,0.10);line-height:1;}
+  .pcard .tile{width:54px;height:54px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600;color:var(--accent);}
+  .pcard .name{font-size:34px;font-weight:600;letter-spacing:-0.01em;}
+  .pcard p{font-size:19px;font-weight:300;line-height:1.55;color:var(--muted);}
+  .pcard .meta{margin-top:auto;font-size:13px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--soft);
+    border-top:1px solid var(--border);padding-top:18px;}
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="head">
+      <div>
+        <div class="eyebrow">Products · Stack · <span class="ix">06</span></div>
+        <h2>Connect · Operate · Experience</h2>
+      </div>
+      <div class="cta-pair">
+        <button class="btn btn-primary">Book a demo</button>
+        <button class="btn btn-secondary">See the connections</button>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="pcard">
+        <span class="num">01</span>
+        <div class="tile">G</div>
+        <div class="name">G-Link</div>
+        <p>The open connection to global supply. One integration, every major source, deduplicated content.</p>
+        <div class="meta">Connect · supply infrastructure</div>
+      </div>
+      <div class="pcard">
+        <span class="num">02</span>
+        <div class="tile">A</div>
+        <div class="name">Atlas TMC OS</div>
+        <p>The operating layer for travel programs — routing, reconciliation, and settlement in one place.</p>
+        <div class="meta">Operate · network operations</div>
+      </div>
+      <div class="pcard">
+        <span class="num">03</span>
+        <div class="tile">Ae</div>
+        <div class="name">AgreeEase</div>
+        <p>Maps contract clauses to booking fields automatically — <em>live in days, not quarters.</em></p>
+        <div class="meta">Experience · agent-assisted</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

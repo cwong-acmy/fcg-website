@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.setAttribute("data-theme", t);
+                    document.documentElement.classList.toggle("dark", t === "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCG template · Pathway cards (3-up)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../template-shell.css">
+</head>
+<body>
+    <button class="tpl-theme-toggle" data-theme-toggle aria-label="Toggle theme"><span data-theme-label>Light</span></button>
+
+    <div class="tpl-label">
+        <strong>04 · Pathway cards — 3-up</strong>
+        <span>page types: homepage, product hub</span>
+        <span class="nuitee-ref">nuitee ref: / (connect/cloud/cupid) · /connect</span>
+    </div>
+
+    <!-- STRUCTURE: section head (claim + clarifier), then 3 equal cards.
+         Each card: index numeral, icon tile, 1-3 word title, ONE line, a "see" link.
+         Copy density: ultra-lean — one line per card. -->
+    <section class="tpl-section">
+        <div class="tpl-inner-wide">
+            <header class="reveal" style="max-width:42rem; margin-bottom:3rem;">
+                <p class="tpl-eyebrow-dash"><span class="slot">Products</span></p>
+                <h2 class="tpl-h2"><span class="slot">H2: bold claim, sentence case, &le;8 words</span></h2>
+                <p class="tpl-clarifier"><span class="slot">one clarifier line, &le;20 words</span></p>
+            </header>
+
+            <div class="tpl-grid tpl-grid-3">
+                <article class="tpl-card reveal" data-delay="1">
+                    <div class="tpl-card-head">
+                        <span class="tpl-card-tag"><span class="slot">Hotel supply</span></span>
+                        <span class="tpl-card-num">SV_01</span>
+                    </div>
+                    <div class="tpl-icon-tile">&#9633;</div>
+                    <h3 class="tpl-h3"><span class="slot">Product name</span></h3>
+                    <p class="tpl-lead" style="margin:.75rem 0 0;"><span class="slot">one line — what it connects / does</span></p>
+                    <div class="tpl-card-status"><span class="bar"></span><span class="label"><span class="ok">&bull;</span> <span class="slot">Active</span></span></div>
+                </article>
+
+                <article class="tpl-card reveal" data-delay="2">
+                    <div class="tpl-card-head">
+                        <span class="tpl-card-tag"><span class="slot">Flight supply</span></span>
+                        <span class="tpl-card-num">SV_02</span>
+                    </div>
+                    <div class="tpl-icon-tile">&#9633;</div>
+                    <h3 class="tpl-h3"><span class="slot">Product name</span></h3>
+                    <p class="tpl-lead" style="margin:.75rem 0 0;"><span class="slot">one line — what it connects / does</span></p>
+                    <div class="tpl-card-status"><span class="bar"></span><span class="label"><span class="ok">&bull;</span> <span class="slot">Active</span></span></div>
+                </article>
+
+                <article class="tpl-card reveal" data-delay="3">
+                    <div class="tpl-card-head">
+                        <span class="tpl-card-tag"><span class="slot">Experience</span></span>
+                        <span class="tpl-card-num">SV_03</span>
+                    </div>
+                    <div class="tpl-icon-tile">&#9633;</div>
+                    <h3 class="tpl-h3"><span class="slot">Product name</span></h3>
+                    <p class="tpl-lead" style="margin:.75rem 0 0;"><span class="slot">one line — what it connects / does</span></p>
+                    <div class="tpl-card-status"><span class="bar"></span><span class="label"><span class="ok">&bull;</span> <span class="slot">Active</span></span></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <script src="../template-shell.js"></script>
+</body>
+</html>

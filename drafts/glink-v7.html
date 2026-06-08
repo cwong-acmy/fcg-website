@@ -1285,6 +1285,20 @@
     filter: invert(1) grayscale(1) brightness(1.4);
     opacity: .9;
   }
+  .partner-logo-text {
+    color: var(--color-fg);
+    font-family: Inter, sans-serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .partner-logo-text.is-long {
+    font-size: 1.05rem;
+    letter-spacing: -0.025em;
+  }
   html[data-theme="dark"] .partner-plus::before,
   html[data-theme="dark"] .partner-plus::after {
     background: var(--color-fg);
@@ -2719,6 +2733,7 @@
   }
 </style>
 <main class="product-shell">
+
   <section id="capabilities" class="fcg-hero2">
     <div class="fcg-hero2-glow" aria-hidden="true"><span></span><span></span><span></span></div>
 
@@ -2749,85 +2764,141 @@
               <span class="fcg-hero2-video-note">Video placeholder · drop in walkthrough.mp4</span>
             </div>
           </div>
-          <div class="fcg-hero2-code-footer" aria-hidden="true">
-            <div class="fcg-hero2-code-chip"><span>Supply</span><strong>4.3M+ hotels</strong></div>
-            <div class="fcg-hero2-code-chip"><span>Network</span><strong>43 suppliers · 13 live</strong></div>
-            <div class="fcg-hero2-code-chip"><span>Asia</span><strong>4 chains deployed</strong></div>
-          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== SUPPLY SOURCES LOGO STRIP ===== -->
-  <section class="partner-grid-section relative z-10 pt-10 pb-12 md:pt-12 md:pb-16" aria-label="Hotel supply sources connected through G-Link">
-    <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
-      <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
-        One API. <strong>Every major supply source.</strong>
-      </h2>
-      <p class="mx-auto mt-3 max-w-xl text-sm text-zinc-400">Global and China hotel groups, connected through one G&#8209;Link integration.</p>
-    </div>
-    <div class="partner-logo-band border-y">
-      <div class="mx-auto flex max-w-[1040px] flex-wrap items-center justify-center gap-x-10 gap-y-8 px-6 py-10 md:gap-x-14">
-        <span class="supplier-logo-placeholder">Narada</span>
-        <span class="supplier-logo-placeholder">New Century</span>
-        <img alt="Kempinski Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/kempinski.svg">
-        <img alt="Hyatt Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/hyatt.svg">
-        <span class="supplier-logo-placeholder">Ji Hotel</span>
-        <span class="supplier-logo-placeholder">Homeinns</span>
-        <img alt="Marriott International Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/marriott.svg">
-        <span class="supplier-logo-placeholder">Vienna Hotel</span>
-        <img alt="Hilton Hotels and Resorts Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/hilton.svg">
-        <img alt="Shangri-La Hotels and Resorts Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/shangri-la.svg">
-        <img alt="Accor Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/accor.svg">
-        <img alt="Atour Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/atour.svg">
-        <span class="supplier-logo-placeholder">Dossen</span>
-        <img alt="Jin Jiang International Logo" class="supplier-logo-real select-none pointer-events-none" src="../assets/images/logos/jinjiang-international.jpg">
-        <img alt="IHG Hotels and Resorts Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/ihg.svg">
-        <span class="supplier-logo-placeholder">CTG Hotel</span>
-        <span class="supplier-logo-placeholder">Green Tree Inn</span>
-        <span class="supplier-logo-placeholder">Inzone</span>
-      </div>
-    </div>
-  </section>
 
-  <section id="api-capabilities" class="fcg-marketing-section">
-    <div class="fcg-marketing-inner" style="max-width:72rem;">
-      <header class="fcg-marketing-header fade-up">
-        <div class="fcg-marketing-eyebrow">Supply layer</div>
-        <h2 class="fcg-marketing-title">One API. <span>Four supply paths.</span></h2>
-        <p>G&#8209;Link brings the hotel paths a TMC needs into one layer: GDS, direct hotel, bedbank, and Asia-direct. Rates, content, and post-booking events stay connected.</p>
-      </header>
+  <!-- nl-* styles (reused from comparison block) -->
+    <style>
+      .nl-block { background: var(--color-bg); color: var(--color-fg); font-family: 'Inter', system-ui, sans-serif; }
+      .nl-inner { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+      .nl-inner-wide { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
+      .nl-section { padding: 5.5rem 0; border-top: 1px solid var(--color-border); }
+      .nl-eyebrow { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: #F97316; font-weight: 600; margin-bottom: 1rem; }
+      .nl-h2 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.7rem, 3.4vw, 2.6rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.1; margin: 0; }
+      .nl-h2 span { color: #F97316; }
+      .nl-lead { color: var(--color-muted); font-size: 1rem; line-height: 1.6; max-width: 40rem; margin: 1rem 0 0; }
+      .nl-greybox {
+        width: 100%; min-height: 22rem; border-radius: 1rem;
+        border: 1px dashed var(--color-border);
+        background:
+          repeating-linear-gradient(45deg, transparent, transparent 11px, rgba(136,136,136,.06) 11px, rgba(136,136,136,.06) 12px),
+          var(--color-card);
+        display: flex; align-items: center; justify-content: center; text-align: center;
+        color: var(--color-muted); font-size: .82rem; letter-spacing: .04em; padding: 2rem;
+      }
+      .nl-greybox span { max-width: 16rem; }
 
-      <div class="fcg-marketing-features fade-up">
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:buildings-2-linear" width="22" height="22"></iconify-icon></div>
-          <h3>4.3M+ mapped hotels</h3>
-          <p>Four supply paths as one bookable, deduplicated feed.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:tag-price-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Corporate rates, not just inventory</h3>
-          <p>RFP rates wholesalers can't carry, up to 70% of corporate volume.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:global-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Asia depth around global GDS</h3>
-          <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Mid-office after booking</h3>
-          <p>Cancellations, holds, and reschedules handled through the BMS.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:ranking-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Quality-scored sources</h3>
-          <p>Bookings route to the most dependable supply path.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+      /* Divider strip */
+      .nl-divider { background: var(--color-card); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+      .nl-divider-inner { max-width: 80rem; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; gap: .7rem; }
+      .nl-divider .nl-dot { width: .55rem; height: .55rem; border-radius: 999px; background: #F97316; flex: none; }
+      .nl-divider strong { font-size: .82rem; font-weight: 600; letter-spacing: .02em; }
+      .nl-divider em { font-style: normal; color: var(--color-muted); font-size: .82rem; }
+
+      /* Hero (split) */
+      .nl-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center; }
+      .nl-pill { display: inline-flex; align-items: center; gap: .5rem; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--color-fg); border: 1px solid var(--color-border); border-radius: 999px; padding: .4rem .85rem; }
+      .nl-pill .nl-dot { width: .5rem; height: .5rem; border-radius: 999px; background: #F97316; }
+      .nl-h1 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(2.1rem, 4.6vw, 3.3rem); font-weight: 500; letter-spacing: -.025em; line-height: 1.05; margin: 1.6rem 0 0; }
+      .nl-h1 em { font-style: normal; color: #F97316; }
+      .nl-clarifier { color: var(--color-muted); font-size: 1.05rem; line-height: 1.6; margin: 1.1rem 0 0; max-width: 32rem; }
+      .nl-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.9rem; }
+      .nl-btn { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; padding: .8rem 1.5rem; font-size: .9rem; font-weight: 500; text-decoration: none; transition: transform .2s ease, opacity .2s ease; }
+      .nl-btn:hover { transform: translateY(-1px); }
+      .nl-btn-primary { background: #F97316; color: #0F1114; }
+      .nl-btn-secondary { background: transparent; color: var(--color-fg); border: 1px solid var(--color-border); }
+
+      /* Advantage 3-up */
+      .nl-adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+      .nl-card { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 1rem; padding: 1.75rem; }
+      .nl-card-icon { width: 2.6rem; height: 2.6rem; display: flex; align-items: center; justify-content: center; border-radius: .7rem; border: 1px solid var(--color-border); color: #F97316; margin-bottom: 1.1rem; }
+      .nl-card h3 { font-size: 1.05rem; font-weight: 600; margin: 0 0 .5rem; letter-spacing: -.01em; }
+      .nl-card p { color: var(--color-muted); font-size: .92rem; line-height: 1.55; margin: 0; }
+
+      /* Stats band */
+      .nl-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+      .nl-stat { border-left: 2px solid #F97316; padding-left: 1.1rem; }
+      .nl-stat-num { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; letter-spacing: -.02em; line-height: 1; }
+      .nl-stat-label { color: var(--color-muted); font-size: .86rem; line-height: 1.45; margin-top: .55rem; }
+
+      /* Capability 4-up (metric + visual) */
+      .nl-cap-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+      .nl-cap { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 1rem; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.1rem; }
+      .nl-cap-metric { font-family: 'Sora', 'Inter', sans-serif; font-size: 1.7rem; font-weight: 500; letter-spacing: -.02em; }
+      .nl-cap h3 { font-size: 1rem; font-weight: 600; margin: 0; }
+      .nl-cap p { color: var(--color-muted); font-size: .9rem; line-height: 1.55; margin: 0; }
+      .nl-cap-visual { min-height: 8rem; border-radius: .75rem; border: 1px dashed var(--color-border);
+        background: repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(136,136,136,.06) 9px, rgba(136,136,136,.06) 10px), var(--color-bg);
+        display: flex; align-items: center; justify-content: center; color: var(--color-muted); font-size: .72rem; letter-spacing: .04em; text-align: center; padding: 1rem; }
+
+      /* Feature split (alternating) */
+      .nl-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+      .nl-feature + .nl-feature { margin-top: 4.5rem; }
+      .nl-feature.nl-reverse .nl-feature-media { order: -1; }
+      .nl-feature h3 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.12; margin: .8rem 0 0; }
+      .nl-feature p { color: var(--color-muted); font-size: 1rem; line-height: 1.6; margin: 1rem 0 0; max-width: 30rem; }
+      .nl-feature-list { list-style: none; padding: 0; margin: 1.4rem 0 0; display: flex; flex-direction: column; gap: .7rem; }
+      .nl-feature-list li { display: flex; align-items: flex-start; gap: .6rem; font-size: .92rem; color: var(--color-fg); }
+      .nl-feature-list iconify-icon { color: #F97316; flex: none; margin-top: .15rem; }
+
+      /* Final CTA band */
+      .nl-cta { text-align: center; padding: 6rem 1.5rem; border-top: 1px solid var(--color-border); background: var(--color-card); }
+      .nl-cta h2 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 500; letter-spacing: -.025em; margin: 0 auto; max-width: 28rem; line-height: 1.1; }
+      .nl-cta p { color: var(--color-muted); font-size: 1.05rem; margin: 1.1rem auto 0; max-width: 34rem; line-height: 1.6; }
+      .nl-cta .nl-actions { justify-content: center; }
+
+      @media (max-width: 860px) {
+        .nl-hero, .nl-feature, .nl-feature.nl-reverse { grid-template-columns: 1fr; gap: 2rem; }
+        .nl-feature.nl-reverse .nl-feature-media { order: 0; }
+        .nl-adv-grid, .nl-stats, .nl-cap-grid { grid-template-columns: 1fr; }
+        .nl-stats { gap: 1.6rem; }
+      }
+    </style>
+
+
+  <!-- Partner grid · 300+ brands -->
+      <section class="partner-grid-section relative z-10 pt-10 pb-10 md:pt-12 md:pb-16">
+        <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
+          <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
+            300+ travel brands, TMCs, and hotel groups. <strong>Already connected.</strong>
+          </h2>
+        </div>
+        <div class="partner-logo-band border-y">
+          <div class="partner-logo-grid relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x">
+            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
+              <img alt="RateHawk Logo" class="pointer-events-none max-h-9 max-w-[150px] select-none object-contain md:max-h-10 md:max-w-[170px] partner-logo-invert-dark" src="../assets/images/logos/ratehawk.svg">
+              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
+            </div>
+            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r">
+              <span class="partner-logo-text" role="img" aria-label="HeyTrip">HeyTrip</span>
+            </div>
+            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
+              <span class="partner-logo-text" role="img" aria-label="Huitravel">Huitravel</span>
+              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
+              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -left-3 -bottom-3 hidden md:block" aria-hidden="true"></span>
+            </div>
+            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b">
+              <img alt="Meituan Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px]" src="../assets/images/logos/meituan.png">
+            </div>
+            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b md:border-b-0">
+              <span class="partner-logo-text" role="img" aria-label="Mengtu">Mengtu</span>
+              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3 md:hidden" aria-hidden="true"></span>
+            </div>
+            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r md:border-b-0">
+              <img alt="Dida Travel Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="../assets/images/logos/dida.png">
+            </div>
+            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r">
+              <img alt="Expedia Logo" class="pointer-events-none max-h-7 max-w-[150px] select-none object-contain md:max-h-8 md:max-w-[170px] partner-logo-invert-dark" src="../assets/images/logos/expedia.svg">
+            </div>
+            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8">
+              <span class="partner-logo-text" role="img" aria-label="MIKI Travel">MIKI</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
   <section id="how-it-works" class="fcg-integration-section">
     <div class="fcg-integration-inner">
@@ -2857,106 +2928,100 @@
           <div class="code-tag">npm i @fcg/glink</div>
         </div>
       </div>
-
-      <div class="fcg-supply-illustration fade-up" aria-label="Many supply sources resolving into one G-Link layer">
-        <svg width="340" height="340" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)" opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="450" cy="720" r="370"/><circle cx="480" cy="720" r="400"/><circle cx="510" cy="720" r="430"/><circle cx="540" cy="720" r="460"/><circle cx="570" cy="720" r="490"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>
-      </div>
     </div>
   </section>
 
-  <section id="supply-buckets" class="px-6 md:px-12 py-28 bg-[#000] border-t border-white/10">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 fade-up">
-        <div>
-          <div class="product-kicker text-xs text-orange-500 mb-4">Supply · Buckets</div>
-          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Four supply paths.</h2>
+      <section class="nl-section" aria-label="Core advantages">
+        <div class="nl-inner">
+          <div class="fade-up">
+            <div class="nl-eyebrow">Why G&#8209;Link</div>
+            <h2 class="nl-h2">One layer. <span>Three things wholesalers can't do.</span></h2>
+          </div>
+          <div class="nl-adv-grid fade-up">
+            <article class="nl-card">
+              <div class="nl-card-icon"><iconify-icon icon="solar:tag-price-linear" width="22" height="22"></iconify-icon></div>
+              <h3>Corporate rates</h3>
+              <p>RFP rates wholesalers can't carry, up to 70% of corporate volume.</p>
+            </article>
+            <article class="nl-card">
+              <div class="nl-card-icon"><iconify-icon icon="solar:global-linear" width="22" height="22"></iconify-icon></div>
+              <h3>Asia depth</h3>
+              <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
+            </article>
+            <article class="nl-card">
+              <div class="nl-card-icon"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
+              <h3>Mid-office included</h3>
+              <p>Cancellations, holds, and reschedules handled through the BMS.</p>
+            </article>
+          </div>
         </div>
-        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Each path plays a different role. Together, one accountable layer.</p>
-      </div>
+      </section>
 
-      <div class="fcg-flow-grid fade-up" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">A</div>
-          <h3>Corporate-rate GDS</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">RFP rates wholesale can't carry, through direct GDS.</p>
-          <div class="code-tag">Bucket A · GDS direct</div>
+      <section class="nl-section" aria-label="Supply network at a glance">
+        <div class="nl-inner">
+          <div class="fade-up">
+            <div class="nl-eyebrow">By the numbers</div>
+            <h2 class="nl-h2">Supply network <span>at a glance.</span></h2>
+          </div>
+          <div class="nl-stats fade-up">
+            <div class="nl-stat">
+              <div class="nl-stat-num">4.3M+</div>
+              <div class="nl-stat-label">Mapped hotels across four supply paths</div>
+            </div>
+            <div class="nl-stat">
+              <div class="nl-stat-num">43 · 13</div>
+              <div class="nl-stat-label">Suppliers connected, 13 live today</div>
+            </div>
+            <div class="nl-stat">
+              <div class="nl-stat-num">4</div>
+              <div class="nl-stat-label">Supply paths in one bookable feed</div>
+            </div>
+            <div class="nl-stat">
+              <div class="nl-stat-num">58%</div>
+              <div class="nl-stat-label">China's share of Asia travel</div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">B</div>
-          <h3>Direct hotel paths</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Direct contracts and channel managers. The most accountable channel.</p>
-          <div class="code-tag">Bucket B · Direct hotel &amp; NDC</div>
-        </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">C</div>
-          <h3>Long-tail coverage</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Bedbank breadth for properties not covered elsewhere.</p>
-          <div class="code-tag">Bucket C · Bedbank</div>
-        </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">D</div>
-          <h3>China and Asia direct</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Chinese chains and Asia-specialty connections. Built in-region.</p>
-          <div class="code-tag">Bucket D · China &amp; Asia direct</div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="fcg-marketing-section" aria-label="Common questions from TMC evaluation teams">
-    <div class="fcg-marketing-inner" style="max-width:72rem;">
-      <header class="fcg-marketing-header fade-up">
-        <div class="fcg-marketing-eyebrow">Evaluation</div>
-        <h2 class="fcg-marketing-title">What TMCs <span>ask first.</span></h2>
-      </header>
-
-      <div class="fcg-marketing-features fade-up">
-        <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"We already use another wholesaler."</div>
-          <h3>Wholesalers cannot carry corporate-negotiated rates.</h3>
-          <p>RFP rates only flow through GDS and direct hotel, up to 70% of corporate volume. G&#8209;Link adds the layer wholesalers can't.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"We already use another travel platform."</div>
-          <h3>Most large TMCs already multiplex APIs.</h3>
-          <p>If China is in your client mix, G&#8209;Link closes the gap: Chinese chains plus global GDS. China is 58% of Asia travel.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"Our dev team is already stretched thin."</div>
-          <h3>Skills helps developers start without a handoff.</h3>
-          <p>Skills, API, and SDK share one backend. Ship the first search call from live docs, no handoff.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="fcg-integration-section" aria-label="Commercial model">
-    <div class="fcg-integration-inner">
-      <header class="fcg-integration-header fade-up">
-        <div class="fcg-integration-eyebrow">Commercial model</div>
-        <h2 class="fcg-integration-title"><span>Clear packaging.</span><br>Scoped by product surface.</h2>
-        <p>Tiered by product surface: G&#8209;Link only, full OBT suite, white-label, or RFP support.</p>
-      </header>
-
-      <div class="fcg-pricing-rows fade-up">
-        <article>
-          <div class="fcg-pricing-label">One-time setup</div>
-          <div class="fcg-pricing-value">Scoped by launch needs</div>
-          <div class="fcg-pricing-sub">Supplier activation, sandbox onboarding, and integration support.</div>
-        </article>
-        <article>
-          <div class="fcg-pricing-label">Monthly subscription</div>
-          <div class="fcg-pricing-value">Tiered by product scope</div>
-          <div class="fcg-pricing-sub">G&#8209;Link only sits at the lower end of the range.</div>
-        </article>
-      </div>
-      <p class="fcg-pricing-foot fade-up">Final tiers depend on product scope and supplier activation.</p>
+  <!-- Supply paths + commercial model (Nuitee feature-split) -->
+  <section class="nl-section" aria-label="Supply paths and commercial model">
+    <div class="nl-inner-wide">
+          <div class="nl-feature fade-up">
+            <div>
+              <div class="nl-eyebrow">Supply · Buckets</div>
+              <h3>Four supply paths.</h3>
+              <p>Each path plays a different role. Together, one accountable layer.</p>
+              <ul class="nl-feature-list">
+                <li><iconify-icon icon="solar:compass-linear" width="18" height="18"></iconify-icon> A · Corporate-rate GDS</li>
+                <li><iconify-icon icon="solar:buildings-2-linear" width="18" height="18"></iconify-icon> B · Direct hotel &amp; NDC</li>
+                <li><iconify-icon icon="solar:box-linear" width="18" height="18"></iconify-icon> C · Bedbank long-tail coverage</li>
+                <li><iconify-icon icon="solar:map-point-wave-linear" width="18" height="18"></iconify-icon> D · China &amp; Asia direct</li>
+              </ul>
+            </div>
+            <div class="nl-feature-media">
+              <div class="nl-greybox"><span>[ supply buckets view — real screenshot to be supplied ]</span></div>
+            </div>
+          </div>
+          <div class="nl-feature nl-reverse fade-up">
+            <div>
+              <div class="nl-eyebrow">Commercial model</div>
+              <h3>Clear packaging.</h3>
+              <p>Tiered by product surface: G&#8209;Link only, full OBT suite, white-label, or RFP support. Final tiers depend on product scope and supplier activation.</p>
+              <ul class="nl-feature-list">
+                <li><iconify-icon icon="solar:tag-linear" width="18" height="18"></iconify-icon> One-time setup, scoped by launch needs</li>
+                <li><iconify-icon icon="solar:wallet-money-linear" width="18" height="18"></iconify-icon> Monthly subscription, tiered by product scope</li>
+              </ul>
+            </div>
+            <div class="nl-feature-media">
+              <div class="nl-greybox"><span>[ pricing / packaging view — real screenshot to be supplied ]</span></div>
+            </div>
+          </div>
     </div>
   </section>
 
 </main>
+
 <!-- ===== API ACCESS CTA SECTION ===== -->
     <footer id="contact" class="flex flex-col w-full">
       <section id="getting-started" class="fcg-mobile-feature border-t border-white/10">
@@ -3082,349 +3147,6 @@
     </footer>
     <!-- ===== END API ACCESS CTA SECTION ===== -->
 
-    <!-- ===== NUITEE-LAYOUT COMPARISON BLOCK (NEW · for review) ===== -->
-    <style>
-      .nl-block { background: var(--color-bg); color: var(--color-fg); font-family: 'Inter', system-ui, sans-serif; }
-      .nl-inner { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
-      .nl-inner-wide { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
-      .nl-section { padding: 5.5rem 0; border-top: 1px solid var(--color-border); }
-      .nl-eyebrow { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: #F97316; font-weight: 600; margin-bottom: 1rem; }
-      .nl-h2 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.7rem, 3.4vw, 2.6rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.1; margin: 0; }
-      .nl-h2 span { color: #F97316; }
-      .nl-lead { color: var(--color-muted); font-size: 1rem; line-height: 1.6; max-width: 40rem; margin: 1rem 0 0; }
-      .nl-greybox {
-        width: 100%; min-height: 22rem; border-radius: 1rem;
-        border: 1px dashed var(--color-border);
-        background:
-          repeating-linear-gradient(45deg, transparent, transparent 11px, rgba(136,136,136,.06) 11px, rgba(136,136,136,.06) 12px),
-          var(--color-card);
-        display: flex; align-items: center; justify-content: center; text-align: center;
-        color: var(--color-muted); font-size: .82rem; letter-spacing: .04em; padding: 2rem;
-      }
-      .nl-greybox span { max-width: 16rem; }
-
-      /* Divider strip */
-      .nl-divider { background: var(--color-card); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
-      .nl-divider-inner { max-width: 80rem; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; gap: .7rem; }
-      .nl-divider .nl-dot { width: .55rem; height: .55rem; border-radius: 999px; background: #F97316; flex: none; }
-      .nl-divider strong { font-size: .82rem; font-weight: 600; letter-spacing: .02em; }
-      .nl-divider em { font-style: normal; color: var(--color-muted); font-size: .82rem; }
-
-      /* Hero (split) */
-      .nl-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center; }
-      .nl-pill { display: inline-flex; align-items: center; gap: .5rem; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--color-fg); border: 1px solid var(--color-border); border-radius: 999px; padding: .4rem .85rem; }
-      .nl-pill .nl-dot { width: .5rem; height: .5rem; border-radius: 999px; background: #F97316; }
-      .nl-h1 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(2.1rem, 4.6vw, 3.3rem); font-weight: 500; letter-spacing: -.025em; line-height: 1.05; margin: 1.6rem 0 0; }
-      .nl-h1 em { font-style: normal; color: #F97316; }
-      .nl-clarifier { color: var(--color-muted); font-size: 1.05rem; line-height: 1.6; margin: 1.1rem 0 0; max-width: 32rem; }
-      .nl-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.9rem; }
-      .nl-btn { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; padding: .8rem 1.5rem; font-size: .9rem; font-weight: 500; text-decoration: none; transition: transform .2s ease, opacity .2s ease; }
-      .nl-btn:hover { transform: translateY(-1px); }
-      .nl-btn-primary { background: #F97316; color: #0F1114; }
-      .nl-btn-secondary { background: transparent; color: var(--color-fg); border: 1px solid var(--color-border); }
-
-      /* Advantage 3-up */
-      .nl-adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
-      .nl-card { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 1rem; padding: 1.75rem; }
-      .nl-card-icon { width: 2.6rem; height: 2.6rem; display: flex; align-items: center; justify-content: center; border-radius: .7rem; border: 1px solid var(--color-border); color: #F97316; margin-bottom: 1.1rem; }
-      .nl-card h3 { font-size: 1.05rem; font-weight: 600; margin: 0 0 .5rem; letter-spacing: -.01em; }
-      .nl-card p { color: var(--color-muted); font-size: .92rem; line-height: 1.55; margin: 0; }
-
-      /* Stats band */
-      .nl-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
-      .nl-stat { border-left: 2px solid #F97316; padding-left: 1.1rem; }
-      .nl-stat-num { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; letter-spacing: -.02em; line-height: 1; }
-      .nl-stat-label { color: var(--color-muted); font-size: .86rem; line-height: 1.45; margin-top: .55rem; }
-
-      /* Capability 4-up (metric + visual) */
-      .nl-cap-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
-      .nl-cap { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 1rem; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.1rem; }
-      .nl-cap-metric { font-family: 'Sora', 'Inter', sans-serif; font-size: 1.7rem; font-weight: 500; letter-spacing: -.02em; }
-      .nl-cap h3 { font-size: 1rem; font-weight: 600; margin: 0; }
-      .nl-cap p { color: var(--color-muted); font-size: .9rem; line-height: 1.55; margin: 0; }
-      .nl-cap-visual { min-height: 8rem; border-radius: .75rem; border: 1px dashed var(--color-border);
-        background: repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(136,136,136,.06) 9px, rgba(136,136,136,.06) 10px), var(--color-bg);
-        display: flex; align-items: center; justify-content: center; color: var(--color-muted); font-size: .72rem; letter-spacing: .04em; text-align: center; padding: 1rem; }
-
-      /* Feature split (alternating) */
-      .nl-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-      .nl-feature + .nl-feature { margin-top: 4.5rem; }
-      .nl-feature.nl-reverse .nl-feature-media { order: -1; }
-      .nl-feature h3 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.12; margin: .8rem 0 0; }
-      .nl-feature p { color: var(--color-muted); font-size: 1rem; line-height: 1.6; margin: 1rem 0 0; max-width: 30rem; }
-      .nl-feature-list { list-style: none; padding: 0; margin: 1.4rem 0 0; display: flex; flex-direction: column; gap: .7rem; }
-      .nl-feature-list li { display: flex; align-items: flex-start; gap: .6rem; font-size: .92rem; color: var(--color-fg); }
-      .nl-feature-list iconify-icon { color: #F97316; flex: none; margin-top: .15rem; }
-
-      /* Final CTA band */
-      .nl-cta { text-align: center; padding: 6rem 1.5rem; border-top: 1px solid var(--color-border); background: var(--color-card); }
-      .nl-cta h2 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 500; letter-spacing: -.025em; margin: 0 auto; max-width: 28rem; line-height: 1.1; }
-      .nl-cta p { color: var(--color-muted); font-size: 1.05rem; margin: 1.1rem auto 0; max-width: 34rem; line-height: 1.6; }
-      .nl-cta .nl-actions { justify-content: center; }
-
-      @media (max-width: 860px) {
-        .nl-hero, .nl-feature, .nl-feature.nl-reverse { grid-template-columns: 1fr; gap: 2rem; }
-        .nl-feature.nl-reverse .nl-feature-media { order: 0; }
-        .nl-adv-grid, .nl-stats, .nl-cap-grid { grid-template-columns: 1fr; }
-        .nl-stats { gap: 1.6rem; }
-      }
-    </style>
-
-    <div class="nl-block">
-      <!-- 1 · Labelled divider strip -->
-      <div class="nl-divider">
-        <div class="nl-divider-inner">
-          <span class="nl-dot" aria-hidden="true"></span>
-          <strong>New layout · Nuitee-ordered (G&#8209;Link)</strong>
-          <em>— same content, re-sequenced for review</em>
-        </div>
-      </div>
-
-      <!-- 2 · Split hero -->
-      <section class="nl-section" aria-label="G-Link hero (Nuitee layout)">
-        <div class="nl-inner-wide">
-          <div class="nl-hero">
-            <div class="fade-up">
-              <span class="nl-pill"><span class="nl-dot" aria-hidden="true"></span> Product · G&#8209;Link</span>
-              <h1 class="nl-h1">Hotel supply for <em>corporate travel.</em></h1>
-              <p class="nl-clarifier">One API for GDS, direct hotel, bedbank, and Asia-direct supply. Corporate rates, 4.3M+ mapped hotels, and a mid-office behind every booking.</p>
-              <div class="nl-actions">
-                <a class="nl-btn nl-btn-primary" href="#getting-started">Schedule a walkthrough <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
-                <a class="nl-btn nl-btn-secondary" href="../api-access.html"><iconify-icon icon="solar:code-square-linear" width="16" height="16"></iconify-icon> Read the API docs</a>
-              </div>
-            </div>
-            <div class="nl-greybox scale-in" aria-label="Product walkthrough placeholder">
-              <svg width="240" height="240" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="var(--color-fg)" opacity="0.16" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="480" cy="720" r="400"/><circle cx="540" cy="720" r="460"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3 · Three core advantages -->
-      <section class="nl-section" aria-label="Core advantages">
-        <div class="nl-inner">
-          <div class="fade-up">
-            <div class="nl-eyebrow">Why G&#8209;Link</div>
-            <h2 class="nl-h2">One layer. <span>Three things wholesalers can't do.</span></h2>
-          </div>
-          <div class="nl-adv-grid fade-up">
-            <article class="nl-card">
-              <div class="nl-card-icon"><iconify-icon icon="solar:tag-price-linear" width="22" height="22"></iconify-icon></div>
-              <h3>Corporate rates</h3>
-              <p>RFP rates wholesalers can't carry, up to 70% of corporate volume.</p>
-            </article>
-            <article class="nl-card">
-              <div class="nl-card-icon"><iconify-icon icon="solar:global-linear" width="22" height="22"></iconify-icon></div>
-              <h3>Asia depth</h3>
-              <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
-            </article>
-            <article class="nl-card">
-              <div class="nl-card-icon"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
-              <h3>Mid-office included</h3>
-              <p>Cancellations, holds, and reschedules handled through the BMS.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4 · Stats band (static numerals) -->
-      <section class="nl-section" aria-label="Supply network at a glance">
-        <div class="nl-inner">
-          <div class="fade-up">
-            <div class="nl-eyebrow">By the numbers</div>
-            <h2 class="nl-h2">Supply network <span>at a glance.</span></h2>
-          </div>
-          <div class="nl-stats fade-up">
-            <div class="nl-stat">
-              <div class="nl-stat-num">4.3M+</div>
-              <div class="nl-stat-label">Mapped hotels across four supply paths</div>
-            </div>
-            <div class="nl-stat">
-              <div class="nl-stat-num">43 · 13</div>
-              <div class="nl-stat-label">Suppliers connected, 13 live today</div>
-            </div>
-            <div class="nl-stat">
-              <div class="nl-stat-num">4</div>
-              <div class="nl-stat-label">Supply paths in one bookable feed</div>
-            </div>
-            <div class="nl-stat">
-              <div class="nl-stat-num">58%</div>
-              <div class="nl-stat-label">China's share of Asia travel</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5 · Four capability cards (metric + visual) -->
-      <section class="nl-section" aria-label="Platform capabilities">
-        <div class="nl-inner">
-          <div class="fade-up">
-            <div class="nl-eyebrow">Capabilities</div>
-            <h2 class="nl-h2">What the supply layer <span>actually does.</span></h2>
-          </div>
-          <div class="nl-cap-grid fade-up">
-            <article class="nl-cap">
-              <div class="nl-cap-metric">4.3M+ hotels</div>
-              <div>
-                <h3>Mapping engine</h3>
-                <p>Four supply paths deduplicated into one bookable feed.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ mapping engine view — real screenshot to be supplied ]</span></div>
-            </article>
-            <article class="nl-cap">
-              <div class="nl-cap-metric">43 suppliers</div>
-              <div>
-                <h3>Coverage</h3>
-                <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ coverage map — real screenshot to be supplied ]</span></div>
-            </article>
-            <article class="nl-cap">
-              <div class="nl-cap-metric">up to 70%</div>
-              <div>
-                <h3>Corporate rates</h3>
-                <p>RFP rates wholesalers can't carry, routed through GDS and direct hotel.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ rate routing view — real screenshot to be supplied ]</span></div>
-            </article>
-            <article class="nl-cap">
-              <div class="nl-cap-metric">Mid-office</div>
-              <div>
-                <h3>After booking</h3>
-                <p>Cancellations, holds, and reschedules handled through the BMS.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ mid-office / BMS view — real screenshot to be supplied ]</span></div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- 6 · Alternating feature-split blocks -->
-      <section class="nl-section" aria-label="How G-Link works">
-        <div class="nl-inner-wide">
-          <!-- 6a · Supply layer -->
-          <div class="nl-feature fade-up">
-            <div>
-              <div class="nl-eyebrow">Supply layer</div>
-              <h3>One API. Four supply paths.</h3>
-              <p>G&#8209;Link brings the hotel paths a TMC needs into one layer: GDS, direct hotel, bedbank, and Asia-direct. Rates, content, and post-booking events stay connected.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:check-circle-linear" width="18" height="18"></iconify-icon> 4.3M+ mapped hotels as one deduplicated feed</li>
-                <li><iconify-icon icon="solar:check-circle-linear" width="18" height="18"></iconify-icon> Quality-scored sources route to the most dependable path</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ supply layer diagram — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-
-          <!-- 6b · Integration -->
-          <div class="nl-feature nl-reverse fade-up">
-            <div>
-              <div class="nl-eyebrow">Integration</div>
-              <h3>Skills, API, or SDK.</h3>
-              <p>The Open Platform exposes G&#8209;Link three ways. Skills is the fastest start — describe the flow in plain English and AI drafts it from live docs.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:magic-stick-3-linear" width="18" height="18"></iconify-icon> Skills · AI-native, fastest start</li>
-                <li><iconify-icon icon="solar:code-linear" width="18" height="18"></iconify-icon> API · versioned REST, full control</li>
-                <li><iconify-icon icon="solar:box-linear" width="18" height="18"></iconify-icon> SDK · typed primitives, less boilerplate</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ integration / docs view — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-
-          <!-- 6c · Supply buckets -->
-          <div class="nl-feature fade-up">
-            <div>
-              <div class="nl-eyebrow">Supply · Buckets</div>
-              <h3>Four supply paths.</h3>
-              <p>Each path plays a different role. Together, one accountable layer.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:compass-linear" width="18" height="18"></iconify-icon> A · Corporate-rate GDS</li>
-                <li><iconify-icon icon="solar:buildings-2-linear" width="18" height="18"></iconify-icon> B · Direct hotel &amp; NDC</li>
-                <li><iconify-icon icon="solar:box-linear" width="18" height="18"></iconify-icon> C · Bedbank long-tail coverage</li>
-                <li><iconify-icon icon="solar:map-point-wave-linear" width="18" height="18"></iconify-icon> D · China &amp; Asia direct</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ supply buckets view — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-
-          <!-- 6d · Commercial model -->
-          <div class="nl-feature nl-reverse fade-up">
-            <div>
-              <div class="nl-eyebrow">Commercial model</div>
-              <h3>Clear packaging.</h3>
-              <p>Tiered by product surface: G&#8209;Link only, full OBT suite, white-label, or RFP support. Final tiers depend on product scope and supplier activation.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:tag-linear" width="18" height="18"></iconify-icon> One-time setup, scoped by launch needs</li>
-                <li><iconify-icon icon="solar:wallet-money-linear" width="18" height="18"></iconify-icon> Monthly subscription, tiered by product scope</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ pricing / packaging view — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 7 · Homepage partner grid (plain HTML) -->
-      <section class="partner-grid-section relative z-10 nl-section" aria-label="Travel brands connected through FCG">
-        <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
-          <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
-            300+ travel brands, TMCs, and hotel groups. <strong>Already connected.</strong>
-          </h2>
-        </div>
-        <div class="partner-logo-band border-y">
-          <div class="partner-logo-grid relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x">
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
-              <img alt="PST Travel Logo" class="pointer-events-none max-h-12 max-w-[150px] select-none object-contain md:max-h-14 md:max-w-[170px]" src="https://static.wixstatic.com/media/6f8e7e_f844282625cb466d8c9580ec35a3645b~mv2.jpg/v1/crop/x_386,y_592,w_3524,h_3344/fill/w_274,h_260,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/PST_Travel-Secondary2.jpg">
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r">
-              <img alt="Connexus Travel Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://cdn.prod.website-files.com/68553d1dd8ca0b336f66b55c/69e8a0b042a0c29ce4b7f0f9_2026%20CTL%20logo_Colour_Tran%20bg%20(2).png">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
-              <img alt="Alibaba Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px]" src="../assets/images/logos/alibaba.svg">
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -left-3 -bottom-3 hidden md:block" aria-hidden="true"></span>
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b">
-              <img alt="ByteDance Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/ByteDance_logo_English.svg">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b md:border-b-0">
-              <img alt="Amadeus Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://commons.wikimedia.org/wiki/Special:FilePath/Amadeus_Organization_logo_2024.svg">
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3 md:hidden" aria-hidden="true"></span>
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r md:border-b-0">
-              <img alt="Huazhu Group Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://companieslogo.com/img/orig/HTHT_BIG-d42ec412.svg?t=1720244492">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r">
-              <img alt="IHG Hotels and Resorts Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/IHG_Hotels_%26_Resorts_logo.svg">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8">
-              <img alt="Marriott International Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/Marriott_International.svg">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 8 · Final CTA band -->
-      <section class="nl-cta" aria-label="Get connected with G-Link">
-        <div class="fade-up">
-          <h2>Hotel supply, ready to integrate.</h2>
-          <p>Walk through corporate-rate routing, Asia depth, and the sandbox path to production.</p>
-          <div class="nl-actions">
-            <a class="nl-btn nl-btn-primary" href="#capabilities"><iconify-icon icon="solar:calendar-mark-linear" width="16" height="16"></iconify-icon> Schedule a walkthrough</a>
-            <a class="nl-btn nl-btn-secondary" href="../api-access.html"><iconify-icon icon="solar:key-minimalistic-square-linear" width="16" height="16"></iconify-icon> Register for sandbox</a>
-          </div>
-        </div>
-      </section>
-    </div>
-    <!-- ===== END NUITEE-LAYOUT COMPARISON BLOCK ===== -->
 
     <!-- FOOTER -->
     <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">

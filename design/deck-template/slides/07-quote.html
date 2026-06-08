@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>FCG Deck · Pull-quote</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080805; --fg:#f7f7f2; --muted:#a1a1aa; --soft:#71717a;
+    --accent:#f97316; --border:rgba(255,255,255,0.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);color:var(--fg);
+    font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;}
+  .slide{position:relative;width:1920px;height:1080px;padding:140px 160px;display:flex;flex-direction:column;justify-content:center;}
+  .mark{font-size:240px;font-weight:600;line-height:0.6;color:rgba(255,255,255,0.07);margin-bottom:20px;}
+  blockquote{font-size:62px;font-weight:300;line-height:1.25;letter-spacing:-0.02em;max-width:1480px;}
+  blockquote b{font-weight:500;color:var(--fg);}
+  .attr{margin-top:64px;display:flex;align-items:center;gap:22px;}
+  .avatar{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:600;color:var(--accent);}
+  .attr .who{display:flex;flex-direction:column;gap:5px;}
+  .attr .name{font-size:16px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;}
+  .attr .role{font-size:14px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--soft);}
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="mark">&ldquo;</div>
+    <blockquote>We don't sell software to TMCs that need <b>strategy</b> first. We built FCG because the <b>connection layer</b> was the bottleneck.</blockquote>
+    <div class="attr">
+      <div class="avatar">JD</div>
+      <div class="who">
+        <span class="name">Name, Title</span>
+        <span class="role">Fusion Connect Group</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

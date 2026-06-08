@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.setAttribute("data-theme", t);
+                    document.documentElement.classList.toggle("dark", t === "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCG template · Feature split</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../template-shell.css">
+</head>
+<body>
+    <button class="tpl-theme-toggle" data-theme-toggle aria-label="Toggle theme"><span data-theme-label>Light</span></button>
+
+    <div class="tpl-label">
+        <strong>07 · Feature split</strong>
+        <span>page types: product detail</span>
+        <span class="nuitee-ref">nuitee ref: /connect/liteapi-enterprise</span>
+    </div>
+
+    <!-- STRUCTURE: two-column split — media one side, copy + 3 feature rows the other.
+         Each row: index glyph + small title + ONE line. Alternate media/copy sides
+         for consecutive instances down the page. Copy density: lean. -->
+    <section class="tpl-section">
+        <div class="tpl-inner-wide">
+            <div class="tpl-split">
+                <div class="gb gb-media reveal" style="min-height:24rem;">
+                    [ real product screenshot — never a CSS/SVG fake ]
+                </div>
+
+                <div class="reveal" data-delay="1">
+                    <p class="tpl-eyebrow-dash"><span class="slot">Capability</span></p>
+                    <h2 class="tpl-h2"><span class="slot">H2: bold claim, sentence case, &le;8 words. One <em>accent</em> max</span></h2>
+                    <p class="tpl-clarifier"><span class="slot">one clarifier line, &le;20 words — system-described, no "you"</span></p>
+
+                    <div class="tpl-stack" style="gap:1.25rem; margin-top:2rem;">
+                        <div class="tpl-step">
+                            <span class="tpl-step-num">&#9633;</span>
+                            <div>
+                                <h3 class="tpl-h3" style="font-size:1.0625rem;"><span class="slot">feature title · 2-4 words</span></h3>
+                                <p class="tpl-lead" style="margin:.35rem 0 0;"><span class="slot">one line — what this feature does</span></p>
+                            </div>
+                        </div>
+
+                        <div class="tpl-step">
+                            <span class="tpl-step-num">&#9633;</span>
+                            <div>
+                                <h3 class="tpl-h3" style="font-size:1.0625rem;"><span class="slot">feature title · 2-4 words</span></h3>
+                                <p class="tpl-lead" style="margin:.35rem 0 0;"><span class="slot">one line — what this feature does</span></p>
+                            </div>
+                        </div>
+
+                        <div class="tpl-step">
+                            <span class="tpl-step-num">&#9633;</span>
+                            <div>
+                                <h3 class="tpl-h3" style="font-size:1.0625rem;"><span class="slot">feature title · 2-4 words</span></h3>
+                                <p class="tpl-lead" style="margin:.35rem 0 0;"><span class="slot">one line — what this feature does</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../template-shell.js"></script>
+</body>
+</html>

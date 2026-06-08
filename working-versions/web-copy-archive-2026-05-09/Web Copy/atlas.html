@@ -1,0 +1,3830 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas — TMC Operating System | FCG Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Marine Header Fonts (system monospace, no external import needed) -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#080805',
+                        foreground: '#ffffff',
+                        accent: '#F97316',
+                        card: '#121212',
+                        border: '#2A2A2A',
+                        muted: '#888888'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Sora', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --color-bg: #080805;
+            --color-fg: #ffffff;
+            --color-card: #121212;
+            --color-border: #2A2A2A;
+            --color-muted: #888888;
+        }
+
+        html[data-theme="light"] {
+            --color-bg: #FFFFFF;
+            --color-fg: #0F1114;
+            --color-accent: #F97316;
+            --color-card: #F3F4F6;
+            --color-border: #D1D5DB;
+            --color-muted: #6B7280;
+        }
+
+        ::selection {
+            background: rgba(249, 115, 22, 0.15);
+            color: inherit;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Theme-aware color overrides */
+        html[data-theme="light"] .text-white {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-400 {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-500 {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-300 {
+            color: var(--color-fg) !important;
+        }
+
+        /* Logo theme styling */
+        img[alt="atlas"] {
+            filter: brightness(1);
+        }
+
+        html[data-theme="light"] img[alt="atlas"] {
+            filter: brightness(0) saturate(100%);
+        }
+
+        html[data-theme="light"] .bg-white {
+            background-color: var(--color-bg) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-950 {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .bg-zinc-200 {
+            background-color: var(--color-card) !important;
+        }
+
+        html[data-theme="light"] .bg-black\/5 {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .font-mono-jb {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            animation: gridMove 20s linear infinite;
+        }
+        .bg-grid-small {
+            background-size: 10px 10px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .text-shimmer {
+            background: linear-gradient(to right, #64748b 20%, #ffffff 40%, #ffffff 60%, #64748b 80%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+        .anim-bar-1 { animation: barPulse1 2s ease-in-out infinite alternate; }
+        .anim-bar-2 { animation: barPulse2 2.5s ease-in-out infinite alternate; }
+        .anim-bar-3 { animation: barPulse3 1.8s ease-in-out infinite alternate; }
+        .anim-bar-4 { animation: barPulse4 2.2s ease-in-out infinite alternate; }
+        .anim-bar-5 { animation: barPulse5 2.7s ease-in-out infinite alternate; }
+        @keyframes barPulse1 { 0% { height: 30%; } 100% { height: 70%; } }
+        @keyframes barPulse2 { 0% { height: 60%; } 100% { height: 95%; } }
+        @keyframes barPulse3 { 0% { height: 40%; } 100% { height: 80%; } }
+        @keyframes barPulse4 { 0% { height: 75%; } 100% { height: 45%; } }
+        @keyframes barPulse5 { 0% { height: 50%; } 100% { height: 85%; } }
+        .layer-float-1 { animation: floatLayer 4s ease-in-out infinite; }
+        .layer-float-2 { animation: floatLayer 4s ease-in-out infinite 0.5s; }
+        .layer-float-3 { animation: floatLayer 4s ease-in-out infinite 1s; }
+        @keyframes floatLayer {
+            0%, 100% { transform: translateY(0) rotateX(45deg) rotateZ(-45deg); }
+            50% { transform: translateY(-10px) rotateX(45deg) rotateZ(-45deg); }
+        }
+        .dot-grid {
+            background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 12px 12px;
+        }
+
+        /* ===== MARINE HEADER SECTION STYLES ===== */
+        .marine-header-section {
+            font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+        }
+        .marine-header-section .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .surface-glass {
+            background: rgba(24, 24, 27, 0.3);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+        html[data-theme="light"] .surface-glass {
+            background: rgba(243, 244, 246, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.05), 0 20px 40px -15px rgba(0, 0, 0, 0.12);
+        }
+        .marine-transition-colors {
+            transition-property: color, background-color, border-color;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        .marine-transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        .fcg-dropdown-nav {
+            background: rgba(255, 255, 255, 0.86);
+            border-color: rgba(15, 17, 20, 0.1);
+            box-shadow: 0 18px 45px rgba(15, 17, 20, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        html[data-theme="dark"] .fcg-dropdown-nav {
+            background: rgba(8, 8, 5, 0.82);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
+        }
+        .fcg-nav-shell {
+            background: rgba(15, 17, 20, 0.04);
+            border: 1px solid rgba(15, 17, 20, 0.08);
+            border-radius: 999px;
+            padding: 3px;
+        }
+        html[data-theme="dark"] .fcg-nav-shell {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .fcg-nav-trigger {
+            color: var(--color-muted);
+            border-radius: 999px;
+            position: relative;
+            transition: color 240ms ease, background-color 240ms ease;
+        }
+        .fcg-dropdown-item::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 12px;
+        }
+        .fcg-dropdown-item:hover .fcg-nav-trigger {
+            color: var(--color-fg);
+            background: rgba(249, 115, 22, 0.1);
+        }
+        .fcg-nav-chevron {
+            transition: transform 180ms ease;
+        }
+        .fcg-dropdown-item:hover .fcg-nav-chevron {
+            transform: rotate(180deg);
+        }
+        .fcg-dropdown-panel {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px) scale(0.98);
+            transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 28px 70px rgba(15, 17, 20, 0.18);
+            min-width: max-content;
+        }
+        html[data-theme="dark"] .fcg-dropdown-panel {
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.36);
+        }
+        .fcg-dropdown-item:hover .fcg-dropdown-panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .fcg-menu-icon {
+            border-color: var(--color-border);
+            color: var(--color-fg);
+            transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+        }
+        .fcg-menu-link:hover .fcg-menu-icon {
+            background: #F97316;
+            border-color: #F97316;
+            color: #ffffff;
+        }
+        .fcg-menu-link p {
+            color: var(--color-fg);
+        }
+        .fcg-menu-link span {
+            color: var(--color-muted);
+            transition: color 180ms ease;
+        }
+        .fcg-menu-link:hover span {
+            color: var(--color-fg);
+        }
+        .fcg-products-mega {
+            width: min(92vw, 980px);
+            max-width: calc(100vw - 48px);
+            padding: 28px;
+        }
+        .fcg-products-mega-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
+        }
+        .fcg-products-group {
+            min-width: 0;
+        }
+        .fcg-products-group-heading {
+            color: var(--color-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        .fcg-products-group-title {
+            color: var(--color-fg);
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .fcg-products-list {
+            display: grid;
+            gap: 16px;
+        }
+        .fcg-products-link {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            min-width: 0;
+            text-decoration: none;
+        }
+        .fcg-products-link p {
+            color: var(--color-fg);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.25;
+            margin: 0 0 3px;
+        }
+        .fcg-products-link span {
+            color: var(--color-muted);
+            display: block;
+            font-size: 12px;
+            line-height: 1.35;
+            max-width: 210px;
+            transition: color 180ms ease;
+        }
+        .fcg-products-link:hover span {
+            color: var(--color-fg);
+        }
+        .fcg-products-link:hover .fcg-menu-icon {
+            background: #F97316;
+            border-color: #F97316;
+            color: #ffffff;
+        }
+        @media (max-width: 900px) {
+            .fcg-products-mega {
+                width: min(92vw, 680px);
+            }
+            .fcg-products-mega-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @keyframes marine-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .marine-animate-pulse {
+            animation: marine-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        /* ===== END MARINE HEADER SECTION STYLES ===== */
+
+        /* ===== MARINE DATA STREAM STYLES ===== */
+        .marine-animate-marquee {
+            animation: marquee 20s linear infinite;
+            will-change: transform;
+        }
+        /* ===== END MARINE DATA STREAM STYLES ===== */
+
+        /* ===== MARINE HERO SECTION STYLES ===== */
+        .marine-hero-section {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+        }
+        .marine-hero-section .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        @keyframes sweep {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes ping-slow {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(2); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; will-change: transform; }
+        .animate-sweep { animation: sweep 4s linear infinite; transform-origin: center; will-change: transform; }
+        .animate-ping-slow { animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite; will-change: transform, opacity; }
+        /* ===== END MARINE HERO SECTION STYLES ===== */
+
+        /* ===== GLOBAL LIGHT MODE OVERRIDES ===== */
+
+        /* --- 1. CORE BACKGROUND & TEXT PRIMITIVES --- */
+        html[data-theme="light"] .marine-hero-section,
+        html[data-theme="light"] .bg-background {
+            background-color: var(--color-bg) !important;
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .bg-\[\#000\],
+        html[data-theme="light"] .bg-\[\#0a0a0a\],
+        html[data-theme="light"] .bg-\[\#050505\],
+        html[data-theme="light"] .bg-black {
+            background-color: #FFFFFF !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-900 {
+            background-color: #F3F4F6 !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-950\/40 {
+            background-color: rgba(243, 244, 246, 0.5) !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-900\/90 {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-950\/80 {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-900\/30 {
+            background-color: rgba(243, 244, 246, 0.4) !important;
+        }
+
+        html[data-theme="light"] .bg-white\/5,
+        html[data-theme="light"] .bg-white\/\[0\.01\],
+        html[data-theme="light"] .bg-white\/\[0\.02\],
+        html[data-theme="light"] .bg-white\/\[0\.03\],
+        html[data-theme="light"] .bg-white\/\[0\.04\],
+        html[data-theme="light"] .bg-white\/\[0\.05\] {
+            background-color: rgba(0, 0, 0, 0.06) !important;
+        }
+
+        html[data-theme="light"] .bg-black\/50,
+        html[data-theme="light"] .bg-black\/80,
+        html[data-theme="light"] .bg-black\/45 {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        /* Text color overrides: white -> dark */
+        html[data-theme="light"] .text-white {
+            color: #111827 !important;
+        }
+
+        html[data-theme="light"] .text-zinc-950 {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .text-zinc-400,
+        html[data-theme="light"] .text-zinc-500 {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .text-zinc-300 {
+            color: #374151 !important;
+        }
+
+        html[data-theme="light"] .text-neutral-100,
+        html[data-theme="light"] .text-neutral-200,
+        html[data-theme="light"] .text-neutral-300 {
+            color: #111827 !important;
+        }
+
+        html[data-theme="light"] .text-neutral-400 {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .text-neutral-500 {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .text-neutral-600 {
+            color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .text-neutral-800 {
+            color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] .text-white\/10,
+        html[data-theme="light"] .text-white\/20 {
+            color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        html[data-theme="light"] .text-white\/30 {
+            color: rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .text-white\/50 {
+            color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .text-white\/80 {
+            color: #4B5563 !important;
+        }
+
+        html[data-theme="light"] .text-white\/90 {
+            color: #374151 !important;
+        }
+
+        /* --- 2. BORDER OVERRIDES --- */
+        html[data-theme="light"] .border-white\/5,
+        html[data-theme="light"] .border-white\/10,
+        html[data-theme="light"] .border-white\/\[0\.05\],
+        html[data-theme="light"] .border-white\/\[0\.08\],
+        html[data-theme="light"] .border-white\/15,
+        html[data-theme="light"] .border-white\/20 {
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .border-neutral-800,
+        html[data-theme="light"] .border-neutral-800\/50,
+        html[data-theme="light"] .border-neutral-800\/60,
+        html[data-theme="light"] .border-neutral-900,
+        html[data-theme="light"] .border-neutral-700 {
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .hover\:border-white\/20:hover,
+        html[data-theme="light"] .hover\:border-white\/30:hover {
+            border-color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .border-t.border-white\/10 {
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .border-b.border-white\/10 {
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .border-b.border-white\/5 {
+            border-color: #E5E7EB !important;
+        }
+
+        /* --- 3. GLASS PANELS --- */
+        html[data-theme="light"] .glass-panel {
+            background: rgba(0, 0, 0, 0.05) !important;
+            border: 1px solid rgba(0, 0, 0, 0.12) !important;
+        }
+
+        html[data-theme="light"] .surface-glass {
+            background: rgba(243, 244, 246, 0.9) !important;
+            border: 1px solid rgba(0, 0, 0, 0.12) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 20px 40px -15px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        /* --- 4. GRID PATTERNS --- */
+        html[data-theme="light"] .bg-grid {
+            background-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px) !important;
+        }
+
+        html[data-theme="light"] .bg-grid-small {
+            background-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px) !important;
+        }
+
+        html[data-theme="light"] .dot-grid {
+            background-image: radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px) !important;
+        }
+
+        /* --- 5. TEXT SHIMMER --- */
+        html[data-theme="light"] .text-shimmer {
+            background: linear-gradient(to right, #94a3b8 20%, #0F1114 40%, #0F1114 60%, #94a3b8 80%) !important;
+            background-size: 200% auto !important;
+            color: transparent !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+        }
+
+        /* --- 6. MARINE HERO: GLOBE LIGHT MODE (colors inverted via JS) --- */
+
+        /* --- 7. MARINE DATA STREAM --- */
+        html[data-theme="light"] .from-zinc-950 {
+            --tw-gradient-from: #F9FAFB !important;
+        }
+
+        /* --- 8. NAVBAR BUTTONS --- */
+        html[data-theme="light"] button.bg-white {
+            background-color: #111827 !important;
+            color: #FFFFFF !important;
+        }
+
+        html[data-theme="light"] button.hover\:bg-neutral-200:hover,
+        html[data-theme="light"] button.hover\:bg-zinc-200:hover {
+            background-color: #374151 !important;
+        }
+
+        html[data-theme="light"] .hover\:text-white\/70:hover {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .hover\:bg-white\/10:hover {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        /* --- 9. SHADOWS --- */
+        html[data-theme="light"] .shadow-2xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .shadow-xl {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        html[data-theme="light"] .shadow-inner {
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_0_30px_rgba\(255\,255\,255\,0\.2\)\] {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_0_32px_rgba\(255\,255\,255\,0\.1\)\] {
+            box-shadow: 0 0 32px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_0_10px_\#fff\] {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_0_20px_rgba\(255\,255\,255\,0\.2\)\] {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[0_10px_30px_rgba\(0\,0\,0\,0\.5\)\] {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        html[data-theme="light"] .shadow-\[-30px_30px_50px_rgba\(0\,0\,0\,0\.8\)\] {
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        /* --- 10. SCHEMA CARD ENHANCED (HORIZONTAL SCROLL) --- */
+        html[data-theme="light"] .schema-card-enhanced {
+            background-color: #FFFFFF !important;
+            background-image: linear-gradient(#FFFFFF, #FFFFFF), linear-gradient(to bottom right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.06)) !important;
+        }
+
+        html[data-theme="light"] .schema-card-enhanced:hover {
+            background-color: #F9FAFB !important;
+            background-image: linear-gradient(#F9FAFB, #F9FAFB), linear-gradient(to bottom right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.12)) !important;
+        }
+
+        html[data-theme="light"] .schema-card-enhanced > span.text-6xl {
+            color: rgba(0, 0, 0, 0.06) !important;
+        }
+
+        html[data-theme="light"] .schema-card-enhanced:hover > span.text-6xl {
+            color: rgba(0, 0, 0, 0.12) !important;
+        }
+
+        html[data-theme="light"] #h-scroll-section,
+        html[data-theme="light"] #h-scroll-section > .sticky {
+            background-color: #FFFFFF !important;
+        }
+
+        html[data-theme="light"] #h-scroll-progress {
+            background-color: #111827 !important;
+        }
+
+        /* --- 11. SCHEMA ANIMATION COLORS --- */
+        html[data-theme="light"] .schema-vignette {
+            background: radial-gradient(circle at center,
+                rgba(255, 255, 255, 0) 30%,
+                rgba(255, 255, 255, 0.18) 58%,
+                rgba(255, 255, 255, 0.42) 80%,
+                rgba(255, 255, 255, 0.72) 100%) !important;
+        }
+
+        html[data-theme="light"] .schema-node-clean {
+            background: rgba(15, 17, 20, 0.8) !important;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        html[data-theme="light"] .schema-pulse-dot,
+        html[data-theme="light"] .schema-pulse-dot-pos {
+            background: #374151 !important;
+        }
+
+        /* --- 12. BACKGROUND COLOR UTILITIES --- */
+        html[data-theme="light"] .bg-white\/10 {
+            background-color: rgba(0, 0, 0, 0.07) !important;
+        }
+
+        html[data-theme="light"] .bg-white\/20 {
+            background-color: #E5E7EB !important;
+        }
+
+        html[data-theme="light"] .bg-white\/40 {
+            background-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .bg-white\/60 {
+            background-color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .bg-white\/80 {
+            background-color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-800 {
+            background-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-800\/50 {
+            background-color: rgba(209, 213, 219, 0.5) !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-800\/30 {
+            background-color: #E5E7EB !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-500 {
+            background-color: #9CA3AF !important;
+        }
+
+        html[data-theme="light"] .bg-neutral-600 {
+            background-color: #D1D5DB !important;
+        }
+
+        /* --- 13. ORBITAL FEATURE SECTION --- */
+        html[data-theme="light"] .border-white\/15 {
+            border-color: #D1D5DB !important;
+        }
+
+        /* SVG path strokes */
+        html[data-theme="light"] path[stroke="rgba(255,255,255,0.4)"],
+        html[data-theme="light"] path[stroke="rgba(255,255,255,0.6)"] {
+            stroke: rgba(0, 0, 0, 0.25) !important;
+        }
+
+        /* --- 14. PROGRESSIVE GRID EXPANSION --- */
+        html[data-theme="light"] #expansion-container {
+            border-color: #D1D5DB !important;
+            background-color: rgba(243, 244, 246, 0.5) !important;
+        }
+
+        html[data-theme="light"] svg.text-neutral-800,
+        html[data-theme="light"] svg.text-neutral-700 {
+            color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] #hero-badge {
+            background-color: #F3F4F6 !important;
+            border-color: #D1D5DB !important;
+            color: #6B7280 !important;
+        }
+
+        /* --- 15. TYPEWRITER / BLINK CURSOR --- */
+        html[data-theme="light"] .typewriter-text {
+            border-right-color: #0F1114 !important;
+            color: #111827 !important;
+        }
+
+        /* --- 16. CTA & FOOTER --- */
+        html[data-theme="light"] footer.bg-\[\#000\] {
+            background-color: #FFFFFF !important;
+        }
+
+        html[data-theme="light"] footer.bg-black {
+            background-color: #F3F4F6 !important;
+            border-color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] footer.bg-black .text-textsec,
+        html[data-theme="light"] footer.bg-black a {
+            color: #6B7280 !important;
+        }
+
+        html[data-theme="light"] footer.bg-black a:hover {
+            color: #111827 !important;
+        }
+
+        html[data-theme="light"] footer.bg-black .text-white\/30 {
+            color: #D1D5DB !important;
+        }
+
+        html[data-theme="light"] footer.bg-black svg path {
+            fill: #000000 !important;
+        }
+
+        /* --- 17. GRADIENT OVERRIDES --- */
+        html[data-theme="light"] .bg-gradient-to-t.from-background\/90 {
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3), transparent) !important;
+        }
+
+        html[data-theme="light"] .bg-gradient-to-b.from-background\/40 {
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.9)) !important;
+        }
+
+        html[data-theme="light"] .bg-gradient-to-t.from-neutral-950\/40 {
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 0.8), transparent) !important;
+        }
+
+        html[data-theme="light"] .bg-gradient-to-l.from-white\/5 {
+            background-image: linear-gradient(to left, rgba(0, 0, 0, 0.02), transparent) !important;
+        }
+
+        /* --- 18. SELECTION COLORS --- */
+        html[data-theme="light"] .selection\:bg-neutral-800 *::selection {
+            background: rgba(249, 115, 22, 0.15) !important;
+            color: inherit !important;
+        }
+
+        /* --- 19. MARQUEE TEXT STROKE --- */
+        html[data-theme="light"] h2[style*="-webkit-text-stroke: 1px rgba(255,255,255"] {
+            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* --- 20. PROJECT CARD OVERLAYS --- */
+        html[data-theme="light"] .bg-gradient-to-t.from-black {
+            background-image: linear-gradient(to top, #FFFFFF, rgba(255, 255, 255, 0.4), transparent) !important;
+        }
+
+        /* --- 21. COUNTER SPAN COLOR --- */
+        html[data-theme="light"] .counter span {
+            color: #9CA3AF !important;
+        }
+
+        /* --- 22. RADIAL GRADIENT OVERLAYS --- */
+        html[data-theme="light"] .bg-\[radial-gradient\(circle_at_top_right\,rgba\(255\,255\,255\,0\.05\)\,transparent_50\%\)\] {
+            background: radial-gradient(circle at top right, rgba(0, 0, 0, 0.03), transparent 50%) !important;
+        }
+
+        html[data-theme="light"] .bg-\[radial-gradient\(circle_at_center\,rgba\(255\,255\,255\,0\.06\)\,transparent_42\%\)\] {
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.03), transparent 42%) !important;
+        }
+
+        /* --- 23. ANIMATED BAR OVERRIDES --- */
+        html[data-theme="light"] .group:hover .group-hover\:bg-white {
+            background-color: #374151 !important;
+        }
+
+        html[data-theme="light"] .group-hover\:bg-white\/\[0\.04\]:hover {
+            background-color: rgba(249, 250, 251, 0.5) !important;
+        }
+
+        html[data-theme="light"] .group:hover .group-hover\:bg-white\/10 {
+            background-color: rgba(0, 0, 0, 0.04) !important;
+        }
+
+        .partner-plus::before,
+        .partner-plus::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            background: #0F1114;
+            transform: translate(-50%, -50%);
+        }
+
+        .partner-plus::before {
+            width: 18px;
+            height: 1px;
+        }
+
+        .partner-plus::after {
+            width: 1px;
+            height: 18px;
+        }
+
+        /* ===== END GLOBAL LIGHT MODE OVERRIDES ===== */
+    </style>
+</head>
+<body class="bg-background text-foreground antialiased">
+    <nav class="marine-header-section fcg-dropdown-nav fixed top-0 z-50 w-full border-b">
+        <div class="w-full px-4 md:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <!-- Logo -->
+                <div class="flex items-center" style="color: var(--color-fg);">
+                    <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 28px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="currentColor"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="currentColor"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="currentColor"/></svg>
+                </div>
+
+                <!-- Desktop Dropdown Navigation -->
+                <ul class="fcg-nav-shell hidden md:flex items-center gap-0 text-sm font-normal">
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>About</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
+                            <div class="flex gap-9 overflow-hidden">
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">FCG Group</h3>
+                                    <div class="space-y-6">
+                                        <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:global-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Asian travel network</p><span class="text-xs">Supply depth across key regional markets</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Operator infrastructure</p><span class="text-xs">Tools built around real travel workflows</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Markets</h3>
+                                    <div class="space-y-6">
+                                        <a href="#capabilities" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Regional coverage</p><span class="text-xs">Singapore, Hong Kong, Shenzhen and more</span></div>
+                                        </a>
+                                        <a href="#decision-paths" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:compass-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Expansion model</p><span class="text-xs">How FCG scales supply and operations</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>Products</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel fcg-products-mega absolute left-0 top-full mt-2 rounded-2xl">
+                            <div class="fcg-products-mega-grid">
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For TMCs & operators</h3>
+                                    <div class="fcg-products-group-title">Connect</div>
+                                    <div class="fcg-products-list">
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:cpu-bolt-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>AgreeEase</p><span>AI hotel sourcing and RFP workflows</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Atlas</p><span>TMC operating system for bookings and service</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:case-round-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Allbon</p><span>Corporate booking platform for business travel</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For travel suppliers</h3>
+                                    <div class="fcg-products-group-title">Operate</div>
+                                    <div class="fcg-products-list">
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:box-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Travakey</p><span>Resource APIs and supplier connectivity</span></div>
+                                        </a>
+                                        <a href="#decision-paths" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:chart-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Smart Distribution</p><span>Rate control and marketplace access</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:card-transfer-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Payment Solutions</p><span>Secure settlement and processing tools</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For mapping & optimization</h3>
+                                    <div class="fcg-products-group-title">Experience</div>
+                                    <div class="fcg-products-list">
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Hotel Mapping</p><span>Clean, standardized property records</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:bed-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Room Mapping</p><span>Full clarity across room types and suppliers</span></div>
+                                        </a>
+                                        <a href="#product-map" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:magic-stick-3-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Content Optimization</p><span>Enrich, standardize, and improve conversion</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>Technology</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
+                            <div class="flex gap-9 overflow-hidden">
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Platform</h3>
+                                    <div class="space-y-6">
+                                        <a href="#product-map" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:shield-check-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Reliable workflows</p><span class="text-xs">Structured processes for sourcing teams</span></div>
+                                        </a>
+                                        <a href="#decision-paths" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:eye-scan-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Data visibility</p><span class="text-xs">See where requests and supply stand</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="mb-4 text-xs font-mono uppercase tracking-[0.18em]" style="color: var(--color-muted);">Automation</h3>
+                                    <div class="space-y-6">
+                                        <a href="#product-map" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:rocket-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Faster responses</p><span class="text-xs">Reduce manual sourcing and follow-ups</span></div>
+                                        </a>
+                                        <a href="#decision-paths" class="fcg-menu-link flex items-start gap-3">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:palette-round-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p class="text-sm font-medium">Custom workflows</p><span class="text-xs">Adapt the system around real teams</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right: Status & Toggle -->
+            <div class="flex items-center gap-4 md:gap-6">
+                <!-- System Status Badge -->
+                <div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono tracking-tight" style="background-color: rgba(249, 115, 22, 0.1); border: 1px solid rgba(249, 115, 22, 0.2); color: #F97316;">
+                    <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background-color: #F97316;"></span>
+                    LIVE.NETWORK
+                </div>
+
+                <!-- Custom Toggle Switch -->
+                <label class="flex items-center gap-3 cursor-pointer group">
+                    <span class="text-xs font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors hidden sm:block uppercase">MODE</span>
+                    <div class="relative">
+                        <input type="checkbox" id="themeToggle" class="sr-only peer" checked>
+                        <div class="w-10 h-5 rounded-full peer peer-checked:bg-orange-900/40 border transition-all bg-zinc-800 border-white/10"></div>
+                        <div class="absolute left-1 top-1 w-3 h-3 bg-zinc-500 rounded-full peer-checked:translate-x-5 peer-checked:bg-orange-500 transition-all shadow-[0_0_8px_rgba(249,115,22,0.4)] peer-checked:shadow-[0_0_12px_rgba(249,115,22,0.8)]"></div>
+                    </div>
+                </label>
+                <a href="#capabilities" class="md:hidden w-10 h-10 rounded-full border flex items-center justify-center" style="border-color: var(--color-border); color: var(--color-fg);" aria-label="Open page sections">
+                    <iconify-icon icon="solar:hamburger-menu-linear" width="20" height="20"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </nav>
+<style>
+  .fcg-hero2 {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #030303;
+    color: #fff;
+  }
+  .fcg-hero2 * { color: inherit; }
+  .fcg-hero2-glow {
+    position: absolute;
+    right: -18rem;
+    top: -4rem;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    filter: blur(24px);
+    pointer-events: none;
+  }
+  .fcg-hero2-glow span {
+    display: block;
+    height: 10rem;
+    border-radius: 999px;
+    filter: blur(6rem);
+    opacity: .78;
+  }
+  .fcg-hero2-glow span:nth-child(1) { width: 60rem; background: linear-gradient(to bottom, #f97316, #0ea5e9); }
+  .fcg-hero2-glow span:nth-child(2) { width: 90rem; background: linear-gradient(to bottom, #be123c, #facc15); }
+  .fcg-hero2-glow span:nth-child(3) { width: 60rem; background: linear-gradient(to bottom, #f59e0b, #06b6d4); }
+  .fcg-hero2::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: .18;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,.38) 1px, transparent 0),
+      linear-gradient(to bottom, rgba(3,3,3,0), rgba(3,3,3,.92));
+    background-size: 18px 18px, 100% 100%;
+  }
+  .fcg-hero2-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    border-radius: 999px;
+    padding: 0 28px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  }
+  .fcg-hero2-button:hover { transform: scale(1.05); }
+  .fcg-hero2-button-primary {
+    background: #fff;
+    color: #050505;
+  }
+  .fcg-hero2-button-secondary {
+    border: 1px solid rgba(255,255,255,.22);
+    color: #fff;
+    background: rgba(255,255,255,.04);
+  }
+  .fcg-hero2-button-secondary:hover { background: rgba(255,255,255,.1); }
+  .fcg-hero2-content {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr);
+    align-items: center;
+    gap: 56px;
+    max-width: 1280px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 132px 24px 96px;
+    text-align: left;
+  }
+  .fcg-hero2-copy-column {
+    max-width: 620px;
+  }
+  .fcg-hero2-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.12);
+    padding: 9px 16px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .fcg-hero2 h1 {
+    max-width: 620px;
+    margin: 36px 0 0;
+    color: #fff !important;
+    font-size: clamp(3rem, 5.2vw, 5.8rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .fcg-hero2-copy {
+    max-width: 590px;
+    margin: 26px 0 0;
+    color: rgba(255,255,255,.72) !important;
+    font-size: clamp(1rem, 1.5vw, 1.18rem);
+    line-height: 1.7;
+  }
+  .fcg-hero2-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .fcg-hero2-preview-wrap {
+    position: relative;
+    width: 100%;
+    margin: 0;
+  }
+  .fcg-hero2-preview-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 2rem;
+    background: rgba(255,255,255,.48);
+    filter: blur(8rem);
+    opacity: .24;
+  }
+  .fcg-hero2-preview {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2rem;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(7,7,7,.88);
+    box-shadow: 0 30px 90px rgba(0,0,0,.45);
+  }
+  .fcg-hero2-preview img {
+    display: block;
+    width: 100%;
+    height: min(64vh, 560px);
+    object-fit: cover;
+    opacity: .64;
+    filter: grayscale(1) contrast(1.05);
+  }
+  .fcg-hero2-preview-grid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    align-items: stretch;
+    gap: 14px;
+    padding: 24px;
+    background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.38), transparent);
+  }
+  .fcg-hero2-preview-card {
+    min-height: 124px;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 18px;
+    text-align: left;
+  }
+  .fcg-hero2-preview-card span {
+    display: block;
+    margin-bottom: 18px;
+    color: #F97316;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+  .fcg-hero2-preview-card strong {
+    display: block;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .product-shell { background: var(--color-bg); color: var(--color-fg); }
+  .product-kicker { font-family: 'JetBrains Mono', monospace; letter-spacing: .18em; text-transform: uppercase; }
+  .product-card {
+    background: rgba(0,0,0,.4);
+    border: 1px solid rgba(255,255,255,.15);
+    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+  .product-card:hover {
+    background: rgba(0,0,0,.52);
+    border-color: rgba(255,255,255,.4);
+    transform: translateY(-2px);
+  }
+  html[data-theme="light"] .product-card {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 50px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .product-card:hover {
+    background: rgba(255,255,255,.92);
+    border-color: rgba(15,17,20,.24);
+  }
+  .product-panel { background: #050505; border: 1px solid rgba(255,255,255,.1); }
+  html[data-theme="light"] .product-panel { background: #f9fafb; border-color: #d1d5db; }
+  .product-line { background: linear-gradient(90deg, transparent, rgba(249,115,22,.55), transparent); }
+  #decision-paths,
+  #product-map {
+    padding-top: 5.5rem !important;
+    padding-bottom: 5.5rem !important;
+  }
+  #decision-paths > div,
+  #product-map > div {
+    max-width: 72rem;
+  }
+  #decision-paths .product-card,
+  #product-map .product-card {
+    border-radius: 2rem !important;
+    padding: 1.25rem !important;
+  }
+  #decision-paths .product-card h3,
+  #product-map .product-card h3 {
+    font-size: 1.08rem !important;
+    line-height: 1.25 !important;
+  }
+  #decision-paths .product-card p,
+  #product-map .product-card p,
+  #product-map .product-card li {
+    font-size: .88rem !important;
+    line-height: 1.6 !important;
+  }
+  #decision-paths .product-card .product-kicker,
+  #product-map .product-card .product-kicker {
+    font-size: .63rem !important;
+  }
+  #decision-paths .space-y-5 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .75rem;
+  }
+  #decision-paths .space-y-5 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0 !important;
+  }
+  #decision-paths .product-card {
+    display: flex !important;
+    min-height: 18rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0 !important;
+  }
+  #decision-paths .product-card > p {
+    margin-top: .85rem;
+  }
+  #decision-paths .product-card > div:last-child {
+    margin-top: auto;
+    border-radius: 14px !important;
+    padding: 1rem !important;
+  }
+  #decision-paths .product-card .text-lg {
+    font-size: .98rem !important;
+    line-height: 1.3 !important;
+  }
+  #product-map .grid {
+    gap: .75rem !important;
+  }
+  #product-map .product-card {
+    min-height: 18.5rem;
+  }
+  #product-map .product-card .w-12 {
+    width: 2.5rem !important;
+  }
+  #product-map .product-card .h-12 {
+    height: 2.5rem !important;
+  }
+  #product-map .product-card .mb-6 {
+    margin-bottom: 1rem !important;
+  }
+  #product-map .product-card .gap-5 {
+    gap: .9rem !important;
+  }
+  #product-map .product-card .pt-5 {
+    padding-top: 1rem !important;
+  }
+  #product-map .product-card .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: .6rem !important;
+  }
+  html[data-theme="light"] #decision-paths .product-card > div:last-child {
+    background: rgba(255,255,255,.68) !important;
+    border-color: rgba(15,17,20,.1) !important;
+  }
+  @media (max-width: 980px) {
+    #decision-paths .space-y-5 {
+      grid-template-columns: 1fr;
+    }
+    #decision-paths .product-card,
+    #product-map .product-card {
+      min-height: auto;
+    }
+  }
+  .fcg-bento {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(249,115,22,.12), transparent 28%),
+      radial-gradient(125% 125% at 50% 10%, #080805 42%, #121212 100%);
+    color: #fff;
+  }
+  .fcg-bento::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 22%, rgba(249,115,22,.14), transparent 28%),
+      linear-gradient(to bottom, rgba(0,0,0,.04), rgba(0,0,0,.55));
+  }
+  .fcg-bento-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+  }
+  .fcg-bento-spiral {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .3;
+    mix-blend-mode: screen;
+    mask-image: radial-gradient(circle at center, rgba(255,255,255,1), rgba(255,255,255,.1) 60%, transparent 75%);
+    -webkit-mask-image: radial-gradient(circle at center, rgba(255,255,255,1), rgba(255,255,255,.1) 60%, transparent 75%);
+  }
+  .fcg-bento-header {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .fcg-bento-kicker {
+    color: #F97316;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    margin-bottom: .9rem;
+    text-transform: uppercase;
+  }
+  .fcg-bento h2 {
+    color: #fff !important;
+    font-size: clamp(2.3rem, 5vw, 4.7rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+  .fcg-bento-subcopy {
+    color: rgba(255,255,255,.7) !important;
+    max-width: 31rem;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .fcg-bento-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-rows: minmax(120px, auto);
+    gap: .75rem;
+  }
+  .fcg-bento-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2rem;
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(0,0,0,.4);
+    padding: 1.25rem;
+    transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+  }
+  .fcg-bento-card:hover {
+    border-color: rgba(255,255,255,.4);
+    background: rgba(0,0,0,.52);
+    transform: translateY(-2px);
+  }
+  .fcg-bento-card::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    mask-image: radial-gradient(180px 180px at var(--x, 50%) var(--y, 50%), white, transparent);
+    -webkit-mask-image: radial-gradient(180px 180px at var(--x, 50%) var(--y, 50%), white, transparent);
+    transition: opacity 180ms ease;
+  }
+  .fcg-bento-card:hover::after { opacity: 1; }
+  .fcg-bento-card-large {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+  .fcg-bento-card-small { grid-column: span 2; }
+  .fcg-bento-card-wide { grid-column: span 3; }
+  .fcg-bento-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    margin-bottom: .7rem;
+  }
+  .fcg-bento-dot {
+    flex: 0 0 auto;
+    width: .55rem;
+    height: .55rem;
+    margin-top: .38rem;
+    border-radius: 999px;
+    background: #F97316;
+    box-shadow: 0 0 18px rgba(249,115,22,.45);
+    color: transparent;
+    font-size: 0;
+  }
+  .fcg-bento-card h3 {
+    min-width: 0;
+    color: #fff !important;
+    font-size: clamp(1rem, 1.7vw, 1.22rem);
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .fcg-bento-meta {
+    flex: 0 0 auto;
+    margin-left: auto;
+    margin-top: .12rem;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 999px;
+    color: rgba(255,255,255,.62);
+    font-size: 10px;
+    letter-spacing: .12em;
+    line-height: 1;
+    padding: .35rem .5rem;
+    text-transform: uppercase;
+  }
+  .fcg-bento-card p {
+    color: rgba(255,255,255,.7) !important;
+    font-size: 14px;
+    line-height: 1.65;
+    max-width: 48rem;
+  }
+  .fcg-showcase {
+    position: relative;
+    overflow: hidden;
+    background: #080805;
+    color: #ffffff;
+    border-top: 1px solid rgba(255,255,255,.1);
+  }
+  .fcg-showcase::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 14%, rgba(249,115,22,.12), transparent 28%),
+      radial-gradient(circle at 86% 74%, rgba(255,255,255,.04), transparent 28%);
+  }
+  .fcg-showcase-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 3.5rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+  }
+  .fcg-showcase-copy {
+    grid-column: span 6;
+  }
+  .fcg-showcase-badge {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 999px;
+    color: #F97316;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    padding: .48rem .75rem;
+    text-transform: uppercase;
+  }
+  .fcg-showcase h2 {
+    color: #fff !important;
+    font-size: clamp(2.4rem, 4.8vw, 4.5rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: .98;
+    max-width: 41rem;
+  }
+  .fcg-showcase-description {
+    color: rgba(255,255,255,.68) !important;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin-top: 1.5rem;
+    max-width: 36rem;
+  }
+  .fcg-showcase-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-top: 1.5rem;
+  }
+  .fcg-showcase-chip {
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 999px;
+    background: rgba(255,255,255,.05);
+    color: rgba(255,255,255,.78);
+    font-size: 12px;
+    line-height: 1;
+    padding: .55rem .7rem;
+  }
+  .fcg-showcase-steps {
+    border-top: 1px solid rgba(255,255,255,.1);
+    margin-top: 2.5rem;
+    max-width: 36rem;
+  }
+  .fcg-showcase-step {
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .fcg-showcase-step-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 1.15rem 0;
+    text-align: left;
+  }
+  .fcg-showcase-step-trigger iconify-icon {
+    flex: 0 0 auto;
+    color: rgba(255,255,255,.56);
+    transition: transform 180ms ease, color 180ms ease;
+  }
+  .fcg-showcase-step-trigger[aria-expanded="true"] iconify-icon {
+    color: #F97316;
+    transform: rotate(45deg);
+  }
+  .fcg-showcase-step-content {
+    color: rgba(255,255,255,.62);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.65;
+    padding: 0 0 1.15rem;
+  }
+  .fcg-showcase-step-content[hidden] {
+    display: none;
+  }
+  .fcg-showcase-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-top: 2rem;
+  }
+  .fcg-showcase-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    min-height: 2.75rem;
+    padding: .88rem 2rem;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  }
+  .fcg-showcase-action:hover {
+    transform: scale(1.05);
+  }
+  .fcg-showcase-action-primary {
+    background: #ffffff;
+    color: #080805;
+    box-shadow: 0 0 30px rgba(255,255,255,.12);
+  }
+  .fcg-showcase-action-secondary {
+    border: 1px solid rgba(255,255,255,.14);
+    background: transparent;
+    color: #ffffff;
+  }
+  .fcg-showcase-action-secondary:hover {
+    border-color: rgba(255,255,255,.28);
+    background: rgba(255,255,255,.06);
+  }
+  .fcg-showcase-visual {
+    grid-column: span 6;
+    min-width: 0;
+  }
+  .fcg-showcase-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 2rem;
+    background: rgba(18,18,18,.72);
+    box-shadow: 0 24px 70px rgba(0,0,0,.28);
+    min-height: 720px;
+  }
+  .fcg-showcase-panel {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .fcg-showcase-panel[hidden] {
+    display: none;
+  }
+  .fcg-showcase-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .28;
+    filter: grayscale(.75) contrast(1.08);
+  }
+  .fcg-showcase-panel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(8,8,5,.16), rgba(8,8,5,.78)),
+      radial-gradient(circle at 50% 22%, rgba(249,115,22,.16), transparent 34%);
+    pointer-events: none;
+  }
+  .fcg-showcase-overlay {
+    position: absolute;
+    inset: auto 1.4rem 6rem 1.4rem;
+    z-index: 1;
+    display: grid;
+    gap: .9rem;
+  }
+  .fcg-showcase-window {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 1.5rem;
+    background: rgba(8,8,5,.74);
+    backdrop-filter: blur(18px);
+    padding: 1rem;
+  }
+  .fcg-showcase-window h3 {
+    color: #fff !important;
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: .9rem;
+  }
+  .fcg-showcase-window p {
+    color: rgba(255,255,255,.66) !important;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .fcg-showcase-preview-list {
+    display: grid;
+    gap: .6rem;
+    margin-top: 1rem;
+  }
+  .fcg-showcase-preview-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: .75rem;
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 12px;
+    background: rgba(255,255,255,.04);
+    padding: .75rem;
+  }
+  .fcg-showcase-preview-row iconify-icon {
+    color: #F97316;
+  }
+  .fcg-showcase-preview-row strong {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .fcg-showcase-preview-row span {
+    color: rgba(255,255,255,.48);
+    font-size: 11px;
+  }
+  .fcg-showcase-preview-row mark {
+    border-radius: 999px;
+    background: rgba(249,115,22,.12);
+    color: #F97316;
+    font-size: 10px;
+    padding: .32rem .48rem;
+  }
+  .fcg-showcase-tabs {
+    position: absolute;
+    inset: auto 0 1rem 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    padding: 0 1rem;
+  }
+  .fcg-showcase-tablist {
+    display: flex;
+    gap: .4rem;
+    max-width: 100%;
+    overflow-x: auto;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 14px;
+    background: rgba(8,8,5,.76);
+    backdrop-filter: blur(18px);
+    padding: .35rem;
+  }
+  .fcg-showcase-tab {
+    flex: 0 0 auto;
+    border-radius: 10px;
+    color: rgba(255,255,255,.74);
+    font-size: 13px;
+    font-weight: 500;
+    padding: .62rem .9rem;
+    transition: background-color 180ms ease, color 180ms ease;
+  }
+  .fcg-showcase-tab[aria-selected="true"] {
+    background: #ffffff;
+    color: #080805;
+  }
+  .fcg-marketing-section {
+    position: relative;
+    overflow: hidden;
+    background: #050505;
+    color: #fff;
+    padding: 6rem 1.5rem 6rem;
+  }
+  .fcg-marketing-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 16%, rgba(249,115,22,.16), transparent 26%),
+      radial-gradient(circle at 86% 66%, rgba(255,255,255,.05), transparent 30%);
+  }
+  .fcg-marketing-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 54.25rem;
+    margin: 0 auto;
+  }
+  .fcg-marketing-header {
+    max-width: 54.25rem;
+    margin-bottom: 3.75rem;
+  }
+  .fcg-marketing-eyebrow,
+  .fcg-mobile-eyebrow {
+    color: #F97316;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    margin-bottom: .85rem;
+    text-transform: uppercase;
+  }
+  .fcg-marketing-title,
+  .fcg-mobile-feature h2 {
+    color: #fff !important;
+    font-size: clamp(2.6rem, 3vw, 3.25rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.05;
+  }
+  .fcg-marketing-title span {
+    color: rgba(255,255,255,.48);
+  }
+  .fcg-marketing-header p,
+  .fcg-mobile-subcopy {
+    color: rgba(255,255,255,.68) !important;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-top: 1rem;
+    max-width: 42rem;
+  }
+  .fcg-ai-showcase {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 29.15rem;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 2rem;
+    background:
+      linear-gradient(135deg, rgba(249,115,22,.16), rgba(255,255,255,.05) 42%, rgba(255,255,255,.08) 78%, rgba(249,115,22,.08)),
+      #141414;
+    box-shadow: 0 24px 70px rgba(0,0,0,.28);
+  }
+  .fcg-ai-showcase::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .16;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.9) 1px, transparent 0);
+    background-size: 3px 3px;
+  }
+  .fcg-ai-card {
+    position: relative;
+    z-index: 1;
+    width: min(100% - 2rem, 26.5rem);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 1.5rem;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 14px 28px rgba(0,0,0,.18);
+    color: #050505;
+    padding: 1.75rem;
+  }
+  .fcg-ai-spark {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    color: #c084fc;
+  }
+  .fcg-ai-prompt {
+    color: #050505 !important;
+    font-size: 1.08rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .fcg-ai-stats {
+    display: grid;
+    gap: .7rem;
+    margin: 1.35rem 0 1.55rem;
+  }
+  .fcg-ai-stat {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    color: #71717a;
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+  .fcg-ai-stat strong {
+    color: #050505;
+    font-weight: 500;
+  }
+  .fcg-ai-input {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 1rem;
+    border-radius: 14px;
+    background: #f1f1f2;
+    padding: 1rem 1rem .9rem;
+  }
+  .fcg-ai-placeholder {
+    color: #777;
+    font-size: 1.05rem;
+    margin-bottom: 1.1rem;
+  }
+  .fcg-ai-tools {
+    display: flex;
+    gap: .7rem;
+  }
+  .fcg-ai-tool,
+  .fcg-ai-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+  }
+  .fcg-ai-tool {
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid rgba(0,0,0,.08);
+    background: rgba(255,255,255,.42);
+    color: #050505;
+  }
+  .fcg-ai-submit {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: #050505;
+    color: #fff;
+  }
+  .fcg-marketing-features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4rem;
+    margin-top: 3.9rem;
+  }
+  .fcg-feature108-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 76rem;
+    margin: 0 auto;
+  }
+  .fcg-feature108-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+  .fcg-feature108-badge {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 2rem;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 999px;
+    background: rgba(255,255,255,.04);
+    color: rgba(255,255,255,.7);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .16em;
+    padding: 0 .9rem;
+    text-transform: uppercase;
+  }
+  .fcg-feature108-title {
+    max-width: 42rem;
+    color: #fff !important;
+    font-size: clamp(2.25rem, 4vw, 3.55rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.04;
+  }
+  .fcg-feature108-copy {
+    max-width: 42rem;
+    color: rgba(255,255,255,.64) !important;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .fcg-feature108-tabs {
+    margin-top: 2.25rem;
+  }
+  .fcg-feature108-tablist {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+  }
+  .fcg-feature108-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    min-height: 3rem;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: rgba(255,255,255,.56);
+    cursor: pointer;
+    font-size: .9rem;
+    font-weight: 500;
+    padding: 0 1rem;
+    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+  }
+  .fcg-feature108-trigger iconify-icon {
+    color: currentColor;
+  }
+  .fcg-feature108-trigger:hover {
+    color: rgba(255,255,255,.86);
+    transform: translateY(-1px);
+  }
+  .fcg-feature108-trigger[aria-selected="true"] {
+    background: rgba(255,255,255,.09);
+    color: #fff;
+  }
+  .fcg-feature108-card {
+    margin-top: 2rem;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 22px;
+    background: rgba(255,255,255,.055);
+    box-shadow: 0 24px 80px rgba(0,0,0,.28);
+    padding: clamp(1.5rem, 4vw, 4rem);
+  }
+  .fcg-feature108-panel {
+    display: grid;
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
+  .fcg-feature108-panel[hidden] {
+    display: none;
+  }
+  .fcg-feature108-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.15rem;
+  }
+  .fcg-feature108-content h3 {
+    color: #fff !important;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.05;
+  }
+  .fcg-feature108-content p {
+    color: rgba(255,255,255,.62) !important;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .fcg-feature108-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    border-radius: 999px;
+    background: #fff;
+    color: #0f1114;
+    font-size: .95rem;
+    font-weight: 500;
+    margin-top: .35rem;
+    padding: 0 1.25rem;
+    text-decoration: none;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+  .fcg-feature108-action:hover {
+    box-shadow: 0 14px 35px rgba(255,255,255,.12);
+    transform: scale(1.05);
+  }
+  .fcg-feature108-visual {
+    position: relative;
+    overflow: hidden;
+    min-height: 24rem;
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 2rem;
+    background:
+      radial-gradient(circle at 18% 24%, rgba(249,115,22,.22), transparent 30%),
+      radial-gradient(circle at 85% 12%, rgba(255,255,255,.06), transparent 28%),
+      linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+    padding: 1.1rem;
+  }
+  .fcg-feature108-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .14;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.85) 1px, transparent 0);
+    background-size: 4px 4px;
+  }
+  .fcg-feature108-window {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    min-height: 21.8rem;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 1.5rem;
+    background: rgba(5,5,5,.78);
+    box-shadow: 0 18px 55px rgba(0,0,0,.32);
+    padding: 1rem;
+  }
+  .fcg-feature108-window-bar {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin-bottom: 1rem;
+  }
+  .fcg-feature108-window-bar span {
+    width: .52rem;
+    height: .52rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,.28);
+  }
+  .fcg-feature108-stack {
+    display: grid;
+    gap: .75rem;
+  }
+  .fcg-feature108-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: .8rem;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px;
+    background: rgba(255,255,255,.055);
+    padding: .85rem;
+  }
+  .fcg-feature108-row strong {
+    color: #fff;
+    display: block;
+    font-size: .88rem;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .fcg-feature108-row small {
+    color: rgba(255,255,255,.5);
+    display: block;
+    font-size: .76rem;
+    line-height: 1.35;
+    margin-top: .2rem;
+  }
+  .fcg-feature108-row mark {
+    border-radius: 999px;
+    background: rgba(249,115,22,.15);
+    color: #F97316;
+    font-size: .72rem;
+    font-weight: 500;
+    padding: .35rem .55rem;
+  }
+  .fcg-feature108-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 12px;
+    background: rgba(249,115,22,.12);
+    color: #F97316;
+  }
+  .fcg-feature108-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .75rem;
+    margin-top: .75rem;
+  }
+  .fcg-feature108-metric {
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px;
+    background: rgba(255,255,255,.045);
+    padding: .85rem;
+  }
+  .fcg-feature108-metric strong {
+    color: #fff;
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 500;
+  }
+  .fcg-feature108-metric span {
+    color: rgba(255,255,255,.48);
+    display: block;
+    font-size: .72rem;
+    line-height: 1.35;
+    margin-top: .25rem;
+  }
+  .fcg-marketing-feature h3 {
+    color: #fff !important;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .fcg-marketing-feature p {
+    color: rgba(255,255,255,.54) !important;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    margin-top: 1rem;
+  }
+  .fcg-mobile-feature {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    padding: 6.5rem 1.5rem;
+  }
+  .fcg-mobile-feature::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom, rgba(255,255,255,.04), transparent 22%),
+      radial-gradient(circle at 50% 0%, rgba(249,115,22,.16), transparent 30%);
+  }
+  .fcg-mobile-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+  .fcg-mobile-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .fcg-main-icon,
+  .fcg-feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: rgba(249,115,22,.12);
+    color: #F97316;
+  }
+  .fcg-main-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: 1rem;
+  }
+  .fcg-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    margin: 4rem auto 0;
+  }
+  .fcg-feature-row {
+    display: flex;
+    gap: 1.15rem;
+    text-align: left;
+  }
+  .fcg-feature-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    flex: 0 0 auto;
+  }
+  .fcg-feature-row h3 {
+    color: #fff !important;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+  .fcg-feature-row p {
+    color: rgba(255,255,255,.62) !important;
+    font-size: .95rem;
+    line-height: 1.65;
+    margin-top: .25rem;
+  }
+  .fcg-mobile-cta {
+    margin-top: 4rem;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 22px;
+    background: rgba(255,255,255,.04);
+    padding: 2rem;
+    text-align: center;
+  }
+  .fcg-mobile-cta h3 {
+    color: #fff !important;
+    font-size: 1.35rem;
+    font-weight: 500;
+  }
+  .fcg-mobile-cta p {
+    color: rgba(255,255,255,.62) !important;
+    line-height: 1.65;
+    margin: .6rem auto 0;
+    max-width: 36rem;
+  }
+  .fcg-store-actions {
+    display: flex;
+    justify-content: center;
+    gap: .85rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+  .fcg-store-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    min-height: 44px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 999px;
+    color: #fff;
+    background: rgba(255,255,255,.04);
+    font-size: .9rem;
+    font-weight: 500;
+    padding: 0 1.15rem;
+    text-decoration: none;
+    transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  }
+  .fcg-store-button:hover {
+    transform: scale(1.05);
+    background: rgba(255,255,255,.09);
+    border-color: rgba(255,255,255,.26);
+  }
+
+  html[data-theme="light"] .fcg-hero2 {
+    background:
+      radial-gradient(circle at 78% 18%, rgba(249,115,22,.16), transparent 30%),
+      radial-gradient(circle at 92% 42%, rgba(15,17,20,.04), transparent 28%),
+      linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #eef2f7 100%);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-hero2-glow span {
+    opacity: .42;
+  }
+  html[data-theme="light"] .fcg-hero2::after {
+    opacity: .35;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(15,17,20,.16) 1px, transparent 0),
+      linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.72));
+  }
+  html[data-theme="light"] .fcg-hero2-badge {
+    background: rgba(255,255,255,.78);
+    border-color: rgba(15,17,20,.12);
+    color: #374151;
+    box-shadow: 0 14px 40px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-hero2 h1 {
+    color: #0f1114 !important;
+  }
+  html[data-theme="light"] .fcg-hero2-copy {
+    color: #4b5563 !important;
+  }
+  html[data-theme="light"] .fcg-hero2-button-primary {
+    background: #0f1114;
+    color: #ffffff;
+    box-shadow: 0 16px 35px rgba(15,17,20,.16);
+  }
+  html[data-theme="light"] .fcg-hero2-button-secondary {
+    background: rgba(255,255,255,.76);
+    border-color: rgba(15,17,20,.14);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-hero2-button-secondary:hover {
+    background: #ffffff;
+  }
+  html[data-theme="light"] .fcg-hero2-preview-wrap::before {
+    background: rgba(15,17,20,.18);
+    opacity: .18;
+  }
+  html[data-theme="light"] .fcg-hero2-preview {
+    background: rgba(255,255,255,.82);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 30px 80px rgba(15,17,20,.13);
+  }
+  html[data-theme="light"] .fcg-hero2-preview img {
+    opacity: .86;
+    filter: grayscale(.8) contrast(1.02);
+  }
+  html[data-theme="light"] .fcg-hero2-preview-grid {
+    background: linear-gradient(to top, rgba(255,255,255,.94), rgba(255,255,255,.5), transparent);
+  }
+  html[data-theme="light"] .fcg-hero2-preview-card {
+    background: rgba(255,255,255,.74);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 45px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-hero2-preview-card strong {
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-bento {
+    background:
+      radial-gradient(circle at 52% 10%, rgba(249,115,22,.12), transparent 32%),
+      radial-gradient(125% 125% at 50% 10%, #ffffff 38%, #F3F4F6 100%);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-bento::after {
+    background:
+      radial-gradient(circle at 18% 22%, rgba(249,115,22,.12), transparent 28%),
+      linear-gradient(to bottom, rgba(255,255,255,.08), rgba(255,255,255,.58));
+  }
+  html[data-theme="light"] .fcg-bento-spiral {
+    opacity: .16;
+    mix-blend-mode: multiply;
+  }
+  html[data-theme="light"] #fcgBentoSpiral {
+    color: #0f172a;
+  }
+  html[data-theme="light"] #fcgBentoSpiral circle {
+    fill: #0f172a;
+  }
+  html[data-theme="light"] .fcg-bento h2,
+  html[data-theme="light"] .fcg-bento-card h3 {
+    color: #0f1114 !important;
+  }
+  html[data-theme="light"] .fcg-bento-subcopy,
+  html[data-theme="light"] .fcg-bento-card p {
+    color: #4b5563 !important;
+  }
+  html[data-theme="light"] .fcg-bento-card {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 50px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-bento-card:hover {
+    background: rgba(255,255,255,.92);
+    border-color: rgba(15,17,20,.24);
+  }
+  html[data-theme="light"] .fcg-bento-card::after {
+    border-color: rgba(15,17,20,.16);
+  }
+  html[data-theme="light"] .fcg-bento-dot {
+    background: #F97316;
+    box-shadow: 0 0 18px rgba(249,115,22,.28);
+  }
+  html[data-theme="light"] .fcg-bento-meta {
+    border-color: rgba(15,17,20,.14);
+    color: #6b7280;
+    background: rgba(255,255,255,.52);
+  }
+  html[data-theme="light"] .fcg-showcase {
+    background: #ffffff;
+    color: #0f1114;
+    border-color: #D1D5DB;
+  }
+  html[data-theme="light"] .fcg-showcase::before {
+    background:
+      radial-gradient(circle at 18% 14%, rgba(249,115,22,.12), transparent 28%),
+      radial-gradient(circle at 86% 74%, rgba(15,17,20,.035), transparent 28%);
+  }
+  html[data-theme="light"] .fcg-showcase-badge {
+    border-color: rgba(15,17,20,.14);
+    background: rgba(255,255,255,.58);
+    color: #F97316;
+  }
+  html[data-theme="light"] .fcg-showcase h2,
+  html[data-theme="light"] .fcg-showcase-step-trigger,
+  html[data-theme="light"] .fcg-showcase-window h3,
+  html[data-theme="light"] .fcg-showcase-preview-row strong {
+    color: #0f1114 !important;
+  }
+  html[data-theme="light"] .fcg-showcase-description,
+  html[data-theme="light"] .fcg-showcase-step-content,
+  html[data-theme="light"] .fcg-showcase-window p {
+    color: #4b5563 !important;
+  }
+  html[data-theme="light"] .fcg-showcase-chip {
+    background: rgba(255,255,255,.68);
+    border-color: rgba(15,17,20,.1);
+    color: #4b5563;
+  }
+  html[data-theme="light"] .fcg-showcase-steps,
+  html[data-theme="light"] .fcg-showcase-step {
+    border-color: rgba(15,17,20,.1);
+  }
+  html[data-theme="light"] .fcg-showcase-step-trigger iconify-icon {
+    color: #6b7280;
+  }
+  html[data-theme="light"] .fcg-showcase-action-primary {
+    background: #0f1114;
+    color: #ffffff;
+  }
+  html[data-theme="light"] .fcg-showcase-action-secondary {
+    border-color: rgba(15,17,20,.14);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-showcase-action-secondary:hover {
+    border-color: rgba(15,17,20,.24);
+    background: rgba(15,17,20,.04);
+  }
+  html[data-theme="light"] .fcg-showcase-card,
+  html[data-theme="light"] .fcg-showcase-window {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 50px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-showcase-panel img {
+    opacity: .32;
+    filter: grayscale(.8) contrast(1.02);
+  }
+  html[data-theme="light"] .fcg-showcase-panel::after {
+    background:
+      linear-gradient(to bottom, rgba(255,255,255,.12), rgba(255,255,255,.86)),
+      radial-gradient(circle at 50% 22%, rgba(249,115,22,.16), transparent 34%);
+  }
+  html[data-theme="light"] .fcg-showcase-preview-row {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.1);
+  }
+  html[data-theme="light"] .fcg-showcase-preview-row span {
+    color: #6b7280;
+  }
+  html[data-theme="light"] .fcg-showcase-preview-row mark {
+    background: rgba(249,115,22,.12);
+    color: #F97316;
+  }
+  html[data-theme="light"] .fcg-showcase-tablist {
+    background: rgba(255,255,255,.78);
+    border-color: rgba(15,17,20,.12);
+  }
+  html[data-theme="light"] .fcg-showcase-tab {
+    color: #4b5563;
+  }
+  html[data-theme="light"] .fcg-showcase-tab[aria-selected="true"] {
+    background: #0f1114;
+    color: #ffffff;
+  }
+  html[data-theme="light"] .fcg-marketing-section {
+    background: #ffffff;
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-marketing-section::before {
+    display: none;
+  }
+  html[data-theme="light"] .fcg-marketing-title,
+  html[data-theme="light"] .fcg-mobile-feature h2,
+  html[data-theme="light"] .fcg-marketing-feature h3,
+  html[data-theme="light"] .fcg-feature-row h3,
+  html[data-theme="light"] .fcg-mobile-cta h3 {
+    color: #0f1114 !important;
+  }
+  html[data-theme="light"] .fcg-marketing-title span {
+    color: #737373;
+  }
+  html[data-theme="light"] .fcg-marketing-header p,
+  html[data-theme="light"] .fcg-marketing-feature p,
+  html[data-theme="light"] .fcg-mobile-subcopy,
+  html[data-theme="light"] .fcg-feature-row p,
+  html[data-theme="light"] .fcg-mobile-cta p {
+    color: #737373 !important;
+  }
+  html[data-theme="light"] .fcg-ai-showcase {
+    background:
+      linear-gradient(135deg, rgba(255,240,209,.9), rgba(252,201,196,.8) 34%, rgba(207,233,240,.86) 72%, rgba(106,203,213,.78)),
+      #f7f7f7;
+    border-color: #d9d9dd;
+    box-shadow: 0 10px 26px rgba(15,17,20,.14);
+  }
+  html[data-theme="light"] .fcg-ai-showcase::after {
+    opacity: .18;
+    background-image: radial-gradient(circle at 1px 1px, rgba(15,17,20,.28) 1px, transparent 0);
+  }
+  html[data-theme="light"] .fcg-ai-card {
+    background: rgba(255,255,255,.94);
+    border-color: rgba(15,17,20,.13);
+    box-shadow: 0 10px 20px rgba(15,17,20,.18);
+  }
+  html[data-theme="light"] .fcg-ai-prompt,
+  html[data-theme="light"] .fcg-ai-stat strong {
+    color: #050505 !important;
+  }
+  html[data-theme="light"] .fcg-ai-stat,
+  html[data-theme="light"] .fcg-ai-placeholder {
+    color: #737373;
+  }
+  html[data-theme="light"] .fcg-ai-input {
+    background: #f1f1f2;
+  }
+  html[data-theme="light"] .fcg-ai-tool {
+    background: rgba(255,255,255,.55);
+    border-color: rgba(15,17,20,.08);
+    color: #050505;
+  }
+  html[data-theme="light"] .fcg-ai-submit {
+    background: #050505;
+    color: #ffffff;
+  }
+  html[data-theme="light"] .fcg-feature108-badge {
+    background: rgba(255,255,255,.76);
+    border-color: rgba(15,17,20,.12);
+    color: #6b7280;
+  }
+  html[data-theme="light"] .fcg-feature108-title,
+  html[data-theme="light"] .fcg-feature108-content h3 {
+    color: #0f1114 !important;
+  }
+  html[data-theme="light"] .fcg-feature108-copy,
+  html[data-theme="light"] .fcg-feature108-content p {
+    color: #737373 !important;
+  }
+  html[data-theme="light"] .fcg-feature108-trigger {
+    color: #737373;
+  }
+  html[data-theme="light"] .fcg-feature108-trigger:hover {
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-feature108-trigger[aria-selected="true"] {
+    background: #f1f5f9;
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-feature108-card {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 50px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-feature108-action {
+    background: #0f1114;
+    color: #ffffff;
+  }
+  html[data-theme="light"] .fcg-feature108-action:hover {
+    box-shadow: 0 14px 35px rgba(15,17,20,.16);
+  }
+  html[data-theme="light"] .fcg-feature108-visual {
+    background:
+      radial-gradient(circle at 18% 24%, rgba(249,115,22,.17), transparent 30%),
+      radial-gradient(circle at 85% 12%, rgba(15,17,20,.04), transparent 28%),
+      linear-gradient(135deg, #ffffff, #F3F4F6);
+    border-color: rgba(15,17,20,.12);
+  }
+  html[data-theme="light"] .fcg-feature108-visual::after {
+    opacity: .16;
+    background-image: radial-gradient(circle at 1px 1px, rgba(15,17,20,.22) 1px, transparent 0);
+  }
+  html[data-theme="light"] .fcg-feature108-window {
+    background: rgba(255,255,255,.88);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 55px rgba(15,17,20,.12);
+  }
+  html[data-theme="light"] .fcg-feature108-window-bar span {
+    background: rgba(15,17,20,.22);
+  }
+  html[data-theme="light"] .fcg-feature108-row,
+  html[data-theme="light"] .fcg-feature108-metric {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.1);
+  }
+  html[data-theme="light"] .fcg-feature108-row strong,
+  html[data-theme="light"] .fcg-feature108-metric strong {
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-feature108-row small,
+  html[data-theme="light"] .fcg-feature108-metric span {
+    color: #737373;
+  }
+  html[data-theme="light"] .fcg-mobile-cta {
+    background: rgba(255,255,255,.78);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 24px 70px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-mobile-feature {
+    background: #ffffff;
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-mobile-feature::before {
+    background:
+      linear-gradient(to bottom, rgba(15,17,20,.035), transparent 22%),
+      radial-gradient(circle at 50% 0%, rgba(249,115,22,.12), transparent 30%);
+  }
+  html[data-theme="light"] .fcg-store-button {
+    background: rgba(255,255,255,.8);
+    border-color: rgba(15,17,20,.14);
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-store-button:hover {
+    background: #ffffff;
+    border-color: rgba(15,17,20,.24);
+  }
+
+  /* Index visual consistency pass */
+  .fcg-hero2 h1,
+  .fcg-bento h2,
+  .fcg-showcase h2,
+  .fcg-showcase-window h3,
+  .fcg-feature108-title,
+  .fcg-feature108-content h3,
+  .fcg-mobile-feature h2,
+  #decision-paths h2,
+  #product-map h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500 !important;
+    letter-spacing: 0;
+  }
+  .fcg-hero2-copy,
+  .fcg-bento-subcopy,
+  .fcg-showcase-description,
+  .fcg-showcase-step-content,
+  .fcg-showcase-window p,
+  .fcg-feature108-copy,
+  .fcg-feature108-content p,
+  .fcg-mobile-subcopy,
+  #decision-paths p,
+  #product-map p,
+  #product-map li {
+    font-weight: 300;
+  }
+  .fcg-hero2-badge,
+  .fcg-showcase-badge,
+  .fcg-feature108-badge,
+  .product-kicker,
+  .fcg-bento-kicker,
+  .fcg-mobile-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+  }
+  #decision-paths,
+  #product-map,
+  .fcg-marketing-section,
+  .fcg-showcase,
+  .fcg-mobile-feature {
+    background: #080805 !important;
+    color: #ffffff;
+  }
+  #decision-paths,
+  #product-map,
+  .fcg-showcase,
+  .fcg-mobile-feature {
+    border-color: rgba(255,255,255,.1) !important;
+  }
+  .fcg-bento {
+    background:
+      radial-gradient(circle at 18% 12%, rgba(249,115,22,.12), transparent 28%),
+      radial-gradient(125% 125% at 50% 10%, #080805 42%, #121212 100%);
+  }
+  .product-card,
+  .fcg-bento-card,
+  .fcg-showcase-card,
+  .fcg-showcase-window,
+  .fcg-feature108-card,
+  .fcg-feature108-window,
+  .fcg-mobile-cta {
+    background: #121212;
+    border-color: #2A2A2A;
+  }
+  .product-card:hover,
+  .fcg-bento-card:hover {
+    background: #171717;
+    border-color: rgba(255,255,255,.18);
+  }
+  .fcg-feature108-row,
+  .fcg-feature108-metric {
+    background: rgba(255,255,255,.04);
+    border-color: rgba(255,255,255,.08);
+  }
+  .fcg-feature108-trigger {
+    font-weight: 500;
+  }
+  .fcg-feature108-trigger[aria-selected="true"] {
+    background: rgba(255,255,255,.08);
+  }
+  .fcg-feature108-action,
+  .fcg-showcase-action,
+  .fcg-hero2-button,
+  .fcg-store-button {
+    font-weight: 500;
+  }
+  .fcg-bento-card h3,
+  .fcg-showcase-step-trigger,
+  .fcg-feature-row h3,
+  .fcg-mobile-cta h3,
+  #decision-paths .product-card h3,
+  #product-map .product-card h3,
+  #decision-paths .product-card .text-lg {
+    font-weight: 500 !important;
+    letter-spacing: 0;
+  }
+  html[data-theme="light"] #decision-paths,
+  html[data-theme="light"] #product-map,
+  html[data-theme="light"] .fcg-marketing-section,
+  html[data-theme="light"] .fcg-showcase,
+  html[data-theme="light"] .fcg-mobile-feature {
+    background: #ffffff !important;
+    color: #0F1114;
+  }
+  html[data-theme="light"] #decision-paths,
+  html[data-theme="light"] #product-map,
+  html[data-theme="light"] .fcg-showcase,
+  html[data-theme="light"] .fcg-mobile-feature {
+    border-color: #D1D5DB !important;
+  }
+  html[data-theme="light"] .fcg-bento {
+    background:
+      radial-gradient(circle at 52% 10%, rgba(249,115,22,.1), transparent 32%),
+      radial-gradient(125% 125% at 50% 10%, #ffffff 38%, #F3F4F6 100%);
+  }
+  html[data-theme="light"] .product-card,
+  html[data-theme="light"] .fcg-bento-card,
+  html[data-theme="light"] .fcg-showcase-card,
+  html[data-theme="light"] .fcg-showcase-window,
+  html[data-theme="light"] .fcg-feature108-card,
+  html[data-theme="light"] .fcg-feature108-window,
+  html[data-theme="light"] .fcg-mobile-cta {
+    background: rgba(255,255,255,.72);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 18px 50px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .product-card:hover,
+  html[data-theme="light"] .fcg-bento-card:hover {
+    background: rgba(255,255,255,.92);
+    border-color: rgba(15,17,20,.24);
+  }
+  html[data-theme="light"] .fcg-feature108-row,
+  html[data-theme="light"] .fcg-feature108-metric {
+    background: rgba(255,255,255,.68);
+    border-color: rgba(15,17,20,.1);
+  }
+  html[data-theme="light"] .fcg-feature108-trigger[aria-selected="true"] {
+    background: #f1f5f9;
+  }
+  @media (max-width: 980px) {
+    .fcg-hero2-content {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      padding-top: 128px;
+      padding-bottom: 72px;
+      text-align: left;
+    }
+    .fcg-hero2-copy-column { max-width: 760px; }
+    .fcg-hero2 h1 { margin-top: 34px; max-width: 760px; }
+    .fcg-hero2-copy { max-width: 720px; }
+    .fcg-hero2-actions { align-items: stretch; flex-direction: column; }
+    .fcg-hero2-actions .fcg-hero2-button { width: 100%; }
+    .fcg-hero2-preview-grid {
+      position: relative;
+      grid-template-columns: 1fr;
+      padding: 16px;
+      background: rgba(0,0,0,.84);
+    }
+    html[data-theme="light"] .fcg-hero2-preview-grid {
+      background: rgba(255,255,255,.88);
+    }
+    .fcg-hero2-preview img { display: none; }
+    .fcg-hero2-preview-card { min-height: auto; }
+    .fcg-bento-inner { padding: 4.5rem 1.25rem; }
+    .fcg-bento-header { align-items: flex-start; flex-direction: column; }
+    .fcg-bento-grid { grid-template-columns: 1fr; }
+    .fcg-bento-card-large,
+    .fcg-bento-card-small,
+    .fcg-bento-card-wide {
+      grid-column: auto;
+      grid-row: auto;
+    }
+    .fcg-showcase-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding: 4.5rem 1.25rem;
+    }
+    .fcg-showcase-copy,
+    .fcg-showcase-visual {
+      grid-column: auto;
+    }
+    .fcg-showcase-card {
+      min-height: 34rem;
+    }
+    .fcg-showcase-overlay {
+      inset: auto .9rem 5.4rem .9rem;
+    }
+    .fcg-showcase-preview-row {
+      grid-template-columns: auto 1fr;
+    }
+    .fcg-showcase-preview-row mark {
+      grid-column: 2;
+      width: fit-content;
+    }
+    .fcg-showcase-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .fcg-showcase-action {
+      width: 100%;
+    }
+    .fcg-marketing-section,
+    .fcg-mobile-feature {
+      padding: 4.5rem 1.25rem;
+    }
+    .fcg-feature-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .fcg-marketing-title {
+      font-size: clamp(2.35rem, 11vw, 3.25rem) !important;
+    }
+    .fcg-marketing-header {
+      margin-bottom: 2.5rem;
+    }
+    .fcg-feature108-header {
+      align-items: flex-start;
+      text-align: left;
+    }
+    .fcg-feature108-tablist {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .fcg-feature108-trigger {
+      justify-content: flex-start;
+      width: 100%;
+    }
+    .fcg-feature108-panel {
+      grid-template-columns: 1fr;
+    }
+    .fcg-feature108-card {
+      border-radius: 18px;
+      padding: 1.1rem;
+    }
+    .fcg-feature108-visual {
+      min-height: auto;
+      padding: .8rem;
+    }
+    .fcg-feature108-window {
+      min-height: auto;
+    }
+    .fcg-feature108-metrics {
+      grid-template-columns: 1fr;
+    }
+    .fcg-feature108-row {
+      grid-template-columns: auto 1fr;
+    }
+    .fcg-feature108-row mark {
+      grid-column: 2;
+      width: fit-content;
+    }
+    .fcg-ai-showcase {
+      min-height: 28rem;
+    }
+    .fcg-ai-card {
+      padding: 1.35rem;
+    }
+    .fcg-ai-input {
+      grid-template-columns: 1fr;
+    }
+    .fcg-marketing-features {
+      grid-template-columns: 1fr;
+      gap: 2.4rem;
+      margin-top: 3rem;
+    }
+    .fcg-store-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .fcg-store-button {
+      width: 100%;
+    }
+  }
+</style>
+<main class="product-shell">
+  <section id="capabilities" class="fcg-hero2">
+    <div class="fcg-hero2-glow" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <div class="fcg-hero2-content">
+      <div class="fcg-hero2-copy-column">
+        <div class="fcg-hero2-badge">
+          Operate &middot; TMC OS
+          <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
+        </div>
+        <h1>Every operational surface, connected in one hub.</h1>
+        <p class="fcg-hero2-copy">Atlas is the operating system for independent TMCs. It connects clients, queues, ticketing, duty of care, and reporting into a single infrastructure layer &mdash; modernizing your operations without surrendering your independence.</p>
+        <div class="fcg-hero2-actions">
+          <a href="#stack-showcase" class="fcg-hero2-button fcg-hero2-button-primary">See Atlas in action</a>
+          <a href="#product-capabilities" class="fcg-hero2-button fcg-hero2-button-secondary">Explore modules</a>
+        </div>
+      </div>
+
+      <div class="fcg-hero2-preview-wrap">
+        <div class="fcg-hero2-preview">
+          <img src="assets/images/frame-mid.svg" alt="Atlas TMC operating system interface preview">
+          <div class="fcg-hero2-preview-grid">
+            <article class="fcg-hero2-preview-card"><span>Agent Tools</span><strong>1 operating surface</strong></article>
+            <article class="fcg-hero2-preview-card"><span>Client Reporting</span><strong>Connected to every booking</strong></article>
+            <article class="fcg-hero2-preview-card"><span>Modules</span><strong>5 connected modules</strong></article>
+            <article class="fcg-hero2-preview-card"><span>Deployment</span><strong>Layer-by-layer rollout</strong></article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="decision-paths" class="px-6 md:px-12 py-28 bg-[#050505] border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-3xl mb-16 fade-up">
+        <div class="product-kicker text-xs text-orange-500 mb-4">Pain Points</div>
+        <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Three reasons TMC operators start an Atlas conversation.</h2>
+      </div>
+      <div class="space-y-5">
+        <article class="product-card rounded-3xl p-6 md:p-8 fade-up grid lg:grid-cols-[.55fr_1fr_.85fr] gap-6 items-start">
+          <div>
+            <div class="product-kicker text-[10px] text-orange-500 mb-2">Pain 01</div>
+            <h3 class="text-2xl text-white font-medium tracking-tight">Operations don't scale</h3>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed">Every new client means more agent hours, more manual reporting, and more margin compression. Growth creates operational drag instead of leverage.</p>
+          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
+            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Atlas module</div>
+            <div class="text-lg text-white font-medium mb-3">OpsHub + Reports</div>
+            <p class="text-sm text-neutral-400 leading-relaxed">One connected surface for client CRM, booking pipeline, agent queues, and branded analytics eliminates weekend spreadsheet assembly.</p>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-6 md:p-8 fade-up grid lg:grid-cols-[.55fr_1fr_.85fr] gap-6 items-start">
+          <div>
+            <div class="product-kicker text-[10px] text-orange-500 mb-2">Pain 02</div>
+            <h3 class="text-2xl text-white font-medium tracking-tight">Agents toggle between six screens</h3>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed">GDS terminals, CRM tabs, email inboxes, spreadsheets, duty of care PDFs, and supplier portals. Every booking requires context-switching across disconnected tools.</p>
+          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
+            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Atlas module</div>
+            <div class="text-lg text-white font-medium mb-3">Inbox + FlowConnect</div>
+            <p class="text-sm text-neutral-400 leading-relaxed">Unified ticketing with SLA enforcement and an integration fabric connecting GDS, suppliers, finance, HR, and SSO into one workflow.</p>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-6 md:p-8 fade-up grid lg:grid-cols-[.55fr_1fr_.85fr] gap-6 items-start">
+          <div>
+            <div class="product-kicker text-[10px] text-orange-500 mb-2">Pain 03</div>
+            <h3 class="text-2xl text-white font-medium tracking-tight">Duty of care is a bolt-on PDF</h3>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed">Real-time traveler visibility doesn't exist. Incidents are discovered after the client complains. Risk management is reactive, not operational.</p>
+          <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
+            <div class="product-kicker text-[10px] text-neutral-500 mb-3">Atlas module</div>
+            <div class="text-lg text-white font-medium mb-3">DutyView</div>
+            <p class="text-sm text-neutral-400 leading-relaxed">Real-time traveler tracking with every incident surfaced proactively. Connected to every booking, not buried in a static report.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="product-map" class="px-6 md:px-12 py-28 bg-[#000] border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 fade-up">
+        <div>
+          <div class="product-kicker text-xs text-orange-500 mb-4">Module Map</div>
+          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Five modules, one connected operating surface.</h2>
+        </div>
+        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Each module solves a specific operational pain. Together, they replace the duct tape holding your TMC infrastructure together.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <article class="product-card rounded-3xl p-7 fade-up">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:cpu-bolt-linear" width="23" height="23"></iconify-icon></div>
+            <div>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Module 01</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">OpsHub</h3>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Client CRM, booking pipeline, and agent queues in one connected surface. Everything visible, everything linked.</p>
+          <div class="border-t border-white/10 pt-5">
+            <ul class="space-y-3">
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Client profiles, travel policies, and booking history in one view</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Agent queue management with workload visibility</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Booking pipeline from request through to confirmation</span></li>
+            </ul>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-7 fade-up">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:inbox-line-linear" width="23" height="23"></iconify-icon></div>
+            <div>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Module 02</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">Inbox</h3>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Unified ticketing with SLA enforcement across every channel. No request lost. No breach discovered after the client complains.</p>
+          <div class="border-t border-white/10 pt-5">
+            <ul class="space-y-3">
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Multi-channel request capture: email, chat, phone, portal</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>SLA timers with escalation rules and breach alerts</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Full audit trail from request to resolution</span></li>
+            </ul>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-7 fade-up">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:link-round-linear" width="23" height="23"></iconify-icon></div>
+            <div>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Module 03</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">FlowConnect</h3>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">GDS, suppliers, finance, HR, SSO. One connected fabric. Not another layer on top &mdash; the layer that replaces the duct tape.</p>
+          <div class="border-t border-white/10 pt-5">
+            <ul class="space-y-3">
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Pre-built connectors for major GDS and supplier systems</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Finance and HR system integration for reconciliation</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>SSO and identity management across the TMC stack</span></li>
+            </ul>
+          </div>
+        </article>
+        <article class="product-card rounded-3xl p-7 fade-up">
+          <div class="flex items-start gap-5 mb-6">
+            <div class="w-12 h-12 rounded-xl border border-white/10 bg-white/[0.03] flex items-center justify-center text-orange-500 shrink-0"><iconify-icon icon="solar:shield-check-linear" width="23" height="23"></iconify-icon></div>
+            <div>
+              <div class="product-kicker text-[10px] text-orange-500 mb-2">Module 04</div>
+              <h3 class="text-2xl text-white font-medium tracking-tight">DutyView</h3>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-400 leading-relaxed mb-6">Real-time traveler tracking with every incident surfaced proactively. Not a bolt-on PDF &mdash; operational duty of care.</p>
+          <div class="border-t border-white/10 pt-5">
+            <ul class="space-y-3">
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Live traveler location and itinerary tracking</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Incident alerting connected to booking and client data</span></li>
+              <li class="flex gap-3 text-sm text-neutral-400 leading-relaxed"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span><span>Risk dashboard for client reporting and compliance</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="performance-signals" class="fcg-marketing-section">
+    <div class="fcg-feature108-inner">
+      <header class="fcg-feature108-header fade-up">
+        <div class="fcg-feature108-badge">Competitive Position</div>
+        <h2 class="fcg-feature108-title">Replace the duct tape without losing your independence</h2>
+        <p class="fcg-feature108-copy">Atlas modernizes your TMC infrastructure without taking your clients, your brand, or your independence. One operating system replaces the patchwork of legacy terminals, homegrown CRM, and spreadsheet ops.</p>
+      </header>
+
+      <div class="fcg-feature108-tabs fade-up" data-feature108-tabs>
+        <div class="fcg-feature108-tablist" role="tablist" aria-label="Atlas competitive advantages">
+          <button class="fcg-feature108-trigger" type="button" id="feature108-tab-options" role="tab" aria-selected="true" aria-controls="feature108-panel-options" data-tab-target="feature108-panel-options">
+            <iconify-icon icon="solar:bolt-circle-bold-duotone" width="18" height="18"></iconify-icon>
+            vs. Legacy terminals
+          </button>
+          <button class="fcg-feature108-trigger" type="button" id="feature108-tab-workflows" role="tab" aria-selected="false" aria-controls="feature108-panel-workflows" data-tab-target="feature108-panel-workflows" tabindex="-1">
+            <iconify-icon icon="solar:cursor-bold-duotone" width="18" height="18"></iconify-icon>
+            vs. Enterprise suites
+          </button>
+          <button class="fcg-feature108-trigger" type="button" id="feature108-tab-rollouts" role="tab" aria-selected="false" aria-controls="feature108-panel-rollouts" data-tab-target="feature108-panel-rollouts" tabindex="-1">
+            <iconify-icon icon="solar:layers-bold-duotone" width="18" height="18"></iconify-icon>
+            vs. Super-platforms
+          </button>
+        </div>
+
+        <div class="fcg-feature108-card">
+          <article class="fcg-feature108-panel" id="feature108-panel-options" role="tabpanel" aria-labelledby="feature108-tab-options">
+            <div class="fcg-feature108-content">
+              <div class="fcg-feature108-badge">Connected Ops</div>
+              <h3>Functional but disconnected is no longer enough.</h3>
+              <p>Legacy GDS terminals handle bookings but leave everything else in spreadsheets, email, and manual handoffs. Atlas connects every operational surface so agents stop toggling and start delivering.</p>
+              <a class="fcg-feature108-action" href="#product-map">Explore modules</a>
+            </div>
+            <div class="fcg-feature108-visual" aria-label="Atlas unified operations preview">
+              <div class="fcg-feature108-window">
+                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
+                <div class="fcg-feature108-stack">
+                  <div class="fcg-feature108-row">
+                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:cpu-bolt-bold-duotone" width="20" height="20"></iconify-icon></span>
+                    <div><strong>OpsHub active</strong><small>Client CRM, pipeline, and queues in one surface</small></div>
+                    <mark>Live</mark>
+                  </div>
+                  <div class="fcg-feature108-row">
+                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:inbox-line-bold-duotone" width="20" height="20"></iconify-icon></span>
+                    <div><strong>Inbox SLA tracking</strong><small>Zero breaches discovered after client complaint</small></div>
+                    <mark>0 breach</mark>
+                  </div>
+                  <div class="fcg-feature108-row">
+                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:chart-2-bold-duotone" width="20" height="20"></iconify-icon></span>
+                    <div><strong>Reports connected</strong><small>Branded analytics linked to every booking</small></div>
+                    <mark>Auto</mark>
+                  </div>
+                </div>
+                <div class="fcg-feature108-metrics">
+                  <div class="fcg-feature108-metric"><strong>5</strong><span>Connected modules</span></div>
+                  <div class="fcg-feature108-metric"><strong>1</strong><span>Operating surface</span></div>
+                  <div class="fcg-feature108-metric"><strong>24/7</strong><span>Visibility</span></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="fcg-feature108-panel" id="feature108-panel-workflows" role="tabpanel" aria-labelledby="feature108-tab-workflows" hidden>
+            <div class="fcg-feature108-content">
+              <div class="fcg-feature108-badge">Right-Sized</div>
+              <h3>Enterprise suites over-engineer the mid-market problem.</h3>
+              <p>SAP Concur and similar platforms were built for global enterprises with dedicated IT teams. Atlas is built for independent TMCs and regional networks that need infrastructure-grade tools without the overhead.</p>
+              <a class="fcg-feature108-action" href="#decision-paths">See pain points</a>
+            </div>
+            <div class="fcg-feature108-visual" aria-label="Atlas mid-market fit preview">
+              <div class="fcg-feature108-window">
+                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
+                <div class="fcg-feature108-stack">
+                  <div class="fcg-feature108-row">
+                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:layers-bold-duotone" width="20" height="20"></iconify-icon></span>
+                    <div><strong>Layer-by-layer deployment</strong><small>Start with one module, expand on your timeline</small></div>
+                    <mark>Flexible</mark>
+                  </div>
+                  <div class="fcg-feature108-row">
+                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:users-group-rounded-bold-duotone" width="20" height="20"></iconify-icon></span>
+                    <div><strong>10-100+ agent teams</strong><small>Built for the operator scale that matters</small></div>
+                    <mark>Fit</mark>
+                  </div>
+                  <div class="fcg-feature108-row">
+                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:map-point-wave-bold-duotone" width="20" height="20"></iconify-icon></span>
+                    <div><strong>APAC-native</strong><small>Singapore, Hong Kong, Thailand, Malaysia, and beyond</small></div>
+                    <mark>Regional</mark>
+                  </div>
+                </div>
+                <div class="fcg-feature108-metrics">
+                  <div class="fcg-feature108-metric"><strong>0</strong><span>IT team required</span></div>
+                  <div class="fcg-feature108-metric"><strong>10+</strong><span>Min. agents</span></div>
+                  <div class="fcg-feature108-metric"><strong>APAC</strong><span>Coverage</span></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="fcg-feature108-panel" id="feature108-panel-rollouts" role="tabpanel" aria-labelledby="feature108-tab-rollouts" hidden>
+            <div class="fcg-feature108-content">
+              <div class="fcg-feature108-badge">Independence</div>
+              <h3>Platforms that help you today compete with you tomorrow.</h3>
+              <p>Super-platforms offer infrastructure but eventually compete for your clients. Atlas is built by FCG, which does not compete with its customers. Your brand, your clients, your independence &mdash; preserved.</p>
+              <a class="fcg-feature108-action" href="#mobile-workflows">See deployment</a>
+            </div>
+            <div class="fcg-feature108-visual" aria-label="Atlas independence model preview">
+              <div class="fcg-feature108-window">
+                <div class="fcg-feature108-window-bar"><span></span><span></span><span></span></div>
+                <div class="fcg-feature108-stack">
+                  <div class="fcg-feature108-row">
+                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:shield-check-bold-duotone" width="20" height="20"></iconify-icon></span>
+                    <div><strong>Your brand stays yours</strong><small>White-label reporting and client-facing surfaces</small></div>
+                    <mark>Owned</mark>
+                  </div>
+                  <div class="fcg-feature108-row">
+                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:lock-bold-duotone" width="20" height="20"></iconify-icon></span>
+                    <div><strong>Your clients stay yours</strong><small>FCG builds infrastructure, not a competing TMC</small></div>
+                    <mark>Protected</mark>
+                  </div>
+                  <div class="fcg-feature108-row">
+                    <span class="fcg-feature108-dot"><iconify-icon icon="solar:key-bold-duotone" width="20" height="20"></iconify-icon></span>
+                    <div><strong>Your data stays yours</strong><small>Full ownership of operational and booking data</small></div>
+                    <mark>Sovereign</mark>
+                  </div>
+                </div>
+                <div class="fcg-feature108-metrics">
+                  <div class="fcg-feature108-metric"><strong>100%</strong><span>Brand control</span></div>
+                  <div class="fcg-feature108-metric"><strong>0</strong><span>Client conflict</span></div>
+                  <div class="fcg-feature108-metric"><strong>Full</strong><span>Data ownership</span></div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="product-capabilities" class="fcg-bento">
+    <div class="fcg-bento-spiral" aria-hidden="true">
+      <div id="fcgBentoSpiral"></div>
+    </div>
+    <div class="fcg-bento-inner">
+      <header class="fcg-bento-header fade-up">
+        <div>
+          <div class="fcg-bento-kicker">Atlas Capabilities</div>
+          <h2>What sits inside the operating system.</h2>
+        </div>
+        <p class="fcg-bento-subcopy">Six capabilities that turn disconnected TMC tools into one connected infrastructure layer: workspace, ticketing, integration, duty of care, analytics, and deployment.</p>
+      </header>
+
+      <div class="fcg-bento-grid">
+        <article class="fcg-bento-card fcg-bento-card-large fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Unified agent workspace</h3>
+            <span class="fcg-bento-meta">OpsHub</span>
+          </header>
+          <p>Client CRM, booking pipeline, and agent queues in one connected surface. Every client relationship, every open request, and every team workload visible without switching screens.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-small fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>SLA-enforced ticketing</h3>
+            <span class="fcg-bento-meta">Inbox</span>
+          </header>
+          <p>Unified ticketing across every channel with SLA timers, escalation rules, and breach alerts. No request lost or forgotten.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-small fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Integration fabric</h3>
+            <span class="fcg-bento-meta">FlowConnect</span>
+          </header>
+          <p>GDS, suppliers, finance, HR, and SSO connected through one fabric. The layer that replaces the duct tape.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-wide fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Real-time duty of care</h3>
+            <span class="fcg-bento-meta">DutyView</span>
+          </header>
+          <p>Live traveler tracking with incident surfacing connected to every booking. Operational risk management, not a bolt-on PDF report.</p>
+        </article>
+
+        <article class="fcg-bento-card fcg-bento-card-wide fade-up">
+          <header class="fcg-bento-card-header">
+            <span class="fcg-bento-dot">&bull;</span>
+            <h3>Client-ready analytics</h3>
+            <span class="fcg-bento-meta">Reports</span>
+          </header>
+          <p>Branded reporting connected to every booking. No more weekend spreadsheet assembly. Deliver client insights that look as professional as the service behind them.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack-showcase" class="fcg-showcase">
+    <div class="fcg-showcase-inner">
+      <div class="fcg-showcase-copy fade-up">
+        <div class="fcg-showcase-badge">Atlas Modules</div>
+        <h2>Walk through the five modules that connect your TMC.</h2>
+        <p class="fcg-showcase-description">Each module handles a distinct operational surface. Together, they form one connected hub that scales with your business instead of against it.</p>
+
+        <div class="fcg-showcase-stats" aria-label="Atlas highlights">
+          <span class="fcg-showcase-chip">5 connected modules</span>
+          <span class="fcg-showcase-chip">One operating surface</span>
+          <span class="fcg-showcase-chip">Layer-by-layer deployment</span>
+          <span class="fcg-showcase-chip">TMC independence preserved</span>
+        </div>
+
+        <div class="fcg-showcase-steps" data-fcg-showcase-accordion>
+          <div class="fcg-showcase-step">
+            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-opshub" aria-expanded="true" aria-controls="showcase-step-opshub-content">
+              <span>OpsHub</span>
+              <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
+            </button>
+            <div class="fcg-showcase-step-content" id="showcase-step-opshub-content" role="region" aria-labelledby="showcase-step-opshub">
+              Client CRM, booking pipeline, and agent queues in one connected surface. Everything connected, everything visible. The foundation of Atlas.
+            </div>
+          </div>
+
+          <div class="fcg-showcase-step">
+            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-inbox" aria-expanded="false" aria-controls="showcase-step-inbox-content">
+              <span>Inbox</span>
+              <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
+            </button>
+            <div class="fcg-showcase-step-content" id="showcase-step-inbox-content" role="region" aria-labelledby="showcase-step-inbox" hidden>
+              Unified ticketing with SLA enforcement across every channel. No request lost. No breach discovered after the client complains.
+            </div>
+          </div>
+
+          <div class="fcg-showcase-step">
+            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-flowconnect" aria-expanded="false" aria-controls="showcase-step-flowconnect-content">
+              <span>FlowConnect</span>
+              <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
+            </button>
+            <div class="fcg-showcase-step-content" id="showcase-step-flowconnect-content" role="region" aria-labelledby="showcase-step-flowconnect" hidden>
+              Integration fabric connecting GDS, suppliers, finance, HR, and SSO. Not another layer on top &mdash; the layer that replaces the duct tape.
+            </div>
+          </div>
+
+          <div class="fcg-showcase-step">
+            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-dutyview" aria-expanded="false" aria-controls="showcase-step-dutyview-content">
+              <span>DutyView</span>
+              <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
+            </button>
+            <div class="fcg-showcase-step-content" id="showcase-step-dutyview-content" role="region" aria-labelledby="showcase-step-dutyview" hidden>
+              Real-time traveler tracking and incident surfacing. Every risk event connected to booking data and client records. Not a bolt-on PDF.
+            </div>
+          </div>
+
+          <div class="fcg-showcase-step">
+            <button class="fcg-showcase-step-trigger" type="button" id="showcase-step-reports" aria-expanded="false" aria-controls="showcase-step-reports-content">
+              <span>Reports</span>
+              <iconify-icon icon="solar:add-circle-linear" width="20" height="20"></iconify-icon>
+            </button>
+            <div class="fcg-showcase-step-content" id="showcase-step-reports-content" role="region" aria-labelledby="showcase-step-reports" hidden>
+              Branded, client-ready analytics connected to every booking. No more weekend spreadsheet assembly. Deliver insights that match the quality of your service.
+            </div>
+          </div>
+        </div>
+
+        <div class="fcg-showcase-actions">
+          <a class="fcg-showcase-action fcg-showcase-action-primary" href="#contact">Start an Atlas conversation</a>
+          <a class="fcg-showcase-action fcg-showcase-action-secondary" href="#product-map">Browse all modules</a>
+        </div>
+      </div>
+
+      <div class="fcg-showcase-visual fade-up" data-fcg-showcase-tabs>
+        <div class="fcg-showcase-card">
+          <article class="fcg-showcase-panel" id="showcase-panel-operations" role="tabpanel" aria-labelledby="showcase-tab-operations">
+            <img src="assets/images/frame-mid.svg" alt="Atlas operations view showing agent queues and booking pipeline" loading="eager">
+            <div class="fcg-showcase-overlay">
+              <div class="fcg-showcase-window">
+                <h3>Operations</h3>
+                <p>Agent queues, booking pipeline, and client CRM in one surface. See every open request, every team workload, and every client relationship without switching tools.</p>
+                <div class="fcg-showcase-preview-list">
+                  <div class="fcg-showcase-preview-row">
+                    <iconify-icon icon="solar:cpu-bolt-bold-duotone" width="20" height="20"></iconify-icon>
+                    <strong>OpsHub active workspace</strong>
+                    <mark>Live</mark>
+                  </div>
+                  <div class="fcg-showcase-preview-row">
+                    <iconify-icon icon="solar:inbox-line-bold-duotone" width="20" height="20"></iconify-icon>
+                    <strong>Inbox queue and SLA status</strong>
+                    <mark>Tracking</mark>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="fcg-showcase-panel" id="showcase-panel-service" role="tabpanel" aria-labelledby="showcase-tab-service" hidden>
+            <img src="assets/images/frame-mid.svg" alt="Atlas service view showing ticketing and SLA tracking" loading="lazy">
+            <div class="fcg-showcase-overlay">
+              <div class="fcg-showcase-window">
+                <h3>Service</h3>
+                <p>Ticketing, SLA tracking, and client requests across every channel. Escalation rules enforce response times before breaches happen.</p>
+                <div class="fcg-showcase-preview-list">
+                  <div class="fcg-showcase-preview-row">
+                    <iconify-icon icon="solar:shield-check-bold-duotone" width="20" height="20"></iconify-icon>
+                    <strong>SLA enforcement active</strong>
+                    <mark>0 breach</mark>
+                  </div>
+                  <div class="fcg-showcase-preview-row">
+                    <iconify-icon icon="solar:link-round-bold-duotone" width="20" height="20"></iconify-icon>
+                    <strong>FlowConnect integrations</strong>
+                    <mark>Synced</mark>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="fcg-showcase-panel" id="showcase-panel-intelligence" role="tabpanel" aria-labelledby="showcase-tab-intelligence" hidden>
+            <img src="assets/images/frame-mid.svg" alt="Atlas intelligence view showing reporting and duty of care" loading="lazy">
+            <div class="fcg-showcase-overlay">
+              <div class="fcg-showcase-window">
+                <h3>Intelligence</h3>
+                <p>Reporting, duty of care, and analytics connected to every booking. Real-time traveler visibility and branded client reporting in one view.</p>
+                <div class="fcg-showcase-preview-list">
+                  <div class="fcg-showcase-preview-row">
+                    <iconify-icon icon="solar:chart-2-bold-duotone" width="20" height="20"></iconify-icon>
+                    <strong>Client-ready analytics</strong>
+                    <mark>Reports</mark>
+                  </div>
+                  <div class="fcg-showcase-preview-row">
+                    <iconify-icon icon="solar:map-point-wave-bold-duotone" width="20" height="20"></iconify-icon>
+                    <strong>DutyView traveler tracking</strong>
+                    <mark>Real-time</mark>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <div class="fcg-showcase-tabs">
+            <div class="fcg-showcase-tablist" role="tablist" aria-label="Atlas operational views">
+              <button class="fcg-showcase-tab" type="button" id="showcase-tab-operations" role="tab" aria-selected="true" aria-controls="showcase-panel-operations" data-showcase-target="showcase-panel-operations">Operations</button>
+              <button class="fcg-showcase-tab" type="button" id="showcase-tab-service" role="tab" aria-selected="false" aria-controls="showcase-panel-service" data-showcase-target="showcase-panel-service" tabindex="-1">Service</button>
+              <button class="fcg-showcase-tab" type="button" id="showcase-tab-intelligence" role="tab" aria-selected="false" aria-controls="showcase-panel-intelligence" data-showcase-target="showcase-panel-intelligence" tabindex="-1">Intelligence</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- ===== MODULAR ROLLOUT CTA SECTION ===== -->
+    <footer id="contact" class="flex flex-col w-full">
+      <section id="mobile-workflows" class="fcg-mobile-feature border-t border-white/10">
+        <div class="fcg-mobile-inner">
+          <header class="fcg-mobile-heading fade-up">
+            <div class="fcg-main-icon"><iconify-icon icon="solar:layers-minimalistic-linear" width="28" height="28"></iconify-icon></div>
+            <div class="fcg-mobile-eyebrow">Layer-by-Layer Deployment</div>
+            <h2>Deploy Atlas one module at a time.</h2>
+            <p class="fcg-mobile-subcopy">Atlas does not require rip-and-replace. Start with the module that solves your most urgent operational pain, then expand across the platform as your team is ready.</p>
+          </header>
+
+          <div class="fcg-feature-grid">
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:routing-3-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Start with the highest-friction workflow</h3>
+                <p>Is it agent queue visibility? Client reporting? SLA compliance? Pick the module that addresses the pain your team feels every day.</p>
+              </div>
+            </article>
+
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:link-round-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Connect without replacing everything</h3>
+                <p>FlowConnect integrates with your existing GDS, supplier systems, and finance tools. Atlas layers on top of what works and replaces what doesn't.</p>
+              </div>
+            </article>
+
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:chart-square-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Measure operational lift from day one</h3>
+                <p>Track agent productivity, SLA compliance, queue throughput, and client satisfaction as each module comes online.</p>
+              </div>
+            </article>
+
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:shield-network-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Scale across APAC complexity</h3>
+                <p>Support different markets, languages, supplier networks, and regulatory requirements across Singapore, Hong Kong, Thailand, Malaysia, and beyond.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="fcg-mobile-cta fade-up">
+            <h3>Choose your first Atlas module with confidence.</h3>
+            <p>Use the sections above to match your operational pain points with the right module before starting a deeper conversation with FCG.</p>
+            <div class="fcg-store-actions">
+              <a href="#decision-paths" class="fcg-store-button"><iconify-icon icon="solar:compass-linear" width="18" height="18"></iconify-icon>Explore pain points</a>
+              <a href="#product-map" class="fcg-store-button"><iconify-icon icon="solar:map-linear" width="18" height="18"></iconify-icon>View all modules</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
+    <!-- ===== END MODULAR ROLLOUT CTA SECTION ===== -->
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">
+        <div class="max-w-[100rem] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-[4rem] md:gap-[2rem]">
+
+            <div class="col-span-1 md:col-span-3 flex flex-col items-start gap-4">
+                <div class="flex items-center gap-3">
+                    <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 24px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="white"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="white"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="white"/></svg>
+                </div>
+                <p class="mt-2">ATLAS_TMC_OS</p>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="text-white mb-2">Atlas Modules</span>
+                <a href="#product-map" class="hover:text-white transition-colors">OpsHub</a>
+                <a href="#product-map" class="hover:text-white transition-colors">Inbox</a>
+                <a href="#product-map" class="hover:text-white transition-colors">FlowConnect</a>
+                <a href="#product-map" class="hover:text-white transition-colors">DutyView</a>
+                <a href="#product-map" class="hover:text-white transition-colors">Reports</a>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="text-white mb-2">Resources</span>
+                <a href="#decision-paths" class="hover:text-white transition-colors">Pain Points</a>
+                <a href="#stack-showcase" class="hover:text-white transition-colors">Module Walkthrough</a>
+                <a href="#mobile-workflows" class="hover:text-white transition-colors">Deployment Guide</a>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="text-white mb-2">Company</span>
+                <a href="#" class="hover:text-white transition-colors">About</a>
+                <a href="#" class="hover:text-white transition-colors">Careers</a>
+                <a href="#" class="hover:text-white transition-colors">Contact</a>
+                <a href="#" class="hover:text-white transition-colors">Press</a>
+            </div>
+
+            <div class="col-span-1 md:col-span-3 flex flex-col md:items-end gap-4">
+                <span class="text-white mb-2">Connect</span>
+                <a href="#" class="hover:text-white/60 transition-colors"><iconify-icon icon="solar:link-linear"></iconify-icon> LinkedIn</a>
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                <span class="mt-4 text-white/30">© 2026 FCG Group. All rights reserved.</span>
+            </div>
+
+        </div>
+    </footer>
+
+    
+<!-- Interactivity scripts -->
+    <script>
+      // Reveal elements on scroll
+      const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                  observer.unobserve(entry.target);
+              }
+          });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-up, .scale-in').forEach(el => observer.observe(el));
+
+      function renderFcgBentoSpiral() {
+          const spiralMount = document.getElementById('fcgBentoSpiral');
+          if (!spiralMount) return;
+
+          const size = 620;
+          const points = 800;
+          const dotRadius = 1.6;
+          const duration = 3;
+          const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+          const center = size / 2;
+          const maxRadius = center - 4 - dotRadius;
+          const svgNS = 'http://www.w3.org/2000/svg';
+          const svg = document.createElementNS(svgNS, 'svg');
+
+          svg.setAttribute('width', String(size));
+          svg.setAttribute('height', String(size));
+          svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+          svg.setAttribute('role', 'presentation');
+
+          for (let i = 0; i < points; i++) {
+              const idx = i + 0.5;
+              const frac = idx / points;
+              const radius = Math.sqrt(frac) * maxRadius;
+              const theta = idx * goldenAngle;
+              const x = center + radius * Math.cos(theta);
+              const y = center + radius * Math.sin(theta);
+              const circle = document.createElementNS(svgNS, 'circle');
+
+              circle.setAttribute('cx', x.toFixed(3));
+              circle.setAttribute('cy', y.toFixed(3));
+              circle.setAttribute('r', String(dotRadius));
+              circle.setAttribute('fill', 'currentColor');
+              circle.setAttribute('opacity', '0.6');
+
+              const animRadius = document.createElementNS(svgNS, 'animate');
+              animRadius.setAttribute('attributeName', 'r');
+              animRadius.setAttribute('values', `${dotRadius * 0.5};${dotRadius * 1.35};${dotRadius * 0.5}`);
+              animRadius.setAttribute('dur', `${duration}s`);
+              animRadius.setAttribute('begin', `${(frac * duration).toFixed(3)}s`);
+              animRadius.setAttribute('repeatCount', 'indefinite');
+              circle.appendChild(animRadius);
+
+              const animOpacity = document.createElementNS(svgNS, 'animate');
+              animOpacity.setAttribute('attributeName', 'opacity');
+              animOpacity.setAttribute('values', '0.25;0.9;0.25');
+              animOpacity.setAttribute('dur', `${duration}s`);
+              animOpacity.setAttribute('begin', `${(frac * duration).toFixed(3)}s`);
+              animOpacity.setAttribute('repeatCount', 'indefinite');
+              circle.appendChild(animOpacity);
+
+              svg.appendChild(circle);
+          }
+
+          spiralMount.innerHTML = '';
+          spiralMount.appendChild(svg);
+      }
+
+      renderFcgBentoSpiral();
+
+      document.querySelectorAll('.fcg-bento-card').forEach(card => {
+          card.addEventListener('mousemove', event => {
+              const rect = card.getBoundingClientRect();
+              card.style.setProperty('--x', `${event.clientX - rect.left}px`);
+              card.style.setProperty('--y', `${event.clientY - rect.top}px`);
+          });
+      });
+
+      document.querySelectorAll('[data-feature108-tabs]').forEach(tabGroup => {
+          const tabs = Array.from(tabGroup.querySelectorAll('[role="tab"]'));
+          const panels = Array.from(tabGroup.querySelectorAll('[role="tabpanel"]'));
+
+          function activateTab(tab) {
+              tabs.forEach(item => {
+                  const isActive = item === tab;
+                  item.setAttribute('aria-selected', String(isActive));
+                  item.tabIndex = isActive ? 0 : -1;
+              });
+
+              panels.forEach(panel => {
+                  panel.hidden = panel.id !== tab.dataset.tabTarget;
+              });
+          }
+
+          tabs.forEach((tab, index) => {
+              tab.addEventListener('click', () => activateTab(tab));
+              tab.addEventListener('keydown', event => {
+                  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+                  event.preventDefault();
+
+                  let nextIndex = index;
+                  if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+                  if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+                  if (event.key === 'Home') nextIndex = 0;
+                  if (event.key === 'End') nextIndex = tabs.length - 1;
+
+                  tabs[nextIndex].focus();
+                  activateTab(tabs[nextIndex]);
+              });
+          });
+      });
+
+      document.querySelectorAll('[data-fcg-showcase-accordion]').forEach(accordion => {
+          const triggers = Array.from(accordion.querySelectorAll('.fcg-showcase-step-trigger'));
+
+          triggers.forEach(trigger => {
+              trigger.addEventListener('click', () => {
+                  const content = document.getElementById(trigger.getAttribute('aria-controls'));
+                  const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+                  triggers.forEach(item => {
+                      const itemContent = document.getElementById(item.getAttribute('aria-controls'));
+                      item.setAttribute('aria-expanded', 'false');
+                      if (itemContent) itemContent.hidden = true;
+                  });
+
+                  if (!isOpen && content) {
+                      trigger.setAttribute('aria-expanded', 'true');
+                      content.hidden = false;
+                  }
+              });
+          });
+      });
+
+      document.querySelectorAll('[data-fcg-showcase-tabs]').forEach(tabGroup => {
+          const tabs = Array.from(tabGroup.querySelectorAll('[role="tab"]'));
+          const panels = Array.from(tabGroup.querySelectorAll('[role="tabpanel"]'));
+
+          function activateShowcaseTab(tab) {
+              tabs.forEach(item => {
+                  const isActive = item === tab;
+                  item.setAttribute('aria-selected', String(isActive));
+                  item.tabIndex = isActive ? 0 : -1;
+              });
+
+              panels.forEach(panel => {
+                  panel.hidden = panel.id !== tab.dataset.showcaseTarget;
+              });
+          }
+
+          tabs.forEach((tab, index) => {
+              tab.addEventListener('click', () => activateShowcaseTab(tab));
+              tab.addEventListener('keydown', event => {
+                  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+                  event.preventDefault();
+
+                  let nextIndex = index;
+                  if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+                  if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+                  if (event.key === 'Home') nextIndex = 0;
+                  if (event.key === 'End') nextIndex = tabs.length - 1;
+
+                  tabs[nextIndex].focus();
+                  activateShowcaseTab(tabs[nextIndex]);
+              });
+          });
+      });
+
+      // Counter animation (with IntersectionObserver cleanup)
+      const counters = document.querySelectorAll('.counter');
+      counters.forEach(counter => {
+          const target = parseFloat(counter.getAttribute('data-target'));
+          let current = target - 0.5;
+          let intervalId = null;
+
+          function startCounter() {
+              if (intervalId) return;
+              intervalId = setInterval(() => {
+                  const jitter = (Math.random() - 0.5) * 0.02;
+                  let val = current + jitter;
+                  if (val > target) val = target;
+                  if (val < target - 0.1) val = target - 0.1;
+                  current = val;
+                  counter.innerHTML = current.toFixed(2) + '<span class="text-lg text-neutral-500">%</span>';
+              }, 150);
+          }
+
+          function stopCounter() {
+              if (intervalId) { clearInterval(intervalId); intervalId = null; }
+          }
+
+          const counterObserver = new IntersectionObserver(([entry]) => {
+              entry.isIntersecting ? startCounter() : stopCounter();
+          });
+          counterObserver.observe(counter);
+      });
+    </script>
+
+    
+<!-- ===== THEME TOGGLE SCRIPT ===== -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Always start in light mode
+        html.setAttribute('data-theme', 'light');
+        if (themeToggle) themeToggle.checked = false;
+        localStorage.removeItem('theme');
+
+        // Toggle theme on checkbox change (checked = dark, unchecked = light)
+        if (themeToggle) {
+            themeToggle.addEventListener('change', function() {
+                const newTheme = this.checked ? 'dark' : 'light';
+                html.setAttribute('data-theme', newTheme);
+            });
+        }
+    </script>
+    <!-- ===== END THEME TOGGLE SCRIPT ===== -->
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>FCG Deck · Content</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080805; --fg:#f7f7f2; --muted:#a1a1aa; --soft:#71717a;
+    --accent:#f97316; --border:rgba(255,255,255,0.10);
+    --card:linear-gradient(180deg,rgba(255,255,255,0.065),rgba(255,255,255,0.025));
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);color:var(--fg);
+    font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;}
+  em{color:var(--accent);font-style:normal;font-weight:500;}
+  .slide{width:1920px;height:1080px;padding:104px 120px;display:flex;flex-direction:column;}
+  .eyebrow{font-size:15px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--soft);}
+  .eyebrow .ix{color:var(--accent);}
+  h2{font-size:72px;font-weight:600;line-height:1.04;letter-spacing:-0.025em;margin-top:24px;max-width:1300px;}
+  .clarifier{margin-top:24px;font-size:24px;font-weight:300;color:var(--muted);max-width:1120px;}
+  .points{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .point{background:var(--card);border:1px solid var(--border);border-radius:26px;padding:44px 40px;display:flex;flex-direction:column;gap:18px;}
+  .point .pix{font-size:15px;font-weight:500;letter-spacing:0.16em;color:var(--accent);}
+  .point h3{font-size:30px;font-weight:600;line-height:1.15;letter-spacing:-0.01em;}
+  .point p{font-size:19px;font-weight:300;line-height:1.55;color:var(--muted);}
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="eyebrow">Capabilities · Connection · <span class="ix">04</span></div>
+    <h2>Modernize the right part of the stack first.</h2>
+    <p class="clarifier">Three engagement types, mapped to where you stand in the network — no rip-and-replace required.</p>
+    <div class="points">
+      <div class="point">
+        <div class="pix">01</div>
+        <h3>Connect the supply</h3>
+        <p>Deduplicate content and route bookings through a single open layer — <em>from one API call to the largest migration.</em></p>
+      </div>
+      <div class="point">
+        <div class="pix">02</div>
+        <h3>Operate the network</h3>
+        <p>Run reconciliation, mapping, and settlement on infrastructure that already speaks every major source.</p>
+      </div>
+      <div class="point">
+        <div class="pix">03</div>
+        <h3>Layer the experience</h3>
+        <p>Ship agent-assisted booking and contract mapping on top — <em>live in days, not quarters.</em></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

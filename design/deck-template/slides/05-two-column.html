@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<title>FCG Deck · Two-column</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080805; --fg:#f7f7f2; --muted:#a1a1aa; --soft:#71717a;
+    --accent:#f97316; --border:rgba(255,255,255,0.10);
+    --card:linear-gradient(180deg,rgba(255,255,255,0.065),rgba(255,255,255,0.025));
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);color:var(--fg);
+    font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;}
+  em{color:var(--accent);font-style:normal;font-weight:500;}
+  .slide{width:1920px;height:1080px;padding:104px 120px;display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center;}
+  .col-text{display:flex;flex-direction:column;}
+  .eyebrow{font-size:15px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--soft);}
+  .eyebrow .ix{color:var(--accent);}
+  h2{font-size:64px;font-weight:600;line-height:1.05;letter-spacing:-0.025em;margin-top:24px;}
+  .clarifier{margin-top:28px;font-size:23px;font-weight:300;line-height:1.6;color:var(--muted);}
+  ul{margin-top:40px;list-style:none;display:flex;flex-direction:column;gap:22px;}
+  li{display:flex;gap:18px;font-size:21px;font-weight:300;line-height:1.45;color:var(--fg);}
+  li .mk{flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:11px;box-shadow:0 0 10px rgba(249,115,22,0.5);}
+  li b{font-weight:500;}
+  /* right: sanctioned in-card diagram backdrop — swap for a real product screenshot */
+  .col-visual{height:760px;background:var(--card);border:1px solid var(--border);border-radius:32px;
+    display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+  .placeholder{display:flex;flex-direction:column;align-items:center;gap:16px;color:var(--soft);}
+  .placeholder .box{width:240px;height:150px;border:1.5px dashed var(--border);border-radius:14px;}
+  .placeholder .lbl{font-size:14px;letter-spacing:0.16em;text-transform:uppercase;}
+  .badge{position:absolute;top:24px;left:24px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--soft);border:1px solid var(--border);border-radius:999px;padding:6px 14px;}
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="col-text">
+      <div class="eyebrow">Architecture · Routing · <span class="ix">05</span></div>
+      <h2>One connection to all of it.</h2>
+      <p class="clarifier">The router reads the request and resolves it to the right supply path — hotels, airlines, and GDS, deduplicated on the way through.</p>
+      <ul>
+        <li><span class="mk"></span><span><b>Normalises</b> content across every source into one schema.</span></li>
+        <li><span class="mk"></span><span><b>Routes</b> each booking to the path with the live, best-priced inventory.</span></li>
+        <li><span class="mk"></span><span><b>Reconciles</b> two PNRs into one — no duplicate records downstream.</span></li>
+      </ul>
+    </div>
+    <div class="col-visual">
+      <span class="badge">Diagram backdrop</span>
+      <div class="placeholder">
+        <div class="box"></div>
+        <div class="lbl">Drop a product screenshot or routing diagram here</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

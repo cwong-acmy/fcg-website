@@ -14,8 +14,8 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G&#8209;Link · Hotel supply for corporate travel · FCG Group</title>
-    <meta name="description" content="G&#8209;Link is FCG's hotel supply API for corporate travel. One integration across GDS, direct hotel, bedbank, and Asia-direct supply.">
+    <title>TMC API · White-label operating modules for TMCs · FCG Group</title>
+    <meta name="description" content="TMC API is FCG's modular operating layer for travel management companies: expense, duty of care, reporting, approvals, and white-label TMC workflows through one integration surface.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -921,18 +921,223 @@
             height: 18px;
         }
 
-        /* ===== V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
-        /* Bucket D highlighted card uses inline gradient with near-black stop */
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] {
-            background: linear-gradient(180deg, rgba(249,115,22,0.08), rgba(255,255,255,0.92)) !important;
-            border-color: rgba(249,115,22,0.35) !important;
+        .partner-grid-section {
+            background-color: var(--color-bg);
+            color: var(--color-fg);
         }
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] p,
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] h3 {
+
+        .partner-grid-title {
+            color: var(--color-muted);
+        }
+
+        .partner-grid-title strong {
+            color: var(--color-fg);
+            font-weight: 500;
+        }
+
+        .partner-logo-band,
+        .partner-logo-grid,
+        .partner-logo-card {
+            border-color: var(--color-border) !important;
+        }
+
+        .partner-logo-card:nth-child(odd) {
+            background-color: var(--color-card);
+        }
+
+        html[data-theme="dark"] .partner-logo-card img.partner-logo-invert-dark {
+            filter: invert(1) grayscale(1) brightness(1.4);
+            opacity: 0.9;
+        }
+
+        html[data-theme="dark"] .partner-plus::before,
+        html[data-theme="dark"] .partner-plus::after {
+            background: var(--color-fg);
+        }
+
+        /* ===== V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
+        /* Section wrappers use inline background:#050505 / #000 / #0a0a0a */
+        html[data-theme="light"] section[style*="background:#050505"],
+        html[data-theme="light"] section[style*="background:#0a0a0a"],
+        html[data-theme="light"] section[style*="background:#000"] {
+            background: var(--color-bg) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
+        }
+        /* CSS-defined dark surfaces in v2 modules + asia-supply sections */
+        html[data-theme="light"] .v2-mod-row {
+            background: var(--color-card) !important;
+        }
+        html[data-theme="light"] .v2-comp-card .v2-num {
+            color: rgba(15, 17, 20, 0.26) !important;
+        }
+        html[data-theme="light"] .v2-asia-card {
+            background: var(--color-card) !important;
+            border-color: var(--color-border) !important;
             color: var(--color-fg) !important;
         }
-        html[data-theme="light"] .fcg-flow-step[style*="linear-gradient"] .code-tag {
+        /* Inline white text */
+        html[data-theme="light"] [style*="color:#fff"] {
+            color: var(--color-fg) !important;
+        }
+        /* Muted white inline */
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.4)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.5)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.6)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.7)"],
+        html[data-theme="light"] [style*="color:rgba(255,255,255,.8)"] {
             color: var(--color-muted) !important;
+        }
+        /* Borders/dividers drawn with rgba white */
+        html[data-theme="light"] [style*="border-top:1px solid rgba(255,255,255,.08)"],
+        html[data-theme="light"] [style*="border-bottom:1px solid rgba(255,255,255,.08)"],
+        html[data-theme="light"] [style*="border:1px solid rgba(255,255,255,.1)"] {
+            border-color: var(--color-border) !important;
+        }
+
+        /* Draft product pages use hard-coded dark inline styles; mirror index.html's theme behavior. */
+        html[data-theme="light"] .product-shell,
+        html[data-theme="light"] .product-shell section[style*="background:#050505"],
+        html[data-theme="light"] .product-shell section[style*="background: #050505"],
+        html[data-theme="light"] .product-shell section[style*="background:#030303"],
+        html[data-theme="light"] .product-shell section[style*="background: #030303"],
+        html[data-theme="light"] .product-shell section[style*="background:#0a0a0a"],
+        html[data-theme="light"] .product-shell section[style*="background: #0a0a0a"],
+        html[data-theme="light"] .product-shell section[style*="background:#000"],
+        html[data-theme="light"] .product-shell section[style*="background: #000"] {
+            background: var(--color-bg) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="color:#fff"],
+        html[data-theme="light"] .product-shell [style*="color: #fff"],
+        html[data-theme="light"] .product-shell [style*="color:#ffffff"],
+        html[data-theme="light"] .product-shell [style*="color: #ffffff"] {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="color:rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="color: rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="color:rgba(255, 255, 255"],
+        html[data-theme="light"] .product-shell [style*="color: rgba(255, 255, 255"] {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] .product-shell [style*="border-top:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-top: 1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-bottom:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border-bottom: 1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border:1px solid rgba(255,255,255"],
+        html[data-theme="light"] .product-shell [style*="border: 1px solid rgba(255,255,255"] {
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-tmc-hero h1,
+            .v2-tmc-pill strong,
+            .v2-tmc-strip-item strong,
+            .v2-comp-head h2,
+            .v2-comp-card h3,
+            .v2-mod-head h2,
+            .v2-mod-num strong,
+            .v2-mod-body h3,
+            .v2-asia h2,
+            .v2-asia-point h4,
+            .v2-asia-stat strong,
+            .fcg-integration-title,
+            .fcg-flow-step h3,
+            .fcg-mobile-feature h2,
+            .fcg-feature-row h3,
+            .fcg-mobile-cta h3
+        ) {
+            color: var(--color-fg) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-tmc-pill,
+            .v2-tmc-hero h1 em,
+            .v2-tmc-hero-copy,
+            .v2-tmc-strip-item,
+            .v2-comp-meta,
+            .v2-comp-lede,
+            .v2-comp-card p,
+            .v2-comp-card .v2-meta,
+            .v2-mod-head p,
+            .v2-mod-body .v2-mod-cat,
+            .v2-mod-body p,
+            .v2-mod-body .v2-mod-bullets span,
+            .v2-mod-foot,
+            .v2-asia h2 em,
+            .v2-asia p.lede,
+            .v2-asia-point p,
+            .v2-asia-stat-lede,
+            .v2-asia-card li,
+            .fcg-integration-header p,
+            .fcg-flow-step p,
+            .fcg-mobile-subcopy,
+            .fcg-feature-row p,
+            .fcg-mobile-cta p
+        ) {
+            color: var(--color-muted) !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-tmc-pill,
+            .v2-tmc-strip,
+            .v2-comp-card,
+            .v2-mod-list,
+            .v2-mod-row,
+            .v2-mod-body .v2-mod-bullets span,
+            .v2-asia-card,
+            .fcg-flow-step,
+            .fcg-code-preview,
+            .fcg-mobile-feature,
+            .fcg-mobile-cta,
+            .fcg-feature-row
+        ) {
+            background: var(--color-card) !important;
+            border-color: var(--color-border) !important;
+            box-shadow: none !important;
+        }
+
+        html[data-theme="light"] .v2-tmc-hero-bg {
+            background:
+                radial-gradient(circle at 50% 22%, rgba(249, 115, 22, 0.12), transparent 34%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(243, 244, 246, 0.92) 100%) !important;
+        }
+
+        html[data-theme="light"] .v2-tmc-hero-grid {
+            background:
+                linear-gradient(rgba(15, 17, 20, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15, 17, 20, 0.08) 1px, transparent 1px) !important;
+            opacity: 0.45 !important;
+        }
+
+        html[data-theme="light"] :is(
+            .v2-tmc-strip-sep,
+            .v2-comp-head,
+            .v2-comp-card .v2-meta,
+            .v2-mod-num,
+            .v2-mod-row.reverse .v2-mod-num,
+            .v2-asia-card ul
+        ) {
+            border-color: var(--color-border) !important;
+        }
+
+        html[data-theme="light"] .v2-mod-row.feature {
+            background: linear-gradient(180deg, rgba(249, 115, 22, 0.08), var(--color-card)) !important;
+        }
+
+        html[data-theme="light"] :is(.v2-tmc-btn-primary, .fcg-store-button) {
+            background: var(--color-fg) !important;
+            color: var(--color-bg) !important;
+        }
+
+        html[data-theme="light"] .v2-tmc-btn-secondary {
+            background: var(--color-card) !important;
+            color: var(--color-fg) !important;
+            border-color: var(--color-border) !important;
         }
         /* ===== END V4 INLINE-STYLE LIGHT MODE OVERRIDES ===== */
 
@@ -1190,108 +1395,6 @@
     margin-top: 34px;
     flex-wrap: wrap;
   }
-  .fcg-pricing-rows {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-    margin-top: 3rem;
-  }
-  .fcg-pricing-rows article {
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 14px;
-    background: rgba(255,255,255,.02);
-    padding: 1.5rem 1.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-  }
-  .fcg-pricing-rows .fcg-pricing-label {
-    color: rgba(255,255,255,.6) !important;
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  .fcg-pricing-rows .fcg-pricing-value {
-    color: #fff !important;
-    font-family: 'Sora', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    line-height: 1.1;
-  }
-  .fcg-pricing-rows .fcg-pricing-sub {
-    color: rgba(255,255,255,.5) !important;
-    font-size: .85rem;
-    line-height: 1.5;
-  }
-  .fcg-pricing-foot {
-    color: rgba(255,255,255,.45) !important;
-    font-size: .8rem;
-    margin-top: 1.25rem;
-    line-height: 1.6;
-  }
-  html[data-theme="light"] .fcg-pricing-rows article { background: rgba(15,17,20,.02); border-color: rgba(15,17,20,.1); }
-  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-label { color: rgba(15,17,20,.55) !important; }
-  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-value { color: var(--color-fg) !important; }
-  html[data-theme="light"] .fcg-pricing-rows .fcg-pricing-sub { color: rgba(15,17,20,.55) !important; }
-  html[data-theme="light"] .fcg-pricing-foot { color: rgba(15,17,20,.55) !important; }
-  .fcg-objection-q {
-    color: #fb923c !important;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    margin-bottom: .85rem;
-    font-weight: 500;
-  }
-  html[data-theme="light"] .fcg-objection-q { color: #fb923c !important; }
-  .partner-plus::before,
-  .partner-plus::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    background: #0F1114;
-    transform: translate(-50%, -50%);
-  }
-  .partner-plus::before {
-    width: 18px;
-    height: 1px;
-  }
-  .partner-plus::after {
-    width: 1px;
-    height: 18px;
-  }
-  .partner-grid-section {
-    background-color: var(--color-bg);
-    color: var(--color-fg);
-  }
-  .partner-grid-title {
-    color: var(--color-muted);
-  }
-  .partner-grid-title strong {
-    color: var(--color-fg);
-    font-weight: 500;
-  }
-  .partner-logo-band,
-  .partner-logo-grid,
-  .partner-logo-card {
-    border-color: var(--color-border) !important;
-  }
-  .partner-logo-card:nth-child(odd) {
-    background-color: var(--color-card);
-  }
-  html[data-theme="dark"] .partner-logo-card img.partner-logo-invert-dark {
-    filter: invert(1) grayscale(1) brightness(1.4);
-    opacity: .9;
-  }
-  html[data-theme="dark"] .partner-plus::before,
-  html[data-theme="dark"] .partner-plus::after {
-    background: var(--color-fg);
-  }
-  @media (max-width: 768px) {
-    .fcg-pricing-rows { grid-template-columns: 1fr; }
-  }
   .fcg-hero2-preview-wrap {
     position: relative;
     width: 100%;
@@ -1331,130 +1434,6 @@
     border-radius: 14px;
     opacity: .98;
     filter: none;
-  }
-  .fcg-hero2-video-frame {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.12);
-    background: linear-gradient(135deg, rgba(249,115,22,.14), rgba(255,255,255,.04));
-  }
-  .fcg-hero2-video-frame video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .fcg-hero2-video-placeholder {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    background:
-      repeating-linear-gradient(45deg, rgba(255,255,255,.025) 0 12px, transparent 12px 24px),
-      rgba(7,7,7,.55);
-  }
-  .fcg-hero2-video-play {
-    width: 66px;
-    height: 66px;
-    border-radius: 999px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    background: rgba(249,115,22,.92);
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 10px 32px rgba(249,115,22,.38);
-    transition: transform .25s ease;
-  }
-  .fcg-hero2-video-play:hover { transform: scale(1.06); }
-  .fcg-hero2-video-label {
-    color: #fff;
-    font-size: 15px;
-    font-weight: 500;
-  }
-  .fcg-hero2-video-note {
-    color: rgba(255,255,255,.5);
-    font-size: 11px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-  }
-  html[data-theme="light"] .fcg-hero2-video-placeholder {
-    background:
-      repeating-linear-gradient(45deg, rgba(0,0,0,.03) 0 12px, transparent 12px 24px),
-      rgba(243,244,246,.7);
-  }
-  html[data-theme="light"] .fcg-hero2-video-label { color: #0F1114; }
-  html[data-theme="light"] .fcg-hero2-video-note { color: rgba(15,17,20,.5); }
-  .supplier-logo-placeholder {
-    font-family: 'Sora', 'Inter', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: .01em;
-    color: rgba(255,255,255,.52);
-    border: 1px dashed rgba(255,255,255,.22);
-    border-radius: 8px;
-    padding: 9px 16px;
-    white-space: nowrap;
-  }
-  html[data-theme="light"] .supplier-logo-placeholder {
-    color: rgba(15,17,20,.5);
-    border-color: rgba(0,0,0,.18);
-  }
-  .supplier-logo-real {
-    max-height: 34px;
-    max-width: 150px;
-    object-fit: contain;
-    opacity: .92;
-  }
-  .supplier-logo-mono {
-    max-height: 34px;
-    max-width: 150px;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: .82;
-    transition: opacity .2s ease;
-  }
-  .supplier-logo-mono:hover { opacity: 1; }
-  html[data-theme="light"] .supplier-logo-mono {
-    filter: brightness(0);
-    opacity: .68;
-  }
-  .fcg-marketing-feature-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fb923c;
-    background: rgba(249,115,22,.1);
-    border: 1px solid rgba(249,115,22,.2);
-    margin-bottom: 1.1rem;
-  }
-  html[data-theme="light"] .fcg-marketing-feature-icon {
-    background: rgba(249,115,22,.08);
-    border-color: rgba(249,115,22,.25);
-  }
-  .fcg-supply-illustration {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2.5rem 2rem;
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,.1);
-    background: rgba(255,255,255,.02);
-    margin-top: 2.5rem;
-  }
-  .fcg-supply-illustration svg { width: min(420px, 80%); height: auto; }
-  html[data-theme="light"] .fcg-supply-illustration {
-    border-color: rgba(15,17,20,.1);
-    background: rgba(15,17,20,.02);
   }
   .fcg-hero2-preview-grid {
     position: relative;
@@ -1508,6 +1487,68 @@
     font-weight: 400;
     line-height: 1.4;
   }
+  .fcg-hero2-code-window {
+    position: relative;
+    min-height: min(56vh, 520px);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: #121827;
+    box-shadow: 0 30px 90px rgba(0,0,0,.45);
+    overflow: hidden;
+  }
+  .fcg-hero2-code-window::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(249,115,22,.18), transparent 24%),
+      linear-gradient(135deg, rgba(255,255,255,.06), transparent 42%);
+  }
+  .fcg-hero2-code-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    color: rgba(255,255,255,.58);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .fcg-hero2-window-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .fcg-hero2-window-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+  }
+  .fcg-hero2-window-dots span:nth-child(1) { background: #fb7185; }
+  .fcg-hero2-window-dots span:nth-child(2) { background: #fbbf24; }
+  .fcg-hero2-window-dots span:nth-child(3) { background: #22c55e; }
+  .fcg-hero2-code-body {
+    position: relative;
+    margin: 0;
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    color: #e5e7eb;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(.84rem, 1.25vw, 1rem);
+    line-height: 1.9;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .fcg-hero2-code-body .code-keyword { color: #fb7185; }
+  .fcg-hero2-code-body .code-method { color: #60a5fa; }
+  .fcg-hero2-code-body .code-string { color: #34d399; }
+  .fcg-hero2-code-body .code-number { color: #f59e0b; }
+  .fcg-hero2-code-body .code-property { color: #38bdf8; }
+  .fcg-hero2-code-body .code-comment { color: #94a3b8; }
   .fcg-hero2-code-footer {
     position: relative;
     display: grid;
@@ -1536,158 +1577,6 @@
     font-size: 15px;
     font-weight: 600;
     line-height: 1.25;
-  }
-  .glink-radar-scene {
-    position: relative;
-    min-height: min(56vh, 520px);
-    width: 100%;
-    overflow: hidden;
-    border-radius: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-  .glink-radar-stage {
-    position: relative;
-    display: flex;
-    min-height: min(56vh, 520px);
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    overflow: hidden;
-    padding: 3rem 1.25rem 5.5rem;
-  }
-  .glink-radar-row-wide,
-  .glink-radar-row-narrow {
-    position: relative;
-    z-index: 50;
-    width: 100%;
-  }
-  .glink-radar-row-wide { max-width: 42rem; }
-  .glink-radar-row-narrow { max-width: 27rem; }
-  .glink-radar-row-inner {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.25rem;
-  }
-  .glink-radar-node {
-    position: relative;
-    z-index: 50;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-    opacity: 0;
-    transform: scale(.95);
-    animation: glink-radar-node-in .2s ease-out forwards;
-  }
-  @keyframes glink-radar-node-in {
-    from { opacity: 0; transform: scale(.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  .glink-radar-tile {
-    display: flex;
-    height: 3rem;
-    width: 3rem;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1rem;
-    border: 1px solid rgba(255,255,255,.14);
-    background: rgba(255,255,255,.08);
-    color: rgba(255,255,255,.68);
-    box-shadow: inset 0 2px 10px rgba(255,255,255,.04), 0 12px 30px rgba(0,0,0,.18);
-  }
-  .glink-radar-label {
-    color: rgba(255,255,255,.62);
-    font-size: .75rem;
-    font-weight: 700;
-    line-height: 1rem;
-    text-align: center;
-    white-space: nowrap;
-  }
-  .glink-radar-core {
-    position: absolute;
-    bottom: 4.75rem;
-    left: 50%;
-    z-index: 20;
-    display: flex;
-    height: 5rem;
-    width: 5rem;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    transform: translateX(-50%);
-    pointer-events: none;
-  }
-  .glink-radar-sweep {
-    position: absolute;
-    right: 50%;
-    top: 50%;
-    z-index: 40;
-    display: flex;
-    height: 5px;
-    width: 400px;
-    align-items: flex-end;
-    justify-content: center;
-    overflow: hidden;
-    background: transparent;
-    transform-origin: right center;
-    animation: glink-radar-spin 10s linear infinite;
-  }
-  @keyframes glink-radar-spin {
-    from { transform: rotate(20deg); }
-    to { transform: rotate(380deg); }
-  }
-  .glink-radar-sweep-line {
-    position: relative;
-    z-index: 40;
-    height: 1px;
-    width: 100%;
-    background: linear-gradient(to right, transparent, #f97316, transparent);
-  }
-  .glink-radar-circle {
-    position: absolute;
-    inset: 0;
-    left: 50%;
-    top: 50%;
-    border-radius: 9999px;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    animation: glink-radar-circle-in .2s ease-out forwards;
-  }
-  @keyframes glink-radar-circle-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  .glink-radar-divider {
-    position: absolute;
-    bottom: 0;
-    z-index: 41;
-    display: none;
-    height: 1px;
-    width: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,.28), transparent);
-  }
-  .glink-radar-section {
-    position: relative;
-    z-index: 10;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    padding: 7rem 0 1.25rem;
-    background: var(--color-bg);
-    border-top: 0;
-  }
-  .glink-radar-inner {
-    width: 100%;
-    margin: 0 auto;
-  }
-  .glink-radar-section + .fcg-mobile-cta {
-    margin-top: 2rem;
   }
   .product-shell { background: var(--color-bg); color: var(--color-fg); }
   .product-kicker { font-family: 'Inter', sans-serif; letter-spacing: .18em; text-transform: uppercase; }
@@ -2119,19 +2008,6 @@
     font-weight: 650;
     line-height: 1.1;
   }
-  .fcg-marketing-feature {
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: 18px;
-    background: rgba(255,255,255,.025);
-    padding: 1.5rem;
-    min-height: 13.5rem;
-    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
-  }
-  .fcg-marketing-feature:hover {
-    border-color: rgba(255,255,255,.32);
-    background: rgba(255,255,255,.045);
-    transform: translateY(-1px);
-  }
   .fcg-marketing-feature p {
     color: rgba(255,255,255,.54) !important;
     font-size: 1.05rem;
@@ -2179,7 +2055,7 @@
     letter-spacing: 0;
     line-height: 1.05;
   }
-  .fcg-integration-title span {
+  .fcg-integration-title .muted-line {
     color: rgba(255,255,255,.48);
   }
   .fcg-integration-header p {
@@ -2245,6 +2121,47 @@
     color: rgba(255,255,255,.55);
     letter-spacing: .02em;
   }
+  .fcg-code-preview {
+    margin-top: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+  .fcg-code-bar {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.02);
+  }
+  .fcg-code-dot {
+    width: .5rem;
+    height: .5rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,.15);
+  }
+  .fcg-code-bar span {
+    margin-left: auto;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,.35);
+    letter-spacing: .08em;
+  }
+  .fcg-code-body {
+    padding: 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .fcg-code-body .code-comment { color: rgba(255,255,255,.3); }
+  .fcg-code-body .code-key { color: #fb923c; }
+  .fcg-code-body .code-string { color: #34d399; }
+  .fcg-code-body .code-method { color: #60a5fa; }
+  .fcg-code-body .code-number { color: #c084fc; }
+  .fcg-code-body .code-punct { color: rgba(255,255,255,.5); }
   .fcg-mobile-feature {
     position: relative;
     overflow: hidden;
@@ -2293,9 +2210,23 @@
     gap: 2rem;
     margin: 4rem auto 0;
   }
+  .fcg-feature-grid.is-tmc-getting-started .fcg-feature-row:last-child {
+    grid-column: 1 / -1;
+    min-height: auto;
+  }
+  .fcg-feature-grid.is-tmc-getting-started .fcg-feature-row:last-child > div:last-child {
+    max-width: 42rem;
+  }
   .fcg-feature-row {
     display: flex;
+    align-items: flex-start;
     gap: 1.15rem;
+    min-height: 10.75rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 8px;
+    background: rgba(255,255,255,.04);
+    box-shadow: 0 18px 44px rgba(0,0,0,.16);
     text-align: left;
   }
   .fcg-feature-icon {
@@ -2433,6 +2364,29 @@
   html[data-theme="light"] .fcg-hero2-preview-card .stat-label {
     color: #6b7280;
   }
+  html[data-theme="light"] .fcg-hero2-code-window {
+    background: rgba(255,255,255,.92);
+    border-color: rgba(15,17,20,.12);
+    box-shadow: 0 30px 80px rgba(15,17,20,.14);
+  }
+  html[data-theme="light"] .fcg-hero2-code-window::before {
+    background:
+      radial-gradient(circle at 18% 12%, rgba(249,115,22,.1), transparent 24%),
+      linear-gradient(135deg, rgba(15,17,20,.035), transparent 42%);
+  }
+  html[data-theme="light"] .fcg-hero2-code-bar {
+    border-color: rgba(15,17,20,.1);
+    color: #9ca3af;
+  }
+  html[data-theme="light"] .fcg-hero2-code-body {
+    color: #0f1114;
+  }
+  html[data-theme="light"] .fcg-hero2-code-body .code-keyword { color: #ef4444; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-method { color: #0f4ea3; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-string { color: #047857; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-number { color: #ea580c; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-property { color: #0369a1; }
+  html[data-theme="light"] .fcg-hero2-code-body .code-comment { color: #9ca3af; }
   html[data-theme="light"] .fcg-hero2-code-chip {
     background: rgba(255,255,255,.72);
     border-color: rgba(15,17,20,.1);
@@ -2440,25 +2394,6 @@
   }
   html[data-theme="light"] .fcg-hero2-code-chip strong {
     color: #0f1114;
-  }
-  html[data-theme="light"] .glink-radar-scene {
-    background: transparent;
-    box-shadow: none;
-  }
-  html[data-theme="light"] .glink-radar-tile {
-    background: rgba(255,255,255,.74);
-    border-color: rgba(15,17,20,.12);
-    color: #4b5563;
-    box-shadow: 0 14px 32px rgba(15,17,20,.07);
-  }
-  html[data-theme="light"] .glink-radar-label {
-    color: #6b7280;
-  }
-  html[data-theme="light"] .glink-radar-circle {
-    border-color: rgba(15,17,20,.18) !important;
-  }
-  html[data-theme="light"] .glink-radar-divider {
-    background: linear-gradient(to right, transparent, rgba(15,17,20,.18), transparent);
   }
   html[data-theme="light"] .fcg-bento {
     background:
@@ -2534,15 +2469,6 @@
   html[data-theme="light"] .fcg-mobile-cta p {
     color: #737373 !important;
   }
-  html[data-theme="light"] .fcg-marketing-feature {
-    background: rgba(255,255,255,.82);
-    border-color: rgba(15,17,20,.14);
-    box-shadow: 0 18px 45px rgba(15,17,20,.07);
-  }
-  html[data-theme="light"] .fcg-marketing-feature:hover {
-    background: #ffffff;
-    border-color: rgba(15,17,20,.28);
-  }
   html[data-theme="light"] .fcg-ai-showcase {
     background:
       linear-gradient(135deg, rgba(255,240,209,.9), rgba(252,201,196,.8) 34%, rgba(207,233,240,.86) 72%, rgba(106,203,213,.78)),
@@ -2590,7 +2516,7 @@
   html[data-theme="light"] .fcg-flow-step h3 {
     color: #0f1114 !important;
   }
-  html[data-theme="light"] .fcg-integration-title span {
+  html[data-theme="light"] .fcg-integration-title .muted-line {
     color: #737373;
   }
   html[data-theme="light"] .fcg-integration-header p,
@@ -2609,10 +2535,35 @@
     border-color: rgba(15,17,20,.1);
     color: #6b7280;
   }
+  html[data-theme="light"] .fcg-code-preview {
+    background: #f9fafb;
+    border-color: #d1d5db;
+  }
+  html[data-theme="light"] .fcg-code-bar {
+    background: rgba(0,0,0,.03);
+    border-color: #e5e7eb;
+  }
+  html[data-theme="light"] .fcg-code-dot {
+    background: rgba(0,0,0,.12);
+  }
+  html[data-theme="light"] .fcg-code-bar span {
+    color: #9ca3af;
+  }
+  html[data-theme="light"] .fcg-code-body .code-comment { color: #9ca3af; }
+  html[data-theme="light"] .fcg-code-body .code-key { color: #ea580c; }
+  html[data-theme="light"] .fcg-code-body .code-string { color: #059669; }
+  html[data-theme="light"] .fcg-code-body .code-method { color: #2563eb; }
+  html[data-theme="light"] .fcg-code-body .code-number { color: #7c3aed; }
+  html[data-theme="light"] .fcg-code-body .code-punct { color: #6b7280; }
   html[data-theme="light"] .fcg-mobile-cta {
     background: rgba(255,255,255,.78);
     border-color: rgba(15,17,20,.12);
     box-shadow: 0 24px 70px rgba(15,17,20,.08);
+  }
+  html[data-theme="light"] .fcg-feature-row {
+    background: #ffffff !important;
+    border-color: rgba(15,17,20,.08) !important;
+    box-shadow: 0 18px 44px rgba(15,17,20,.06) !important;
   }
   html[data-theme="light"] .fcg-mobile-feature {
     background: #ffffff;
@@ -2656,18 +2607,8 @@
     }
     .fcg-hero2-preview img { height: auto; }
     .fcg-hero2-preview-card { min-height: auto; }
+    .fcg-hero2-code-window { min-height: auto; }
     .fcg-hero2-code-footer { grid-template-columns: 1fr; }
-    .glink-radar-section { padding: 5.5rem 0 1rem; }
-    .glink-radar-scene,
-    .glink-radar-stage {
-      min-height: 420px;
-    }
-    .glink-radar-row-inner {
-      gap: .9rem;
-    }
-    .glink-radar-label {
-      display: none;
-    }
     .fcg-bento-inner { padding: 4.5rem 1.25rem; }
     .fcg-bento-header { align-items: flex-start; flex-direction: column; }
     .fcg-bento-grid { grid-template-columns: 1fr; }
@@ -2688,6 +2629,13 @@
     .fcg-feature-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
+    }
+    .fcg-feature-row {
+      min-height: auto;
+      padding: 1.25rem;
+    }
+    .fcg-feature-grid.is-tmc-getting-started .fcg-feature-row:last-child {
+      grid-column: auto;
     }
     .fcg-marketing-title {
       font-size: clamp(2rem, 8.5vw, 2.65rem) !important;
@@ -2719,712 +2667,454 @@
   }
 </style>
 <main class="product-shell">
-  <section id="capabilities" class="fcg-hero2">
-    <div class="fcg-hero2-glow" aria-hidden="true"><span></span><span></span><span></span></div>
+  <section id="capabilities" style="position:relative;isolation:isolate;overflow:hidden;background:#050505;color:#fff;padding:7.5rem 1.5rem 7rem;text-align:left;">
+    <style>
+      .v2-tmc-hero-bg { position:absolute; inset:0; z-index:0; pointer-events:none;
+        background:
+          radial-gradient(circle at 50% 22%, rgba(249,115,22,.16), transparent 32%),
+          linear-gradient(180deg, rgba(8,8,5,.86) 0%, rgba(5,5,5,.94) 100%);
+      }
+      .v2-tmc-hero-grid { position:absolute; left:-16%; right:-16%; bottom:-9rem; height: 34rem; z-index: 0; pointer-events:none;
+        background:
+          linear-gradient(rgba(255,255,255,.11) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.11) 1px, transparent 1px);
+        background-size: 4.25rem 4.25rem;
+        transform: perspective(760px) rotateX(64deg);
+        transform-origin: bottom center;
+        opacity: .55;
+      }
+      .v2-tmc-hero > * { position:relative; z-index: 2; }
+      .v2-tmc-hero { font-family: 'Inter', sans-serif; max-width: 80rem; margin: 0 auto; }
+      .v2-tmc-hero-split { display:grid; grid-template-columns: 1.04fr 1fr; gap: 3.5rem; align-items:center; }
+      @media (max-width: 960px){ .v2-tmc-hero-split { grid-template-columns:1fr; gap: 2.75rem; } }
+      .v2-tmc-hero-right .v7-code { box-shadow: 0 40px 90px rgba(0,0,0,.5); }
 
-    <div class="fcg-hero2-content">
-      <div class="fcg-hero2-copy-column">
-        <div class="fcg-hero2-badge">
-          Product · G&#8209;Link
-          <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
-        </div>
-        <h1>Hotel supply for corporate travel.</h1>
-        <p class="fcg-hero2-copy">One API for GDS, direct hotel, bedbank, and Asia-direct supply. Corporate rates, 4.3M+ mapped hotels, and a mid-office behind every booking.</p>
-        <div class="fcg-hero2-actions">
-          <a href="#getting-started" class="fcg-hero2-button fcg-hero2-button-primary">Schedule a walkthrough</a>
-          <a href="../api-access.html" class="fcg-hero2-button fcg-hero2-button-secondary">Read the API docs</a>
-        </div>
-      </div>
+      .v2-tmc-pill { display:inline-flex; align-items:center; gap:.55rem; padding: .55rem 1rem; border: 1px solid rgba(255,255,255,.16); border-radius: 9999px; background: rgba(255,255,255,.04); color: rgba(255,255,255,.74); font-size: 13px; line-height: 1; }
+      .v2-tmc-pill strong { color:#fff; font-weight: 500; display:inline-flex; align-items:center; gap:.3rem; }
+      .v2-tmc-pill .sep { width: 1px; height: 12px; background: rgba(255,255,255,.18); margin: 0 .15rem; }
+      .v2-tmc-pill .dot { width: 6px; height: 6px; border-radius: 9999px; background:#fb923c; box-shadow: 0 0 10px rgba(249,115,22,.7); }
 
-      <div class="fcg-hero2-preview-wrap">
-        <div class="fcg-hero2-preview fcg-hero2-video-preview">
-          <div class="fcg-hero2-video-frame" aria-label="G&#8209;Link product walkthrough">
-            <!-- Swap this placeholder for the real walkthrough video:
-                 <video src="../assets/video/glink-walkthrough.mp4" poster="../assets/images/glink-walkthrough-poster.jpg" controls playsinline></video> -->
-            <div class="fcg-hero2-video-placeholder">
-              <button class="fcg-hero2-video-play" aria-label="Play product walkthrough">
-                <iconify-icon icon="solar:play-bold" width="26" height="26"></iconify-icon>
-              </button>
-              <span class="fcg-hero2-video-label">G&#8209;Link product walkthrough</span>
-              <span class="fcg-hero2-video-note">Video placeholder · drop in walkthrough.mp4</span>
-            </div>
+      .v2-tmc-hero h1 { color:#fff; font-size: clamp(2.35rem, 4.4vw, 3.55rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.07; margin: 1.5rem 0 0; max-width: 30rem; }
+      .v2-tmc-hero h1 em { font-style:normal; color: rgba(255,255,255,.55); }
+      .v2-tmc-hero-copy { color: rgba(255,255,255,.68); font-size: 1.025rem; line-height: 1.7; max-width: 34rem; margin: 1.3rem 0 0; }
+
+      .v2-tmc-actions { display:flex; justify-content:flex-start; align-items:center; flex-wrap:wrap; gap:.65rem; margin-top: 2rem; }
+      .v2-tmc-btn { display:inline-flex; align-items:center; gap:.5rem; padding: .9rem 1.5rem; border-radius: 9999px; font-size: 14px; font-weight: 500; transition: background 180ms ease, border-color 180ms ease, transform 180ms ease; }
+      .v2-tmc-btn-primary { background:#fff; color:#0a0a0a; }
+      .v2-tmc-btn-primary:hover { transform: scale(1.01); }
+      .v2-tmc-btn-secondary { background: rgba(255,255,255,.04); color:#fff; border: 1px solid rgba(255,255,255,.14); }
+      .v2-tmc-btn-secondary:hover { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.08); }
+
+      .v2-tmc-strip { display:inline-flex; align-items:center; gap:1.5rem; margin-top: 2.5rem; padding: .85rem 1.25rem; border: 1px solid rgba(255,255,255,.1); border-radius: 9999px; background: rgba(255,255,255,.03); }
+      .v2-tmc-strip-item { display:inline-flex; align-items:center; gap:.5rem; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .06em; color: rgba(255,255,255,.55); text-transform: uppercase; }
+      .v2-tmc-strip-item strong { color:#fff; font-weight: 500; }
+      .v2-tmc-strip-item iconify-icon { color:#fb923c; }
+      .v2-tmc-strip-sep { width: 1px; height: 14px; background: rgba(255,255,255,.12); }
+      @media (max-width: 720px) {
+        .v2-tmc-strip { flex-wrap:wrap; gap:.85rem 1.1rem; border-radius: 20px; }
+        .v2-tmc-strip-sep { display:none; }
+      }
+
+      /* ---- LIGHT MODE hero text (bg already flips via .v2-tmc-hero-bg override) ---- */
+      html[data-theme="light"] .v2-tmc-hero h1 { color:#0f1114; }
+      html[data-theme="light"] .v2-tmc-hero h1 em { color:#9aa1ab; }
+      html[data-theme="light"] .v2-tmc-hero-copy { color:#737373; }
+      html[data-theme="light"] .v2-tmc-pill { background:#ffffff; border-color:rgba(15,17,20,.12); color:#4b5563; }
+      html[data-theme="light"] .v2-tmc-pill strong { color:#0f1114; }
+      html[data-theme="light"] .v2-tmc-strip { background:#ffffff; border-color:rgba(15,17,20,.1); }
+      html[data-theme="light"] .v2-tmc-strip-item { color:#737373; }
+      html[data-theme="light"] .v2-tmc-strip-item strong { color:#0f1114; }
+      /* .v7-code window stays dark in both themes — looks intentional on a light hero */
+    </style>
+
+    <div class="v2-tmc-hero-bg" aria-hidden="true"></div>
+    <div class="v2-tmc-hero-grid" aria-hidden="true"></div>
+
+    <div class="v2-tmc-hero">
+      <div class="v2-tmc-hero-split">
+        <div class="v2-tmc-hero-left">
+          <div class="v2-tmc-pill">
+            Product
+            <span class="sep"></span>
+            <strong><span class="dot"></span>TMC API</strong>
+            <span class="sep"></span>
+            <span>White-label modules</span>
           </div>
-          <div class="fcg-hero2-code-footer" aria-hidden="true">
-            <div class="fcg-hero2-code-chip"><span>Supply</span><strong>4.3M+ hotels</strong></div>
-            <div class="fcg-hero2-code-chip"><span>Network</span><strong>43 suppliers · 13 live</strong></div>
-            <div class="fcg-hero2-code-chip"><span>Asia</span><strong>4 chains deployed</strong></div>
+
+          <h1>TMC modules, ready to plug in.</h1>
+          <p class="v2-tmc-hero-copy">Launch expense, duty of care, reporting, and approval modules through one white-label API. Add the operating layer without rebuilding the platform.</p>
+
+          <div class="v2-tmc-actions">
+            <a href="https://open.fusionconnectgroup.com/" target="_blank" rel="noopener" class="v2-tmc-btn v2-tmc-btn-primary">Start building<iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
+            <a href="#" class="v2-tmc-btn v2-tmc-btn-secondary">Open the docs</a>
+          </div>
+
+          <div class="v2-tmc-strip" role="list">
+            <span class="v2-tmc-strip-item" role="listitem"><iconify-icon icon="solar:verified-check-linear" width="14" height="14"></iconify-icon><strong>Built by FCG</strong></span>
+            <span class="v2-tmc-strip-sep"></span>
+            <span class="v2-tmc-strip-item" role="listitem"><iconify-icon icon="solar:invisibility-linear" width="14" height="14"></iconify-icon><strong>White-label</strong>by default</span>
+            <span class="v2-tmc-strip-sep"></span>
+            <span class="v2-tmc-strip-item" role="listitem"><iconify-icon icon="solar:layers-minimalistic-linear" width="14" height="14"></iconify-icon><strong>One surface</strong>across the stack</span>
+          </div>
+        </div>
+
+        <div class="v2-tmc-hero-right fade-up">
+          <div class="v7-code">
+            <div class="v7-code-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">route-approval.ts</span></div>
+            <pre><span class="c">// route a booking through the client's policy</span>
+<span class="k">import</span> { TMC } <span class="k">from</span> <span class="s">'@fcg/tmc'</span>;
+
+<span class="k">const</span> tmc = <span class="k">new</span> TMC({ tenant: <span class="s">'acme-travel'</span> });
+
+<span class="k">await</span> tmc.approvals.route({
+  booking:  <span class="s">'BKG_48213'</span>,
+  policy:   <span class="s">'corp-default'</span>,
+  amount:   1840,
+  currency: <span class="s">'USD'</span>,
+});
+<span class="c">// → { status: 'pending', step: 'manager' }</span></pre>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== SUPPLY SOURCES LOGO STRIP ===== -->
-  <section class="partner-grid-section relative z-10 pt-10 pb-12 md:pt-12 md:pb-16" aria-label="Hotel supply sources connected through G-Link">
+  <!-- Partner grid · 300+ brands -->
+  <section class="partner-grid-section relative z-10 pt-10 pb-10 md:pt-12 md:pb-16">
     <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
       <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
-        One API. <strong>Every major supply source.</strong>
+        300+ travel brands, TMCs, and hotel groups. <strong>Already connected.</strong>
       </h2>
-      <p class="mx-auto mt-3 max-w-xl text-sm text-zinc-400">Global and China hotel groups, connected through one G&#8209;Link integration.</p>
     </div>
     <div class="partner-logo-band border-y">
-      <div class="mx-auto flex max-w-[1040px] flex-wrap items-center justify-center gap-x-10 gap-y-8 px-6 py-10 md:gap-x-14">
-        <span class="supplier-logo-placeholder">Narada</span>
-        <span class="supplier-logo-placeholder">New Century</span>
-        <img alt="Kempinski Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/kempinski.svg">
-        <img alt="Hyatt Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/hyatt.svg">
-        <span class="supplier-logo-placeholder">Ji Hotel</span>
-        <span class="supplier-logo-placeholder">Homeinns</span>
-        <img alt="Marriott International Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/marriott.svg">
-        <span class="supplier-logo-placeholder">Vienna Hotel</span>
-        <img alt="Hilton Hotels and Resorts Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/hilton.svg">
-        <img alt="Shangri-La Hotels and Resorts Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/shangri-la.svg">
-        <img alt="Accor Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/accor.svg">
-        <img alt="Atour Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/atour.svg">
-        <span class="supplier-logo-placeholder">Dossen</span>
-        <img alt="Jin Jiang International Logo" class="supplier-logo-real select-none pointer-events-none" src="../assets/images/logos/jinjiang-international.jpg">
-        <img alt="IHG Hotels and Resorts Logo" class="supplier-logo-mono select-none pointer-events-none" src="../assets/images/logos/ihg.svg">
-        <span class="supplier-logo-placeholder">CTG Hotel</span>
-        <span class="supplier-logo-placeholder">Green Tree Inn</span>
-        <span class="supplier-logo-placeholder">Inzone</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="api-capabilities" class="fcg-marketing-section">
-    <div class="fcg-marketing-inner" style="max-width:72rem;">
-      <header class="fcg-marketing-header fade-up">
-        <div class="fcg-marketing-eyebrow">Supply layer</div>
-        <h2 class="fcg-marketing-title">One API. <span>Four supply paths.</span></h2>
-        <p>G&#8209;Link brings the hotel paths a TMC needs into one layer: GDS, direct hotel, bedbank, and Asia-direct. Rates, content, and post-booking events stay connected.</p>
-      </header>
-
-      <div class="fcg-marketing-features fade-up">
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:buildings-2-linear" width="22" height="22"></iconify-icon></div>
-          <h3>4.3M+ mapped hotels</h3>
-          <p>Four supply paths as one bookable, deduplicated feed.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:tag-price-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Corporate rates, not just inventory</h3>
-          <p>RFP rates wholesalers can't carry, up to 70% of corporate volume.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:global-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Asia depth around global GDS</h3>
-          <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Mid-office after booking</h3>
-          <p>Cancellations, holds, and reschedules handled through the BMS.</p>
-        </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-marketing-feature-icon"><iconify-icon icon="solar:ranking-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Quality-scored sources</h3>
-          <p>Bookings route to the most dependable supply path.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="how-it-works" class="fcg-integration-section">
-    <div class="fcg-integration-inner">
-      <header class="fcg-integration-header fade-up">
-        <div class="fcg-integration-eyebrow">Integration</div>
-        <h2 class="fcg-integration-title"><span>Skills, API, or SDK.</span><br>Three ways into the same supply layer.</h2>
-        <p>The Open Platform exposes G&#8209;Link three ways. Skills is the fastest start.</p>
-      </header>
-
-      <div class="fcg-flow-grid fade-up">
-        <div class="fcg-flow-step">
-          <div class="fcg-flow-step-number">01</div>
-          <h3>Skills · AI-native</h3>
-          <p>Describe the flow in plain English. AI drafts it from live docs.</p>
-          <div class="code-tag">/skill fcg-glink</div>
+      <div class="partner-logo-grid relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x">
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
+          <img alt="PST Travel Logo" class="pointer-events-none max-h-12 max-w-[150px] select-none object-contain md:max-h-14 md:max-w-[170px]" src="https://static.wixstatic.com/media/6f8e7e_f844282625cb466d8c9580ec35a3645b~mv2.jpg/v1/crop/x_386,y_592,w_3524,h_3344/fill/w_274,h_260,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/PST_Travel-Secondary2.jpg">
+          <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
         </div>
-        <div class="fcg-flow-step">
-          <div class="fcg-flow-step-number">02</div>
-          <h3>API · Versioned REST</h3>
-          <p>Full control over search, rates, and booking.</p>
-          <div class="code-tag">POST /v2/hotels/search</div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r">
+          <img alt="Connexus Travel Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://cdn.prod.website-files.com/68553d1dd8ca0b336f66b55c/69e8a0b042a0c29ce4b7f0f9_2026%20CTL%20logo_Colour_Tran%20bg%20(2).png">
         </div>
-        <div class="fcg-flow-step">
-          <div class="fcg-flow-step-number">03</div>
-          <h3>SDK · Managed surface</h3>
-          <p>Typed primitives for standard stacks, less boilerplate.</p>
-          <div class="code-tag">npm i @fcg/glink</div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
+          <img alt="Alibaba Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px]" src="../assets/images/logos/alibaba.svg">
+          <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
+          <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -left-3 -bottom-3 hidden md:block" aria-hidden="true"></span>
         </div>
-      </div>
-
-      <div class="fcg-supply-illustration fade-up" aria-label="Many supply sources resolving into one G-Link layer">
-        <svg width="340" height="340" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)" opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="450" cy="720" r="370"/><circle cx="480" cy="720" r="400"/><circle cx="510" cy="720" r="430"/><circle cx="540" cy="720" r="460"/><circle cx="570" cy="720" r="490"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>
-      </div>
-    </div>
-  </section>
-
-  <section id="supply-buckets" class="px-6 md:px-12 py-28 bg-[#000] border-t border-white/10">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 fade-up">
-        <div>
-          <div class="product-kicker text-xs text-orange-500 mb-4">Supply · Buckets</div>
-          <h2 class="text-3xl md:text-5xl text-white font-medium tracking-tight">Four supply paths.</h2>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b">
+          <img alt="ByteDance Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/ByteDance_logo_English.svg">
         </div>
-        <p class="text-sm text-neutral-400 max-w-md leading-relaxed">Each path plays a different role. Together, one accountable layer.</p>
-      </div>
-
-      <div class="fcg-flow-grid fade-up" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">A</div>
-          <h3>Corporate-rate GDS</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">RFP rates wholesale can't carry, through direct GDS.</p>
-          <div class="code-tag">Bucket A · GDS direct</div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b md:border-b-0">
+          <img alt="Amadeus Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://commons.wikimedia.org/wiki/Special:FilePath/Amadeus_Organization_logo_2024.svg">
+          <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3 md:hidden" aria-hidden="true"></span>
         </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">B</div>
-          <h3>Direct hotel paths</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Direct contracts and channel managers. The most accountable channel.</p>
-          <div class="code-tag">Bucket B · Direct hotel &amp; NDC</div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r md:border-b-0">
+          <img alt="Huazhu Group Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://companieslogo.com/img/orig/HTHT_BIG-d42ec412.svg?t=1720244492">
         </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">C</div>
-          <h3>Long-tail coverage</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Bedbank breadth for properties not covered elsewhere.</p>
-          <div class="code-tag">Bucket C · Bedbank</div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r">
+          <img alt="IHG Hotels and Resorts Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/IHG_Hotels_%26_Resorts_logo.svg">
         </div>
-
-        <div class="fcg-flow-step" style="text-align:left;">
-          <div class="fcg-flow-step-number">D</div>
-          <h3>China and Asia direct</h3>
-          <p style="margin:0 0 1.25rem;max-width:none;">Chinese chains and Asia-specialty connections. Built in-region.</p>
-          <div class="code-tag">Bucket D · China &amp; Asia direct</div>
+        <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8">
+          <img alt="Marriott International Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/Marriott_International.svg">
         </div>
       </div>
     </div>
   </section>
-  <section class="fcg-marketing-section" aria-label="Common questions from TMC evaluation teams">
-    <div class="fcg-marketing-inner" style="max-width:72rem;">
-      <header class="fcg-marketing-header fade-up">
-        <div class="fcg-marketing-eyebrow">Evaluation</div>
-        <h2 class="fcg-marketing-title">What TMCs <span>ask first.</span></h2>
-      </header>
 
-      <div class="fcg-marketing-features fade-up">
-        <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"We already use another wholesaler."</div>
-          <h3>Wholesalers cannot carry corporate-negotiated rates.</h3>
-          <p>RFP rates only flow through GDS and direct hotel, up to 70% of corporate volume. G&#8209;Link adds the layer wholesalers can't.</p>
+  <!-- ===== 3-UP FEATURE CARDS (nuitee: "you dream it, we'll build it") ===== -->
+  <section id="api-capabilities" class="v7-section" style="position:relative;padding:6.5rem 1.5rem;border-top:0;">
+    <style>
+      .v7-cards-wrap { max-width: 72rem; margin: 0 auto; }
+      .v7-cards-head { max-width: 42rem; margin: 0 0 3.25rem; }
+      .v7-eyebrow { color:#fb923c; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:.18em; margin-bottom:.7rem; text-transform:uppercase; }
+      .v7-cards-head h2 { color:#fff; font-size:clamp(1.9rem,3vw,2.5rem); font-weight:500; letter-spacing:-.02em; margin:0 0 1rem; line-height:1.1; }
+      .v7-cards-head p { color:rgba(255,255,255,.62); font-size:1rem; line-height:1.7; margin:0; max-width:38rem; }
+      .v7-cards-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+      @media (max-width:860px){ .v7-cards-grid{ grid-template-columns:1fr; } }
+      .v7-card { position:relative; background:#121212; border:1px solid #2a2a2a; border-radius:24px; padding:2rem; display:flex; flex-direction:column; min-height:16rem; }
+      .v7-card-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; }
+      .v7-card-tag { font-family:'Inter',sans-serif; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.55); }
+      .v7-card-num { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px; color:rgba(255,255,255,.3); letter-spacing:.05em; }
+      .v7-tile { width:2.75rem; height:2.75rem; border-radius:10px; background:rgba(249,115,22,.1); border:1px solid rgba(249,115,22,.22); display:flex; align-items:center; justify-content:center; color:#fb923c; margin-bottom:1.4rem; }
+      .v7-card h3 { color:#fff; font-size:1.2rem; font-weight:500; letter-spacing:-.01em; margin:0 0 .75rem; line-height:1.22; }
+      .v7-card p { color:rgba(255,255,255,.6); font-size:.9rem; line-height:1.6; margin:0; }
+    </style>
+    <div class="v7-cards-wrap">
+      <div class="v7-cards-head fade-up">
+        <div class="v7-eyebrow">Operating modules</div>
+        <h2>The TMC stack, unbundled.</h2>
+        <p>G&#8209;Link and F&#8209;Link handle inventory. TMC API handles the workflows around each booking: policy, approvals, reporting, expense, and duty of care.</p>
+      </div>
+      <div class="v7-cards-grid">
+        <article class="v7-card fade-up">
+          <div class="v7-card-head"><span class="v7-card-tag">Modular</span><span class="v7-card-num">01</span></div>
+          <div class="v7-tile"><iconify-icon icon="solar:widget-add-linear" width="22" height="22"></iconify-icon></div>
+          <h3>One module library</h3>
+          <p>Expense, duty of care, reporting, and approvals are exposed as discrete APIs. Take one, several, or expand over time through the same surface.</p>
         </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"We already use another travel platform."</div>
-          <h3>Most large TMCs already multiplex APIs.</h3>
-          <p>If China is in your client mix, G&#8209;Link closes the gap: Chinese chains plus global GDS. China is 58% of Asia travel.</p>
+        <article class="v7-card fade-up">
+          <div class="v7-card-head"><span class="v7-card-tag">Brand</span><span class="v7-card-num">02</span></div>
+          <div class="v7-tile"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
+          <h3>White-label by default</h3>
+          <p>Corporate clients see the TMC's brand, not FCG's. Modules sit inside the client portal, booking flow, and reporting pack.</p>
         </article>
-        <article class="fcg-marketing-feature">
-          <div class="fcg-objection-q">"Our dev team is already stretched thin."</div>
-          <h3>Skills helps developers start without a handoff.</h3>
-          <p>Skills, API, and SDK share one backend. Ship the first search call from live docs, no handoff.</p>
+        <article class="v7-card fade-up">
+          <div class="v7-card-head"><span class="v7-card-tag">Stack</span><span class="v7-card-num">03</span></div>
+          <div class="v7-tile"><iconify-icon icon="solar:layers-minimalistic-linear" width="22" height="22"></iconify-icon></div>
+          <h3>Built to pair with supply</h3>
+          <p>Run modules alone, or beside G&#8209;Link and F&#8209;Link when a partner wants supply plus operations through one relationship.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="fcg-integration-section" aria-label="Commercial model">
-    <div class="fcg-integration-inner">
-      <header class="fcg-integration-header fade-up">
-        <div class="fcg-integration-eyebrow">Commercial model</div>
-        <h2 class="fcg-integration-title"><span>Clear packaging.</span><br>Scoped by product surface.</h2>
-        <p>Tiered by product surface: G&#8209;Link only, full OBT suite, white-label, or RFP support.</p>
-      </header>
-
-      <div class="fcg-pricing-rows fade-up">
-        <article>
-          <div class="fcg-pricing-label">One-time setup</div>
-          <div class="fcg-pricing-value">Scoped by launch needs</div>
-          <div class="fcg-pricing-sub">Supplier activation, sandbox onboarding, and integration support.</div>
-        </article>
-        <article>
-          <div class="fcg-pricing-label">Monthly subscription</div>
-          <div class="fcg-pricing-value">Tiered by product scope</div>
-          <div class="fcg-pricing-sub">G&#8209;Link only sits at the lower end of the range.</div>
-        </article>
-      </div>
-      <p class="fcg-pricing-foot fade-up">Final tiers depend on product scope and supplier activation.</p>
+  <!-- ===== FEATURE-SPLIT #1 · integration + code sample (nuitee: "one fast API") ===== -->
+  <section id="how-it-works" class="v7-section v7-section-alt" style="position:relative;padding:7rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);overflow:hidden;">
+    <style>
+      .v7-split { max-width:76rem; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+      @media (max-width:900px){ .v7-split{ grid-template-columns:1fr; gap:2.5rem; } .v7-split .v7-media{ order:2; } }
+      .v7-split .v7-copy h2 { color:#fff; font-size:clamp(1.9rem,3.2vw,2.6rem); font-weight:500; letter-spacing:-.02em; margin:0 0 1.1rem; line-height:1.1; }
+      .v7-split .v7-copy h2 em { font-style:normal; color:rgba(255,255,255,.55); }
+      .v7-split .v7-copy > p { color:rgba(255,255,255,.66); font-size:1.02rem; line-height:1.7; margin:0 0 2rem; max-width:34rem; }
+      .v7-feat { display:flex; flex-direction:column; gap:1.4rem; }
+      .v7-feat-row { display:flex; gap:1rem; align-items:flex-start; }
+      .v7-feat-row .v7-fnum { font-family:'JetBrains Mono',monospace; font-size:12px; color:#fb923c; padding-top:.2rem; flex-shrink:0; min-width:1rem; }
+      .v7-feat-row h3 { color:#fff; font-size:1.05rem; font-weight:500; margin:0 0 .3rem; letter-spacing:-.005em; }
+      .v7-feat-row p { color:rgba(255,255,255,.6); font-size:.92rem; line-height:1.55; margin:0; }
+      .v7-feat-row .code-tag { display:inline-block; margin-top:.5rem; font-family:'JetBrains Mono',monospace; font-size:11px; color:rgba(255,255,255,.7); background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:6px; padding:.35rem .6rem; }
+      .v7-howit-head { text-align:center; max-width:46rem; margin:0 auto 3.25rem; }
+      .v7-howit-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2.25rem; max-width:74rem; margin:0 auto; }
+      @media (max-width:860px){ .v7-howit-grid{ grid-template-columns:1fr; gap:1.75rem; } }
+      .v7-code { background:#0c0c0c; border:1px solid rgba(255,255,255,.1); border-radius:18px; overflow:hidden; font-family:'JetBrains Mono',ui-monospace,monospace; }
+      .v7-code-bar { display:flex; align-items:center; gap:.5rem; padding:.85rem 1.1rem; border-bottom:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.02); }
+      .v7-code-bar .dot { width:10px; height:10px; border-radius:9999px; background:rgba(255,255,255,.16); }
+      .v7-code-bar .file { margin-left:.5rem; font-size:11px; color:rgba(255,255,255,.45); letter-spacing:.04em; }
+      .v7-code pre { margin:0; padding:1.5rem 1.4rem; font-size:12.5px; line-height:1.7; color:rgba(255,255,255,.82); overflow-x:auto; }
+      .v7-code .k { color:#fb923c; }
+      .v7-code .s { color:#86efac; }
+      .v7-code .c { color:rgba(255,255,255,.35); }
+    </style>
+    <div class="v7-cards-head v7-howit-head fade-up">
+      <div class="v7-eyebrow">Open Platform integration</div>
+      <h2>One surface. <em>Skills, API, or SDK.</em></h2>
+      <p>Open Platform exposes TMC API through the same three methods as the rest of the FCG stack. Start with one workflow in sandbox, then add modules under the same credentials and tenant model.</p>
+    </div>
+    <div class="v7-howit-grid">
+      <div class="v7-feat-row fade-up"><span class="v7-fnum">01</span><div><h3>Skills · AI-native</h3><p>Paste a Skills command into your AI tool. The model reads the docs and drafts the calls.</p><span class="code-tag">/skill fcg-tmc-api</span></div></div>
+      <div class="v7-feat-row fade-up"><span class="v7-fnum">02</span><div><h3>API · Versioned REST</h3><p>Versioned REST for custom policy logic, tenant scoping, and audit trails.</p><span class="code-tag">POST /v2/approvals/route</span></div></div>
+      <div class="v7-feat-row fade-up"><span class="v7-fnum">03</span><div><h3>SDK · Managed surface</h3><p>Typed primitives for expenses, traveler-risk lookups, reports, and approval chains.</p><span class="code-tag">npm i @fcg/tmc</span></div></div>
     </div>
   </section>
 
+  <!-- ===== FEATURE-SPLIT #2 · modules (nuitee: "clean data") ===== -->
+  <section id="tmc-modules" class="v7-section" style="position:relative;padding:7rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);overflow:hidden;">
+    <style>
+      .v7-mod-panel { background:#0a0a0a; border:1px solid rgba(255,255,255,.1); border-radius:24px; overflow:hidden; }
+      .v7-mod-item { display:flex; align-items:center; gap:1rem; padding:1.35rem 1.5rem; border-bottom:1px solid rgba(255,255,255,.06); }
+      .v7-mod-item:last-child { border-bottom:0; }
+      .v7-mod-item .ic { width:2.4rem; height:2.4rem; border-radius:8px; background:rgba(249,115,22,.08); border:1px solid rgba(249,115,22,.22); display:flex; align-items:center; justify-content:center; color:#fb923c; flex-shrink:0; }
+      .v7-mod-item .tx strong { display:block; color:#fff; font-size:.95rem; font-weight:500; }
+      .v7-mod-item .tx span { color:rgba(255,255,255,.55); font-size:.82rem; }
+      .v7-mod-item .st { margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.06em; color:rgba(255,255,255,.4); text-transform:uppercase; }
+    </style>
+
+    <!-- ===== V7 THEME · dark default + light-mode overrides (code window stays dark) ===== -->
+    <style>
+      /* Section shells — dark default */
+      .v7-section { background:#050505; color:#fff; }
+      .v7-section.v7-section-alt { background:#000; }
+
+      /* ---------- LIGHT MODE ---------- */
+      html[data-theme="light"] .v7-section,
+      html[data-theme="light"] .v7-section.v7-section-alt {
+        background:#ffffff; color:#0f1114;
+        border-top-color:rgba(15,17,20,.08) !important;
+      }
+      /* Section heads + body copy */
+      html[data-theme="light"] .v7-cards-head h2,
+      html[data-theme="light"] .v7-split .v7-copy h2,
+      html[data-theme="light"] .v7-card h3,
+      html[data-theme="light"] .v7-feat-row h3,
+      html[data-theme="light"] .v7-mod-item .tx strong { color:#0f1114; }
+      html[data-theme="light"] .v7-split .v7-copy h2 em { color:#9aa1ab; }
+      html[data-theme="light"] .v7-cards-head p,
+      html[data-theme="light"] .v7-split .v7-copy > p,
+      html[data-theme="light"] .v7-card p,
+      html[data-theme="light"] .v7-feat-row p,
+      html[data-theme="light"] .v7-mod-item .tx span { color:#737373; }
+      html[data-theme="light"] .v7-card-tag,
+      html[data-theme="light"] .v7-card-num,
+      html[data-theme="light"] .v7-mod-item .st { color:#9aa1ab; }
+
+      /* Cards + panels — white with neutral borders (matches .product-card) */
+      html[data-theme="light"] .v7-card {
+        background:#ffffff; border-color:rgba(15,17,20,.10);
+        box-shadow:0 18px 50px rgba(15,17,20,.06);
+      }
+      html[data-theme="light"] .v7-mod-panel {
+        background:#ffffff; border-color:rgba(15,17,20,.10);
+        box-shadow:0 18px 50px rgba(15,17,20,.06);
+      }
+      html[data-theme="light"] .v7-mod-item { border-bottom-color:rgba(15,17,20,.07); }
+
+      /* Inline code chip in feature list */
+      html[data-theme="light"] .v7-feat-row .code-tag {
+        color:#4b5563; background:#f3f4f6; border-color:rgba(15,17,20,.10);
+      }
+      /* .v7-code window intentionally NOT overridden — stays dark in both themes */
+    </style>
+    <div class="v7-split">
+      <div class="v7-media fade-up">
+        <div class="v7-mod-panel">
+          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:wallet-money-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Expense Management</strong><span>Capture, enforce policy, route, report</span></div><span class="st">Module</span></div>
+          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:shield-check-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Duty of Care</strong><span>Traveler tracking, risk, incident comms</span></div><span class="st">Module</span></div>
+          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:chart-square-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Reporting</strong><span>Spend, supplier, compliance, savings</span></div><span class="st">Module</span></div>
+          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:checklist-minimalistic-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Approval Workflows</strong><span>Multi-level chains, policy routing, audit</span></div><span class="st">Module</span></div>
+        </div>
+      </div>
+      <div class="v7-copy fade-up">
+        <div class="v7-eyebrow">Modules · Library</div>
+        <h2>Operational modules, <em>ready to embed.</em></h2>
+        <p>Each module is white-label ready and can stand alone. Start with the highest-value gap, then add more without changing the integration model.</p>
+        <div class="v7-feat">
+          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>Drop-in, not rip-and-replace</h3><p>Bolt a module into the booking platform, CRM, or client portal a TMC already runs.</p></div></div>
+          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>Tenant-scoped per client</h3><p>Policy, routing, and reporting cut per corporate client, with a full audit trail.</p></div></div>
+          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>New modules, same surface</h3><p>The library expands through the same credentials and integration model.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ASIA / CHINA SUPPLY SECTION ===== -->
+  <section id="asia-supply" style="position:relative;background:#050505;color:#fff;padding:7rem 1.5rem;border-top:1px solid rgba(255,255,255,.08);overflow:hidden;">
+    <style>
+      .v2-asia-wrap { max-width: 76rem; margin: 0 auto; position: relative; z-index: 1; display:grid; grid-template-columns: 1.05fr .95fr; gap: 4rem; align-items:center; }
+      @media (max-width: 900px) { .v2-asia-wrap { grid-template-columns: 1fr; gap: 3rem; } }
+      .v2-asia-eyebrow { color:#fb923c; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:.18em; margin-bottom:.85rem; text-transform:uppercase; }
+      .v2-asia h2 { color:#fff; font-size: clamp(2rem, 3.4vw, 2.85rem); font-weight:500; letter-spacing:-.02em; margin:0 0 1.25rem; line-height:1.08; }
+      .v2-asia h2 em { font-style:normal; color:rgba(255,255,255,.55); }
+      .v2-asia p.lede { color:rgba(255,255,255,.68); font-size:1.025rem; line-height:1.7; max-width: 36rem; margin: 0 0 2rem; }
+      .v2-asia-points { display:flex; flex-direction:column; gap:1.1rem; margin-top: 1.25rem; }
+      .v2-asia-point { display:flex; gap: 1rem; align-items:flex-start; }
+      .v2-asia-point .v2-asia-icon { width:2.5rem; height:2.5rem; border-radius:8px; background: rgba(249,115,22,.08); border:1px solid rgba(249,115,22,.22); display:flex; align-items:center; justify-content:center; color:#fb923c; flex-shrink:0; }
+      .v2-asia-point h4 { color:#fff; font-size: .95rem; font-weight: 500; margin: .15rem 0 .25rem; letter-spacing:-.005em; }
+      .v2-asia-point p { color: rgba(255,255,255,.6); font-size: .9rem; line-height:1.55; margin: 0; }
+      .v2-asia-card { position:relative; background:#0a0a0a; border:1px solid rgba(255,255,255,.1); border-radius: 24px; padding: 2.5rem; overflow:hidden; }
+      .v2-asia-stat { display:flex; align-items:baseline; gap:.6rem; margin-bottom: 1.5rem; }
+      .v2-asia-stat strong { color:#fff; font-size: clamp(3rem, 6vw, 4.25rem); font-weight: 300; font-family:'JetBrains Mono', ui-monospace, monospace; letter-spacing:-.04em; line-height:1; }
+      .v2-asia-stat span { color:#fb923c; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase; }
+      .v2-asia-stat-lede { color:rgba(255,255,255,.65); font-size: .95rem; line-height: 1.6; margin: 0 0 2rem; }
+      .v2-asia-card ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: .75rem; border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; }
+      .v2-asia-card li { display:flex; gap:.65rem; align-items:flex-start; color: rgba(255,255,255,.62); font-size: .9rem; line-height: 1.5; }
+      .v2-asia-card li iconify-icon { color:#fb923c; margin-top: .2rem; flex-shrink:0; }
+    </style>
+    <div class="v2-asia-wrap">
+      <div class="v2-asia fade-up">
+        <div class="v2-asia-eyebrow">Built to pair with supply</div>
+        <h2>Operations beside Asia and China supply.</h2>
+        <p class="lede">TMC API is not hotel or flight supply. It is the operational counterpart to G&#8209;Link and F&#8209;Link, adding policy, reporting, care, and expense workflows around the inventory strategy.</p>
+        <div class="v2-asia-points">
+          <div class="v2-asia-point">
+            <div class="v2-asia-icon"><iconify-icon icon="solar:global-linear" width="18" height="18"></iconify-icon></div>
+            <div>
+              <h4>Pairs with FCG's regional supply stack</h4>
+              <p>When a TMC also uses G&#8209;Link or F&#8209;Link, modules can sit beside FCG's hotel and air inventory instead of becoming another disconnected vendor.</p>
+            </div>
+          </div>
+          <div class="v2-asia-point">
+            <div class="v2-asia-icon"><iconify-icon icon="solar:buildings-3-linear" width="18" height="18"></iconify-icon></div>
+            <div>
+              <h4>Designed for Asia-heavy corporate travel</h4>
+              <p>Duty of care, reporting, and approvals matter more when clients operate across China, Southeast Asia, and complex regional routes.</p>
+            </div>
+          </div>
+          <div class="v2-asia-point">
+            <div class="v2-asia-icon"><iconify-icon icon="solar:shield-check-linear" width="18" height="18"></iconify-icon></div>
+            <div>
+              <h4>One stack when partners want both</h4>
+              <p>A TMC can consume TMC API modules independently, or combine them with G&#8209;Link and F&#8209;Link under one FCG relationship.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="v2-asia-card fade-up">
+        <div class="v2-asia-stat"><strong>58%</strong><span>of Asia travel<br>spend</span></div>
+        <p class="v2-asia-stat-lede">China alone represents 58% of Asia's travel spend. For TMCs serving Asia-heavy corporates, operations need the same regional awareness as supply.</p>
+        <ul>
+          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>Operational modules for TMCs that already have a booking platform</li>
+          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>White-label surfaces for the TMC's own client experience</li>
+          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>Can be consumed independently from G&#8209;Link and F&#8209;Link</li>
+          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>Can consolidate with FCG supply products when partners want one stack</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
 </main>
 <!-- ===== API ACCESS CTA SECTION ===== -->
     <footer id="contact" class="flex flex-col w-full">
       <section id="getting-started" class="fcg-mobile-feature border-t border-white/10">
         <div class="fcg-mobile-inner">
           <header class="fcg-mobile-heading fade-up">
-            <div class="fcg-main-icon"><iconify-icon icon="solar:code-square-linear" width="28" height="28"></iconify-icon></div>
+            <div class="fcg-main-icon"><iconify-icon icon="solar:widget-add-linear" width="28" height="28"></iconify-icon></div>
             <div class="fcg-mobile-eyebrow">Get connected</div>
-            <h2>Connect G&#8209;Link.</h2>
-            <p class="fcg-mobile-subcopy">Start in sandbox, test the four supply paths, move to production.</p>
+            <h2>Add the missing operating layer.</h2>
+            <p class="fcg-mobile-subcopy">Plug white-label modules into the platform a TMC already runs. Start with one workflow, then expand through the same surface.</p>
           </header>
 
-          <div class="fcg-feature-grid">
+          <div class="fcg-feature-grid is-tmc-getting-started">
             <article class="fcg-feature-row fade-up">
               <div class="fcg-feature-icon"><iconify-icon icon="solar:key-minimalistic-square-linear" width="22" height="22"></iconify-icon></div>
               <div>
                 <h3>Register on the Open Platform</h3>
-                <p>Self-serve sandbox credentials and live docs. No handoff.</p>
+                <p>Self-serve developer registration, sandbox credentials, and live docs in one place.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
               <div class="fcg-feature-icon"><iconify-icon icon="solar:magic-stick-3-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Integrate via Skills, API, or SDK</h3>
-                <p>Three doors, one backend. Skills is the default: describe it, AI writes the code.</p>
+                <h3>Pick the modules that fit</h3>
+                <p>Expense, duty of care, reporting, approvals, and more. Take one module, several, or leave in-house capabilities untouched.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
               <div class="fcg-feature-icon"><iconify-icon icon="solar:test-tube-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Test against the four supply buckets</h3>
-                <p>Run a search across all four paths and confirm a sandbox booking.</p>
+                <h3>Wire into the existing surface</h3>
+                <p>Bolt modules into the booking platform, CRM, or client portal a TMC already operates. The corporate client sees the TMC's brand.</p>
               </div>
             </article>
 
             <article class="fcg-feature-row fade-up">
               <div class="fcg-feature-icon"><iconify-icon icon="solar:rocket-2-linear" width="22" height="22"></iconify-icon></div>
               <div>
-                <h3>Move to production</h3>
-                <p>Switch to production once validated. Commercial terms handled in parallel.</p>
+                <h3>Consolidate the commercial relationship</h3>
+                <p>Already on G&#8209;Link or F&#8209;Link? Module consumption rolls into the same contract and billing surface. One vendor across supply and operations.</p>
+              </div>
+            </article>
+
+            <article class="fcg-feature-row fade-up">
+              <div class="fcg-feature-icon"><iconify-icon icon="solar:tag-price-linear" width="22" height="22"></iconify-icon></div>
+              <div>
+                <h3>Per-module pricing</h3>
+                <p>Pricing scales by module and volume tier. Talk to sales for a quote scoped to the stack.</p>
               </div>
             </article>
           </div>
 
-          <section class="glink-radar-section" aria-label="G&#8209;Link supply radar">
-            <div class="glink-radar-inner">
-              <div class="glink-radar-scene">
-                <div class="glink-radar-stage">
-                  <div class="glink-radar-row-wide">
-                    <div class="glink-radar-row-inner">
-                      <div class="glink-radar-node" style="animation-delay: .2s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:compass-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">GDS</div>
-                      </div>
-                      <div class="glink-radar-node" style="animation-delay: .3s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:buildings-2-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Direct hotel</div>
-                      </div>
-                      <div class="glink-radar-node" style="animation-delay: .4s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:box-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Bedbank</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="glink-radar-row-narrow">
-                    <div class="glink-radar-row-inner">
-                      <div class="glink-radar-node" style="animation-delay: .5s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:chart-2-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Corporate rates</div>
-                      </div>
-                      <div class="glink-radar-node" style="animation-delay: .6s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:map-point-wave-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Asia direct</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="glink-radar-row-wide">
-                    <div class="glink-radar-row-inner">
-                      <div class="glink-radar-node" style="animation-delay: .7s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:case-round-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">TMCs</div>
-                      </div>
-                      <div class="glink-radar-node" style="animation-delay: .8s;">
-                        <div class="glink-radar-tile"><iconify-icon icon="solar:cpu-bolt-linear" width="28" height="28"></iconify-icon></div>
-                        <div class="glink-radar-label">Mid-office</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="glink-radar-core" aria-hidden="true">
-                    <div class="glink-radar-sweep">
-                      <div class="glink-radar-sweep-line"></div>
-                    </div>
-                    <div class="glink-radar-circle" style="height:5rem;width:5rem;border:1px solid rgba(255,255,255,.9);animation-delay:0s;"></div>
-                    <div class="glink-radar-circle" style="height:10rem;width:10rem;border:1px solid rgba(255,255,255,.8);animation-delay:.1s;"></div>
-                    <div class="glink-radar-circle" style="height:15rem;width:15rem;border:1px solid rgba(255,255,255,.7);animation-delay:.2s;"></div>
-                    <div class="glink-radar-circle" style="height:20rem;width:20rem;border:1px solid rgba(255,255,255,.6);animation-delay:.3s;"></div>
-                    <div class="glink-radar-circle" style="height:25rem;width:25rem;border:1px solid rgba(255,255,255,.5);animation-delay:.4s;"></div>
-                    <div class="glink-radar-circle" style="height:30rem;width:30rem;border:1px solid rgba(255,255,255,.4);animation-delay:.5s;"></div>
-                    <div class="glink-radar-circle" style="height:35rem;width:35rem;border:1px solid rgba(255,255,255,.3);animation-delay:.6s;"></div>
-                    <div class="glink-radar-circle" style="height:40rem;width:40rem;border:1px solid rgba(255,255,255,.2);animation-delay:.7s;"></div>
-                  </div>
-
-                  <div class="glink-radar-divider" aria-hidden="true"></div>
-                </div>
-              </div>
-            </div>
-          </section>
-
           <div class="fcg-mobile-cta fade-up">
-            <h3>Hotel supply, ready to integrate.</h3>
-            <p>Walk through corporate-rate routing, Asia depth, and the sandbox path to production.</p>
+            <h3>TMC operations, module by module.</h3>
+            <p>Walk through the current modules, the white-label surface, and the sandbox path for one real workflow.</p>
             <div class="fcg-store-actions">
-              <a href="#capabilities" class="fcg-store-button"><iconify-icon icon="solar:calendar-mark-linear" width="18" height="18"></iconify-icon>Schedule a walkthrough</a>
-              <a href="../api-access.html" class="fcg-store-button"><iconify-icon icon="solar:key-minimalistic-square-linear" width="18" height="18"></iconify-icon>Register for sandbox</a>
+              <a href="#contact" class="fcg-store-button"><iconify-icon icon="solar:calendar-mark-linear" width="18" height="18"></iconify-icon>Book a demo</a>
+              <a href="#" class="fcg-store-button"><iconify-icon icon="solar:document-text-linear" width="18" height="18"></iconify-icon>Open the docs</a>
             </div>
           </div>
         </div>
       </section>
     </footer>
     <!-- ===== END API ACCESS CTA SECTION ===== -->
-
-    <!-- ===== NUITEE-LAYOUT COMPARISON BLOCK (NEW · for review) ===== -->
-    <style>
-      .nl-block { background: var(--color-bg); color: var(--color-fg); font-family: 'Inter', system-ui, sans-serif; }
-      .nl-inner { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
-      .nl-inner-wide { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
-      .nl-section { padding: 5.5rem 0; border-top: 1px solid var(--color-border); }
-      .nl-eyebrow { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: #F97316; font-weight: 600; margin-bottom: 1rem; }
-      .nl-h2 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.7rem, 3.4vw, 2.6rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.1; margin: 0; }
-      .nl-h2 span { color: #F97316; }
-      .nl-lead { color: var(--color-muted); font-size: 1rem; line-height: 1.6; max-width: 40rem; margin: 1rem 0 0; }
-      .nl-greybox {
-        width: 100%; min-height: 22rem; border-radius: 1rem;
-        border: 1px dashed var(--color-border);
-        background:
-          repeating-linear-gradient(45deg, transparent, transparent 11px, rgba(136,136,136,.06) 11px, rgba(136,136,136,.06) 12px),
-          var(--color-card);
-        display: flex; align-items: center; justify-content: center; text-align: center;
-        color: var(--color-muted); font-size: .82rem; letter-spacing: .04em; padding: 2rem;
-      }
-      .nl-greybox span { max-width: 16rem; }
-
-      /* Divider strip */
-      .nl-divider { background: var(--color-card); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
-      .nl-divider-inner { max-width: 80rem; margin: 0 auto; padding: .9rem 1.5rem; display: flex; align-items: center; gap: .7rem; }
-      .nl-divider .nl-dot { width: .55rem; height: .55rem; border-radius: 999px; background: #F97316; flex: none; }
-      .nl-divider strong { font-size: .82rem; font-weight: 600; letter-spacing: .02em; }
-      .nl-divider em { font-style: normal; color: var(--color-muted); font-size: .82rem; }
-
-      /* Hero (split) */
-      .nl-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center; }
-      .nl-pill { display: inline-flex; align-items: center; gap: .5rem; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--color-fg); border: 1px solid var(--color-border); border-radius: 999px; padding: .4rem .85rem; }
-      .nl-pill .nl-dot { width: .5rem; height: .5rem; border-radius: 999px; background: #F97316; }
-      .nl-h1 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(2.1rem, 4.6vw, 3.3rem); font-weight: 500; letter-spacing: -.025em; line-height: 1.05; margin: 1.6rem 0 0; }
-      .nl-h1 em { font-style: normal; color: #F97316; }
-      .nl-clarifier { color: var(--color-muted); font-size: 1.05rem; line-height: 1.6; margin: 1.1rem 0 0; max-width: 32rem; }
-      .nl-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.9rem; }
-      .nl-btn { display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; padding: .8rem 1.5rem; font-size: .9rem; font-weight: 500; text-decoration: none; transition: transform .2s ease, opacity .2s ease; }
-      .nl-btn:hover { transform: translateY(-1px); }
-      .nl-btn-primary { background: #F97316; color: #0F1114; }
-      .nl-btn-secondary { background: transparent; color: var(--color-fg); border: 1px solid var(--color-border); }
-
-      /* Advantage 3-up */
-      .nl-adv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
-      .nl-card { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 1rem; padding: 1.75rem; }
-      .nl-card-icon { width: 2.6rem; height: 2.6rem; display: flex; align-items: center; justify-content: center; border-radius: .7rem; border: 1px solid var(--color-border); color: #F97316; margin-bottom: 1.1rem; }
-      .nl-card h3 { font-size: 1.05rem; font-weight: 600; margin: 0 0 .5rem; letter-spacing: -.01em; }
-      .nl-card p { color: var(--color-muted); font-size: .92rem; line-height: 1.55; margin: 0; }
-
-      /* Stats band */
-      .nl-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
-      .nl-stat { border-left: 2px solid #F97316; padding-left: 1.1rem; }
-      .nl-stat-num { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; letter-spacing: -.02em; line-height: 1; }
-      .nl-stat-label { color: var(--color-muted); font-size: .86rem; line-height: 1.45; margin-top: .55rem; }
-
-      /* Capability 4-up (metric + visual) */
-      .nl-cap-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
-      .nl-cap { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 1rem; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.1rem; }
-      .nl-cap-metric { font-family: 'Sora', 'Inter', sans-serif; font-size: 1.7rem; font-weight: 500; letter-spacing: -.02em; }
-      .nl-cap h3 { font-size: 1rem; font-weight: 600; margin: 0; }
-      .nl-cap p { color: var(--color-muted); font-size: .9rem; line-height: 1.55; margin: 0; }
-      .nl-cap-visual { min-height: 8rem; border-radius: .75rem; border: 1px dashed var(--color-border);
-        background: repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(136,136,136,.06) 9px, rgba(136,136,136,.06) 10px), var(--color-bg);
-        display: flex; align-items: center; justify-content: center; color: var(--color-muted); font-size: .72rem; letter-spacing: .04em; text-align: center; padding: 1rem; }
-
-      /* Feature split (alternating) */
-      .nl-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-      .nl-feature + .nl-feature { margin-top: 4.5rem; }
-      .nl-feature.nl-reverse .nl-feature-media { order: -1; }
-      .nl-feature h3 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.12; margin: .8rem 0 0; }
-      .nl-feature p { color: var(--color-muted); font-size: 1rem; line-height: 1.6; margin: 1rem 0 0; max-width: 30rem; }
-      .nl-feature-list { list-style: none; padding: 0; margin: 1.4rem 0 0; display: flex; flex-direction: column; gap: .7rem; }
-      .nl-feature-list li { display: flex; align-items: flex-start; gap: .6rem; font-size: .92rem; color: var(--color-fg); }
-      .nl-feature-list iconify-icon { color: #F97316; flex: none; margin-top: .15rem; }
-
-      /* Final CTA band */
-      .nl-cta { text-align: center; padding: 6rem 1.5rem; border-top: 1px solid var(--color-border); background: var(--color-card); }
-      .nl-cta h2 { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 500; letter-spacing: -.025em; margin: 0 auto; max-width: 28rem; line-height: 1.1; }
-      .nl-cta p { color: var(--color-muted); font-size: 1.05rem; margin: 1.1rem auto 0; max-width: 34rem; line-height: 1.6; }
-      .nl-cta .nl-actions { justify-content: center; }
-
-      @media (max-width: 860px) {
-        .nl-hero, .nl-feature, .nl-feature.nl-reverse { grid-template-columns: 1fr; gap: 2rem; }
-        .nl-feature.nl-reverse .nl-feature-media { order: 0; }
-        .nl-adv-grid, .nl-stats, .nl-cap-grid { grid-template-columns: 1fr; }
-        .nl-stats { gap: 1.6rem; }
-      }
-    </style>
-
-    <div class="nl-block">
-      <!-- 1 · Labelled divider strip -->
-      <div class="nl-divider">
-        <div class="nl-divider-inner">
-          <span class="nl-dot" aria-hidden="true"></span>
-          <strong>New layout · Nuitee-ordered (G&#8209;Link)</strong>
-          <em>— same content, re-sequenced for review</em>
-        </div>
-      </div>
-
-      <!-- 2 · Split hero -->
-      <section class="nl-section" aria-label="G-Link hero (Nuitee layout)">
-        <div class="nl-inner-wide">
-          <div class="nl-hero">
-            <div class="fade-up">
-              <span class="nl-pill"><span class="nl-dot" aria-hidden="true"></span> Product · G&#8209;Link</span>
-              <h1 class="nl-h1">Hotel supply for <em>corporate travel.</em></h1>
-              <p class="nl-clarifier">One API for GDS, direct hotel, bedbank, and Asia-direct supply. Corporate rates, 4.3M+ mapped hotels, and a mid-office behind every booking.</p>
-              <div class="nl-actions">
-                <a class="nl-btn nl-btn-primary" href="#getting-started">Schedule a walkthrough <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
-                <a class="nl-btn nl-btn-secondary" href="../api-access.html"><iconify-icon icon="solar:code-square-linear" width="16" height="16"></iconify-icon> Read the API docs</a>
-              </div>
-            </div>
-            <div class="nl-greybox scale-in" aria-label="Product walkthrough placeholder">
-              <svg width="240" height="240" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="var(--color-fg)" opacity="0.16" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="480" cy="720" r="400"/><circle cx="540" cy="720" r="460"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3 · Three core advantages -->
-      <section class="nl-section" aria-label="Core advantages">
-        <div class="nl-inner">
-          <div class="fade-up">
-            <div class="nl-eyebrow">Why G&#8209;Link</div>
-            <h2 class="nl-h2">One layer. <span>Three things wholesalers can't do.</span></h2>
-          </div>
-          <div class="nl-adv-grid fade-up">
-            <article class="nl-card">
-              <div class="nl-card-icon"><iconify-icon icon="solar:tag-price-linear" width="22" height="22"></iconify-icon></div>
-              <h3>Corporate rates</h3>
-              <p>RFP rates wholesalers can't carry, up to 70% of corporate volume.</p>
-            </article>
-            <article class="nl-card">
-              <div class="nl-card-icon"><iconify-icon icon="solar:global-linear" width="22" height="22"></iconify-icon></div>
-              <h3>Asia depth</h3>
-              <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
-            </article>
-            <article class="nl-card">
-              <div class="nl-card-icon"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
-              <h3>Mid-office included</h3>
-              <p>Cancellations, holds, and reschedules handled through the BMS.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4 · Stats band (static numerals) -->
-      <section class="nl-section" aria-label="Supply network at a glance">
-        <div class="nl-inner">
-          <div class="fade-up">
-            <div class="nl-eyebrow">By the numbers</div>
-            <h2 class="nl-h2">Supply network <span>at a glance.</span></h2>
-          </div>
-          <div class="nl-stats fade-up">
-            <div class="nl-stat">
-              <div class="nl-stat-num">4.3M+</div>
-              <div class="nl-stat-label">Mapped hotels across four supply paths</div>
-            </div>
-            <div class="nl-stat">
-              <div class="nl-stat-num">43 · 13</div>
-              <div class="nl-stat-label">Suppliers connected, 13 live today</div>
-            </div>
-            <div class="nl-stat">
-              <div class="nl-stat-num">4</div>
-              <div class="nl-stat-label">Supply paths in one bookable feed</div>
-            </div>
-            <div class="nl-stat">
-              <div class="nl-stat-num">58%</div>
-              <div class="nl-stat-label">China's share of Asia travel</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5 · Four capability cards (metric + visual) -->
-      <section class="nl-section" aria-label="Platform capabilities">
-        <div class="nl-inner">
-          <div class="fade-up">
-            <div class="nl-eyebrow">Capabilities</div>
-            <h2 class="nl-h2">What the supply layer <span>actually does.</span></h2>
-          </div>
-          <div class="nl-cap-grid fade-up">
-            <article class="nl-cap">
-              <div class="nl-cap-metric">4.3M+ hotels</div>
-              <div>
-                <h3>Mapping engine</h3>
-                <p>Four supply paths deduplicated into one bookable feed.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ mapping engine view — real screenshot to be supplied ]</span></div>
-            </article>
-            <article class="nl-cap">
-              <div class="nl-cap-metric">43 suppliers</div>
-              <div>
-                <h3>Coverage</h3>
-                <p>Chinese chains alongside Sabre, Amadeus, and Travelport.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ coverage map — real screenshot to be supplied ]</span></div>
-            </article>
-            <article class="nl-cap">
-              <div class="nl-cap-metric">up to 70%</div>
-              <div>
-                <h3>Corporate rates</h3>
-                <p>RFP rates wholesalers can't carry, routed through GDS and direct hotel.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ rate routing view — real screenshot to be supplied ]</span></div>
-            </article>
-            <article class="nl-cap">
-              <div class="nl-cap-metric">Mid-office</div>
-              <div>
-                <h3>After booking</h3>
-                <p>Cancellations, holds, and reschedules handled through the BMS.</p>
-              </div>
-              <div class="nl-cap-visual"><span>[ mid-office / BMS view — real screenshot to be supplied ]</span></div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- 6 · Alternating feature-split blocks -->
-      <section class="nl-section" aria-label="How G-Link works">
-        <div class="nl-inner-wide">
-          <!-- 6a · Supply layer -->
-          <div class="nl-feature fade-up">
-            <div>
-              <div class="nl-eyebrow">Supply layer</div>
-              <h3>One API. Four supply paths.</h3>
-              <p>G&#8209;Link brings the hotel paths a TMC needs into one layer: GDS, direct hotel, bedbank, and Asia-direct. Rates, content, and post-booking events stay connected.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:check-circle-linear" width="18" height="18"></iconify-icon> 4.3M+ mapped hotels as one deduplicated feed</li>
-                <li><iconify-icon icon="solar:check-circle-linear" width="18" height="18"></iconify-icon> Quality-scored sources route to the most dependable path</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ supply layer diagram — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-
-          <!-- 6b · Integration -->
-          <div class="nl-feature nl-reverse fade-up">
-            <div>
-              <div class="nl-eyebrow">Integration</div>
-              <h3>Skills, API, or SDK.</h3>
-              <p>The Open Platform exposes G&#8209;Link three ways. Skills is the fastest start — describe the flow in plain English and AI drafts it from live docs.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:magic-stick-3-linear" width="18" height="18"></iconify-icon> Skills · AI-native, fastest start</li>
-                <li><iconify-icon icon="solar:code-linear" width="18" height="18"></iconify-icon> API · versioned REST, full control</li>
-                <li><iconify-icon icon="solar:box-linear" width="18" height="18"></iconify-icon> SDK · typed primitives, less boilerplate</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ integration / docs view — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-
-          <!-- 6c · Supply buckets -->
-          <div class="nl-feature fade-up">
-            <div>
-              <div class="nl-eyebrow">Supply · Buckets</div>
-              <h3>Four supply paths.</h3>
-              <p>Each path plays a different role. Together, one accountable layer.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:compass-linear" width="18" height="18"></iconify-icon> A · Corporate-rate GDS</li>
-                <li><iconify-icon icon="solar:buildings-2-linear" width="18" height="18"></iconify-icon> B · Direct hotel &amp; NDC</li>
-                <li><iconify-icon icon="solar:box-linear" width="18" height="18"></iconify-icon> C · Bedbank long-tail coverage</li>
-                <li><iconify-icon icon="solar:map-point-wave-linear" width="18" height="18"></iconify-icon> D · China &amp; Asia direct</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ supply buckets view — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-
-          <!-- 6d · Commercial model -->
-          <div class="nl-feature nl-reverse fade-up">
-            <div>
-              <div class="nl-eyebrow">Commercial model</div>
-              <h3>Clear packaging.</h3>
-              <p>Tiered by product surface: G&#8209;Link only, full OBT suite, white-label, or RFP support. Final tiers depend on product scope and supplier activation.</p>
-              <ul class="nl-feature-list">
-                <li><iconify-icon icon="solar:tag-linear" width="18" height="18"></iconify-icon> One-time setup, scoped by launch needs</li>
-                <li><iconify-icon icon="solar:wallet-money-linear" width="18" height="18"></iconify-icon> Monthly subscription, tiered by product scope</li>
-              </ul>
-            </div>
-            <div class="nl-feature-media">
-              <div class="nl-greybox"><span>[ pricing / packaging view — real screenshot to be supplied ]</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 7 · Homepage partner grid (plain HTML) -->
-      <section class="partner-grid-section relative z-10 nl-section" aria-label="Travel brands connected through FCG">
-        <div class="px-6 pb-8 text-center md:px-12 md:pb-10">
-          <h2 class="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
-            300+ travel brands, TMCs, and hotel groups. <strong>Already connected.</strong>
-          </h2>
-        </div>
-        <div class="partner-logo-band border-y">
-          <div class="partner-logo-grid relative mx-auto grid max-w-[940px] grid-cols-2 md:grid-cols-4 md:border-x">
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
-              <img alt="PST Travel Logo" class="pointer-events-none max-h-12 max-w-[150px] select-none object-contain md:max-h-14 md:max-w-[170px]" src="https://static.wixstatic.com/media/6f8e7e_f844282625cb466d8c9580ec35a3645b~mv2.jpg/v1/crop/x_386,y_592,w_3524,h_3344/fill/w_274,h_260,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/PST_Travel-Secondary2.jpg">
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r">
-              <img alt="Connexus Travel Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://cdn.prod.website-files.com/68553d1dd8ca0b336f66b55c/69e8a0b042a0c29ce4b7f0f9_2026%20CTL%20logo_Colour_Tran%20bg%20(2).png">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b">
-              <img alt="Alibaba Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px]" src="../assets/images/logos/alibaba.svg">
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3" aria-hidden="true"></span>
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -left-3 -bottom-3 hidden md:block" aria-hidden="true"></span>
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b">
-              <img alt="ByteDance Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/ByteDance_logo_English.svg">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r border-b md:border-b-0">
-              <img alt="Amadeus Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://commons.wikimedia.org/wiki/Special:FilePath/Amadeus_Organization_logo_2024.svg">
-              <span class="partner-plus absolute z-10 h-6 w-6 pointer-events-none -right-3 -bottom-3 md:hidden" aria-hidden="true"></span>
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-b md:border-r md:border-b-0">
-              <img alt="Huazhu Group Logo" class="pointer-events-none max-h-10 max-w-[150px] select-none object-contain md:max-h-12 md:max-w-[170px]" src="https://companieslogo.com/img/orig/HTHT_BIG-d42ec412.svg?t=1720244492">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8 border-r">
-              <img alt="IHG Hotels and Resorts Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/IHG_Hotels_%26_Resorts_logo.svg">
-            </div>
-            <div class="partner-logo-card relative flex min-h-[104px] items-center justify-center px-4 py-8 md:p-8">
-              <img alt="Marriott International Logo" class="pointer-events-none max-h-8 max-w-[150px] select-none object-contain md:max-h-9 md:max-w-[170px] partner-logo-invert-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/Marriott_International.svg">
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 8 · Final CTA band -->
-      <section class="nl-cta" aria-label="Get connected with G-Link">
-        <div class="fade-up">
-          <h2>Hotel supply, ready to integrate.</h2>
-          <p>Walk through corporate-rate routing, Asia depth, and the sandbox path to production.</p>
-          <div class="nl-actions">
-            <a class="nl-btn nl-btn-primary" href="#capabilities"><iconify-icon icon="solar:calendar-mark-linear" width="16" height="16"></iconify-icon> Schedule a walkthrough</a>
-            <a class="nl-btn nl-btn-secondary" href="../api-access.html"><iconify-icon icon="solar:key-minimalistic-square-linear" width="16" height="16"></iconify-icon> Register for sandbox</a>
-          </div>
-        </div>
-      </section>
-    </div>
-    <!-- ===== END NUITEE-LAYOUT COMPARISON BLOCK ===== -->
 
     <!-- FOOTER -->
     <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">

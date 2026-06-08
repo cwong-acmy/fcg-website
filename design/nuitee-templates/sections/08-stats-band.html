@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.setAttribute("data-theme", t);
+                    document.documentElement.classList.toggle("dark", t === "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCG template · Stats band</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../template-shell.css">
+</head>
+<body>
+    <button class="tpl-theme-toggle" data-theme-toggle aria-label="Toggle theme"><span data-theme-label>Light</span></button>
+
+    <div class="tpl-label">
+        <strong>08 · Stats band</strong>
+        <span>page types: segment landing, about</span>
+        <span class="nuitee-ref">nuitee ref: / · /about-us</span>
+    </div>
+
+    <!-- STRUCTURE: wide row of 4 stats. Each: big numeral (slot) + orange +,
+         then mono caption. Optional eyebrow above. Numbers carry the proof. -->
+    <section class="tpl-section">
+        <div class="tpl-inner-wide">
+            <p class="tpl-eyebrow-dash reveal"><span class="slot">By the numbers</span></p>
+
+            <div class="tpl-grid tpl-grid-4">
+                <div class="tpl-stat reveal" data-delay="1">
+                    <p class="tpl-stat-num"><span class="slot">4.3M</span><span class="plus">+</span></p>
+                    <p class="tpl-stat-cap"><span class="slot">metric caption, 2-4 words</span></p>
+                </div>
+
+                <div class="tpl-stat reveal" data-delay="2">
+                    <p class="tpl-stat-num"><span class="slot">180</span><span class="plus">+</span></p>
+                    <p class="tpl-stat-cap"><span class="slot">metric caption, 2-4 words</span></p>
+                </div>
+
+                <div class="tpl-stat reveal" data-delay="3">
+                    <p class="tpl-stat-num"><span class="slot">99.9%</span><span class="plus">+</span></p>
+                    <p class="tpl-stat-cap"><span class="slot">metric caption, 2-4 words</span></p>
+                </div>
+
+                <div class="tpl-stat reveal" data-delay="3">
+                    <p class="tpl-stat-num"><span class="slot">24/7</span><span class="plus">+</span></p>
+                    <p class="tpl-stat-cap"><span class="slot">metric caption, 2-4 words</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../template-shell.js"></script>
+</body>
+</html>

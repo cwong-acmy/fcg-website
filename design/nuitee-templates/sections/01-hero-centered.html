@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.setAttribute("data-theme", t);
+                    document.documentElement.classList.toggle("dark", t === "dark");
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCG template · Hero (centered)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../template-shell.css">
+</head>
+<body>
+    <button class="tpl-theme-toggle" data-theme-toggle aria-label="Toggle theme"><span data-theme-label>Light</span></button>
+
+    <div class="tpl-label">
+        <strong>01 · Hero — centered</strong>
+        <span>page types: homepage, product hub, segment landing</span>
+        <span class="nuitee-ref">nuitee ref: / · /connect · /solutions/*</span>
+    </div>
+
+    <!-- STRUCTURE: single column, centered. Short headline + one clarifier + 2 CTAs.
+         Copy density: ~30% text / 70% whitespace. Headline 4-7 words. -->
+    <section class="tpl-section tpl-center">
+        <div class="tpl-glow"></div>
+        <div class="tpl-inner tpl-stack" style="align-items:center; gap:0;">
+            <span class="tpl-pill reveal">
+                <span class="dot"></span>
+                <span class="slot">eyebrow pill · 2-4 words</span>
+            </span>
+
+            <h1 class="tpl-h1 reveal" data-delay="1" style="margin-top:1.75rem;">
+                <span class="slot">H1: short claim, sentence case, 4-7 words. One <em>accent span</em> max</span>
+            </h1>
+
+            <p class="tpl-clarifier reveal" data-delay="2">
+                <span class="slot">one clarifier line, &le;20 words — system-described, no "you"</span>
+            </p>
+
+            <div class="tpl-actions reveal" data-delay="3">
+                <a class="tpl-btn tpl-btn-primary" href="#"><span class="slot">Get connected</span> <span class="arr">&rarr;</span></a>
+                <a class="tpl-btn tpl-btn-secondary" href="#"><span class="tpl-btn-icon">&lt;/&gt;</span> <span class="slot">Schedule a call</span></a>
+            </div>
+
+            <!-- optional product visual below the hero copy -->
+            <div class="gb gb-media reveal" data-delay="3" style="width:100%; margin-top:3.5rem; min-height:22rem;">
+                [ real product screenshot — never a CSS/SVG fake ]
+            </div>
+        </div>
+    </section>
+
+    <script src="../template-shell.js"></script>
+</body>
+</html>
