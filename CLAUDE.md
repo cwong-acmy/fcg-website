@@ -26,3 +26,10 @@ This is the main FCG Website project folder. Use this file to stay oriented befo
 - Do not open or start a preview unless Crystal asks.
 - Keep summaries clear and non-technical.
 
+## Accounts
+
+- Project type: **work** — never mix work/personal accounts (see `~/.claude/project-accounts.md`).
+- GitHub: cwong-acmy/fcg-website (account `cwong-acmy`)
+- Git identity: crystal.wong@accomy.com (`git work`)
+- Vercel: none
+- Supabase: none
