@@ -693,149 +693,287 @@
     </div>
   </section>
 
-  <!-- ===== 4-UP FEATURE CARDS ===== -->
-  <section id="how-it-works" class="v7-section" style="position:relative;padding:6.5rem 1.5rem;border-top:0;">
-    <div class="v7-cards-wrap">
-      <div class="v7-cards-head fade-up">
-        <div class="v7-eyebrow">Four capabilities, one platform</div>
-        <h2>Everything the travel team touches, in one place.</h2>
-        <p>AtlasOS pulls communications, operations, finance, and duty of care into a single operating system, so a travel team stops switching between tools to run the work.</p>
-      </div>
-      <div class="v7-cards-grid">
-        <article class="v7-card fade-up">
-          <div class="v7-card-head"><span class="v7-card-tag">Communications</span><span class="v7-card-num">01</span></div>
-          <div class="v7-tile"><iconify-icon icon="solar:chat-round-line-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Consolidated inbox</h3>
-          <p>An omni-channel inbox brings Email, WhatsApp, WeChat, and SMS together, so every traveller touchpoint lands in one queue instead of scattered across apps.</p>
-        </article>
-        <article class="v7-card fade-up">
-          <div class="v7-card-head"><span class="v7-card-tag">Operations</span><span class="v7-card-num">02</span></div>
-          <div class="v7-tile"><iconify-icon icon="solar:checklist-minimalistic-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Operations hub</h3>
-          <p>Attach and manage service requests against each booking, with escalation workflows and SLA tracking that keep cases moving and accountable.</p>
-        </article>
-        <article class="v7-card fade-up">
-          <div class="v7-card-head"><span class="v7-card-tag">Finance</span><span class="v7-card-num">03</span></div>
-          <div class="v7-tile"><iconify-icon icon="solar:calculator-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Finance &amp; reconciliation</h3>
-          <p>Accurate financial reporting and reverse-PNR look-up make reconciliation fast and clean, matching transactions back to the booking that created them.</p>
-        </article>
-        <article class="v7-card fade-up">
-          <div class="v7-card-head"><span class="v7-card-tag">Duty of care</span><span class="v7-card-num">04</span></div>
-          <div class="v7-tile"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Duty of care</h3>
-          <p>A live traveller map, a world-events feed, and risk policy come with AI next-step recommendations, so the team can see who is exposed and act.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FEATURE SPLIT · where it sits in the stack ===== -->
-  <section id="stack" class="v7-section v7-section-alt" style="position:relative;padding:7rem 1.5rem;border-top:1px solid rgba(15,17,20,.08);overflow:hidden;">
-    <div class="v7-split">
-      <div class="v7-media fade-up">
-        <div class="v7-mod-panel">
-          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:chat-round-line-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Consolidated inbox</strong><span>Email, WhatsApp, WeChat, SMS in one queue</span></div><span class="st">Comms</span></div>
-          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:checklist-minimalistic-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Operations hub</strong><span>Service requests, escalation, SLA tracking</span></div><span class="st">Ops</span></div>
-          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:calculator-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Finance &amp; reconciliation</strong><span>Reporting and reverse-PNR look-up</span></div><span class="st">Finance</span></div>
-          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:shield-check-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Duty of care</strong><span>Live map, world-events feed, risk policy</span></div><span class="st">Care</span></div>
-          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:global-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>ADDN network</strong><span>Runs on the distribution network</span></div><span class="st">Layer</span></div>
-        </div>
-      </div>
-      <div class="v7-copy fade-up">
-        <div class="v7-eyebrow">Inside the FCG stack</div>
-        <h2>The mid-end layer, <em>between booking and supply.</em></h2>
-        <p>AtlasOS is the mid-end layer of the FCG stack, running on the ADDN network. Bookings flow in from the front end; AtlasOS is where the travel team handles the work that happens after — the messages, the service requests, the reconciliation, and the people in the field.</p>
-        <div class="v7-feat">
-          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>One queue for every channel</h3><p>Traveller messages over Email, WhatsApp, WeChat, and SMS arrive in the same inbox, tied to the booking they belong to.</p></div></div>
-          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>Cases that escalate on time</h3><p>Service requests carry escalation workflows and SLA tracking, so nothing sits unattended and breaches are visible before they happen.</p></div></div>
-          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>Reconciliation that ties back</h3><p>Reverse-PNR look-up matches finance records to the booking behind them, turning a slow month-end into a clean one.</p></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PLATFORM PROOF · stat aside ===== -->
-  <section id="platform" style="position:relative;background:#ffffff;color:#0f1114;padding:7rem 1.5rem;border-top:1px solid rgba(15,17,20,.08);overflow:hidden;">
+  <!-- ===== CONSOLIDATED OPS QUEUE · live data table ===== -->
+  <section id="ops-queue" style="position:relative;background:#ffffff;color:#0f1114;padding:6.5rem 1.5rem;border-top:0;overflow:hidden;">
     <style>
-      .v2-proof-wrap { max-width: 76rem; margin: 0 auto; position: relative; z-index: 1; display:grid; grid-template-columns: 1.05fr .95fr; gap: 4rem; align-items:center; }
-      @media (max-width: 900px) { .v2-proof-wrap { grid-template-columns: 1fr; gap: 3rem; } }
-      .v2-proof-eyebrow { color:#F97316; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:.18em; margin-bottom:.85rem; text-transform:uppercase; }
-      .v2-proof h2 { color:#0f1114; font-size: clamp(2rem, 3.4vw, 2.85rem); font-weight:500; letter-spacing:-.02em; margin:0 0 1.25rem; line-height:1.08; }
-      .v2-proof h2 em { font-style:normal; color:#9aa1ab; }
-      .v2-proof p.lede { color:#737373; font-size:1.025rem; line-height:1.7; max-width: 36rem; margin: 0 0 2rem; }
-      .v2-proof-points { display:flex; flex-direction:column; gap:1.1rem; margin-top: 1.25rem; }
-      .v2-proof-point { display:flex; gap: 1rem; align-items:flex-start; }
-      .v2-proof-point .v2-proof-icon { width:2.5rem; height:2.5rem; border-radius:8px; background: rgba(249,115,22,.08); border:1px solid rgba(249,115,22,.22); display:flex; align-items:center; justify-content:center; color:#F97316; flex-shrink:0; }
-      .v2-proof-point h4 { color:#0f1114; font-size: .95rem; font-weight: 500; margin: .15rem 0 .25rem; letter-spacing:-.005em; }
-      .v2-proof-point p { color: #737373; font-size: .9rem; line-height:1.55; margin: 0; }
-      .v2-proof-card { position:relative; background:#ffffff; border:1px solid rgba(15,17,20,.10); border-radius: 24px; padding: 2.5rem; overflow:hidden; box-shadow:0 18px 50px rgba(15,17,20,.06); }
-      .v2-proof-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem 1.25rem; margin-bottom:1.75rem; }
-      .v2-proof-stat strong { display:block; color:#0f1114; font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 300; font-family:ui-monospace, monospace; letter-spacing:-.03em; line-height:1; }
-      .v2-proof-stat span { display:block; margin-top:.5rem; color:#F97316; font-family:'Inter',sans-serif; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; }
-      .v2-proof-card ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: .75rem; border-top: 1px solid rgba(15,17,20,.08); padding-top: 1.5rem; }
-      .v2-proof-card li { display:flex; gap:.65rem; align-items:flex-start; color: #737373; font-size: .9rem; line-height: 1.5; }
-      .v2-proof-card li iconify-icon { color:#F97316; margin-top: .2rem; flex-shrink:0; }
+      .ax-queue { max-width: 80rem; margin: 0 auto; position: relative; z-index: 1; }
+      .ax-queue-head { display:grid; grid-template-columns: minmax(0,1fr) auto; gap: 2rem; align-items: end; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(15,17,20,.1); }
+      @media (max-width: 820px){ .ax-queue-head { grid-template-columns: 1fr; gap: 1.25rem; align-items: flex-start; } }
+      .ax-queue-eyebrow { display:inline-flex; align-items:center; gap:.55rem; font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.14em; color:#F97316; text-transform:uppercase; margin-bottom:1rem; }
+      .ax-queue-eyebrow::before { content:""; width:1.6rem; height:1px; background:rgba(249,115,22,.45); }
+      .ax-queue-head h2 { color:#0f1114; font-size:clamp(1.9rem,3.2vw,2.55rem); font-weight:500; letter-spacing:-.018em; line-height:1.1; margin:0 0 .85rem; max-width:36rem; }
+      .ax-queue-head p { color:#737373; font-size:1rem; line-height:1.6; margin:0; max-width:34rem; }
+      .ax-queue-live { display:inline-flex; align-items:center; gap:.55rem; padding:.55rem .95rem; border-radius:9999px; background:rgba(34,197,94,.1); color:#15803d; font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; }
+      .ax-queue-live::before { content:""; width:7px; height:7px; border-radius:9999px; background:#22c55e; box-shadow:0 0 12px rgba(34,197,94,.8); animation:ax-pulse 2s ease-in-out infinite; }
+      @keyframes ax-pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
 
-      html[data-theme="dark"] #platform { background:#050505 !important; color:#fff !important; border-top-color:rgba(255,255,255,.08) !important; }
-      html[data-theme="dark"] .v2-proof-eyebrow,
-      html[data-theme="dark"] .v2-proof-point .v2-proof-icon,
-      html[data-theme="dark"] .v2-proof-stat span,
-      html[data-theme="dark"] .v2-proof-card li iconify-icon { color:#fb923c; }
-      html[data-theme="dark"] .v2-proof h2 { color:#fff; }
-      html[data-theme="dark"] .v2-proof h2 em { color:rgba(255,255,255,.55); }
-      html[data-theme="dark"] .v2-proof p.lede { color:rgba(255,255,255,.68); }
-      html[data-theme="dark"] .v2-proof-point p,
-      html[data-theme="dark"] .v2-proof-card li { color:rgba(255,255,255,.6); }
-      html[data-theme="dark"] .v2-proof-point h4 { color:#fff; }
-      html[data-theme="dark"] .v2-proof-card { background:#0a0a0a; border-color:rgba(255,255,255,.1); box-shadow:none; }
-      html[data-theme="dark"] .v2-proof-stat strong { color:#fff; }
-      html[data-theme="dark"] .v2-proof-card ul { border-top-color:rgba(255,255,255,.08); }
+      /* console-style table — dark in BOTH themes, labelled */
+      .ax-table { border:1px solid rgba(15,17,20,.12); border-radius:18px; overflow:hidden; box-shadow:0 24px 60px rgba(15,17,20,.08); background:#0c0c0c; }
+      .ax-table-bar { display:flex; align-items:center; gap:.5rem; padding:.8rem 1.1rem; border-bottom:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.02); }
+      .ax-table-bar .dot { width:9px; height:9px; border-radius:9999px; background:rgba(255,255,255,.16); }
+      .ax-table-bar .ttl { margin-left:.5rem; font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.06em; color:rgba(255,255,255,.5); text-transform:uppercase; }
+      .ax-table-bar .clk { margin-left:auto; font-family:ui-monospace,monospace; font-size:11px; color:#fb923c; letter-spacing:.04em; }
+      .ax-tr { display:grid; grid-template-columns: 8.5rem minmax(0,1fr) 7rem 7rem; gap:1rem; align-items:center; padding:1rem 1.25rem; border-bottom:1px solid rgba(255,255,255,.06); }
+      .ax-tr:last-child { border-bottom:0; }
+      .ax-tr.hdr { padding:.7rem 1.25rem; background:rgba(255,255,255,.02); }
+      .ax-tr.hdr span { font-family:ui-monospace,monospace; font-size:9.5px; letter-spacing:.1em; color:rgba(255,255,255,.4); text-transform:uppercase; }
+      @media (max-width: 760px){ .ax-tr { grid-template-columns: 1fr auto; gap:.6rem; } .ax-tr .col-sla { display:none; } .ax-tr.hdr { display:none; } }
+      .ax-chan { display:inline-flex; align-items:center; gap:.45rem; font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.6); }
+      .ax-chan iconify-icon { color:#fb923c; }
+      .ax-req strong { display:block; color:#fff; font-size:.9rem; font-weight:500; letter-spacing:-.005em; }
+      .ax-req span { display:block; margin-top:.15rem; color:rgba(255,255,255,.5); font-size:.78rem; }
+      .ax-sla { font-family:ui-monospace,monospace; font-size:.82rem; color:rgba(255,255,255,.7); letter-spacing:.02em; }
+      .ax-sla.warn { color:#fdba74; }
+      .ax-sla.breach { color:#fca5a5; }
+      .ax-pill { justify-self:start; display:inline-flex; align-items:center; gap:.4rem; padding:.28rem .6rem; border-radius:6px; font-family:ui-monospace,monospace; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; }
+      .ax-pill::before { content:""; width:5px; height:5px; border-radius:9999px; }
+      .ax-pill.open { background:rgba(245,158,11,.16); color:#fdba74; }
+      .ax-pill.open::before { background:#f59e0b; }
+      .ax-pill.esc { background:rgba(239,68,68,.16); color:#fca5a5; }
+      .ax-pill.esc::before { background:#ef4444; box-shadow:0 0 8px rgba(239,68,68,.7); }
+      .ax-pill.res { background:rgba(34,197,94,.14); color:#86efac; }
+      .ax-pill.res::before { background:#22c55e; }
+      .ax-queue-foot { margin-top:2rem; display:flex; flex-wrap:wrap; gap:1.25rem; justify-content:space-between; align-items:center; }
+      .ax-queue-foot p { color:#737373; font-size:.9rem; line-height:1.55; margin:0; max-width:38rem; }
+      .ax-queue-foot p em { color:#F97316; font-style:normal; font-weight:500; }
+      .ax-queue-foot a { display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 1.3rem; border-radius:9999px; background:rgba(15,17,20,.03); color:#0f1114; border:1px solid rgba(15,17,20,.14); font-size:13px; font-weight:500; white-space:nowrap; transition:border-color 180ms ease, background 180ms ease; }
+      .ax-queue-foot a:hover { border-color:rgba(15,17,20,.28); background:rgba(15,17,20,.06); }
+
+      /* DARK MODE (toggle) — section chrome only; the console table stays dark */
+      html[data-theme="dark"] #ops-queue { background:#050505; color:#fff; border-top-color:rgba(255,255,255,.08); }
+      html[data-theme="dark"] .ax-queue-head { border-bottom-color:rgba(255,255,255,.1); }
+      html[data-theme="dark"] .ax-queue-head h2 { color:#fff; }
+      html[data-theme="dark"] .ax-queue-head p,
+      html[data-theme="dark"] .ax-queue-foot p { color:rgba(255,255,255,.62); }
+      html[data-theme="dark"] .ax-queue-live { background:rgba(34,197,94,.12); color:#86efac; }
+      html[data-theme="dark"] .ax-table { border-color:rgba(255,255,255,.1); box-shadow:none; }
+      html[data-theme="dark"] .ax-queue-foot a { background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.14); }
+      html[data-theme="dark"] .ax-queue-foot a:hover { border-color:rgba(255,255,255,.3); background:rgba(255,255,255,.1); }
     </style>
-    <div class="v2-proof-wrap">
-      <div class="v2-proof fade-up">
-        <div class="v2-proof-eyebrow">Backed by the platform</div>
-        <h2>Built for teams that <em>run at scale.</em></h2>
-        <p class="lede">AtlasOS sits on infrastructure that already serves some of the largest travel programs in the world. Teams adopt the operating system on a platform that has carried enterprise volume for over a decade.</p>
-        <div class="v2-proof-points">
-          <div class="v2-proof-point">
-            <div class="v2-proof-icon"><iconify-icon icon="solar:buildings-3-linear" width="18" height="18"></iconify-icon></div>
-            <div>
-              <h4>Enterprise-grade by default</h4>
-              <p>50+ enterprise clients, including central SOEs and Fortune Global 500 companies, run on the same platform.</p>
-            </div>
-          </div>
-          <div class="v2-proof-point">
-            <div class="v2-proof-icon"><iconify-icon icon="solar:global-linear" width="18" height="18"></iconify-icon></div>
-            <div>
-              <h4>Global coverage</h4>
-              <p>Operations and duty of care span 220+ countries, so the team tracks travellers wherever they are.</p>
-            </div>
-          </div>
-          <div class="v2-proof-point">
-            <div class="v2-proof-icon"><iconify-icon icon="solar:shield-check-linear" width="18" height="18"></iconify-icon></div>
-            <div>
-              <h4>13+ years of track record</h4>
-              <p>More than a decade building travel infrastructure stands behind the operating system.</p>
-            </div>
-          </div>
+
+    <div class="ax-queue">
+      <header class="ax-queue-head fade-up">
+        <div>
+          <div class="ax-queue-eyebrow">Consolidated ops queue</div>
+          <h2>Every traveller request, in one queue.</h2>
+          <p>Email, WhatsApp, WeChat, and SMS land in a single operations queue, each tied to a booking and tracked against an SLA — so the team works one list instead of four inboxes.</p>
+        </div>
+        <span class="ax-queue-live">AtlasOS · Live queue</span>
+      </header>
+
+      <div class="ax-table fade-up">
+        <div class="ax-table-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="ttl">atlas.tmc.ops / queue</span><span class="clk">12 open · 1 escalated</span></div>
+        <div class="ax-tr hdr"><span>Channel</span><span>Request</span><span class="col-sla">SLA</span><span>Status</span></div>
+
+        <div class="ax-tr">
+          <span class="ax-chan"><iconify-icon icon="solar:letter-linear" width="13" height="13"></iconify-icon>Email</span>
+          <span class="ax-req"><strong>Reissue · BKK &rarr; LHR</strong><span>M. Chen · booking #FC-2841</span></span>
+          <span class="ax-sla breach col-sla">SLA 12m</span>
+          <span class="ax-pill esc">Escalated</span>
+        </div>
+        <div class="ax-tr">
+          <span class="ax-chan"><iconify-icon icon="ph:whatsapp-logo" width="13" height="13"></iconify-icon>WhatsApp</span>
+          <span class="ax-req"><strong>Late check-in · Singapore</strong><span>A. Rao · 2 nights · #FC-2906</span></span>
+          <span class="ax-sla warn col-sla">SLA 38m</span>
+          <span class="ax-pill open">Open</span>
+        </div>
+        <div class="ax-tr">
+          <span class="ax-chan"><iconify-icon icon="ph:wechat-logo" width="13" height="13"></iconify-icon>WeChat</span>
+          <span class="ax-req"><strong>Seat change · PVG &rarr; NRT</strong><span>L. Wang · #FC-2877</span></span>
+          <span class="ax-sla col-sla">SLA 1h 24m</span>
+          <span class="ax-pill open">Open</span>
+        </div>
+        <div class="ax-tr">
+          <span class="ax-chan"><iconify-icon icon="solar:smartphone-linear" width="13" height="13"></iconify-icon>SMS</span>
+          <span class="ax-req"><strong>Flight delay · rebook help</strong><span>D. Müller · #FC-2812</span></span>
+          <span class="ax-sla warn col-sla">SLA 41m</span>
+          <span class="ax-pill open">Open</span>
+        </div>
+        <div class="ax-tr">
+          <span class="ax-chan"><iconify-icon icon="solar:letter-linear" width="13" height="13"></iconify-icon>Email</span>
+          <span class="ax-req"><strong>Invoice copy · Shanghai</strong><span>Reconciled · reverse-PNR matched</span></span>
+          <span class="ax-sla col-sla">Closed</span>
+          <span class="ax-pill res">Resolved</span>
+        </div>
+        <div class="ax-tr">
+          <span class="ax-chan"><iconify-icon icon="ph:wechat-logo" width="13" height="13"></iconify-icon>WeChat</span>
+          <span class="ax-req"><strong>Hotel folio query · Shenzhen</strong><span>J. Park · #FC-2790</span></span>
+          <span class="ax-sla col-sla">Closed</span>
+          <span class="ax-pill res">Resolved</span>
         </div>
       </div>
 
-      <aside class="v2-proof-card fade-up">
-        <div class="v2-proof-grid">
-          <div class="v2-proof-stat"><strong>50+</strong><span>Enterprise clients</span></div>
-          <div class="v2-proof-stat"><strong>220+</strong><span>Countries covered</span></div>
-          <div class="v2-proof-stat"><strong>13+</strong><span>Years of track record</span></div>
-          <div class="v2-proof-stat"><strong>4</strong><span>Capabilities in one OS</span></div>
-        </div>
-        <ul>
-          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>Omni-channel inbox across Email, WhatsApp, WeChat, SMS</li>
-          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>Service requests with escalation and SLA tracking</li>
-          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>Reverse-PNR look-up for fast reconciliation</li>
-          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>Live traveller map with AI next-step recommendations</li>
-        </ul>
-      </aside>
+      <div class="ax-queue-foot fade-up">
+        <p>Each row carries its <em>channel, booking, SLA timer, and status</em> — escalation fires before a breach, and resolved cases reconcile back through reverse-PNR look-up.</p>
+        <a href="#contact"><iconify-icon icon="solar:eye-linear" width="16" height="16"></iconify-icon>See the live queue</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOUR PILLARS · asymmetric bento grid ===== -->
+  <section id="pillars" style="position:relative;background:#f7f8fa;color:#0f1114;padding:7rem 1.5rem;border-top:1px solid rgba(15,17,20,.08);overflow:hidden;">
+    <style>
+      .ax-bento-wrap { max-width: 80rem; margin: 0 auto; position: relative; z-index: 1; }
+      .ax-bento-head { margin-bottom: 3rem; max-width: 40rem; }
+      .ax-bento-eyebrow { color:#F97316; font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:.9rem; }
+      .ax-bento-head h2 { color:#0f1114; font-size:clamp(1.9rem,3.2vw,2.6rem); font-weight:500; letter-spacing:-.02em; line-height:1.1; margin:0 0 1rem; }
+      .ax-bento-head p { color:#737373; font-size:1rem; line-height:1.65; margin:0; max-width:36rem; }
+
+      .ax-bento { display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; grid-auto-rows: 15.5rem; }
+      @media (max-width: 900px){ .ax-bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 14rem; } }
+      @media (max-width: 560px){ .ax-bento { grid-template-columns: 1fr; } }
+      .ax-cell { position:relative; overflow:hidden; border:1px solid rgba(15,17,20,.1); border-radius:24px; background:#ffffff; padding:1.85rem; display:flex; flex-direction:column; box-shadow:0 18px 50px rgba(15,17,20,.06); transition:border-color 220ms ease, transform 220ms ease; }
+      .ax-cell:hover { border-color:rgba(249,115,22,.35); transform:translateY(-2px); }
+      .ax-cell .ax-cell-top { display:flex; align-items:center; justify-content:space-between; }
+      .ax-cell .ax-ic { width:2.6rem; height:2.6rem; border-radius:10px; background:rgba(249,115,22,.1); border:1px solid rgba(249,115,22,.22); display:flex; align-items:center; justify-content:center; color:#F97316; }
+      .ax-cell .ax-tag { font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:#9aa1ab; }
+      .ax-cell .ax-cell-body { margin-top:auto; }
+      .ax-cell h3 { color:#0f1114; font-size:1.2rem; font-weight:500; letter-spacing:-.01em; margin:1.25rem 0 .6rem; line-height:1.2; }
+      .ax-cell p { color:#737373; font-size:.9rem; line-height:1.6; margin:0; }
+      .ax-cell .ax-chips { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:1rem; }
+      .ax-cell .ax-chips span { font-family:ui-monospace,monospace; font-size:9.5px; letter-spacing:.04em; text-transform:uppercase; padding:.3rem .55rem; border-radius:6px; background:rgba(249,115,22,.1); color:#c2410c; }
+      .ax-cell .ax-chips span.muted { background:rgba(15,17,20,.05); color:#6b7280; }
+
+      /* asymmetric spans */
+      .ax-cell.feature { grid-column: span 2; grid-row: span 2; }
+      .ax-cell.tall { grid-column: span 1; grid-row: span 2; }
+      .ax-cell.wide { grid-column: span 4; grid-row: span 1; }
+      @media (max-width: 900px){
+        .ax-cell.feature { grid-column: span 2; grid-row: span 2; }
+        .ax-cell.tall { grid-column: span 1; grid-row: span 1; }
+        .ax-cell.wide { grid-column: span 2; grid-row: span 1; }
+      }
+      @media (max-width: 560px){
+        .ax-cell.feature, .ax-cell.tall, .ax-cell.wide { grid-column: span 1; grid-row: span 1; }
+      }
+
+      .ax-cell.feature h3 { font-size:1.5rem; }
+      .ax-cell.feature p { font-size:.95rem; max-width:26rem; }
+      .ax-cell .ax-map { position:absolute; inset:0; pointer-events:none; opacity:.5;
+        background:
+          radial-gradient(circle at 22% 38%, rgba(249,115,22,.16), transparent 14%),
+          radial-gradient(circle at 68% 30%, rgba(249,115,22,.1), transparent 12%),
+          radial-gradient(circle at 80% 64%, rgba(249,115,22,.12), transparent 12%),
+          linear-gradient(rgba(15,17,20,.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(15,17,20,.05) 1px, transparent 1px);
+        background-size: 100% 100%, 100% 100%, 100% 100%, 2.4rem 2.4rem, 2.4rem 2.4rem;
+      }
+      .ax-cell.feature > * { position:relative; z-index:1; }
+      .ax-wide-inner { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.5rem; height:100%; }
+      .ax-wide-inner .ax-wide-copy { max-width:32rem; }
+      .ax-wide-stats { display:flex; gap:2.5rem; }
+      .ax-wide-stats .st strong { display:block; font-family:ui-monospace,monospace; font-size:1.7rem; font-weight:300; color:#0f1114; letter-spacing:-.02em; line-height:1; }
+      .ax-wide-stats .st span { display:block; margin-top:.4rem; font-family:ui-monospace,monospace; font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:#9aa1ab; }
+
+      /* DARK MODE (toggle) */
+      html[data-theme="dark"] #pillars { background:#000; color:#fff; border-top-color:rgba(255,255,255,.08); }
+      html[data-theme="dark"] .ax-bento-head h2 { color:#fff; }
+      html[data-theme="dark"] .ax-bento-head p,
+      html[data-theme="dark"] .ax-cell p { color:rgba(255,255,255,.62); }
+      html[data-theme="dark"] .ax-cell { background:#0a0a0a; border-color:rgba(255,255,255,.1); box-shadow:none; }
+      html[data-theme="dark"] .ax-cell:hover { border-color:rgba(249,115,22,.4); }
+      html[data-theme="dark"] .ax-cell h3 { color:#fff; }
+      html[data-theme="dark"] .ax-ic { color:#fb923c; }
+      html[data-theme="dark"] .ax-cell .ax-tag { color:rgba(255,255,255,.45); }
+      html[data-theme="dark"] .ax-cell .ax-chips span { background:rgba(249,115,22,.14); color:#fdba74; }
+      html[data-theme="dark"] .ax-cell .ax-chips span.muted { background:rgba(255,255,255,.05); color:rgba(255,255,255,.55); }
+      html[data-theme="dark"] .ax-cell .ax-map { opacity:.55;
+        background:
+          radial-gradient(circle at 22% 38%, rgba(249,115,22,.2), transparent 14%),
+          radial-gradient(circle at 68% 30%, rgba(249,115,22,.14), transparent 12%),
+          radial-gradient(circle at 80% 64%, rgba(249,115,22,.16), transparent 12%),
+          linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+        background-size: 100% 100%, 100% 100%, 100% 100%, 2.4rem 2.4rem, 2.4rem 2.4rem;
+      }
+      html[data-theme="dark"] .ax-wide-stats .st strong { color:#fff; }
+      html[data-theme="dark"] .ax-wide-stats .st span { color:rgba(255,255,255,.45); }
+    </style>
+
+    <div class="ax-bento-wrap">
+      <div class="ax-bento-head fade-up">
+        <div class="ax-bento-eyebrow">Four pillars, one operating system</div>
+        <h2>Communications, operations, finance, and care.</h2>
+        <p>AtlasOS runs as the mid-end layer of the FCG stack, on the ADDN network. Four pillars carry the work a travel team handles after a booking is made.</p>
+      </div>
+
+      <div class="ax-bento fade-up">
+
+        <!-- Duty of Care — feature 2x2 -->
+        <article class="ax-cell feature">
+          <div class="ax-map" aria-hidden="true"></div>
+          <div class="ax-cell-top">
+            <div class="ax-ic"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
+            <span class="ax-tag">Pillar 04 · Care</span>
+          </div>
+          <div class="ax-cell-body">
+            <h3>Duty of care</h3>
+            <p>A live traveller map and a world-events feed show who is exposed; risk policy and AI next-step recommendations tell the team what to do next.</p>
+            <div class="ax-chips">
+              <span>Live map</span>
+              <span>World-events feed</span>
+              <span>Risk policy</span>
+              <span class="muted">AI next-step</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Consolidated Inbox — tall 1x2 -->
+        <article class="ax-cell tall">
+          <div class="ax-cell-top">
+            <div class="ax-ic"><iconify-icon icon="solar:chat-round-line-linear" width="22" height="22"></iconify-icon></div>
+            <span class="ax-tag">01 · Comms</span>
+          </div>
+          <div class="ax-cell-body">
+            <h3>Consolidated inbox</h3>
+            <p>Email, WhatsApp, WeChat, and SMS arrive in one omni-channel queue, each message tied to its booking.</p>
+          </div>
+        </article>
+
+        <!-- Operations Hub — small 1x1 -->
+        <article class="ax-cell">
+          <div class="ax-cell-top">
+            <div class="ax-ic"><iconify-icon icon="solar:checklist-minimalistic-linear" width="22" height="22"></iconify-icon></div>
+            <span class="ax-tag">02 · Ops</span>
+          </div>
+          <div class="ax-cell-body">
+            <h3>Operations hub</h3>
+            <p>Service requests, escalation workflows, and SLA tracking per booking.</p>
+          </div>
+        </article>
+
+        <!-- Finance — small 1x1 -->
+        <article class="ax-cell">
+          <div class="ax-cell-top">
+            <div class="ax-ic"><iconify-icon icon="solar:calculator-linear" width="22" height="22"></iconify-icon></div>
+            <span class="ax-tag">03 · Finance</span>
+          </div>
+          <div class="ax-cell-body">
+            <h3>Finance &amp; reconciliation</h3>
+            <p>Reporting plus reverse-PNR look-up that ties records back to the booking.</p>
+          </div>
+        </article>
+
+        <!-- Wide proof bar -->
+        <article class="ax-cell wide">
+          <div class="ax-wide-inner">
+            <div class="ax-wide-copy">
+              <div class="ax-cell-top" style="margin-bottom:.85rem;">
+                <div class="ax-ic"><iconify-icon icon="solar:buildings-3-linear" width="22" height="22"></iconify-icon></div>
+                <span class="ax-tag">Run at scale</span>
+              </div>
+              <h3 style="margin:0 0 .4rem;">Built for teams that run at scale</h3>
+              <p>The same platform serves central SOEs and Fortune Global 500 travel programs, across the markets where they operate.</p>
+            </div>
+            <div class="ax-wide-stats">
+              <div class="st"><strong>50+</strong><span>Enterprise clients</span></div>
+              <div class="st"><strong>220+</strong><span>Countries</span></div>
+              <div class="st"><strong>13+</strong><span>Years</span></div>
+            </div>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 </main>
@@ -939,43 +1077,57 @@
 </section>
 <!-- ===== END CLOSING CTA ===== -->
 
-    <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">
+    <footer class="site-footer w-full border-t py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech">
+        <style>
+            .site-footer { background:#f7f8fa; border-color: rgba(15,17,20,.1); color:#6b7280; }
+            .site-footer .ft-head { color:#0f1114; }
+            .site-footer .ft-link { color:#6b7280; transition: color .2s ease; }
+            .site-footer .ft-link:hover { color:#0f1114; }
+            .site-footer .ft-logo svg path { fill:#0f1114; }
+            .site-footer .ft-copy { color: rgba(15,17,20,.4); }
+            html[data-theme="dark"] .site-footer { background:#000; border-color: rgba(255,255,255,.1); color:#a1a1aa; }
+            html[data-theme="dark"] .site-footer .ft-head { color:#ffffff; }
+            html[data-theme="dark"] .site-footer .ft-link { color:#a1a1aa; }
+            html[data-theme="dark"] .site-footer .ft-link:hover { color:#ffffff; }
+            html[data-theme="dark"] .site-footer .ft-logo svg path { fill:#ffffff; }
+            html[data-theme="dark"] .site-footer .ft-copy { color: rgba(255,255,255,.3); }
+        </style>
         <div class="max-w-[100rem] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-[4rem] md:gap-[2rem]">
 
             <div class="col-span-1 md:col-span-3 flex flex-col items-start gap-4">
-                <div class="flex items-center gap-3">
+                <div class="ft-logo flex items-center gap-3">
                     <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 24px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="white"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="white"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="white"/></svg>
                 </div>
                 <p class="mt-2">TRAVEL_INFRASTRUCTURE</p>
             </div>
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
-                <span class="text-white mb-2">Products</span>
-                <a href="corporate-booking-tool.html" class="hover:text-white transition-colors">Corporate Booking Tool</a>
-                <a href="ai-booking-tool.html" class="hover:text-white transition-colors">AI Booking Tool</a>
-                <a href="agreeease.html" class="hover:text-white transition-colors">AgreeEase</a>
-                <a href="atlas.html" class="hover:text-white transition-colors">AtlasOS</a>
-                <a href="glink.html" class="hover:text-white transition-colors">G-Link</a>
-                <a href="flink.html" class="hover:text-white transition-colors">F-Link</a>
+                <span class="ft-head mb-2">Products</span>
+                <a href="corporate-booking-tool.html" class="ft-link">Corporate Booking Tool</a>
+                <a href="ai-booking-tool.html" class="ft-link">AI Booking Tool</a>
+                <a href="agreeease.html" class="ft-link">AgreeEase</a>
+                <a href="atlas.html" class="ft-link">AtlasOS</a>
+                <a href="glink.html" class="ft-link">G-Link</a>
+                <a href="flink.html" class="ft-link">F-Link</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
-                <span class="text-white mb-2">Network</span>
-                <a href="addn.html" class="hover:text-white transition-colors">ADDN</a>
-                <a href="payment.html" class="hover:text-white transition-colors">Payment</a>
+                <span class="ft-head mb-2">Network</span>
+                <a href="addn.html" class="ft-link">ADDN</a>
+                <a href="payment.html" class="ft-link">Payment</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
-                <span class="text-white mb-2">Company</span>
-                <a href="about.html" class="hover:text-white transition-colors">About</a>
-                <a href="developer.html" class="hover:text-white transition-colors">Developer</a>
-                <a href="mailto:hello@fusionconnectgroup.com" class="hover:text-white transition-colors">Contact</a>
+                <span class="ft-head mb-2">Company</span>
+                <a href="about.html" class="ft-link">About</a>
+                <a href="developer.html" class="ft-link">Developer</a>
+                <a href="mailto:hello@fusionconnectgroup.com" class="ft-link">Contact</a>
             </div>
 
             <div class="col-span-1 md:col-span-3 flex flex-col md:items-end gap-4">
-                <span class="text-white mb-2">Connect</span>
-                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
-                <span class="mt-4 text-white/30">© 2026 FCG Group. All rights reserved.</span>
+                <span class="ft-head mb-2">Connect</span>
+                <a href="#" class="ft-link">Privacy Policy</a>
+                <a href="#" class="ft-link">Terms of Service</a>
+                <span class="ft-copy mt-4">© 2026 FCG Group. All rights reserved.</span>
             </div>
 
         </div>
