@@ -2,28 +2,28 @@
 
 **Date:** 2026-06-22
 **Status:** Approved (design) — pending written-spec review
-**Scope:** Track B — main-site restructure + visual redesign + copy rewrite
+**Scope:** Full site — restructure + visual redesign + copy rewrite + BTS event pages
+**Hard deadline:** Before BTS London, Jun 24 2026 (~2 days from spec date)
 
 ---
 
 ## Goal
 
 Restructure, redesign, and rewrite the FCG marketing site onto a new 4-item
-navigation and the codified FCG design system. This is a **rollout**, not a
-visual exploration — the design direction is already locked (design-system doc +
-the in-progress golden draft). Copy is rewritten to the FCG brand voice
-(`docs/FCG Open Design System Prompt.md`, voice section).
+navigation and the codified FCG design system, AND ship the two BTS event pages
+(China-supply landing + Payment) — all before BTS London (Jun 24). This is a
+**rollout**, not a visual exploration — the design direction is already locked
+(design-system doc + the in-progress golden draft). Copy is rewritten to the FCG
+brand voice (`docs/FCG Open Design System Prompt.md`, voice section).
 
-## Two-track context
+## One deadline, all 12 equal
 
-This site work splits into two tracks on different clocks. This spec covers
-**Track B only**.
+Everything ships before BTS. No tiering — once the template is locked, all 12
+pages fan out in parallel at equal priority for maximum throughput.
 
-- **Track A** — BTS London event pages (BTS China-supply landing + Payment),
-  deadline Jun 24–25 2026. Specced separately, built after Track B per the
-  decided order (B then A). The **Payment** nav slot exists in Track B's nav,
-  but the Payment page itself is a Track A deliverable.
-- **Track B** — this spec.
+**Risk (accepted by Crystal):** with ~2 days and no tiering, if the window runs
+short the shortfall lands on an arbitrary page rather than a back-of-house one —
+including, potentially, an event-facing page (BTS landing / Payment).
 
 ## Locked navigation IA
 
@@ -51,35 +51,34 @@ Top-level: **Products · Network · Developer · About**
 | New | F-Link (Back) | `drafts/flink-*` |
 | New | ADDN (Network) | — |
 | Repurpose | Developer | `api-access.html` |
-| Deferred (Track A) — nav slot only | Payment (Network) | — |
+| New | Payment (Network) | gap analysis §4 |
+| New | BTS landing (standalone, not in main nav) | gap analysis §3 |
 | Remove (archive, do not delete) | Whitelabel | `whitelabel.html` |
 | Remove (archive, do not delete) | Advisory & Implementation | `advisory-implementation.html` |
 | Remove (archive, do not delete) | AI Mapping | `ai-mapping.html` |
 | Remove (archive, do not delete) | Agent Booking Tool | `agent-booking-tool.html` |
 | Internal, untouched | Components library | `components.html` |
 
-**Track B ships 10 pages:** Home, About, CBT, AI-BT, RFP, AtlasOS, G-Link,
-F-Link, ADDN, Developer. (Payment nav slot present; page built in Track A.)
+**Ships 12 pages:** Home, About, CBT, AI-BT, RFP, AtlasOS, G-Link, F-Link, ADDN,
+Developer, Payment, BTS landing.
 
-## Phased plan
+## Plan — deadline-driven, template-then-fan-out
 
-Each phase = its own plan → build → review.
+The template is the critical path; everything else parallelises behind it.
 
 | Phase | Scope | Depends on |
 |---|---|---|
-| **0 — Foundation** | Pin the golden reference page; build the new 4-item nav (Products mega-menu w/ Front/Mid/Back; Network dropdown; Developer + About direct links); extract shared header/footer as one reusable template; archive the 4 removed pages. | — |
-| **1 — Spine** | Home + About → golden quality + copy rewrite. | Phase 0 template |
-| **2 — Products** | CBT, AI-BT, RFP, AtlasOS, G-Link, F-Link → each to golden + rewrite. | Phase 0 template |
-| **3 — Network + Developer** | ADDN page; Developer hub (from api-access); Payment nav slot wired (page deferred to Track A). | Phase 0 nav |
+| **0 — Foundation (critical path, do first)** | Resolve the open items below; pin the golden reference page; build the new 4-item nav (Products mega-menu w/ Front/Mid/Back; Network dropdown; Developer + About direct links); extract shared header/footer as one reusable template; archive the 4 removed pages. | — |
+| **1 — Parallel fan-out** | All 12 pages built against the locked template, in parallel at equal priority. Each page = redesign to golden + copy rewrite. | Phase 0 |
 
-**Why spine-first:** front-loads the one decision everything copies (the
-template), so Phase 2 is mechanical and the header isn't rebuilt 10 times.
+**Why template-first:** front-loads the one decision every page copies, so the
+fan-out is mechanical and the header/nav isn't rebuilt 12 times.
 
 ## Open items (resolve at Phase 0 start — non-blocking for this spec)
 
-1. **Golden reference page.** Version numbers aren't chronological: freshest
-   work (Jun 22) is on `flink-v6`, `glink-v6`, `whitelabel-v2/v3`; the `v7`
-   files are untouched since Jun 9. Pick the approved template before rollout.
+1. ~~Golden reference page.~~ **RESOLVED:** `index-v4.html` for Home;
+   `flink-v7` / `glink-v7` / `tmc-api-v7` for product pages. The v6 edits from
+   Jun 22 are not the template.
 2. **Front / Mid / Back group name** — placeholder; needs a nicer label.
 3. **`O-T` / `O-G` / `O-F` tags** — "open platform … API" (O-T = open platform
    TMC API). Decide how/where these surface (likely Developer + product pages).
@@ -100,7 +99,7 @@ template), so Phase 2 is mechanical and the header isn't rebuilt 10 times.
 
 - Re-architecture (stays hand-written static HTML — no framework/SSG).
 - New visual direction (the design system is the answer).
-- Track A pages (BTS landing, Payment page build).
 - Whitelabel, Advisory, AI Mapping, Agent Booking Tool, and the former
   gap-analysis Solutions pages (Sourcing in China, Global Sourcing, Property
   Hosting) — all out of this build.
+- Product videos and the physical flyer (gap analysis §5) — separate deliverables.
