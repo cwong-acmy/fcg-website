@@ -159,8 +159,8 @@ Expected: `STRUCTURE OK`.
 
 - [ ] **Step 6: Verify (banned words)** —
 
-Run: `grep -inE "seamless|frictionless|intuitive|magical|revolutionary|empower|unlock|supercharge|AI-powered|learn more|get started|click here" X.html || echo "VOICE CLEAN"`
-Expected: `VOICE CLEAN` (no matches).
+Run: `grep -vi "AI-Powered Decentralized Distribution Network" X.html | grep -inE "seamless|frictionless|intuitive|magical|revolutionary|empower|unlock|supercharge|AI-powered|learn more|get started|click here" || echo "VOICE CLEAN"`
+Expected: `VOICE CLEAN` (no matches). NOTE: ADDN's official name "AI-Powered Decentralized Distribution Network" is the ONE sanctioned exception to the AI-powered ban — keep it verbatim (it's in the shell nav/footer); the grep above excludes that line. Never reword it.
 
 - [ ] **Step 7: Verify (visual)** — preview the page (preview_start once, then preview_snapshot / preview_screenshot per page). Confirm it renders, nav works, matches the golden look.
 
