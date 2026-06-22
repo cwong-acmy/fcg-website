@@ -1,64 +1,41 @@
-    <footer id="contact" class="flex flex-col w-full bg-[#000]">
-  <!-- CTA Section -->
-  <div class="overflow-hidden w-full border-white/10 border-t pt-32 pb-32 relative">
-    <div class="absolute inset-0 bg-grid opacity-10 pointer-events-none" style="mask-image: linear-gradient(to bottom, black 20%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);"></div>
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/[0.03] blur-[100px] rounded-full pointer-events-none"></div>
+    <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">
+        <div class="max-w-[100rem] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-[4rem] md:gap-[2rem]">
 
-    <div class="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900/30 text-xs font-normal text-neutral-400 mb-6 backdrop-blur-md">
-        <span class="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)] animate-pulse"></span>
-        Get Started
-      </div>
+            <div class="col-span-1 md:col-span-3 flex flex-col items-start gap-4">
+                <div class="flex items-center gap-3">
+                    <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 24px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="white"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="white"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="white"/></svg>
+                </div>
+                <p class="mt-2">TRAVEL_INFRASTRUCTURE</p>
+            </div>
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="text-white mb-2">Products</span>
+                <a href="corporate-booking-tool.html" class="hover:text-white transition-colors">Corporate Booking Tool</a>
+                <a href="ai-booking-tool.html" class="hover:text-white transition-colors">AI Booking Tool</a>
+                <a href="agreeease.html" class="hover:text-white transition-colors">AgreeEase</a>
+                <a href="atlas.html" class="hover:text-white transition-colors">AtlasOS</a>
+                <a href="glink.html" class="hover:text-white transition-colors">G-Link</a>
+                <a href="flink.html" class="hover:text-white transition-colors">F-Link</a>
+            </div>
 
-      <style>
-        @keyframes type {
-          0%, 10% { width: 0; }
-          40%, 90% { width: 21ch; }
-          100% { width: 0; }
-        }
-        @keyframes blink {
-          0%, 100% { border-color: transparent; }
-          50% { border-color: #fff; }
-        }
-        .typewriter-text {
-          display: inline-block;
-          overflow: hidden;
-          white-space: nowrap;
-          border-right: 3px solid #fff;
-          width: 21ch;
-          animation: type 5s steps(21, end) infinite, blink 0.8s step-end infinite;
-        }
-      </style>
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="text-white mb-2">Network</span>
+                <a href="addn.html" class="hover:text-white transition-colors">ADDN</a>
+                <a href="payment.html" class="hover:text-white transition-colors">Payment</a>
+            </div>
 
-      <h2 class="text-4xl md:text-5xl font-normal text-white tracking-tight mb-6 font-mono typewriter-text">
-        &gt; Ready to modernize?
-      </h2>
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="text-white mb-2">Company</span>
+                <a href="about.html" class="hover:text-white transition-colors">About</a>
+                <a href="developer.html" class="hover:text-white transition-colors">Developer</a>
+                <a href="mailto:hello@fusionconnectgroup.com" class="hover:text-white transition-colors">Contact</a>
+            </div>
 
-      <p class="text-neutral-400 max-w-lg font-light leading-relaxed mb-10">
-        Address supplier fragmentation, rate complexity, and legacy systems <span class="text-orange-500">one module at a time.</span> No full system replacement. No multi-year migrations.
-      </p>
+            <div class="col-span-1 md:col-span-3 flex flex-col md:items-end gap-4">
+                <span class="text-white mb-2">Connect</span>
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                <span class="mt-4 text-white/30">© 2026 FCG Group. All rights reserved.</span>
+            </div>
 
-      <div class="flex flex-col sm:flex-row items-center gap-4">
-        <button class="w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-black bg-white rounded-full transition-all duration-300 hover:scale-105 hover:bg-neutral-200 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-          <span class="relative z-10 flex items-center gap-2">
-            Book a demo
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right transition-transform duration-300 group-hover:translate-x-1">
-              <path d="M5 12h14"></path>
-              <path d="m12 5 7 7-7 7"></path>
-            </svg>
-          </span>
-        </button>
-        <button class="w-full sm:w-auto group relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-medium text-white bg-white/5 border border-white/10 rounded-full transition-all duration-300 hover:bg-white/10 backdrop-blur-sm">
-          <span class="relative z-10 flex items-center gap-2 text-neutral-300 group-hover:text-white transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-2">
-              <path d="m18 16 4-4-4-4"></path>
-              <path d="m6 8-4 4 4 4"></path>
-              <path d="m14.5 4-5 16"></path>
-            </svg>
-            Schedule a Call
-          </span>
-        </button>
-      </div>
-    </div>
-  </div>
+        </div>
     </footer>
