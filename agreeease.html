@@ -696,142 +696,101 @@
     </div>
   </section>
 
-  <!-- ===== 3-UP FEATURE CARDS ===== -->
-  <section id="how-it-works" class="v7-section" style="position:relative;padding:6.5rem 1.5rem;border-top:0;">
-    <div class="v7-cards-wrap">
-      <div class="v7-cards-head fade-up">
-        <div class="v7-eyebrow">End-to-end sourcing</div>
-        <h2>Procurement that runs off the spreadsheet.</h2>
-        <p>AgreeEase brings sourcing, negotiation, and contracting into a single workflow for travel teams — then keeps the agreed rates in custody so they hold across every channel.</p>
+  <!-- ===== FEATURE SPLIT · RFP / rate-monitoring CONSOLE (dark window, light section) ===== -->
+  <section id="how-it-works" class="v7-section" style="position:relative;padding:7rem 1.5rem;border-top:0;overflow:hidden;">
+    <style>
+      /* Console window — intentionally dark in BOTH themes (a console is a legit dark surface) */
+      .ae-console { background:#0c0c0c; border:1px solid rgba(255,255,255,.1); border-radius:18px; overflow:hidden; font-family:ui-monospace,monospace; box-shadow:0 40px 90px rgba(15,17,20,.14); }
+      html[data-theme="dark"] .ae-console { box-shadow:0 40px 90px rgba(0,0,0,.5); }
+      .ae-console-bar { display:flex; align-items:center; gap:.5rem; padding:.85rem 1.1rem; border-bottom:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.02); }
+      .ae-console-bar .dot { width:10px; height:10px; border-radius:9999px; background:rgba(255,255,255,.16); }
+      .ae-console-bar .file { margin-left:.5rem; font-size:11px; color:rgba(255,255,255,.45); letter-spacing:.04em; }
+      .ae-console-body { padding:1.1rem 1.1rem 1.3rem; }
+      .ae-console-head { display:flex; align-items:center; gap:.6rem; padding:.3rem .35rem .9rem; border-bottom:1px solid rgba(255,255,255,.07); margin-bottom:.85rem; }
+      .ae-console-head .logo { width:1.8rem; height:1.8rem; border-radius:7px; background:rgba(249,115,22,.14); border:1px solid rgba(249,115,22,.3); display:flex; align-items:center; justify-content:center; color:#fb923c; }
+      .ae-console-head .name { color:#fff; font-size:.82rem; font-weight:600; letter-spacing:-.01em; }
+      .ae-console-head .meta { margin-left:auto; font-size:10px; letter-spacing:.08em; color:rgba(255,255,255,.4); text-transform:uppercase; }
+      .ae-crow { display:flex; align-items:center; gap:.7rem; padding:.7rem .8rem; border:1px solid rgba(255,255,255,.07); border-radius:10px; background:rgba(255,255,255,.02); margin-bottom:.55rem; }
+      .ae-crow:last-child { margin-bottom:0; }
+      .ae-crow .prop { display:flex; flex-direction:column; min-width:0; }
+      .ae-crow .prop strong { color:#fff; font-size:.8rem; font-weight:500; }
+      .ae-crow .prop span { color:rgba(255,255,255,.45); font-size:.7rem; }
+      .ae-crow .rate { font-size:.8rem; color:rgba(255,255,255,.85); font-weight:500; margin-left:auto; padding-right:.2rem; white-space:nowrap; }
+      .ae-crow .chk { font-size:9.5px; letter-spacing:.05em; text-transform:uppercase; padding:.2rem .5rem; border-radius:5px; white-space:nowrap; }
+      .ae-crow .chk.ok { color:#86efac; background:rgba(134,239,172,.12); }
+      .ae-crow .chk.warn { color:#fca5a5; background:rgba(248,113,113,.12); }
+      .ae-crow .chk.act { color:#fdba74; background:rgba(251,146,60,.14); }
+      .ae-console-foot { display:flex; align-items:center; gap:.5rem; margin-top:.85rem; padding-top:.8rem; border-top:1px solid rgba(255,255,255,.07); font-size:10.5px; letter-spacing:.05em; color:rgba(255,255,255,.4); text-transform:uppercase; }
+      .ae-console-foot .live { width:6px; height:6px; border-radius:9999px; background:#fb923c; box-shadow:0 0 8px rgba(249,115,22,.6); }
+    </style>
+    <div class="v7-split">
+      <div class="v7-copy fade-up">
+        <div class="v7-eyebrow">Rate monitoring</div>
+        <h2>Watch every negotiated rate <em>against the contract.</em></h2>
+        <p>AgreeEase keeps the rates you agreed under continuous watch. Automated compliance checks compare live rates to each contract and flag what drifts — so deviations surface as they happen, not at audit time.</p>
+        <div class="v7-feat">
+          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>Checks the rate, not the calendar</h3><p>Every contracted property is compared to its negotiated rate continuously, so an out-of-policy rate is caught the day it appears.</p></div></div>
+          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>Status the team can act on</h3><p>Each property carries a clear state — verified, out of policy, renegotiate — so procurement knows where to step in.</p></div></div>
+          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>One view across the program</h3><p>Global and China supply sit in the same console, so a travel team tracks the whole rate book in one place.</p></div></div>
+        </div>
       </div>
-      <div class="v7-cards-grid">
-        <article class="v7-card fade-up">
-          <div class="v7-card-head"><span class="v7-card-tag">Lifecycle</span><span class="v7-card-num">01</span></div>
-          <div class="v7-tile"><iconify-icon icon="solar:document-text-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Full RFP lifecycle</h3>
-          <p>Sourcing, negotiation, and contracting live in one place. The team runs an RFP end to end without juggling spreadsheets and email threads.</p>
-        </article>
-        <article class="v7-card fade-up">
-          <div class="v7-card-head"><span class="v7-card-tag">Compliance</span><span class="v7-card-num">02</span></div>
-          <div class="v7-tile"><iconify-icon icon="solar:shield-check-linear" width="22" height="22"></iconify-icon></div>
-          <h3>AI rate monitoring</h3>
-          <p>Automated compliance checks and real-time tracking watch the rates you negotiated, so deviations surface as they happen rather than at audit time.</p>
-        </article>
-        <article class="v7-card fade-up">
-          <div class="v7-card-head"><span class="v7-card-tag">Custody</span><span class="v7-card-num">03</span></div>
-          <div class="v7-tile"><iconify-icon icon="solar:global-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Global rate custody</h3>
-          <p>Contracted rates are held in custody and guaranteed across every channel, so the rate a team agreed is the rate a traveler sees worldwide.</p>
-        </article>
+      <div class="v7-media fade-up">
+        <div class="ae-console">
+          <div class="ae-console-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">rate-monitor · 2026 RFP</span></div>
+          <div class="ae-console-body">
+            <div class="ae-console-head">
+              <span class="logo"><iconify-icon icon="solar:shield-check-linear" width="15" height="15"></iconify-icon></span>
+              <span class="name">Compliance check</span>
+              <span class="meta">Live</span>
+            </div>
+            <div class="ae-crow">
+              <div class="prop"><strong>Grand Hotel · Tokyo</strong><span>Negotiated ¥28,500</span></div>
+              <span class="rate">¥28,500</span>
+              <span class="chk ok">Rate verified</span>
+            </div>
+            <div class="ae-crow">
+              <div class="prop"><strong>City Suites · London</strong><span>Negotiated £189</span></div>
+              <span class="rate">£214</span>
+              <span class="chk warn">Out of policy</span>
+            </div>
+            <div class="ae-crow">
+              <div class="prop"><strong>Harbor Inn · Singapore</strong><span>Negotiated S$245</span></div>
+              <span class="rate">S$262</span>
+              <span class="chk act">Renegotiate</span>
+            </div>
+            <div class="ae-crow">
+              <div class="prop"><strong>Lakeview · Shanghai</strong><span>Negotiated ¥1,180</span></div>
+              <span class="rate">¥1,180</span>
+              <span class="chk ok">Rate verified</span>
+            </div>
+            <div class="ae-console-foot"><span class="live"></span>Scanning 4 of 4 contracted properties</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== FEATURE SPLIT · where it sits in the stack ===== -->
-  <section id="stack" class="v7-section v7-section-alt" style="position:relative;padding:7rem 1.5rem;border-top:1px solid rgba(15,17,20,.08);overflow:hidden;">
+  <!-- ===== MODULES GRID · AgreeEase capabilities ===== -->
+  <section id="modules" class="v7-section v7-section-alt" style="position:relative;padding:7rem 1.5rem;border-top:1px solid rgba(15,17,20,.08);overflow:hidden;">
     <div class="v7-split">
       <div class="v7-media fade-up">
         <div class="v7-mod-panel">
-          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:document-text-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>RFP lifecycle</strong><span>Source, negotiate, and contract in one workflow</span></div><span class="st">Workflow</span></div>
+          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:document-text-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Full RFP lifecycle</strong><span>Source, negotiate, and contract in one workflow</span></div><span class="st">Workflow</span></div>
           <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:shield-check-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>AI rate monitoring</strong><span>Automated compliance checks and real-time tracking</span></div><span class="st">Compliance</span></div>
-          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:global-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Global rate custody</strong><span>Guaranteed rate access across every channel</span></div><span class="st">Custody</span></div>
+          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:global-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Global rate custody</strong><span>Agreed rates held across every channel</span></div><span class="st">Custody</span></div>
           <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:clipboard-list-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Audit trails</strong><span>Detailed reporting on every procurement action</span></div><span class="st">Reporting</span></div>
         </div>
       </div>
       <div class="v7-copy fade-up">
-        <div class="v7-eyebrow">Inside the FCG stack</div>
-        <h2>Procurement, <em>wired to the network.</em></h2>
-        <p>AgreeEase sits in FCG's services-wrap layer and runs on the ADDN network. Sourcing and rate enforcement draw on the same hotel content that moves through the rest of the stack, so a negotiated rate stays intact from contract to checkout.</p>
+        <div class="v7-eyebrow">What AgreeEase covers</div>
+        <h2>Four capabilities, <em>one sourcing workflow.</em></h2>
+        <p>AgreeEase is the services-wrap layer for hotel sourcing on the ADDN network. It carries an RFP from first source to signed contract, then holds and watches the rate against the same content base that powers the rest of FCG — 4.35M+ global and 1.35M+ China hotel records, plus 35K+ direct independents.</p>
         <div class="v7-feat">
-          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>One workflow, no spreadsheets</h3><p>Source, negotiate, and contract in a single place instead of stitching the process together across files and inboxes.</p></div></div>
-          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>Rates that hold up</h3><p>AI rate monitoring and global custody keep the agreed rate enforced across channels, with deviations tracked in real time.</p></div></div>
-          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>A record of every action</h3><p>Audit trails capture each procurement step, giving travel teams detailed reporting on how a rate was sourced and signed.</p></div></div>
+          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>Source, negotiate, contract</h3><p>The full RFP runs in one place — no spreadsheets, no email threads stitched together.</p></div></div>
+          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>Held, then enforced</h3><p>Global rate custody keeps the contracted rate in place across channels, with AI rate monitoring tracking deviations.</p></div></div>
+          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>A record of every step</h3><p>Audit trails log each procurement action with detailed reporting for review.</p></div></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ===== PLATFORM PROOF · stat aside ===== -->
-  <section id="platform" style="position:relative;background:#ffffff;color:#0f1114;padding:7rem 1.5rem;border-top:1px solid rgba(15,17,20,.08);overflow:hidden;">
-    <style>
-      .v2-proof-wrap { max-width: 76rem; margin: 0 auto; position: relative; z-index: 1; display:grid; grid-template-columns: 1.05fr .95fr; gap: 4rem; align-items:center; }
-      @media (max-width: 900px) { .v2-proof-wrap { grid-template-columns: 1fr; gap: 3rem; } }
-      .v2-proof-eyebrow { color:#F97316; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:.18em; margin-bottom:.85rem; text-transform:uppercase; }
-      .v2-proof h2 { color:#0f1114; font-size: clamp(2rem, 3.4vw, 2.85rem); font-weight:500; letter-spacing:-.02em; margin:0 0 1.25rem; line-height:1.08; }
-      .v2-proof h2 em { font-style:normal; color:#9aa1ab; }
-      .v2-proof p.lede { color:#737373; font-size:1.025rem; line-height:1.7; max-width: 36rem; margin: 0 0 2rem; }
-      .v2-proof-points { display:flex; flex-direction:column; gap:1.1rem; margin-top: 1.25rem; }
-      .v2-proof-point { display:flex; gap: 1rem; align-items:flex-start; }
-      .v2-proof-point .v2-proof-icon { width:2.5rem; height:2.5rem; border-radius:8px; background: rgba(249,115,22,.08); border:1px solid rgba(249,115,22,.22); display:flex; align-items:center; justify-content:center; color:#F97316; flex-shrink:0; }
-      .v2-proof-point h4 { color:#0f1114; font-size: .95rem; font-weight: 500; margin: .15rem 0 .25rem; letter-spacing:-.005em; }
-      .v2-proof-point p { color: #737373; font-size: .9rem; line-height:1.55; margin: 0; }
-      .v2-proof-card { position:relative; background:#ffffff; border:1px solid rgba(15,17,20,.10); border-radius: 24px; padding: 2.5rem; overflow:hidden; box-shadow:0 18px 50px rgba(15,17,20,.06); }
-      .v2-proof-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem 1.25rem; margin-bottom:1.75rem; }
-      .v2-proof-stat strong { display:block; color:#0f1114; font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 300; font-family:ui-monospace, monospace; letter-spacing:-.03em; line-height:1; }
-      .v2-proof-stat span { display:block; margin-top:.5rem; color:#F97316; font-family:'Inter',sans-serif; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; }
-      .v2-proof-card ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: .75rem; border-top: 1px solid rgba(15,17,20,.08); padding-top: 1.5rem; }
-      .v2-proof-card li { display:flex; gap:.65rem; align-items:flex-start; color: #737373; font-size: .9rem; line-height: 1.5; }
-      .v2-proof-card li iconify-icon { color:#F97316; margin-top: .2rem; flex-shrink:0; }
-
-      html[data-theme="dark"] #platform { background:#050505 !important; color:#fff !important; border-top-color:rgba(255,255,255,.08) !important; }
-      html[data-theme="dark"] .v2-proof-eyebrow,
-      html[data-theme="dark"] .v2-proof-point .v2-proof-icon,
-      html[data-theme="dark"] .v2-proof-stat span,
-      html[data-theme="dark"] .v2-proof-card li iconify-icon { color:#fb923c; }
-      html[data-theme="dark"] .v2-proof h2 { color:#fff; }
-      html[data-theme="dark"] .v2-proof h2 em { color:rgba(255,255,255,.55); }
-      html[data-theme="dark"] .v2-proof p.lede { color:rgba(255,255,255,.68); }
-      html[data-theme="dark"] .v2-proof-point p,
-      html[data-theme="dark"] .v2-proof-card li { color:rgba(255,255,255,.6); }
-      html[data-theme="dark"] .v2-proof-point h4 { color:#fff; }
-      html[data-theme="dark"] .v2-proof-card { background:#0a0a0a; border-color:rgba(255,255,255,.1); box-shadow:none; }
-      html[data-theme="dark"] .v2-proof-stat strong { color:#fff; }
-      html[data-theme="dark"] .v2-proof-card ul { border-top-color:rgba(255,255,255,.08); }
-    </style>
-    <div class="v2-proof-wrap">
-      <div class="v2-proof fade-up">
-        <div class="v2-proof-eyebrow">Backed by the platform</div>
-        <h2>Sourcing on <em>deep hotel content.</em></h2>
-        <p class="lede">AgreeEase negotiates and enforces rates against the same content base that powers the rest of FCG — millions of global and China hotel records, plus direct relationships with independents that most procurement tools never reach.</p>
-        <div class="v2-proof-points">
-          <div class="v2-proof-point">
-            <div class="v2-proof-icon"><iconify-icon icon="solar:buildings-3-linear" width="18" height="18"></iconify-icon></div>
-            <div>
-              <h4>Global and China coverage</h4>
-              <p>4.35M+ global hotel records and 1.35M+ China hotel records give RFPs a wide pool to source against.</p>
-            </div>
-          </div>
-          <div class="v2-proof-point">
-            <div class="v2-proof-icon"><iconify-icon icon="solar:link-circle-linear" width="18" height="18"></iconify-icon></div>
-            <div>
-              <h4>Direct independent supply</h4>
-              <p>35K+ direct independents bring rates that aggregator-only tools can't put on the table.</p>
-            </div>
-          </div>
-          <div class="v2-proof-point">
-            <div class="v2-proof-icon"><iconify-icon icon="solar:shield-check-linear" width="18" height="18"></iconify-icon></div>
-            <div>
-              <h4>13+ years behind it</h4>
-              <p>More than a decade building travel infrastructure sits under every rate AgreeEase sources and holds.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <aside class="v2-proof-card fade-up">
-        <div class="v2-proof-grid">
-          <div class="v2-proof-stat"><strong>4.35M+</strong><span>Global hotel records</span></div>
-          <div class="v2-proof-stat"><strong>1.35M+</strong><span>China hotel records</span></div>
-          <div class="v2-proof-stat"><strong>35K+</strong><span>Direct independents</span></div>
-          <div class="v2-proof-stat"><strong>13+</strong><span>Years of track record</span></div>
-        </div>
-        <ul>
-          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>Full RFP lifecycle in one workflow</li>
-          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>AI rate monitoring with real-time tracking</li>
-          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>Global rate custody across every channel</li>
-          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>Audit trails on every procurement action</li>
-        </ul>
-      </aside>
     </div>
   </section>
 </main>
@@ -935,43 +894,57 @@
 </section>
 <!-- ===== END CLOSING CTA ===== -->
 
-    <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">
+    <footer class="site-footer w-full border-t py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech">
+        <style>
+            .site-footer { background:#f7f8fa; border-color: rgba(15,17,20,.1); color:#6b7280; }
+            .site-footer .ft-head { color:#0f1114; }
+            .site-footer .ft-link { color:#6b7280; transition: color .2s ease; }
+            .site-footer .ft-link:hover { color:#0f1114; }
+            .site-footer .ft-logo svg path { fill:#0f1114; }
+            .site-footer .ft-copy { color: rgba(15,17,20,.4); }
+            html[data-theme="dark"] .site-footer { background:#000; border-color: rgba(255,255,255,.1); color:#a1a1aa; }
+            html[data-theme="dark"] .site-footer .ft-head { color:#ffffff; }
+            html[data-theme="dark"] .site-footer .ft-link { color:#a1a1aa; }
+            html[data-theme="dark"] .site-footer .ft-link:hover { color:#ffffff; }
+            html[data-theme="dark"] .site-footer .ft-logo svg path { fill:#ffffff; }
+            html[data-theme="dark"] .site-footer .ft-copy { color: rgba(255,255,255,.3); }
+        </style>
         <div class="max-w-[100rem] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-[4rem] md:gap-[2rem]">
 
             <div class="col-span-1 md:col-span-3 flex flex-col items-start gap-4">
-                <div class="flex items-center gap-3">
+                <div class="ft-logo flex items-center gap-3">
                     <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 24px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="white"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="white"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="white"/></svg>
                 </div>
                 <p class="mt-2">TRAVEL_INFRASTRUCTURE</p>
             </div>
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
-                <span class="text-white mb-2">Products</span>
-                <a href="corporate-booking-tool.html" class="hover:text-white transition-colors">Corporate Booking Tool</a>
-                <a href="ai-booking-tool.html" class="hover:text-white transition-colors">AI Booking Tool</a>
-                <a href="agreeease.html" class="hover:text-white transition-colors">AgreeEase</a>
-                <a href="atlas.html" class="hover:text-white transition-colors">AtlasOS</a>
-                <a href="glink.html" class="hover:text-white transition-colors">G-Link</a>
-                <a href="flink.html" class="hover:text-white transition-colors">F-Link</a>
+                <span class="ft-head mb-2">Products</span>
+                <a href="corporate-booking-tool.html" class="ft-link">Corporate Booking Tool</a>
+                <a href="ai-booking-tool.html" class="ft-link">AI Booking Tool</a>
+                <a href="agreeease.html" class="ft-link">AgreeEase</a>
+                <a href="atlas.html" class="ft-link">AtlasOS</a>
+                <a href="glink.html" class="ft-link">G-Link</a>
+                <a href="flink.html" class="ft-link">F-Link</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
-                <span class="text-white mb-2">Network</span>
-                <a href="addn.html" class="hover:text-white transition-colors">ADDN</a>
-                <a href="payment.html" class="hover:text-white transition-colors">Payment</a>
+                <span class="ft-head mb-2">Network</span>
+                <a href="addn.html" class="ft-link">ADDN</a>
+                <a href="payment.html" class="ft-link">Payment</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
-                <span class="text-white mb-2">Company</span>
-                <a href="about.html" class="hover:text-white transition-colors">About</a>
-                <a href="developer.html" class="hover:text-white transition-colors">Developer</a>
-                <a href="mailto:hello@fusionconnectgroup.com" class="hover:text-white transition-colors">Contact</a>
+                <span class="ft-head mb-2">Company</span>
+                <a href="about.html" class="ft-link">About</a>
+                <a href="developer.html" class="ft-link">Developer</a>
+                <a href="mailto:hello@fusionconnectgroup.com" class="ft-link">Contact</a>
             </div>
 
             <div class="col-span-1 md:col-span-3 flex flex-col md:items-end gap-4">
-                <span class="text-white mb-2">Connect</span>
-                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
-                <span class="mt-4 text-white/30">© 2026 FCG Group. All rights reserved.</span>
+                <span class="ft-head mb-2">Connect</span>
+                <a href="#" class="ft-link">Privacy Policy</a>
+                <a href="#" class="ft-link">Terms of Service</a>
+                <span class="ft-copy mt-4">© 2026 FCG Group. All rights reserved.</span>
             </div>
 
         </div>
