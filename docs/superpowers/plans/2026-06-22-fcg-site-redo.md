@@ -136,6 +136,8 @@ git commit -m "Archive removed pages (Whitelabel, Advisory, AI Mapping, Agent Bo
 
 Once Phase 0 is committed, build all 12 pages in parallel — one subagent per page. **Every page follows the same recipe.** Pages are independent (no shared state), so dispatch them concurrently.
 
+**Content source of truth (overrides everything):** `reference/FCG_Company_Deckpptx.pptx`. Extract the deck first (pptx skill) and treat it as authoritative over the knowledge-base MD, the gap analysis, and existing page copy where they conflict. Group names in nav/footer are locked: **book** (For travel programs & TMCs), **core** (For travel operators), **engine** (For builders & platforms). ADDN uses its official name: "AI-Powered Decentralized Distribution Network".
+
 ### Per-page recipe (apply to each of the 12)
 
 **Inputs per page:** target file, golden source draft (or nearest), the page's product/content brief.
