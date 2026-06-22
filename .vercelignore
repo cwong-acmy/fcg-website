@@ -1,0 +1,14 @@
+design/
+design-archive/
+archive/
+docs/
+drafts/
+outputs/
+reference/
+research/
+working-versions/
+proposals/
+.claude/
+AGENTS.md
+CLAUDE.md
+README.md
