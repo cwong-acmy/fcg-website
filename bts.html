@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script>
+        (function () {
+            try {
+                const savedTheme = localStorage.getItem("theme");
+                if (savedTheme === "dark" || savedTheme === "light") {
+                    document.documentElement.setAttribute("data-theme", savedTheme);
+                    document.documentElement.classList.toggle("dark", savedTheme === "dark");
+                }
+            } catch (error) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCG at BTS London — Business Travel Show</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Marine header font normalization -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: 'var(--color-bg)',
+                        foreground: 'var(--color-fg)',
+                        accent: 'var(--color-accent)',
+                        card: 'var(--color-card)',
+                        border: 'var(--color-border)',
+                        muted: 'var(--color-muted)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Sora', 'sans-serif'],
+                        mono: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --color-bg: #080805;
+            --color-fg: #ffffff;
+            --color-accent: #F97316;
+            --color-card: #121212;
+            --color-border: #2A2A2A;
+            --color-muted: #888888;
+        }
+
+        html[data-theme="light"] {
+            --color-bg: #FFFFFF;
+            --color-fg: #0F1114;
+            --color-accent: #F97316;
+            --color-card: #F3F4F6;
+            --color-border: #D1D5DB;
+            --color-muted: #6B7280;
+        }
+
+        ::selection {
+            background: rgba(249, 115, 22, 0.15);
+            color: inherit;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Theme-aware color overrides */
+        html[data-theme="light"] .text-white { color: var(--color-fg) !important; }
+        html[data-theme="light"] .text-zinc-400 { color: var(--color-muted) !important; }
+        html[data-theme="light"] .text-zinc-500 { color: var(--color-muted) !important; }
+        html[data-theme="light"] .text-zinc-300 { color: var(--color-fg) !important; }
+        html[data-theme="light"] .bg-white { background-color: var(--color-bg) !important; }
+        html[data-theme="light"] .text-zinc-950 { color: var(--color-fg) !important; }
+        html[data-theme="light"] .bg-zinc-200 { background-color: var(--color-card) !important; }
+        html[data-theme="light"] .bg-black\/5 { background-color: rgba(0, 0, 0, 0.05) !important; }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .font-mono-jb { font-family: 'Inter', sans-serif; }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .scale-in.visible { opacity: 1; transform: scale(1); }
+
+        /* ===== MARINE HEADER SECTION STYLES (nav) ===== */
+        .marine-header-section {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-fg);
+        }
+        .marine-header-section .font-mono { font-family: 'Inter', sans-serif; }
+        .fcg-dropdown-nav {
+            background: rgba(255, 255, 255, 0.86);
+            border-color: rgba(15, 17, 20, 0.1);
+            box-shadow: 0 18px 45px rgba(15, 17, 20, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        html[data-theme="dark"] .fcg-dropdown-nav {
+            background: rgba(8, 8, 5, 0.82);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
+        }
+        .fcg-nav-shell {
+            background: rgba(15, 17, 20, 0.04);
+            border: 1px solid rgba(15, 17, 20, 0.08);
+            border-radius: 999px;
+            padding: 3px;
+        }
+        html[data-theme="dark"] .fcg-nav-shell {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .fcg-nav-trigger {
+            color: var(--color-muted);
+            border-radius: 999px;
+            position: relative;
+            transition: color 240ms ease, background-color 240ms ease;
+        }
+        .fcg-dropdown-item::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 12px;
+        }
+        .fcg-dropdown-item:hover .fcg-nav-trigger {
+            color: var(--color-fg);
+            background: rgba(249, 115, 22, 0.1);
+        }
+        .fcg-nav-chevron { transition: transform 180ms ease; }
+        .fcg-dropdown-item:hover .fcg-nav-chevron { transform: rotate(180deg); }
+        .fcg-dropdown-panel {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px) scale(0.98);
+            transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 28px 70px rgba(15, 17, 20, 0.18);
+            min-width: max-content;
+        }
+        html[data-theme="dark"] .fcg-dropdown-panel { box-shadow: 0 28px 70px rgba(0, 0, 0, 0.36); }
+        .fcg-dropdown-item:hover .fcg-dropdown-panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .fcg-menu-icon {
+            border-color: var(--color-border);
+            color: var(--color-fg);
+            transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+        }
+        .fcg-menu-link:hover .fcg-menu-icon { background: #F97316; border-color: #F97316; color: #ffffff; }
+        .fcg-menu-link p { color: var(--color-fg); }
+        .fcg-menu-link span { color: var(--color-muted); transition: color 180ms ease; }
+        .fcg-menu-link:hover span { color: var(--color-fg); }
+        .fcg-products-mega { width: min(92vw, 980px); max-width: calc(100vw - 48px); padding: 28px; }
+        .fcg-products-mega-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+        .fcg-products-group { min-width: 0; }
+        .fcg-products-group-heading {
+            color: var(--color-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        .fcg-products-group-title {
+            color: var(--color-fg);
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .fcg-products-list { display: grid; gap: 16px; }
+        .fcg-products-link { display: flex; gap: 12px; align-items: flex-start; min-width: 0; text-decoration: none; }
+        .fcg-products-link p { color: var(--color-fg); font-size: 14px; font-weight: 500; line-height: 1.25; margin: 0 0 3px; }
+        .fcg-products-link span { color: var(--color-muted); display: block; font-size: 12px; line-height: 1.35; max-width: 210px; transition: color 180ms ease; }
+        .fcg-products-link:hover span { color: var(--color-fg); }
+        .fcg-products-link:hover .fcg-menu-icon { background: #F97316; border-color: #F97316; color: #ffffff; }
+        @media (max-width: 900px) {
+            .fcg-products-mega { width: min(92vw, 680px); }
+            .fcg-products-mega-grid { grid-template-columns: 1fr; }
+        }
+        /* ===== END MARINE HEADER SECTION STYLES ===== */
+
+        /* =========================================================
+           BTS LONDON — SECTION SYSTEM (light default, dark via toggle)
+           All bts-specific CSS scoped under the bts- prefix.
+           ========================================================= */
+        .bts-shell { background: var(--color-bg); color: var(--color-fg); }
+
+        /* ---- HERO ---- */
+        .bts-hero { position:relative; isolation:isolate; overflow:hidden; background:#ffffff; color:#0f1114; padding:9rem 1.5rem 7rem; }
+        .bts-hero-bg { position:absolute; inset:0; z-index:0; pointer-events:none;
+            background:
+                radial-gradient(circle at 50% 20%, rgba(249,115,22,.10), transparent 34%),
+                linear-gradient(180deg, #ffffff 0%, #f7f8fa 100%);
+        }
+        .bts-hero-grid { position:absolute; left:-16%; right:-16%; bottom:-9rem; height:34rem; z-index:0; pointer-events:none;
+            background:
+                linear-gradient(rgba(15,17,20,.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15,17,20,.06) 1px, transparent 1px);
+            background-size:4.25rem 4.25rem;
+            transform:perspective(760px) rotateX(64deg);
+            transform-origin:bottom center;
+            opacity:.55;
+        }
+        .bts-hero-inner { position:relative; z-index:2; max-width:80rem; margin:0 auto; }
+        .bts-hero-split { display:grid; grid-template-columns:1.04fr 1fr; gap:3.5rem; align-items:center; }
+        @media (max-width:960px){ .bts-hero-split { grid-template-columns:1fr; gap:2.75rem; } }
+        .bts-pill { display:inline-flex; align-items:center; gap:.55rem; padding:.55rem 1rem; border:1px solid rgba(15,17,20,.12); border-radius:9999px; background:#ffffff; color:#4b5563; font-size:13px; line-height:1; }
+        .bts-pill strong { color:#0f1114; font-weight:500; display:inline-flex; align-items:center; gap:.3rem; }
+        .bts-pill .sep { width:1px; height:12px; background:rgba(15,17,20,.14); margin:0 .15rem; }
+        .bts-pill .dot { width:6px; height:6px; border-radius:9999px; background:#F97316; box-shadow:0 0 10px rgba(249,115,22,.5); }
+        .bts-hero h1 { color:#0f1114; font-size:clamp(2.35rem,4.4vw,3.55rem); font-weight:500; letter-spacing:-.02em; line-height:1.07; margin:1.5rem 0 0; max-width:34rem; }
+        .bts-hero h1 em { font-style:normal; color:#9aa1ab; }
+        .bts-hero-copy { color:#737373; font-size:1.025rem; line-height:1.7; max-width:34rem; margin:1.3rem 0 0; }
+        .bts-actions { display:flex; align-items:center; flex-wrap:wrap; gap:.65rem; margin-top:2rem; }
+        .bts-btn { display:inline-flex; align-items:center; gap:.5rem; padding:.9rem 1.5rem; border-radius:9999px; font-size:14px; font-weight:500; transition:background 180ms ease, border-color 180ms ease, transform 180ms ease; }
+        .bts-btn-primary { background:#0f1114; color:#ffffff; }
+        .bts-btn-primary:hover { transform:scale(1.01); }
+        .bts-btn-secondary { background:rgba(15,17,20,.03); color:#0f1114; border:1px solid rgba(15,17,20,.14); }
+        .bts-btn-secondary:hover { border-color:rgba(15,17,20,.26); background:rgba(15,17,20,.06); }
+        .bts-strip { display:inline-flex; align-items:center; gap:1.5rem; margin-top:2.5rem; padding:.85rem 1.25rem; border:1px solid rgba(15,17,20,.1); border-radius:9999px; background:#ffffff; }
+        .bts-strip-item { display:inline-flex; align-items:center; gap:.5rem; font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.06em; color:#737373; text-transform:uppercase; }
+        .bts-strip-item strong { color:#0f1114; font-weight:500; }
+        .bts-strip-item iconify-icon { color:#F97316; }
+        .bts-strip-sep { width:1px; height:14px; background:rgba(15,17,20,.12); }
+        @media (max-width:720px){ .bts-strip { flex-wrap:wrap; gap:.85rem 1.1rem; border-radius:20px; } .bts-strip-sep { display:none; } }
+
+        /* hero preview card — China supply browser mockup */
+        .bts-preview { background:#ffffff; border:1px solid rgba(15,17,20,.10); border-radius:18px; overflow:hidden; box-shadow:0 40px 90px rgba(15,17,20,.12); }
+        .bts-preview-bar { display:flex; align-items:center; gap:.5rem; padding:.85rem 1.1rem; border-bottom:1px solid rgba(15,17,20,.08); background:#f7f8fa; }
+        .bts-preview-bar .pdot { width:10px; height:10px; border-radius:9999px; background:rgba(15,17,20,.16); }
+        .bts-preview-bar .url { margin-left:.5rem; font-family:ui-monospace,monospace; font-size:11px; color:#9aa1ab; letter-spacing:.04em; }
+        .bts-preview-body { padding:1.4rem; }
+        .bts-preview-brand { display:flex; align-items:center; gap:.6rem; padding-bottom:1rem; border-bottom:1px solid rgba(15,17,20,.07); }
+        .bts-preview-brand .logo { width:1.9rem; height:1.9rem; border-radius:7px; background:rgba(249,115,22,.14); border:1px solid rgba(249,115,22,.3); display:flex; align-items:center; justify-content:center; color:#F97316; }
+        .bts-preview-brand .name { color:#0f1114; font-size:.85rem; font-weight:600; letter-spacing:-.01em; }
+        .bts-preview-brand .tag { margin-left:auto; font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.08em; color:#9aa1ab; text-transform:uppercase; }
+        .bts-preview-rows { display:flex; flex-direction:column; gap:.6rem; margin-top:1rem; }
+        .bts-prow { display:flex; align-items:center; gap:.7rem; padding:.7rem .85rem; border:1px solid rgba(15,17,20,.08); border-radius:10px; background:#f7f8fa; }
+        .bts-prow .ic { width:1.8rem; height:1.8rem; border-radius:7px; background:rgba(249,115,22,.1); display:flex; align-items:center; justify-content:center; color:#F97316; flex-shrink:0; }
+        .bts-prow .meta { display:flex; flex-direction:column; min-width:0; }
+        .bts-prow .meta strong { color:#0f1114; font-size:.82rem; font-weight:500; }
+        .bts-prow .meta span.sub { color:#737373; font-size:.72rem; }
+        .bts-prow .chan { font-family:ui-monospace,monospace; font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:#9aa1ab; margin-bottom:.1rem; }
+        .bts-prow .state { margin-left:auto; font-family:ui-monospace,monospace; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; padding:.2rem .5rem; border-radius:5px; white-space:nowrap; }
+        .bts-prow .state.ok { color:#15803d; background:rgba(34,197,94,.12); }
+        .bts-prow .state.live { color:#b45309; background:rgba(245,158,11,.14); }
+        .bts-prow .state.gds { color:#b91c1c; background:rgba(239,68,68,.12); }
+
+        /* ---- TRUST MARQUEE ---- */
+        .bts-trust { background:#f7f8fa; border-top:1px solid rgba(15,17,20,.08); border-bottom:1px solid rgba(15,17,20,.08); padding:3.25rem 0; overflow:hidden; }
+        .bts-trust-label { text-align:center; font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#9aa1ab; margin-bottom:1.75rem; }
+        .bts-marquee-mask { overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); }
+        .bts-marquee-track { display:flex; gap:4rem; width:max-content; animation:marquee 32s linear infinite; }
+        .bts-logo { font-family:'Sora',sans-serif; font-size:1.4rem; font-weight:500; letter-spacing:-.01em; color:#0f1114; opacity:.62; white-space:nowrap; }
+
+        /* ---- GENERIC SECTION HEADS ---- */
+        .bts-section { background:#ffffff; color:#0f1114; padding:7rem 1.5rem; }
+        .bts-section.alt { background:#f7f8fa; }
+        .bts-wrap { max-width:76rem; margin:0 auto; }
+        .bts-head { max-width:44rem; margin:0 0 3.25rem; }
+        .bts-eyebrow { color:#F97316; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:.18em; margin-bottom:.7rem; text-transform:uppercase; }
+        .bts-head h2 { color:#0f1114; font-size:clamp(1.9rem,3vw,2.5rem); font-weight:500; letter-spacing:-.02em; margin:0 0 1rem; line-height:1.1; }
+        .bts-head h2 em { font-style:normal; color:#9aa1ab; }
+        .bts-head p { color:#737373; font-size:1rem; line-height:1.7; margin:0; max-width:40rem; }
+
+        /* ---- PILLAR CARDS (3-up) ---- */
+        .bts-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+        @media (max-width:900px){ .bts-cards { grid-template-columns:1fr; } }
+        .bts-card { position:relative; background:#ffffff; border:1px solid rgba(15,17,20,.10); border-radius:24px; padding:2rem; display:flex; flex-direction:column; min-height:17rem; box-shadow:0 18px 50px rgba(15,17,20,.06); }
+        .bts-card-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; }
+        .bts-card-tag { font-family:'Inter',sans-serif; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:#9aa1ab; }
+        .bts-card-num { font-family:ui-monospace,monospace; font-size:11px; color:#9aa1ab; letter-spacing:.05em; }
+        .bts-tile { width:2.75rem; height:2.75rem; border-radius:10px; background:rgba(249,115,22,.1); border:1px solid rgba(249,115,22,.22); display:flex; align-items:center; justify-content:center; color:#F97316; margin-bottom:1.4rem; }
+        .bts-stat { color:#0f1114; font-size:2.4rem; font-weight:500; letter-spacing:-.02em; line-height:1; }
+        .bts-stat .u { color:#F97316; font-size:1.5rem; }
+        .bts-card h3 { color:#0f1114; font-size:1.15rem; font-weight:500; letter-spacing:-.01em; margin:1rem 0 .6rem; line-height:1.22; }
+        .bts-card p { color:#737373; font-size:.9rem; line-height:1.6; margin:0; }
+        .bts-card-foot { margin-top:auto; padding-top:1.25rem; }
+        .bts-flag { display:inline-flex; align-items:center; gap:.4rem; font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:#b91c1c; background:rgba(239,68,68,.08); border:1px solid rgba(239,68,68,.16); border-radius:6px; padding:.3rem .55rem; }
+
+        /* ---- PRODUCT STACK (book / core / engine on ADDN) ---- */
+        .bts-stack { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+        @media (max-width:900px){ .bts-stack { grid-template-columns:1fr; } }
+        .bts-layer { background:#ffffff; border:1px solid rgba(15,17,20,.10); border-radius:20px; padding:1.75rem; box-shadow:0 18px 50px rgba(15,17,20,.05); }
+        .bts-layer .lbl { font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#F97316; margin-bottom:.4rem; }
+        .bts-layer h3 { color:#0f1114; font-size:1.35rem; font-weight:500; letter-spacing:-.01em; margin:0 0 1.25rem; }
+        .bts-layer .row { display:flex; align-items:flex-start; gap:.75rem; padding:.7rem 0; border-top:1px solid rgba(15,17,20,.07); }
+        .bts-layer .row:first-of-type { border-top:0; }
+        .bts-layer .row .ic { width:1.9rem; height:1.9rem; border-radius:7px; background:rgba(249,115,22,.08); border:1px solid rgba(249,115,22,.2); display:flex; align-items:center; justify-content:center; color:#F97316; flex-shrink:0; }
+        .bts-layer .row strong { display:block; color:#0f1114; font-size:.92rem; font-weight:500; }
+        .bts-layer .row span { color:#737373; font-size:.8rem; line-height:1.45; }
+        .bts-stack-base { margin-top:1rem; display:flex; align-items:center; justify-content:center; gap:.6rem; padding:1.1rem; border:1px dashed rgba(249,115,22,.4); border-radius:16px; background:rgba(249,115,22,.05); font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#b45309; }
+
+        /* ---- SERVICES SPLIT ---- */
+        .bts-split { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:76rem; margin:0 auto; }
+        @media (max-width:900px){ .bts-split { grid-template-columns:1fr; gap:2.5rem; } }
+        .bts-split .copy h2 { color:#0f1114; font-size:clamp(1.9rem,3.2vw,2.6rem); font-weight:500; letter-spacing:-.02em; margin:0 0 1.1rem; line-height:1.1; }
+        .bts-split .copy h2 em { font-style:normal; color:#9aa1ab; }
+        .bts-split .copy > p { color:#737373; font-size:1.02rem; line-height:1.7; margin:0 0 2rem; max-width:34rem; }
+        .bts-feat { display:flex; flex-direction:column; gap:1.4rem; }
+        .bts-feat-row { display:flex; gap:1rem; align-items:flex-start; }
+        .bts-feat-row .fnum { font-family:ui-monospace,monospace; font-size:12px; color:#F97316; padding-top:.2rem; flex-shrink:0; min-width:1rem; }
+        .bts-feat-row h3 { color:#0f1114; font-size:1.05rem; font-weight:500; margin:0 0 .3rem; letter-spacing:-.005em; }
+        .bts-feat-row p { color:#737373; font-size:.92rem; line-height:1.55; margin:0; }
+        .bts-mod-panel { background:#ffffff; border:1px solid rgba(15,17,20,.10); border-radius:24px; overflow:hidden; box-shadow:0 18px 50px rgba(15,17,20,.06); }
+        .bts-mod-item { display:flex; align-items:center; gap:1rem; padding:1.35rem 1.5rem; border-bottom:1px solid rgba(15,17,20,.07); }
+        .bts-mod-item:last-child { border-bottom:0; }
+        .bts-mod-item .ic { width:2.4rem; height:2.4rem; border-radius:8px; background:rgba(249,115,22,.08); border:1px solid rgba(249,115,22,.22); display:flex; align-items:center; justify-content:center; color:#F97316; flex-shrink:0; }
+        .bts-mod-item .tx strong { display:block; color:#0f1114; font-size:.95rem; font-weight:500; }
+        .bts-mod-item .tx span { color:#737373; font-size:.82rem; }
+        .bts-mod-item .st { margin-left:auto; font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.06em; color:#15803d; background:rgba(34,197,94,.1); border-radius:5px; padding:.2rem .5rem; text-transform:uppercase; }
+
+        /* ---- CLOSING CTA ---- */
+        .bts-cta { background:#ffffff; color:#0f1114; padding:7rem 1.5rem; }
+        .bts-cta-wrap { max-width:60rem; margin:0 auto; border:1px solid rgba(15,17,20,.1); border-radius:28px; background:linear-gradient(180deg,#ffffff,#f7f8fa); padding:3.5rem; box-shadow:0 30px 80px rgba(15,17,20,.08); text-align:center; }
+        .bts-cta-wrap .eyebrow { color:#F97316; font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; margin-bottom:1rem; }
+        .bts-cta-wrap h2 { color:#0f1114; font-size:clamp(2rem,3.4vw,2.85rem); font-weight:500; letter-spacing:-.02em; line-height:1.08; margin:0 auto 1.1rem; max-width:32rem; }
+        .bts-cta-wrap h2 em { font-style:normal; color:#9aa1ab; }
+        .bts-cta-wrap p { color:#737373; font-size:1.02rem; line-height:1.7; max-width:36rem; margin:0 auto 2rem; }
+        .bts-cta-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:.65rem; }
+        .bts-cta-meta { margin-top:2rem; display:inline-flex; align-items:center; gap:1.25rem; font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:#737373; flex-wrap:wrap; justify-content:center; }
+        .bts-cta-meta .i { display:inline-flex; align-items:center; gap:.45rem; }
+        .bts-cta-meta .i iconify-icon { color:#F97316; }
+        .bts-cta-meta .sep { width:1px; height:13px; background:rgba(15,17,20,.14); }
+
+        /* =========================================================
+           BTS DARK MODE (toggle override only — light stays primary)
+           ========================================================= */
+        html[data-theme="dark"] .bts-hero { background:#050505; color:#fff; }
+        html[data-theme="dark"] .bts-hero-bg {
+            background:
+                radial-gradient(circle at 50% 20%, rgba(249,115,22,.16), transparent 34%),
+                linear-gradient(180deg, rgba(8,8,5,.86) 0%, rgba(5,5,5,.94) 100%);
+        }
+        html[data-theme="dark"] .bts-hero-grid {
+            background:
+                linear-gradient(rgba(255,255,255,.11) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.11) 1px, transparent 1px);
+            background-size:4.25rem 4.25rem;
+        }
+        html[data-theme="dark"] .bts-hero h1 { color:#fff; }
+        html[data-theme="dark"] .bts-hero h1 em,
+        html[data-theme="dark"] .bts-head h2 em,
+        html[data-theme="dark"] .bts-split .copy h2 em,
+        html[data-theme="dark"] .bts-cta-wrap h2 em { color:rgba(255,255,255,.55); }
+        html[data-theme="dark"] .bts-hero-copy { color:rgba(255,255,255,.68); }
+        html[data-theme="dark"] .bts-pill { background:rgba(255,255,255,.04); border-color:rgba(255,255,255,.16); color:rgba(255,255,255,.74); }
+        html[data-theme="dark"] .bts-pill strong { color:#fff; }
+        html[data-theme="dark"] .bts-pill .sep { background:rgba(255,255,255,.18); }
+        html[data-theme="dark"] .bts-pill .dot,
+        html[data-theme="dark"] .bts-strip-item iconify-icon,
+        html[data-theme="dark"] .bts-preview-brand .logo,
+        html[data-theme="dark"] .bts-prow .ic,
+        html[data-theme="dark"] .bts-eyebrow,
+        html[data-theme="dark"] .bts-tile,
+        html[data-theme="dark"] .bts-stat .u,
+        html[data-theme="dark"] .bts-layer .lbl,
+        html[data-theme="dark"] .bts-layer .row .ic,
+        html[data-theme="dark"] .bts-feat-row .fnum,
+        html[data-theme="dark"] .bts-mod-item .ic,
+        html[data-theme="dark"] .bts-cta-wrap .eyebrow,
+        html[data-theme="dark"] .bts-cta-meta .i iconify-icon { color:#fb923c; }
+        html[data-theme="dark"] .bts-btn-primary { background:#fff; color:#0a0a0a; }
+        html[data-theme="dark"] .bts-btn-secondary { background:rgba(255,255,255,.04); color:#fff; border-color:rgba(255,255,255,.14); }
+        html[data-theme="dark"] .bts-btn-secondary:hover { border-color:rgba(255,255,255,.3); background:rgba(255,255,255,.08); }
+        html[data-theme="dark"] .bts-strip { background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.1); }
+        html[data-theme="dark"] .bts-strip-item { color:rgba(255,255,255,.55); }
+        html[data-theme="dark"] .bts-strip-item strong { color:#fff; }
+        html[data-theme="dark"] .bts-strip-sep { background:rgba(255,255,255,.12); }
+
+        html[data-theme="dark"] .bts-preview { background:#0c0c0c; border-color:rgba(255,255,255,.1); box-shadow:0 40px 90px rgba(0,0,0,.5); }
+        html[data-theme="dark"] .bts-preview-bar { border-bottom-color:rgba(255,255,255,.08); background:rgba(255,255,255,.02); }
+        html[data-theme="dark"] .bts-preview-bar .pdot { background:rgba(255,255,255,.16); }
+        html[data-theme="dark"] .bts-preview-bar .url { color:rgba(255,255,255,.45); }
+        html[data-theme="dark"] .bts-preview-brand { border-bottom-color:rgba(255,255,255,.07); }
+        html[data-theme="dark"] .bts-preview-brand .name { color:#fff; }
+        html[data-theme="dark"] .bts-preview-brand .tag { color:rgba(255,255,255,.4); }
+        html[data-theme="dark"] .bts-prow { border-color:rgba(255,255,255,.08); background:rgba(255,255,255,.02); }
+        html[data-theme="dark"] .bts-prow .ic { background:rgba(255,255,255,.05); }
+        html[data-theme="dark"] .bts-prow .meta strong { color:#fff; }
+        html[data-theme="dark"] .bts-prow .meta span.sub { color:rgba(255,255,255,.5); }
+        html[data-theme="dark"] .bts-prow .chan { color:rgba(255,255,255,.4); }
+        html[data-theme="dark"] .bts-prow .state.ok { color:#86efac; background:rgba(134,239,172,.1); }
+        html[data-theme="dark"] .bts-prow .state.live { color:#fdba74; background:rgba(251,146,60,.12); }
+        html[data-theme="dark"] .bts-prow .state.gds { color:#fca5a5; background:rgba(248,113,113,.12); }
+
+        html[data-theme="dark"] .bts-trust { background:#000; border-color:rgba(255,255,255,.1); }
+        html[data-theme="dark"] .bts-trust-label { color:rgba(255,255,255,.4); }
+        html[data-theme="dark"] .bts-logo { color:#fff; opacity:.55; }
+
+        html[data-theme="dark"] .bts-section { background:#050505; color:#fff; }
+        html[data-theme="dark"] .bts-section.alt { background:#000; }
+        html[data-theme="dark"] .bts-head h2,
+        html[data-theme="dark"] .bts-card h3,
+        html[data-theme="dark"] .bts-stat,
+        html[data-theme="dark"] .bts-layer h3,
+        html[data-theme="dark"] .bts-layer .row strong,
+        html[data-theme="dark"] .bts-split .copy h2,
+        html[data-theme="dark"] .bts-feat-row h3,
+        html[data-theme="dark"] .bts-mod-item .tx strong,
+        html[data-theme="dark"] .bts-cta-wrap h2 { color:#fff; }
+        html[data-theme="dark"] .bts-head p,
+        html[data-theme="dark"] .bts-card p,
+        html[data-theme="dark"] .bts-layer .row span,
+        html[data-theme="dark"] .bts-split .copy > p,
+        html[data-theme="dark"] .bts-feat-row p,
+        html[data-theme="dark"] .bts-mod-item .tx span,
+        html[data-theme="dark"] .bts-cta-wrap p,
+        html[data-theme="dark"] .bts-cta-meta { color:rgba(255,255,255,.62); }
+        html[data-theme="dark"] .bts-card-tag,
+        html[data-theme="dark"] .bts-card-num { color:rgba(255,255,255,.4); }
+        html[data-theme="dark"] .bts-card,
+        html[data-theme="dark"] .bts-layer,
+        html[data-theme="dark"] .bts-mod-panel { background:#121212; border-color:#2a2a2a; box-shadow:none; }
+        html[data-theme="dark"] .bts-layer .row,
+        html[data-theme="dark"] .bts-mod-item { border-color:rgba(255,255,255,.06); }
+        html[data-theme="dark"] .bts-stack-base { background:rgba(249,115,22,.08); border-color:rgba(249,115,22,.35); color:#fdba74; }
+        html[data-theme="dark"] .bts-cta { background:#050505; }
+        html[data-theme="dark"] .bts-cta-wrap { background:linear-gradient(180deg,#0c0c0c,#000); border-color:rgba(255,255,255,.1); box-shadow:none; }
+        html[data-theme="dark"] .bts-cta-meta .sep { background:rgba(255,255,255,.14); }
+    </style>
+</head>
+<body class="bg-background text-foreground antialiased bts-shell">
+
+    <!-- ===== MARINE HEADER SECTION ===== -->
+    <nav class="marine-header-section fcg-dropdown-nav fixed top-0 z-50 w-full border-b">
+        <div class="w-full px-4 md:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="flex items-center" style="color: var(--color-fg);" aria-label="FCG Group home">
+                    <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 28px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="currentColor"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="currentColor"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="currentColor"/></svg>
+                </a>
+
+                <ul class="fcg-nav-shell hidden md:flex items-center gap-0 text-sm font-normal">
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>Products</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel fcg-products-mega absolute left-0 top-full mt-2 rounded-2xl">
+                            <div class="fcg-products-mega-grid">
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For travel programs &amp; TMCs</h3>
+                                    <div class="fcg-products-group-title">book</div>
+                                    <div class="fcg-products-list">
+                                        <a href="corporate-booking-tool.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:map-point-wave-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>Corporate Booking Tool</p><span>Modern booking for managed travel programs</span></div>
+                                        </a>
+                                        <a href="ai-booking-tool.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:cpu-bolt-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>AI Booking Tool</p><span>Connect AI to live travel inventory</span></div>
+                                        </a>
+                                        <a href="agreeease.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:chart-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>AgreeEase</p><span>Hotel sourcing, RFPs, and rate workflows</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For travel operators</h3>
+                                    <div class="fcg-products-group-title">core</div>
+                                    <div class="fcg-products-list">
+                                        <a href="atlas.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>AtlasOS</p><span>Mid-office ops, duty of care, and a unified inbox</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="fcg-products-group">
+                                    <h3 class="fcg-products-group-heading">For builders &amp; platforms</h3>
+                                    <div class="fcg-products-group-title">engine</div>
+                                    <div class="fcg-products-list">
+                                        <a href="glink.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:bed-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>G-Link</p><span>Connect to 4.3M+ hotels through one API</span></div>
+                                        </a>
+                                        <a href="flink.html" class="fcg-products-link">
+                                            <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:plain-2-linear" width="19" height="19"></iconify-icon></div>
+                                            <div><p>F-Link</p><span>Every airline — GDS, NDC, and LCC in one feed</span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fcg-dropdown-item relative">
+                        <button class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5" type="button">
+                            <span>Network</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="fcg-nav-chevron" width="14" height="14"></iconify-icon>
+                        </button>
+                        <div class="fcg-dropdown-panel absolute left-0 top-full mt-2 rounded-2xl p-4 w-max">
+                            <div class="space-y-6 overflow-hidden">
+                                <a href="addn.html" class="fcg-menu-link flex items-start gap-3">
+                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:global-linear" width="19" height="19"></iconify-icon></div>
+                                    <div><p class="text-sm font-medium">ADDN</p><span class="text-xs">AI-Powered Decentralized Distribution Network</span></div>
+                                </a>
+                                <a href="payment.html" class="fcg-menu-link flex items-start gap-3">
+                                    <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:card-linear" width="19" height="19"></iconify-icon></div>
+                                    <div><p class="text-sm font-medium">Payment</p><span class="text-xs">Settle Chinese hotel bookings in RMB — no FX friction</span></div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fcg-dropdown-item relative">
+                        <a href="developer.html" class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5">
+                            <span>Developer</span>
+                        </a>
+                    </li>
+                    <li class="fcg-dropdown-item relative">
+                        <a href="about.html" class="fcg-nav-trigger px-4 py-2 flex items-center gap-1.5">
+                            <span>About</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="flex items-center gap-4 md:gap-6">
+                <div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono tracking-tight" style="background-color: rgba(249, 115, 22, 0.1); border: 1px solid rgba(249, 115, 22, 0.2); color: #F97316;">
+                    <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background-color: #F97316;"></span>
+                    BTS.LONDON
+                </div>
+
+                <label id="themeToggleControl" class="flex items-center gap-3 cursor-pointer group">
+                    <span class="text-xs font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors hidden sm:block uppercase">MODE</span>
+                    <div class="relative">
+                        <input type="checkbox" id="themeToggle" class="sr-only peer" checked>
+                        <div class="w-10 h-5 rounded-full peer peer-checked:bg-orange-900/40 border transition-all bg-zinc-800 border-white/10"></div>
+                        <div class="absolute left-1 top-1 w-3 h-3 bg-zinc-500 rounded-full peer-checked:translate-x-5 peer-checked:bg-orange-500 transition-all shadow-[0_0_8px_rgba(249,115,22,0.4)] peer-checked:shadow-[0_0_12px_rgba(249,115,22,0.8)]"></div>
+                    </div>
+                </label>
+                <a href="#bts-hero" class="md:hidden w-10 h-10 rounded-full border flex items-center justify-center" style="border-color: var(--color-border); color: var(--color-fg);" aria-label="Open page sections">
+                    <iconify-icon icon="solar:hamburger-menu-linear" width="20" height="20"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- ===== END MARINE HEADER SECTION ===== -->
+
+    <!-- ===== HERO ===== -->
+    <section id="bts-hero" class="bts-hero">
+        <div class="bts-hero-bg" aria-hidden="true"></div>
+        <div class="bts-hero-grid" aria-hidden="true"></div>
+
+        <div class="bts-hero-inner">
+            <div class="bts-hero-split">
+                <div class="bts-hero-left">
+                    <div class="bts-pill">
+                        BTS London
+                        <span class="sep"></span>
+                        <strong><span class="dot"></span>Stand · Jun 24–25 2026</strong>
+                        <span class="sep"></span>
+                        <span>Business Travel Show</span>
+                    </div>
+
+                    <h1>The largest non-OTA TMC supply chain <em>in China.</em></h1>
+                    <p class="bts-hero-copy">FCG connects European TMCs and DMCs to the Chinese hotels GDS can't reach — local chains, independent properties, and compliant RMB settlement. Meet the network behind it at BTS London.</p>
+
+                    <div class="bts-actions">
+                        <a href="#bts-cta" class="bts-btn bts-btn-primary">Book a meeting<iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
+                        <a href="#bts-supply" class="bts-btn bts-btn-secondary">See the supply</a>
+                    </div>
+
+                    <div class="bts-strip" role="list">
+                        <span class="bts-strip-item" role="listitem"><iconify-icon icon="solar:bed-linear" width="14" height="14"></iconify-icon><strong>1.35M+</strong>China hotels</span>
+                        <span class="bts-strip-sep"></span>
+                        <span class="bts-strip-item" role="listitem"><iconify-icon icon="solar:buildings-3-linear" width="14" height="14"></iconify-icon><strong>100+</strong>local chains</span>
+                        <span class="bts-strip-sep"></span>
+                        <span class="bts-strip-item" role="listitem"><iconify-icon icon="solar:card-linear" width="14" height="14"></iconify-icon><strong>RMB</strong>settlement</span>
+                    </div>
+                </div>
+
+                <div class="bts-hero-right fade-up">
+                    <div class="bts-preview">
+                        <div class="bts-preview-bar"><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="url">fcg.network/china-supply</span></div>
+                        <div class="bts-preview-body">
+                            <div class="bts-preview-brand">
+                                <span class="logo"><iconify-icon icon="solar:bed-linear" width="16" height="16"></iconify-icon></span>
+                                <span class="name">China hotel supply</span>
+                                <span class="tag">In China</span>
+                            </div>
+                            <div class="bts-preview-rows">
+                                <div class="bts-prow">
+                                    <span class="ic"><iconify-icon icon="solar:buildings-2-linear" width="15" height="15"></iconify-icon></span>
+                                    <span class="meta"><span class="chan">Local chain</span><strong>Atour · 亚朵 · Shanghai</strong><span class="sub">Negotiated rate · not on GDS</span></span>
+                                    <span class="state gds">No GDS</span>
+                                </div>
+                                <div class="bts-prow">
+                                    <span class="ic"><iconify-icon icon="solar:buildings-2-linear" width="15" height="15"></iconify-icon></span>
+                                    <span class="meta"><span class="chan">Local chain</span><strong>Huazhu · 全季 · Beijing</strong><span class="sub">Direct-contracted · live inventory</span></span>
+                                    <span class="state live">Direct</span>
+                                </div>
+                                <div class="bts-prow">
+                                    <span class="ic"><iconify-icon icon="solar:card-linear" width="15" height="15"></iconify-icon></span>
+                                    <span class="meta"><span class="chan">Payment</span><strong>RMB settlement · Conferma VCC</strong><span class="sub">Booking #FC-7720 · reconciled</span></span>
+                                    <span class="state ok">Settled</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ===== END HERO ===== -->
+
+    <!-- ===== TRUST MARQUEE — corporate social proof ===== -->
+    <section class="bts-trust">
+        <div class="bts-trust-label fade-up">Trusted by the largest Chinese corporates and central SOEs</div>
+        <div class="bts-marquee-mask">
+            <div class="bts-marquee-track">
+                <span class="bts-logo">Alibaba</span>
+                <span class="bts-logo">ByteDance</span>
+                <span class="bts-logo">State Grid</span>
+                <span class="bts-logo">China Mobile</span>
+                <span class="bts-logo">Ping An</span>
+                <span class="bts-logo">Wins TMC</span>
+                <span class="bts-logo">Alibaba</span>
+                <span class="bts-logo">ByteDance</span>
+                <span class="bts-logo">State Grid</span>
+                <span class="bts-logo">China Mobile</span>
+                <span class="bts-logo">Ping An</span>
+                <span class="bts-logo">Wins TMC</span>
+            </div>
+        </div>
+    </section>
+    <!-- ===== END TRUST MARQUEE ===== -->
+
+    <!-- ===== CHINA SUPPLY PILLARS — 3-up cards ===== -->
+    <section id="bts-supply" class="bts-section">
+        <div class="bts-wrap">
+            <div class="bts-head fade-up">
+                <div class="bts-eyebrow">In China · the supply story</div>
+                <h2>China supply GDS can't reach.</h2>
+                <p>Western platforms book the international brands your travellers already have. FCG connects the local brands they actually want — direct-contracted, deduplicated, and live.</p>
+            </div>
+
+            <div class="bts-cards">
+                <article class="bts-card fade-up">
+                    <div class="bts-card-head">
+                        <span class="bts-card-tag">Local chains</span>
+                        <span class="bts-card-num">01 / 03</span>
+                    </div>
+                    <div class="bts-tile"><iconify-icon icon="solar:buildings-2-linear" width="22" height="22"></iconify-icon></div>
+                    <div class="bts-stat">100<span class="u">+</span></div>
+                    <h3>Chinese local hotel chains</h3>
+                    <p>华住 Huazhu and its sub-brands — 全季, 桔子 — plus 亚朵 Atour and 锦江 Jinjiang. The brands Chinese travellers book first.</p>
+                    <div class="bts-card-foot"><span class="bts-flag"><iconify-icon icon="solar:close-circle-linear" width="12" height="12"></iconify-icon>Not available on GDS</span></div>
+                </article>
+
+                <article class="bts-card fade-up">
+                    <div class="bts-card-head">
+                        <span class="bts-card-tag">Independents</span>
+                        <span class="bts-card-num">02 / 03</span>
+                    </div>
+                    <div class="bts-tile"><iconify-icon icon="solar:home-2-linear" width="22" height="22"></iconify-icon></div>
+                    <div class="bts-stat">35K<span class="u">+</span></div>
+                    <h3>Direct China independents</h3>
+                    <p>Local independent hotels FCG contracts directly — counted separately from chains, across 1.35M+ China hotel records in total.</p>
+                    <div class="bts-card-foot"><span class="bts-flag"><iconify-icon icon="solar:close-circle-linear" width="12" height="12"></iconify-icon>Not available on GDS</span></div>
+                </article>
+
+                <article class="bts-card fade-up">
+                    <div class="bts-card-head">
+                        <span class="bts-card-tag">Pricing</span>
+                        <span class="bts-card-num">03 / 03</span>
+                    </div>
+                    <div class="bts-tile"><iconify-icon icon="solar:tag-price-linear" width="22" height="22"></iconify-icon></div>
+                    <div class="bts-stat">#1</div>
+                    <h3>China negotiated-hotel scale</h3>
+                    <p>Direct supplier connections mean better rates than GDS routes them through — and the #1 negotiated-hotel scale in the China market.</p>
+                    <div class="bts-card-foot"><span class="bts-flag" style="color:#b45309;background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2);"><iconify-icon icon="solar:graph-up-linear" width="12" height="12"></iconify-icon>Direct rates, no markup</span></div>
+                </article>
+            </div>
+        </div>
+    </section>
+    <!-- ===== END CHINA SUPPLY PILLARS ===== -->
+
+    <!-- ===== PRODUCT STACK — book / core / engine on ADDN ===== -->
+    <section id="bts-stack" class="bts-section alt">
+        <div class="bts-wrap">
+            <div class="bts-head fade-up">
+                <div class="bts-eyebrow">The stack · book · core · engine</div>
+                <h2>One network. The full chain.</h2>
+                <p>Connect · Operate · Experience. FCG's product stack is modular and runs end-to-end on the ADDN network — sourcing through settlement.</p>
+            </div>
+
+            <div class="bts-stack">
+                <div class="bts-layer fade-up">
+                    <div class="lbl">Book · front-end</div>
+                    <h3>book</h3>
+                    <div class="row">
+                        <span class="ic"><iconify-icon icon="solar:map-point-wave-linear" width="17" height="17"></iconify-icon></span>
+                        <span><strong>Corporate Booking Tool</strong><span>White-label booking for TMCs, resellers, and partners.</span></span>
+                    </div>
+                    <div class="row">
+                        <span class="ic"><iconify-icon icon="solar:cpu-bolt-linear" width="17" height="17"></iconify-icon></span>
+                        <span><strong>AI Booking Tool</strong><span>Chat and voice booking across FCG's full content stack.</span></span>
+                    </div>
+                </div>
+
+                <div class="bts-layer fade-up">
+                    <div class="lbl">Core · mid-end</div>
+                    <h3>core</h3>
+                    <div class="row">
+                        <span class="ic"><iconify-icon icon="solar:buildings-2-linear" width="17" height="17"></iconify-icon></span>
+                        <span><strong>AtlasOS</strong><span>Unified inbox, operations hub, finance, and duty of care.</span></span>
+                    </div>
+                    <div class="row">
+                        <span class="ic"><iconify-icon icon="solar:chart-2-linear" width="17" height="17"></iconify-icon></span>
+                        <span><strong>AgreeEase</strong><span>RFPs, rate custody, and AI rate monitoring with audit trails.</span></span>
+                    </div>
+                </div>
+
+                <div class="bts-layer fade-up">
+                    <div class="lbl">Engine · back-end</div>
+                    <h3>engine</h3>
+                    <div class="row">
+                        <span class="ic"><iconify-icon icon="solar:bed-linear" width="17" height="17"></iconify-icon></span>
+                        <span><strong>G-Link</strong><span>Hotel supply aggregator — 4.35M+ records through one API.</span></span>
+                    </div>
+                    <div class="row">
+                        <span class="ic"><iconify-icon icon="solar:plain-2-linear" width="17" height="17"></iconify-icon></span>
+                        <span><strong>F-Link</strong><span>Flight supply — GDS, NDC, and LCC in one validated feed.</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bts-stack-base fade-up">
+                <iconify-icon icon="solar:global-linear" width="16" height="16"></iconify-icon>
+                All deployable on ADDN · AI-Powered Decentralized Distribution Network
+            </div>
+        </div>
+    </section>
+    <!-- ===== END PRODUCT STACK ===== -->
+
+    <!-- ===== SERVICES SPLIT — payment / rates / hosting ===== -->
+    <section id="bts-services" class="bts-section">
+        <div class="bts-split">
+            <div class="copy fade-up">
+                <div class="bts-eyebrow">Services · the China programme</div>
+                <h2>Three problems FCG already <em>solves.</em></h2>
+                <p>Beyond supply, FCG removes the friction that keeps European programmes out of China — payment, rates, and on-the-ground management.</p>
+                <div class="bts-feat">
+                    <div class="bts-feat-row">
+                        <span class="fnum">01</span>
+                        <div><h3>Payment to China</h3><p>Settle any Chinese hotel in RMB by virtual card with Conferma — closing the &gt;70% market VCC-to-China failure rate. Live today.</p></div>
+                    </div>
+                    <div class="bts-feat-row">
+                        <span class="fnum">02</span>
+                        <div><h3>Negotiated corporate rates</h3><p>Managed 协议价 corporate rates loaded directly into your programme — custody, monitoring, and audit handled by FCG.</p></div>
+                    </div>
+                    <div class="bts-feat-row">
+                        <span class="fnum">03</span>
+                        <div><h3>Property hosting · 托管</h3><p>FCG manages your China single-property hotels end-to-end — rates, payment, and operations on one network.</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bts-media fade-up">
+                <div class="bts-mod-panel">
+                    <div class="bts-mod-item">
+                        <span class="ic"><iconify-icon icon="solar:card-linear" width="18" height="18"></iconify-icon></span>
+                        <span class="tx"><strong>Cross-border payment</strong><span>Conferma VCC · global-to-China</span></span>
+                        <span class="st">Live</span>
+                    </div>
+                    <div class="bts-mod-item">
+                        <span class="ic"><iconify-icon icon="solar:tag-price-linear" width="18" height="18"></iconify-icon></span>
+                        <span class="tx"><strong>Negotiated rates · 协议价</strong><span>Loaded into Amadeus &amp; Sabre</span></span>
+                        <span class="st">Custody</span>
+                    </div>
+                    <div class="bts-mod-item">
+                        <span class="ic"><iconify-icon icon="solar:buildings-3-linear" width="18" height="18"></iconify-icon></span>
+                        <span class="tx"><strong>Property hosting · 托管</strong><span>Managed China properties</span></span>
+                        <span class="st">Managed</span>
+                    </div>
+                    <div class="bts-mod-item">
+                        <span class="ic"><iconify-icon icon="solar:shield-check-linear" width="18" height="18"></iconify-icon></span>
+                        <span class="tx"><strong>Compliant settlement</strong><span>End-to-end traceable</span></span>
+                        <span class="st">In China</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ===== END SERVICES SPLIT ===== -->
+
+    <!-- ===== CLOSING CTA — meet FCG at BTS ===== -->
+    <section id="bts-cta" class="bts-cta">
+        <div class="bts-cta-wrap fade-up">
+            <div class="eyebrow">Talk to us at BTS London</div>
+            <h2>Meet the network <em>at the stand.</em></h2>
+            <p>Day 1 for TMCs, Day 2 for corporate travel teams. See China supply, payment, and the full FCG stack live — then book a walkthrough.</p>
+            <div class="bts-cta-actions">
+                <a href="mailto:hello@fusionconnectgroup.com?subject=BTS%20London%20meeting" class="bts-btn bts-btn-primary">Book a meeting<iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
+                <a href="https://open.fusionconnectgroup.com" class="bts-btn bts-btn-secondary">Explore the network</a>
+            </div>
+            <div class="bts-cta-meta">
+                <span class="i"><iconify-icon icon="solar:calendar-linear" width="14" height="14"></iconify-icon>Jun 24–25 2026</span>
+                <span class="sep"></span>
+                <span class="i"><iconify-icon icon="solar:map-point-linear" width="14" height="14"></iconify-icon>Business Travel Show · London</span>
+                <span class="sep"></span>
+                <span class="i"><iconify-icon icon="solar:letter-linear" width="14" height="14"></iconify-icon>hello@fusionconnectgroup.com</span>
+            </div>
+        </div>
+    </section>
+    <!-- ===== END CLOSING CTA ===== -->
+
+    <!-- ===== SITE FOOTER ===== -->
+    <footer class="site-footer w-full border-t py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech">
+        <style>
+            .site-footer { background:#f7f8fa; border-color: rgba(15,17,20,.1); color:#6b7280; }
+            .site-footer .ft-head { color:#0f1114; }
+            .site-footer .ft-link { color:#6b7280; transition: color .2s ease; }
+            .site-footer .ft-link:hover { color:#0f1114; }
+            .site-footer .ft-logo svg path { fill:#0f1114; }
+            .site-footer .ft-copy { color: rgba(15,17,20,.4); }
+            html[data-theme="dark"] .site-footer { background:#000; border-color: rgba(255,255,255,.1); color:#a1a1aa; }
+            html[data-theme="dark"] .site-footer .ft-head { color:#ffffff; }
+            html[data-theme="dark"] .site-footer .ft-link { color:#a1a1aa; }
+            html[data-theme="dark"] .site-footer .ft-link:hover { color:#ffffff; }
+            html[data-theme="dark"] .site-footer .ft-logo svg path { fill:#ffffff; }
+            html[data-theme="dark"] .site-footer .ft-copy { color: rgba(255,255,255,.3); }
+        </style>
+        <div class="max-w-[100rem] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-[4rem] md:gap-[2rem]">
+
+            <div class="col-span-1 md:col-span-3 flex flex-col items-start gap-4">
+                <div class="ft-logo flex items-center gap-3">
+                    <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 24px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="white"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="white"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="white"/></svg>
+                </div>
+                <p class="mt-2">TRAVEL_INFRASTRUCTURE</p>
+            </div>
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="ft-head mb-2">Products</span>
+                <a href="corporate-booking-tool.html" class="ft-link">Corporate Booking Tool</a>
+                <a href="ai-booking-tool.html" class="ft-link">AI Booking Tool</a>
+                <a href="agreeease.html" class="ft-link">AgreeEase</a>
+                <a href="atlas.html" class="ft-link">AtlasOS</a>
+                <a href="glink.html" class="ft-link">G-Link</a>
+                <a href="flink.html" class="ft-link">F-Link</a>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="ft-head mb-2">Network</span>
+                <a href="addn.html" class="ft-link">ADDN</a>
+                <a href="payment.html" class="ft-link">Payment</a>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
+                <span class="ft-head mb-2">Company</span>
+                <a href="about.html" class="ft-link">About</a>
+                <a href="developer.html" class="ft-link">Developer</a>
+                <a href="mailto:hello@fusionconnectgroup.com" class="ft-link">Contact</a>
+            </div>
+
+            <div class="col-span-1 md:col-span-3 flex flex-col md:items-end gap-4">
+                <span class="ft-head mb-2">Connect</span>
+                <a href="#" class="ft-link">Privacy Policy</a>
+                <a href="#" class="ft-link">Terms of Service</a>
+                <span class="ft-copy mt-4">© 2026 FCG Group. All rights reserved.</span>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ===== SCROLL REVEAL SCRIPT ===== -->
+    <script>
+      const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                  observer.unobserve(entry.target);
+              }
+          });
+      }, observerOptions);
+      document.querySelectorAll('.fade-up, .scale-in').forEach(el => observer.observe(el));
+    </script>
+
+    <!-- ===== THEME TOGGLE SCRIPT ===== -->
+    <script>
+        (function () {
+            const themeToggle = document.getElementById("themeToggle");
+            const html = document.documentElement;
+            const savedTheme = localStorage.getItem("theme");
+            const activeTheme = savedTheme === "dark" || savedTheme === "light" ? savedTheme : "light";
+
+            function applyTheme(theme) {
+                const isDark = theme === "dark";
+                html.setAttribute("data-theme", theme);
+                html.classList.toggle("dark", isDark);
+                if (themeToggle) themeToggle.checked = isDark;
+            }
+
+            applyTheme(activeTheme);
+
+            if (themeToggle) {
+                themeToggle.addEventListener("change", function () {
+                    const newTheme = this.checked ? "dark" : "light";
+                    localStorage.setItem("theme", newTheme);
+                    applyTheme(newTheme);
+                });
+            }
+        })();
+    </script>
+    <!-- ===== END THEME TOGGLE SCRIPT ===== -->
+</body>
+</html>
