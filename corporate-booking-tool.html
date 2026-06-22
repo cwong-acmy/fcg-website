@@ -317,82 +317,9 @@
         }
         /* ===== END MARINE HEADER SECTION STYLES ===== */
 
-        /* ===== PRODUCT SHELL + V7 SECTION SYSTEM ===== */
+        /* ===== PRODUCT SHELL ===== */
         .product-shell { background: var(--color-bg); color: var(--color-fg); }
-
-        /* DEFAULT = LIGHT; dark is a toggle override below */
-        .v7-section { background:#ffffff; color:#0f1114; }
-        .v7-section.v7-section-alt { background:#f7f8fa; }
-
-        /* Section heads */
-        .v7-cards-wrap { max-width: 72rem; margin: 0 auto; }
-        .v7-cards-head { max-width: 44rem; margin: 0 0 3.25rem; }
-        .v7-eyebrow { color:#F97316; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:.18em; margin-bottom:.7rem; text-transform:uppercase; }
-        .v7-cards-head h2 { color:#0f1114; font-size:clamp(1.9rem,3vw,2.5rem); font-weight:500; letter-spacing:-.02em; margin:0 0 1rem; line-height:1.1; }
-        .v7-cards-head p { color:#737373; font-size:1rem; line-height:1.7; margin:0; max-width:38rem; }
-
-        /* 3-up cards */
-        .v7-cards-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
-        @media (max-width:860px){ .v7-cards-grid{ grid-template-columns:1fr; } }
-        .v7-card { position:relative; background:#ffffff; border:1px solid rgba(15,17,20,.10); border-radius:24px; padding:2rem; display:flex; flex-direction:column; min-height:16rem; box-shadow:0 18px 50px rgba(15,17,20,.06); }
-        .v7-card-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; }
-        .v7-card-tag { font-family:'Inter',sans-serif; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:#9aa1ab; }
-        .v7-card-num { font-family:ui-monospace,monospace; font-size:11px; color:#9aa1ab; letter-spacing:.05em; }
-        .v7-tile { width:2.75rem; height:2.75rem; border-radius:10px; background:rgba(249,115,22,.1); border:1px solid rgba(249,115,22,.22); display:flex; align-items:center; justify-content:center; color:#F97316; margin-bottom:1.4rem; }
-        .v7-card h3 { color:#0f1114; font-size:1.2rem; font-weight:500; letter-spacing:-.01em; margin:0 0 .75rem; line-height:1.22; }
-        .v7-card p { color:#737373; font-size:.9rem; line-height:1.6; margin:0; }
-
-        /* Feature split */
-        .v7-split { max-width:76rem; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
-        @media (max-width:900px){ .v7-split{ grid-template-columns:1fr; gap:2.5rem; } .v7-split .v7-media{ order:2; } }
-        .v7-split .v7-copy h2 { color:#0f1114; font-size:clamp(1.9rem,3.2vw,2.6rem); font-weight:500; letter-spacing:-.02em; margin:0 0 1.1rem; line-height:1.1; }
-        .v7-split .v7-copy h2 em { font-style:normal; color:#9aa1ab; }
-        .v7-split .v7-copy > p { color:#737373; font-size:1.02rem; line-height:1.7; margin:0 0 2rem; max-width:34rem; }
-        .v7-feat { display:flex; flex-direction:column; gap:1.4rem; }
-        .v7-feat-row { display:flex; gap:1rem; align-items:flex-start; }
-        .v7-feat-row .v7-fnum { font-family:ui-monospace,monospace; font-size:12px; color:#F97316; padding-top:.2rem; flex-shrink:0; min-width:1rem; }
-        .v7-feat-row h3 { color:#0f1114; font-size:1.05rem; font-weight:500; margin:0 0 .3rem; letter-spacing:-.005em; }
-        .v7-feat-row p { color:#737373; font-size:.92rem; line-height:1.55; margin:0; }
-
-        /* Module / surface panel */
-        .v7-mod-panel { background:#ffffff; border:1px solid rgba(15,17,20,.10); border-radius:24px; overflow:hidden; box-shadow:0 18px 50px rgba(15,17,20,.06); }
-        .v7-mod-item { display:flex; align-items:center; gap:1rem; padding:1.35rem 1.5rem; border-bottom:1px solid rgba(15,17,20,.07); }
-        .v7-mod-item:last-child { border-bottom:0; }
-        .v7-mod-item .ic { width:2.4rem; height:2.4rem; border-radius:8px; background:rgba(249,115,22,.08); border:1px solid rgba(249,115,22,.22); display:flex; align-items:center; justify-content:center; color:#F97316; flex-shrink:0; }
-        .v7-mod-item .tx strong { display:block; color:#0f1114; font-size:.95rem; font-weight:500; }
-        .v7-mod-item .tx span { color:#737373; font-size:.82rem; }
-        .v7-mod-item .st { margin-left:auto; font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.06em; color:#9aa1ab; text-transform:uppercase; }
-
-        /* ---------- V7 DARK MODE (toggle) ---------- */
-        html[data-theme="dark"] .v7-section { background:#050505; color:#fff; }
-        html[data-theme="dark"] .v7-section.v7-section-alt { background:#000; }
-        html[data-theme="dark"] .v7-eyebrow,
-        html[data-theme="dark"] .v7-feat-row .v7-fnum,
-        html[data-theme="dark"] .v7-tile,
-        html[data-theme="dark"] .v7-mod-item .ic { color:#fb923c; }
-        html[data-theme="dark"] .v7-cards-head h2,
-        html[data-theme="dark"] .v7-split .v7-copy h2,
-        html[data-theme="dark"] .v7-card h3,
-        html[data-theme="dark"] .v7-feat-row h3,
-        html[data-theme="dark"] .v7-mod-item .tx strong { color:#fff; }
-        html[data-theme="dark"] .v7-split .v7-copy h2 em { color:rgba(255,255,255,.55); }
-        html[data-theme="dark"] .v7-cards-head p,
-        html[data-theme="dark"] .v7-split .v7-copy > p { color:rgba(255,255,255,.62); }
-        html[data-theme="dark"] .v7-card p,
-        html[data-theme="dark"] .v7-feat-row p,
-        html[data-theme="dark"] .v7-mod-item .tx span { color:rgba(255,255,255,.6); }
-        html[data-theme="dark"] .v7-card-tag { color:rgba(255,255,255,.55); }
-        html[data-theme="dark"] .v7-card-num { color:rgba(255,255,255,.3); }
-        html[data-theme="dark"] .v7-mod-item .st { color:rgba(255,255,255,.4); }
-        html[data-theme="dark"] .v7-card {
-            background:#121212; border-color:#2a2a2a; box-shadow:none;
-        }
-        html[data-theme="dark"] .v7-mod-panel {
-            background:#0a0a0a; border-color:rgba(255,255,255,.1); box-shadow:none;
-        }
-        html[data-theme="dark"] .v7-mod-item { border-bottom-color:rgba(255,255,255,.06); }
-        html[data-theme="dark"] #stack { border-top-color:rgba(255,255,255,.08) !important; }
-        /* ===== END PRODUCT SHELL + V7 SECTION SYSTEM ===== */
+        /* ===== END PRODUCT SHELL ===== */
     </style>
     <link rel="stylesheet" href="assets/css/fcg-brand-theme.css">
 </head>
@@ -689,142 +616,302 @@
     </div>
   </section>
 
-  <!-- ===== 3-UP FEATURE CARDS ===== -->
-  <section id="how-it-deploys" class="v7-section" style="position:relative;padding:6.5rem 1.5rem;border-top:0;">
-    <div class="v7-cards-wrap">
-      <div class="v7-cards-head fade-up">
-        <div class="v7-eyebrow">White-label by design</div>
-        <h2>A booking front end that carries the partner's brand.</h2>
-        <p>The Corporate Booking Tool is built for TMCs, resellers, and partner agencies. The corporate traveler sees the partner — not FCG — across the domain, the booking flow, and every confirmation.</p>
-      </div>
-      <div class="v7-cards-grid">
-        <article class="v7-card fade-up">
-          <div class="v7-card-head"><span class="v7-card-tag">Brand</span><span class="v7-card-num">01</span></div>
-          <div class="v7-tile"><iconify-icon icon="solar:invisibility-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Fully white-labelled</h3>
-          <p>The tool runs on the partner's own domain under the partner's name. Travelers book through a branded experience; FCG stays in the infrastructure layer.</p>
-        </article>
-        <article class="v7-card fade-up">
-          <div class="v7-card-head"><span class="v7-card-tag">Deploy</span><span class="v7-card-num">02</span></div>
-          <div class="v7-tile"><iconify-icon icon="solar:bolt-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Simple deploy or custom build</h3>
-          <p>Stand up a standard configuration quickly, or commission a fully custom build. Either path skips the heavy IT lift and moves to market fast.</p>
-        </article>
-        <article class="v7-card fade-up">
-          <div class="v7-card-head"><span class="v7-card-tag">Control</span><span class="v7-card-num">03</span></div>
-          <div class="v7-tile"><iconify-icon icon="solar:checklist-minimalistic-linear" width="22" height="22"></iconify-icon></div>
-          <h3>Policy and approvals built in</h3>
-          <p>Travel policy and approval workflows ship inside the tool, so managed-travel rules are enforced at the point of booking rather than bolted on afterward.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FEATURE SPLIT · where it sits in the stack ===== -->
-  <section id="stack" class="v7-section v7-section-alt" style="position:relative;padding:7rem 1.5rem;border-top:1px solid rgba(15,17,20,.08);overflow:hidden;">
-    <div class="v7-split">
-      <div class="v7-media fade-up">
-        <div class="v7-mod-panel">
-          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:invisibility-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Branded front end</strong><span>Partner domain, partner identity, partner experience</span></div><span class="st">Layer</span></div>
-          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:global-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>ADDN network</strong><span>Deployable across the distribution network</span></div><span class="st">Layer</span></div>
-          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:bed-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Hotel content</strong><span>4.35M+ global hotel records</span></div><span class="st">Content</span></div>
-          <div class="v7-mod-item"><div class="ic"><iconify-icon icon="solar:plain-2-linear" width="16" height="16"></iconify-icon></div><div class="tx"><strong>Flight content</strong><span>Full air supply through the FCG stack</span></div><span class="st">Content</span></div>
-        </div>
-      </div>
-      <div class="v7-copy fade-up">
-        <div class="v7-eyebrow">Inside the FCG stack</div>
-        <h2>The booking surface, <em>wired to the supply.</em></h2>
-        <p>The Corporate Booking Tool is the front-end layer. It deploys on the ADDN network and connects straight to FCG's full hotel and flight content, so a partner ships a complete booking product without building the supply behind it.</p>
-        <div class="v7-feat">
-          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>No heavy IT lift</h3><p>The supply, content, and distribution already exist. Partners configure and brand the front end instead of building infrastructure.</p></div></div>
-          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>Built for managed travel</h3><p>Policy and approval workflows are native, so the tool fits the way TMCs and corporate programs already operate.</p></div></div>
-          <div class="v7-feat-row"><span class="v7-fnum">&rarr;</span><div><h3>One connection to full content</h3><p>Hotel and flight inventory arrive through the same stack, drawing on 4.35M+ hotel records across 220+ countries.</p></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PLATFORM PROOF · stat aside ===== -->
-  <section id="platform" style="position:relative;background:#ffffff;color:#0f1114;padding:7rem 1.5rem;border-top:1px solid rgba(15,17,20,.08);overflow:hidden;">
+  <!-- ===== ARCHITECTURE BENTO GRID · what the tool ships with ===== -->
+  <section id="how-it-deploys" class="cbt-bento" style="position:relative;padding:6.5rem 1.5rem;">
     <style>
-      .v2-proof-wrap { max-width: 76rem; margin: 0 auto; position: relative; z-index: 1; display:grid; grid-template-columns: 1.05fr .95fr; gap: 4rem; align-items:center; }
-      @media (max-width: 900px) { .v2-proof-wrap { grid-template-columns: 1fr; gap: 3rem; } }
-      .v2-proof-eyebrow { color:#F97316; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:.18em; margin-bottom:.85rem; text-transform:uppercase; }
-      .v2-proof h2 { color:#0f1114; font-size: clamp(2rem, 3.4vw, 2.85rem); font-weight:500; letter-spacing:-.02em; margin:0 0 1.25rem; line-height:1.08; }
-      .v2-proof h2 em { font-style:normal; color:#9aa1ab; }
-      .v2-proof p.lede { color:#737373; font-size:1.025rem; line-height:1.7; max-width: 36rem; margin: 0 0 2rem; }
-      .v2-proof-points { display:flex; flex-direction:column; gap:1.1rem; margin-top: 1.25rem; }
-      .v2-proof-point { display:flex; gap: 1rem; align-items:flex-start; }
-      .v2-proof-point .v2-proof-icon { width:2.5rem; height:2.5rem; border-radius:8px; background: rgba(249,115,22,.08); border:1px solid rgba(249,115,22,.22); display:flex; align-items:center; justify-content:center; color:#F97316; flex-shrink:0; }
-      .v2-proof-point h4 { color:#0f1114; font-size: .95rem; font-weight: 500; margin: .15rem 0 .25rem; letter-spacing:-.005em; }
-      .v2-proof-point p { color: #737373; font-size: .9rem; line-height:1.55; margin: 0; }
-      .v2-proof-card { position:relative; background:#ffffff; border:1px solid rgba(15,17,20,.10); border-radius: 24px; padding: 2.5rem; overflow:hidden; box-shadow:0 18px 50px rgba(15,17,20,.06); }
-      .v2-proof-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem 1.25rem; margin-bottom:1.75rem; }
-      .v2-proof-stat strong { display:block; color:#0f1114; font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 300; font-family:ui-monospace, monospace; letter-spacing:-.03em; line-height:1; }
-      .v2-proof-stat span { display:block; margin-top:.5rem; color:#F97316; font-family:'Inter',sans-serif; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; }
-      .v2-proof-card ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: .75rem; border-top: 1px solid rgba(15,17,20,.08); padding-top: 1.5rem; }
-      .v2-proof-card li { display:flex; gap:.65rem; align-items:flex-start; color: #737373; font-size: .9rem; line-height: 1.5; }
-      .v2-proof-card li iconify-icon { color:#F97316; margin-top: .2rem; flex-shrink:0; }
+      .cbt-bento { background:#ffffff; color:#0f1114; }
+      .cbt-bento-wrap { max-width:78rem; margin:0 auto; }
+      .cbt-bento-head { max-width:44rem; margin:0 0 3rem; }
+      .cbt-bento-eyebrow { color:#F97316; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:.18em; margin-bottom:.7rem; text-transform:uppercase; }
+      .cbt-bento-head h2 { color:#0f1114; font-size:clamp(1.9rem,3vw,2.5rem); font-weight:500; letter-spacing:-.02em; margin:0 0 1rem; line-height:1.1; }
+      .cbt-bento-head p { color:#737373; font-size:1rem; line-height:1.7; margin:0; max-width:38rem; }
+      .cbt-bento-head p strong { color:#F97316; font-weight:500; }
 
-      html[data-theme="dark"] #platform { background:#050505 !important; color:#fff !important; border-top-color:rgba(255,255,255,.08) !important; }
-      html[data-theme="dark"] .v2-proof-eyebrow,
-      html[data-theme="dark"] .v2-proof-point .v2-proof-icon,
-      html[data-theme="dark"] .v2-proof-stat span,
-      html[data-theme="dark"] .v2-proof-card li iconify-icon { color:#fb923c; }
-      html[data-theme="dark"] .v2-proof h2 { color:#fff; }
-      html[data-theme="dark"] .v2-proof h2 em { color:rgba(255,255,255,.55); }
-      html[data-theme="dark"] .v2-proof p.lede { color:rgba(255,255,255,.68); }
-      html[data-theme="dark"] .v2-proof-point p,
-      html[data-theme="dark"] .v2-proof-card li { color:rgba(255,255,255,.6); }
-      html[data-theme="dark"] .v2-proof-point h4 { color:#fff; }
-      html[data-theme="dark"] .v2-proof-card { background:#0a0a0a; border-color:rgba(255,255,255,.1); box-shadow:none; }
-      html[data-theme="dark"] .v2-proof-stat strong { color:#fff; }
-      html[data-theme="dark"] .v2-proof-card ul { border-top-color:rgba(255,255,255,.08); }
+      .cbt-bento-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; grid-auto-rows:300px; }
+      @media (max-width:880px){ .cbt-bento-grid{ grid-template-columns:1fr; grid-auto-rows:auto; } }
+      .cbt-tile { position:relative; overflow:hidden; border:1px solid rgba(15,17,20,.10); border-radius:2rem; background:#ffffff; box-shadow:0 18px 50px rgba(15,17,20,.06); padding:2rem; display:flex; flex-direction:column; transition:border-color .4s ease; }
+      .cbt-tile:hover{ border-color:rgba(15,17,20,.2); }
+      .cbt-tile.alt{ background:#f7f8fa; }
+      @media (max-width:880px){ .cbt-tile{ min-height:14rem; } }
+      .cbt-tile-2x2{ grid-column:span 2; grid-row:span 2; }
+      .cbt-tile-1x2{ grid-column:span 1; grid-row:span 2; }
+      .cbt-tile-wide{ grid-column:span 4; grid-row:span 1; }
+      @media (max-width:880px){ .cbt-tile-2x2,.cbt-tile-1x2,.cbt-tile-wide{ grid-column:auto; grid-row:auto; } }
+
+      .cbt-tile .top { display:flex; justify-content:space-between; align-items:flex-start; }
+      .cbt-tile .top iconify-icon{ color:#9aa1ab; font-size:1.4rem; transition:color .4s ease; }
+      .cbt-tile:hover .top iconify-icon{ color:#F97316; }
+      .cbt-tag { display:inline-flex; align-items:center; gap:.45rem; padding:.3rem .7rem; border-radius:6px; background:rgba(249,115,22,.1); border:1px solid rgba(249,115,22,.22); font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:#F97316; }
+      .cbt-tag .dot{ width:6px; height:6px; border-radius:9999px; background:#F97316; }
+      .cbt-mono-label{ font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.1em; color:#9aa1ab; text-transform:uppercase; }
+      .cbt-tile h3{ color:#0f1114; font-size:1.2rem; font-weight:500; letter-spacing:-.01em; margin:0 0 .55rem; line-height:1.25; }
+      .cbt-tile.small h3{ font-size:1.05rem; }
+      .cbt-tile p{ color:#737373; font-size:.9rem; line-height:1.6; margin:0; }
+      .cbt-tile-foot{ margin-top:1.25rem; padding-top:1rem; border-top:1px solid rgba(15,17,20,.08); display:flex; gap:2rem; }
+      .cbt-foot-k{ font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.06em; color:#9aa1ab; text-transform:uppercase; margin-bottom:.3rem; }
+      .cbt-foot-v{ font-family:ui-monospace,monospace; font-size:.85rem; color:#0f1114; }
+
+      /* 2x2 hero tile — branded booking preview */
+      .cbt-brand-stack{ flex:1; display:flex; flex-direction:column; justify-content:center; gap:.6rem; margin:1.25rem 0; }
+      .cbt-brand-row{ display:flex; align-items:center; gap:.7rem; padding:.7rem .85rem; border:1px solid rgba(15,17,20,.08); border-radius:10px; background:#f7f8fa; }
+      .cbt-brand-row .ic{ width:1.8rem; height:1.8rem; border-radius:7px; background:rgba(249,115,22,.1); display:flex; align-items:center; justify-content:center; color:#F97316; flex-shrink:0; }
+      .cbt-brand-row .mt{ display:flex; flex-direction:column; }
+      .cbt-brand-row .mt strong{ color:#0f1114; font-size:.82rem; font-weight:500; }
+      .cbt-brand-row .mt span{ color:#737373; font-size:.72rem; }
+      .cbt-brand-row .st{ margin-left:auto; font-family:ui-monospace,monospace; font-size:9px; letter-spacing:.06em; text-transform:uppercase; color:#15803d; }
+
+      /* 1x2 policy tile — approval ladder */
+      .cbt-ladder{ flex:1; display:flex; flex-direction:column; justify-content:center; gap:.55rem; margin:1rem 0; }
+      .cbt-ladder-step{ display:flex; align-items:center; gap:.6rem; font-size:.8rem; color:#737373; }
+      .cbt-ladder-step .pin{ width:1.4rem; height:1.4rem; border-radius:6px; border:1px solid rgba(15,17,20,.12); display:flex; align-items:center; justify-content:center; color:#F97316; flex-shrink:0; }
+
+      /* dark mode (toggle) */
+      html[data-theme="dark"] .cbt-bento{ background:#000; color:#fff; }
+      html[data-theme="dark"] .cbt-bento-head h2{ color:#fff; }
+      html[data-theme="dark"] .cbt-bento-head p{ color:rgba(255,255,255,.62); }
+      html[data-theme="dark"] .cbt-tile{ background:#050505; border-color:rgba(255,255,255,.1); box-shadow:none; }
+      html[data-theme="dark"] .cbt-tile:hover{ border-color:rgba(255,255,255,.2); }
+      html[data-theme="dark"] .cbt-tile.alt{ background:#0a0a0a; }
+      html[data-theme="dark"] .cbt-tile h3{ color:#fff; }
+      html[data-theme="dark"] .cbt-tile p{ color:rgba(255,255,255,.6); }
+      html[data-theme="dark"] .cbt-tile .top iconify-icon{ color:rgba(255,255,255,.4); }
+      html[data-theme="dark"] .cbt-tile-foot{ border-top-color:rgba(255,255,255,.1); }
+      html[data-theme="dark"] .cbt-foot-v{ color:#fff; }
+      html[data-theme="dark"] .cbt-mono-label{ color:rgba(255,255,255,.4); }
+      html[data-theme="dark"] .cbt-brand-row{ background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.08); }
+      html[data-theme="dark"] .cbt-brand-row .mt strong{ color:#fff; }
+      html[data-theme="dark"] .cbt-brand-row .mt span{ color:rgba(255,255,255,.5); }
+      html[data-theme="dark"] .cbt-brand-row .st{ color:#86efac; }
+      html[data-theme="dark"] .cbt-ladder-step{ color:rgba(255,255,255,.6); }
+      html[data-theme="dark"] .cbt-ladder-step .pin{ border-color:rgba(255,255,255,.14); color:#fb923c; }
     </style>
-    <div class="v2-proof-wrap">
-      <div class="v2-proof fade-up">
-        <div class="v2-proof-eyebrow">Backed by the platform</div>
-        <h2>A young product on <em>proven infrastructure.</em></h2>
-        <p class="lede">The Corporate Booking Tool is new, but the platform underneath it is not. Partners launch on supply, content, and distribution that already move billions in travel for some of the largest enterprises in the world.</p>
-        <div class="v2-proof-points">
-          <div class="v2-proof-point">
-            <div class="v2-proof-icon"><iconify-icon icon="solar:buildings-3-linear" width="18" height="18"></iconify-icon></div>
-            <div>
-              <h4>Enterprise-grade by default</h4>
-              <p>50+ enterprise clients, including central SOEs and Fortune Global 500 companies, run on the same platform.</p>
-            </div>
-          </div>
-          <div class="v2-proof-point">
-            <div class="v2-proof-icon"><iconify-icon icon="solar:global-linear" width="18" height="18"></iconify-icon></div>
-            <div>
-              <h4>Global content reach</h4>
-              <p>4.35M+ hotel records across 220+ countries feed the booking front end from day one.</p>
-            </div>
-          </div>
-          <div class="v2-proof-point">
-            <div class="v2-proof-icon"><iconify-icon icon="solar:shield-check-linear" width="18" height="18"></iconify-icon></div>
-            <div>
-              <h4>13+ years of track record</h4>
-              <p>More than a decade building travel infrastructure, with USD 3B+ in cumulative platform GMV behind it.</p>
-            </div>
-          </div>
-        </div>
+    <div class="cbt-bento-wrap">
+      <div class="cbt-bento-head fade-up">
+        <div class="cbt-bento-eyebrow">What the tool ships with</div>
+        <h2>One front end, wired to the whole stack.</h2>
+        <p>The Corporate Booking Tool carries a partner's brand, enforces travel policy at the point of booking, draws on FCG's <strong>full hotel and flight content</strong>, and deploys across the ADDN network.</p>
       </div>
 
-      <aside class="v2-proof-card fade-up">
-        <div class="v2-proof-grid">
-          <div class="v2-proof-stat"><strong>$3B+</strong><span>Cumulative platform GMV</span></div>
-          <div class="v2-proof-stat"><strong>4.35M+</strong><span>Global hotel records</span></div>
-          <div class="v2-proof-stat"><strong>220+</strong><span>Countries covered</span></div>
-          <div class="v2-proof-stat"><strong>50+</strong><span>Enterprise clients</span></div>
+      <div class="cbt-bento-grid fade-up">
+
+        <!-- 2x2 — white-label branding -->
+        <div class="cbt-tile cbt-tile-2x2">
+          <div class="top">
+            <span class="cbt-tag"><span class="dot"></span>White-label</span>
+            <iconify-icon icon="solar:invisibility-linear"></iconify-icon>
+          </div>
+          <div class="cbt-brand-stack">
+            <div class="cbt-brand-row">
+              <span class="ic"><iconify-icon icon="solar:bed-linear" width="15" height="15"></iconify-icon></span>
+              <span class="mt"><strong>Hotel · Singapore</strong><span>travel.yourbrand.com</span></span>
+              <span class="st">Confirmed</span>
+            </div>
+            <div class="cbt-brand-row">
+              <span class="ic"><iconify-icon icon="solar:plain-2-linear" width="15" height="15"></iconify-icon></span>
+              <span class="mt"><strong>Flight · SIN → HKG</strong><span>Partner identity throughout</span></span>
+              <span class="st">Confirmed</span>
+            </div>
+          </div>
+          <div>
+            <h3>Runs under the partner's brand</h3>
+            <p>The tool sits on the partner's own domain under the partner's name. The corporate traveler sees the partner, not FCG, across the booking flow and every confirmation.</p>
+          </div>
         </div>
-        <ul>
-          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>Built for TMCs, resellers, and partner agencies</li>
-          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>White-labelled on the partner's own domain</li>
-          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>Deployable across the ADDN network</li>
-          <li><iconify-icon icon="solar:check-circle-linear" width="16" height="16"></iconify-icon>13+ years of travel infrastructure behind it</li>
-        </ul>
-      </aside>
+
+        <!-- 1x2 — policy & approval controls -->
+        <div class="cbt-tile cbt-tile-1x2 alt small">
+          <div class="top">
+            <iconify-icon icon="solar:checklist-minimalistic-linear"></iconify-icon>
+            <span class="cbt-mono-label">Controls</span>
+          </div>
+          <div class="cbt-ladder">
+            <div class="cbt-ladder-step"><span class="pin"><iconify-icon icon="solar:user-linear" width="13" height="13"></iconify-icon></span>Traveler books in policy</div>
+            <div class="cbt-ladder-step"><span class="pin"><iconify-icon icon="solar:shield-check-linear" width="13" height="13"></iconify-icon></span>Rules checked at booking</div>
+            <div class="cbt-ladder-step"><span class="pin"><iconify-icon icon="solar:user-check-linear" width="13" height="13"></iconify-icon></span>Manager approves exceptions</div>
+          </div>
+          <div>
+            <h3>Policy and approvals built in</h3>
+            <p>Travel policy and approval workflows ship inside the tool, so managed-travel rules apply at the point of booking.</p>
+          </div>
+        </div>
+
+        <!-- 1x1 — hotel content -->
+        <div class="cbt-tile small">
+          <div class="top">
+            <iconify-icon icon="solar:bed-linear"></iconify-icon>
+            <span class="cbt-mono-label">Content</span>
+          </div>
+          <div style="margin-top:auto;">
+            <div class="cbt-foot-v" style="font-size:1.6rem;letter-spacing:-.03em;color:#0f1114;">4.35M+</div>
+            <h3 style="margin-top:.4rem;">Full hotel content</h3>
+          </div>
+        </div>
+
+        <!-- 1x1 — flight content -->
+        <div class="cbt-tile small alt">
+          <div class="top">
+            <iconify-icon icon="solar:plain-2-linear"></iconify-icon>
+            <span class="cbt-mono-label">Content</span>
+          </div>
+          <div style="margin-top:auto;">
+            <div class="cbt-foot-v" style="font-size:1.05rem;letter-spacing:.02em;color:#0f1114;">GDS · NDC · LCC</div>
+            <h3 style="margin-top:.4rem;">Full flight content</h3>
+          </div>
+        </div>
+
+        <!-- wide bottom — ADDN deploy -->
+        <div class="cbt-tile cbt-tile-wide" style="flex-direction:row;align-items:center;justify-content:space-between;gap:2rem;">
+          <div style="max-width:34rem;">
+            <div class="top" style="margin-bottom:1rem;"><span class="cbt-tag"><span class="dot"></span>ADDN network</span></div>
+            <h3 style="margin-bottom:.4rem;">Deploys across the ADDN network</h3>
+            <p>Stand up a standard configuration quickly or commission a custom build. Either path skips the heavy IT lift, drawing supply and distribution from the existing network.</p>
+          </div>
+          <div class="cbt-tile-foot" style="border-top:0;padding-top:0;margin-top:0;">
+            <div>
+              <div class="cbt-foot-k">Coverage</div>
+              <div class="cbt-foot-v" style="font-size:1.5rem;">220+</div>
+              <div class="cbt-foot-k" style="margin-top:.2rem;">Countries</div>
+            </div>
+            <div>
+              <div class="cbt-foot-k">Identity</div>
+              <div class="cbt-foot-v" style="font-size:1.5rem;">Partner</div>
+              <div class="cbt-foot-k" style="margin-top:.2rem;">Branded</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROGRESSIVE METRICS DASHBOARD · booking-program proof ===== -->
+  <section id="platform" class="cbt-metrics" style="position:relative;padding:7rem 1.5rem;border-top:1px solid rgba(15,17,20,.08);overflow:hidden;">
+    <style>
+      .cbt-metrics{ background:#f7f8fa; color:#0f1114; }
+      .cbt-metrics-wrap{ max-width:72rem; margin:0 auto; }
+      .cbt-metrics-head{ text-align:center; max-width:42rem; margin:0 auto 3.25rem; }
+      .cbt-metrics-eyebrow{ color:#F97316; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:.18em; margin-bottom:.7rem; text-transform:uppercase; }
+      .cbt-metrics-head h2{ color:#0f1114; font-size:clamp(1.9rem,3vw,2.5rem); font-weight:500; letter-spacing:-.02em; margin:0 0 1rem; line-height:1.1; }
+      .cbt-metrics-head h2 em{ font-style:normal; color:#9aa1ab; }
+      .cbt-metrics-head p{ color:#737373; font-size:1rem; line-height:1.7; margin:0 auto; max-width:36rem; }
+
+      /* dashboard grid — expanding tile sizes */
+      .cbt-dash{ display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+      @media (max-width:880px){ .cbt-dash{ grid-template-columns:repeat(2,1fr); } }
+      @media (max-width:560px){ .cbt-dash{ grid-template-columns:1fr; } }
+      .cbt-stat{ position:relative; background:#ffffff; border:1px solid rgba(15,17,20,.1); border-radius:1.25rem; padding:1.6rem; box-shadow:0 12px 36px rgba(15,17,20,.05); display:flex; flex-direction:column; justify-content:space-between; min-height:11rem; transition:border-color .4s ease; }
+      .cbt-stat:hover{ border-color:rgba(249,115,22,.4); }
+      .cbt-stat-lg{ grid-column:span 2; }
+      @media (max-width:560px){ .cbt-stat-lg{ grid-column:auto; } }
+      .cbt-stat .head{ display:flex; justify-content:space-between; align-items:flex-start; }
+      .cbt-stat .head iconify-icon{ color:#F97316; font-size:1.25rem; }
+      .cbt-stat .badge{ font-family:ui-monospace,monospace; font-size:9px; letter-spacing:.08em; text-transform:uppercase; padding:.2rem .5rem; border-radius:5px; background:rgba(15,17,20,.04); border:1px solid rgba(15,17,20,.08); color:#9aa1ab; display:inline-flex; align-items:center; gap:.3rem; }
+      .cbt-stat .badge .live{ width:5px; height:5px; border-radius:9999px; background:#F97316; }
+      .cbt-stat .figure{ font-family:ui-monospace,monospace; font-weight:300; font-size:clamp(1.9rem,4vw,2.8rem); letter-spacing:-.03em; line-height:1; color:#0f1114; }
+      .cbt-stat .figure .u{ font-size:.45em; color:#9aa1ab; }
+      .cbt-stat .label{ margin-top:.55rem; color:#F97316; font-family:'Inter',sans-serif; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; }
+      .cbt-stat .sub{ color:#737373; font-size:.82rem; line-height:1.5; margin:.5rem 0 0; }
+      .cbt-bar{ margin-top:1rem; }
+      .cbt-bar .bar-top{ display:flex; justify-content:space-between; font-family:ui-monospace,monospace; font-size:10px; color:#9aa1ab; margin-bottom:.4rem; }
+      .cbt-bar .track{ height:4px; border-radius:9999px; background:rgba(15,17,20,.07); overflow:hidden; }
+      .cbt-bar .fill{ height:100%; background:#F97316; border-radius:9999px; }
+      .cbt-spark{ display:flex; align-items:flex-end; gap:3px; height:2.4rem; margin-top:1rem; }
+      .cbt-spark span{ flex:1; background:rgba(249,115,22,.25); border-radius:2px; }
+      .cbt-spark span.hi{ background:#F97316; }
+
+      html[data-theme="dark"] .cbt-metrics{ background:#000; color:#fff; border-top-color:rgba(255,255,255,.08); }
+      html[data-theme="dark"] .cbt-metrics-head h2{ color:#fff; }
+      html[data-theme="dark"] .cbt-metrics-head h2 em{ color:rgba(255,255,255,.55); }
+      html[data-theme="dark"] .cbt-metrics-head p{ color:rgba(255,255,255,.62); }
+      html[data-theme="dark"] .cbt-stat{ background:#050505; border-color:rgba(255,255,255,.1); box-shadow:none; }
+      html[data-theme="dark"] .cbt-stat:hover{ border-color:rgba(249,115,22,.4); }
+      html[data-theme="dark"] .cbt-stat .head iconify-icon,
+      html[data-theme="dark"] .cbt-stat .label{ color:#fb923c; }
+      html[data-theme="dark"] .cbt-stat .badge{ background:rgba(255,255,255,.04); border-color:rgba(255,255,255,.1); color:rgba(255,255,255,.45); }
+      html[data-theme="dark"] .cbt-stat .figure{ color:#fff; }
+      html[data-theme="dark"] .cbt-stat .figure .u{ color:rgba(255,255,255,.4); }
+      html[data-theme="dark"] .cbt-stat .sub{ color:rgba(255,255,255,.55); }
+      html[data-theme="dark"] .cbt-bar .bar-top{ color:rgba(255,255,255,.4); }
+      html[data-theme="dark"] .cbt-bar .track{ background:rgba(255,255,255,.08); }
+    </style>
+    <div class="cbt-metrics-wrap">
+      <div class="cbt-metrics-head fade-up">
+        <div class="cbt-metrics-eyebrow">The platform underneath</div>
+        <h2>A young product on <em>proven infrastructure.</em></h2>
+        <p>The Corporate Booking Tool is new. The supply, content, and distribution it draws on are not — they already move billions in travel.</p>
+      </div>
+
+      <div class="cbt-dash fade-up">
+
+        <!-- large — hotel records -->
+        <div class="cbt-stat cbt-stat-lg">
+          <div class="head">
+            <iconify-icon icon="solar:bed-linear"></iconify-icon>
+            <span class="badge"><span class="live"></span>Live</span>
+          </div>
+          <div>
+            <div class="figure">4.35M<span class="u">+</span></div>
+            <div class="label">Global hotel records</div>
+            <p class="sub">Hotel content feeds the booking front end from the same stack that supplies the network.</p>
+          </div>
+        </div>
+
+        <!-- countries -->
+        <div class="cbt-stat">
+          <div class="head">
+            <iconify-icon icon="solar:global-linear"></iconify-icon>
+            <span class="badge">Reach</span>
+          </div>
+          <div>
+            <div class="figure">220<span class="u">+</span></div>
+            <div class="label">Countries covered</div>
+          </div>
+          <div class="cbt-bar">
+            <div class="bar-top"><span>Coverage</span><span>Global</span></div>
+            <div class="track"><div class="fill" style="width:96%"></div></div>
+          </div>
+        </div>
+
+        <!-- GMV -->
+        <div class="cbt-stat">
+          <div class="head">
+            <iconify-icon icon="solar:chart-2-linear"></iconify-icon>
+            <span class="badge">Cumulative</span>
+          </div>
+          <div>
+            <div class="figure">USD 3B<span class="u">+</span></div>
+            <div class="label">Platform GMV</div>
+          </div>
+          <div class="cbt-spark">
+            <span style="height:35%"></span><span style="height:50%"></span><span style="height:45%"></span><span style="height:70%"></span><span class="hi" style="height:90%"></span><span style="height:65%"></span><span class="hi" style="height:100%"></span>
+          </div>
+        </div>
+
+        <!-- track record -->
+        <div class="cbt-stat">
+          <div class="head">
+            <iconify-icon icon="solar:shield-check-linear"></iconify-icon>
+            <span class="badge">Track record</span>
+          </div>
+          <div>
+            <div class="figure">13<span class="u">+ yrs</span></div>
+            <div class="label">Building travel infrastructure</div>
+          </div>
+        </div>
+
+        <!-- large — stack summary -->
+        <div class="cbt-stat cbt-stat-lg">
+          <div class="head">
+            <iconify-icon icon="solar:layers-minimalistic-linear"></iconify-icon>
+            <span class="badge"><span class="live"></span>Connected</span>
+          </div>
+          <div>
+            <div class="figure" style="font-size:1.5rem;letter-spacing:-.01em;">Hotel + flight, one connection</div>
+            <p class="sub">Partners ship a complete booking front end without building the supply behind it — content and distribution arrive through the FCG stack, deployable across the ADDN network.</p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 </main>
@@ -928,43 +1015,57 @@
 </section>
 <!-- ===== END CLOSING CTA ===== -->
 
-    <footer class="w-full bg-black border-t border-white/10 py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech text-textsec">
+    <footer class="site-footer w-full border-t py-[6rem] relative z-10 font-mono text-[clamp(0.65rem,0.8vw,0.75rem)] uppercase tracking-tech">
+        <style>
+            .site-footer { background:#f7f8fa; border-color: rgba(15,17,20,.1); color:#6b7280; }
+            .site-footer .ft-head { color:#0f1114; }
+            .site-footer .ft-link { color:#6b7280; transition: color .2s ease; }
+            .site-footer .ft-link:hover { color:#0f1114; }
+            .site-footer .ft-logo svg path { fill:#0f1114; }
+            .site-footer .ft-copy { color: rgba(15,17,20,.4); }
+            html[data-theme="dark"] .site-footer { background:#000; border-color: rgba(255,255,255,.1); color:#a1a1aa; }
+            html[data-theme="dark"] .site-footer .ft-head { color:#ffffff; }
+            html[data-theme="dark"] .site-footer .ft-link { color:#a1a1aa; }
+            html[data-theme="dark"] .site-footer .ft-link:hover { color:#ffffff; }
+            html[data-theme="dark"] .site-footer .ft-logo svg path { fill:#ffffff; }
+            html[data-theme="dark"] .site-footer .ft-copy { color: rgba(255,255,255,.3); }
+        </style>
         <div class="max-w-[100rem] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-[4rem] md:gap-[2rem]">
 
             <div class="col-span-1 md:col-span-3 flex flex-col items-start gap-4">
-                <div class="flex items-center gap-3">
+                <div class="ft-logo flex items-center gap-3">
                     <svg width="88" height="24" viewBox="0 0 88 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 24px; width: auto;"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="white"/><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="white"/><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="white"/></svg>
                 </div>
                 <p class="mt-2">TRAVEL_INFRASTRUCTURE</p>
             </div>
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
-                <span class="text-white mb-2">Products</span>
-                <a href="corporate-booking-tool.html" class="hover:text-white transition-colors">Corporate Booking Tool</a>
-                <a href="ai-booking-tool.html" class="hover:text-white transition-colors">AI Booking Tool</a>
-                <a href="agreeease.html" class="hover:text-white transition-colors">AgreeEase</a>
-                <a href="atlas.html" class="hover:text-white transition-colors">AtlasOS</a>
-                <a href="glink.html" class="hover:text-white transition-colors">G-Link</a>
-                <a href="flink.html" class="hover:text-white transition-colors">F-Link</a>
+                <span class="ft-head mb-2">Products</span>
+                <a href="corporate-booking-tool.html" class="ft-link">Corporate Booking Tool</a>
+                <a href="ai-booking-tool.html" class="ft-link">AI Booking Tool</a>
+                <a href="agreeease.html" class="ft-link">AgreeEase</a>
+                <a href="atlas.html" class="ft-link">AtlasOS</a>
+                <a href="glink.html" class="ft-link">G-Link</a>
+                <a href="flink.html" class="ft-link">F-Link</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
-                <span class="text-white mb-2">Network</span>
-                <a href="addn.html" class="hover:text-white transition-colors">ADDN</a>
-                <a href="payment.html" class="hover:text-white transition-colors">Payment</a>
+                <span class="ft-head mb-2">Network</span>
+                <a href="addn.html" class="ft-link">ADDN</a>
+                <a href="payment.html" class="ft-link">Payment</a>
             </div>
 
             <div class="col-span-1 md:col-span-2 flex flex-col gap-4">
-                <span class="text-white mb-2">Company</span>
-                <a href="about.html" class="hover:text-white transition-colors">About</a>
-                <a href="developer.html" class="hover:text-white transition-colors">Developer</a>
-                <a href="mailto:hello@fusionconnectgroup.com" class="hover:text-white transition-colors">Contact</a>
+                <span class="ft-head mb-2">Company</span>
+                <a href="about.html" class="ft-link">About</a>
+                <a href="developer.html" class="ft-link">Developer</a>
+                <a href="mailto:hello@fusionconnectgroup.com" class="ft-link">Contact</a>
             </div>
 
             <div class="col-span-1 md:col-span-3 flex flex-col md:items-end gap-4">
-                <span class="text-white mb-2">Connect</span>
-                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
-                <span class="mt-4 text-white/30">© 2026 FCG Group. All rights reserved.</span>
+                <span class="ft-head mb-2">Connect</span>
+                <a href="#" class="ft-link">Privacy Policy</a>
+                <a href="#" class="ft-link">Terms of Service</a>
+                <span class="ft-copy mt-4">© 2026 FCG Group. All rights reserved.</span>
             </div>
 
         </div>
