@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FCG — BTS London flyer (Seed sell-sheet style, 2-page A4)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Seed Sans is proprietary; Hanken Grotesk is the closest free substitute. Source Code Pro matches the mono figures. -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== shared primitives (identical across both source sheets) ===== */
+:root{
+  --green:#1C3A13; --cream:#FCFCF7; --sage-1:#F6F7EF; --sage-2:#EFF1E4;
+  --lime:#C9E79A; --line:rgba(28,58,19,.16); --muted:rgba(28,58,19,.64);
+  --sans:'Hanken Grotesk',Helvetica,sans-serif; --mono:'Source Code Pro',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--green);background:#d8d8d2;font-size:11px;line-height:1.5;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
+.pill{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:5px 13px;border-radius:50px;border:1px solid var(--green);line-height:1}
+.pill-lime{background:var(--lime);border-color:transparent}
+.logo{font-size:24px;font-weight:500;display:flex;align-items:center;gap:7px}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--green)}
+.eyebrow{font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;color:var(--muted);display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
+
+/* ===== DOC A — brand + products (homepage sell sheet) ===== */
+.doc-a .page{
+  width:210mm;height:297mm;background:var(--cream);
+  margin:8mm auto;padding:15mm 16mm;overflow:hidden;position:relative;
+  box-shadow:0 2px 14px rgba(0,0,0,.18);display:flex;flex-direction:column;gap:8mm;
+}
+.doc-a .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--green);color:#fff;font-size:12px;font-weight:500;border-radius:50px;padding:11px 26px}
+.doc-a .btn-outline{background:transparent;color:var(--green);border:1px solid var(--green)}
+.doc-a .head{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:6mm}
+.doc-a .head .ttl{font-size:15px;font-weight:300;color:var(--muted);margin-left:8px}
+.doc-a .head .pill{margin-left:auto}
+.doc-a .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:11mm;align-items:center}
+.doc-a .hero h1{font-size:36px;margin-bottom:12px}
+.doc-a .hero-sub{font-size:13px;line-height:1.5;color:var(--muted);margin-bottom:16px;max-width:24em}
+.doc-a .hero-cta{display:flex;gap:10px}
+.doc-a .hero-img{aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:var(--sage-2)}
+.doc-a .hero-img img{width:100%;height:100%;object-fit:cover}
+.doc-a .s-head{font-size:24px;margin-bottom:4px}
+.doc-a .s-sub{font-size:12px;color:var(--muted);max-width:40em;margin-bottom:7mm}
+.doc-a .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6mm}
+.doc-a .prod{background:var(--sage-1);border-radius:14px;padding:6mm 5mm;display:flex;flex-direction:column;min-height:0}
+.doc-a .prod .tag{align-self:flex-start;font-size:8.5px;font-weight:600;padding:3px 9px;border-radius:50px;background:var(--lime);margin-bottom:14px}
+.doc-a .prod .code{font-family:var(--mono);font-size:13px;font-weight:500;margin-bottom:3px}
+.doc-a .prod h3{font-size:15px;font-weight:400;margin-bottom:auto}
+.doc-a .prod .price{font-size:10px;color:var(--muted);margin:12px 0 9px}
+.doc-a .prod .price b{font-size:14px;font-weight:500;color:var(--green)}
+.doc-a .prod .shop{font-size:10px;font-weight:600;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px}
+.doc-a .bundle{background:var(--green);color:var(--cream);border-radius:14px;padding:7mm 8mm;display:flex;align-items:center;gap:8mm}
+.doc-a .bundle .pill-lime{color:var(--green);flex:none}
+.doc-a .bundle h3{font-size:17px;color:var(--cream);margin-bottom:5px;max-width:13em}
+.doc-a .bundle p{font-size:10.5px;color:rgba(252,252,247,.82);max-width:34em}
+.doc-a .bundle .btn{background:var(--cream);color:var(--green);margin-left:auto;flex:none}
+.doc-a .viacap{display:grid;grid-template-columns:.95fr 1.05fr;gap:11mm;align-items:center}
+.doc-a .viacap-img{aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#3a5230}
+.doc-a .viacap-img img{width:100%;height:100%;object-fit:cover}
+.doc-a .viacap h2{font-size:22px;margin:6px 0 14px;max-width:14em}
+.doc-a .cap-row{padding:11px 0;border-top:1px solid var(--line)}
+.doc-a .cap-row .lbl{font-family:var(--mono);font-size:9px;letter-spacing:.04em;color:var(--muted);margin-bottom:3px}
+.doc-a .cap-row p{font-size:11px;color:var(--muted);line-height:1.45}
+.doc-a .band{background:var(--green);color:var(--cream);border-radius:16px;padding:9mm 10mm;display:grid;grid-template-columns:1.3fr .7fr;gap:9mm;align-items:center}
+.doc-a .band h2{font-size:24px;color:var(--cream);margin-bottom:9px}
+.doc-a .band p{font-size:11px;color:rgba(252,252,247,.84);line-height:1.5;max-width:30em;margin-bottom:12px}
+.doc-a .band .btn-outline{color:var(--cream);border-color:rgba(252,252,247,.5)}
+.doc-a .stat{text-align:center;border-left:1px solid rgba(252,252,247,.2);padding-left:9mm}
+.doc-a .stat .big{font-size:42px;font-weight:300;color:var(--cream);line-height:1}
+.doc-a .stat .cap{font-size:10px;color:rgba(252,252,247,.74);margin-top:6px}
+.doc-a .two{display:grid;grid-template-columns:1fr 1fr;gap:8mm}
+.doc-a .proof h3{font-size:18px;font-weight:300;margin-bottom:6px;max-width:14em}
+.doc-a .proof p{font-size:11px;color:var(--muted);max-width:26em}
+.doc-a .proof .eyebrow{margin-top:12px}
+.doc-a .foot{margin-top:auto;background:var(--green);color:rgba(252,252,247,.82);border-radius:16px;padding:9mm 10mm;display:flex;align-items:center;gap:10mm}
+.doc-a .foot h2{font-size:22px;color:var(--cream);max-width:12em}
+.doc-a .foot .sub{font-size:10.5px;color:rgba(252,252,247,.8);margin-top:5px}
+.doc-a .foot .btn{background:var(--cream);color:var(--green);margin-left:auto;flex:none}
+.doc-a .foot-disc{font-size:8px;color:var(--muted);text-align:center;margin-top:5mm;line-height:1.45}
+
+/* ===== DOC B — DS-01 product sell sheet ===== */
+.doc-b .page{
+  width:210mm;height:297mm;background:var(--cream);
+  margin:8mm auto;padding:16mm 16mm;overflow:hidden;position:relative;
+  box-shadow:0 2px 14px rgba(0,0,0,.18);display:flex;flex-direction:column;gap:8mm;
+}
+.doc-b .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--green);color:#fff;font-size:12px;font-weight:500;border-radius:50px;padding:12px 30px}
+.doc-b .head{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:7mm}
+.doc-b .head .ttl{font-size:18px;font-weight:300;margin-left:8px}
+.doc-b .head .pill{margin-left:auto}
+.doc-b .hero{display:grid;grid-template-columns:1fr 1fr;gap:11mm;align-items:center}
+.doc-b .hero-img{aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:var(--sage-2)}
+.doc-b .hero-img img{width:100%;height:100%;object-fit:cover}
+.doc-b .hero h1{font-size:38px;margin-bottom:8px}
+.doc-b .rating{display:flex;align-items:center;gap:9px;font-size:12px;margin:5px 0 12px}
+.doc-b .stars{letter-spacing:1px}
+.doc-b .hero-sub{font-size:13px;line-height:1.5;margin-bottom:14px}
+.doc-b .price-row{display:flex;align-items:baseline;gap:11px;margin-bottom:4px}
+.doc-b .price-now{font-size:26px;font-weight:400}
+.doc-b .price-was{font-size:16px;color:var(--muted);text-decoration:line-through}
+.doc-b .promo b{background:var(--lime);padding:2px 7px;border-radius:4px;font-weight:600}
+.doc-b .ship{font-size:11px;color:var(--muted);margin:6px 0 16px}
+.doc-b .bens{list-style:none;display:flex;flex-direction:column;gap:8px}
+.doc-b .bens li{font-size:12px;display:flex;gap:9px;line-height:1.35}
+.doc-b .bens .chk{font-weight:600}
+.doc-b .band{background:var(--green);color:var(--cream);border-radius:16px;padding:9mm 12mm}
+.doc-b .band h2{font-size:26px;color:var(--cream);margin-bottom:7mm;max-width:20em}
+.doc-b .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8mm}
+.doc-b .feat .ic{width:38px;height:38px;color:var(--cream);margin-bottom:11px}
+.doc-b .feat h3{font-size:14px;font-weight:400;color:var(--cream);margin-bottom:6px}
+.doc-b .feat p{font-size:10.5px;color:rgba(252,252,247,.84);line-height:1.45}
+.doc-b .alive{display:grid;grid-template-columns:1fr 1fr;gap:11mm;align-items:center}
+.doc-b .alive-img{aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#3a5230}
+.doc-b .alive-img img{width:100%;height:100%;object-fit:cover}
+.doc-b .alive h2{font-size:22px;margin-bottom:9px;max-width:13em}
+.doc-b .alive>div>p{font-size:12px;color:var(--muted);margin-bottom:12px}
+.doc-b .cap-row{padding:10px 0;border-top:1px solid var(--line)}
+.doc-b .cap-row h4{font-size:13px;font-weight:500}
+.doc-b .cap-row p{font-size:11px;color:var(--muted)}
+.doc-b .s-head{font-size:24px;margin-bottom:7mm}
+.doc-b .tl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm}
+.doc-b .tl-card{background:var(--sage-1);border-radius:14px;padding:8mm}
+.doc-b .tl-tag{display:inline-block;background:var(--green);color:var(--cream);font-size:10px;font-weight:500;padding:4px 12px;border-radius:50px;margin-bottom:11px}
+.doc-b .tl-card h3{font-size:16px;font-weight:400;margin-bottom:10px}
+.doc-b .tl-card ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.doc-b .tl-card li{font-size:11px;color:var(--muted);padding-left:13px;position:relative}
+.doc-b .tl-card li::before{content:"";position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--green);opacity:.5}
+.doc-b .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm}
+.doc-b .test-col{border-top:2px solid var(--green);padding-top:11px}
+.doc-b .test-col h4{font-size:13px;font-weight:400;line-height:1.35}
+.doc-b .test-lead{font-size:12px;color:var(--muted);max-width:34em;margin-bottom:7mm}
+.doc-b .foot{margin-top:auto;background:var(--green);color:rgba(252,252,247,.82);border-radius:16px;padding:10mm 12mm;display:flex;align-items:center;gap:11mm}
+.doc-b .foot h2{font-size:22px;color:var(--cream);max-width:11em}
+.doc-b .foot .btn{background:var(--cream);color:var(--green);margin-left:auto}
+.doc-b .foot-disc{font-size:8px;color:var(--muted);text-align:center;margin-top:6mm;line-height:1.45}
+
+@page{size:A4;margin:0}
+@media print{
+  body{background:#fff}
+  .page{margin:0;box-shadow:none;page-break-after:always}
+  .doc-b .page:last-child{page-break-after:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="doc-a">
+<!-- ===================== PAGE 1 — CHINA HOTEL SUPPLY ===================== -->
+<section class="page">
+  <div class="head">
+    <span class="logo">FCG<span class="dot"></span></span>
+    <span class="ttl">China hotel supply</span>
+    <span class="pill pill-lime">BTS London · 24–25 Jun 2026</span>
+  </div>
+
+  <!-- hero -->
+  <div class="hero">
+    <div>
+      <h1>The largest non-OTA TMC supply chain in China.</h1>
+      <p class="hero-sub">Book the local Chinese hotel chains your travellers actually prefer — the brands the GDS can't reach.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn">Talk to us at BTS London</a>
+        <a href="#" class="btn btn-outline">Stand &amp; meetings — back page</a>
+      </div>
+    </div>
+    <div class="hero-img"></div>
+  </div>
+
+  <!-- local chain coverage -->
+  <div>
+    <h2 class="s-head">Local chain coverage.</h2>
+    <p class="s-sub">Direct to FCG — not on the GDS. The local Chinese hotel chains your travellers prefer, plus the independent properties.</p>
+    <div class="prod-grid">
+      <div class="prod">
+        <span class="tag">Chain</span>
+        <span class="code">亚朵</span>
+        <h3>Atour</h3>
+      </div>
+      <div class="prod">
+        <span class="tag">Chain</span>
+        <span class="code">锦江</span>
+        <h3>Jinjiang</h3>
+      </div>
+      <div class="prod">
+        <span class="tag">Multi-brand</span>
+        <span class="code">华住</span>
+        <h3>Huazhu — 全季 (JI), 桔子 (Orange) &amp; more</h3>
+      </div>
+      <div class="prod">
+        <span class="tag">Direct</span>
+        <span class="code">Independent</span>
+        <h3>Local independent hotels</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- supply proof -->
+  <div class="bundle">
+    <span class="pill pill-lime">100+ connected chains</span>
+    <div>
+      <h3>The brands the GDS can't reach — booked direct through FCG.</h3>
+      <p>Trusted by China's largest corporates. Reach roughly 7% of China's hotel market through direct local connections, often at better rates than the GDS.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="doc-a">
+<!-- ===================== PAGE 2 — PAYMENT TO CHINA ===================== -->
+<section class="page">
+  <div class="head">
+    <span class="logo">FCG<span class="dot"></span></span>
+    <span class="ttl">Payment to China</span>
+    <span class="pill pill-lime">BTS London · 24–25 Jun 2026</span>
+  </div>
+
+  <!-- problem / fix -->
+  <div class="viacap">
+    <div class="viacap-img"></div>
+    <div>
+      <div class="eyebrow">PAYMENT TO CHINA</div>
+      <h2>Settle Chinese hotel bookings in RMB — no FX friction.</h2>
+      <div class="cap-row">
+        <div class="lbl">THE PROBLEM TODAY</div>
+        <p>European companies booking Chinese hotels have no clean way to pay in RMB. They absorb FX costs, rely on hotels to invoice in USD/EUR (unreliable), or avoid certain properties altogether.</p>
+      </div>
+      <div class="cap-row">
+        <div class="lbl">FCG'S FIX</div>
+        <p>A clean, end-to-end settlement path built for European TMCs and DMCs. FCG removes that friction entirely.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- how it works -->
+  <div>
+    <h2 class="s-head">How it works.</h2>
+    <p class="s-sub">Designed for TMCs, DMCs and corporates booking China travel.</p>
+    <div class="prod-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="prod">
+        <span class="tag">Step 01</span>
+        <span class="code">Book</span>
+        <h3>TMC/DMC books the Chinese hotel as normal.</h3>
+      </div>
+      <div class="prod">
+        <span class="tag">Step 02</span>
+        <span class="code">FCG settles</span>
+        <h3>FCG handles RMB settlement to the hotel end-to-end.</h3>
+      </div>
+      <div class="prod">
+        <span class="tag">Step 03</span>
+        <span class="code">You're invoiced</span>
+        <h3>One clean settlement in your currency. No FX surprises.</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- partner proof -->
+  <div class="two">
+    <div class="proof">
+      <div class="eyebrow">SIGNED PAYMENT PARTNER</div>
+      <h3>Confirma.</h3>
+      <p>Payment partnership signed.</p>
+    </div>
+    <div class="proof">
+      <div class="eyebrow">LIVE CLIENT</div>
+      <h3>Performance — live and operational.</h3>
+      <p>Using FCG's Payment to China service today, not just announced.</p>
+    </div>
+  </div>
+
+  <!-- footer cta -->
+  <div class="foot">
+    <span class="logo" style="color:var(--cream)">FCG<span class="dot" style="background:var(--cream)"></span></span>
+    <div>
+      <h2>Book a walkthrough at the show.</h2>
+      <div class="sub">Business Travel Show London · 24–25 June 2026 — we'll walk you through China supply and Payment to China in person.</div>
+    </div>
+    <a href="#" class="btn">Talk to us at BTS</a>
+  </div>
+  <p class="foot-disc">© 2026 Fusion Connect Group · Built for Business Travel Show London. Contact details — name · email · phone · stand number — to be supplied.</p>
+</section>
+</div>
+
+</body>
+</html>
