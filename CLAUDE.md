@@ -31,7 +31,7 @@ This is the main FCG Website project folder. Use this file to stay oriented befo
 - Project type: **work** — never mix work/personal accounts (see `~/.claude/project-accounts.md`).
 - GitHub: cwong-acmy/fcg-website (account `cwong-acmy`)
 - Git identity: crystal.wong@accomy.com (`git work`)
-- Vercel: none
+- Vercel: `fcg-website-one.vercel.app` (work team `crystalwong-accomycoms-projects`). NOTE: currently serves an older build — the redo lives on branch `codex/drafts` and is not the production deploy yet.
 - Supabase: none
 
 ## Karpathy Coding Guidelines
