@@ -31,7 +31,7 @@ This is the main FCG Website project folder. Use this file to stay oriented befo
 - Project type: **work** — never mix work/personal accounts (see `~/.claude/project-accounts.md`).
 - GitHub: cwong-acmy/fcg-website (account `cwong-acmy`)
 - Git identity: crystal.wong@accomy.com (`git work`)
-- Vercel: `fcg-website-one.vercel.app` (work team `crystalwong-accomycoms-projects`). NOTE: currently serves an older build — the redo lives on branch `codex/drafts` and is not the production deploy yet.
+- Vercel: `fcg-website-one.vercel.app` (work team `crystalwong-accomycoms-projects`). Production serves the 4-item-nav redo, deployed via **Vercel CLI** from branch `codex/drafts` (`vercel deploy --prod`, token in 1Password `op://Employee/Vercel - cwong`). `.vercelignore` keeps `reference/`, `research/`, `drafts/`, `docs/`, `proposals/`, and CLAUDE.md private. Home (`index.html`) is still the old page, pending rebuild.
 - Supabase: none
 
 ## Karpathy Coding Guidelines

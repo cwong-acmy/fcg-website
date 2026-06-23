@@ -226,7 +226,7 @@ The four supply buckets above are the headline asset, but the supply network als
 
 ### 3.3 Quality scoring and ranking
 
-- An internal data platform tracks supplier quality (cancellation success rate, confirmation reliability, price stability, etc.).
+- An internal data platform tracks supplier quality (cancellation success rate, confermation reliability, price stability, etc.).
 - This feeds future capabilities like **AI-driven automatic markup** — using machine learning to determine optimal markup per source per route per traveler segment, rather than the legacy "1% or 2% flat per supplier" approach.
 
 ### 3.4 Operations and mid-office handling

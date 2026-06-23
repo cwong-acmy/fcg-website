@@ -187,7 +187,7 @@ git commit -m "Rebuild X on new nav + golden design + rewritten copy"
 | F-Link | `flink.html` | `drafts/flink-v7.html` | Back; new filename |
 | ADDN | `addn.html` | knowledge base | Network; net-new |
 | Developer | `developer.html` | `api-access.html` body | repurpose api-access |
-| Payment | `payment.html` | gap analysis §4 | net-new; name Confirma |
+| Payment | `payment.html` | gap analysis §4 | net-new; name Conferma |
 | BTS landing | `bts.html` | gap analysis §3 | standalone, not in nav |
 
 ---

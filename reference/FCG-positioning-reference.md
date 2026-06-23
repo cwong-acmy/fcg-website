@@ -83,7 +83,7 @@ G-link's job is to abstract a **chaotic, multi-source supply landscape** into on
 | Bucket | Sources | Why it matters |
 |---|---|---|
 | **GDS direct** | Amadeus, Sabre | The only channel that can carry corporate negotiated rates (RFP rates). Third-party aggregators *physically cannot* connect here for corporate rates. |
-| **NDC / Direct-to-hotel** | Direct hotel contracts, channel managers (Derbisoft, etc.), email confirmations for some flows | Most reliable channel. Hotels won't pass corporate rates through wholesale. |
+| **NDC / Direct-to-hotel** | Direct hotel contracts, channel managers (Derbisoft, etc.), email confermations for some flows | Most reliable channel. Hotels won't pass corporate rates through wholesale. |
 | **Bedbank aggregators** | HotelBeds (HBX), Expedia, Meituan, Qunar/Monster, Trip.com, Travelfusion, Xixin | Volume/leisure coverage. We connect them but they are not the moat. |
 | **China-specific supply** | Direct relationships with Chinese hotel chains, regional channels | Our biggest single differentiator vs Western competitors. |
 

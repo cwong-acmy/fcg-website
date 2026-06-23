@@ -61,7 +61,7 @@ The main website stays product-focused (APIs, platforms, technical specs). The B
 | Pillar 1 — Local chain coverage | 100+ connected Chinese local hotel chains. Lead with logos: 华住 (Huazhu + its sub-brands), 亚朵 (Atour), 锦江 (Jinjiang). Explicit callout: these are NOT available on GDS | Core differentiator. 吴晓文: *"We can tell them — in China we have more content than GDS."* Huazhu alone carries multiple sub-brands (全季, 桔子, etc.) — list them | 吴晓文, 00:51:49–00:52:03; Denzel, 00:54:00 |
 | Pillar 2 — Local independent hotels | Separate stat from chains — number of local independent hotels covered | 吴晓文 explicitly said to keep chains and independent hotels as two separate things, each with their own count. Don't merge into one number | 吴晓文, 00:55:07 |
 | Pillar 3 — Pricing advantage | Direct connections to local suppliers = better rates than GDS. Use percentage of China's hotel market, not absolute hotel count | Denzel: *"Write it as a percentage — 7% — because foreigners have no idea if 700k is big or small in China"* | 吴晓文, 00:57:58; Denzel, 00:55:20 |
-| Services section | Three capabilities: (1) Payment to China — confirmed partner Confirma, launching; (2) Managed/negotiated corporate rates (协议价); (3) Property hosting (托管) — FCG manages client China single-property hotels | Keep brief on this page — each links to its own dedicated section or page. These are supporting proof points, not the main story | 吴晓文, 00:53:41; 00:49:38 |
+| Services section | Three capabilities: (1) Payment to China — confirmed partner Conferma, launching; (2) Managed/negotiated corporate rates (协议价); (3) Property hosting (托管) — FCG manages client China single-property hotels | Keep brief on this page — each links to its own dedicated section or page. These are supporting proof points, not the main story | 吴晓文, 00:53:41; 00:49:38 |
 | CTA | "Talk to us at BTS" / "Schedule a walkthrough" | Drive to in-person meeting bookings at BTS, not generic signups | — |
 
 **What goes where — main site vs BTS landing page:**
@@ -79,7 +79,7 @@ The main website stays product-focused (APIs, platforms, technical specs). The B
 
 ## Section 4 — New Page: Payment Page
 
-**Context:** 吴晓文 identified Payment to China as *"a very strong angle to sell to European clients and European DMCs"* at 00:49:38 — because European companies booking Chinese hotels have no clean settlement path today. The payment partner (Confirma) has been signed and confirmed. Elaine asked whether to name them; Denzel said yes, it's done.
+**Context:** 吴晓文 identified Payment to China as *"a very strong angle to sell to European clients and European DMCs"* at 00:49:38 — because European companies booking Chinese hotels have no clean settlement path today. The payment partner (Conferma) has been signed and confirmed. Elaine asked whether to name them; Denzel said yes, it's done.
 
 Denzel was explicit about the page structure at 00:50:04: *"Create a new page. Two sections — front and back. Don't put it on one page. Don't confuse it, don't take away from the China supply page."* Payment is its own pitch to a slightly different buyer concern and should not share space with the hotel supply story.
 
@@ -88,8 +88,8 @@ Denzel was explicit about the page structure at 00:50:04: *"Create a new page. T
 | # | Change | Detail | Source |
 |---|---|---|---|
 | P-1 | Create Payment page — Section 1 (front) | What the payment service is and who it solves a problem for. Lead with the pain: European companies have no clean path to pay Chinese hotels. FCG handles RMB settlement end-to-end. Include: how it works, what types of bookings it covers, which clients it's designed for (TMCs, DMCs, corporates booking China travel) | Elaine, 00:49:56; Denzel, 00:50:04 |
-| P-2 | Create Payment page — Section 2 (back) | Partner proof and getting started. Name Confirma as the confirmed payment partner — 吴晓文: *"Naming them increases credibility. Clients see you're already live."* Include Performance as a live client using the service today. CTA to get started / talk to FCG | 吴晓文, 00:57:48; Elaine, 00:57:40; Denzel, 00:57:46 |
-| P-3 | Name Confirma explicitly | Elaine asked "do we mention Confirma?" — Denzel: *"可以，签，都签了"* (yes, signed, all done). Do not hedge — name them and present it as a live, operational service | Elaine, 00:57:40; Denzel, 00:57:46 |
+| P-2 | Create Payment page — Section 2 (back) | Partner proof and getting started. Name Conferma as the confirmed payment partner — 吴晓文: *"Naming them increases credibility. Clients see you're already live."* Include Performance as a live client using the service today. CTA to get started / talk to FCG | 吴晓文, 00:57:48; Elaine, 00:57:40; Denzel, 00:57:46 |
+| P-3 | Name Conferma explicitly | Elaine asked "do we mention Conferma?" — Denzel: *"可以，签，都签了"* (yes, signed, all done). Do not hedge — name them and present it as a live, operational service | Elaine, 00:57:40; Denzel, 00:57:46 |
 | P-4 | Reference Performance as a live payment client | 吴晓文 named Performance as a key FCG client currently using the payment service — adds proof that the product is live and in use, not just announced | 吴晓文, 00:57:25 |
 | P-5 | Keep payment page fully separate from China supply page | Denzel: do not merge or cross-link these two stories on the same page — they confuse each other. Payment is its own pitch to a buyer who may not care about hotel chain depth at all | Denzel, 00:50:04 |
 
@@ -110,7 +110,7 @@ Denzel was explicit about the page structure at 00:50:04: *"Create a new page. T
 | V-5 | BTS opening presentation (~10 min) | Deck or talking notes for the event opening. 吴晓文: *"We need something — even if not a screen, at least a script or a notebook."* Denzel confirmed it is being prepared. Content: who FCG is, what we're pitching, why China supply matters to this audience | Denzel + team | 吴晓文, 00:59:34; Denzel, 01:00:51 |
 | V-6 | BTS Day 1 framing — TMC audience | Opening should lead with the China supply / local chain story — Denzel: *"TMC focus is the China angle."* Reference Wins as a live TMC already on the platform for credibility | Denzel | Denzel, 01:00:10 |
 | V-7 | BTS Day 2 framing — Corporate audience | Different pitch from Day 1. Corporate buyers care about programme management, negotiated rates (协议价), and payment — not the API or supply chain mechanics | TBC | Elaine, 00:59:57 |
-| V-8 | Physical flyer — 2-page (China front / Payment back) | Separate from all website pages. Front page: China supply story (local chains, logos, stats). Back page: payment service (Confirma). Elaine is preparing. Must be ready before BTS | Elaine | Denzel, 00:53:36; Elaine, 00:58:25 |
+| V-8 | Physical flyer — 2-page (China front / Payment back) | Separate from all website pages. Front page: China supply story (local chains, logos, stats). Back page: payment service (Conferma). Elaine is preparing. Must be ready before BTS | Elaine | Denzel, 00:53:36; Elaine, 00:58:25 |
 
 **Dependency note:** Product videos (V-1 through V-4) are website dependencies — pages can go live with placeholder sections, but video slots should be designed in from the start so they don't require a layout change later.
 
