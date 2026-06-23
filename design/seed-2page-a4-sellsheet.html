@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seed • DS-01® Daily Synbiotic — 2-page A4 sell sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Seed Sans is proprietary; Hanken Grotesk is the closest free substitute. -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1C3A13; --cream:#FCFCF7; --sage-1:#F6F7EF; --sage-2:#EFF1E4;
+  --lime:#C9E79A; --line:rgba(28,58,19,.16); --muted:rgba(28,58,19,.64);
+  --sans:'Hanken Grotesk',Helvetica,sans-serif; --mono:'Source Code Pro',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--green);background:#d8d8d2;font-size:11px;line-height:1.5;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
+
+.page{
+  width:210mm;height:297mm;background:var(--cream);
+  margin:8mm auto;padding:16mm 16mm;overflow:hidden;position:relative;
+  box-shadow:0 2px 14px rgba(0,0,0,.18);display:flex;flex-direction:column;gap:8mm;
+}
+.pill{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:5px 13px;border-radius:50px;border:1px solid var(--green);line-height:1}
+.pill-lime{background:var(--lime);border-color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--green);color:#fff;font-size:12px;font-weight:500;border-radius:50px;padding:12px 30px}
+
+/* header */
+.head{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:7mm}
+.logo{font-size:24px;font-weight:500;display:flex;align-items:center;gap:7px}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--green)}
+.head .ttl{font-size:18px;font-weight:300;margin-left:8px}
+.head .pill{margin-left:auto}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:11mm;align-items:center}
+.hero-img{aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:var(--sage-2)}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+.hero h1{font-size:38px;margin-bottom:8px}
+.rating{display:flex;align-items:center;gap:9px;font-size:12px;margin:5px 0 12px}
+.stars{letter-spacing:1px}
+.hero-sub{font-size:13px;line-height:1.5;margin-bottom:14px}
+.price-row{display:flex;align-items:baseline;gap:11px;margin-bottom:4px}
+.price-now{font-size:26px;font-weight:400}
+.price-was{font-size:16px;color:var(--muted);text-decoration:line-through}
+.promo b{background:var(--lime);padding:2px 7px;border-radius:4px;font-weight:600}
+.ship{font-size:11px;color:var(--muted);margin:6px 0 16px}
+.bens{list-style:none;display:flex;flex-direction:column;gap:8px}
+.bens li{font-size:12px;display:flex;gap:9px;line-height:1.35}
+.bens .chk{font-weight:600}
+
+/* feel — green band */
+.band{background:var(--green);color:var(--cream);border-radius:16px;padding:9mm 12mm}
+.band h2{font-size:26px;color:var(--cream);margin-bottom:7mm;max-width:20em}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8mm}
+.feat .ic{width:38px;height:38px;color:var(--cream);margin-bottom:11px}
+.feat h3{font-size:14px;font-weight:400;color:var(--cream);margin-bottom:6px}
+.feat p{font-size:10.5px;color:rgba(252,252,247,.84);line-height:1.45}
+
+/* alive */
+.alive{display:grid;grid-template-columns:1fr 1fr;gap:11mm;align-items:center}
+.alive-img{aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#3a5230}
+.alive-img img{width:100%;height:100%;object-fit:cover}
+.alive h2{font-size:22px;margin-bottom:9px;max-width:13em}
+.alive>div>p{font-size:12px;color:var(--muted);margin-bottom:12px}
+.cap-row{padding:10px 0;border-top:1px solid var(--line)}
+.cap-row h4{font-size:13px;font-weight:500}
+.cap-row p{font-size:11px;color:var(--muted)}
+
+.s-head{font-size:24px;margin-bottom:7mm}
+
+/* timeline */
+.tl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm}
+.tl-card{background:var(--sage-1);border-radius:14px;padding:8mm}
+.tl-tag{display:inline-block;background:var(--green);color:var(--cream);font-size:10px;font-weight:500;padding:4px 12px;border-radius:50px;margin-bottom:11px}
+.tl-card h3{font-size:16px;font-weight:400;margin-bottom:10px}
+.tl-card ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.tl-card li{font-size:11px;color:var(--muted);padding-left:13px;position:relative}
+.tl-card li::before{content:"";position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--green);opacity:.5}
+
+/* testing proof */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm}
+.test-col{border-top:2px solid var(--green);padding-top:11px}
+.test-col h4{font-size:13px;font-weight:400;line-height:1.35}
+.test-lead{font-size:12px;color:var(--muted);max-width:34em;margin-bottom:7mm}
+
+/* footer */
+.foot{margin-top:auto;background:var(--green);color:rgba(252,252,247,.82);border-radius:16px;padding:10mm 12mm;display:flex;align-items:center;gap:11mm}
+.foot h2{font-size:22px;color:var(--cream);max-width:11em}
+.foot .btn{background:var(--cream);color:var(--green);margin-left:auto}
+.foot-disc{font-size:8px;color:var(--muted);text-align:center;margin-top:6mm;line-height:1.45}
+
+@page{size:A4;margin:0}
+@media print{
+  body{background:#fff}
+  .page{margin:0;box-shadow:none;page-break-after:always}
+  .page:last-child{page-break-after:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== PAGE 1 ===================== -->
+<section class="page">
+  <div class="head">
+    <span class="logo">Seed<span class="dot"></span></span>
+    <span class="ttl">DS-01® Daily Synbiotic</span>
+    <span class="pill pill-lime">Save 30% · SUMMER30</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-img">
+      <img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-gallery-lifestyle_1440x.webp" alt="DS-01 Daily Synbiotic" onerror="this.parentNode.style.background='linear-gradient(135deg,#cdd6bd,#9fb086)'">
+    </div>
+    <div>
+      <h1>Daily Synbiotic</h1>
+      <div class="rating"><b style="font-weight:600">4.8</b><span class="stars">★★★★★</span><span>13,427 Reviews</span></div>
+      <p class="hero-sub">Daily probiotic + prebiotic clinically validated to relieve bloating, gas, and irregularity—formulated with 24 strains to promote whole body health.*</p>
+      <div class="price-row">
+        <span class="price-now">$35.00</span>
+        <span class="price-was">$49.99</span>
+        <span class="promo">30% off with <b>SUMMER30</b></span>
+      </div>
+      <p class="ship">30-day supply delivered monthly. Pause or cancel anytime. 30-day risk-free guarantee · Free US shipping.</p>
+      <ul class="bens">
+        <li><span class="chk">✓</span> Reduces bloating and gas</li>
+        <li><span class="chk">✓</span> Improves regularity &amp; digestive comfort</li>
+        <li><span class="chk">✓</span> Supports whole body health</li>
+        <li><span class="chk">✓</span> Validated in placebo-controlled clinical trials</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="band">
+    <h2>Feel the difference of a truly healthy gut.</h2>
+    <div class="feat-grid">
+      <div class="feat">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="18" cy="18" r="6"/><circle cx="30" cy="18" r="6"/><circle cx="24" cy="29" r="6"/><circle cx="13" cy="29" r="5"/><circle cx="35" cy="29" r="5"/></svg>
+        <h3>Diverse Strains</h3>
+        <p>24 strains support microbial diversity, the foundation of a healthy gut.</p>
+      </div>
+      <div class="feat">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="17" y="9" width="14" height="30" rx="7"/><line x1="17" y1="24" x2="31" y2="24"/></svg>
+        <h3>Engineered to Survive</h3>
+        <p>ViaCap® safeguards probiotics all the way to the colon.</p>
+      </div>
+      <div class="feat">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 10v22M24 32l-7-7M24 32l7-7M14 38h20"/></svg>
+        <h3>Feeds Microbes</h3>
+        <p>Non-fiber prebiotic feeds beneficial gut microbes.</p>
+      </div>
+      <div class="feat">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="20" cy="20" r="9"/><line x1="27" y1="27" x2="38" y2="38"/></svg>
+        <h3>Clinically Tested</h3>
+        <p>Tested in full-formulation, randomized, placebo-controlled trials.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="alive">
+    <div class="alive-img">
+      <img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-tal_1440x.webp" alt="ViaCap delivery along the GI tract" onerror="this.parentNode.style.background='linear-gradient(135deg,#5b7a3f,#2e431f)'">
+    </div>
+    <div>
+      <h2>Unlike many probiotics, DS-01® makes it to the gut alive.</h2>
+      <p>Seed's ViaCap® technology is engineered for targeted delivery along the GI tract.</p>
+      <div class="cap-row"><h4>Prebiotic Outer Capsule</h4><p>No-bloat prebiotic feeds beneficial gut microbes.</p></div>
+      <div class="cap-row"><h4>Probiotic Inner Capsule</h4><p>Delivers live bacteria to the colon where it's needed most.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAGE 2 ===================== -->
+<section class="page">
+  <div>
+    <h2 class="s-head">The DS-01® difference: benefits that build over time.</h2>
+    <div class="tl-grid">
+      <div class="tl-card">
+        <span class="tl-tag">7 Days</span><h3>Reduces Bloating</h3>
+        <ul><li>Reduces rumbling in the gut</li><li>Eases bloating and gas</li><li>Makes pooping easier</li></ul>
+      </div>
+      <div class="tl-card">
+        <span class="tl-tag">30 Days</span><h3>Improves Regularity</h3>
+        <ul><li>Promotes regular, comfortable digestion</li><li>Supports a balanced microbiome</li><li>Improves ease of evacuation</li></ul>
+      </div>
+      <div class="tl-card">
+        <span class="tl-tag">6 Months+</span><h3>Whole Body Health</h3>
+        <ul><li>Promotes digestive quality of life</li><li>Supports immune system balance††</li><li>Increases micronutrient synthesis††</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="s-head">Rigorous testing that sets a higher standard.</h2>
+    <p class="test-lead">DS-01® is screened as a full formula for allergens, contaminants, and pesticides—because what's <i>not</i> in your supplement matters, too.</p>
+    <div class="test-grid">
+      <div class="test-col"><h4>Formulated without gluten, soy, dairy, and corn</h4></div>
+      <div class="test-col"><h4>Tested for heavy metals; free of glyphosate and AMPA</h4></div>
+      <div class="test-col"><h4>Third-party tested · Low FODMAP · Prop. 65 compliant</h4></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="s-head">A 24-strain formula, sustainably delivered.</h2>
+    <div class="test-grid">
+      <div class="test-col"><h4>24 clinically- &amp; scientifically-studied probiotic strains</h4><p style="font-size:11px;color:var(--muted);margin-top:6px">Plus a non-fermenting, non-bloating prebiotic in a 2-in-1 ViaCap® capsule.</p></div>
+      <div class="test-col"><h4>Refillable glass jar + travel vial</h4><p style="font-size:11px;color:var(--muted);margin-top:6px">Complimentary Welcome Kit designed for a daily ritual, refilled monthly.</p></div>
+      <div class="test-col"><h4>38.7B AFU · 60 capsules · 30-day supply</h4><p style="font-size:11px;color:var(--muted);margin-top:6px">Take 2 capsules daily, all at once, with or without food.</p></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="logo" style="color:var(--cream)">Seed<span class="dot" style="background:var(--cream)"></span></span>
+    <h2>Begin your daily ritual.</h2>
+    <a href="https://seed.com" class="btn">Start Now — $35/mo</a>
+  </div>
+  <p class="foot-disc">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease. © 2026 Seed Health, Inc. · Replica built for design study from public references.</p>
+</section>
+
+</body>
+</html>

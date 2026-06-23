@@ -10,13 +10,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ===== shared primitives (identical across both source sheets) ===== */
+/* FCG palette from drafts/index-v4.html (light theme tokens), mapped onto Seed's variable slots */
 :root{
-  --green:#1C3A13; --cream:#FCFCF7; --sage-1:#F6F7EF; --sage-2:#EFF1E4;
-  --lime:#C9E79A; --line:rgba(28,58,19,.16); --muted:rgba(28,58,19,.64);
+  --green:#0F1114; --cream:#FFFFFF; --sage-1:#F3F4F6; --sage-2:#E5E7EB;
+  --lime:#F97316; --line:#D1D5DB; --muted:#6B7280;
   --sans:'Hanken Grotesk',Helvetica,sans-serif; --mono:'Source Code Pro',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--sans);color:var(--green);background:#d8d8d2;font-size:11px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);color:var(--green);background:#E9EBEF;font-size:11px;line-height:1.5;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
@@ -24,6 +25,8 @@ h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
 .pill-lime{background:var(--lime);border-color:transparent}
 .logo{font-size:24px;font-weight:500;display:flex;align-items:center;gap:7px}
 .logo .dot{width:9px;height:9px;border-radius:50%;background:var(--green)}
+.logo-img{height:26px;width:auto;display:block}
+.logo-light{filter:brightness(0) invert(1)}
 .eyebrow{font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;color:var(--muted);display:flex;align-items:center;gap:7px;margin-bottom:8px}
 .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
 
@@ -31,7 +34,7 @@ h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
 .doc-a .page{
   width:210mm;height:297mm;background:var(--cream);
   margin:8mm auto;padding:15mm 16mm;overflow:hidden;position:relative;
-  box-shadow:0 2px 14px rgba(0,0,0,.18);display:flex;flex-direction:column;gap:8mm;
+  box-shadow:0 2px 14px rgba(0,0,0,.18);display:flex;flex-direction:column;gap:5mm;
 }
 .doc-a .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--green);color:#fff;font-size:12px;font-weight:500;border-radius:50px;padding:11px 26px}
 .doc-a .btn-outline{background:transparent;color:var(--green);border:1px solid var(--green)}
@@ -54,6 +57,24 @@ h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
 .doc-a .prod .price{font-size:10px;color:var(--muted);margin:12px 0 9px}
 .doc-a .prod .price b{font-size:14px;font-weight:500;color:var(--green)}
 .doc-a .prod .shop{font-size:10px;font-weight:600;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px}
+.doc-a .prod.chain{min-height:118px}
+.doc-a .prod .brand-logo{display:flex;align-items:center;height:40px;margin:14px 0 auto}
+.doc-a .prod .brand-logo img{max-height:40px;max-width:100%;width:auto;object-fit:contain}
+.doc-a .prod .brand-logo img.raster{mix-blend-mode:multiply}
+.doc-a .prod .brand-logo .wordmark{font-size:26px;font-weight:500;letter-spacing:.02em;color:var(--green)}
+.doc-a .prod .brand-logo svg{width:32px;height:32px;color:var(--lime);stroke-width:1.6;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+/* page-2 feature band + standards grid (ported from doc-b into doc-a scope) */
+.doc-a .featband{background:var(--green);color:var(--cream);border-radius:16px;padding:7mm 12mm}
+.doc-a .featband h2{font-size:24px;color:var(--cream);margin-bottom:5mm;max-width:24em}
+.doc-a .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8mm}
+.doc-a .feat .ic{width:38px;height:38px;color:var(--cream);margin-bottom:11px;display:block;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.doc-a .feat h3{font-size:14px;font-weight:400;color:var(--cream);margin-bottom:6px}
+.doc-a .feat p{font-size:10.5px;color:rgba(255,255,255,.82);line-height:1.45}
+.doc-a .test-lead{font-size:12px;color:var(--muted);max-width:60em;margin-bottom:5mm}
+.doc-a .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm}
+.doc-a .test-col{border-top:2px solid var(--green);padding-top:11px}
+.doc-a .test-col h4{font-size:13px;font-weight:500;line-height:1.35;margin-bottom:6px}
+.doc-a .test-col p{font-size:11px;color:var(--muted);line-height:1.45}
 .doc-a .bundle{background:var(--green);color:var(--cream);border-radius:14px;padding:7mm 8mm;display:flex;align-items:center;gap:8mm}
 .doc-a .bundle .pill-lime{color:var(--green);flex:none}
 .doc-a .bundle h3{font-size:17px;color:var(--cream);margin-bottom:5px;max-width:13em}
@@ -66,7 +87,7 @@ h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
 .doc-a .cap-row{padding:11px 0;border-top:1px solid var(--line)}
 .doc-a .cap-row .lbl{font-family:var(--mono);font-size:9px;letter-spacing:.04em;color:var(--muted);margin-bottom:3px}
 .doc-a .cap-row p{font-size:11px;color:var(--muted);line-height:1.45}
-.doc-a .band{background:var(--green);color:var(--cream);border-radius:16px;padding:9mm 10mm;display:grid;grid-template-columns:1.3fr .7fr;gap:9mm;align-items:center}
+.doc-a .band{background:var(--green);color:var(--cream);border-radius:16px;padding:6mm 10mm;display:grid;grid-template-columns:1.3fr .7fr;gap:9mm;align-items:center}
 .doc-a .band h2{font-size:24px;color:var(--cream);margin-bottom:9px}
 .doc-a .band p{font-size:11px;color:rgba(252,252,247,.84);line-height:1.5;max-width:30em;margin-bottom:12px}
 .doc-a .band .btn-outline{color:var(--cream);border-color:rgba(252,252,247,.5)}
@@ -77,7 +98,7 @@ h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
 .doc-a .proof h3{font-size:18px;font-weight:300;margin-bottom:6px;max-width:14em}
 .doc-a .proof p{font-size:11px;color:var(--muted);max-width:26em}
 .doc-a .proof .eyebrow{margin-top:12px}
-.doc-a .foot{margin-top:auto;background:var(--green);color:rgba(252,252,247,.82);border-radius:16px;padding:9mm 10mm;display:flex;align-items:center;gap:10mm}
+.doc-a .foot{margin-top:auto;background:var(--green);color:rgba(252,252,247,.82);border-radius:16px;padding:6mm 10mm;display:flex;align-items:center;gap:10mm}
 .doc-a .foot h2{font-size:22px;color:var(--cream);max-width:12em}
 .doc-a .foot .sub{font-size:10.5px;color:rgba(252,252,247,.8);margin-top:5px}
 .doc-a .foot .btn{background:var(--cream);color:var(--green);margin-left:auto;flex:none}
@@ -153,7 +174,7 @@ h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
 <!-- ===================== PAGE 1 — CHINA HOTEL SUPPLY ===================== -->
 <section class="page">
   <div class="head">
-    <span class="logo">FCG<span class="dot"></span></span>
+    <img class="logo-img" src="../assets/images/fcg-logo.svg" alt="FCG">
     <span class="ttl">China hotel supply</span>
     <span class="pill pill-lime">BTS London · 24–25 Jun 2026</span>
   </div>
@@ -168,7 +189,7 @@ h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
         <a href="#" class="btn btn-outline">Stand &amp; meetings — back page</a>
       </div>
     </div>
-    <div class="hero-img"></div>
+    <div class="hero-img"><img src="assets/p1-hero.jpg" alt="Chinese hotel tower at dusk over the city skyline"></div>
   </div>
 
   <!-- local chain coverage -->
@@ -176,35 +197,57 @@ h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
     <h2 class="s-head">Local chain coverage.</h2>
     <p class="s-sub">Direct to FCG — not on the GDS. The local Chinese hotel chains your travellers prefer, plus the independent properties.</p>
     <div class="prod-grid">
-      <div class="prod">
+      <div class="prod chain">
         <span class="tag">Chain</span>
+        <div class="brand-logo"><img src="../assets/images/logos/atour.svg" alt="Atour"></div>
         <span class="code">亚朵</span>
         <h3>Atour</h3>
       </div>
-      <div class="prod">
+      <div class="prod chain">
         <span class="tag">Chain</span>
+        <div class="brand-logo"><img class="raster" src="../assets/images/logos/jinjiang-international.jpg" alt="Jinjiang"></div>
         <span class="code">锦江</span>
         <h3>Jinjiang</h3>
       </div>
-      <div class="prod">
+      <div class="prod chain">
         <span class="tag">Multi-brand</span>
-        <span class="code">华住</span>
-        <h3>Huazhu — 全季 (JI), 桔子 (Orange) &amp; more</h3>
+        <div class="brand-logo"><span class="wordmark">华住</span></div>
+        <span class="code">Huazhu</span>
+        <h3>全季 (JI), 桔子 (Orange) &amp; more</h3>
       </div>
-      <div class="prod">
+      <div class="prod chain">
         <span class="tag">Direct</span>
+        <div class="brand-logo"><svg viewBox="0 0 24 24"><path d="M4 21V5a1 1 0 011-1h9a1 1 0 011 1v16"/><path d="M15 21V9h4a1 1 0 011 1v11"/><path d="M8 8h3M8 12h3M8 16h3"/></svg></div>
         <span class="code">Independent</span>
         <h3>Local independent hotels</h3>
       </div>
     </div>
   </div>
 
-  <!-- supply proof -->
-  <div class="bundle">
-    <span class="pill pill-lime">100+ connected chains</span>
+  <!-- supply scale band -->
+  <div class="band">
     <div>
-      <h3>The brands the GDS can't reach — booked direct through FCG.</h3>
-      <p>Trusted by China's largest corporates. Reach roughly 7% of China's hotel market through direct local connections, often at better rates than the GDS.</p>
+      <h2>The largest non-OTA hotel supply network in China.</h2>
+      <p>13+ years of direct relationships with Chinese hotel chains, independents and B2B suppliers — the inventory the GDS and global OTAs can't reach. Trusted by China's largest corporates.</p>
+      <a href="#" class="btn btn-outline">Talk to us at BTS London</a>
+    </div>
+    <div class="stat">
+      <div class="big">4.35M+</div>
+      <div class="cap">global hotel records — 1.35M+ in China</div>
+    </div>
+  </div>
+
+  <!-- supply proof two-up -->
+  <div class="two">
+    <div class="proof">
+      <div class="eyebrow">DIRECT CHINA HOTELS</div>
+      <h3>100+ local chains · 35K+ direct independents.</h3>
+      <p>Local Chinese chains and independent properties booked direct through FCG — not on the GDS, often at better rates.</p>
+    </div>
+    <div class="proof">
+      <div class="eyebrow">FLIGHT + SUPPLIER NETWORK</div>
+      <h3>Air via F-Link · 43 suppliers and growing.</h3>
+      <p>Flight supply through GDS, NDC and LCC connectivity; 43 hotel suppliers in the network — 13 live, 30 onboarding.</p>
     </div>
   </div>
 </section>
@@ -214,14 +257,14 @@ h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
 <!-- ===================== PAGE 2 — PAYMENT TO CHINA ===================== -->
 <section class="page">
   <div class="head">
-    <span class="logo">FCG<span class="dot"></span></span>
+    <img class="logo-img" src="../assets/images/fcg-logo.svg" alt="FCG">
     <span class="ttl">Payment to China</span>
     <span class="pill pill-lime">BTS London · 24–25 Jun 2026</span>
   </div>
 
   <!-- problem / fix -->
   <div class="viacap">
-    <div class="viacap-img"></div>
+    <div class="viacap-img"><img src="assets/p2-hero.jpg" alt="Contactless card payment terminal and phone"></div>
     <div>
       <div class="eyebrow">PAYMENT TO CHINA</div>
       <h2>Settle Chinese hotel bookings in RMB — no FX friction.</h2>
@@ -236,46 +279,47 @@ h1,h2,h3,h4{font-weight:300;letter-spacing:-.015em;line-height:1.08}
     </div>
   </div>
 
-  <!-- how it works -->
-  <div>
-    <h2 class="s-head">How it works.</h2>
-    <p class="s-sub">Designed for TMCs, DMCs and corporates booking China travel.</p>
-    <div class="prod-grid" style="grid-template-columns:repeat(3,1fr)">
-      <div class="prod">
-        <span class="tag">Step 01</span>
-        <span class="code">Book</span>
-        <h3>TMC/DMC books the Chinese hotel as normal.</h3>
+  <!-- settlement features -->
+  <div class="featband">
+    <h2>Settlement, handled end-to-end.</h2>
+    <div class="feat-grid">
+      <div class="feat">
+        <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+        <h3>Book as normal</h3>
+        <p>Your TMC or DMC books the Chinese hotel exactly as today.</p>
       </div>
-      <div class="prod">
-        <span class="tag">Step 02</span>
-        <span class="code">FCG settles</span>
-        <h3>FCG handles RMB settlement to the hotel end-to-end.</h3>
+      <div class="feat">
+        <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 8l4 4 4-4M12 12v5M8 14h8"/></svg>
+        <h3>FCG settles in RMB</h3>
+        <p>FCG pays the hotel in RMB, end-to-end across the border.</p>
       </div>
-      <div class="prod">
-        <span class="tag">Step 03</span>
-        <span class="code">You're invoiced</span>
-        <h3>One clean settlement in your currency. No FX surprises.</h3>
+      <div class="feat">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+        <h3>One clean invoice</h3>
+        <p>You're billed once, in your own currency. No surprises.</p>
+      </div>
+      <div class="feat">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h3>No FX friction</h3>
+        <p>No absorbed FX costs, no unreliable USD/EUR invoicing.</p>
       </div>
     </div>
   </div>
 
-  <!-- partner proof -->
-  <div class="two">
-    <div class="proof">
-      <div class="eyebrow">SIGNED PAYMENT PARTNER</div>
-      <h3>Confirma.</h3>
-      <p>Payment partnership signed.</p>
-    </div>
-    <div class="proof">
-      <div class="eyebrow">LIVE CLIENT</div>
-      <h3>Performance — live and operational.</h3>
-      <p>Using FCG's Payment to China service today, not just announced.</p>
+  <!-- standards / proof -->
+  <div>
+    <h2 class="s-head">Built for compliance and trust.</h2>
+    <p class="test-lead">Payment to China runs on a signed partner, a live client, and 13+ years of cross-border settlement — live and operational, not just announced.</p>
+    <div class="test-grid">
+      <div class="test-col"><h4>Signed payment partner — Confirma</h4><p>Partnership signed; RMB settlement live end-to-end.</p></div>
+      <div class="test-col"><h4>Live client today — Performance</h4><p>Using FCG's Payment to China service now, in production.</p></div>
+      <div class="test-col"><h4>13+ years · USD 3B+ platform GMV</h4><p>Trusted by central SOEs and Fortune Global 500 corporates.</p></div>
     </div>
   </div>
 
   <!-- footer cta -->
   <div class="foot">
-    <span class="logo" style="color:var(--cream)">FCG<span class="dot" style="background:var(--cream)"></span></span>
+    <img class="logo-img logo-light" src="../assets/images/fcg-logo.svg" alt="FCG">
     <div>
       <h2>Book a walkthrough at the show.</h2>
       <div class="sub">Business Travel Show London · 24–25 June 2026 — we'll walk you through China supply and Payment to China in person.</div>

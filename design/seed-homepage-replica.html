@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seed • Homepage Replica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1c3a13;
+  --green-2:#29451f;
+  --cream:#fcfcf7;
+  --sage:#eff1e4;
+  --sage-2:#f6f7ef;
+  --lime:#c9e79a;
+  --line:rgba(28,58,19,.14);
+  --muted:rgba(28,58,19,.64);
+  --shadow:0 28px 70px rgba(28,58,19,.16);
+  --sans:'Hanken Grotesk',Helvetica,sans-serif;
+  --mono:'Source Code Pro',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--cream);
+  color:var(--green);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+h1,h2,h3{font-weight:300;letter-spacing:0;line-height:1.05}
+.wrap{max-width:1340px;margin:0 auto;padding:0 28px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:54px;padding:0 30px;border-radius:999px;border:1px solid transparent;
+  background:var(--green);color:var(--cream);cursor:pointer;transition:opacity .2s,background .2s,color .2s;
+}
+.btn:hover{opacity:.88}
+.btn-light{background:var(--cream);color:var(--green)}
+.btn-outline{background:transparent;color:var(--green);border-color:var(--green)}
+.btn-outline:hover{background:var(--green);color:var(--cream)}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid currentColor;border-radius:999px;padding:6px 14px;
+  font-size:13px;font-weight:500;line-height:1;
+}
+.arrow{display:inline-flex;align-items:center;gap:10px;border-bottom:1px solid currentColor;padding-bottom:3px;font-weight:500}
+.arrow::after{content:"→";font-size:18px;line-height:1}
+
+.nav-shell{position:fixed;top:0;left:0;right:0;z-index:30;padding:18px 28px;pointer-events:none}
+.nav{
+  pointer-events:auto;max-width:1340px;margin:0 auto;padding:14px 26px;border-radius:999px;
+  display:flex;align-items:center;gap:36px;
+  background:rgba(239,241,228,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+}
+.logo{font-size:22px;font-weight:500;letter-spacing:0;display:flex;align-items:center;gap:7px}
+.logo i{width:9px;height:9px;border-radius:999px;background:currentColor;display:block}
+.nav-links{display:flex;gap:28px;font-size:16px}
+.nav-links a:hover,.nav-right a:hover{opacity:.6}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:22px}
+.nav-cta{background:var(--green);color:var(--cream);border-radius:999px;padding:11px 24px;font-size:15px}
+
+.hero{padding:108px 0 18px;display:flex;align-items:stretch}
+.hero-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:18px;min-height:680px}
+.hero-copy{
+  background:var(--green);color:var(--cream);border-radius:24px;
+  padding:56px;display:flex;flex-direction:column;justify-content:space-between;
+}
+.hero-copy .pill{align-self:flex-start;color:var(--cream)}
+.hero h1{font-size:clamp(44px,5vw,82px);max-width:7.2em;color:var(--cream)}
+.hero-copy p{font-size:20px;max-width:28em;color:rgba(252,252,247,.82);margin:24px 0 34px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero-media{
+  position:relative;overflow:hidden;border-radius:24px;background:#bccaa7;
+  display:flex;align-items:flex-end;min-height:620px;
+}
+.hero-media::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(28,58,19,0) 48%,rgba(28,58,19,.46) 100%);
+}
+.hero-media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.hero-card{
+  position:relative;z-index:1;margin:0 28px 28px auto;width:min(410px,calc(100% - 56px));
+  background:rgba(252,252,247,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-radius:20px;padding:22px;color:var(--green);box-shadow:var(--shadow);
+}
+.hero-card h3{font-size:28px;margin-bottom:10px}
+.hero-card p{color:var(--muted);font-size:15px;margin-bottom:18px}
+.micro-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.micro{background:var(--sage-2);border-radius:14px;padding:12px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.micro strong{display:block;font-family:var(--sans);font-size:21px;color:var(--green);font-weight:400;margin-bottom:2px}
+
+.marquee{overflow:hidden;border-block:1px solid var(--line);background:var(--sage);padding:18px 0}
+.marquee-track{display:flex;gap:42px;width:max-content;animation:slide 28s linear infinite}
+.marquee span{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+.section{padding:96px 0}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:42px}
+.section-head h2{font-size:clamp(36px,5vw,68px);max-width:10em}
+.section-head p{max-width:26em;color:var(--muted);font-size:18px}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.product{
+  min-height:620px;background:var(--sage-2);border-radius:22px;overflow:hidden;
+  display:flex;flex-direction:column;border:1px solid var(--line);
+}
+.product-img{height:390px;background:#d9dfc9;overflow:hidden}
+.product-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.product:hover img{transform:scale(1.04)}
+.product-body{padding:26px;display:flex;flex-direction:column;gap:16px;flex:1}
+.product h3{font-size:30px}
+.product p{color:var(--muted);font-size:16px}
+.product-meta{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.price{font-size:18px;font-weight:500}
+
+.science{background:var(--green);color:var(--cream);padding:110px 0}
+.science-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:center}
+.science h2{font-size:clamp(38px,5.5vw,76px);color:var(--cream)}
+.science p{color:rgba(252,252,247,.78);font-size:19px;max-width:30em;margin:22px 0 34px}
+.science-visual{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.round-img,.capsule-panel{border-radius:24px;overflow:hidden;min-height:520px;background:#263b1d}
+.round-img img{width:100%;height:100%;object-fit:cover}
+.capsule-panel{
+  padding:34px;display:flex;flex-direction:column;justify-content:space-between;
+  border:1px solid rgba(252,252,247,.18);
+}
+.capsule-art{height:270px;position:relative}
+.capsule{
+  position:absolute;left:50%;top:50%;width:118px;height:296px;border-radius:999px;
+  transform:translate(-50%,-50%) rotate(18deg);
+  background:linear-gradient(180deg,var(--cream) 0 48%,var(--lime) 49% 100%);
+  box-shadow:0 24px 70px rgba(0,0,0,.28);
+}
+.capsule::before{content:"";position:absolute;left:12px;right:12px;top:50%;height:1px;background:rgba(28,58,19,.28)}
+.capsule-panel h3{font-size:30px;color:var(--cream)}
+.capsule-panel p{font-size:15px;margin:8px 0 0;color:rgba(252,252,247,.72)}
+
+.proof-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:18px}
+.proof-aside{background:var(--sage);border-radius:22px;padding:38px;display:flex;flex-direction:column;justify-content:space-between;min-height:520px}
+.proof-aside h2{font-size:52px}
+.proof-aside p{color:var(--muted);font-size:18px;margin-top:18px}
+.proof-list{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.proof{
+  background:var(--cream);border:1px solid var(--line);border-radius:22px;padding:34px;min-height:251px;
+}
+.proof .num{font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:42px}
+.proof h3{font-size:28px;margin-bottom:12px}
+.proof p{color:var(--muted)}
+
+.story{padding:14px 0}
+.story-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:14px}
+.story-img{border-radius:22px;overflow:hidden;min-height:640px;background:#80906e}
+.story-img img{width:100%;height:100%;object-fit:cover}
+.story-copy{background:var(--sage-2);border-radius:22px;padding:56px;display:flex;flex-direction:column}
+.story-copy h2{font-size:58px;margin-bottom:22px}
+.story-copy p{color:var(--muted);font-size:18px;max-width:30em}
+.story-tabs{margin-top:auto;display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.story-tab{
+  background:transparent;border:0;border-bottom:1px solid var(--line);padding:22px 0;text-align:left;cursor:pointer;
+  display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;
+}
+.story-tab span{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.story-tab strong{font-size:19px;font-weight:400}
+.story-tab i{font-style:normal;opacity:.45}
+
+.labs{background:#16240f;color:var(--cream);padding:104px 0}
+.labs-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.labs h2{font-size:clamp(38px,5vw,70px);color:var(--cream)}
+.labs p{color:rgba(252,252,247,.76);font-size:18px;margin:22px 0 34px;max-width:32em}
+.lab-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.lab-card{border:1px solid rgba(252,252,247,.18);border-radius:20px;padding:24px;min-height:220px;background:rgba(252,252,247,.04)}
+.lab-card span{font-family:var(--mono);font-size:12px;color:rgba(252,252,247,.56)}
+.lab-card h3{font-size:26px;color:var(--cream);margin:46px 0 10px}
+.lab-card p{font-size:14px;margin:0;color:rgba(252,252,247,.7)}
+
+.cta{padding:96px 0;text-align:center}
+.cta img{width:220px;height:220px;object-fit:cover;border-radius:26px;margin:0 auto 30px;background:var(--sage)}
+.cta h2{font-size:52px;margin-bottom:26px}
+
+footer{background:var(--green);color:rgba(252,252,247,.78);padding:72px 0 0}
+.foot-top{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;padding-bottom:58px}
+.foot-top .logo{color:var(--cream);font-size:28px;margin-bottom:22px}
+.foot-tag{font-size:30px;font-weight:300;line-height:1.18;color:var(--cream);max-width:13em;margin-bottom:30px}
+.news-form{display:flex;border:1px solid rgba(252,252,247,.38);border-radius:999px;max-width:430px;overflow:hidden}
+.news-form input{flex:1;background:transparent;border:0;outline:0;padding:15px 22px;color:var(--cream)}
+.news-form input::placeholder{color:rgba(252,252,247,.58)}
+.news-form button{background:transparent;border:0;color:var(--cream);font-size:20px;padding:0 22px;cursor:pointer}
+.foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+.foot-col h5{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:rgba(252,252,247,.48);margin-bottom:16px}
+.foot-col a{display:block;margin-bottom:11px;font-size:15px;color:rgba(252,252,247,.84)}
+.foot-copy{text-align:center;font-size:12px;color:rgba(252,252,247,.55);padding:22px;background:#16240f}
+
+@media(max-width:980px){
+  .hero{padding-top:104px}
+  .hero-grid,.science-grid,.proof-grid,.story-grid,.labs-grid,.foot-top{grid-template-columns:1fr}
+  .hero-copy{padding:42px}
+  .hero-media{min-height:560px}
+  .products,.proof-list,.lab-cards{grid-template-columns:1fr}
+  .science-visual{grid-template-columns:1fr}
+  .section-head{align-items:flex-start;flex-direction:column}
+  .foot-cols{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+}
+@media(max-width:620px){
+  .wrap{padding:0 18px}
+  .nav-shell{padding:12px}
+  .nav{padding:12px 16px}
+  .nav-right .signin{display:none}
+  .hero-copy,.story-copy{padding:30px}
+  .hero-media{min-height:430px}
+  .hero-card{width:calc(100% - 32px);margin:0 16px 16px}
+  .micro-row{grid-template-columns:1fr}
+  .section{padding:70px 0}
+  .section-head h2,.proof-aside h2,.story-copy h2,.cta h2{font-size:36px}
+  .foot-cols{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="nav-shell">
+  <nav class="nav" aria-label="Primary">
+    <a class="logo" href="#">Seed<i></i></a>
+    <div class="nav-links">
+      <a href="#shop">Shop</a>
+      <a href="#science">Science</a>
+      <a href="#labs">SeedLabs</a>
+      <a href="#learn">Learn</a>
+    </div>
+    <div class="nav-right">
+      <a class="signin" href="#">Sign in</a>
+      <a class="nav-cta" href="#shop">Shop Now</a>
+    </div>
+  </nav>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div>
+          <span class="pill">Microbiome essentials</span>
+          <h1>A daily ritual for whole-body health.</h1>
+          <p>Seed translates microbiome science into clinically studied products for digestive health, skin health, and everyday resilience.</p>
+          <div class="hero-actions">
+            <a class="btn btn-light" href="#shop">Shop Daily Essentials</a>
+            <a class="btn btn-outline" style="color:var(--cream);border-color:var(--cream)" href="#science">Explore the Science</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/Seed-2025_Come-To-Life-10_61789_A1_9677175888583194_adfc05e2-4481-41dc-8cf6-60295842a55e_1440x.png" alt="Seed product lifestyle imagery" onerror="this.style.display='none'">
+        <div class="hero-card">
+          <h3>Designed for the gut.</h3>
+          <p>A nested capsule system protects probiotic strains through digestion, then supports delivery where they matter.</p>
+          <div class="micro-row">
+            <div class="micro"><strong>24</strong>strains</div>
+            <div class="micro"><strong>53.6B</strong>AFU</div>
+            <div class="micro"><strong>2-in-1</strong>ViaCap</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Digestive health</span><span>Microbiome science</span><span>Daily essentials</span><span>Clinical testing</span><span>Sustainable refills</span>
+      <span>Digestive health</span><span>Microbiome science</span><span>Daily essentials</span><span>Clinical testing</span><span>Sustainable refills</span>
+    </div>
+  </div>
+
+  <section class="section" id="shop">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Daily essentials for the whole family.</h2>
+        <p>Homepage-style product cards, modeled after Seed's calm editorial product merchandising.</p>
+      </div>
+      <div class="products">
+        <article class="product">
+          <div class="product-img"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-gallery-lifestyle_1440x.webp" alt="DS-01 Daily Synbiotic" onerror="this.style.display='none'"></div>
+          <div class="product-body">
+            <span class="pill">Bestseller</span>
+            <h3>DS-01® Daily Synbiotic</h3>
+            <p>Probiotic and prebiotic support for bloating, regularity, and whole-body health.</p>
+            <div class="product-meta"><span class="price">From $35</span><a class="arrow" href="#">Shop</a></div>
+          </div>
+        </article>
+        <article class="product">
+          <div class="product-img"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/sustain-ds-lifestyle_1440x.webp" alt="Seed refill kit" onerror="this.style.display='none'"></div>
+          <div class="product-body">
+            <span class="pill">Daily Multi</span>
+            <h3>DM-02® Daily Multi</h3>
+            <p>A studied daily multi format for nutrient support, presented in Seed's refill-first system.</p>
+            <div class="product-meta"><span class="price">From $39</span><a class="arrow" href="#">Shop</a></div>
+          </div>
+        </article>
+        <article class="product">
+          <div class="product-img"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/benefits-jar-hands_500x.webp" alt="Seed jar in hand" onerror="this.style.display='none'"></div>
+          <div class="product-body">
+            <span class="pill">Kids</span>
+            <h3>PDS-08® Pediatric</h3>
+            <p>A pediatric daily synbiotic format for growing microbiomes, shown here as a homepage placeholder card.</p>
+            <div class="product-meta"><span class="price">From $29</span><a class="arrow" href="#">Shop</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="science" id="science">
+    <div class="wrap science-grid">
+      <div>
+        <span class="pill">ViaCap® delivery</span>
+        <h2>Engineered to arrive alive.</h2>
+        <p>The visual language here mirrors Seed's science-led homepage rhythm: large quiet type, deep green fields, and product technology explained with restraint.</p>
+        <a class="btn btn-light" href="#">Learn About ViaCap</a>
+      </div>
+      <div class="science-visual">
+        <div class="round-img"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-tal_1440x.webp" alt="ViaCap delivery illustration" onerror="this.style.display='none'"></div>
+        <div class="capsule-panel">
+          <div class="capsule-art"><div class="capsule" aria-hidden="true"></div></div>
+          <div>
+            <h3>Nested capsule design</h3>
+            <p>Outer prebiotic capsule. Inner probiotic capsule. One compact daily ritual.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap proof-grid">
+      <aside class="proof-aside">
+        <div>
+          <span class="pill">The standard</span>
+          <h2>Evidence before claims.</h2>
+          <p>Seed's visual system makes science feel quiet and legible rather than loud or clinical.</p>
+        </div>
+        <a class="arrow" href="#">View Research</a>
+      </aside>
+      <div class="proof-list">
+        <article class="proof"><div class="num">01</div><h3>Full-formula testing</h3><p>Built around the complete formulation instead of isolated strain storytelling.</p></article>
+        <article class="proof"><div class="num">02</div><h3>Third-party screening</h3><p>Allergen, pesticide, and contaminant checks are treated as part of the product experience.</p></article>
+        <article class="proof"><div class="num">03</div><h3>Refill-first packaging</h3><p>A glass jar and monthly refills make the daily habit feel considered.</p></article>
+        <article class="proof"><div class="num">04</div><h3>Planetary lens</h3><p>The homepage blends human health with a broader ecological microbiome story.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="story" id="learn">
+    <div class="wrap story-grid">
+      <div class="story-img">
+        <img id="storyImage" src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-gallery-viacap_1440x.webp" alt="Seed story imagery" onerror="this.style.display='none'">
+      </div>
+      <div class="story-copy">
+        <div>
+          <span class="pill">Explore</span>
+          <h2>One science story, three entry points.</h2>
+          <p>Click the rows to swap the image. This keeps the page feeling alive without adding a full app framework.</p>
+        </div>
+        <div class="story-tabs">
+          <button class="story-tab" data-img="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-gallery-viacap_1440x.webp"><span>01</span><strong>What is the microbiome?</strong><i>→</i></button>
+          <button class="story-tab" data-img="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-galleryi-wk_1440x.webp"><span>02</span><strong>Why delivery matters</strong><i>→</i></button>
+          <button class="story-tab" data-img="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-gallery-spf_1440x.webp"><span>03</span><strong>How to build the ritual</strong><i>→</i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="labs" id="labs">
+    <div class="wrap labs-grid">
+      <div>
+        <span class="pill">SeedLabs</span>
+        <h2>Microbial research beyond the shelf.</h2>
+        <p>A homepage brand section for planetary health, research partnerships, and long-horizon microbiome work.</p>
+        <a class="btn btn-light" href="#">Discover SeedLabs</a>
+      </div>
+      <div class="lab-cards">
+        <article class="lab-card"><span>FIELD 01</span><h3>Human health</h3><p>Microbiome-centered interventions for everyday systems.</p></article>
+        <article class="lab-card"><span>FIELD 02</span><h3>Planetary health</h3><p>Research into microbial systems that support shared environments.</p></article>
+        <article class="lab-card"><span>FIELD 03</span><h3>Education</h3><p>Public science content that makes invisible biology feel understandable.</p></article>
+        <article class="lab-card"><span>FIELD 04</span><h3>Standards</h3><p>Testing, traceability, and sustainability baked into the brand story.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/benefits-jar-hands_500x.webp" alt="Seed daily ritual" onerror="this.style.display='none'">
+      <h2>Begin with the gut.</h2>
+      <a class="btn" href="#shop">Shop Daily Essentials</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-top">
+    <div>
+      <a class="logo" href="#">Seed<i></i></a>
+      <p class="foot-tag">Pioneering microbiome science for human and planetary health.</p>
+      <form class="news-form" onsubmit="return false">
+        <input type="email" placeholder="Sign Up For Our Newsletter" aria-label="Email">
+        <button type="submit" aria-label="Subscribe">→</button>
+      </form>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col"><h5>Products</h5><a href="#">Shop All</a><a href="#">DS-01®</a><a href="#">DM-02®</a><a href="#">PDS-08®</a></div>
+      <div class="foot-col"><h5>About</h5><a href="#">Science</a><a href="#">Sustainability</a><a href="#">SeedLabs</a><a href="#">Our Story</a></div>
+      <div class="foot-col"><h5>Help</h5><a href="#">Contact</a><a href="#">Account</a><a href="#">Shipping</a><a href="#">Accessibility</a></div>
+    </div>
+  </div>
+  <div class="foot-copy">© 2026 Seed Health, Inc. · Visual replica built for design study.</div>
+</footer>
+
+<script>
+document.querySelectorAll('.story-tab').forEach((button)=>{
+  button.addEventListener('click',()=>{
+    document.getElementById('storyImage').src=button.dataset.img;
+  });
+});
+</script>
+</body>
+</html>

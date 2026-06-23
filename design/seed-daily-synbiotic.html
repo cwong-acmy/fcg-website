@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seed • DS-01® Daily Synbiotic — replica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Seed Sans is proprietary; Hanken Grotesk is the closest free grotesque substitute. Source Code Pro matches the mono AFU figures. -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1C3A13;       /* primary forest green: text, dark sections, buttons */
+  --cream:#FCFCF7;       /* page bg / light text on dark */
+  --sage-1:#F6F7EF;      /* light section bg */
+  --sage-2:#EFF1E4;      /* nav pill / cards */
+  --lime:#C9E79A;        /* accent pill / promo highlight */
+  --line:rgba(28,58,19,.14);
+  --muted:rgba(28,58,19,.62);
+  --serif:'Hanken Grotesk',Helvetica,sans-serif;
+  --mono:'Source Code Pro',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  font-family:var(--serif);
+  font-weight:400;
+  color:var(--green);
+  background:var(--cream);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-weight:300;letter-spacing:-.02em;line-height:1.08}
+.wrap{max-width:1340px;margin:0 auto;padding:0 28px}
+.eased{transition:all .35s cubic-bezier(.4,0,.2,1)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--serif);font-size:16px;font-weight:400;
+  border-radius:50px;padding:16px 32px;cursor:pointer;border:1px solid transparent;
+  transition:opacity .25s,background .25s,color .25s;
+}
+.btn-dark{background:var(--green);color:#fff}
+.btn-dark:hover{opacity:.88}
+.btn-outline{background:transparent;color:var(--green);border-color:var(--green)}
+.btn-outline:hover{background:var(--green);color:#fff}
+.btn-block{width:100%}
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:500;padding:5px 13px;border-radius:50px;
+  border:1px solid var(--green);line-height:1;
+}
+.pill-lime{background:var(--lime);border-color:transparent;color:var(--green)}
+.linkarrow{display:inline-flex;align-items:center;gap:10px;font-weight:500;border-bottom:1px solid currentColor;padding-bottom:3px}
+.linkarrow svg{width:18px;height:18px}
+
+/* ---------- nav ---------- */
+.nav-shell{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 28px;pointer-events:none}
+.nav{
+  pointer-events:auto;max-width:1340px;margin:0 auto;
+  display:flex;align-items:center;
+  background:rgba(239,241,228,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-radius:60px;padding:14px 26px;
+}
+.logo{font-size:22px;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:7px}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--green);display:inline-block}
+.nav-links{display:flex;gap:30px;margin-left:42px;font-size:16px}
+.nav-links a:hover{opacity:.6}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:22px}
+.nav-right .signin{font-size:16px}
+.nav-right .signin:hover{opacity:.6}
+.nav-cta{background:var(--green);color:#fff;border-radius:50px;padding:11px 24px;font-size:15px}
+.nav-cta:hover{opacity:.88}
+
+/* ---------- hero ---------- */
+.hero{padding:128px 0 72px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:start}
+.gallery .main-img{
+  width:100%;aspect-ratio:1/1;border-radius:20px;overflow:hidden;background:var(--sage-2);
+}
+.gallery .main-img img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:flex;gap:14px;margin-top:14px}
+.thumb{
+  width:80px;height:80px;border-radius:12px;overflow:hidden;cursor:pointer;
+  background:var(--sage-2);border:2px solid transparent;flex:none;
+}
+.thumb.active{border-color:var(--green)}
+.thumb img{width:100%;height:100%;object-fit:cover}
+
+.hero-info{padding-top:6px}
+.hero-titlerow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.hero-info h1{font-size:38px;font-weight:300}
+.rating{display:flex;align-items:center;gap:10px;margin-bottom:20px;font-size:15px}
+.stars{color:var(--green);letter-spacing:1px;font-size:16px}
+.rating a{border-bottom:1px solid var(--green)}
+.hero-sub{font-size:17px;line-height:1.5;margin-bottom:22px;max-width:30em}
+.price-row{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.price-now{font-size:26px;font-weight:400}
+.price-was{font-size:20px;color:var(--muted);text-decoration:line-through}
+.promo-tag{font-size:13px;font-weight:500}
+.promo-tag b{background:var(--lime);padding:2px 8px;border-radius:4px;font-weight:600}
+.ship-note{font-size:15px;color:var(--muted);margin:8px 0 22px;line-height:1.45}
+.guarantee{font-size:14px;color:var(--muted);margin-top:14px}
+
+/* accordions (native <details>) */
+.acc{border-top:1px solid var(--line);margin-top:26px}
+.acc details{border-bottom:1px solid var(--line)}
+.acc summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  padding:20px 2px;font-size:18px;font-weight:400;
+}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary .ico{font-size:22px;font-weight:300;transition:transform .25s}
+.acc details[open] summary .ico{transform:rotate(45deg)}
+.acc .body{padding:0 2px 22px;font-size:16px}
+.acc .body ul{list-style:none;display:flex;flex-direction:column;gap:13px}
+.acc .body li{display:flex;gap:12px;align-items:flex-start;line-height:1.45}
+.acc .body li .chk{flex:none;margin-top:3px}
+
+/* ---------- feature / "feel the difference" ---------- */
+.feel{position:relative;border-radius:0;overflow:hidden;min-height:760px;display:flex;align-items:flex-end;
+  background:#2b3a26 center/cover no-repeat;}
+.feel::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,30,14,.15) 0%,rgba(20,30,14,.55) 70%,rgba(20,30,14,.78) 100%)}
+.feel-inner{position:relative;width:100%;max-width:1340px;margin:0 auto;padding:0 28px 56px;color:var(--cream)}
+.feel h2{font-size:48px;font-weight:300;color:var(--cream);margin:120px 0 0;max-width:14em}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:200px}
+.feat .ic{width:54px;height:54px;margin-bottom:18px;color:var(--cream)}
+.feat h3{font-size:20px;font-weight:400;color:var(--cream);margin-bottom:8px}
+.feat p{font-size:15.5px;color:rgba(252,252,247,.82);line-height:1.45}
+
+/* ---------- alive split ---------- */
+.alive{padding:14px 0}
+.alive-grid{display:grid;grid-template-columns:.42fr .58fr;gap:14px;align-items:stretch}
+.alive-img{border-radius:20px;overflow:hidden;background:#3a5230;min-height:560px}
+.alive-img img{width:100%;height:100%;object-fit:cover}
+.alive-panel{background:var(--green);color:var(--cream);border-radius:20px;padding:64px 60px;display:flex;flex-direction:column}
+.alive-panel h2{font-size:42px;color:var(--cream);font-weight:300;max-width:11em}
+.alive-panel p{margin:22px 0 26px;color:rgba(252,252,247,.85);max-width:22em;line-height:1.5}
+.alive-panel .linkarrow{color:var(--cream)}
+.cap-rows{margin-top:auto;display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(252,252,247,.2)}
+.cap-row{padding:24px 0;border-bottom:1px solid rgba(252,252,247,.2)}
+.cap-row h4{font-size:19px;font-weight:400;color:var(--cream);margin-bottom:5px}
+.cap-row p{margin:0;font-size:15px;color:rgba(252,252,247,.72)}
+
+/* ---------- benefits timeline ---------- */
+.timeline{padding:96px 0 24px;text-align:center}
+.timeline h2{font-size:48px;font-weight:300;margin-bottom:54px}
+.tl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;text-align:left}
+.tl-card{background:var(--sage-1);border-radius:18px;padding:34px 32px;min-height:230px;display:flex;flex-direction:column}
+.tl-tag{align-self:flex-start;background:var(--green);color:var(--cream);font-size:13px;font-weight:500;padding:5px 13px;border-radius:50px;margin-bottom:18px}
+.tl-card h3{font-size:22px;font-weight:400;margin-bottom:14px}
+.tl-card ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.tl-card li{font-size:15.5px;color:var(--muted);padding-left:16px;position:relative}
+.tl-card li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--green);opacity:.5}
+
+/* ---------- 24 strain / ingredients ---------- */
+.strain{padding:92px 0 40px}
+.strain-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:46px;flex-wrap:wrap}
+.strain-head h2{font-size:52px;font-weight:300;max-width:11em}
+.ing-list{border-top:1px solid var(--line)}
+.ing-list details{border-bottom:1px solid var(--line)}
+.ing-list summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto auto;gap:24px;align-items:center;padding:26px 4px}
+.ing-list summary::-webkit-details-marker{display:none}
+.ing-name{font-size:20px;font-weight:400}
+.ing-afu{font-family:var(--mono);font-size:14px;color:var(--muted);letter-spacing:-.02em}
+.ing-list .ico{font-size:22px;font-weight:300;transition:transform .25s}
+.ing-list details[open] .ico{transform:rotate(45deg)}
+.ing-list .body{padding:0 4px 26px;font-size:15px;color:var(--muted);max-width:60em}
+
+/* badges */
+.badges{display:flex;flex-wrap:wrap;gap:14px 30px;margin-top:50px;align-items:center;justify-content:center}
+.badge{display:flex;flex-direction:column;align-items:center;gap:8px;width:88px;text-align:center}
+.badge img{width:46px;height:46px;object-fit:contain;opacity:.9}
+.badge span{font-size:11px;color:var(--muted);line-height:1.2}
+
+/* ---------- compare ---------- */
+.compare{padding:80px 0}
+.compare h2{font-size:42px;font-weight:300;margin-bottom:40px}
+.ctable{width:100%;border-collapse:collapse;background:var(--sage-1);border-radius:20px;overflow:hidden}
+.ctable th,.ctable td{padding:24px 28px;text-align:left;vertical-align:middle;border-bottom:1px solid var(--line)}
+.ctable thead th{font-size:18px;font-weight:500;background:var(--green);color:var(--cream)}
+.ctable thead th:first-child{background:var(--green)}
+.ctable tbody td:first-child{font-size:16px;width:46%}
+.ctable .ds{font-weight:500}
+.ctable .yes{color:var(--green);font-weight:500;display:flex;align-items:center;gap:9px}
+.ctable .other{color:var(--muted)}
+.ctable tr:last-child td{border-bottom:none}
+
+/* ---------- sustainably delivered ---------- */
+.sustain{padding:80px 0}
+.sustain-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.sustain-img{border-radius:20px;overflow:hidden;aspect-ratio:5/6;background:var(--sage-2)}
+.sustain-img img{width:100%;height:100%;object-fit:cover}
+.sustain h2{font-size:44px;font-weight:300;margin-bottom:30px}
+.kit{display:flex;flex-direction:column;gap:18px;margin-bottom:36px}
+.kit-item{display:flex;gap:16px;align-items:flex-start;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.kit-item .num{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:3px}
+.kit-item h4{font-size:17px;font-weight:500}
+.kit-item p{font-size:14px;color:var(--muted)}
+.kit-item .gift{font-size:12px;color:var(--green);background:var(--lime);padding:2px 8px;border-radius:4px;margin-left:auto;white-space:nowrap}
+
+/* ---------- testing standard ---------- */
+.testing{padding:80px 0;background:var(--sage-1)}
+.testing .lead{max-width:30em;margin-bottom:54px}
+.testing h2{font-size:42px;font-weight:300;margin-bottom:18px}
+.testing .lead p{color:var(--muted);font-size:17px;line-height:1.5}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.test-col{border-top:2px solid var(--green);padding-top:22px}
+.test-col h3{font-size:21px;font-weight:400;line-height:1.3}
+
+/* ---------- faq ---------- */
+.faq{padding:90px 0}
+.faq h2{font-size:42px;font-weight:300;margin-bottom:36px}
+.faq .acc{border-top:1px solid var(--line);margin-top:0}
+.faq summary{font-size:21px;padding:26px 2px}
+.faq .body{font-size:16px;color:var(--muted);line-height:1.55;max-width:54em}
+
+/* ---------- footer cta ---------- */
+.footcta{background:var(--green);color:var(--cream);padding:84px 0;text-align:center}
+.footcta img{width:200px;margin:0 auto 32px;border-radius:16px}
+.footcta h2{font-size:40px;color:var(--cream);font-weight:300;margin-bottom:30px}
+.footcta .btn-dark{background:var(--cream);color:var(--green)}
+
+/* ---------- footer ---------- */
+footer.site{background:var(--green);color:rgba(252,252,247,.8);padding:72px 0 0}
+.foot-top{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;padding-bottom:56px}
+.foot-top .logo{color:var(--cream);font-size:28px;margin-bottom:22px}
+.foot-top .logo .dot{background:var(--cream)}
+.foot-tag{font-size:30px;font-weight:300;line-height:1.18;letter-spacing:-.02em;color:var(--cream);max-width:13em;margin-bottom:30px}
+.news-label{font-size:15px;color:rgba(252,252,247,.85);margin-bottom:4px}
+.news-sub{font-size:13px;color:rgba(252,252,247,.55);margin-bottom:14px}
+.news-form{display:flex;align-items:center;gap:0;border:1px solid rgba(252,252,247,.4);border-radius:50px;max-width:420px;overflow:hidden}
+.news-form input{flex:1;background:transparent;border:none;outline:none;color:var(--cream);font-family:var(--serif);font-size:15px;padding:15px 22px}
+.news-form input::placeholder{color:rgba(252,252,247,.6)}
+.news-form button{background:transparent;border:none;color:var(--cream);cursor:pointer;padding:0 22px;font-size:20px}
+.foot-disc{font-size:11.5px;color:rgba(252,252,247,.5);line-height:1.5;max-width:34em;margin-top:26px}
+.foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 30px}
+.foot-col h5{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:rgba(252,252,247,.5);margin-bottom:16px}
+.foot-col a{display:block;color:rgba(252,252,247,.85);font-size:15px;margin-bottom:11px}
+.foot-col a:hover{color:var(--cream)}
+.foot-blobs{height:200px;background:#16240f center/cover no-repeat;position:relative;overflow:hidden;border-top:1px solid rgba(252,252,247,.12)}
+.foot-blobs svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:660px;max-width:96%;opacity:.92}
+.foot-copy{text-align:center;font-size:12px;color:rgba(252,252,247,.55);padding:18px 0 26px;background:#16240f}
+
+/* ---------- sticky add bar ---------- */
+.stickybar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:rgba(239,241,228,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);
+  transform:translateY(110%);transition:transform .4s cubic-bezier(.4,0,.2,1);
+}
+.stickybar.show{transform:translateY(0)}
+.stickybar .inner{max-width:1340px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:16px}
+.stickybar img{width:44px;height:44px;border-radius:10px;object-fit:cover;background:var(--green)}
+.stickybar .sb-name{font-size:16px}
+.stickybar .sb-price{font-size:15px;color:var(--muted)}
+.stickybar .sb-price s{margin-left:6px}
+.stickybar .btn{margin-left:auto;padding:12px 30px}
+
+/* ---------- responsive ---------- */
+@media(max-width:980px){
+  .hero-grid,.alive-grid,.sustain-grid{grid-template-columns:1fr;gap:36px}
+  .feat-grid{grid-template-columns:repeat(2,1fr);gap:34px;margin-top:60px}
+  .feel h2{font-size:34px;margin-top:80px}
+  .feel{min-height:auto;padding-top:60px}
+  .tl-grid,.test-grid{grid-template-columns:1fr}
+  .alive-panel{padding:44px 34px}
+  .alive-img{min-height:320px}
+  .foot-top{grid-template-columns:1fr;gap:40px}
+  .foot-cols{grid-template-columns:1fr 1fr}
+  .foot-tag{font-size:24px}
+  .strain-head h2,.timeline h2,.sustain h2,.compare h2,.testing h2,.faq h2,.feel h2{font-size:32px}
+  .hero-info h1{font-size:30px}
+  .ctable th,.ctable td{padding:16px 14px;font-size:14px}
+  .nav-links{display:none}
+}
+@media(max-width:560px){
+  .feat-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .wrap{padding:0 18px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<div class="nav-shell">
+  <nav class="nav">
+    <a href="#" class="logo">Seed<span class="dot"></span></a>
+    <div class="nav-links">
+      <a href="#">Shop</a>
+      <a href="#">Science</a>
+      <a href="#">Learn</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="signin">Sign in</a>
+      <a href="#start" class="nav-cta">Get Started</a>
+    </div>
+  </nav>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="start">
+  <div class="wrap hero-grid">
+    <!-- gallery -->
+    <div class="gallery">
+      <div class="main-img">
+        <img id="heroMain" src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-gallery-lifestyle_1440x.webp" alt="DS-01 Daily Synbiotic held in hand" onerror="this.style.opacity=0">
+      </div>
+      <div class="thumbs">
+        <div class="thumb active" data-src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-gallery-lifestyle_1440x.webp"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-gallery-lifestyle_500x.webp" alt="" onerror="this.style.opacity=0"></div>
+        <div class="thumb" data-src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-gallery-viacap_1440x.webp"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-gallery-viacap_500x.webp" alt="" onerror="this.style.opacity=0"></div>
+        <div class="thumb" data-src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-galleryi-wk_1440x.webp"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-galleryi-wk_500x.webp" alt="" onerror="this.style.opacity=0"></div>
+        <div class="thumb" data-src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-gallery-spf_1440x.webp"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-gallery-spf_500x.webp" alt="" onerror="this.style.opacity=0"></div>
+      </div>
+    </div>
+
+    <!-- info -->
+    <div class="hero-info">
+      <div class="hero-titlerow">
+        <span class="pill">Save 30%</span>
+        <h1>Daily Synbiotic</h1>
+      </div>
+      <div class="rating">
+        <span style="font-weight:500">4.8</span>
+        <span class="stars">★★★★★</span>
+        <a href="#">13,427 Reviews</a>
+      </div>
+      <p class="hero-sub">Daily probiotic + prebiotic clinically validated to relieve bloating, gas, and irregularity—formulated with 24 strains to promote whole body health.*</p>
+
+      <span class="pill pill-lime" style="margin-bottom:18px">Bestseller</span>
+
+      <div class="price-row">
+        <span class="price-now">$35.00</span>
+        <span class="price-was">$49.99</span>
+        <span class="promo-tag">30% off with <b>SUMMER30</b></span>
+      </div>
+      <p class="ship-note">30-day supply delivered monthly.<br>Pause or cancel anytime.</p>
+
+      <a href="#" class="btn btn-dark btn-block">Start Now</a>
+      <p class="guarantee">30-day risk-free guarantee. Free US shipping.</p>
+
+      <!-- accordions -->
+      <div class="acc">
+        <details open>
+          <summary>Benefits* <span class="ico">+</span></summary>
+          <div class="body">
+            <ul>
+              <li><span class="chk">✓</span> Reduces bloating and gas.</li>
+              <li><span class="chk">✓</span> Improves regularity and digestive discomfort.</li>
+              <li><span class="chk">✓</span> Supports whole body health.</li>
+              <li><span class="chk">✓</span> Tested in multiple full formulation randomized, placebo-controlled clinical trials.</li>
+            </ul>
+            <a href="#" class="linkarrow" style="margin-top:20px">View Clinical Trials
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </details>
+        <details>
+          <summary>Ingredients <span class="ico">+</span></summary>
+          <div class="body">24 clinically- and scientifically-studied probiotic strains plus a non-fermenting, non-bloating prebiotic, delivered in a 2-in-1 nested ViaCap® capsule.</div>
+        </details>
+        <details>
+          <summary>How to Use <span class="ico">+</span></summary>
+          <div class="body">Adults—take 2 capsules daily, all at once, with or without food.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEEL THE DIFFERENCE ===================== -->
+<section class="feel" style="background-image:url('https://cdn.shopify.com/s/files/1/0929/7828/2785/files/Seed-2025_Come-To-Life-10_61789_A1_9677175888583194_adfc05e2-4481-41dc-8cf6-60295842a55e_1440x.png')">
+  <div class="feel-inner">
+    <h2>Feel the difference of a truly healthy gut.</h2>
+    <div class="feat-grid">
+      <div class="feat">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="18" cy="18" r="6"/><circle cx="30" cy="18" r="6"/><circle cx="24" cy="29" r="6"/><circle cx="13" cy="29" r="5"/><circle cx="35" cy="29" r="5"/></svg>
+        <h3>Diverse Probiotic Strains</h3>
+        <p>24 strains support microbial diversity, the foundation of a healthy gut.</p>
+      </div>
+      <div class="feat">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="17" y="9" width="14" height="30" rx="7"/><line x1="17" y1="24" x2="31" y2="24"/></svg>
+        <h3>Engineered to Survive</h3>
+        <p>ViaCap® delivery system safeguards probiotics all the way to the colon.</p>
+      </div>
+      <div class="feat">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M24 10v22M24 32l-7-7M24 32l7-7M14 38h20"/></svg>
+        <h3>Feeds Good Gut Microbes</h3>
+        <p>Non-fiber prebiotic feeds beneficial gut microbes.</p>
+      </div>
+      <div class="feat">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="20" cy="20" r="9"/><line x1="27" y1="27" x2="38" y2="38"/></svg>
+        <h3>Clinically Tested Formulation</h3>
+        <p>Clinically tested in full formulation, randomized, placebo-controlled clinical trials.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MAKES IT TO THE GUT ALIVE ===================== -->
+<section class="alive">
+  <div class="wrap alive-grid">
+    <div class="alive-img">
+      <img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/ds-tal_1440x.webp" alt="ViaCap delivery along the GI tract" onerror="this.parentNode.style.background='linear-gradient(135deg,#5b7a3f,#2e431f)'">
+    </div>
+    <div class="alive-panel">
+      <h2>Unlike many probiotics, DS-01® makes it to the gut alive.</h2>
+      <p>Seed's ViaCap® technology is engineered for targeted delivery along the GI tract.</p>
+      <a href="#" class="linkarrow">Learn More
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <div class="cap-rows">
+        <div class="cap-row">
+          <h4>Prebiotic Outer Capsule</h4>
+          <p>No-bloat prebiotic feeds beneficial gut microbes.</p>
+        </div>
+        <div class="cap-row">
+          <h4>Probiotic Inner Capsule</h4>
+          <p>Delivers live bacteria to the colon where it's needed most.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BENEFITS TIMELINE ===================== -->
+<section class="timeline">
+  <div class="wrap">
+    <h2>The DS-01® difference:<br>Benefits that build over time.</h2>
+    <div class="tl-grid">
+      <div class="tl-card">
+        <span class="tl-tag">7 Days</span>
+        <h3>Reduces Bloating</h3>
+        <ul>
+          <li>Reduces rumbling in the gut</li>
+          <li>Eases bloating and gas</li>
+          <li>Makes pooping easier</li>
+        </ul>
+      </div>
+      <div class="tl-card">
+        <span class="tl-tag">30 Days</span>
+        <h3>Improves Regularity</h3>
+        <ul>
+          <li>Promotes regular, comfortable digestion</li>
+          <li>Supports a balanced microbiome</li>
+          <li>Improves ease of evacuation</li>
+        </ul>
+      </div>
+      <div class="tl-card">
+        <span class="tl-tag">6 Months+</span>
+        <h3>Whole Body Health</h3>
+        <ul>
+          <li>Promotes overall digestive quality of life</li>
+          <li>Supports immune system balance††</li>
+          <li>Increases micronutrient synthesis††</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 24 STRAIN FORMULA ===================== -->
+<section class="strain">
+  <div class="wrap">
+    <div class="strain-head">
+      <h2>24 strain formula for transformative gut benefits*</h2>
+      <a href="#" class="linkarrow">View Strains + Ingredients
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="ing-list">
+      <details>
+        <summary>
+          <span class="ing-name">Digestive Health Probiotic Blend°</span>
+          <span class="ing-afu">224 mg / 38.7 Billion AFU</span>
+          <span class="ico">+</span>
+        </summary>
+        <div class="body">A blend of clinically- and scientifically-studied strains that support regularity, ease of evacuation, and relief from occasional bloating and gas.</div>
+      </details>
+      <details>
+        <summary>
+          <span class="ing-name">Dermatological Health Probiotic Blend°</span>
+          <span class="ing-afu">36 mg / 3.34 Billion AFU</span>
+          <span class="ico">+</span>
+        </summary>
+        <div class="body">Strains studied for their role in the gut-skin axis and dermatological health.</div>
+      </details>
+      <details>
+        <summary>
+          <span class="ing-name">Cardiovascular Health Probiotic Blend°</span>
+          <span class="ing-afu">13 mg / 4.21 Billion AFU</span>
+          <span class="ico">+</span>
+        </summary>
+        <div class="body">Strains studied for cardiovascular health, including the metabolism of dietary compounds.</div>
+      </details>
+      <details>
+        <summary>
+          <span class="ing-name">Micronutrient Synthesis Probiotic Blend°</span>
+          <span class="ing-afu">36 mg / 7.32 Billion AFU</span>
+          <span class="ico">+</span>
+        </summary>
+        <div class="body">Strains that support the synthesis of key micronutrients, including folate.</div>
+      </details>
+    </div>
+
+    <div class="badges">
+      <div class="badge"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/gluten-tested_100x.webp" alt="" onerror="this.style.display='none'"><span>Gluten-Tested</span></div>
+      <div class="badge"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/dairy-tested_100x.webp" alt="" onerror="this.style.display='none'"><span>Dairy-Tested</span></div>
+      <div class="badge"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/nut-tested_100x.webp" alt="" onerror="this.style.display='none'"><span>Nut-Tested</span></div>
+      <div class="badge"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/soy-tested_100x.webp" alt="" onerror="this.style.display='none'"><span>Soy-Tested</span></div>
+      <div class="badge"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/shellfish-tested_100x.webp" alt="" onerror="this.style.display='none'"><span>Shellfish-Tested</span></div>
+      <div class="badge"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/sesame-tested_100x.webp" alt="" onerror="this.style.display='none'"><span>Sesame-Tested</span></div>
+      <div class="badge"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/corn-tested_100x.webp" alt="" onerror="this.style.display='none'"><span>Corn-Tested</span></div>
+      <div class="badge"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/glypho-ampa-tested_100x.webp" alt="" onerror="this.style.display='none'"><span>Glyphosate/AMPA-Tested</span></div>
+      <div class="badge"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/no-binders_100x.webp" alt="" onerror="this.style.display='none'"><span>No Binders</span></div>
+      <div class="badge"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/no-preservatives_100x.webp" alt="" onerror="this.style.display='none'"><span>No Preservatives</span></div>
+      <div class="badge"><img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/prop-65-compliant_100x.webp" alt="" onerror="this.style.display='none'"><span>Prop. 65 Compliant</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMPARE ===================== -->
+<section class="compare">
+  <div class="wrap">
+    <h2>How DS-01® Compares:</h2>
+    <table class="ctable">
+      <thead>
+        <tr><th></th><th>DS-01®</th><th>Other Probiotics</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Clinically-studied 24-strain formula</td>
+          <td class="ds"><span class="yes">✓ 24 strains</span></td>
+          <td class="other">10 or fewer strains</td>
+        </tr>
+        <tr>
+          <td>Engineered for precision delivery to colon</td>
+          <td class="ds"><span class="yes">✓ ViaCap®</span></td>
+          <td class="other">Rarely validated to reach gut</td>
+        </tr>
+        <tr>
+          <td>Clinically tested in multiple trials</td>
+          <td class="ds"><span class="yes">✓ Yes</span></td>
+          <td class="other">Rare</td>
+        </tr>
+        <tr>
+          <td>Third-party tested for pesticides &amp; allergens</td>
+          <td class="ds"><span class="yes">✓ Yes</span></td>
+          <td class="other">Rare</td>
+        </tr>
+        <tr>
+          <td>Gluten and nut tested, low FODMAP</td>
+          <td class="ds"><span class="yes">✓ Yes</span></td>
+          <td class="other">Rare</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== SUSTAINABLY DELIVERED ===================== -->
+<section class="sustain">
+  <div class="wrap sustain-grid">
+    <div class="sustain-img">
+      <img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/sustain-ds-lifestyle_1440x.webp" alt="Sustainable refillable glass jar" onerror="this.parentNode.style.background='linear-gradient(135deg,#cdd6bd,#9fb086)'">
+    </div>
+    <div>
+      <h2>Sustainably delivered, monthly.</h2>
+      <div class="kit">
+        <div class="kit-item">
+          <span class="num">01</span>
+          <div><h4>DS-01® Welcome Kit</h4><p>Complimentary with your first order</p></div>
+        </div>
+        <div class="kit-item">
+          <span class="num">02</span>
+          <div><h4>Refillable Glass Jar</h4><p>Designed for daily ritual</p></div>
+          <span class="gift">Bonus gift</span>
+        </div>
+        <div class="kit-item">
+          <span class="num">03</span>
+          <div><h4>Glass Travel Vial</h4><p>For probiotics on the go</p></div>
+          <span class="gift">Bonus gift</span>
+        </div>
+        <div class="kit-item">
+          <span class="num">04</span>
+          <div><h4>DS-01® Daily Synbiotic</h4><p>30-day supply • 60 capsules</p></div>
+        </div>
+      </div>
+      <a href="#" class="btn btn-dark">Start Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TESTING STANDARD ===================== -->
+<section class="testing">
+  <div class="wrap">
+    <div class="lead">
+      <h2>Rigorous testing that sets a higher standard.</h2>
+      <p>DS-01® is screened as a full formula for allergens, contaminants, and pesticides—because what's not in your supplement matters, too.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-col"><h3>Formulated without gluten, soy, dairy, and corn</h3></div>
+      <div class="test-col"><h3>Tested for heavy metals and free of glyphosate and AMPA</h3></div>
+      <div class="test-col"><h3>Formulated to comply with Prop. 65</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="faq">
+  <div class="wrap">
+    <h2>Questions? We're here to help.</h2>
+    <div class="acc">
+      <details open>
+        <summary>When will I feel something? <span class="ico">+</span></summary>
+        <div class="body">It is normal to feel effects in the digestive tract in as little as 24-48 hours. Other longer term benefits like cardiovascular health and gut immune function may take longer. As long as you continue your daily intake, those beneficial microbes are doing their work inside to program, sustain, and enhance your health.</div>
+      </details>
+      <details>
+        <summary>How do I take DS-01® Daily Synbiotic? <span class="ico">+</span></summary>
+        <div class="body">Adults—take 2 capsules daily, all at once. You can take DS-01 with or without food and maintain the efficacy of the product. However, you know your body best—find the best time of day to take for you.</div>
+      </details>
+      <details>
+        <summary>Why should I take DS-01® Daily Synbiotic? <span class="ico">+</span></summary>
+        <div class="body">You are home to a community of trillions of microorganisms, including 38,000,000,000,000 bacteria that live in and on you. They perform critical functions like digesting food, managing inflammation, and synthesizing key vitamins, metabolites and neurotransmitters. This is the microbiome. By supplementing your gut microbial makeup, DS-01® provides benefits for both digestive and whole body health.</div>
+      </details>
+    </div>
+    <a href="#" class="linkarrow" style="margin-top:30px">View All
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER CTA ===================== -->
+<section class="footcta">
+  <div class="wrap">
+    <img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/benefits-jar-hands_500x.webp" alt="DS-01 Daily Synbiotic jar" onerror="this.style.display='none'">
+    <h2>Begin your daily ritual.</h2>
+    <a href="#" class="btn btn-dark">Start Now</a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <a href="#" class="logo">Seed<span class="dot"></span></a>
+        <p class="foot-tag">Pioneering microbiome science for human and planetary health since 2015.</p>
+        <p class="news-label">Science with Seed—nerdy reads for your inbox.</p>
+        <p class="news-sub">By signing up you consent to receive Seed emails.</p>
+        <form class="news-form" onsubmit="return false">
+          <input type="email" placeholder="Sign Up For Our Newsletter" aria-label="Email">
+          <button type="submit" aria-label="Subscribe">→</button>
+        </form>
+        <p class="foot-disc">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h5>Products</h5>
+          <a href="#">Shop All</a>
+          <a href="#">DS-01® Daily Synbiotic</a>
+          <a href="#">DM-02® Daily Multi</a>
+          <a href="#">PDS-08® Pediatric</a>
+        </div>
+        <div class="foot-col">
+          <h5>About</h5>
+          <a href="#">Science</a>
+          <a href="#">Sustainability</a>
+          <a href="#">SeedLabs</a>
+        </div>
+        <div class="foot-col">
+          <h5>Inquire</h5>
+          <a href="#">Partner</a>
+          <a href="#">Practitioners</a>
+          <a href="#">Press</a>
+          <a href="#">Join</a>
+        </div>
+        <div class="foot-col">
+          <h5>Help</h5>
+          <a href="#">Help</a>
+          <a href="mailto:care@seed.com">Contact</a>
+          <a href="#">My Account</a>
+          <a href="#">International</a>
+        </div>
+        <div class="foot-col">
+          <h5>Social</h5>
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Refer</a>
+        </div>
+        <div class="foot-col">
+          <h5>Legal</h5>
+          <a href="#">Terms + Conditions</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Accessibility</a>
+          <a href="#">Consent Preferences</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot-blobs">
+    <svg viewBox="0 0 660 180" xmlns="http://www.w3.org/2000/svg" fill="#FCFCF7">
+      <path d="M40 95c-14-2-24-14-20-28 4-13 20-16 30-9 9 6 8 19 18 22 12 4 14-12 26-12 13 0 16 16 6 24-9 7-22 2-32 7-9 4-13 6-28-4z"/>
+      <path d="M150 70c10-6 24-2 27 9 3 10-6 17-2 27 4 11-9 20-19 15-9-4-9-16-18-21-10-5-21 3-26-7-4-9 5-19 16-18 9 1 13 1 22-4z"/>
+      <path d="M300 100c-12 3-25-4-25-16 0-13 14-18 24-13 8 4 9 14 19 16 11 2 16-11 27-7 11 4 9 21-3 24-10 3-18-4-27-2-6 1-10 11-15-2z"/>
+      <path d="M430 68c11-4 23 3 23 14 0 10-9 14-9 24 0 12-15 16-22 7-6-7-1-16-9-23-9-7-22-1-24-12-2-10 9-17 19-14 8 2 14 8 22 4z"/>
+      <path d="M560 96c-13 1-23-9-20-21 3-11 17-13 26-7 7 5 6 15 16 18 11 4 17-8 27-3 10 6 5 22-7 23-10 1-16-7-26-7-7 0-11 5-16-3z"/>
+      <circle cx="95" cy="135" r="6"/><circle cx="230" cy="48" r="5"/><circle cx="370" cy="138" r="6"/><circle cx="500" cy="44" r="5"/><circle cx="620" cy="138" r="6"/>
+    </svg>
+  </div>
+  <div class="foot-copy">© 2026 Seed Health, Inc. · Replica built for design study from public references.</div>
+</footer>
+
+<!-- ===================== STICKY ADD BAR ===================== -->
+<div class="stickybar" id="stickybar">
+  <div class="inner">
+    <img src="https://cdn.shopify.com/s/files/1/0929/7828/2785/files/benefits-jar-hands_100x.webp" alt="" onerror="this.style.background='var(--green)'">
+    <div>
+      <div class="sb-name">DS-01® Daily Synbiotic</div>
+      <div class="sb-price">$35.00 <s>$49.99</s></div>
+    </div>
+    <a href="#start" class="btn btn-dark">Start Now</a>
+  </div>
+</div>
+
+<script>
+// hero thumbnail swap
+document.querySelectorAll('.thumb').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.thumb').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('heroMain').src=t.dataset.src;
+    document.getElementById('heroMain').style.opacity=1;
+  });
+});
+// reveal sticky bar after hero scrolls out
+const bar=document.getElementById('stickybar');
+const hero=document.getElementById('start');
+new IntersectionObserver(([e])=>{
+  bar.classList.toggle('show',!e.isIntersecting);
+},{threshold:0}).observe(hero);
+</script>
+
+</body>
+</html>
