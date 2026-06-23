@@ -32,7 +32,7 @@ Top-level: **Products · Network · Developer · About**
 
 | Tab | Behaviour | Contents |
 |---|---|---|
-| **Products** | Mega-menu, grouped *Front / Mid / Back* (group name TBD) | Front → CBT, AI-BT, RFP · Mid → AtlasOS · Back → G-Link, F-Link |
+| **Products** | Mega-menu, grouped *Book / Core / Engine* | Book → CBT, AI-BT, RFP · Core → AtlasOS · Engine → G-Link, F-Link |
 | **Network** | Dropdown → 2 separate pages | ADDN, Payment *(Payment page = Track A)* |
 | **Developer** | Direct link, no dropdown | repurposed from `api-access.html` |
 | **About** | Direct link, no dropdown | Corporate intro · FCG [second item TBD] |
@@ -68,7 +68,7 @@ The template is the critical path; everything else parallelises behind it.
 
 | Phase | Scope | Depends on |
 |---|---|---|
-| **0 — Foundation (critical path, do first)** | Resolve the open items below; pin the golden reference page; build the new 4-item nav (Products mega-menu w/ Front/Mid/Back; Network dropdown; Developer + About direct links); extract shared header/footer as one reusable template; archive the 4 removed pages. | — |
+| **0 — Foundation (critical path, do first)** | Resolve the open items below; pin the golden reference page; build the new 4-item nav (Products mega-menu w/ Book/Core/Engine; Network dropdown; Developer + About direct links); extract shared header/footer as one reusable template; archive the 4 removed pages. | — |
 | **1 — Parallel fan-out** | All 12 pages built against the locked template, in parallel at equal priority. Each page = redesign to golden + copy rewrite. | Phase 0 |
 
 **Why template-first:** front-loads the one decision every page copies, so the
@@ -79,7 +79,7 @@ fan-out is mechanical and the header/nav isn't rebuilt 12 times.
 1. ~~Golden reference page.~~ **RESOLVED:** `index-v4.html` for Home;
    `flink-v7` / `glink-v7` / `tmc-api-v7` for product pages. The v6 edits from
    Jun 22 are not the template.
-2. **Front / Mid / Back group name** — placeholder; needs a nicer label.
+2. ~~**Front / Mid / Back group name** — placeholder; needs a nicer label.~~ **RESOLVED:** Book / Core / Engine (capitalised).
 3. **`O-T` / `O-G` / `O-F` tags** — "open platform … API" (O-T = open platform
    TMC API). Decide how/where these surface (likely Developer + product pages).
 4. **Red double-underlines** on the sketch (CBT, "Open") — priority markers?

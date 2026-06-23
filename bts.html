@@ -456,7 +456,12 @@
         html[data-theme="dark"] .bts-cta { background:#050505; }
         html[data-theme="dark"] .bts-cta-wrap { background:linear-gradient(180deg,#0c0c0c,#000); border-color:rgba(255,255,255,.1); box-shadow:none; }
         html[data-theme="dark"] .bts-cta-meta .sep { background:rgba(255,255,255,.14); }
+
+        /* HubSpot lead-capture form container (the form renders inside HubSpot's own iframe; theme its fields in the HubSpot form editor) */
+        .bts-form { max-width:34rem; margin:1.75rem auto 0; text-align:left; }
+        .bts-form iframe { width:100% !important; border:0; }
     </style>
+    <link rel="stylesheet" href="assets/css/fcg-brand-theme.css">
 </head>
 <body class="bg-background text-foreground antialiased bts-shell">
 
@@ -500,7 +505,7 @@
                                     <div class="fcg-products-list">
                                         <a href="atlas.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>AtlasOS</p><span>Mid-office ops, duty of care, and a unified inbox</span></div>
+                                            <div><p>Atlas</p><span>Mid-office ops, duty of care, and a unified inbox</span></div>
                                         </a>
                                     </div>
                                 </div>
@@ -514,7 +519,7 @@
                                         </a>
                                         <a href="flink.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:plain-2-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>F-Link</p><span>Every airline — GDS, NDC, and LCC in one feed</span></div>
+                                            <div><p>F-Link</p><span>GDS, NDC &amp; LCC in one feed</span></div>
                                         </a>
                                     </div>
                                 </div>
@@ -590,7 +595,7 @@
                         <span>Business Travel Show</span>
                     </div>
 
-                    <h1>The largest non-OTA TMC supply chain <em>in China.</em></h1>
+                    <h1>The largest direct-contracted TMC supply chain <em>in China.</em></h1>
                     <p class="bts-hero-copy">FCG connects European TMCs and DMCs to the Chinese hotels GDS can't reach — local chains, independent properties, and compliant RMB settlement. Meet the network behind it at BTS London.</p>
 
                     <div class="bts-actions">
@@ -601,7 +606,7 @@
                     <div class="bts-strip" role="list">
                         <span class="bts-strip-item" role="listitem"><iconify-icon icon="solar:bed-linear" width="14" height="14"></iconify-icon><strong>1.35M+</strong>China hotels</span>
                         <span class="bts-strip-sep"></span>
-                        <span class="bts-strip-item" role="listitem"><iconify-icon icon="solar:buildings-3-linear" width="14" height="14"></iconify-icon><strong>100+</strong>local chains</span>
+                        <span class="bts-strip-item" role="listitem"><iconify-icon icon="solar:buildings-3-linear" width="14" height="14"></iconify-icon><strong>35K+</strong>direct independents</span>
                         <span class="bts-strip-sep"></span>
                         <span class="bts-strip-item" role="listitem"><iconify-icon icon="solar:card-linear" width="14" height="14"></iconify-icon><strong>RMB</strong>settlement</span>
                     </div>
@@ -619,12 +624,12 @@
                             <div class="bts-preview-rows">
                                 <div class="bts-prow">
                                     <span class="ic"><iconify-icon icon="solar:buildings-2-linear" width="15" height="15"></iconify-icon></span>
-                                    <span class="meta"><span class="chan">Local chain</span><strong>Atour · 亚朵 · Shanghai</strong><span class="sub">Negotiated rate · not on GDS</span></span>
+                                    <span class="meta"><span class="chan">Local chain</span><strong>Atour · Shanghai</strong><span class="sub">Negotiated rate · not on GDS</span></span>
                                     <span class="state gds">No GDS</span>
                                 </div>
                                 <div class="bts-prow">
                                     <span class="ic"><iconify-icon icon="solar:buildings-2-linear" width="15" height="15"></iconify-icon></span>
-                                    <span class="meta"><span class="chan">Local chain</span><strong>Huazhu · 全季 · Beijing</strong><span class="sub">Direct-contracted · live inventory</span></span>
+                                    <span class="meta"><span class="chan">Local chain</span><strong>Huazhu · Beijing</strong><span class="sub">Direct-contracted · live inventory</span></span>
                                     <span class="state live">Direct</span>
                                 </div>
                                 <div class="bts-prow">
@@ -646,18 +651,18 @@
         <div class="bts-trust-label fade-up">Trusted by the largest Chinese corporates and central SOEs</div>
         <div class="bts-marquee-mask">
             <div class="bts-marquee-track">
-                <span class="bts-logo">Alibaba</span>
-                <span class="bts-logo">ByteDance</span>
                 <span class="bts-logo">State Grid</span>
                 <span class="bts-logo">China Mobile</span>
                 <span class="bts-logo">Ping An</span>
-                <span class="bts-logo">Wins TMC</span>
-                <span class="bts-logo">Alibaba</span>
-                <span class="bts-logo">ByteDance</span>
                 <span class="bts-logo">State Grid</span>
                 <span class="bts-logo">China Mobile</span>
                 <span class="bts-logo">Ping An</span>
-                <span class="bts-logo">Wins TMC</span>
+                <span class="bts-logo">State Grid</span>
+                <span class="bts-logo">China Mobile</span>
+                <span class="bts-logo">Ping An</span>
+                <span class="bts-logo">State Grid</span>
+                <span class="bts-logo">China Mobile</span>
+                <span class="bts-logo">Ping An</span>
             </div>
         </div>
     </section>
@@ -675,13 +680,13 @@
             <div class="bts-cards">
                 <article class="bts-card fade-up">
                     <div class="bts-card-head">
-                        <span class="bts-card-tag">Local chains</span>
+                        <span class="bts-card-tag">Hotel groups</span>
                         <span class="bts-card-num">01 / 03</span>
                     </div>
                     <div class="bts-tile"><iconify-icon icon="solar:buildings-2-linear" width="22" height="22"></iconify-icon></div>
-                    <div class="bts-stat">100<span class="u">+</span></div>
-                    <h3>Chinese local hotel chains</h3>
-                    <p>华住 Huazhu and its sub-brands — 全季, 桔子 — plus 亚朵 Atour and 锦江 Jinjiang. The brands Chinese travellers book first.</p>
+                    <div class="bts-stat">Top 60</div>
+                    <h3>Domestic &amp; global hotel groups</h3>
+                    <p>System-integrated with the top 60 domestic and global hotel groups — Huazhu, Atour, Jinjiang and more — and connected to Ctrip and Meituan. The brands Chinese travellers book first.</p>
                     <div class="bts-card-foot"><span class="bts-flag"><iconify-icon icon="solar:close-circle-linear" width="12" height="12"></iconify-icon>Not available on GDS</span></div>
                 </article>
 
@@ -693,7 +698,7 @@
                     <div class="bts-tile"><iconify-icon icon="solar:home-2-linear" width="22" height="22"></iconify-icon></div>
                     <div class="bts-stat">35K<span class="u">+</span></div>
                     <h3>Direct China independents</h3>
-                    <p>Local independent hotels FCG contracts directly — counted separately from chains, across 1.35M+ China hotel records in total.</p>
+                    <p>Local independent hotels FCG contracts directly — counted separately from the integrated groups, across 1.35M+ China hotel records in total.</p>
                     <div class="bts-card-foot"><span class="bts-flag"><iconify-icon icon="solar:close-circle-linear" width="12" height="12"></iconify-icon>Not available on GDS</span></div>
                 </article>
 
@@ -741,7 +746,7 @@
                     <h3>core</h3>
                     <div class="row">
                         <span class="ic"><iconify-icon icon="solar:buildings-2-linear" width="17" height="17"></iconify-icon></span>
-                        <span><strong>AtlasOS</strong><span>Unified inbox, operations hub, finance, and duty of care.</span></span>
+                        <span><strong>Atlas</strong><span>Unified inbox, operations hub, finance, and duty of care.</span></span>
                     </div>
                     <div class="row">
                         <span class="ic"><iconify-icon icon="solar:chart-2-linear" width="17" height="17"></iconify-icon></span>
@@ -771,13 +776,13 @@
     </section>
     <!-- ===== END PRODUCT STACK ===== -->
 
-    <!-- ===== SERVICES SPLIT — payment / rates / hosting ===== -->
+    <!-- ===== SERVICES SPLIT — payment / rates / two-way supply ===== -->
     <section id="bts-services" class="bts-section">
         <div class="bts-split">
             <div class="copy fade-up">
                 <div class="bts-eyebrow">Services · the China programme</div>
                 <h2>Three problems FCG already <em>solves.</em></h2>
-                <p>Beyond supply, FCG removes the friction that keeps European programmes out of China — payment, rates, and on-the-ground management.</p>
+                <p>Beyond supply, FCG removes the friction that keeps European programmes out of China — payment, negotiated rates, and standardized two-way supply.</p>
                 <div class="bts-feat">
                     <div class="bts-feat-row">
                         <span class="fnum">01</span>
@@ -785,11 +790,11 @@
                     </div>
                     <div class="bts-feat-row">
                         <span class="fnum">02</span>
-                        <div><h3>Negotiated corporate rates</h3><p>Managed 协议价 corporate rates loaded directly into your programme — custody, monitoring, and audit handled by FCG.</p></div>
+                        <div><h3>Negotiated corporate rates</h3><p>Managed negotiated corporate rates loaded directly into your programme — custody, monitoring, and audit handled by FCG.</p></div>
                     </div>
                     <div class="bts-feat-row">
                         <span class="fnum">03</span>
-                        <div><h3>Property hosting · 托管</h3><p>FCG manages your China single-property hotels end-to-end — rates, payment, and operations on one network.</p></div>
+                        <div><h3>Standardized China supply, two ways</h3><p>Open, standardized China hotel supply and compliant payment for overseas TMCs, agencies, and travellers — in China and out. Closes the gap legacy GDS cannot serve.</p></div>
                     </div>
                 </div>
             </div>
@@ -803,13 +808,13 @@
                     </div>
                     <div class="bts-mod-item">
                         <span class="ic"><iconify-icon icon="solar:tag-price-linear" width="18" height="18"></iconify-icon></span>
-                        <span class="tx"><strong>Negotiated rates · 协议价</strong><span>Loaded into Amadeus &amp; Sabre</span></span>
+                        <span class="tx"><strong>Negotiated rates</strong><span>Loaded into Amadeus &amp; Sabre</span></span>
                         <span class="st">Custody</span>
                     </div>
                     <div class="bts-mod-item">
                         <span class="ic"><iconify-icon icon="solar:buildings-3-linear" width="18" height="18"></iconify-icon></span>
-                        <span class="tx"><strong>Property hosting · 托管</strong><span>Managed China properties</span></span>
-                        <span class="st">Managed</span>
+                        <span class="tx"><strong>Standardized supply</strong><span>Top 60 groups · Ctrip &amp; Meituan</span></span>
+                        <span class="st">In China</span>
                     </div>
                     <div class="bts-mod-item">
                         <span class="ic"><iconify-icon icon="solar:shield-check-linear" width="18" height="18"></iconify-icon></span>
@@ -828,8 +833,8 @@
             <div class="eyebrow">Talk to us at BTS London</div>
             <h2>Meet the network <em>at the stand.</em></h2>
             <p>Day 1 for TMCs, Day 2 for corporate travel teams. See China supply, payment, and the full FCG stack live — then book a walkthrough.</p>
-            <div class="bts-cta-actions">
-                <a href="mailto:hello@fusionconnectgroup.com?subject=BTS%20London%20meeting" class="bts-btn bts-btn-primary">Book a meeting<iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon></a>
+            <div id="bts-hubspot-form" class="bts-form"></div>
+            <div class="bts-cta-actions" style="margin-top:1.5rem;">
                 <a href="https://open.fusionconnectgroup.com" class="bts-btn bts-btn-secondary">Explore the network</a>
             </div>
             <div class="bts-cta-meta">
@@ -872,7 +877,7 @@
                 <a href="corporate-booking-tool.html" class="ft-link">Corporate Booking Tool</a>
                 <a href="ai-booking-tool.html" class="ft-link">AI Booking Tool</a>
                 <a href="agreeease.html" class="ft-link">AgreeEase</a>
-                <a href="atlas.html" class="ft-link">AtlasOS</a>
+                <a href="atlas.html" class="ft-link">Atlas</a>
                 <a href="glink.html" class="ft-link">G-Link</a>
                 <a href="flink.html" class="ft-link">F-Link</a>
             </div>
@@ -941,5 +946,26 @@
         })();
     </script>
     <!-- ===== END THEME TOGGLE SCRIPT ===== -->
+
+    <!-- ===== HUBSPOT LEAD-CAPTURE FORM (BTS) ===== -->
+    <script charset="utf-8" type="text/javascript" src="//js-na2.hsforms.net/forms/embed/v2.js"></script>
+    <script>
+      (function () {
+        function createBtsForm() {
+          if (window.hbspt && window.hbspt.forms) {
+            window.hbspt.forms.create({
+              portalId: "46299368",
+              formId: "0371579b-7a6f-4ea3-9fe1-aca89bd26728",
+              region: "na2",
+              target: "#bts-hubspot-form"
+            });
+          } else {
+            setTimeout(createBtsForm, 200);
+          }
+        }
+        createBtsForm();
+      })();
+    </script>
+    <!-- ===== END HUBSPOT FORM ===== -->
 </body>
 </html>

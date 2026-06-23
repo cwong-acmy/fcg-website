@@ -31,7 +31,7 @@ This is the main FCG Website project folder. Use this file to stay oriented befo
 - Project type: **work** — never mix work/personal accounts (see `~/.claude/project-accounts.md`).
 - GitHub: cwong-acmy/fcg-website (account `cwong-acmy`)
 - Git identity: crystal.wong@accomy.com (`git work`)
-- Vercel: `fcg-website-one.vercel.app` (work team `crystalwong-accomycoms-projects`). Production serves the 4-item-nav redo, deployed via **Vercel CLI** from branch `codex/drafts` (`vercel deploy --prod`, token in 1Password `op://Employee/Vercel - cwong`). `.vercelignore` keeps `reference/`, `research/`, `drafts/`, `docs/`, `proposals/`, and CLAUDE.md private. Home (`index.html`) is still the old page, pending rebuild.
+- Vercel: `fcg-website-one.vercel.app` (work team `crystalwong-accomycoms-projects`). Production serves the 4-item-nav redo, deployed via **Vercel CLI** from branch `codex/drafts` (`vercel deploy --prod`, token in 1Password `op://Employee/Vercel - cwong/vercel-cwong Token`). `.vercelignore` keeps `reference/`, `research/`, `drafts/`, `docs/`, `proposals/`, `design/`, `design-archive/`, `archive/`, `outputs/`, `working-versions/`, `.claude/`, CLAUDE.md, and `nav-preview.html` (throwaway) private. As of 2026-06-23 (latest CLI deploy), **all page copy/figures are aligned to the company deck** (source of truth — `reference/FCG_Knowledge_Base.md`); `addn.html` reworked to the decentralized 3-hub model; `bts.html` carries a HubSpot lead-capture form; `developer.html` is canon and `api-access.html` is archived. Home (`index.html`) page **body** is still the old layout, pending rebuild. NOTE: deploys are CLI-from-working-tree — the live site can be **ahead of git** (commit/push separately when asked).
 - Supabase: none
 
 ## Karpathy Coding Guidelines

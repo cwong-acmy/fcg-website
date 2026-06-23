@@ -945,7 +945,7 @@
                     </h1>
 
                     <p class="text-base md:text-lg max-w-[50ch] leading-relaxed font-light mt-2 text-zinc-400">
-                        4.3M+ hotels. 24.9M+ room types. Every major airline. One connection to all of it. G-Link and F-Link give builders, TMCs, and corporate travel teams the live inventory and content layer behind every booking.
+                        4.35M+ hotels. GDS, NDC & LCC flight content. One connection to all of it. G-Link and F-Link give builders, TMCs, and corporate travel teams the live inventory and content layer behind every booking.
                     </p>
 
                     <div class="relative z-30 flex flex-col sm:flex-row items-start sm:items-center gap-6 mt-2">
@@ -967,8 +967,8 @@
                                 <span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
                                 <span class="text-zinc-300">NETWORK ACTIVE</span>
                             </div>
-                            <span>HOTELS: 4.3M+</span>
-                            <span>PARTNERS: 300+</span>
+                            <span>HOTELS: 4.35M+</span>
+                            <span>ENTERPRISE CLIENTS: 50+</span>
                         </div>
                     </div>
                 </div>
@@ -1021,12 +1021,15 @@
                     className: "max-h-10 md:max-h-12"
                 },
                 {
-                    src: "assets/images/logos/alibaba.svg",
-                    alt: "Alibaba Logo"
+                    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Sabre_Corporation_logo.svg",
+                    alt: "Sabre Logo",
+                    className: "max-h-10 md:max-h-12",
+                    invertOnDark: true
                 },
                 {
-                    src: "https://commons.wikimedia.org/wiki/Special:FilePath/ByteDance_logo_English.svg",
-                    alt: "ByteDance Logo",
+                    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Hilton_Worldwide_logo.svg",
+                    alt: "Hilton Logo",
+                    className: "max-h-10 md:max-h-12",
                     invertOnDark: true
                 },
                 {
@@ -1055,8 +1058,11 @@
                 <section className="partner-grid-section relative z-10 pt-10 pb-10 md:pt-12 md:pb-16">
                     <div className="px-6 pb-8 text-center md:px-12 md:pb-10">
                         <h2 className="partner-grid-title text-2xl font-medium tracking-tight md:text-3xl">
-                            300+ travel brands, TMCs, and hotel groups. <strong>Already connected.</strong>
+                            The supply and partner network <strong>behind FCG.</strong>
                         </h2>
+                        <p className="mt-3 text-sm md:text-base" style={{ color: 'var(--color-muted)' }}>
+                            Trusted by 50+ enterprise clients — central SOEs &amp; Fortune Global 500, including State Grid, China Mobile, and Ping An.
+                        </p>
                     </div>
 
                     <div className="partner-logo-band border-y">
@@ -1084,9 +1090,9 @@
 
         const About = () => {
             const stats = [
-                { number: "4.3", suffix: "M+", label: "hotels. 24.9M+ room types" },
-                { number: "$500M", suffix: "+", label: "Volume flowing through connected partners" },
-                { number: "300", suffix: "+", label: "Travel brands and hotel groups connected" },
+                { number: "4.35", suffix: "M+", label: "hotels" },
+                { number: "$3B", suffix: "+", label: "Cumulative platform GMV" },
+                { number: "50", suffix: "+", label: "Enterprise clients" },
                 { number: "4", suffix: "", label: "FCG locations: Hong Kong · Malaysia · Shenzhen · London" }
             ];
             return (
@@ -1150,11 +1156,11 @@
 
         const FeaturedModels = () => {
             const cars = [
-                { name: "G-Link", brand: "Hotel Supply", price: "Connect to every hotel", hp: "4.3M+ Hotels", mileage: "24.9M+ Room Types", location: "Multi-Source", image: '<svg width="340" height="340" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="450" cy="720" r="370"/><circle cx="480" cy="720" r="400"/><circle cx="510" cy="720" r="430"/><circle cx="540" cy="720" r="460"/><circle cx="570" cy="720" r="490"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>' },
-                { name: "F-Link", brand: "Flight Supply", price: "Connect to every airline", hp: "GDS + NDC + LCC", mileage: "Fare Normalization", location: "Ancillary Mgmt", image: '<svg width="340" height="340" viewBox="100 250 1000 900" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="240" y1="790" x2="960" y2="790" stroke-dasharray="1 18" stroke-width="4"/><line x1="600" y1="380" x2="600" y2="970" stroke-dasharray="1 18" stroke-width="4"/><line x1="430" y1="930" x2="600" y2="790" stroke-dasharray="1 18" stroke-width="4"/><ellipse cx="420" cy="730" rx="80" ry="220"/><ellipse cx="815" cy="700" rx="115" ry="360"/><line x1="420" y1="510" x2="600" y2="790"/><line x1="420" y1="950" x2="600" y2="790"/><line x1="600" y1="790" x2="815" y2="340"/><line x1="600" y1="790" x2="815" y2="1060"/></g></svg>' },
+                { name: "G-Link", brand: "Hotel Supply", price: "4.35M+ hotel records", hp: "4.35M+ Hotels", mileage: "1.35M+ China Hotels", location: "Multi-Source", image: '<svg width="340" height="340" viewBox="200 300 800 800" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="330" cy="720" r="250"/><circle cx="360" cy="720" r="280"/><circle cx="390" cy="720" r="310"/><circle cx="420" cy="720" r="340"/><circle cx="450" cy="720" r="370"/><circle cx="480" cy="720" r="400"/><circle cx="510" cy="720" r="430"/><circle cx="540" cy="720" r="460"/><circle cx="570" cy="720" r="490"/><circle cx="600" cy="720" r="390" stroke-dasharray="1 18" stroke-width="4"/></g></svg>' },
+                { name: "F-Link", brand: "Flight Supply", price: "GDS, NDC & LCC", hp: "GDS + NDC + LCC", mileage: "Fare Normalization", location: "Ancillary Mgmt", image: '<svg width="340" height="340" viewBox="100 250 1000 900" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="240" y1="790" x2="960" y2="790" stroke-dasharray="1 18" stroke-width="4"/><line x1="600" y1="380" x2="600" y2="970" stroke-dasharray="1 18" stroke-width="4"/><line x1="430" y1="930" x2="600" y2="790" stroke-dasharray="1 18" stroke-width="4"/><ellipse cx="420" cy="730" rx="80" ry="220"/><ellipse cx="815" cy="700" rx="115" ry="360"/><line x1="420" y1="510" x2="600" y2="790"/><line x1="420" y1="950" x2="600" y2="790"/><line x1="600" y1="790" x2="815" y2="340"/><line x1="600" y1="790" x2="815" y2="1060"/></g></svg>' },
                 { name: "AgreeEase", brand: "Experience", price: "AI hotel sourcing", hp: "RFP Workflows", mileage: "Rate Management", location: "Program Control", image: '<svg width="340" height="340" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)" opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="68" y="82" width="204" height="176" rx="18"/><path d="M104 134h132M104 176h92M104 218h114"/><circle cx="246" cy="218" r="18"/></g></svg>' },
                 { name: "Atlas", brand: "Operate", price: "TMC Operating System", hp: "Connected Ops", mileage: "Duty of Care", location: "Unified Inbox", image: '<svg width="340" height="340" viewBox="200 400 800 750" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="260" y1="1020" x2="960" y2="1020" stroke-dasharray="1 18" stroke-width="4"/><line x1="600" y1="450" x2="600" y2="1050" stroke-dasharray="1 18" stroke-width="4"/><line x1="360" y1="1020" x2="890" y2="500" stroke-dasharray="1 18" stroke-width="4"/><line x1="360" y1="1020" x2="985" y2="800"/><path d="M360 1020 C 430 560, 530 450, 700 470"/><path d="M360 1020 C 455 575, 565 490, 735 540"/><path d="M360 1020 C 480 590, 600 530, 770 610"/><path d="M360 1020 C 505 605, 635 570, 805 680"/><path d="M360 1020 C 530 620, 670 610, 840 750"/><path d="M360 1020 C 555 635, 705 650, 875 820"/><path d="M360 1020 C 580 650, 740 690, 910 890"/><path d="M360 1020 C 605 665, 775 730, 945 960"/><path d="M360 1020 C 630 680, 810 770, 980 1030"/><path d="M360 1020 Q 520 690, 850 980" stroke-dasharray="1 18" stroke-width="4"/><path d="M360 1020 Q 600 670, 885 885" stroke-dasharray="1 18" stroke-width="4"/><path d="M360 1020 Q 680 650, 920 790" stroke-dasharray="1 18" stroke-width="4"/><path d="M360 1020 Q 760 630, 955 695" stroke-dasharray="1 18" stroke-width="4"/><path d="M360 1020 Q 840 610, 990 600" stroke-dasharray="1 18" stroke-width="4"/></g></svg>' },
-                { name: "Agent Booking Tool", brand: "Operate", price: "Search every supplier", hp: "Agent Workspace", mileage: "Multi-Source", location: "One Flow", image: '<svg width="340" height="340" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)" opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="80" y="96" width="180" height="148" rx="18"/><path d="M120 96V76h100v20M110 144h120M110 184h90M110 224h130"/><path d="M95 276h150"/></g></svg>' },
+                { name: "AI Booking Tool", brand: "Operate", price: "Search every supplier", hp: "Agent Workspace", mileage: "Multi-Source", location: "One Flow", image: '<svg width="340" height="340" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)" opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="80" y="96" width="180" height="148" rx="18"/><path d="M120 96V76h100v20M110 144h120M110 184h90M110 224h130"/><path d="M95 276h150"/></g></svg>' },
                 { name: "Corporate Booking Tool", brand: "Experience", price: "Modern travel booking", hp: "Policy Engine", mileage: "Mobile-First", location: "Duty of Care", image: '<svg width="340" height="340" viewBox="100 350 1000 850" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="var(--color-fg)"  opacity="0.18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="250" y1="790" x2="950" y2="790" stroke-dasharray="1 18" stroke-width="4"/><line x1="600" y1="470" x2="600" y2="1110" stroke-dasharray="1 18" stroke-width="4"/><ellipse cx="600" cy="790" rx="300" ry="82" transform="rotate(0 600 790)"/><ellipse cx="600" cy="790" rx="300" ry="82" transform="rotate(55 600 790)"/><ellipse cx="600" cy="790" rx="300" ry="82" transform="rotate(-55 600 790)"/><ellipse cx="600" cy="790" rx="300" ry="82" transform="rotate(90 600 790)"/></g></svg>' }
             ];
             return (
@@ -1171,7 +1177,7 @@
 
         const Benefits = () => {
             const features = [
-                { icon: "solar:cpu-bolt-linear", title: "Deep, not just wide.", desc: "4.3M+ hotels and 24.9M+ room types, resolved at property and room level. Every connection returns bookable inventory, not duplicate listings for the same hotel." },
+                { icon: "solar:cpu-bolt-linear", title: "Deep, not just wide.", desc: "4.35M+ hotels, resolved at property and room level. Every connection returns bookable inventory, not duplicate listings for the same hotel." },
                 { icon: "solar:chart-square-linear", title: "Asia-native. Globally connected.", desc: "Built in the region with the world's fastest-growing business travel market. Real supply depth across APAC, connected to global inventory." },
                 { icon: "solar:code-scan-linear", title: "Open connections, not locked platforms.", desc: "Connect to one product or the full stack. Modular pricing, flexible deployment, and supply infrastructure that stays constant as your business changes." }
             ];
@@ -1252,7 +1258,7 @@
                                     <div class="fcg-products-list">
                                         <a href="atlas.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:buildings-2-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>AtlasOS</p><span>Mid-office ops, duty of care, and a unified inbox</span></div>
+                                            <div><p>Atlas</p><span>Mid-office ops, duty of care, and a unified inbox</span></div>
                                         </a>
                                     </div>
                                 </div>
@@ -1266,7 +1272,7 @@
                                         </a>
                                         <a href="flink.html" class="fcg-products-link">
                                             <div class="fcg-menu-icon w-9 h-9 rounded-md border flex items-center justify-center shrink-0"><iconify-icon icon="solar:plain-2-linear" width="19" height="19"></iconify-icon></div>
-                                            <div><p>F-Link</p><span>Every airline — GDS, NDC, and LCC in one feed</span></div>
+                                            <div><p>F-Link</p><span>GDS, NDC &amp; LCC in one feed</span></div>
                                         </a>
                                     </div>
                                 </div>
@@ -1390,7 +1396,7 @@
               <div class="absolute inset-0 rounded-3xl bg-[#0a0a0a] border border-white/[0.08] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:[transform:translate3d(12px,-12px,-30px)] opacity-0 group-hover:opacity-100 flex flex-col justify-start p-6 overflow-hidden shadow-xl">
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.05),transparent_50%)]"></div>
                 <div class="font-mono text-[9px] text-neutral-400 uppercase">Properties</div>
-                <div class="font-mono text-[10px] text-white mt-1">4.3M+ HOTELS</div>
+                <div class="font-mono text-[10px] text-white mt-1">4.35M+ HOTELS</div>
               </div>
 
               <!-- Main Card (Front) -->
@@ -1556,7 +1562,7 @@
             The Connection at a Glance
           </h2>
           <p class="text-base text-neutral-400 max-w-xl font-light leading-relaxed">
-            <span class="text-orange-500">300+ travel brands</span>, TMCs, and hotel groups already connected. Real-time inventory, commercial-ready supply, and infrastructure that scales.
+            <span class="text-orange-500">50+ enterprise clients</span> already connected — central SOEs and Fortune Global 500. Real-time inventory, commercial-ready supply, and infrastructure that scales.
           </p>
         </div>
 
@@ -1606,12 +1612,12 @@
                 </h3>
                 <div class="flex gap-8 pt-4 border-t border-white/10">
                   <div>
-                    <div class="text-[10px] text-neutral-500 font-mono mb-1">FLOWING THROUGH</div>
-                    <div class="text-sm font-mono text-white">$500M+</div>
+                    <div class="text-[10px] text-neutral-500 font-mono mb-1">CUMULATIVE GMV</div>
+                    <div class="text-sm font-mono text-white">$3B+</div>
                   </div>
                   <div>
-                    <div class="text-[10px] text-neutral-500 font-mono mb-1">PARTNERS</div>
-                    <div class="text-sm font-mono text-white">300+</div>
+                    <div class="text-[10px] text-neutral-500 font-mono mb-1">CLIENTS</div>
+                    <div class="text-sm font-mono text-white">50+</div>
                   </div>
                 </div>
               </div>
@@ -1698,9 +1704,9 @@
               </div>
               <div>
                 <div class="text-3xl font-semibold text-white tracking-tighter font-mono">
-                  300<span class="text-lg text-neutral-500">+</span>
+                  50<span class="text-lg text-neutral-500">+</span>
                 </div>
-                <div class="text-[10px] text-neutral-500 font-mono uppercase mt-1">Partners Connected</div>
+                <div class="text-[10px] text-neutral-500 font-mono uppercase mt-1">Enterprise Clients</div>
               </div>
             </div>
           </div>
@@ -2057,7 +2063,7 @@
       <!-- Badge with animation -->
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900/30 text-xs font-normal text-neutral-400 mb-8 opacity-0 backdrop-blur-md" id="hero-badge">
         <span class="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)] animate-pulse"></span>
-        300+ Partners Connected
+        50+ Enterprise Clients
       </div>
 
       <!-- Masked H1 Text Reveal -->
@@ -2107,7 +2113,7 @@
                 G-Link & F-Link
               </h3>
               <p class="mt-2 text-sm text-neutral-500 font-normal">
-                One connection to <span class="text-orange-500">4.3M+ hotels</span>, <span class="text-orange-500">24.9M+ room types</span>, and <span class="text-orange-500">every major airline</span>. The supply layer everything connects to.
+                One connection to <span class="text-orange-500">4.35M+ hotels</span> and <span class="text-orange-500">GDS, NDC & LCC</span> flight content. The supply layer everything connects to.
               </p>
             </div>
           </div>
@@ -2414,7 +2420,7 @@
                 <a href="corporate-booking-tool.html" class="ft-link">Corporate Booking Tool</a>
                 <a href="ai-booking-tool.html" class="ft-link">AI Booking Tool</a>
                 <a href="agreeease.html" class="ft-link">AgreeEase</a>
-                <a href="atlas.html" class="ft-link">AtlasOS</a>
+                <a href="atlas.html" class="ft-link">Atlas</a>
                 <a href="glink.html" class="ft-link">G-Link</a>
                 <a href="flink.html" class="ft-link">F-Link</a>
             </div>

@@ -86,7 +86,7 @@ Removed from nav entirely: Solutions group, Whitelabel, Advisory & Implementatio
 
 - [ ] **Step 2:** Delete the Solutions dropdown and every Whitelabel/Advisory/AI-Mapping/Agent-Booking link/entry.
 
-- [ ] **Step 3:** Restructure the Products dropdown into the three groups above (Front / Mid / Back), with the six links. Keep the existing dropdown markup/classes; only the group labels and `<a href>` items change.
+- [ ] **Step 3:** Restructure the Products dropdown into the three groups above (Book / Core / Engine), with the six links. Keep the existing dropdown markup/classes; only the group labels and `<a href>` items change.
 
 - [ ] **Step 4:** Add the **Network** dropdown (ADDN, Payment) and the **Developer** + **About** direct links, reusing the same pill/link classes as existing top-level items.
 
@@ -138,7 +138,7 @@ Once Phase 0 is committed, build all 12 pages in parallel — one subagent per p
 
 **THEME RULE (overrides the design doc's "dark-first"):** LIGHT mode is primary. Every page must render **cohesively light on load** — header, hero, and all section blocks light (white/`var(--color-bg)` backgrounds, dark text, orange accents). NEVER hardcode dark backgrounds (`bg-[#000]`, `bg-black`, dark gradients) on sections; use the theme system (`var(--color-*)`, `bg-background`, `text-foreground`) so light is default. Provide dark variants via `html[data-theme="dark"] …` so the toggle still works. Match how `drafts/index-v4.html` renders in light mode. The shell `<html>` stays `data-theme="light"`.
 
-**Content source of truth (overrides everything):** `reference/FCG_Company_Deckpptx.pptx`. Extract the deck first (pptx skill) and treat it as authoritative over the knowledge-base MD, the gap analysis, and existing page copy where they conflict. Group names in nav/footer are locked: **book** (For travel programs & TMCs), **core** (For travel operators), **engine** (For builders & platforms). ADDN uses its official name: "AI-Powered Decentralized Distribution Network".
+**Content source of truth (overrides everything):** `reference/FCG_Company_Deckpptx.pptx`. Extract the deck first (pptx skill) and treat it as authoritative over the knowledge-base MD, the gap analysis, and existing page copy where they conflict. Group names in nav are locked, capitalised: **Book** (For travel programmes & TMCs), **Core** (For travel operators), **Engine** (For builders & platforms). ADDN uses its official name: "AI-Powered Decentralized Distribution Network".
 
 ### Per-page recipe (apply to each of the 12)
 
@@ -194,7 +194,7 @@ git commit -m "Rebuild X on new nav + golden design + rewritten copy"
 
 ## Open items to settle during execution (non-blocking)
 
-1. **Front / Mid / Back group label** — placeholder; pick a nicer name when authoring `_shell/nav.html` (Task 2). Default to keeping Front/Mid/Back if undecided.
+1. ~~**Front / Mid / Back group label** — placeholder; pick a nicer name.~~ **RESOLVED:** Book / Core / Engine (capitalised), live in `_shell/nav.html` and all pages.
 2. **`O-T` / `O-G` / `O-F` "open platform … API" tags** — surface on `developer.html` and the relevant product pages; decide presentation during those page builds.
 3. **About second nav-item label** ("FCG …") — confirm when building About.
 
