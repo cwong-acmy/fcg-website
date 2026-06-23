@@ -335,12 +335,10 @@ body main > section:not(.fcg-hero2):not(.fcg-default-hero):not(.fcg-tailark-hero
     padding-right: clamp(1rem, 4vw, 3.5rem) !important;
 }
 
-body main > section:first-of-type h1,
 body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
     max-width: min(100%, 64rem) !important;
 }
 
-body main > section:first-of-type h1,
 body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target, .fcg-feature108-title, .fcg-showcase-copy h2, .fcg-mobile-feature h2, .fcg-marketing-title, #decision-paths h2, #product-map h2, main section h2) {
     letter-spacing: 0 !important;
     line-height: 1.08 !important;
@@ -426,7 +424,6 @@ body :is(.fcg-feature108-trigger, .fcg-showcase-tab, .fcg-showcase-step-trigger)
         padding-bottom: 4.5rem !important;
     }
 
-    body main > section:first-of-type h1,
     body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
         font-size: 2.55rem !important;
         line-height: 1.06 !important;
@@ -505,7 +502,6 @@ body :is(.fcg-feature108-trigger, .fcg-showcase-tab, .fcg-showcase-step-trigger)
 }
 
 @media (max-width: 380px) {
-    body main > section:first-of-type h1,
     body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
         font-size: 2.25rem !important;
     }
@@ -521,7 +517,6 @@ body :is(.fcg-feature108-trigger, .fcg-showcase-tab, .fcg-showcase-step-trigger)
         padding-bottom: 5.5rem !important;
     }
 
-    body main > section:first-of-type h1,
     body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
         font-size: 3.75rem !important;
         line-height: 1.05 !important;
@@ -543,7 +538,6 @@ body :is(.fcg-feature108-trigger, .fcg-showcase-tab, .fcg-showcase-step-trigger)
 }
 
 @media (min-width: 1024px) {
-    body main > section:first-of-type h1,
     body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
         font-size: 5rem !important;
     }
@@ -555,7 +549,6 @@ body :is(.fcg-feature108-trigger, .fcg-showcase-tab, .fcg-showcase-step-trigger)
 }
 
 @media (min-width: 1280px) {
-    body main > section:first-of-type h1,
     body :is(.fcg-hero2 h1, .fcg-default-hero h1, .fcg-tailark-hero h1, .about3-title, .masked-reveal-target) {
         font-size: 5.75rem !important;
     }

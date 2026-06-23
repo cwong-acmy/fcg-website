@@ -4,8 +4,8 @@
     {
       "name": "fcg-static",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-c", "import functools,http.server,socketserver; D='/Users/crystalwong/Desktop/Claude/03.Code Projects/FCG Website'; H=functools.partial(http.server.SimpleHTTPRequestHandler,directory=D); socketserver.TCPServer(('',8766),H).serve_forever()"],
-      "port": 8766
+      "runtimeArgs": ["-m", "http.server", "8767"],
+      "port": 8767
     }
   ]
 }
