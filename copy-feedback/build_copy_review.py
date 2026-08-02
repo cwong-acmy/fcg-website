@@ -16,8 +16,8 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 from openpyxl.utils import get_column_letter
 
 
-ROOT = Path(__file__).resolve().parents[2]
-OUT_DIR = ROOT / "outputs" / "copy-feedback"
+ROOT = Path(__file__).resolve().parents[1]
+OUT_DIR = ROOT / "copy-feedback"
 XLSX_PATH = OUT_DIR / "FCG Website Copy Review.xlsx"
 CSV_PATH = OUT_DIR / "FCG Website Copy Review.csv"
 
