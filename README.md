@@ -22,10 +22,9 @@ The 4-item nav (Products · Network · Developer · About) links these root page
 - Products: `corporate-booking-tool.html`, `ai-booking-tool.html`, `agreeease.html`, `atlas.html`, `glink.html`, `flink.html`
 - Network: `addn.html`, `payment.html`
 - `developer.html` — Developer Platform (canon; the old `api-access.html` is archived)
-- `bts.html` — Business Travel Show London landing page (HubSpot lead-capture form)
 - `components.html` — shared component reference
 
-Archived (in `archive/`, not deployed): `api-access.html`, `whitelabel.html`, `agent-booking-tool.html`, `advisory-implementation.html`, `ai-mapping.html`.
+Archived (in `archive/`, not deployed): `api-access.html`, `whitelabel.html`, `agent-booking-tool.html`, `advisory-implementation.html`, `ai-mapping.html`, `bts.html` (Business Travel Show London event page, June 2026; HubSpot embed removed with the HubSpot exit).
 
 ## Draft Workflow
 
