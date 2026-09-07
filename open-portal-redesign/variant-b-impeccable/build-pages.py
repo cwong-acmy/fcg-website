@@ -396,7 +396,11 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 
 /* ---------- auth ---------- */
 .auth{min-height:calc(100vh - 76px);display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr)}
-.auth-aside{position:relative;padding:84px 0 72px;border-right:1px solid var(--hair);overflow:hidden;display:flex;align-items:center}
+/* top-aligned, not centred: the register form is far taller than this
+   column, and centring pushed the aside's list below the fold. Sticky so
+   it stays in view while the form scrolls. */
+.auth-aside{position:relative;padding:64px 0 72px;border-right:1px solid var(--hair);overflow:hidden;display:flex;align-items:flex-start}
+.auth-aside .wrap{position:sticky;top:0}
 .auth-aside .wrap{max-width:none;padding:0 64px 0 max(32px,calc((100vw - var(--wrap)) / 2 + 32px));width:100%}
 .auth-aside .ahead{font-size:clamp(30px,3.6vw,50px);line-height:1.04;letter-spacing:-.03em;max-width:18ch;margin-top:22px;color:var(--ink);font-weight:500}
 .auth-aside .ahead em{display:block;font-style:normal;color:var(--accent)}
@@ -498,7 +502,8 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
   .docs-side-in{position:static;flex-direction:row;flex-wrap:wrap;gap:26px 44px}
   .docs-main{padding:38px 0 72px}
   .auth{grid-template-columns:minmax(0,1fr);min-height:0}
-  .auth-aside{border-right:0;border-bottom:1px solid var(--hair);padding:60px 0 56px}
+  .auth-aside{border-right:0;border-bottom:1px solid var(--hair);padding:56px 0 52px}
+  .auth-aside .wrap{position:static}
   .auth-aside .wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
   .auth-main{padding:56px 32px 72px}
   .chat{grid-template-columns:minmax(0,1fr)}
