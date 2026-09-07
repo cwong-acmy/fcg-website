@@ -12,18 +12,26 @@ ARROW = '<iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></icon
 DL = '<iconify-icon icon="solar:download-minimalistic-linear" aria-hidden="true"></iconify-icon>'
 
 
-def band(eyebrow, h1, lede, crumb=None, foot=None):
+def band(eyebrow, h1, lede, crumb=None, foot=None, chip=None):
+    """Page band. `chip` sits on the eyebrow line — the CTA row holds only CTAs."""
     c = ""
     if crumb:
         parts = []
         for label, href in crumb:
             parts.append(f'<a href="{href}">{label}</a>' if href else f"<span>{label}</span>")
         c = f'      <p class="crumb">{" <i>/</i> ".join(parts)}</p>\n'
+    ch = (
+        f'<span class="chip chip--live"><span class="dot" aria-hidden="true"></span>{chip}</span>'
+        if chip else ""
+    )
     f = f'      <div class="band-foot">{foot}</div>\n' if foot else ""
     return f"""<section class="band">
   <div class="band-grid" aria-hidden="true"></div>
   <div class="wrap band-in">
-{c}      <p class="eyebrow micro">{eyebrow}</p>
+{c}      <div class="band-top">
+        <p class="eyebrow micro">{eyebrow}</p>
+        {ch}
+      </div>
       <h1>{h1}</h1>
       <p class="lede">{lede}</p>
 {f}  </div>
@@ -141,8 +149,8 @@ def app_cards():
 APP_MANAGEMENT = f"""
 {band(
     "Independent credentials per product",
-    "App Management.",
-    "Manage the applications behind an API integration. Each product carries its own credential set, "
+    "App Management",
+    "<b>Manage the applications behind an API integration.</b> Each product carries its own credential set, "
     "so a hotel key never unlocks a flight endpoint and a sandbox key never reaches production.",
     foot=f'<a class="btn" href="register.html">Create an application {ARROW}</a>'
          f'<a class="btn btn--ghost" href="login.html">Sign in to the console {ARROW}</a>',
@@ -152,7 +160,7 @@ APP_MANAGEMENT = f"""
   <div class="wrap">
     <div class="blk-head">
       <p class="eyebrow micro">Applications</p>
-      <h2 class="h3">Three applications, three credential sets.</h2>
+      <h2 class="h3">Three applications, <em>three credential sets.</em></h2>
       <p class="lede">Credentials are shown in the console once signed in. Nothing on this page reveals a live key.</p>
     </div>
     <div class="cards">
@@ -221,10 +229,10 @@ HOTEL_MANDATORY = [
 def mandatory_rows():
     return [
         (
-            f'<td class="num">{n}</td>',
+            f'<td class="t-num">{n}</td>',
             f"<td>{name}</td>",
-            f'<td class="mid"><span class="method">{m}</span></td>',
-            f'<td class="path">{p}</td>',
+            f'<td class="t-mid"><span class="method">{m}</span></td>',
+            f'<td class="t-path">{p}</td>',
         )
         for n, name, m, p in HOTEL_MANDATORY
     ]
@@ -233,8 +241,8 @@ def mandatory_rows():
 API_DOCS_HOTEL = f"""
 {band(
     "Supports both SDK and API integration",
-    "G-Link Hotel API.",
-    "Major global hotel inventory over one standardised interface. The full workflow runs from "
+    "G-Link Hotel API",
+    "<b>Major global hotel inventory</b> over one standardised interface. The full workflow runs from "
     "real-time search and trial booking through to reservation, payment and cancellation.",
     crumb=[("Docs centre", "api-docs-hotel.html"), ("G-Link Hotel API", None)],
     foot=rail(DOCS_RAIL, "G-Link Hotel")
@@ -294,9 +302,9 @@ API_DOCS_HOTEL = f"""
       Cache static data locally and reserve live calls for search, trial booking and order operations.</span>
     </div>
 
-    <div class="band-foot" style="margin-top:8px">
+    <div class="band-foot">
       <a class="btn" href="api-docs-hotel-process.html">Read the integration flow {ARROW}</a>
-      <a class="tlink" href="api-docs-hotel-apis.html">Full API reference {ARROW}</a>
+      <a class="tlink tlink--o" href="api-docs-hotel-apis.html">Full API reference {ARROW}</a>
     </div>
   </div>
 </div>
@@ -333,8 +341,8 @@ def steps():
 API_DOCS_HOTEL_PROCESS = f"""
 {band(
     "Recommended integration flow",
-    "G-Link Integration Flow.",
-    "The order in which an Open Platform partner should wire the G-Link hotel API. Eight steps, "
+    "G-Link Integration Flow",
+    "<b>The order in which to wire the G-Link hotel API.</b> Eight steps, "
     "search through to cancellation, each one a single endpoint.",
     crumb=[("Docs centre", "api-docs-hotel.html"), ("G-Link Hotel API", "api-docs-hotel.html"), ("Integration flow", None)],
     foot=rail(DOCS_RAIL, "Integration flow"),
@@ -344,7 +352,7 @@ API_DOCS_HOTEL_PROCESS = f"""
 <div class="docs">
 {docs_side("Integration flow")}
   <div class="docs-main">
-    <h2>Standard API integration, in order.</h2>
+    <h2>Standard API integration, <em>in order.</em></h2>
     <p>Follow the sequence. Steps one and two build local reference data and run on a schedule;
        steps three onwards are live and run per booking.</p>
 
@@ -372,9 +380,9 @@ API_DOCS_HOTEL_PROCESS = f"""
       customer's decision and the order call.</span>
     </div>
 
-    <div class="band-foot" style="margin-top:8px">
+    <div class="band-foot">
       <a class="btn" href="api-docs-hotel-apis.html">Open the API reference {ARROW}</a>
-      <a class="tlink" href="skills.html">Install the G-Link Skills package {ARROW}</a>
+      <a class="tlink tlink--o" href="skills.html">Install the G-Link Skills package {ARROW}</a>
     </div>
   </div>
 </div>
@@ -452,8 +460,8 @@ def ref_rows():
             mark = ' style="background:rgba(15,17,20,.02)"' if cur else ""
             rows.append((
                 f"<td{mark}>{name}</td>",
-                f'<td class="mid"{mark}><span class="method">{m}</span></td>',
-                f'<td class="path"{mark}>{path}</td>',
+                f'<td class="t-mid"{mark}><span class="method">{m}</span></td>',
+                f'<td class="t-path"{mark}>{path}</td>',
             ))
     return rows
 
@@ -461,8 +469,8 @@ def ref_rows():
 API_DOCS_HOTEL_APIS = f"""
 {band(
     "Sandbox and production",
-    "G-Link API Reference.",
-    "Every G-Link endpoint, grouped by what it does. One endpoint is expanded in full below as the "
+    "G-Link API Reference",
+    "<b>Every G-Link endpoint, grouped by what it does.</b> One is expanded in full below as the "
     "worked example; the request and response shape is consistent across the set.",
     crumb=[("Docs centre", "api-docs-hotel.html"), ("G-Link Hotel API", "api-docs-hotel.html"), ("API reference", None)],
     foot=rail(DOCS_RAIL, "API reference"),
@@ -472,7 +480,7 @@ API_DOCS_HOTEL_APIS = f"""
 <div class="docs">
 {docs_side("API reference")}
   <div class="docs-main">
-    <h2>Twenty endpoints, five groups.</h2>
+    <h2>Twenty endpoints, <em>five groups.</em></h2>
     <p>Static data first, then live booking, then orders and callbacks. Paths are shown against the
        production host; the sandbox host is issued with sandbox credentials.</p>
 
@@ -537,9 +545,9 @@ API_DOCS_HOTEL_APIS = f"""
       returns HTTP 200 with <code class="inl">code=SUPPLIER_BIZ_ERROR</code>. Branch on the body.</span>
     </div>
 
-    <div class="band-foot" style="margin-top:8px">
+    <div class="band-foot">
       <a class="btn" href="api-docs-errors.html">Error code reference {ARROW}</a>
-      <a class="tlink" href="sdk.html">Use an SDK instead {ARROW}</a>
+      <a class="tlink tlink--o" href="sdk.html">Use an SDK instead {ARROW}</a>
     </div>
   </div>
 </div>
@@ -576,10 +584,10 @@ def flink_rows():
     for n, name, m, p in FLINK:
         cls = "method method--get" if m == "GET" else "method"
         out.append((
-            f'<td class="num">{n}</td>',
+            f'<td class="t-num">{n}</td>',
             f"<td>{name}</td>",
-            f'<td class="mid"><span class="{cls}">{m}</span></td>',
-            f'<td class="path">{p.replace("{lang}", "&#123;lang&#125;")}</td>',
+            f'<td class="t-mid"><span class="{cls}">{m}</span></td>',
+            f'<td class="t-path">{p.replace("{lang}", "&#123;lang&#125;")}</td>',
         ))
     return out
 
@@ -587,9 +595,9 @@ def flink_rows():
 API_DOCS_FLINK = f"""
 {band(
     "Direct airline seat inventory",
-    "F-Link Flight API.",
-    "Domestic and international carriers with BSP support, covering search, pricing, ticketing, "
-    "refunds and changes. Nineteen endpoints, one language-scoped path pattern.",
+    "F-Link Flight API",
+    "<b>Direct airline seat inventory.</b> Domestic and international carriers with BSP support, "
+    "covering search, pricing, ticketing, refunds and changes. Nineteen endpoints, one path pattern.",
     crumb=[("Docs centre", "api-docs-hotel.html"), ("F-Link Flight API", None)],
     foot=rail(DOCS_RAIL, "F-Link Flight")
          + f'<a class="btn btn--sm" href="sdk.html">Download SDK {DL}</a>',
@@ -630,9 +638,9 @@ API_DOCS_FLINK = f"""
       of a failed <code class="inl">order/create</code>.</span>
     </div>
 
-    <div class="band-foot" style="margin-top:8px">
+    <div class="band-foot">
       <a class="btn" href="api-docs-errors.html">Error code reference {ARROW}</a>
-      <a class="tlink" href="skills.html">Install the F-Link Skills package {ARROW}</a>
+      <a class="tlink tlink--o" href="skills.html">Install the F-Link Skills package {ARROW}</a>
     </div>
   </div>
 </div>
@@ -660,11 +668,11 @@ ERRORS = [
 def error_rows():
     return [
         (
-            f'<td class="code">{c}</td>',
+            f'<td class="t-code">{c}</td>',
             f"<td>{msg}</td>",
-            f'<td class="mid dim">{prod}</td>',
-            f'<td class="mid dim">{integ}</td>',
-            f'<td class="dim">{reason}</td>',
+            f'<td class="t-mid t-dim">{prod}</td>',
+            f'<td class="t-mid t-dim">{integ}</td>',
+            f'<td class="t-dim">{reason}</td>',
             f"<td>{fix}</td>",
         )
         for c, msg, prod, integ, reason, fix in ERRORS
@@ -674,8 +682,8 @@ def error_rows():
 API_DOCS_ERRORS = f"""
 {band(
     "All products, all integration methods",
-    "Error Code Reference.",
-    "Every error code the platform returns, what causes it and what to do about it. Codes are stable "
+    "Error Code Reference",
+    "<b>Every error code the platform returns</b>, what causes it and what to do about it. Codes are stable "
     "across products; the product and integration columns say where each one can appear.",
     crumb=[("Docs centre", "api-docs-hotel.html"), ("Error code reference", None)],
     foot=rail(DOCS_RAIL, "Error codes"),
@@ -685,7 +693,7 @@ API_DOCS_ERRORS = f"""
 <div class="docs">
 {docs_side("Error code reference")}
   <div class="docs-main">
-    <h2>Twelve codes, four families.</h2>
+    <h2>Twelve codes, <em>four families.</em></h2>
     <p>Platform errors in the <code class="inl">1xxxx</code> range apply everywhere. Product errors are
        scoped to G-Link or F-Link. <code class="inl">MCP</code> and <code class="inl">SDK</code> prefixes
        are integration-layer failures and never reach the travel supplier.</p>
@@ -710,9 +718,9 @@ API_DOCS_ERRORS = f"""
         Rate-limit disputes are settled on the platform's clock.</span></li>
     </ul>
 
-    <div class="band-foot" style="margin-top:8px">
+    <div class="band-foot">
       <a class="btn" href="ai-assistant.html">Ask the AI Assistant {ARROW}</a>
-      <a class="tlink" href="index.html#start-integration">Submit a ticket {ARROW}</a>
+      <a class="tlink tlink--o" href="index.html#start-integration">Submit a ticket {ARROW}</a>
     </div>
   </div>
 </div>
@@ -767,8 +775,8 @@ def sdk_cards():
 SDK = f"""
 {band(
     "Auth, retry and serialisation built in",
-    "SDK Integration Centre.",
-    "Multilingual SDKs with install commands, example code, changelogs and security verification. "
+    "SDK Integration Centre",
+    "<b>Multilingual SDKs</b> with install commands, example code, changelogs and security verification. "
     "Go, Java and Python are published today; Node.js is in progress.",
     foot=f'<a class="btn" href="register.html">Get sandbox credentials {ARROW}</a>'
          f'<a class="btn btn--ghost" href="skills.html">Skills packages {ARROW}</a>',
@@ -788,7 +796,7 @@ SDK = f"""
   <div class="wrap">
     <div class="blk-head">
       <p class="eyebrow micro">Available now</p>
-      <h2 class="h3">Install, configure the key pair, call the API.</h2>
+      <h2 class="h3">Install, configure the key pair, <em>call the API.</em></h2>
       <p class="lede">Every SDK ships with the same three things: a quick start, a changelog and a signature
          verification helper. Download the package, install it, then configure AppKey and AppSecret on your server —
          never in a client.</p>
@@ -820,7 +828,7 @@ SDK = f"""
         <h3>MCP smart integration</h3>
         <span class="k">Model Context Protocol</span>
         <p>Lets an AI model call travel capabilities directly. Built for LLM applications and assistants.</p>
-        <div class="icard-foot"><a class="tlink" href="skills.html">Skills packages {ARROW}</a></div>
+        <div class="icard-foot"><a class="tlink tlink--o" href="skills.html">Skills packages {ARROW}</a></div>
       </article>
       <article class="icard rv">
         <div class="icard-ic"><iconify-icon icon="solar:code-square-linear"></iconify-icon></div>
@@ -837,7 +845,7 @@ SDK = f"""
         <h3>REST API</h3>
         <span class="k">Any language</span>
         <p>Standard APIs callable from any language or framework. No SDK required.</p>
-        <div class="icard-foot"><a class="tlink" href="api-docs-hotel-apis.html">API reference {ARROW}</a></div>
+        <div class="icard-foot"><a class="tlink tlink--o" href="api-docs-hotel-apis.html">API reference {ARROW}</a></div>
       </article>
     </div>
   </div>
@@ -867,7 +875,11 @@ TOOLS = ["Codex", "Cursor", "Claude Code", "Kiro", "Gemini CLI"]
 def skill_cards():
     out = []
     for code, name, ver, date, what, cmd in SKILL_PKGS:
-        chips = "".join(f'<span class="chip chip--plain">{t}</span>' for t in TOOLS)
+        chips = (
+            '<span class="chip chip--live"><span class="dot" aria-hidden="true"></span>Sandbox ready</span>'
+            '<span class="chip chip--live"><span class="dot" aria-hidden="true"></span>Production ready</span>'
+            + "".join(f'<span class="chip chip--plain">{t}</span>' for t in TOOLS)
+        )
         out.append(
             f"""  <article class="card rv">
     <div class="card-h">
@@ -879,7 +891,6 @@ def skill_cards():
     <div class="card-meta">
       <div><span class="k">Version</span><span class="v">{ver}</span></div>
       <div><span class="k">Updated</span><span class="v">{date}</span></div>
-      <div><span class="k">Environments</span><span class="v">Sandbox &amp; production</span></div>
     </div>
     <div class="ep-b" style="border-top:1px solid var(--hair);padding:20px 24px">
       <h4>Remote install</h4>
@@ -900,13 +911,13 @@ def skill_cards():
 SKILLS = f"""
 {band(
     "One official package per API",
-    "Skills Installation Centre.",
-    "Integration skill packages for AI coding assistants. Import one into Claude, Codex, Cursor, Kiro or "
+    "Skills Installation Centre",
+    "<b>Integration skill packages for AI coding assistants.</b> Import one into Claude, Codex, Cursor, Kiro or "
     "Gemini CLI and the assistant writes more accurate authentication code, debugs API calls and diagnoses "
     "failures against the real interface.",
-    foot=f'<span class="badge">New</span>'
-         f'<a class="btn" href="#packages">Browse packages {ARROW}</a>'
-         f'<a class="tlink" href="sdk.html">SDK downloads {ARROW}</a>',
+    chip="New",
+    foot=f'<a class="btn" href="#packages">Browse packages {ARROW}</a>'
+         f'<a class="tlink tlink--o" href="sdk.html">SDK downloads {ARROW}</a>',
 )}
 
 <section class="blk blk--top">
@@ -923,7 +934,7 @@ SKILLS = f"""
   <div class="wrap">
     <div class="blk-head">
       <p class="eyebrow micro">Packages</p>
-      <h2 class="h3">Install by command, or download the file.</h2>
+      <h2 class="h3">Install by command, <em>or download the file.</em></h2>
       <p class="lede">Each package installs remotely with one command, or downloads as a single
          <code class="inl">SKILL.md</code> you drop into the assistant yourself. Both routes carry the same content.</p>
     </div>
@@ -940,7 +951,7 @@ SKILLS = f"""
     <div class="skills">
       <div>
         <p class="eyebrow micro">How to install</p>
-        <h2 class="h3" style="margin-top:22px">Two routes, one outcome.</h2>
+        <h2 class="h3" style="margin-top:22px">Two routes, <em>one outcome.</em></h2>
         <p class="lede" style="margin-top:22px">Remote install is the shorter path and stays current.
            The downloadable file suits an assistant with no network access, or a repository that should
            carry its own copy.</p>
@@ -994,11 +1005,12 @@ ASKS = [
 AI_ASSISTANT = f"""
 {band(
     "Technical support · Integration consulting",
-    "AI Assistant.",
-    "Running into an integration issue? Ask directly and get an answer with code examples in seconds, "
+    "AI Assistant",
+    "<b>Running into an integration issue?</b> Ask directly and get an answer with code examples in seconds, "
     "grounded in the platform's own API documentation.",
+    chip="Online",
     foot=f'<a class="btn" href="#ask">Start a conversation {ARROW}</a>'
-         f'<a class="tlink" href="api-docs-errors.html">Error code reference {ARROW}</a>',
+         f'<a class="tlink tlink--o" href="api-docs-errors.html">Error code reference {ARROW}</a>',
 )}
 
 <section class="blk blk--top" id="ask">
@@ -1062,21 +1074,21 @@ AI_ASSISTANT = f"""
         <span class="k">Technical support</span>
         <p>Include the <code class="inl">request_id</code> and <code class="inl">trace_id</code> from the failing
            call. Support cannot trace a failure without them.</p>
-        <div class="icard-foot"><a class="tlink" href="login.html">Open the console {ARROW}</a></div>
+        <div class="icard-foot"><a class="tlink tlink--o" href="login.html">Open the console {ARROW}</a></div>
       </article>
       <article class="icard rv">
         <div class="icard-ic"><iconify-icon icon="solar:document-text-linear"></iconify-icon></div>
         <h3>Read the docs</h3>
         <span class="k">Docs centre</span>
         <p>Interface lists, request and response shapes, worked examples and the full error code table.</p>
-        <div class="icard-foot"><a class="tlink" href="api-docs-hotel.html">Docs centre {ARROW}</a></div>
+        <div class="icard-foot"><a class="tlink tlink--o" href="api-docs-hotel.html">Docs centre {ARROW}</a></div>
       </article>
       <article class="icard rv">
         <div class="icard-ic"><iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon></div>
         <h3>Business consultation</h3>
         <span class="k">Commercial</span>
         <p>Custom solutions, dedicated pricing and TMC API deployment go to the business team, not to support.</p>
-        <div class="icard-foot"><a class="tlink" href="index.html#start-integration">Book a demo {ARROW}</a></div>
+        <div class="icard-foot"><a class="tlink tlink--o" href="index.html#start-integration">Book a demo {ARROW}</a></div>
       </article>
     </div>
   </div>
@@ -1104,7 +1116,7 @@ LOGIN = f"""
 
   <div class="auth-main">
     <div class="auth-card rv">
-      <h1>Welcome back.</h1>
+      <h1>Welcome back</h1>
       <p>Sign in to access your developer console.</p>
 
       <button class="oauth" type="button">
@@ -1144,7 +1156,7 @@ REGISTER = f"""
     <div class="band-grid" aria-hidden="true"></div>
     <div class="wrap" style="position:relative;z-index:1">
       <p class="eyebrow micro">Free access</p>
-      <p class="ahead">Register once, test everything.</p>
+      <p class="ahead">Register once, <em>test everything.</em></p>
       <p class="lede">Set up a company account and complete the onboarding details to reach the platform console.
          The sandbox opens immediately and costs nothing upfront.</p>
       <ul class="tick" style="margin-top:38px;max-width:40ch">
@@ -1158,7 +1170,7 @@ REGISTER = f"""
 
   <div class="auth-main">
     <div class="auth-card rv">
-      <h1>Create your account.</h1>
+      <h1>Create your account</h1>
       <p>Set up your company account and complete the onboarding details to access the platform console.</p>
 
       <button class="oauth" type="button">

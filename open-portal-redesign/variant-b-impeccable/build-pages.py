@@ -90,8 +90,9 @@ LOGO = (
 )
 
 LANG = """<div class="lang" role="group" aria-label="Language">
-        <button type="button" aria-pressed="true">EN</button>
-        <button type="button" aria-pressed="false">中文</button>
+        <button type="button" aria-pressed="true">ENG</button>
+        <button type="button" aria-pressed="false">简体</button>
+        <button type="button" aria-pressed="false">繁體</button>
       </div>"""
 
 ARROW = '<iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon>'
@@ -146,10 +147,9 @@ def header(active="", minimal=False):
     <div class="wrap">
       <ul>
 {mob}
-        <li><a href="login.html">Login</a></li>
       </ul>
       <div class="m-cta">
-        <a class="btn btn--sm" href="register.html">Register {ARROW}</a>
+        <a class="btn btn--ghost" href="login.html">Login {ARROW}</a>
         {LANG}
       </div>
     </div>
@@ -183,7 +183,7 @@ def footer():
     </div>
     <div class="ftr-bot">
       <span>© 2026 Fusion Connect Group Holdings Ltd (BVI). All rights reserved.</span>
-      <span class="mono">EN · 中文</span>
+      <span class="mono">ENG · 简体 · 繁體</span>
     </div>
   </div>
 </footer>"""
@@ -211,25 +211,38 @@ PAGE_CSS = """<style>
   -webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 92%);
   mask-image:linear-gradient(to bottom,#000 0%,transparent 92%);
 }
+/* every child clamps to the wrap: a column flex item sizes to content and
+   min-width:auto stops it shrinking, which is how the tab rail ended up
+   587px wide inside a 335px column and silently clipped. */
 .band-in{position:relative;z-index:1;display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.band-in > *{max-width:100%;min-width:0}
+/* eyebrow + status chip share one micro row, so the CTA row stays CTAs only */
+.band-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
 .band h1{font-size:clamp(34px,4.6vw,62px);line-height:1.02;letter-spacing:-.032em;max-width:22ch}
+.band h1 em{display:block;font-style:normal;color:var(--accent)}
 .band .lede{font-size:16.5px;line-height:27px;max-width:60ch}
-.band-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px}
+.band-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px;width:100%;min-width:0}
 .crumb{display:flex;align-items:center;gap:8px;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
 .crumb a{color:var(--muted);transition:color 240ms ease}
-.crumb a:hover{color:var(--ink)}
+@media (hover:hover) and (pointer:fine){ .crumb a:hover{color:var(--ink)} }
 .crumb i{font-style:normal;color:var(--line)}
 
 /* ---------- tab rail (reuses the nav shell grammar) ---------- */
-.rail{display:flex;gap:2px;padding:3px;background:var(--shell);border:1px solid var(--hair);border-radius:999px;overflow-x:auto;max-width:100%}
+/* min-width:0 + align-self:stretch — without them this nowrap flex row keeps
+   its min-content width and gets clipped by body{overflow-x:hidden}. */
+.rail{display:flex;gap:2px;padding:3px;background:var(--shell);border:1px solid var(--hair);border-radius:999px;overflow-x:auto;max-width:100%;min-width:0;flex:0 1 auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .rail a,.rail button{
   display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 15px;border:0;border-radius:999px;
   background:transparent;font-size:13.5px;font-weight:400;color:var(--ink);white-space:nowrap;cursor:pointer;
-  transition:background 240ms ease;
+  transition:background var(--hover) ease,transform var(--press) var(--ease-out);
 }
-.rail a:hover,.rail button:hover{background:#fff}
+.rail a:active,.rail button:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .rail a:hover,.rail button:hover{background:#fff}
+}
 .rail a.on,.rail button.on{background:#fff;font-weight:500}
 .rail::-webkit-scrollbar{height:0}
+.docs-side-in{min-width:0}
 
 /* ---------- generic content block ---------- */
 .blk{padding:80px 0}
@@ -255,30 +268,48 @@ table.tbl th{
 }
 table.tbl td{padding:16px 20px;border-top:1px solid var(--hair);font-size:14px;line-height:22px;vertical-align:top}
 table.tbl tbody tr:first-child td{border-top:0}
-table.tbl td.num{font-family:var(--mono);font-size:11.5px;color:var(--muted);width:44px;white-space:nowrap}
-table.tbl td.path,table.tbl td.code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em;color:var(--ink)}
-table.tbl td.mid{white-space:nowrap;width:1%}
-table.tbl td.dim{color:var(--muted)}
-table.tbl tbody tr:hover{background:rgba(15,17,20,.015)}
+/* t- prefix, deliberately: a bare .path here collided with the homepage's
+   unscoped .path closing card and rendered every cell as a rounded panel. */
+table.tbl td.t-num{font-family:var(--mono);font-size:11.5px;color:var(--muted);width:44px;white-space:nowrap}
+table.tbl td.t-path,table.tbl td.t-code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em;color:var(--ink)}
+table.tbl td.t-mid{white-space:nowrap;width:1%}
+table.tbl td.t-dim{color:var(--muted)}
+table.tbl td{border-radius:0;background:none}
+@media (hover:hover) and (pointer:fine){
+  table.tbl tbody tr{transition:background var(--hover) ease}
+  table.tbl tbody tr:hover{background:rgba(15,17,20,.015)}
+}
 
 /* ---------- docs two-column ---------- */
 .docs{display:grid;grid-template-columns:252px minmax(0,1fr);gap:0;border-top:1px solid var(--hair)}
 .docs-side{border-right:1px solid var(--hair);padding:38px 28px 60px 0}
 .docs-side-in{position:sticky;top:100px;display:flex;flex-direction:column;gap:26px}
-.docs-grp .docs-h{margin:0;font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.docs-grp .docs-h{margin:0;font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-ink)}
 .docs-grp ul{margin-top:12px;display:flex;flex-direction:column}
 .docs-grp a{
   display:flex;align-items:center;gap:8px;padding:8px 12px;margin-left:-12px;border-radius:999px;
-  color:var(--muted);font-size:13.5px;transition:background 240ms ease,color 240ms ease;
+  color:var(--muted);font-size:13.5px;
+  transition:background var(--hover) ease,color var(--hover) ease,transform var(--press) var(--ease-out);
 }
-.docs-grp a:hover{color:var(--ink);background:var(--shell)}
+.docs-grp a:active{transform:scale(.98)}
+@media (hover:hover) and (pointer:fine){
+  .docs-grp a:hover{color:var(--ink);background:var(--shell)}
+}
 .docs-grp a.on{color:var(--ink);font-weight:500;background:var(--card)}
 .docs-main{padding:38px 0 80px 40px;min-width:0}
-.docs-main > * + *{margin-top:26px}
+.docs-main > * + *{margin-top:22px}
+.docs-main > h2 + *,.docs-main > h3 + *{margin-top:16px}   /* tight under a heading */
+.docs-main > * + h3{margin-top:54px}                        /* open above one */
+.docs-main > * + h2{margin-top:64px}
+.docs-main > * + .tblwrap,.docs-main > * + .steps{margin-top:28px}
+.docs-main > * + .note{margin-top:34px}
+.docs-main > * + .ep{margin-top:28px}
+.docs-main > * + .band-foot{margin-top:40px}
 .docs-main h2{font-size:clamp(24px,2.4vw,32px);line-height:1.12;letter-spacing:-.02em}
+.docs-main h2 em{display:block;font-style:normal;color:var(--accent)}
 .docs-main h3{font-size:19px;letter-spacing:-.01em}
 .docs-main h4{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.docs-main p{color:var(--muted);font-size:15px;line-height:26px;max-width:70ch}
+.docs-main p{color:var(--muted);font-size:15px;line-height:25px;max-width:66ch}
 .docs-main ol,.docs-main ul.bul{display:flex;flex-direction:column;gap:0;padding:0;list-style:none;counter-reset:s}
 .docs-main ol li{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--hair-soft);font-size:14.5px;line-height:23px}
 .docs-main ol li:last-child{border-bottom:1px solid var(--hair-soft)}
@@ -314,7 +345,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .step{padding:22px 22px 24px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair)}
 .step:nth-child(4n){border-right:0}
 .step:nth-last-child(-n+4){border-bottom:0}
-.step .sn{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.step .sn{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
 .step h3{font-size:15px;font-weight:500;letter-spacing:-.01em;margin-top:14px;line-height:1.3}
 .step code{display:block;margin-top:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);word-break:break-all}
 
@@ -323,7 +354,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .cards--2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .card{border:1px solid var(--line);border-radius:20px;background:#fff;display:flex;flex-direction:column;overflow:hidden}
 .card-h{padding:24px 24px 20px}
-.card-k{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.card-k{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
 .card-h h3{font-size:19px;letter-spacing:-.01em;margin-top:14px}
 .card-h p{color:var(--muted);font-size:14px;line-height:23px;margin-top:12px}
 /* ponytail: three lines reserved (3 x 23px) so meta rows start at the same y
@@ -344,10 +375,13 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .cmd button{
   flex:none;padding:0 16px;border:0;border-left:1px solid var(--dark-line);background:transparent;cursor:pointer;
   color:var(--dark-muted);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  transition:color 240ms ease,background 240ms ease;
+  transition:color var(--hover) ease,background var(--hover) ease,transform var(--press) var(--ease-out);
 }
-.cmd button:hover{color:#fff;background:rgba(255,255,255,.06)}
+.cmd button:active{transform:scale(.96)}
 .cmd button.done{color:#fff}
+@media (hover:hover) and (pointer:fine){
+  .cmd button:hover{color:#fff;background:rgba(255,255,255,.06)}
+}
 
 /* ---------- stat strip variant used on inner pages ---------- */
 .mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
@@ -365,6 +399,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .auth-aside{position:relative;padding:84px 0 72px;border-right:1px solid var(--hair);overflow:hidden;display:flex;align-items:center}
 .auth-aside .wrap{max-width:none;padding:0 64px 0 max(32px,calc((100vw - var(--wrap)) / 2 + 32px));width:100%}
 .auth-aside .ahead{font-size:clamp(30px,3.6vw,50px);line-height:1.04;letter-spacing:-.03em;max-width:18ch;margin-top:22px;color:var(--ink);font-weight:500}
+.auth-aside .ahead em{display:block;font-style:normal;color:var(--accent)}
 .auth-aside .lede{margin-top:22px;font-size:16px;line-height:26px;max-width:44ch}
 .auth-main{display:flex;align-items:center;justify-content:center;padding:64px 32px 72px;background:var(--footer)}
 .auth-card{width:100%;max-width:436px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:40px 38px 36px}
@@ -373,9 +408,14 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .oauth{
   display:flex;align-items:center;justify-content:center;gap:11px;width:100%;height:50px;margin-top:28px;
   border:1px solid var(--line);border-radius:999px;background:#fff;cursor:pointer;
-  font-size:14.5px;font-weight:500;transition:background 240ms ease,border-color 240ms ease;
+  font-size:14.5px;font-weight:500;
+  transition:background var(--hover) ease,border-color var(--hover) ease,
+             transform var(--press) var(--ease-out);
 }
-.oauth:hover{background:var(--card);border-color:var(--ink)}
+.oauth:active{transform:scale(.98)}
+@media (hover:hover) and (pointer:fine){
+  .oauth:hover{background:var(--card);border-color:var(--ink)}
+}
 .oauth iconify-icon{font-size:19px}
 .orline{display:flex;align-items:center;gap:14px;margin:24px 0 22px;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
 .orline::before,.orline::after{content:"";flex:1;height:1px;background:var(--hair)}
@@ -386,18 +426,20 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
      small-orange-text decision is made — see STATE-LOG. */
 .fld input,.fld select{
   height:48px;padding:0 15px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);
-  font-family:var(--sans);font-size:14.5px;width:100%;transition:border-color 240ms ease,background 240ms ease;
+  font-family:var(--sans);font-size:14.5px;width:100%;transition:border-color var(--hover) var(--ease-out),background var(--hover) ease;
 }
 .fld select{appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='1.6'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 14px center;background-size:16px}
-.fld input:hover,.fld select:hover{border-color:var(--muted)}
+@media (hover:hover) and (pointer:fine){
+  .fld input:hover,.fld select:hover{border-color:var(--muted)}
+}
 .fld input:focus,.fld select:focus{border-color:var(--ink);outline:none}
 .fld input:focus-visible,.fld select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .fields--2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .fld-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:-4px}
 .fld-row a{font-size:13px;color:var(--muted);transition:color 240ms ease}
-.fld-row a:hover{color:var(--ink)}
+@media (hover:hover) and (pointer:fine){ .fld-row a:hover{color:var(--ink)} }
 .auth-submit{width:100%;justify-content:space-between;margin-top:26px}
 .auth-alt{margin-top:22px;padding-top:20px;border-top:1px solid var(--hair);color:var(--muted);font-size:13.5px;text-align:center}
 .auth-alt a{color:var(--ink);font-weight:500}
@@ -427,10 +469,13 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .asks button{
   display:flex;align-items:flex-start;gap:10px;width:100%;text-align:left;padding:15px 20px;border:0;
   border-top:1px solid var(--hair-soft);background:#fff;cursor:pointer;font-size:13.5px;line-height:21px;
-  transition:background 240ms ease;
+  transition:background var(--hover) ease,transform var(--press) var(--ease-out);
 }
 .asks button:first-of-type{border-top:0}
-.asks button:hover{background:var(--shell)}
+.asks button:active{transform:scale(.99)}
+@media (hover:hover) and (pointer:fine){
+  .asks button:hover{background:var(--shell)}
+}
 .asks button iconify-icon{font-size:15px;color:var(--muted);flex:none;margin-top:3px}
 
 /* ---------- responsive ---------- */
@@ -462,6 +507,10 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
   .mini div + div{border-left:0;border-top:1px solid var(--hair)}
 }
 @media (max-width:640px){
+  /* wrap the rail instead of scrolling it: a horizontal scroller on a phone
+     hides options behind an edge with no affordance */
+  .rail{flex-wrap:wrap;overflow:visible;border-radius:18px;gap:4px;padding:5px}
+  .rail a,.rail button{height:32px;padding:0 13px;font-size:13px}
   .band{padding:52px 0 42px}
   .blk{padding:60px 0}
   .blk--top{padding-top:48px}
@@ -476,7 +525,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
   .msg{max-width:92%}
   .chat-b{padding:20px 16px}
   .card-h,.card-f,.card-meta{padding-left:20px;padding-right:20px}
-  .band-foot .btn{width:100%;justify-content:space-between}
+  .band-foot .btn{justify-content:flex-start}
 }
 </style>"""
 
@@ -533,6 +582,57 @@ COPY_JS = """<script>
 """
 
 
+# The orange second clause is only ever the part AFTER a comma. A headline with
+# no comma has no second clause and stays entirely ink. Enforced, not remembered.
+EM_IN_HEADING = re.compile(
+    r"<(h1|h2|h3|p class=\"ahead\")[^>]*>(.*?)</(?:h1|h2|h3|p)>", re.S
+)
+
+
+H1_TEXT = re.compile(r"<h1[^>]*>(.*?)</h1>", re.S)
+
+# A heading's orange clause and a lede's orange lead-in are both "the one
+# emphasis in this block". Using both stacks two orange runs on top of each
+# other and reads as a colour wash, so a block gets one or the other.
+DOUBLE_ORANGE = re.compile(
+    r'<(?:h1|h2|p class="ahead")[^>]*>(.*?)</(?:h1|h2|p)>\s*(?:<[^>]+>\s*)*'
+    r'<p class="lede"[^>]*>(.*?)</p>',
+    re.S,
+)
+
+
+def check_double_orange(html, slug):
+    for m in DOUBLE_ORANGE.finditer(html):
+        if "<em>" in m.group(1) and "<b>" in m.group(2):
+            head = re.sub(r"<[^>]+>", "", m.group(1)).strip()[:50]
+            raise SystemExit(
+                f"{slug}: heading already carries an orange clause, so its lede "
+                f"must not also have an orange lead-in — {head!r}"
+            )
+
+
+def check_h1_rule(html, slug):
+    """An h1 is a page title, not a sentence: no trailing full stop."""
+    for m in H1_TEXT.finditer(html):
+        txt = re.sub(r"<[^>]+>", "", m.group(1)).strip()
+        if txt.endswith("."):
+            raise SystemExit(f"{slug}: h1 must not end in a full stop — {txt!r}")
+
+
+def check_em_rule(html, slug):
+    bad = []
+    for m in EM_IN_HEADING.finditer(html):
+        inner = m.group(2)
+        for em in re.finditer(r"<em>", inner):
+            before = inner[: em.start()].rstrip()
+            if not before.endswith(","):
+                bad.append(re.sub(r"\s+", " ", inner)[:70])
+    if bad:
+        raise SystemExit(
+            f"{slug}: orange <em> must follow a comma — offending headings: {bad}"
+        )
+
+
 def build(slug, title, desc, body, nav="", minimal=False, extra=""):
     html = PAGE.format(
         head=HEAD_OPEN,
@@ -547,6 +647,9 @@ def build(slug, title, desc, body, nav="", minimal=False, extra=""):
         script=SCRIPT,
         extra=extra,
     )
+    check_em_rule(html, slug)
+    check_h1_rule(html, slug)
+    check_double_orange(html, slug)
     (HERE / f"{slug}.html").write_text(html, encoding="utf-8")
     return len(html)
 
@@ -567,6 +670,10 @@ if __name__ == "__main__":
     import pages_content
 
     changed = patch_index()
+    _idx = INDEX.read_text(encoding="utf-8")
+    check_em_rule(_idx, "index.html")
+    check_h1_rule(_idx, "index.html")
+    check_double_orange(_idx, "index.html")
     print(f"index.html nav/footer: {'rewritten' if changed else 'already current'}")
     total = 0
     for spec in pages_content.PAGES:

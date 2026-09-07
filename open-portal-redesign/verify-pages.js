@@ -23,18 +23,29 @@ const pages = process.argv.slice(2).length ? process.argv.slice(2) : ALL;
 function audit() {
   const surf = [], smallOrange = [], overlap = [], misalign = [], fonts = new Set();
 
+  const accentInk = getComputedStyle(document.documentElement)
+    .getPropertyValue("--accent-ink").trim();
+  const offToken = [];
+
   document.querySelectorAll("body *").forEach((e) => {
     const cs = getComputedStyle(e);
-    // the accent must never be a surface: only dots, dashes, arcs, cursor, focus ring
+    // The accent may fill a dot, a dash, a thin arc, the terminal cursor and the
+    // small circle on a tertiary link. It must never fill a button or a panel,
+    // so the failure threshold is button scale, not any fill at all.
     if (cs.backgroundColor === "rgb(249, 115, 22)") {
       const r = e.getBoundingClientRect();
-      if (r.width > 16 || r.height > 16) surf.push(e.className || e.tagName);
+      if (r.width > 44 && r.height > 44) surf.push(e.className || e.tagName);
     }
-    // #F97316 on white is 2.80:1 — never legal below 18px
-    if (cs.color === "rgb(249, 115, 22)" && parseFloat(cs.fontSize) < 18 && e.textContent.trim()) {
+    // Small orange text is intended — it is the marketing site's own eyebrow
+    // treatment. Just count it, so a jump in the count is visible in review.
+    if (e.textContent.trim() && parseFloat(cs.fontSize) < 18 &&
+        cs.color === "rgb(249, 115, 22)") {
       smallOrange.push(e.tagName + "." + e.className);
     }
   });
+  // Every small orange label must resolve through --accent-ink, so switching to
+  // the AA-passing #C2410C stays a one-token change.
+  if (accentInk !== "#F97316" && accentInk !== "#C2410C") offToken.push("--accent-ink=" + accentInk);
 
   document
     .querySelectorAll("h1,h2,h3,h4,p,a,button,code,pre,td,th,li,label,input,select,span")
@@ -66,6 +77,46 @@ function audit() {
     });
   });
 
+  // A table cell must never inherit panel styling. This is what catches a class
+  // collision like td.path picking up an unscoped .path card (radius, big
+  // padding, display:flex) from the donor stylesheet.
+  const cellStyle = [];
+  document.querySelectorAll("table.tbl td, table.tbl th").forEach((c) => {
+    const cs = getComputedStyle(c);
+    if (parseFloat(cs.borderTopLeftRadius) > 6) cellStyle.push("radius " + cs.borderTopLeftRadius);
+    if (parseFloat(cs.paddingTop) > 26) cellStyle.push("padding " + cs.paddingTop);
+    if (cs.display === "flex") cellStyle.push("display:flex");
+  });
+
+  // body{overflow-x:hidden} means an over-wide child is silently CLIPPED rather
+  // than producing a document scrollbar, so H-SCROLL alone misses it. Compare
+  // each .wrap's children against the wrap's own content box instead.
+  // An element is clipped only if it is WIDER than the wrap's content box and
+  // nothing between it and the wrap scrolls. Sitting at the padding edge is
+  // fine (a flex row's last item), and so is being wide inside an
+  // overflow-x:auto ancestor (the tab rail's links, a <pre>, a table).
+  const clipped = [];
+  document.querySelectorAll(".wrap").forEach((wrap) => {
+    const wcs = getComputedStyle(wrap);
+    const ww = wrap.getBoundingClientRect().width;
+    if (!ww) return; // display:none wrap (the mobile menu) has no content box
+    const inner = ww - parseFloat(wcs.paddingLeft) - parseFloat(wcs.paddingRight);
+    wrap.querySelectorAll("*").forEach((el) => {
+      const b = el.getBoundingClientRect();
+      if (!b.width) return; // not laid out
+      if (b.width <= inner + 1) return;
+      const cs = getComputedStyle(el);
+      if (cs.position === "absolute" || cs.position === "fixed") return;
+      for (let a = el.parentElement; a && a !== wrap; a = a.parentElement) {
+        const ox = getComputedStyle(a).overflowX;
+        if (ox === "auto" || ox === "scroll") return;
+      }
+      const ox = cs.overflowX;
+      if (ox === "auto" || ox === "scroll") return; // scrolls its own content
+      clipped.push((el.className || el.tagName) + " " + Math.round(b.width) + "w");
+    });
+  });
+
   const hs = [...document.querySelectorAll("h1,h2,h3,h4,h5,h6")].map((e) => +e.tagName[1]);
   let skip = null;
   for (let i = 1; i < hs.length; i++)
@@ -75,13 +126,16 @@ function audit() {
     sw: document.documentElement.scrollWidth,
     cw: document.documentElement.clientWidth,
     surf: [...new Set(surf)],
-    smallOrange: [...new Set(smallOrange)],
+    smallOrangeCount: smallOrange.length,
+    offToken: [...new Set(offToken)],
     overlap: [...new Set(overlap)],
     misalign,
     skip,
     badFont: [...fonts].filter((f) => !["Inter", "ui-monospace", "Iconify"].includes(f)),
     h1: document.querySelectorAll("h1").length,
     deadHref: document.querySelectorAll('a[href="#"]').length,
+    cellStyle: [...new Set(cellStyle)],
+    clipped: [...new Set(clipped)].slice(0, 4),
   };
 }
 
@@ -117,16 +171,24 @@ function audit() {
       if (m.sw > m.cw + 1) f.push(`H-SCROLL ${m.sw}>${m.cw}`);
       if (m.overlap.length) f.push("OVERLAP " + m.overlap);
       if (m.surf.length) f.push("ACCENT-SURFACE " + m.surf);
-      if (m.smallOrange.length) f.push("SMALL-ORANGE " + m.smallOrange);
+      if (m.offToken.length) f.push("ORANGE-OFF-TOKEN " + m.offToken);
       if (m.badFont.length) f.push("FONT " + m.badFont);
       if (m.h1 !== 1) f.push("H1=" + m.h1);
       if (m.skip) f.push("HEADING-SKIP " + m.skip);
       if (m.deadHref) f.push("DEAD-HREF x" + m.deadHref);
+      if (m.cellStyle.length) f.push("TABLE-CELL-PANEL " + m.cellStyle);
+      if (m.clipped.length) f.push("CLIPPED-BY-WRAP " + m.clipped);
       if (w === 1280 && m.misalign.length) f.push("META-MISALIGN " + m.misalign);
 
       if (f.length) failing++;
-      console.log(`${w} ${name.padEnd(26)}${f.length ? " FAIL " + f.join(" | ") : " ok"}`);
-      await page.screenshot({ path: path.join(OUT, `${name}-${w}.png`), fullPage: true });
+      const info = w === 1280 ? `  small-orange x${m.smallOrangeCount}` : "";
+      console.log(`${w} ${name.padEnd(26)}${f.length ? " FAIL " + f.join(" | ") : " ok"}${info}`);
+      try {
+        await page.screenshot({ path: path.join(OUT, `${name}-${w}.png`), fullPage: true });
+      } catch (e) {
+        // a capture hiccup on a very tall page must not mask the checks above
+        console.log(`     (screenshot skipped: ${e.message.split("\n")[0]})`);
+      }
     }
   }
 

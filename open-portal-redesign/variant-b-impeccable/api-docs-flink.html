@@ -27,6 +27,10 @@
   --hair-soft:rgba(15,17,20,.06);
   --shell:rgba(15,17,20,.04);
   --accent:#F97316;
+  /* Small orange text. #F97316 on white is 2.80:1 and fails AA below 18px;
+     the marketing site does this and Crystal asked to match it. Switch this
+     one value to #C2410C (4.6:1) to make every small orange label pass. */
+  --accent-ink:#F97316;
   --footer:#f7f8fa;
   --dark:#0F1114;
   --dark-line:#26282C;
@@ -37,6 +41,10 @@
   --wrap:1200px;
   --sec:128px;
   --ease:cubic-bezier(.16,1,.3,1);
+  --ease-out:cubic-bezier(.23,1,.32,1);      /* entering / exiting */
+  --ease-in-out:cubic-bezier(.77,0,.175,1);  /* moving on screen */
+  --press:160ms;                             /* button press feedback */
+  --hover:160ms;                             /* hover is seen dozens of times a day */
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -53,7 +61,7 @@ h1,h2,h3,h4{margin:0;font-weight:500;color:var(--ink)}
 p{margin:0}
 ul{margin:0;padding:0;list-style:none}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-::selection{background:rgba(15,17,20,.9);color:#fff}
+::selection{background:var(--accent);color:var(--ink)}
 
 .wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 32px}
 .sec{padding:var(--sec) 0;position:relative}
@@ -63,15 +71,21 @@ ul{margin:0;padding:0;list-style:none}
 .micro{font-size:11px;line-height:1;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
 .mono{font-family:var(--mono);font-size:12.5px;line-height:1.6;letter-spacing:-.01em}
 
-/* eyebrow: orange dash (graphic) + ink label. Small orange text on white
-   fails AA, so the accent stays graphic here. */
-.eyebrow{display:flex;align-items:center;gap:10px;color:var(--ink)}
+/* eyebrow: orange dash + orange label, as on the marketing site.
+   Colour comes from --accent-ink so the AA swap is one token. */
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--accent-ink)}
 .eyebrow::before{content:"";width:12px;height:1.5px;background:var(--accent);flex:none;border-radius:2px}
 .eyebrow--c{justify-content:center}
 
 .h2{font-size:clamp(32px,5.1vw,72px);line-height:1.02;letter-spacing:-.03em}
 .h3{font-size:clamp(24px,2.3vw,30px);line-height:1.15;letter-spacing:-.02em}
 .lede{color:var(--muted);font-size:16px;line-height:26px;max-width:62ch}
+/* <em> = the orange second clause of a headline; <b> = the orange lead-in
+   phrase of a lede. Both are the marketing site's own pattern. */
+/* the orange clause always starts its own line, so the comma never leaves
+   an orphan word at the end of the ink line */
+h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent)}
+.lede b{font-weight:400;color:var(--accent-ink)}
 .sec-head{display:flex;flex-direction:column;gap:22px;margin-bottom:64px}
 .sec-head--c{align-items:center;text-align:center}
 .sec-head--c .lede{max-width:58ch}
@@ -87,25 +101,46 @@ ul{margin:0;padding:0;list-style:none}
   height:52px;padding:0 12px 0 26px;border-radius:999px;
   background:var(--ink);color:#fff;border:1px solid var(--ink);
   font-size:15px;font-weight:500;letter-spacing:-.01em;cursor:pointer;
-  transition:background 240ms ease,color 240ms ease,border-color 240ms ease;
+  transition:background var(--hover) ease,color var(--hover) ease,
+             border-color var(--hover) ease,transform var(--press) var(--ease-out);
 }
 .btn iconify-icon{
   width:30px;height:30px;border-radius:999px;background:rgba(255,255,255,.12);
-  padding:7px;font-size:16px;flex:none;transition:transform 240ms ease;
+  padding:7px;font-size:16px;flex:none;transition:transform var(--hover) var(--ease-out);
 }
-.btn:hover{background:#000}
-.btn:hover iconify-icon{transform:translateX(3px)}
+/* the press is the one animation that must never be missed — it is how the
+   interface says it heard you */
+.btn:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{background:#000}
+  .btn:hover iconify-icon{transform:translateX(3px)}
+}
 .btn--ghost{background:transparent;color:var(--ink);border-color:var(--line);padding-right:26px}
 .btn--ghost iconify-icon{background:var(--card);color:var(--ink)}
-.btn--ghost:hover{background:var(--card);border-color:var(--ink)}
+@media (hover:hover) and (pointer:fine){
+  .btn--ghost:hover{background:var(--card);border-color:var(--ink)}
+}
 .btn--sm{height:40px;padding:0 8px 0 18px;font-size:13.5px}
 .btn--sm iconify-icon{width:24px;height:24px;padding:5px;font-size:14px}
 .tlink{
   display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:500;
-  color:var(--ink);transition:gap 240ms ease,color 240ms ease;
+  color:var(--ink);transition:color var(--hover) ease;
 }
-.tlink iconify-icon{font-size:15px}
-.tlink:hover{gap:11px}
+/* the arrow slides on transform rather than the row animating `gap` — gap is a
+   layout property and cannot run on the compositor */
+.tlink iconify-icon{font-size:15px;transition:transform var(--hover) var(--ease-out)}
+.tlink:active iconify-icon{transform:translateX(1px)}
+@media (hover:hover) and (pointer:fine){
+  .tlink:hover iconify-icon{transform:translateX(4px)}
+}
+/* the marketing site's one orange affordance: a small filled circle on a
+   tertiary link. Never on a primary CTA — that stays the black pill. */
+.tlink--o{gap:12px;font-size:14.5px}
+.tlink--o iconify-icon{width:28px;height:28px;padding:7px;border-radius:999px;background:var(--accent);color:#fff;font-size:14px;flex:none;transition:transform var(--hover) var(--ease-out)}
+.tlink--o:active iconify-icon{transform:scale(.94)}
+@media (hover:hover) and (pointer:fine){
+  .tlink--o:hover iconify-icon{transform:translateX(3px)}
+}
 
 /* ---------- chips / badges ---------- */
 .chip{
@@ -114,6 +149,7 @@ ul{margin:0;padding:0;list-style:none}
   font-size:12px;font-weight:500;color:var(--ink-2);white-space:nowrap;
 }
 .chip--plain{background:#fff;border-color:var(--line)}
+.chip--live{background:rgba(249,115,22,.07);border-color:rgba(249,115,22,.28);color:var(--accent-ink);gap:7px}
 .chips{display:flex;flex-wrap:wrap;gap:7px}
 .badge{
   display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:999px;
@@ -132,11 +168,13 @@ ul{margin:0;padding:0;list-style:none}
    NAV
    ============================================================ */
 .skip{
-  position:absolute;left:16px;top:-60px;z-index:100;
+  position:absolute;left:16px;top:14px;z-index:100;
   background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;font-size:13px;
-  transition:top 240ms ease;
+  /* transform, not top: only transform and opacity skip layout and paint */
+  transform:translateY(-84px);
+  transition:transform 200ms var(--ease-out);
 }
-.skip:focus{top:14px}
+.skip:focus{transform:none}
 .hdr{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color 240ms ease}
 .hdr.stuck{border-bottom-color:var(--hair)}
 .hdr-in{display:flex;align-items:center;gap:22px;height:76px}
@@ -154,27 +192,43 @@ ul{margin:0;padding:0;list-style:none}
   font-size:13.5px;font-weight:400;color:var(--ink);white-space:nowrap;
   transition:background 240ms ease,color 240ms ease;
 }
-.shell a:hover{background:#fff}
+.shell a{transition:background var(--hover) ease,color var(--hover) ease,transform var(--press) var(--ease-out)}
+.shell a:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){ .shell a:hover{background:#fff} }
 .shell a.on{background:#fff;font-weight:500}
 .nav-right{display:flex;align-items:center;gap:14px;margin-left:auto;flex:none}
 .lang{display:flex;align-items:center;padding:3px;background:var(--shell);border:1px solid var(--hair);border-radius:999px}
 .lang button{
-  height:28px;padding:0 11px;border:0;background:transparent;border-radius:999px;cursor:pointer;
+  height:28px;padding:0 9px;border:0;background:transparent;border-radius:999px;cursor:pointer;
   font-size:11.5px;font-weight:500;letter-spacing:.06em;color:var(--muted);
-  transition:background 240ms ease,color 240ms ease;
+  transition:background var(--hover) ease,color var(--hover) ease,transform var(--press) var(--ease-out);
 }
+.lang button:active{transform:scale(.94)}
 .lang button[aria-pressed="true"]{background:#fff;color:var(--ink)}
 .login{font-size:13.5px;font-weight:400;color:var(--ink);transition:color 240ms ease}
-.login:hover{color:var(--muted)}
+@media (hover:hover) and (pointer:fine){ .login:hover{color:var(--muted)} }
 .burger{
   display:none;width:42px;height:42px;align-items:center;justify-content:center;
   background:var(--shell);border:1px solid var(--hair);border-radius:999px;cursor:pointer;font-size:19px;
+  transition:background var(--hover) ease,transform var(--press) var(--ease-out);
 }
-.mnav{display:none;border-top:1px solid var(--hair);background:#fff;padding:14px 0 26px}
-.mnav.open{display:block}
+.burger:active{transform:scale(.94)}
+.mnav{
+  display:none;border-top:1px solid var(--hair);background:#fff;padding:14px 0 26px;
+  opacity:0;transform:translateY(-6px);
+  transition:opacity 200ms var(--ease-out),transform 200ms var(--ease-out),
+             display 200ms allow-discrete;
+}
+.mnav.open{display:block;opacity:1;transform:none}
+@starting-style{ .mnav.open{opacity:0;transform:translateY(-6px)} }
 .mnav ul{display:flex;flex-direction:column}
-.mnav a{display:block;padding:13px 0;font-size:16px;border-bottom:1px solid var(--hair-soft)}
-.mnav .m-cta{display:flex;gap:10px;align-items:center;margin-top:20px;flex-wrap:wrap}
+/* scoped to the list: an unscoped .mnav a also hit the drawer's CTA pills and
+   flattened them with display:block + vertical padding */
+.mnav ul a{display:block;padding:13px 0;font-size:16px;border-bottom:1px solid var(--hair-soft)}
+.mnav .m-cta{display:grid;grid-template-columns:1fr;gap:10px;margin-top:22px}
+.mnav .m-cta .btn{width:100%;height:48px;justify-content:space-between;padding:0 10px 0 18px;font-size:14.5px}
+.mnav .m-cta .lang{display:grid;grid-template-columns:repeat(3,1fr);width:100%;margin-top:2px}
+.mnav .m-cta .lang button{height:36px;padding:0;font-size:12.5px}
 
 /* ============================================================
    HERO
@@ -282,7 +336,7 @@ ul{margin:0;padding:0;list-style:none}
 .icard{border:1px solid var(--line);border-radius:20px;padding:28px 26px 26px;background:#fff;display:flex;flex-direction:column}
 .icard-ic{width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--ink)}
 .icard h3{font-size:19px;letter-spacing:-.01em;margin-top:22px}
-.icard .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:8px;display:block}
+.icard .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);margin-top:8px;display:block}
 .icard p{color:var(--muted);font-size:14px;line-height:23px;margin-top:14px}
 .icard-foot{margin-top:auto;padding-top:22px}
 .langs{display:flex;flex-wrap:wrap;gap:6px}
@@ -331,7 +385,7 @@ ul{margin:0;padding:0;list-style:none}
 .cell:nth-child(4n){border-right:0}
 .board-g > .cell:nth-last-child(-n+4){border-bottom:0}
 .cell.alt{background:var(--card)}
-.cell:hover{color:var(--ink)}
+@media (hover:hover) and (pointer:fine){ .cell:hover{color:var(--ink)} }
 /* + crosshairs sit exactly on the cell hairlines, so they must be darker
    and longer than the hairline to register as marks at all. */
 .xh{position:absolute;width:15px;height:15px;pointer-events:none;transform:translate(-50%,-50%);z-index:2}
@@ -364,7 +418,7 @@ ul{margin:0;padding:0;list-style:none}
 .ftr-col .ftr-h{margin:0;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink)}
 .ftr-col ul{margin-top:20px;display:flex;flex-direction:column;gap:12px}
 .ftr-col a{color:var(--muted);font-size:14px;transition:color 240ms ease}
-.ftr-col a:hover{color:var(--ink)}
+@media (hover:hover) and (pointer:fine){ .ftr-col a:hover{color:var(--ink)} }
 .ftr-bot{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-top:64px;padding-top:26px;border-top:1px solid rgba(15,17,20,.1);color:var(--muted);font-size:12.5px}
 .ftr-bot .mono{font-size:11.5px;letter-spacing:.06em}
 
@@ -375,9 +429,14 @@ html.js .rv{opacity:0;transform:translateY(30px)}
 html.js .rv.in{opacity:1;transform:none;transition:opacity 1s var(--ease),transform 1s var(--ease)}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  html.js .rv{opacity:1!important;transform:none!important;transition:none!important}
+  /* movement goes; opacity and colour stay, because they carry meaning */
+  html.js .rv{opacity:1!important;transform:none!important;transition:none}
   .cursor{animation:none}
-  *{transition-duration:.01ms!important}
+  .mnav{transition:opacity 150ms ease,display 150ms allow-discrete;transform:none}
+  .mnav.open{transform:none}
+  .btn:active,.btn--ghost:active,.shell a:active,.lang button:active,.burger:active,
+  .oauth:active,.rail a:active,.asks button:active,.cmd button:active{transform:none}
+  .btn iconify-icon,.tlink iconify-icon,.tlink--o iconify-icon{transition:none;transform:none!important}
 }
 
 /* ============================================================
@@ -430,8 +489,10 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s var(--ease),transf
   .hero h1{letter-spacing:-.025em}
   .hero .lede{font-size:15.5px}
   .hero-cta{gap:10px}
-  .hero-cta .btn{width:100%;justify-content:space-between}
-  .hero-cta .btn--ghost{justify-content:center;padding:0 26px}
+  /* content-width pills with the label flush left — full-bleed buttons read as
+     banners on a phone and centre their label away from the text column */
+  .hero-cta .btn,.path-foot .btn{justify-content:flex-start}
+  .hero-cta .btn--ghost{padding:0 26px}
   .hero-facts{gap:0;flex-direction:column;align-items:flex-start;margin-top:40px}
   .sec-head{margin-bottom:44px;gap:18px}
   .term-body{padding:16px 14px 18px}
@@ -446,7 +507,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s var(--ease),transf
   .stat:nth-child(3){border-left:0}
   .cell{min-height:104px;font-size:13px}
   .path{padding:30px 24px 28px;border-radius:20px}
-  .path-foot .btn{width:100%;justify-content:space-between}
+
   .ftr{padding-top:60px}
   .ftr-top{grid-template-columns:minmax(0,1fr);gap:36px}
   .ftr-bot{margin-top:44px}
@@ -474,25 +535,38 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s var(--ease),transf
   -webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 92%);
   mask-image:linear-gradient(to bottom,#000 0%,transparent 92%);
 }
+/* every child clamps to the wrap: a column flex item sizes to content and
+   min-width:auto stops it shrinking, which is how the tab rail ended up
+   587px wide inside a 335px column and silently clipped. */
 .band-in{position:relative;z-index:1;display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.band-in > *{max-width:100%;min-width:0}
+/* eyebrow + status chip share one micro row, so the CTA row stays CTAs only */
+.band-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
 .band h1{font-size:clamp(34px,4.6vw,62px);line-height:1.02;letter-spacing:-.032em;max-width:22ch}
+.band h1 em{display:block;font-style:normal;color:var(--accent)}
 .band .lede{font-size:16.5px;line-height:27px;max-width:60ch}
-.band-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px}
+.band-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px;width:100%;min-width:0}
 .crumb{display:flex;align-items:center;gap:8px;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
 .crumb a{color:var(--muted);transition:color 240ms ease}
-.crumb a:hover{color:var(--ink)}
+@media (hover:hover) and (pointer:fine){ .crumb a:hover{color:var(--ink)} }
 .crumb i{font-style:normal;color:var(--line)}
 
 /* ---------- tab rail (reuses the nav shell grammar) ---------- */
-.rail{display:flex;gap:2px;padding:3px;background:var(--shell);border:1px solid var(--hair);border-radius:999px;overflow-x:auto;max-width:100%}
+/* min-width:0 + align-self:stretch — without them this nowrap flex row keeps
+   its min-content width and gets clipped by body{overflow-x:hidden}. */
+.rail{display:flex;gap:2px;padding:3px;background:var(--shell);border:1px solid var(--hair);border-radius:999px;overflow-x:auto;max-width:100%;min-width:0;flex:0 1 auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .rail a,.rail button{
   display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 15px;border:0;border-radius:999px;
   background:transparent;font-size:13.5px;font-weight:400;color:var(--ink);white-space:nowrap;cursor:pointer;
-  transition:background 240ms ease;
+  transition:background var(--hover) ease,transform var(--press) var(--ease-out);
 }
-.rail a:hover,.rail button:hover{background:#fff}
+.rail a:active,.rail button:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .rail a:hover,.rail button:hover{background:#fff}
+}
 .rail a.on,.rail button.on{background:#fff;font-weight:500}
 .rail::-webkit-scrollbar{height:0}
+.docs-side-in{min-width:0}
 
 /* ---------- generic content block ---------- */
 .blk{padding:80px 0}
@@ -518,30 +592,48 @@ table.tbl th{
 }
 table.tbl td{padding:16px 20px;border-top:1px solid var(--hair);font-size:14px;line-height:22px;vertical-align:top}
 table.tbl tbody tr:first-child td{border-top:0}
-table.tbl td.num{font-family:var(--mono);font-size:11.5px;color:var(--muted);width:44px;white-space:nowrap}
-table.tbl td.path,table.tbl td.code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em;color:var(--ink)}
-table.tbl td.mid{white-space:nowrap;width:1%}
-table.tbl td.dim{color:var(--muted)}
-table.tbl tbody tr:hover{background:rgba(15,17,20,.015)}
+/* t- prefix, deliberately: a bare .path here collided with the homepage's
+   unscoped .path closing card and rendered every cell as a rounded panel. */
+table.tbl td.t-num{font-family:var(--mono);font-size:11.5px;color:var(--muted);width:44px;white-space:nowrap}
+table.tbl td.t-path,table.tbl td.t-code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em;color:var(--ink)}
+table.tbl td.t-mid{white-space:nowrap;width:1%}
+table.tbl td.t-dim{color:var(--muted)}
+table.tbl td{border-radius:0;background:none}
+@media (hover:hover) and (pointer:fine){
+  table.tbl tbody tr{transition:background var(--hover) ease}
+  table.tbl tbody tr:hover{background:rgba(15,17,20,.015)}
+}
 
 /* ---------- docs two-column ---------- */
 .docs{display:grid;grid-template-columns:252px minmax(0,1fr);gap:0;border-top:1px solid var(--hair)}
 .docs-side{border-right:1px solid var(--hair);padding:38px 28px 60px 0}
 .docs-side-in{position:sticky;top:100px;display:flex;flex-direction:column;gap:26px}
-.docs-grp .docs-h{margin:0;font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.docs-grp .docs-h{margin:0;font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-ink)}
 .docs-grp ul{margin-top:12px;display:flex;flex-direction:column}
 .docs-grp a{
   display:flex;align-items:center;gap:8px;padding:8px 12px;margin-left:-12px;border-radius:999px;
-  color:var(--muted);font-size:13.5px;transition:background 240ms ease,color 240ms ease;
+  color:var(--muted);font-size:13.5px;
+  transition:background var(--hover) ease,color var(--hover) ease,transform var(--press) var(--ease-out);
 }
-.docs-grp a:hover{color:var(--ink);background:var(--shell)}
+.docs-grp a:active{transform:scale(.98)}
+@media (hover:hover) and (pointer:fine){
+  .docs-grp a:hover{color:var(--ink);background:var(--shell)}
+}
 .docs-grp a.on{color:var(--ink);font-weight:500;background:var(--card)}
 .docs-main{padding:38px 0 80px 40px;min-width:0}
-.docs-main > * + *{margin-top:26px}
+.docs-main > * + *{margin-top:22px}
+.docs-main > h2 + *,.docs-main > h3 + *{margin-top:16px}   /* tight under a heading */
+.docs-main > * + h3{margin-top:54px}                        /* open above one */
+.docs-main > * + h2{margin-top:64px}
+.docs-main > * + .tblwrap,.docs-main > * + .steps{margin-top:28px}
+.docs-main > * + .note{margin-top:34px}
+.docs-main > * + .ep{margin-top:28px}
+.docs-main > * + .band-foot{margin-top:40px}
 .docs-main h2{font-size:clamp(24px,2.4vw,32px);line-height:1.12;letter-spacing:-.02em}
+.docs-main h2 em{display:block;font-style:normal;color:var(--accent)}
 .docs-main h3{font-size:19px;letter-spacing:-.01em}
 .docs-main h4{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.docs-main p{color:var(--muted);font-size:15px;line-height:26px;max-width:70ch}
+.docs-main p{color:var(--muted);font-size:15px;line-height:25px;max-width:66ch}
 .docs-main ol,.docs-main ul.bul{display:flex;flex-direction:column;gap:0;padding:0;list-style:none;counter-reset:s}
 .docs-main ol li{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--hair-soft);font-size:14.5px;line-height:23px}
 .docs-main ol li:last-child{border-bottom:1px solid var(--hair-soft)}
@@ -577,7 +669,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .step{padding:22px 22px 24px;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair)}
 .step:nth-child(4n){border-right:0}
 .step:nth-last-child(-n+4){border-bottom:0}
-.step .sn{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.step .sn{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
 .step h3{font-size:15px;font-weight:500;letter-spacing:-.01em;margin-top:14px;line-height:1.3}
 .step code{display:block;margin-top:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);word-break:break-all}
 
@@ -586,7 +678,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .cards--2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .card{border:1px solid var(--line);border-radius:20px;background:#fff;display:flex;flex-direction:column;overflow:hidden}
 .card-h{padding:24px 24px 20px}
-.card-k{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.card-k{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
 .card-h h3{font-size:19px;letter-spacing:-.01em;margin-top:14px}
 .card-h p{color:var(--muted);font-size:14px;line-height:23px;margin-top:12px}
 /* ponytail: three lines reserved (3 x 23px) so meta rows start at the same y
@@ -607,10 +699,13 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .cmd button{
   flex:none;padding:0 16px;border:0;border-left:1px solid var(--dark-line);background:transparent;cursor:pointer;
   color:var(--dark-muted);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  transition:color 240ms ease,background 240ms ease;
+  transition:color var(--hover) ease,background var(--hover) ease,transform var(--press) var(--ease-out);
 }
-.cmd button:hover{color:#fff;background:rgba(255,255,255,.06)}
+.cmd button:active{transform:scale(.96)}
 .cmd button.done{color:#fff}
+@media (hover:hover) and (pointer:fine){
+  .cmd button:hover{color:#fff;background:rgba(255,255,255,.06)}
+}
 
 /* ---------- stat strip variant used on inner pages ---------- */
 .mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
@@ -628,6 +723,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .auth-aside{position:relative;padding:84px 0 72px;border-right:1px solid var(--hair);overflow:hidden;display:flex;align-items:center}
 .auth-aside .wrap{max-width:none;padding:0 64px 0 max(32px,calc((100vw - var(--wrap)) / 2 + 32px));width:100%}
 .auth-aside .ahead{font-size:clamp(30px,3.6vw,50px);line-height:1.04;letter-spacing:-.03em;max-width:18ch;margin-top:22px;color:var(--ink);font-weight:500}
+.auth-aside .ahead em{display:block;font-style:normal;color:var(--accent)}
 .auth-aside .lede{margin-top:22px;font-size:16px;line-height:26px;max-width:44ch}
 .auth-main{display:flex;align-items:center;justify-content:center;padding:64px 32px 72px;background:var(--footer)}
 .auth-card{width:100%;max-width:436px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:40px 38px 36px}
@@ -636,9 +732,14 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .oauth{
   display:flex;align-items:center;justify-content:center;gap:11px;width:100%;height:50px;margin-top:28px;
   border:1px solid var(--line);border-radius:999px;background:#fff;cursor:pointer;
-  font-size:14.5px;font-weight:500;transition:background 240ms ease,border-color 240ms ease;
+  font-size:14.5px;font-weight:500;
+  transition:background var(--hover) ease,border-color var(--hover) ease,
+             transform var(--press) var(--ease-out);
 }
-.oauth:hover{background:var(--card);border-color:var(--ink)}
+.oauth:active{transform:scale(.98)}
+@media (hover:hover) and (pointer:fine){
+  .oauth:hover{background:var(--card);border-color:var(--ink)}
+}
 .oauth iconify-icon{font-size:19px}
 .orline{display:flex;align-items:center;gap:14px;margin:24px 0 22px;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
 .orline::before,.orline::after{content:"";flex:1;height:1px;background:var(--hair)}
@@ -649,18 +750,20 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
      small-orange-text decision is made — see STATE-LOG. */
 .fld input,.fld select{
   height:48px;padding:0 15px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);
-  font-family:var(--sans);font-size:14.5px;width:100%;transition:border-color 240ms ease,background 240ms ease;
+  font-family:var(--sans);font-size:14.5px;width:100%;transition:border-color var(--hover) var(--ease-out),background var(--hover) ease;
 }
 .fld select{appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='1.6'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 14px center;background-size:16px}
-.fld input:hover,.fld select:hover{border-color:var(--muted)}
+@media (hover:hover) and (pointer:fine){
+  .fld input:hover,.fld select:hover{border-color:var(--muted)}
+}
 .fld input:focus,.fld select:focus{border-color:var(--ink);outline:none}
 .fld input:focus-visible,.fld select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .fields--2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .fld-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:-4px}
 .fld-row a{font-size:13px;color:var(--muted);transition:color 240ms ease}
-.fld-row a:hover{color:var(--ink)}
+@media (hover:hover) and (pointer:fine){ .fld-row a:hover{color:var(--ink)} }
 .auth-submit{width:100%;justify-content:space-between;margin-top:26px}
 .auth-alt{margin-top:22px;padding-top:20px;border-top:1px solid var(--hair);color:var(--muted);font-size:13.5px;text-align:center}
 .auth-alt a{color:var(--ink);font-weight:500}
@@ -690,10 +793,13 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .asks button{
   display:flex;align-items:flex-start;gap:10px;width:100%;text-align:left;padding:15px 20px;border:0;
   border-top:1px solid var(--hair-soft);background:#fff;cursor:pointer;font-size:13.5px;line-height:21px;
-  transition:background 240ms ease;
+  transition:background var(--hover) ease,transform var(--press) var(--ease-out);
 }
 .asks button:first-of-type{border-top:0}
-.asks button:hover{background:var(--shell)}
+.asks button:active{transform:scale(.99)}
+@media (hover:hover) and (pointer:fine){
+  .asks button:hover{background:var(--shell)}
+}
 .asks button iconify-icon{font-size:15px;color:var(--muted);flex:none;margin-top:3px}
 
 /* ---------- responsive ---------- */
@@ -725,6 +831,10 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
   .mini div + div{border-left:0;border-top:1px solid var(--hair)}
 }
 @media (max-width:640px){
+  /* wrap the rail instead of scrolling it: a horizontal scroller on a phone
+     hides options behind an edge with no affordance */
+  .rail{flex-wrap:wrap;overflow:visible;border-radius:18px;gap:4px;padding:5px}
+  .rail a,.rail button{height:32px;padding:0 13px;font-size:13px}
   .band{padding:52px 0 42px}
   .blk{padding:60px 0}
   .blk--top{padding-top:48px}
@@ -739,7 +849,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
   .msg{max-width:92%}
   .chat-b{padding:20px 16px}
   .card-h,.card-f,.card-meta{padding-left:20px;padding-right:20px}
-  .band-foot .btn{width:100%;justify-content:space-between}
+  .band-foot .btn{justify-content:flex-start}
 }
 </style>
 </head>
@@ -768,8 +878,9 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 
     <div class="nav-right">
       <div class="lang" role="group" aria-label="Language">
-        <button type="button" aria-pressed="true">EN</button>
-        <button type="button" aria-pressed="false">中文</button>
+        <button type="button" aria-pressed="true">ENG</button>
+        <button type="button" aria-pressed="false">简体</button>
+        <button type="button" aria-pressed="false">繁體</button>
       </div>
       <a class="login" href="login.html">Login</a>
       <a class="btn btn--sm" href="register.html">Register <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
@@ -788,13 +899,13 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
         <li><a href="sdk.html">SDK</a></li>
         <li><a href="skills.html">Skills</a></li>
         <li><a href="ai-assistant.html">AI Assistant</a></li>
-        <li><a href="login.html">Login</a></li>
       </ul>
       <div class="m-cta">
-        <a class="btn btn--sm" href="register.html">Register <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
+        <a class="btn btn--ghost" href="login.html">Login <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
         <div class="lang" role="group" aria-label="Language">
-        <button type="button" aria-pressed="true">EN</button>
-        <button type="button" aria-pressed="false">中文</button>
+        <button type="button" aria-pressed="true">ENG</button>
+        <button type="button" aria-pressed="false">简体</button>
+        <button type="button" aria-pressed="false">繁體</button>
       </div>
       </div>
     </div>
@@ -806,9 +917,12 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
   <div class="band-grid" aria-hidden="true"></div>
   <div class="wrap band-in">
       <p class="crumb"><a href="api-docs-hotel.html">Docs centre</a> <i>/</i> <span>F-Link Flight API</span></p>
-      <p class="eyebrow micro">Direct airline seat inventory</p>
-      <h1>F-Link Flight API.</h1>
-      <p class="lede">Domestic and international carriers with BSP support, covering search, pricing, ticketing, refunds and changes. Nineteen endpoints, one language-scoped path pattern.</p>
+      <div class="band-top">
+        <p class="eyebrow micro">Direct airline seat inventory</p>
+        
+      </div>
+      <h1>F-Link Flight API</h1>
+      <p class="lede"><b>Direct airline seat inventory.</b> Domestic and international carriers with BSP support, covering search, pricing, ticketing, refunds and changes. Nineteen endpoints, one path pattern.</p>
       <div class="band-foot"><nav class="rail" aria-label="Section"><a href="api-docs-hotel.html">G-Link Hotel</a><a class="on" href="api-docs-flink.html">F-Link Flight</a><a href="api-docs-hotel-process.html">Integration flow</a><a href="api-docs-hotel-apis.html">API reference</a><a href="api-docs-errors.html">Error codes</a></nav><a class="btn btn--sm" href="sdk.html">Download SDK <iconify-icon icon="solar:download-minimalistic-linear" aria-hidden="true"></iconify-icon></a></div>
   </div>
 </section>
@@ -832,25 +946,25 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
   <table class="tbl" style="min-width:720px">
     <thead><tr><th>No.</th><th>Interface</th><th>Method</th><th>Path</th></tr></thead>
     <tbody>
-      <tr><td class="num">1</td><td>Flight search</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/search</td></tr>
-      <tr><td class="num">2</td><td>Get more fare quotes</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/cabin</td></tr>
-      <tr><td class="num">3</td><td>Pre-booking price verification</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/verify</td></tr>
-      <tr><td class="num">4</td><td>Submit pre-booking order</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/order/create</td></tr>
-      <tr><td class="num">5</td><td>Order payment</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/order/pay</td></tr>
-      <tr><td class="num">6</td><td>Standard order details</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/order/detail</td></tr>
-      <tr><td class="num">7</td><td>Cancel standard order</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/order/cancel</td></tr>
-      <tr><td class="num">8</td><td>Change flight search</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/change/search</td></tr>
-      <tr><td class="num">9</td><td>Submit change request</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/change/apply</td></tr>
-      <tr><td class="num">10</td><td>Cancel change request</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/change/cancel</td></tr>
-      <tr><td class="num">11</td><td>Change request details</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/change/detail</td></tr>
-      <tr><td class="num">12</td><td>Submit refund request</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/refund/apply</td></tr>
-      <tr><td class="num">13</td><td>Refund request details</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/refund/detail</td></tr>
-      <tr><td class="num">14</td><td>Confirm or cancel refund</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/flight/refund/confirm</td></tr>
-      <tr><td class="num">15</td><td>Query airport information</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/airports/list</td></tr>
-      <tr><td class="num">16</td><td>Query airline information</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/airlines/list</td></tr>
-      <tr><td class="num">17</td><td>Search airport information</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/airports/search</td></tr>
-      <tr><td class="num">18</td><td>Query nationality list</td><td class="mid"><span class="method">POST</span></td><td class="path">/openapi/v1/flink/&#123;lang&#125;/nationality/list</td></tr>
-      <tr><td class="num">19</td><td>Query translation information</td><td class="mid"><span class="method method--get">GET</span></td><td class="path">/openapi/v1/flink/fields</td></tr>
+      <tr><td class="t-num">1</td><td>Flight search</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/search</td></tr>
+      <tr><td class="t-num">2</td><td>Get more fare quotes</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/cabin</td></tr>
+      <tr><td class="t-num">3</td><td>Pre-booking price verification</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/verify</td></tr>
+      <tr><td class="t-num">4</td><td>Submit pre-booking order</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/order/create</td></tr>
+      <tr><td class="t-num">5</td><td>Order payment</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/order/pay</td></tr>
+      <tr><td class="t-num">6</td><td>Standard order details</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/order/detail</td></tr>
+      <tr><td class="t-num">7</td><td>Cancel standard order</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/order/cancel</td></tr>
+      <tr><td class="t-num">8</td><td>Change flight search</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/change/search</td></tr>
+      <tr><td class="t-num">9</td><td>Submit change request</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/change/apply</td></tr>
+      <tr><td class="t-num">10</td><td>Cancel change request</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/change/cancel</td></tr>
+      <tr><td class="t-num">11</td><td>Change request details</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/change/detail</td></tr>
+      <tr><td class="t-num">12</td><td>Submit refund request</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/refund/apply</td></tr>
+      <tr><td class="t-num">13</td><td>Refund request details</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/refund/detail</td></tr>
+      <tr><td class="t-num">14</td><td>Confirm or cancel refund</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/flight/refund/confirm</td></tr>
+      <tr><td class="t-num">15</td><td>Query airport information</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/airports/list</td></tr>
+      <tr><td class="t-num">16</td><td>Query airline information</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/airlines/list</td></tr>
+      <tr><td class="t-num">17</td><td>Search airport information</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/airports/search</td></tr>
+      <tr><td class="t-num">18</td><td>Query nationality list</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/flink/&#123;lang&#125;/nationality/list</td></tr>
+      <tr><td class="t-num">19</td><td>Query translation information</td><td class="t-mid"><span class="method method--get">GET</span></td><td class="t-path">/openapi/v1/flink/fields</td></tr>
     </tbody>
   </table>
 </div></div>
@@ -879,9 +993,9 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
       of a failed <code class="inl">order/create</code>.</span>
     </div>
 
-    <div class="band-foot" style="margin-top:8px">
+    <div class="band-foot">
       <a class="btn" href="api-docs-errors.html">Error code reference <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
-      <a class="tlink" href="skills.html">Install the F-Link Skills package <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
+      <a class="tlink tlink--o" href="skills.html">Install the F-Link Skills package <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
     </div>
   </div>
 </div>
@@ -931,7 +1045,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
     </div>
     <div class="ftr-bot">
       <span>© 2026 Fusion Connect Group Holdings Ltd (BVI). All rights reserved.</span>
-      <span class="mono">EN · 中文</span>
+      <span class="mono">ENG · 简体 · 繁體</span>
     </div>
   </div>
 </footer>
@@ -992,7 +1106,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
     });
   }, {rootMargin:'0px 0px -8% 0px', threshold:0.06});
   Array.prototype.forEach.call(items, function(el, i){
-    el.style.transitionDelay = (Math.min(i, 2) * 90) + 'ms';
+    el.style.transitionDelay = (Math.min(i, 3) * 60) + 'ms';
     io.observe(el);
   });
 })();
