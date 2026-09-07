@@ -198,13 +198,19 @@ h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent)}
 .shell a.on{background:#fff;font-weight:500}
 .nav-right{display:flex;align-items:center;gap:14px;margin-left:auto;flex:none}
 .lang{display:flex;align-items:center;padding:3px;background:var(--shell);border:1px solid var(--hair);border-radius:999px}
-.lang button{
+/* the control is <a> links across locales; <button> is kept so the same rules
+   apply if a locale ever needs an in-page toggle again */
+.lang button,.lang a{
+  display:inline-flex;align-items:center;justify-content:center;
   height:28px;padding:0 9px;border:0;background:transparent;border-radius:999px;cursor:pointer;
-  font-size:11.5px;font-weight:500;letter-spacing:.06em;color:var(--muted);
+  font-size:11.5px;font-weight:500;letter-spacing:.06em;color:var(--muted);text-decoration:none;
   transition:background var(--hover) ease,color var(--hover) ease,transform var(--press) var(--ease-out);
 }
-.lang button:active{transform:scale(.94)}
-.lang button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+.lang button:active,.lang a:active{transform:scale(.94)}
+.lang button[aria-pressed="true"],.lang a[aria-current="page"]{background:#fff;color:var(--ink)}
+@media (hover:hover) and (pointer:fine){
+  .lang a:not([aria-current="page"]):hover{color:var(--ink)}
+}
 .login{font-size:13.5px;font-weight:400;color:var(--ink);transition:color 240ms ease}
 @media (hover:hover) and (pointer:fine){ .login:hover{color:var(--muted)} }
 .burger{
@@ -834,6 +840,9 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
   .asks{position:static}
   .mini{grid-template-columns:minmax(0,1fr)}
   .mini div + div{border-left:0;border-top:1px solid var(--hair)}
+  /* stacking starts here, so the flush rule has to start here too — putting it
+     in the 640px block left 641-1000px indented */
+  .mini--aside div{padding-left:0;padding-right:0}
 }
 @media (max-width:640px){
   /* wrap the rail instead of scrolling it: a horizontal scroller on a phone
@@ -883,9 +892,9 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 
     <div class="nav-right">
       <div class="lang" role="group" aria-label="Language">
-        <button type="button" aria-pressed="true">ENG</button>
-        <button type="button" aria-pressed="false">简体</button>
-        <button type="button" aria-pressed="false">繁體</button>
+        <a href="api-docs-hotel.html" aria-current="page">ENG</a>
+        <a href="zh-CN/api-docs-hotel.html">简体</a>
+        <a href="zh-TW/api-docs-hotel.html">繁體</a>
       </div>
       <a class="login" href="login.html">Login</a>
       <a class="btn btn--sm" href="register.html">Register <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
@@ -908,9 +917,9 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
       <div class="m-cta">
         <a class="btn btn--ghost" href="login.html">Login <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
         <div class="lang" role="group" aria-label="Language">
-        <button type="button" aria-pressed="true">ENG</button>
-        <button type="button" aria-pressed="false">简体</button>
-        <button type="button" aria-pressed="false">繁體</button>
+        <a href="api-docs-hotel.html" aria-current="page">ENG</a>
+        <a href="zh-CN/api-docs-hotel.html">简体</a>
+        <a href="zh-TW/api-docs-hotel.html">繁體</a>
       </div>
       </div>
     </div>

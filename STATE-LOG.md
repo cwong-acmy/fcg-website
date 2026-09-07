@@ -1,5 +1,118 @@
 # STATE-LOG — FCG Website
 
+## 2026-09-07 (session 2) — Simplified and Traditional Chinese, and a design-system spec
+
+### What changed
+
+**36 pages now: English, Simplified Chinese and Traditional Chinese**, twelve each, at
+[variant-b-impeccable/](open-portal-redesign/variant-b-impeccable) with `zh-CN/` and `zh-TW/`
+subdirectories. The language control is real cross-locale links, wired correctly in all three
+directions, with the current locale marked `aria-current="page"`.
+
+**Only copy changes between locales, never layout** — enforced by construction, not by discipline.
+[i18n.py](open-portal-redesign/variant-b-impeccable/i18n.py) parses the built English page and swaps
+**text nodes and four translatable attributes only** (`placeholder`, `aria-label`, `title`, `content`).
+CSS, tokens, classes and markup are byte-identical across locales because nothing else is touched.
+
+**A design-system spec** → [DESIGN-SYSTEM.md](open-portal-redesign/DESIGN-SYSTEM.md). Written to be
+followed cold for a new page or an app screen: tokens, the accent law, type scale, the enforced copy
+rules, every component with real CSS, the motion rules, the layout traps that shipped as bugs in this
+build, the accessibility floor, and a section on what changes when applying this to app UI rather than
+marketing pages.
+
+### Decisions
+
+- **Translate the built HTML, not the content source.** Duplicating `pages_content.py` per locale would
+  have tripled 1,200 lines of structure and let the design drift silently between languages. Swapping
+  text nodes makes design drift impossible.
+- **Proved the round-trip is lossless before authoring a single translation.** Translating with an empty
+  table must reproduce the input byte-for-byte. It did not at first: Python's `HTMLParser` lowercases
+  attribute names, so `viewBox` became `viewbox` and the inlined wordmark stopped rendering. Fixed with
+  a small camelCase restore map, and losslessness is now asserted on every build — a new camelCase SVG
+  attribute fails the build rather than silently breaking a logo.
+- **Traditional Chinese is written for Taiwan/Hong Kong, not converted.** No converter was installed and
+  installing one needs approval, but hand-authoring was the better answer anyway: the regional IT and
+  travel vocabulary differs, so a glyph conversion produces mainland phrasing in Traditional characters.
+  介面 not 接口, 資料 not 數據, 伺服器 not 服務器, 金鑰 not 密鑰, 簽章 not 簽名, 權杖 not 令牌,
+  回呼 not 回調, 飯店 not 酒店, 開票 not 出票, 票價 not 運價, 登入 not 登錄, 主控台 not 控制台,
+  使用者名稱 not 用戶名, 電子郵件 not 郵箱, 原始碼 not 源碼, 簽核 not 審批, 商旅管理公司 not 差旅管理公司.
+- **Nothing is silently left in English.** The build reports every string with no table entry and exits
+  non-zero. Both tables hold 606 entries with identical key sets and zero untranslated strings.
+- **Product names, endpoint paths, error codes, field names and partner lockups stay as-is** in every
+  locale. Pattern-matched (a leading `/`, an `MCP001`-shaped code, a camelCase identifier, an install
+  command) rather than listed one by one.
+
+### Also in this session, before the Chinese work
+
+- **The orange pass** Crystal asked for, against three screenshots of the marketing site's own treatment:
+  orange eyebrow labels, an orange second clause on a headline, an orange lede lead-in, a tinted status
+  chip, orange mono card labels, one filled orange circular arrow on tertiary links. Buttons and panels
+  stay ink. Small orange text resolves through `--accent-ink`, so switching to the AA-passing `#C2410C`
+  is one value.
+- **Three copy rules, each enforced by the build and proved by deliberately breaking it:** an orange
+  `<em>` clause must follow a comma; an `<h1>` is a title and never ends in a full stop; one orange
+  emphasis per block. The orange clause is `display:block`, so a comma never orphans a word.
+- **A motion pass** on Emil Kowalski's framework — press feedback on every pressable, every hover gated
+  behind `(hover:hover) and (pointer:fine)`, custom curves, 160ms hover, 60ms stagger, layout properties
+  moved onto `transform`, the drawer transitioning with `allow-discrete` plus `@starting-style`, and
+  reduced-motion keeping opacity and colour rather than nuking every transition.
+- **Chips audited against the page.** Seven band chips removed for restating the heading or lede directly
+  below them; eight remain. Chips ride the eyebrow line, never the CTA row.
+- **Mobile fixes:** the tab rail now wraps instead of scrolling (a scroller hid options behind an edge),
+  buttons size to content with the label flush left, the drawer's CTA pill renders correctly, Login is a
+  full-width button there with Register kept in the header, and the language control is a full-width
+  three-way segmented row.
+
+### Verified
+
+- `verify-pages.js` — 12 pages × 1280 and 375, per locale. **English 24/24, zh-CN 24/24, zh-TW 24/24**,
+  no JS errors. It takes an optional locale argument: `node verify-pages.js zh-CN`.
+- `verify-motion.js` — **12/12**, no `transition:all`, no `scale(0)` entry, no `ease-in` on UI, no UI
+  transition over 300ms, no layout property animated, `:active` on every pressable, every hover gated.
+- Static: CSS token block and all `class` attributes byte-identical across the three locales; every
+  internal link resolves in every locale; the language switcher's nine cross-locale hrefs are correct.
+
+### Still open
+
+- **Nothing is deployed.** The live marketing site is served from OneDrive `07 Website` on nginx, not
+  this repo and not Vercel. The portal redesign has no deployment target agreed.
+- **The AA call on small orange text** is Crystal's, reversible in one token.
+- **Image generation still blocked** — both Google AI Studio keys return `429 free_tier limit 0`;
+  Higgsfield needs an interactive `hf auth login`. Brand-kit raster boards unbuilt, prompts stored.
+- **Six duplicate full-tree folders** remain untracked junk needing Crystal's approval to delete, along
+  with `.vercel/` and `.claude/`.
+- **All of this is on branch `portal-redesign-direction-b`**, not `main`, and is not pushed.
+
+### Learnings
+
+**Problem.** Ship three language editions of a twelve-page site without the design drifting between
+them, while the brief kept changing.
+
+**Approach.** Separate the two things that were being conflated: structure and copy. Generate the page
+once, then swap only its text nodes — so "the design is identical across locales" stops being a promise
+and becomes a property of the pipeline. Before authoring 1,352 translations, prove the swap is a no-op
+when the table is empty. Then drive the untranslated-string count to zero and let the build fail if it
+is ever non-zero.
+
+**Judgment calls — what was NOT done, and why.**
+- Did not duplicate the content module per locale. Three copies of the structure is three places for the
+  design to diverge, and the divergence would be invisible until someone opened two languages side by side.
+- Did not author a single translation until the identity round-trip was byte-for-byte clean. It was not,
+  and the failure was silent: a lowercased `viewBox` breaks the logo without any error.
+- Did not install a Simplified-to-Traditional converter, and would not have used one if it were present.
+  It solves the glyphs and leaves the vocabulary wrong for the audience.
+- Did not translate product names, endpoint paths, error codes or API field names, and matched them by
+  shape rather than listing them, so a new endpoint does not need a table entry.
+- Did not accept the horizontal-scroll check as proof of no clipping — `body{overflow-x:hidden}` turns
+  overflow into silent truncation, which is exactly how the tab rail shipped cut off.
+- Did not fix visual bugs from the screenshot alone. Reading the computed style named the colliding class
+  (`.path`) in one query; measuring the boxes showed a `min-height` was landing on the wrong element.
+
+**Reusable rule.** When one artefact must exist in several variants, make the variance a pipeline
+property rather than a copy: generate once, transform narrowly, and assert the transform is a no-op on
+empty input before trusting it with real content. And turn each accepted rule into a build assertion the
+moment it is agreed, then break it once to prove it fires.
+
 ## 2026-09-07 (later) — Direction B built out to 12 pages, then an orange pass
 
 ### What changed

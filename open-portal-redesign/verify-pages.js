@@ -10,7 +10,10 @@
 const puppeteer = require("puppeteer-core");
 const path = require("path");
 
-const DIR = path.join(__dirname, "variant-b-impeccable");
+// first arg may be a locale subdirectory: node verify-pages.js zh-CN [pages...]
+const argv = process.argv.slice(2);
+const LOCALE = ["zh-CN", "zh-TW"].includes(argv[0]) ? argv.shift() : "";
+const DIR = path.join(__dirname, "variant-b-impeccable", LOCALE);
 const OUT = path.join(__dirname, "shots", "b-pages");
 const ALL = [
   "index", "app-management", "api-docs-hotel", "api-docs-hotel-process",
@@ -18,7 +21,7 @@ const ALL = [
   "skills", "ai-assistant", "login", "register",
 ];
 
-const pages = process.argv.slice(2).length ? process.argv.slice(2) : ALL;
+const pages = argv.length ? argv : ALL;
 
 function audit() {
   const surf = [], smallOrange = [], overlap = [], misalign = [], fonts = new Set();
@@ -147,7 +150,7 @@ function audit() {
   page.on("console", (m) => { if (m.type() === "error") errors.push("console: " + m.text()); });
 
   let failing = 0;
-  for (const w of [1280, 375]) {
+  for (const w of [1280, 768, 375]) {
     await page.setViewport({ width: w, height: 900 });
     for (const name of pages) {
       // domcontentloaded, not networkidle2 — the Google Fonts / Iconify CDN stalls
@@ -184,7 +187,7 @@ function audit() {
       const info = w === 1280 ? `  small-orange x${m.smallOrangeCount}` : "";
       console.log(`${w} ${name.padEnd(26)}${f.length ? " FAIL " + f.join(" | ") : " ok"}${info}`);
       try {
-        await page.screenshot({ path: path.join(OUT, `${name}-${w}.png`), fullPage: true });
+        await page.screenshot({ path: path.join(OUT, `${LOCALE ? LOCALE + "-" : ""}${name}-${w}.png`), fullPage: true });
       } catch (e) {
         // a capture hiccup on a very tall page must not mask the checks above
         console.log(`     (screenshot skipped: ${e.message.split("\n")[0]})`);
@@ -193,7 +196,7 @@ function audit() {
   }
 
   console.log(`\nJS errors: ${errors.length ? JSON.stringify([...new Set(errors)].slice(0, 6)) : "none"}`);
-  console.log(`Failing checks: ${failing} / ${pages.length * 2}`);
+  console.log(`Failing checks: ${failing} / ${pages.length * 3}`);
   await page.close();
   browser.disconnect();
   process.exit(failing || errors.length ? 1 : 0);

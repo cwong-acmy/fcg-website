@@ -15,6 +15,12 @@ import re
 import sys
 from pathlib import Path
 
+import i18n
+from i18n_zh_cn import ZH_CN
+from i18n_zh_tw import ZH_TW
+
+TABLES = {"zh-CN": ZH_CN, "zh-TW": ZH_TW}
+
 HERE = Path(__file__).parent
 INDEX = HERE / "index.html"
 
@@ -89,17 +95,37 @@ LOGO = (
     'style="height: {h}px; width: auto;"><use href="#fcg-logo"></use></svg>'
 )
 
-LANG = """<div class="lang" role="group" aria-label="Language">
-        <button type="button" aria-pressed="true">ENG</button>
-        <button type="button" aria-pressed="false">简体</button>
-        <button type="button" aria-pressed="false">繁體</button>
-      </div>"""
+# code, output subdirectory, <html lang>, switcher label
+LOCALES = [
+    ("en", "", "en-GB", "ENG"),
+    ("zh-CN", "zh-CN", "zh-Hans", "简体"),
+    ("zh-TW", "zh-TW", "zh-Hant", "繁體"),
+]
+
+
+def lang_control(locale, slug):
+    """Real cross-locale links. Every locale holds the same filenames, so the
+    only thing that changes is the relative prefix."""
+    here = next(d for c, d, _, _ in LOCALES if c == locale)
+    out = []
+    for code, subdir, _, label in LOCALES:
+        if code == locale:
+            out.append(f'<a href="{slug}.html" aria-current="page">{label}</a>')
+            continue
+        up = "../" if here else ""
+        href = f"{up}{subdir + '/' if subdir else ''}{slug}.html"
+        out.append(f'<a href="{href}">{label}</a>')
+    inner = "\n        ".join(out)
+    return f'''<div class="lang" role="group" aria-label="Language">
+        {inner}
+      </div>'''
 
 ARROW = '<iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon>'
 
 
-def header(active="", minimal=False):
+def header(active="", minimal=False, locale="en", slug="index"):
     """Full portal header, or the reduced brand-only header the auth pages use."""
+    lang = lang_control(locale, slug)
     brand = (
         f'<a class="brand" href="index.html" aria-label="FCG Developer Platform — home">\n'
         f"      {LOGO.format(h=28)}\n"
@@ -113,7 +139,7 @@ def header(active="", minimal=False):
   <div class="wrap hdr-in">
     {brand}
     <div class="nav-right">
-      {LANG}
+      {lang}
       <a class="tlink" href="index.html">Back to platform {ARROW}</a>
     </div>
   </div>
@@ -134,7 +160,7 @@ def header(active="", minimal=False):
     </nav>
 
     <div class="nav-right">
-      {LANG}
+      {lang}
       <a class="login" href="login.html">Login</a>
       <a class="btn btn--sm" href="register.html">Register {ARROW}</a>
       <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Open menu">
@@ -150,7 +176,7 @@ def header(active="", minimal=False):
       </ul>
       <div class="m-cta">
         <a class="btn btn--ghost" href="login.html">Login {ARROW}</a>
-        {LANG}
+        {lang}
       </div>
     </div>
   </div>
@@ -510,6 +536,9 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
   .asks{position:static}
   .mini{grid-template-columns:minmax(0,1fr)}
   .mini div + div{border-left:0;border-top:1px solid var(--hair)}
+  /* stacking starts here, so the flush rule has to start here too — putting it
+     in the 640px block left 641-1000px indented */
+  .mini--aside div{padding-left:0;padding-right:0}
 }
 @media (max-width:640px){
   /* wrap the rail instead of scrolling it: a horizontal scroller on a phone
@@ -638,25 +667,41 @@ def check_em_rule(html, slug):
         )
 
 
-def build(slug, title, desc, body, nav="", minimal=False, extra=""):
+def build(slug, title, desc, body, nav="", minimal=False, extra="", locale="en"):
+    """Assemble one page for one locale. English is authored; the other locales
+    are the same document with its text nodes swapped, so markup and CSS are
+    identical across locales by construction."""
+    code, subdir, htmllang, _ = next(l for l in LOCALES if l[0] == locale)
+    head = HEAD_OPEN.replace('<html lang="en-GB"', f'<html lang="{htmllang}"')
+
     html = PAGE.format(
-        head=HEAD_OPEN,
+        head=head,
         title=title,
         desc=desc,
         css=CSS,
         pagecss=PAGE_CSS,
         symbol=SYMBOL,
-        header=header(nav, minimal),
+        header=header(nav, minimal, locale, slug),
         body=body.strip("\n"),
         footer=footer(),
         script=SCRIPT,
         extra=extra,
     )
-    check_em_rule(html, slug)
-    check_h1_rule(html, slug)
-    check_double_orange(html, slug)
-    (HERE / f"{slug}.html").write_text(html, encoding="utf-8")
-    return len(html)
+
+    # the copy rules are checked on the authored English, where they are written
+    if locale == "en":
+        check_em_rule(html, slug)
+        check_h1_rule(html, slug)
+        check_double_orange(html, slug)
+
+    missing = set()
+    if locale != "en":
+        html, missing = i18n.translate(html, TABLES[locale])
+
+    out_dir = HERE / subdir if subdir else HERE
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / f"{slug}.html").write_text(html, encoding="utf-8")
+    return len(html), missing
 
 
 def patch_index():
@@ -671,6 +716,21 @@ def patch_index():
     return False
 
 
+def build_index_locale(locale):
+    """index.html is the shell donor, not generated from pages_content, so its
+    locale copies are made by swapping the chrome and translating in place."""
+    code, subdir, htmllang, _ = next(l for l in LOCALES if l[0] == locale)
+    src = INDEX.read_text(encoding="utf-8")
+    src = src.replace('<html lang="en-GB"', f'<html lang="{htmllang}"')
+    old_hdr = cut(src, '<header class="hdr" id="hdr">', "</header>")
+    src = src.replace(old_hdr, header("home", False, locale, "index"))
+    html, missing = i18n.translate(src, TABLES[locale])
+    out = HERE / subdir
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "index.html").write_text(html, encoding="utf-8")
+    return len(html), missing
+
+
 if __name__ == "__main__":
     import pages_content
 
@@ -680,9 +740,29 @@ if __name__ == "__main__":
     check_h1_rule(_idx, "index.html")
     check_double_orange(_idx, "index.html")
     print(f"index.html nav/footer: {'rewritten' if changed else 'already current'}")
-    total = 0
-    for spec in pages_content.PAGES:
-        n = build(**spec)
-        total += n
-        print(f"  {spec['slug']+'.html':<28} {n/1024:6.1f} KB")
-    print(f"{len(pages_content.PAGES)} pages, {total/1024:.0f} KB total")
+
+    all_missing = {}
+    for code, subdir, _, _ in LOCALES:
+        total, miss = 0, set()
+        for spec in pages_content.PAGES:
+            n, m = build(**spec, locale=code)
+            total += n
+            miss |= m
+        if code != "en":
+            n, m = build_index_locale(code)
+            total += n
+            miss |= m
+        else:
+            total += len(_idx)
+        label = subdir or "en (root)"
+        print(f"  {label:<12} {len(pages_content.PAGES) + 1:>2} pages  {total/1024:6.0f} KB"
+              + (f"  ⚠ {len(miss)} untranslated" if miss else "  fully translated" if code != "en" else ""))
+        if miss:
+            all_missing[code] = miss
+
+    if all_missing:
+        for code, miss in all_missing.items():
+            print(f"\n{code} is missing {len(miss)} strings:")
+            for s in sorted(miss)[:20]:
+                print(f"    {s!r}")
+        sys.exit("translation incomplete — every string must have an entry")
