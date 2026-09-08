@@ -29,7 +29,9 @@
   /* Small orange text. #F97316 on white is 2.80:1 and fails AA below 18px;
      the marketing site does this and Crystal asked to match it. Switch this
      one value to #C2410C (4.6:1) to make every small orange label pass. */
-  --accent-ink:#F97316;
+  --accent-ink:#EA580C;   /* orange TEXT. 3.56:1 on white: clears AA at 18px+,
+                             still under 4.5:1 for small labels — Crystal's call,
+                             8 Sept 2026. Graphics keep --accent. */
   --footer:#f7f8fa;
   --dark:#0F1114;
   --dark-line:#26282C;
@@ -73,7 +75,7 @@ ul{margin:0;padding:0;list-style:none}
 /* eyebrow: orange dash + orange label, as on the marketing site.
    Colour comes from --accent-ink so the AA swap is one token. */
 .eyebrow{display:flex;align-items:center;gap:10px;color:var(--accent-ink)}
-.eyebrow::before{content:"";width:12px;height:1.5px;background:var(--accent);flex:none;border-radius:2px}
+.eyebrow::before{content:"";width:12px;height:1.5px;background:currentColor;flex:none;border-radius:2px}
 .eyebrow--c{justify-content:center}
 
 .h2{font-size:clamp(32px,5.1vw,72px);line-height:1.02;letter-spacing:-.03em}
@@ -83,7 +85,7 @@ ul{margin:0;padding:0;list-style:none}
    phrase of a lede. Both are the marketing site's own pattern. */
 /* the orange clause always starts its own line, so the comma never leaves
    an orphan word at the end of the ink line */
-h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent)}
+h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent-ink)}
 .lede b{font-weight:400;color:var(--accent-ink)}
 .sec-head{display:flex;flex-direction:column;gap:22px;margin-bottom:64px}
 .sec-head--c{align-items:center;text-align:center}
@@ -373,7 +375,7 @@ h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent)}
 .stat{padding:46px 28px 44px}
 .stat + .stat{border-left:1px solid var(--hair)}
 .stat .n{font-size:clamp(38px,4.4vw,62px);line-height:1;letter-spacing:-.03em;font-weight:500;color:var(--ink)}
-.stat .n u{text-decoration:none;color:var(--accent)}
+.stat .n u{text-decoration:none;color:var(--accent-ink)}
 .stat .c{margin-top:16px;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
 
 /* ============================================================

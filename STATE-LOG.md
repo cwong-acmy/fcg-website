@@ -52,11 +52,25 @@ button, blue/green/purple chart series, a blue donut labelled "No data 100%" whe
 blue sidebar active state, drop-shadowed cards, a Poppins-ish heading face, and a brand lockup that
 truncates to "FCG Developer Plat…" at 1440px. All of it is fixed in the rebuild.
 
+### The orange decision, closed
+
+`--accent-ink` is now **`#EA580C`** (3.56:1), chosen by Crystal on appearance over the recommended
+`#C2410C` (5.18:1), which read as too dark. Measured, not estimated — the previous session's note said
+`#C2410C` was 4.6:1; it is 5.18:1.
+
+The finding that changed the shape of this decision: `#F97316` at 2.80:1 fails AA for **large** text as
+well as small, so the 62px `4.35M+` statistic — the site's signature device — was also below the bar, not
+just the little labels. `#EA580C` fixes that. **The small labels (11px eyebrow, 16px lede lead-in, 11.5px
+chip, 10.5px card key) still fail at 3.56:1, knowingly.** Recorded in DESIGN-SYSTEM §2 so an audit finds
+the decision rather than the defect.
+
+Implementation is a clean token split: `--accent-ink` colours every orange character at any size,
+`--accent` `#F97316` fills every orange shape. Seven rules that set type in `--accent` were moved across,
+so the contrast value is now genuinely one line. The eyebrow dash moved to `currentColor` — it sits 10px
+from its label and two different oranges side by side read as a mistake.
+
 ### Blockers
 
-- **Small orange text still unresolved** from the previous session: `#F97316` is 2.80:1 on white.
-  Nothing in the console uses orange below 18px, so the console is unaffected either way, but the
-  recommendation stands at `#C2410C` for small orange text.
 - **i18n for the console not started** (63 pages when it is).
 - Carried over: six untracked duplicate full-tree copies still awaiting a delete decision.
 

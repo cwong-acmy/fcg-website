@@ -245,7 +245,7 @@ PAGE_CSS = """<style>
 /* eyebrow + status chip share one micro row, so the CTA row stays CTAs only */
 .band-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
 .band h1{font-size:clamp(34px,4.6vw,62px);line-height:1.02;letter-spacing:-.032em;max-width:22ch}
-.band h1 em{display:block;font-style:normal;color:var(--accent)}
+.band h1 em{display:block;font-style:normal;color:var(--accent-ink)}
 .band .lede{font-size:16.5px;line-height:27px;max-width:60ch}
 .band-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px;width:100%;min-width:0}
 .crumb{display:flex;align-items:center;gap:8px;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
@@ -332,7 +332,7 @@ table.tbl td{border-radius:0;background:none}
 .docs-main > * + .ep{margin-top:28px}
 .docs-main > * + .band-foot{margin-top:40px}
 .docs-main h2{font-size:clamp(24px,2.4vw,32px);line-height:1.12;letter-spacing:-.02em}
-.docs-main h2 em{display:block;font-style:normal;color:var(--accent)}
+.docs-main h2 em{display:block;font-style:normal;color:var(--accent-ink)}
 .docs-main h3{font-size:19px;letter-spacing:-.01em}
 .docs-main h4{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .docs-main p{color:var(--muted);font-size:15px;line-height:25px;max-width:66ch}
@@ -414,7 +414,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .mini div{padding:30px 24px}
 .mini div + div{border-left:1px solid var(--hair)}
 .mini .n{font-size:clamp(28px,3vw,42px);line-height:1;letter-spacing:-.03em;font-weight:500}
-.mini .n u{text-decoration:none;color:var(--accent)}
+.mini .n u{text-decoration:none;color:var(--accent-ink)}
 .mini .c{margin-top:12px;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
 .mini--aside{border-bottom:0;background:transparent}
 .mini--aside div{padding:30px 22px}
@@ -429,7 +429,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .auth-aside .wrap{position:sticky;top:0}
 .auth-aside .wrap{max-width:none;padding:0 64px 0 max(32px,calc((100vw - var(--wrap)) / 2 + 32px));width:100%}
 .auth-aside .ahead{font-size:clamp(30px,3.6vw,50px);line-height:1.04;letter-spacing:-.03em;max-width:18ch;margin-top:22px;color:var(--ink);font-weight:500}
-.auth-aside .ahead em{display:block;font-style:normal;color:var(--accent)}
+.auth-aside .ahead em{display:block;font-style:normal;color:var(--accent-ink)}
 .auth-aside .lede{margin-top:22px;font-size:16px;line-height:26px;max-width:44ch}
 .auth-main{display:flex;align-items:center;justify-content:center;padding:64px 32px 72px;background:var(--footer)}
 .auth-card{width:100%;max-width:436px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:40px 38px 36px}

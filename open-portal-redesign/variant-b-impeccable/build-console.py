@@ -127,7 +127,7 @@ body{overflow-x:visible}
 /* one orange unit per row, on the tile that leads. Four orange units in a
    row of four tiles reads as a colour wash, which is what the accent law
    is there to prevent. */
-.kpi--lead .kpi-v u{color:var(--accent)}
+.kpi--lead .kpi-v u{color:var(--accent-ink)}
 .kpi-f{font-size:12.5px;color:var(--muted)}
 
 /* ---------- filter bar ---------- */

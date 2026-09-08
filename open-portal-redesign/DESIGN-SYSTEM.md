@@ -51,7 +51,7 @@ Copy this block verbatim. Do not introduce a colour that is not here.
   --hair-soft:rgba(15,17,20,.06); /* quietest: list item dividers */
   --shell:rgba(15,17,20,.04); /* nav shell and tab rail ground */
   --accent:#F97316;           /* graphics only — see §2 */
-  --accent-ink:#F97316;       /* small orange TEXT — see §2 */
+  --accent-ink:#EA580C;       /* ALL orange text, any size — see §2 */
   --footer:#f7f8fa;           /* footer and auth-form ground */
   --dark:#0F1114;             /* the terminal block, the only dark surface */
   --dark-line:#26282C;
@@ -98,15 +98,32 @@ primary button is a black pill. Always.
 **One orange emphasis per block.** If a heading already carries an orange clause, its lede does **not** also
 get an orange lead-in. The build enforces this.
 
-**Contrast, stated plainly.** `#F97316` on white is **2.80:1** and fails WCAG AA below 18px. Every small
-orange label in this system resolves through `--accent-ink`, so the fix is one value:
+**Contrast, stated plainly.** `#F97316` on white is **2.80:1**. That is under 4.5:1, so it fails AA for
+text below 18px — and under 3:1, so it fails AA for large text too, including the 62px statistic suffix.
+The failure was never limited to small labels.
 
-```css
---accent-ink:#C2410C;   /* 4.6:1 — every small orange label passes AA */
-```
+**Decided 8 September 2026: `--accent-ink:#EA580C`, measured 3.56:1.** Crystal chose it over `#C2410C`
+(5.18:1) on appearance; `#C2410C` read as too dark. So:
 
-`--accent` stays `#F97316` for graphics and display-size text either way. Crystal chose to match the
-marketing site, which has this failure; the swap is one line whenever that changes.
+| | ratio | 18px and above | below 18px |
+|---|---|---|---|
+| `#F97316` — was | 2.80:1 | fail | fail |
+| **`#EA580C` — now** | **3.56:1** | **pass** | **fail** |
+| `#C2410C` — rejected | 5.18:1 | pass | pass |
+
+**The small labels still fail, knowingly.** Eyebrows (11px), the lede lead-in (16px), the live chip
+(11.5px) and the icon-card key (10.5px) are all below 4.5:1 at `#EA580C`. This is a recorded brand
+decision, not an oversight. Anyone auditing this system will find it; do not silently "fix" it, and do
+not report it as passing AA. The 62px statistic suffix does now pass.
+
+**Two tokens, one job each.** `--accent-ink` colours every orange *character* on the page at any size —
+eyebrow, lede lead-in, chip label, card key, headline `<em>`, statistic unit, console KPI unit. `--accent`
+`#F97316` fills every orange *shape* — status dots, arcs, the terminal cursor, focus rings, the selection
+highlight. No rule sets type in `--accent`; that is what makes the contrast decision a one-line change.
+
+The one exception is the **eyebrow dash**, which is `currentColor`. It sits 10px from its label and is
+read as part of the same lockup, so two different oranges side by side read as a mistake rather than a
+system.
 
 ---
 
