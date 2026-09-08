@@ -177,8 +177,8 @@ h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent)}
 .skip:focus{transform:none}
 .hdr{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color 240ms ease}
 .hdr.stuck{border-bottom-color:var(--hair)}
-.hdr-in{display:flex;align-items:center;gap:22px;height:76px}
-.brand{display:flex;align-items:center;gap:13px;flex:none}
+.hdr-in{display:flex;align-items:center;gap:14px;height:76px}
+.brand{display:flex;align-items:center;gap:11px;flex:none}
 .brand svg{height:26px;width:auto;color:var(--ink)}
 .brand-div{width:1px;height:20px;background:var(--line);flex:none}
 .brand-sub{font-size:11px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
@@ -188,21 +188,21 @@ h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent)}
   background:var(--shell);border:1px solid var(--hair);border-radius:999px;
 }
 .shell a{
-  display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 15px;border-radius:999px;
-  font-size:13.5px;font-weight:400;color:var(--ink);white-space:nowrap;
+  display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 11px;border-radius:999px;
+  font-size:13px;font-weight:400;color:var(--ink);white-space:nowrap;
   transition:background 240ms ease,color 240ms ease;
 }
 .shell a{transition:background var(--hover) ease,color var(--hover) ease,transform var(--press) var(--ease-out)}
 .shell a:active{transform:scale(.97)}
 @media (hover:hover) and (pointer:fine){ .shell a:hover{background:#fff} }
 .shell a.on{background:#fff;font-weight:500}
-.nav-right{display:flex;align-items:center;gap:14px;margin-left:auto;flex:none}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto;flex:none}
 .lang{display:flex;align-items:center;padding:3px;background:var(--shell);border:1px solid var(--hair);border-radius:999px}
 /* the control is <a> links across locales; <button> is kept so the same rules
    apply if a locale ever needs an in-page toggle again */
 .lang button,.lang a{
   display:inline-flex;align-items:center;justify-content:center;
-  height:28px;padding:0 9px;border:0;background:transparent;border-radius:999px;cursor:pointer;
+  height:28px;padding:0 7px;border:0;background:transparent;border-radius:999px;cursor:pointer;
   font-size:11.5px;font-weight:500;letter-spacing:.06em;color:var(--muted);text-decoration:none;
   transition:background var(--hover) ease,color var(--hover) ease,transform var(--press) var(--ease-out);
 }
@@ -211,7 +211,7 @@ h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent)}
 @media (hover:hover) and (pointer:fine){
   .lang a:not([aria-current="page"]):hover{color:var(--ink)}
 }
-.login{font-size:13.5px;font-weight:400;color:var(--ink);transition:color 240ms ease}
+.login{font-size:13px;font-weight:400;color:var(--ink);transition:color 240ms ease}
 @media (hover:hover) and (pointer:fine){ .login:hover{color:var(--muted)} }
 .burger{
   display:none;width:42px;height:42px;align-items:center;justify-content:center;
@@ -238,14 +238,15 @@ h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent)}
 
 /* ---------- Products mega menu ---------- */
 .shell .drop-t{
-  display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 15px;
+  display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;
   border:0;border-radius:999px;background:transparent;cursor:pointer;
-  font-family:inherit;font-size:13.5px;font-weight:400;color:var(--ink);white-space:nowrap;
+  font-family:inherit;font-size:13px;font-weight:400;color:var(--ink);white-space:nowrap;
   transition:background var(--hover) ease,color var(--hover) ease,transform var(--press) var(--ease-out);
 }
 .shell .drop-t:active{transform:scale(.97)}
 @media (hover:hover) and (pointer:fine){ .shell .drop-t:hover{background:#fff} }
 .shell .drop-t[aria-expanded="true"]{background:#fff;font-weight:500}
+.shell .drop-t.on{background:#fff;font-weight:500}
 /* the chevron is the shared arrow glyph turned, so the menu adds no new icon */
 .drop-c{font-size:14px;transform:rotate(90deg);transition:transform 240ms var(--ease-out)}
 .drop-t[aria-expanded="true"] .drop-c{transform:rotate(-90deg)}
@@ -498,11 +499,21 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s var(--ease),transf
    ============================================================ */
 @media (max-width:1180px){
   :root{--sec:112px}
-  .shell a{padding:0 12px;font-size:13px}
+  .shell a{padding:0 10px}
+  .shell .drop-t{padding:0 11px}
   .hero-in{gap:44px}
   .skills{gap:48px}
   .dhead,.drow{grid-template-columns:minmax(0,1.2fr) minmax(0,1.1fr) minmax(0,1fr) 130px;gap:18px;padding:20px}
   .dhead{padding:14px 20px}
+}
+
+/* The pill nav only fits inside the 1200px content column down to 1180px.
+   Below that the drawer takes over: a header that overflows the page was the
+   pre-existing behaviour here and it scrolled the whole document sideways. */
+@media (max-width:1179px){
+  .shell,.nav-right .login,.nav-right .lang{display:none}
+  .burger{display:flex}
+  .mega{display:none}
 }
 @media (max-width:1000px){
   .shell,.nav-right .login,.nav-right .lang{display:none}
@@ -914,6 +925,75 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
   .card-h,.card-f,.card-meta{padding-left:20px;padding-right:20px}
   .band-foot .btn{justify-content:flex-start}
 }
+
+/* A bare <code> falls back to the browser's monospace, which is a different
+   face from --mono and shows up as a font violation in verify-pages.js. */
+table.tbl code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em}
+.flow code{font-family:inherit;font-size:inherit;letter-spacing:inherit}
+
+/* ---------- three-up step grid (the flow page runs eight, these run three) --- */
+.steps--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+/* ---------- coverage figure ---------- */
+.covr{
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+  border:1px solid var(--line);border-radius:24px;overflow:hidden;background:#fff;
+}
+.covr-fig{
+  display:flex;align-items:center;justify-content:center;padding:26px;
+  background:var(--card);border-right:1px solid var(--hair);
+}
+.covr-fig svg{display:block;width:100%;max-width:460px;height:auto}
+.covr-side{display:flex;flex-direction:column;justify-content:center;gap:24px;padding:34px}
+.covr-side h3{font-size:19px;font-weight:500;letter-spacing:-.01em}
+.covr-side .lede{font-size:14px;line-height:23px}
+.lgnd{display:flex;flex-direction:column}
+.lgnd li{
+  display:flex;align-items:center;gap:15px;padding:13px 0;
+  border-top:1px solid var(--hair-soft);font-size:14px;color:var(--ink);
+}
+.lgnd li:last-child{border-bottom:1px solid var(--hair-soft)}
+.lgnd .sw{flex:none;width:22px;display:flex;align-items:center;justify-content:center}
+.lgnd .sw i{display:block;border-radius:999px;background:var(--accent)}
+.lgnd .cap{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted)}
+
+/* ---------- definition rows (metric or filter, label + one line) ----------
+   Capped at 940px: at the full 1200px wrap the description drifts so far from
+   its label that the pair stops reading as one row. */
+.defs{border-top:1px solid var(--hair);max-width:940px}
+.defs > div{
+  display:grid;grid-template-columns:minmax(0,250px) minmax(0,1fr);gap:24px;
+  padding:20px 0;border-bottom:1px solid var(--hair);align-items:baseline;
+}
+.defs .dt{font-size:15px;font-weight:500;letter-spacing:-.01em;color:var(--ink)}
+.defs .dd{font-size:14.5px;line-height:24px;color:var(--muted);max-width:60ch}
+/* two-up: a long reference list reads as a lookup table, not a second essay */
+.defs--2{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:60px;
+  border-top:0;max-width:100%;
+}
+.defs--2 > div{
+  grid-template-columns:minmax(0,1fr);gap:5px;padding:17px 0;align-items:start;
+  border-top:1px solid var(--hair);border-bottom:0;
+}
+@media (max-width:900px){
+  .steps--3{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .defs--2{grid-template-columns:minmax(0,1fr);column-gap:0}
+}
+@media (max-width:640px){
+  .steps--3{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .covr{grid-template-columns:minmax(0,1fr)}
+  .covr-fig{border-right:0;border-bottom:1px solid var(--hair);padding:26px}
+  .defs > div{grid-template-columns:minmax(0,1fr);gap:6px}
+}
+@media (max-width:900px){
+  .covr{grid-template-columns:minmax(0,1fr)}
+  .covr-fig{border-right:0;border-bottom:1px solid var(--hair)}
+}
 </style>
 </head>
 <body>
@@ -965,7 +1045,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
               <span class="mega-ic"><iconify-icon icon="solar:widget-5-linear" aria-hidden="true"></iconify-icon></span>
               <span class="mega-tx"><b>應用程式管理</b><span>建立應用程式並管理介接權限</span></span>
             </a></li>
-            <li><a class="mega-i" href="index.html#start-integration">
+            <li><a class="mega-i" href="sandbox.html">
               <span class="mega-ic"><iconify-icon icon="solar:key-minimalistic-linear" aria-hidden="true"></iconify-icon></span>
               <span class="mega-tx"><b>沙箱</b><span>在受控環境中測試介接</span></span>
             </a></li>
@@ -997,15 +1077,15 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
           <p class="mega-h" id="mega-h2">營運</p>
           <nav aria-labelledby="mega-h2">
           <ul>
-            <li><a class="mega-i" href="api-docs-errors.html">
+            <li><a class="mega-i" href="request-trace.html">
               <span class="mega-ic"><iconify-icon icon="solar:route-linear" aria-hidden="true"></iconify-icon></span>
               <span class="mega-tx"><b>請求追蹤</b><span>檢視呼叫並診斷介接問題</span></span>
             </a></li>
-            <li><a class="mega-i" href="index.html#network">
+            <li><a class="mega-i" href="coverage-map.html">
               <span class="mega-ic"><iconify-icon icon="solar:global-linear" aria-hidden="true"></iconify-icon></span>
               <span class="mega-tx"><b>資源覆蓋地圖</b><span>介接前先了解飯店資源覆蓋範圍</span></span>
             </a></li>
-            <li><a class="mega-i" href="api-docs-hotel-process.html">
+            <li><a class="mega-i" href="hotel-mapping.html">
               <span class="mega-ic"><iconify-icon icon="solar:bed-linear" aria-hidden="true"></iconify-icon></span>
               <span class="mega-tx"><b>飯店對應</b><span>在同一工作區標準化供應商資料</span></span>
             </a></li>
@@ -1021,7 +1101,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
         <p class="micro m-h">開始</p>
         <ul>
           <li><a href="app-management.html">應用程式管理</a></li>
-          <li><a href="index.html#start-integration">沙箱</a></li>
+          <li><a href="sandbox.html">沙箱</a></li>
         </ul>
         <p class="micro m-h">建置</p>
         <ul>
@@ -1031,9 +1111,9 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
         </ul>
         <p class="micro m-h">營運</p>
         <ul>
-          <li><a href="api-docs-errors.html">請求追蹤</a></li>
-          <li><a href="index.html#network">資源覆蓋地圖</a></li>
-          <li><a href="api-docs-hotel-process.html">飯店對應</a></li>
+          <li><a href="request-trace.html">請求追蹤</a></li>
+          <li><a href="coverage-map.html">資源覆蓋地圖</a></li>
+          <li><a href="hotel-mapping.html">飯店對應</a></li>
         </ul>
         <p class="micro m-h">更多</p>
         <ul>
@@ -1184,6 +1264,8 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
           <li><a href="api-docs-hotel.html">G-Link Hotel API</a></li>
           <li><a href="api-docs-flink.html">F-Link Flight API</a></li>
           <li><a href="index.html#products">TMC API</a></li>
+          <li><a href="coverage-map.html">資源覆蓋地圖</a></li>
+          <li><a href="hotel-mapping.html">飯店對應</a></li>
           <li><a href="index.html#use-cases">產品應用情境</a></li>
         </ul>
         </nav>
@@ -1205,6 +1287,8 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
         <ul>
           <li><a href="index.html">首頁</a></li>
           <li><a href="app-management.html">應用程式管理</a></li>
+          <li><a href="sandbox.html">沙箱</a></li>
+          <li><a href="request-trace.html">請求追蹤</a></li>
           <li><a href="ai-assistant.html">AI 助理</a></li>
           <li><a href="register.html">註冊</a></li>
         </ul>

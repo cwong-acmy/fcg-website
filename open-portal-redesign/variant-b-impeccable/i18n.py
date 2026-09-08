@@ -215,7 +215,12 @@ class _Translate(HTMLParser):
         self.out.append(f"<{tag}{self._attrs(attrs)}>")
 
     def handle_startendtag(self, tag, attrs):
-        self.out.append(f"<{tag}{self._attrs(attrs)}>")
+        # An HTML void element is self-closing by definition, so "<br/>" and
+        # "<br>" are the same element. Inside SVG nothing is void: dropping the
+        # slash from "<circle .../>" leaves the element open and every shape
+        # after it nests inside a shape, which renders as nothing at all.
+        close = "" if tag in VOID else "/"
+        self.out.append(f"<{tag}{self._attrs(attrs)}{close}>")
 
     def handle_endtag(self, tag):
         _pop(self.stack, tag)

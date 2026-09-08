@@ -1,5 +1,99 @@
 # STATE-LOG — FCG Website
 
+## 2026-09-08 (session 2) — The four Products pages, built and design-checked
+
+### What changed
+
+**Sandbox, Request Trace, Coverage Map and Hotel Mapping are real pages.** The Products mega menu's four
+placeholder destinations now point at
+[sandbox](open-portal-redesign/variant-b-impeccable/sandbox.html),
+[request-trace](open-portal-redesign/variant-b-impeccable/request-trace.html),
+[coverage-map](open-portal-redesign/variant-b-impeccable/coverage-map.html) and
+[hotel-mapping](open-portal-redesign/variant-b-impeccable/hotel-mapping.html), authored in
+[pages_content.py](open-portal-redesign/variant-b-impeccable/pages_content.py) and built in all three
+locales. The portal is 16 pages × 3 locales = 48.
+
+Content came from the console captures in
+[reference/console-dev](open-portal-redesign/reference/console-dev) — the four screenshots plus
+`_text.json` — rewritten into FCG's declarative voice in British English. Nothing was invented: where the
+console shows a control but not its data (batch statuses, coverage counts), the page describes what the
+control reports instead of showing a fabricated number.
+
+**Coverage Map carries the one new component**: an orthographic wireframe globe, tilt 18°, centred on
+60°E, with hidden-line removal, plotted from real city coordinates and sized by the console's own legend
+bands. Geometry is generated once and baked in, not computed at build time.
+
+**Nav and chrome:** the Products trigger now takes an active state on the four menu-only pages, the
+footer picks all four up, and `verify-pages.js` covers them.
+
+### Decisions
+
+- **Extension, not a new visual world.** Impeccable's `context.mjs` asked for `init`/PRODUCT.md first;
+  skipped deliberately. `open-portal-redesign/DESIGN-SYSTEM.md` plus the twelve built pages already are
+  the authority, and interviewing for product truth would have re-derived what the repo states.
+- **No fabricated data anywhere.** Request Trace shows an illustrative table with `{trace_id}`-style
+  placeholders and a `.disclaim`, which is the pattern index.html already uses. Hotel Mapping's batch
+  history became a column-definition list instead of a second placeholder table — repeating the device
+  twice would have read as filler.
+- **Grouped IA taken from the console.** Two rails: App Management / Sandbox / Request Trace (the
+  console's "Integration & Debugging") and Coverage Map / Hotel Mapping (its "Hotel Catalog").
+- **Nine filters two-up.** A nine-row full-width definition list read as a second essay directly under a
+  six-row one; the two-column variant reads as a lookup.
+
+### Fixed along the way
+
+- **`i18n.py` dropped the slash from self-closing tags.** Harmless for `<br/>`, fatal for SVG: `<circle
+  .../>` came out as `<circle ...>`, so every shape after it nested inside a shape and the globe rendered
+  as an empty ring in both Chinese locales. Fixed in `handle_startendtag`; the empty-table round-trip is
+  still byte-identical across all 16 English pages.
+- **The header overflowed the 1200px content column.** Pre-existing: it sat 51px past the column at every
+  width and scrolled the document sideways below ~1180px. The sixth nav pill made it worse. Header
+  metrics tightened (pill padding, gaps, 13px nav type) so it aligns exactly from 1180px up, and the
+  drawer now takes over below 1180 instead of the header spilling.
+- Bare `<code>` in a table cell or flow strip fell back to the browser's monospace rather than `--mono`.
+
+### Verified
+
+`verify-pages.js` across all three locales: **0 failing checks out of 48 per locale**, no JS errors, at
+1280 / 768 / 375. Full-page captures reviewed at 1440 and 390 for all four pages plus zh-Hant. No dead
+internal links across all 48 pages. Build reports both Chinese locales fully translated (430 new strings).
+
+### Blockers / next actions
+
+- The `small-orange` advisories the verifier prints are the documented `--accent-ink` contrast trade-off
+  Crystal chose, not regressions.
+- Orphan `__pycache__` entries exist for `build-console.py`, `console_content.py`, `console_nav.py` and
+  `build_console_globe.py` whose sources are not in the tree. Left alone — worth asking about.
+
+### Learnings
+
+**Problem.** Add four pages to a twelve-page generated portal so they read as native to it, using a real
+console as the source of truth, without inventing product facts.
+
+**Approach.** Read the incumbent's own design spec and one representative page before writing anything,
+then author only in the vocabulary that already exists (band, cards, steps, tbl, chips, note, rail) and
+add exactly one new component. Take content from the console captures; where the capture shows a control
+with no data, describe the control. Let the build's copy-rule gates and `verify-pages.js` be the checker
+rather than self-assessment.
+
+**Judgment calls — what was NOT done, and why.**
+- Did not run Impeccable's `init` gate. A documented design system and twelve shipped pages already carry
+  more product truth than an interview would have produced, and the skill's own routing allows extension
+  on the incumbent.
+- Did not fabricate metric values to fill the console's stat strips. All-zero counters look broken and
+  invented ones are worse; naming what each counter reports keeps the page honest and still useful.
+- Did not build a geographically accurate coverage map. Real per-region counts do not exist on the
+  portal, so the globe is labelled illustrative and plots city coordinates for shape, not for claims.
+- Did not add a second placeholder table on Hotel Mapping, and did not create stub pages for controls
+  that need authentication.
+- Did not fix the header overflow by shrinking only the new element. The defect predated the mega menu
+  and needed the whole header re-fitted to the column.
+
+**Reusable rule.** When extending a generated site, the incumbent's spec plus one representative page is
+the brief; add at most one new component and let the project's own build gates and verifier decide when
+it is done. And when a parser rewrites markup, test it against SVG — HTML void-element assumptions break
+silently in foreign content, and the failure is invisible in the source locale.
+
 ## 2026-09-08 — Products mega menu in the Direction B nav
 
 ### What changed

@@ -1249,6 +1249,730 @@ COPY = """<script>
 </script>
 """
 
+# ============================================================ Sandbox
+
+INTEGRATION_RAIL = [
+    ("App Management", "app-management.html"),
+    ("Sandbox", "sandbox.html"),
+    ("Request Trace", "request-trace.html"),
+]
+
+CATALOGUE_RAIL = [
+    ("Coverage Map", "coverage-map.html"),
+    ("Hotel Mapping", "hotel-mapping.html"),
+]
+
+SANDBOXES = [
+    ("G-Link Hotel", "G-Link Hotel Sandbox",
+     "Hotel search, booking, payment and cancellation workflows.",
+     "api-docs-hotel.html", None),
+    ("F-Link Flight", "F-Link Flight Sandbox",
+     "Flight search, ticketing, refunds and changes.",
+     "api-docs-flink.html", None),
+    ("TMC API", "TMC API Sandbox",
+     "Rapid deployment of corporate travel platforms.",
+     "index.html#products", "The TMC API sandbox supports USD only."),
+]
+
+
+def sandbox_cards():
+    out = []
+    for code, name, what, docs, note in SANDBOXES:
+        n = (
+            f'      <div class="note" style="margin:0 24px 20px"><iconify-icon icon="solar:info-circle-linear"></iconify-icon>'
+            f"<span>{note}</span></div>"
+            if note
+            else ""
+        )
+        out.append(
+            f"""  <article class="card rv">
+    <div class="card-h">
+      <p class="card-k"><span class="dot" aria-hidden="true"></span>{code}</p>
+      <h3>{name}</h3>
+      <p>{what}</p>
+    </div>
+    <div class="card-meta">
+      <div><span class="k">Status</span><span class="v">Sandbox active</span></div>
+      <div><span class="k">Credentials</span><span class="v">Its own app key</span></div>
+      <div><span class="k">Opens</span><span class="v">On registration</span></div>
+      <div><span class="k">Cost</span><span class="v">No upfront cost</span></div>
+    </div>
+{n}    <div class="card-f">
+      <a class="btn btn--sm" href="login.html">Open in the console {ARROW}</a>
+      <a class="tlink" href="{docs}">Product docs {ARROW}</a>
+    </div>
+  </article>"""
+        )
+    return "\n".join(out)
+
+
+SANDBOX_FLOW = " <i>&rarr;</i> ".join(
+    f"<code>{p.split('/')[-1]}</code>" for _, p in HOTEL_STEPS
+)
+
+
+SANDBOX = f"""
+{band(
+    "Integration and debugging",
+    "Sandbox Environment",
+    "<b>Validate integration logic before a single live booking.</b> Three sandboxes, one per product, "
+    "open from the moment a company account is registered. Production data is never in scope.",
+    foot=rail(INTEGRATION_RAIL, "Sandbox"),
+)}
+
+<section class="blk blk--top">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">Sandbox environments</p>
+      <h2 class="h3">Three sandboxes, <em>one per product.</em></h2>
+      <p class="lede">Each product carries its own sandbox and its own credential set. A hotel sandbox key
+         never reaches a flight endpoint, and no sandbox key reaches production.</p>
+    </div>
+    <div class="cards">
+{sandbox_cards()}
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">Sandbox and production</p>
+      <h2 class="h3">One integration, <em>two sets of keys.</em></h2>
+      <p class="lede">A sandbox key is issued on registration. A production key is issued separately, once
+         integration testing passes.</p>
+    </div>
+    <div class="cards cards--2">
+      <article class="card rv">
+        <div class="card-h">
+          <p class="card-k"><span class="dot" aria-hidden="true"></span>Sandbox</p>
+          <h3>Open from registration.</h3>
+          <p>Every product sandbox is available the moment a company account exists. Test the full API set
+             at no upfront cost, against test data only.</p>
+        </div>
+        <div class="card-meta" style="padding-bottom:4px">
+          <div><span class="k">Products</span><span class="v">G-Link, F-Link, TMC API</span></div>
+          <div><span class="k">Cost</span><span class="v">No upfront cost</span></div>
+          <div><span class="k">Data</span><span class="v">Test only, never production</span></div>
+          <div><span class="k">Currency</span><span class="v">TMC API is USD only</span></div>
+        </div>
+        <div class="card-f card-f--plain">
+          <a class="btn btn--sm" href="register.html">Register for a sandbox {ARROW}</a>
+        </div>
+      </article>
+      <article class="card rv">
+        <div class="card-h">
+          <p class="card-k"><span class="dot" aria-hidden="true"></span>Production</p>
+          <h3>Issued once testing passes.</h3>
+          <p>Production keys are released after integration testing, then billed on what the integration
+             actually calls. There is no minimum spend.</p>
+        </div>
+        <div class="card-meta" style="padding-bottom:4px">
+          <div><span class="k">Issued</span><span class="v">After integration testing</span></div>
+          <div><span class="k">Rate limit</span><span class="v">100 req / min</span></div>
+          <div><span class="k">Billing</span><span class="v">Usage-based</span></div>
+          <div><span class="k">Minimum spend</span><span class="v">None</span></div>
+        </div>
+        <div class="card-f card-f--plain">
+          <a class="btn btn--sm" href="app-management.html">Manage applications {ARROW}</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">What to run first</p>
+      <h2 class="h3">Eight calls, <em>one complete booking.</em></h2>
+      <p class="lede">The G-Link hotel flow runs end to end in sandbox, from the available hotel list
+         through to cancellation. Run it once before wiring anything of your own.</p>
+    </div>
+    <div class="cards cards--2">
+      <article class="card rv">
+        <div class="card-h">
+          <p class="card-k"><span class="dot" aria-hidden="true"></span>Integration flow</p>
+          <h3>Run the eight-step flow.</h3>
+          <p class="flow" style="margin-top:18px">{SANDBOX_FLOW}</p>
+        </div>
+        <div class="card-f card-f--plain">
+          <a class="btn btn--sm" href="api-docs-hotel-process.html">Read the flow {ARROW}</a>
+          <a class="tlink" href="api-docs-hotel-apis.html">API reference {ARROW}</a>
+        </div>
+      </article>
+      <article class="card rv">
+        <div class="card-h">
+          <p class="card-k"><span class="dot" aria-hidden="true"></span>Debugging</p>
+          <h3>Every sandbox call is recorded.</h3>
+          <p>Sandbox traffic lands in Request Trace alongside production traffic, filtered by environment.
+             Each call keeps its trace ID, path, status and duration.</p>
+        </div>
+        <div class="card-f card-f--plain">
+          <a class="btn btn--sm" href="request-trace.html">Open Request Trace {ARROW}</a>
+          <a class="tlink" href="api-docs-errors.html">Error codes {ARROW}</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="band-foot">
+      <a class="btn" href="register.html">Register for a sandbox {ARROW}</a>
+      <a class="tlink tlink--o" href="login.html">Sign in to the console {ARROW}</a>
+    </div>
+  </div>
+</section>
+"""
+
+# ============================================================ Request Trace
+
+TRACE_METRICS = [
+    ("Total requests", "Every call that matches the filters currently applied."),
+    ("Successes", "Calls that completed and returned a success code."),
+    ("Failures", "Calls that returned an error."),
+    ("Failure rate", "Failures as a percentage of total requests."),
+    ("Timeouts", "Calls that did not return inside the platform's limit."),
+    ("Loaded", "Records currently loaded into the table below the counters."),
+]
+
+TRACE_FILTERS = [
+    ("Request ID", "A single call, by platform request ID."),
+    ("Trace ID", "A single call, by platform trace ID."),
+    ("Application", "Calls made by one registered application."),
+    ("Environment", "Sandbox or production."),
+    ("Time range", "Calls inside a chosen window."),
+    ("Product", "G-Link Hotel, F-Link Flight or TMC API."),
+    ("Endpoint", "One endpoint inside the chosen product."),
+    ("Status", "Success, failure or timeout."),
+    ("Latency", "Calls inside a duration band."),
+]
+
+TRACE_ROWS = [
+    ("Sandbox", "/openapi/v1/glink/search/hotelIdList", "Success"),
+    ("Sandbox", "/openapi/v1/glink/booking/availabilityCheck", "Failure"),
+    ("Production", "/openapi/v1/glink/order/orderDetail", "Success"),
+]
+
+
+def defs(rows, two=False):
+    out = "\n".join(
+        f'    <div><p class="dt">{t}</p><p class="dd">{d}</p></div>' for t, d in rows
+    )
+    mod = " defs--2" if two else ""
+    return f'<div class="defs{mod}">\n{out}\n  </div>'
+
+
+def trace_rows():
+    return [
+        (
+            '<td class="t-code"><code>{trace_id}</code></td>',
+            f"<td>{env}</td>",
+            f'<td class="t-path">{path}</td>',
+            f"<td>{status}</td>",
+            '<td class="t-dim"><code>{ms}</code></td>',
+            '<td class="t-dim"><code>{app}</code></td>',
+            '<td class="t-dim"><code>{timestamp}</code></td>',
+        )
+        for env, path, status in TRACE_ROWS
+    ]
+
+
+REQUEST_TRACE = f"""
+{band(
+    "Integration and debugging",
+    "Request Trace",
+    "<b>Inspect and analyse API request flows to locate issues quickly.</b> Every call an application "
+    "makes is recorded with its trace ID, path, status, duration and environment, then filtered down to "
+    "the one request you need.",
+    foot=rail(INTEGRATION_RAIL, "Request Trace"),
+)}
+
+<section class="blk blk--top">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">What the panel reports</p>
+      <h2 class="h3">Six counters, <em>one view of health.</em></h2>
+      <p class="lede">The counters sit above the request table and recalculate against whatever filter is
+         applied, so a narrowed search reports on that slice rather than on everything.</p>
+    </div>
+{defs(TRACE_METRICS)}
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">Filters</p>
+      <h2 class="h3">Nine filters, <em>one request.</em></h2>
+      <p class="lede">Two free-text fields find a known call outright. The seven selectors narrow a
+         population down until the failing call is the only one left.</p>
+    </div>
+{defs(TRACE_FILTERS, two=True)}
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">Request records</p>
+      <h2 class="h3">Seven columns, <em>one row per call.</em></h2>
+      <p class="lede">The table pages through the filtered set and exports it as CSV, which is what
+         support asks for when a failure needs escalating.</p>
+    </div>
+{tbl(
+    ["Trace ID", "Env", "Path", "Status", "Duration", "Application", "Request time"],
+    trace_rows(),
+    minw=900,
+)}
+    <p class="disclaim" style="margin-top:14px">Illustrative rows. Values in braces stand for real data;
+       the live table is in the console.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="cards cards--2">
+      <article class="card rv">
+        <div class="card-h">
+          <p class="card-k"><span class="dot" aria-hidden="true"></span>Error responses</p>
+          <h3>The same IDs are in the payload.</h3>
+          <p>Every response carries <code class="inl">request_id</code> and <code class="inl">trace_id</code>,
+             and a supplier failure adds <code class="inl">downstream_request_id</code>. Log all three and
+             any call can be found here later.</p>
+        </div>
+        <div class="card-f card-f--plain">
+          <a class="btn btn--sm" href="api-docs-errors.html">Error code reference {ARROW}</a>
+        </div>
+      </article>
+      <article class="card rv">
+        <div class="card-h">
+          <p class="card-k"><span class="dot" aria-hidden="true"></span>Escalation</p>
+          <h3>Export the filtered set.</h3>
+          <p>Narrow the table to the failing calls, export the CSV, and attach it to a ticket. Support
+             cannot trace a failure without the platform IDs the export carries.</p>
+        </div>
+        <div class="card-f card-f--plain">
+          <a class="btn btn--sm" href="ai-assistant.html">Ask the AI Assistant {ARROW}</a>
+          <a class="tlink" href="index.html#start-integration">Submit a ticket {ARROW}</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="band-foot">
+      <a class="btn" href="login.html">Open Request Trace {ARROW}</a>
+      <a class="tlink tlink--o" href="sandbox.html">Start in sandbox {ARROW}</a>
+    </div>
+  </div>
+</section>
+"""
+
+# ============================================================ Coverage Map
+
+# Orthographic globe, tilt 18°, centred on 60°E so the graticule reads Europe
+# through Asia-Pacific. Back-facing segments are dropped, so the wireframe stays
+# a sphere rather than a flat rosette. Generated once and baked in: the geometry
+# is fixed, and a build-time trig loop would produce the same bytes every run.
+GRAT = (
+    '<polyline points="138,354 144,356 151,357 158,359 166,360 174,361 183,362 191,362 200,362 209,362 217,362 226,361 234,360 242,359 249,357 256,356 262,354"/>'
+    '<polyline points="76,301 84,305 93,309 104,312 115,315 128,317 142,320 156,321 170,322 185,323 200,323 215,323 230,322 244,321 258,320 272,317 285,315 296,312 307,309 316,305 324,301 331,297 337,293"/>'
+    '<polyline points="63,293 69,297 76,301"/>'
+    '<polyline points="56,226 66,230 77,234 89,238 102,242 117,244 132,247 149,249 165,250 183,251 200,251 217,251 235,250 251,249 268,247 283,244 298,242 311,238 323,234 334,230 344,226 352,221 358,216 362,211 365,205"/>'
+    '<polyline points="35,205 38,211 42,216 48,221 56,226"/>'
+    '<polyline points="76,143 84,147 93,151 104,154 115,157 128,160 142,162 156,163 170,165 185,165 200,165 215,165 230,165 244,163 258,162 272,160 285,157 296,154 307,151 316,147 324,143 331,139 337,135 341,130 343,126 344,121 343,116"/>'
+    '<polyline points="57,116 56,121 57,126 59,130 63,135 69,139 76,143"/>'
+    '<polyline points="128,76 133,78 138,80 144,82 151,84 158,85 166,87 174,88 183,88 191,89 200,89 209,89 217,88 226,88 234,87 242,85 249,84 256,82 262,80 267,78 272,76 276,74 279,71 281,69 283,66 283,63 283,61 281,58 279,55 276,53 272,50"/>'
+    '<polyline points="128,50 124,53 121,55 119,58 117,61 117,63 117,66 119,69 121,71 124,74 128,76"/>'
+    '<polyline points="115,343 104,334 93,325 84,314 76,301 69,288 63,273 59,258 57,242 56,226 57,209 59,192 63,176 69,159 76,143 84,128 93,113 104,100 115,87 128,76 142,66 156,58 170,51 185,46 200,42"/>'
+    '<polyline points="183,364 179,361 175,357 171,350 168,342 165,333 163,322 161,309 159,296 158,281 157,266 157,250 157,233 158,216 159,198 161,181 163,164 165,147 168,131 171,116 175,101 179,88 183,76 187,65 191,56 196,48 200,42"/>'
+    '<polyline points="234,362 242,359 249,354 256,347 262,339 267,329 272,317 276,305 279,291 281,276 283,261 283,244 283,228 281,211 279,193 276,176 272,160 267,143 262,127 256,112 249,98 242,85 234,74 226,64 217,55 209,48 200,42"/>'
+    '<polyline points="339,290 346,276 352,261 357,246 359,230 360,213 359,197 357,180 352,164 346,148 339,133 330,118 319,104 307,92 294,80 280,70 265,61 250,54 233,48 217,44 200,42"/>'
+    '<polyline points="272,50 258,45 244,42 230,40 215,40 200,42"/>'
+    '<polyline points="209,35 204,38 200,42"/>'
+    '<polyline points="174,36 183,36 191,38 200,42"/>'
+    '<polyline points="81,84 93,74 106,64 120,57 135,50 150,46 167,43 183,42 200,42"/>'
+)
+
+DOTS = (
+    '<circle cx="110" cy="92" r="5.6" opacity=".9"/>'
+    '<circle cx="108" cy="99" r="5.6" opacity=".9"/>'
+    '<circle cx="127" cy="96" r="4" opacity=".58"/>'
+    '<circle cx="109" cy="120" r="4" opacity=".58"/>'
+    '<circle cx="87" cy="115" r="4" opacity=".58"/>'
+    '<circle cx="117" cy="93" r="4" opacity=".58"/>'
+    '<circle cx="164" cy="96" r="4" opacity=".58"/>'
+    '<circle cx="135" cy="130" r="4" opacity=".58"/>'
+    '<circle cx="143" cy="84" r="2.4" opacity=".34"/>'
+    '<circle cx="117" cy="99" r="2.4" opacity=".34"/>'
+    '<circle cx="127" cy="110" r="2.4" opacity=".34"/>'
+    '<circle cx="110" cy="110" r="4" opacity=".58"/>'
+    '<circle cx="188" cy="179" r="5.6" opacity=".9"/>'
+    '<circle cx="165" cy="179" r="2.4" opacity=".34"/>'
+    '<circle cx="131" cy="160" r="2.4" opacity=".34"/>'
+    '<circle cx="121" cy="309" r="2.4" opacity=".34"/>'
+    '<circle cx="62" cy="210" r="2.4" opacity=".34"/>'
+    '<circle cx="135" cy="251" r="2.4" opacity=".34"/>'
+    '<circle cx="109" cy="320" r="2.4" opacity=".34"/>'
+    '<circle cx="235" cy="196" r="4" opacity=".58"/>'
+    '<circle cx="243" cy="167" r="4" opacity=".58"/>'
+    '<circle cx="249" cy="212" r="2.4" opacity=".34"/>'
+    '<circle cx="305" cy="200" r="5.6" opacity=".9"/>'
+    '<circle cx="315" cy="233" r="5.6" opacity=".9"/>'
+    '<circle cx="310" cy="230" r="4" opacity=".58"/>'
+    '<circle cx="325" cy="168" r="5.6" opacity=".9"/>'
+    '<circle cx="325" cy="139" r="5.6" opacity=".9"/>'
+    '<circle cx="306" cy="121" r="5.6" opacity=".9"/>'
+    '<circle cx="322" cy="166" r="4" opacity=".58"/>'
+    '<circle cx="316" cy="145" r="4" opacity=".58"/>'
+    '<circle cx="303" cy="139" r="2.4" opacity=".34"/>'
+    '<circle cx="305" cy="153" r="4" opacity=".58"/>'
+    '<circle cx="317" cy="127" r="2.4" opacity=".34"/>'
+    '<circle cx="306" cy="101" r="2.4" opacity=".34"/>'
+    '<circle cx="333" cy="115" r="4" opacity=".58"/>'
+    '<circle cx="321" cy="120" r="4" opacity=".58"/>'
+    '<circle cx="340" cy="184" r="2.4" opacity=".34"/>'
+    '<circle cx="320" cy="252" r="4" opacity=".58"/>'
+    '<circle cx="319" cy="205" r="2.4" opacity=".34"/>'
+    '<circle cx="311" cy="177" r="2.4" opacity=".34"/>'
+    '<circle cx="332" cy="155" r="4" opacity=".58"/>'
+    '<circle cx="319" cy="189" r="2.4" opacity=".34"/>'
+    '<circle cx="302" cy="218" r="2.4" opacity=".34"/>'
+    '<circle cx="299" cy="187" r="2.4" opacity=".34"/>'
+    '<circle cx="315" cy="204" r="2.4" opacity=".34"/>'
+    '<circle cx="176" cy="176" r="2.4" opacity=".34"/>'
+    '<circle cx="143" cy="151" r="2.4" opacity=".34"/>'
+    '<circle cx="168" cy="132" r="2.4" opacity=".34"/>'
+    '<circle cx="235" cy="128" r="2.4" opacity=".34"/>'
+    '<circle cx="237" cy="98" r="2.4" opacity=".34"/>'
+)
+
+GLOBE = (
+    '<svg viewBox="0 0 400 400" role="img" '
+    'aria-label="Hotel coverage plotted as points on a globe">'
+    '<circle cx="200" cy="200" r="166" fill="#fff" stroke="#D1D5DB"/>'
+    '<g fill="none" stroke="rgba(15,17,20,.14)" stroke-width="1">' + "".join(GRAT) + "</g>"
+    '<g fill="#F97316">' + "".join(DOTS) + "</g>"
+    "</svg>"
+)
+
+# Entity-free labels: an &lt; splits the text node in two and the translation
+# table then has to carry both halves.
+LEGEND = [
+    ("5", "Fewer than 10 properties"),
+    ("7", "10 to 30 properties"),
+    ("9", "More than 30 properties"),
+    ("4", "Individual hotel"),
+]
+
+COVERAGE_METRICS = [
+    ("Total properties", "Every property in the catalogue that can be sold through the API."),
+    ("Covered countries and regions", "How many countries and regions that supply spans."),
+    ("Properties in view", "The count inside the current viewport, recalculated as the map is panned."),
+]
+
+COVERAGE_APIS = [
+    ("Country list", "/openapi/v1/glink/region/countries"),
+    ("Available hotel ID list", "/openapi/v1/glink/search/hotelIdList"),
+    ("Hotel basic information", "/openapi/v1/glink/hotel/detail"),
+]
+
+
+def legend():
+    out = "\n".join(
+        f'      <li><span class="sw"><i style="width:{d}px;height:{d}px'
+        f';opacity:{o}"></i></span>{label}</li>'
+        for (d, label), o in zip(LEGEND, (".34", ".58", ".9", "1"))
+    )
+    return f'<ul class="lgnd">\n{out}\n    </ul>'
+
+
+def coverage_rows():
+    return [
+        (f"<td>{name}</td>",
+         '<td class="t-mid"><span class="method">POST</span></td>',
+         f'<td class="t-path">{path}</td>')
+        for name, path in COVERAGE_APIS
+    ]
+
+
+COVERAGE_MAP = f"""
+{band(
+    "Hotel catalogue",
+    "Coverage Map",
+    "<b>Explore hotel supply coverage before you connect.</b> Every property FCG can sell is plotted as a "
+    "WGS84 coordinate, counted by country and region, and searchable by place.",
+    foot=rail(CATALOGUE_RAIL, "Coverage Map"),
+)}
+
+<section class="blk blk--top">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">Reading the map</p>
+      <h2 class="h3">Density by dot, <em>one point per property.</em></h2>
+      <p class="lede">Coverage is plotted on a globe rather than listed. Zoomed out, nearby properties
+         collapse into a cluster sized by how many it holds; zoomed in, each property is its own point.</p>
+    </div>
+    <div class="covr rv">
+      <div class="covr-fig">{GLOBE}</div>
+      <div class="covr-side">
+        <div>
+          <h3>Legend</h3>
+          <p class="lede" style="margin-top:10px">A cluster grows with the number of properties beneath
+             it. Search for a place to jump the viewport straight there.</p>
+        </div>
+{legend()}
+      </div>
+    </div>
+    <p class="disclaim" style="margin-top:14px">Illustrative rendering. The live map plots WGS84
+       coordinates from the hotel catalogue.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">What the map reports</p>
+      <h2 class="h3">Three counters, <em>one that follows the viewport.</em></h2>
+      <p class="lede">Two counters describe the catalogue as a whole. The third follows the viewport, so
+         it answers what supply exists in the market currently on screen.</p>
+    </div>
+{defs(COVERAGE_METRICS)}
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">Coverage in the API</p>
+      <h2 class="h3">The same supply, <em>three endpoints.</em></h2>
+      <p class="lede">What the map shows visually, the G-Link hotel API returns as data: the countries
+         covered, the sellable hotel IDs, and the static record behind each one.</p>
+    </div>
+{tbl(["Returns", "Method", "Path"], coverage_rows(), minw=680)}
+    <div class="note" style="margin-top:22px"><iconify-icon icon="solar:global-linear"></iconify-icon>
+      <span>Coordinates are WGS84, the same reference the map plots against.</span></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="cards cards--2">
+      <article class="card rv">
+        <div class="card-h">
+          <p class="card-k"><span class="dot" aria-hidden="true"></span>Next step</p>
+          <h3>Match your own inventory.</h3>
+          <p>Coverage answers what FCG can sell. Hotel Mapping answers which of those properties are the
+             ones already in your system, matched to FCG hotel IDs.</p>
+        </div>
+        <div class="card-f card-f--plain">
+          <a class="btn btn--sm" href="hotel-mapping.html">Open Hotel Mapping {ARROW}</a>
+        </div>
+      </article>
+      <article class="card rv">
+        <div class="card-h">
+          <p class="card-k"><span class="dot" aria-hidden="true"></span>Before you build</p>
+          <h3>Check coverage in sandbox.</h3>
+          <p>The hotel ID list and the static record are both callable in sandbox, so a coverage
+             assumption can be tested before any production key exists.</p>
+        </div>
+        <div class="card-f card-f--plain">
+          <a class="btn btn--sm" href="sandbox.html">Sandbox environment {ARROW}</a>
+          <a class="tlink" href="api-docs-hotel.html">G-Link docs {ARROW}</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="band-foot">
+      <a class="btn" href="login.html">Open the Coverage Map {ARROW}</a>
+      <a class="tlink tlink--o" href="register.html">Register for access {ARROW}</a>
+    </div>
+  </div>
+</section>
+"""
+
+# ============================================================ Hotel Mapping
+
+MAPPING_STEPS = [
+    ("Download the template",
+     "Use the same columns as the mapping provider, in the same order. The template carries every field "
+     "the matcher reads."),
+    ("Upload the CSV",
+     "Submit the completed file under your distributor code. The platform creates a batch and processes "
+     "it asynchronously, so a large file does not hold the page."),
+    ("Review and export",
+     "Work through the matched, review, unmatched and invalid rows. Cancel a mapping that is wrong, then "
+     "export the result as CSV."),
+]
+
+MAPPING_COLUMNS = [
+    "Property ID", "Property name", "Address", "Country", "Coordinates",
+    "City", "Chain", "Type", "Rating", "Postal code",
+]
+
+MAPPING_BUCKETS = ["Matched", "Review", "Unmatched", "Invalid"]
+
+MAPPING_HISTORY = [
+    ("Batch", "The identifier the platform assigns to an upload."),
+    ("File", "The name of the CSV that was submitted."),
+    ("Status", "Where the batch has reached in processing."),
+    ("Progress", "How far through the file the matcher has run."),
+    ("Uploaded", "When the batch was submitted."),
+    ("Actions", "Reopen the review, or export the result again."),
+]
+
+
+def mapping_steps():
+    out = []
+    for i, (what, why) in enumerate(MAPPING_STEPS, 1):
+        out.append(
+            f"""  <div class="step rv">
+    <p class="sn"><span class="dot" aria-hidden="true"></span>Step {i:02d}</p>
+    <h3>{what}</h3>
+    <p style="margin-top:12px;font-size:13.5px;line-height:22px;color:var(--muted)">{why}</p>
+  </div>"""
+        )
+    return "\n".join(out)
+
+
+HOTEL_MAPPING = f"""
+{band(
+    "Property mapping",
+    "Hotel Mapping",
+    "<b>Match distributor hotel inventory to FCG hotel IDs.</b> Download the template, upload a completed "
+    "CSV, then review every row before the mapping is used to book.",
+    crumb=[("Hotel catalogue", "coverage-map.html"), ("Hotel Mapping", None)],
+    foot=rail(CATALOGUE_RAIL, "Hotel Mapping"),
+)}
+
+<section class="blk blk--top">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">How mapping runs</p>
+      <h2 class="h3">Three steps, <em>one batch at a time.</em></h2>
+      <p class="lede">Mapping is a file exchange, not an integration. Nothing here needs a code change:
+         a completed CSV in, a reviewed CSV out.</p>
+    </div>
+    <div class="steps steps--3">
+{mapping_steps()}
+    </div>
+    <div class="band-foot" style="margin-top:34px">
+      <a class="btn" href="login.html">Download the CSV template {DL}</a>
+      <a class="tlink tlink--o" href="login.html">Upload a CSV {ARROW}</a>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">The template</p>
+      <h2 class="h3">Ten columns, <em>one row per property.</em></h2>
+      <p class="lede">Keep the template's column names and order. The matcher reads them by name, so a
+         renamed or reordered header is the most common reason a batch comes back invalid.</p>
+    </div>
+    <div class="chips">
+{chr(10).join(f'      <span class="chip chip--plain">{c}</span>' for c in MAPPING_COLUMNS)}
+    </div>
+    <div class="note" style="margin-top:26px"><iconify-icon icon="solar:global-linear"></iconify-icon>
+      <span>Coordinates are WGS84, the same reference the Coverage Map plots against.</span></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">Review</p>
+      <h2 class="h3">Four outcomes, <em>one per row.</em></h2>
+      <p class="lede">A batch is not finished when it stops processing. Every row lands in one of four
+         buckets, and the two that need a decision are yours to make.</p>
+    </div>
+    <div class="chips">
+{chr(10).join(f'      <span class="chip">{b}</span>' for b in MAPPING_BUCKETS)}
+    </div>
+    <div class="cards cards--2" style="margin-top:34px">
+      <article class="card rv">
+        <div class="card-h">
+          <p class="card-k"><span class="dot" aria-hidden="true"></span>Correcting</p>
+          <h3>Cancel a mapping that is wrong.</h3>
+          <p>A cancelled mapping is removed from the batch result, so the property falls back to unmatched
+             rather than resolving to the wrong hotel ID.</p>
+        </div>
+      </article>
+      <article class="card rv">
+        <div class="card-h">
+          <p class="card-k"><span class="dot" aria-hidden="true"></span>Exporting</p>
+          <h3>Export the reviewed result.</h3>
+          <p>The export is the CSV to load back into your own system: your property IDs on one side, FCG
+             hotel IDs on the other.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">Mapping history</p>
+      <h2 class="h3">Every batch, <em>kept on the record.</em></h2>
+      <p class="lede">Batches stay listed after they finish, so a mapping run can be reopened,
+         re-reviewed or exported again months later without uploading the file a second time.</p>
+    </div>
+{defs(MAPPING_HISTORY)}
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="band-foot">
+      <a class="btn" href="login.html">Open Hotel Mapping {ARROW}</a>
+      <a class="tlink tlink--o" href="coverage-map.html">See what is covered first {ARROW}</a>
+    </div>
+  </div>
+</section>
+"""
+
+
 PAGES = [
     dict(slug="app-management", nav="apps",
          title="App Management — FCG Developer Platform",
@@ -1286,6 +2010,22 @@ PAGES = [
          title="AI Assistant — FCG Developer Platform",
          desc="Ask the FCG Developer Platform AI Assistant about API integration, authentication and order workflows.",
          body=AI_ASSISTANT),
+    dict(slug="sandbox", nav="sandbox",
+         title="Sandbox Environment — FCG Developer Platform",
+         desc="Three FCG API sandboxes, one per product, open from registration and free of production data.",
+         body=SANDBOX),
+    dict(slug="request-trace", nav="trace",
+         title="Request Trace — FCG Developer Platform",
+         desc="Inspect and analyse FCG API request flows by trace ID, application, environment and status.",
+         body=REQUEST_TRACE),
+    dict(slug="coverage-map", nav="coverage",
+         title="Coverage Map — FCG Developer Platform",
+         desc="Explore FCG hotel supply coverage as WGS84 points on a globe before you connect.",
+         body=COVERAGE_MAP),
+    dict(slug="hotel-mapping", nav="mapping",
+         title="Hotel Mapping — FCG Developer Platform",
+         desc="Match distributor hotel inventory to FCG hotel IDs with a CSV template, upload and review.",
+         body=HOTEL_MAPPING),
     dict(slug="login", nav="", minimal=True,
          title="Sign in — FCG Developer Platform",
          desc="Sign in to the FCG Developer Platform console.",

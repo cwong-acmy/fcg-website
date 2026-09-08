@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <!DOCTYPE html>
-<html lang="zh-Hans" id="top">
+<html lang="zh-Hant" id="top">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>G-Link 接口参考 — FCG 开放平台</title>
-<meta name="description" content="G-Link 酒店接口全集，含请求方法、路径与完整的请求与响应示例。">
+<title>資源覆蓋地圖 — FCG 開放平台</title>
+<meta name="description" content="介接前，先在地球檢視上以 WGS84 座標點查看 FCG 飯店資源覆蓋範圍。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -997,37 +997,37 @@ table.tbl code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em}
 </style>
 </head>
 <body>
-<a class="skip" href="#main">跳转到正文</a>
+<a class="skip" href="#main">跳至主要內容</a>
 
 <!-- The real FCG wordmark, inlined verbatim once and referenced where needed. -->
 <svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><symbol id="fcg-logo" viewBox="0 0 88 24"><path d="M68.1808 23.9997C67.3293 23.7027 66.4778 23.4056 65.6066 23.1284C58.3986 20.8512 54.7155 13.4452 57.7452 7.069C59.8046 2.75217 63.5868 0.514545 68.161 0.25712C74.3987 -0.099316 80.6759 0.17791 87.0125 0.17791C85.9828 1.50464 84.8937 2.96999 83.7254 4.37593C83.5274 4.61355 82.9729 4.63335 82.5769 4.63335C78.6165 4.63335 74.6561 4.63335 70.6957 4.63335C68.3987 4.63335 66.3194 5.26702 64.6165 6.81157C62.5967 8.65316 61.8046 10.9502 62.4977 13.6433C63.2303 16.4551 65.2105 17.9997 67.864 18.871C68.359 19.0294 68.8739 19.1878 69.3689 19.1878C73.1709 19.2076 76.9729 19.1878 80.8343 19.1878V14.1977H67.8244C69.2303 12.5739 70.4383 11.1284 71.6858 9.72246C71.864 9.52444 72.26 9.42543 72.5571 9.42543C77.1313 9.42543 81.7056 9.42543 86.5571 9.42543V23.9799H68.161L68.1808 23.9997Z" fill="currentColor"></path><path d="M0 24V0H25.9208C24.6931 1.56436 23.5643 3.06931 22.3564 4.47525C22.1584 4.71287 21.5643 4.63366 21.1683 4.63366C16.0396 4.63366 10.9109 4.63366 5.72277 4.63366V9.92079H24.6732C23.3267 11.5842 22.1782 13.0693 20.9505 14.4752C20.7524 14.7129 20.1782 14.6931 19.7822 14.6931C15.1287 14.6931 10.4554 14.6931 5.68316 14.6931V23.9604H0.0197911L0 24Z" fill="currentColor"></path><path d="M37.6204 23.9997C36.7689 23.7027 35.9174 23.4056 35.0461 23.1284C27.8976 20.8908 24.2145 13.5838 27.1253 7.20761C29.1451 2.79177 32.9669 0.534347 37.5808 0.25712C43.7194 -0.099316 49.9174 0.17791 56.1352 0.17791C55.1253 1.50464 54.0362 2.98979 52.8679 4.39573C52.6699 4.63336 52.0956 4.63335 51.6996 4.63335C47.9372 4.63335 44.155 4.61355 40.3927 4.65316C39.1847 4.65316 37.9372 4.77197 36.7689 5.0888C33.3828 6.0195 31.5808 8.55415 31.6798 12.0393C31.7788 15.4056 34.0362 18.1581 37.4224 18.9106C38.4125 19.1284 39.462 19.2274 40.4917 19.2274C45.6798 19.267 50.8679 19.2274 56.254 19.2274C55.0857 20.871 53.9768 22.4155 52.8877 23.9799H37.6006L37.6204 23.9997Z" fill="currentColor"></path></symbol></svg>
 
 <header class="hdr" id="hdr">
   <div class="wrap hdr-in">
-    <a class="brand" href="index.html" aria-label="FCG 开放平台 — 首页">
+    <a class="brand" href="index.html" aria-label="FCG 開放平台 — 首頁">
       <svg viewBox="0 0 88 24" role="img" aria-label="FCG" style="height: 28px; width: auto;"><use href="#fcg-logo"></use></svg>
       <span class="brand-div" aria-hidden="true"></span>
-      <span class="brand-sub">开放平台</span>
+      <span class="brand-sub">開放平台</span>
     </a>
 
-    <nav class="shell" aria-label="主导航">
-      <button class="drop-t" type="button" id="mega-t" aria-expanded="false" aria-controls="mega">产品 <iconify-icon class="drop-c" icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></button>
-      <a href="app-management.html">应用管理</a>
-      <a class="on" href="api-docs-hotel.html">接口文档</a>
+    <nav class="shell" aria-label="主導覽">
+      <button class="drop-t on" type="button" id="mega-t" aria-expanded="false" aria-controls="mega">產品 <iconify-icon class="drop-c" icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></button>
+      <a href="app-management.html">應用程式管理</a>
+      <a href="api-docs-hotel.html">介面文件</a>
       <a href="sdk.html">SDK</a>
       <a href="skills.html">Skills 技能包</a>
-      <a href="ai-assistant.html">AI 助手</a>
+      <a href="ai-assistant.html">AI 助理</a>
     </nav>
 
     <div class="nav-right">
-      <div class="lang" role="group" aria-label="语言">
-        <a href="../api-docs-hotel-apis.html">ENG</a>
-        <a href="api-docs-hotel-apis.html" aria-current="page">简体</a>
-        <a href="../zh-Hant/api-docs-hotel-apis.html">繁體</a>
+      <div class="lang" role="group" aria-label="語言">
+        <a href="../coverage-map.html">ENG</a>
+        <a href="../zh-Hans/coverage-map.html">简体</a>
+        <a href="coverage-map.html" aria-current="page">繁體</a>
       </div>
-      <a class="login" href="login.html">登录</a>
-      <a class="btn btn--sm" href="register.html">注册 <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
-      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="打开菜单">
+      <a class="login" href="login.html">登入</a>
+      <a class="btn btn--sm" href="register.html">註冊 <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
+      <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="開啟選單">
         <iconify-icon icon="solar:hamburger-menu-linear" aria-hidden="true"></iconify-icon>
       </button>
     </div>
@@ -1037,57 +1037,57 @@ table.tbl code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em}
     <div class="wrap mega-in">
       <div class="mega-card">
         <div class="mega-col">
-          <p class="micro mega-e">面向首次接入</p>
-          <p class="mega-h" id="mega-h0">开始</p>
+          <p class="micro mega-e">給第一次介接</p>
+          <p class="mega-h" id="mega-h0">開始</p>
           <nav aria-labelledby="mega-h0">
           <ul>
             <li><a class="mega-i" href="app-management.html">
               <span class="mega-ic"><iconify-icon icon="solar:widget-5-linear" aria-hidden="true"></iconify-icon></span>
-              <span class="mega-tx"><b>应用管理</b><span>创建应用并管理接入权限</span></span>
+              <span class="mega-tx"><b>應用程式管理</b><span>建立應用程式並管理介接權限</span></span>
             </a></li>
             <li><a class="mega-i" href="sandbox.html">
               <span class="mega-ic"><iconify-icon icon="solar:key-minimalistic-linear" aria-hidden="true"></iconify-icon></span>
-              <span class="mega-tx"><b>沙箱</b><span>在受控环境中测试接入</span></span>
+              <span class="mega-tx"><b>沙箱</b><span>在受控環境中測試介接</span></span>
             </a></li>
           </ul>
           </nav>
         </div>
         <div class="mega-col">
-          <p class="micro mega-e">面向开发者</p>
-          <p class="mega-h" id="mega-h1">构建</p>
+          <p class="micro mega-e">給開發者</p>
+          <p class="mega-h" id="mega-h1">建置</p>
           <nav aria-labelledby="mega-h1">
           <ul>
             <li><a class="mega-i" href="api-docs-hotel.html">
               <span class="mega-ic"><iconify-icon icon="solar:document-text-linear" aria-hidden="true"></iconify-icon></span>
-              <span class="mega-tx"><b>接口文档</b><span>查阅接口、数据结构与请求示例</span></span>
+              <span class="mega-tx"><b>介面文件</b><span>查閱端點、資料結構與請求範例</span></span>
             </a></li>
             <li><a class="mega-i" href="sdk.html">
               <span class="mega-ic"><iconify-icon icon="solar:code-square-linear" aria-hidden="true"></iconify-icon></span>
-              <span class="mega-tx"><b>SDK</b><span>生成客户端代码与接入示例</span></span>
+              <span class="mega-tx"><b>SDK</b><span>產生用戶端程式碼與介接範例</span></span>
             </a></li>
             <li><a class="mega-i" href="skills.html">
               <span class="mega-ic"><iconify-icon icon="solar:bolt-linear" aria-hidden="true"></iconify-icon></span>
-              <span class="mega-tx"><b>Skills 技能包</b><span>复用常见接口流程的操作指引</span></span>
+              <span class="mega-tx"><b>Skills 技能包</b><span>沿用常見介面流程的可重複指引</span></span>
             </a></li>
           </ul>
           </nav>
         </div>
         <div class="mega-col">
-          <p class="micro mega-e">面向运营与支持</p>
-          <p class="mega-h" id="mega-h2">运营</p>
+          <p class="micro mega-e">給營運與支援</p>
+          <p class="mega-h" id="mega-h2">營運</p>
           <nav aria-labelledby="mega-h2">
           <ul>
             <li><a class="mega-i" href="request-trace.html">
               <span class="mega-ic"><iconify-icon icon="solar:route-linear" aria-hidden="true"></iconify-icon></span>
-              <span class="mega-tx"><b>请求追踪</b><span>查看调用记录并排查接入问题</span></span>
+              <span class="mega-tx"><b>請求追蹤</b><span>檢視呼叫並診斷介接問題</span></span>
             </a></li>
             <li><a class="mega-i" href="coverage-map.html">
               <span class="mega-ic"><iconify-icon icon="solar:global-linear" aria-hidden="true"></iconify-icon></span>
-              <span class="mega-tx"><b>资源覆盖地图</b><span>接入前先了解酒店资源覆盖情况</span></span>
+              <span class="mega-tx"><b>資源覆蓋地圖</b><span>介接前先了解飯店資源覆蓋範圍</span></span>
             </a></li>
             <li><a class="mega-i" href="hotel-mapping.html">
               <span class="mega-ic"><iconify-icon icon="solar:bed-linear" aria-hidden="true"></iconify-icon></span>
-              <span class="mega-tx"><b>酒店匹配</b><span>在同一工作台中标准化供应商数据</span></span>
+              <span class="mega-tx"><b>飯店對應</b><span>在同一工作區標準化供應商資料</span></span>
             </a></li>
           </ul>
           </nav>
@@ -1098,34 +1098,34 @@ table.tbl code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em}
 
   <div class="mnav" id="mnav">
     <div class="wrap">
-        <p class="micro m-h">开始</p>
+        <p class="micro m-h">開始</p>
         <ul>
-          <li><a href="app-management.html">应用管理</a></li>
+          <li><a href="app-management.html">應用程式管理</a></li>
           <li><a href="sandbox.html">沙箱</a></li>
         </ul>
-        <p class="micro m-h">构建</p>
+        <p class="micro m-h">建置</p>
         <ul>
-          <li><a href="api-docs-hotel.html">接口文档</a></li>
+          <li><a href="api-docs-hotel.html">介面文件</a></li>
           <li><a href="sdk.html">SDK</a></li>
           <li><a href="skills.html">Skills 技能包</a></li>
         </ul>
-        <p class="micro m-h">运营</p>
+        <p class="micro m-h">營運</p>
         <ul>
-          <li><a href="request-trace.html">请求追踪</a></li>
-          <li><a href="coverage-map.html">资源覆盖地图</a></li>
-          <li><a href="hotel-mapping.html">酒店匹配</a></li>
+          <li><a href="request-trace.html">請求追蹤</a></li>
+          <li><a href="coverage-map.html">資源覆蓋地圖</a></li>
+          <li><a href="hotel-mapping.html">飯店對應</a></li>
         </ul>
         <p class="micro m-h">更多</p>
         <ul>
-          <li><a href="index.html">首页</a></li>
-          <li><a href="ai-assistant.html">AI 助手</a></li>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="ai-assistant.html">AI 助理</a></li>
         </ul>
       <div class="m-cta">
-        <a class="btn btn--ghost" href="login.html">登录 <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
-        <div class="lang" role="group" aria-label="语言">
-        <a href="../api-docs-hotel-apis.html">ENG</a>
-        <a href="api-docs-hotel-apis.html" aria-current="page">简体</a>
-        <a href="../zh-Hant/api-docs-hotel-apis.html">繁體</a>
+        <a class="btn btn--ghost" href="login.html">登入 <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
+        <div class="lang" role="group" aria-label="語言">
+        <a href="../coverage-map.html">ENG</a>
+        <a href="../zh-Hans/coverage-map.html">简体</a>
+        <a href="coverage-map.html" aria-current="page">繁體</a>
       </div>
       </div>
     </div>
@@ -1136,135 +1136,123 @@ table.tbl code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em}
 <section class="band">
   <div class="band-grid" aria-hidden="true"></div>
   <div class="wrap band-in">
-      <p class="crumb"><a href="api-docs-hotel.html">文档中心</a> <i>/</i> <a href="api-docs-hotel.html">G-Link Hotel API</a> <i>/</i> <span>接口参考</span></p>
       <div class="band-top">
-        <p class="eyebrow micro">沙箱与生产环境</p>
+        <p class="eyebrow micro">飯店資源庫</p>
         
       </div>
-      <h1>G-Link 接口参考</h1>
-      <p class="lede"><b>G-Link 全部接口，按功能分组。</b> 下方以其中一个接口作为完整示例；整套接口的请求与响应结构保持一致。</p>
-      <div class="band-foot"><nav class="rail" aria-label="章节"><a href="api-docs-hotel.html">G-Link Hotel</a><a href="api-docs-flink.html">F-Link Flight</a><a href="api-docs-hotel-process.html">对接流程</a><a class="on" href="api-docs-hotel-apis.html">接口参考</a><a href="api-docs-errors.html">错误码</a></nav></div>
+      <h1>資源覆蓋地圖</h1>
+      <p class="lede"><b>介接前先了解飯店資源覆蓋範圍。</b> FCG 可售的每一家飯店都以 WGS84 座標標示在地圖上，依國家與地區統計，並可依地點搜尋。</p>
+      <div class="band-foot"><nav class="rail" aria-label="章節"><a class="on" href="coverage-map.html">資源覆蓋地圖</a><a href="hotel-mapping.html">飯店對應</a></nav></div>
   </div>
 </section>
 
-<div class="wrap">
-<div class="docs">
-  <aside class="docs-side">
-    <div class="docs-side-in">
-      <div class="docs-grp"><p class="docs-h" id="nav-product-docs">产品文档</p><nav aria-labelledby="nav-product-docs"><ul><li><a href="api-docs-hotel.html">G-Link Hotel API</a></li><li><a href="api-docs-flink.html">F-Link Flight API</a></li><li><a href="api-docs-errors.html">错误码说明</a></li></ul></nav></div>
-      <div class="docs-grp"><p class="docs-h" id="nav-g-link-sections">G-Link 章节</p><nav aria-labelledby="nav-g-link-sections"><ul><li><a href="api-docs-hotel-process.html">对接流程</a></li><li><a class="on" href="api-docs-hotel-apis.html">接口参考</a></li></ul></nav></div>
-      <div class="docs-grp"><p class="docs-h" id="nav-developer-tools">开发者工具</p><nav aria-labelledby="nav-developer-tools"><ul><li><a href="sdk.html">SDK 下载</a></li><li><a href="skills.html">Skills 技能包</a></li><li><a href="ai-assistant.html">AI 助手</a></li></ul></nav></div>
+<section class="blk blk--top">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">如何看這張地圖</p>
+      <h2 class="h3">以點呈現密度， <em>一家飯店一個點。</em></h2>
+      <p class="lede">覆蓋範圍以地球檢視呈現，而不是清單。縮小時，鄰近飯店會聚合成一個點，點的大小取決於聚合數量；放大後，每家飯店各占一個點。</p>
     </div>
-  </aside>
-  <div class="docs-main">
-    <h2>二十个接口， <em>五个分组。</em></h2>
-    <p>先是静态数据，其次实时预订，最后是订单与回调。路径基于生产环境域名；沙箱域名随沙箱凭证一并下发。</p>
+    <div class="covr rv">
+      <div class="covr-fig"><svg viewBox="0 0 400 400" role="img" aria-label="以點的形式標示在地球檢視上的飯店覆蓋範圍"><circle cx="200" cy="200" r="166" fill="#fff" stroke="#D1D5DB"/><g fill="none" stroke="rgba(15,17,20,.14)" stroke-width="1"><polyline points="138,354 144,356 151,357 158,359 166,360 174,361 183,362 191,362 200,362 209,362 217,362 226,361 234,360 242,359 249,357 256,356 262,354"/><polyline points="76,301 84,305 93,309 104,312 115,315 128,317 142,320 156,321 170,322 185,323 200,323 215,323 230,322 244,321 258,320 272,317 285,315 296,312 307,309 316,305 324,301 331,297 337,293"/><polyline points="63,293 69,297 76,301"/><polyline points="56,226 66,230 77,234 89,238 102,242 117,244 132,247 149,249 165,250 183,251 200,251 217,251 235,250 251,249 268,247 283,244 298,242 311,238 323,234 334,230 344,226 352,221 358,216 362,211 365,205"/><polyline points="35,205 38,211 42,216 48,221 56,226"/><polyline points="76,143 84,147 93,151 104,154 115,157 128,160 142,162 156,163 170,165 185,165 200,165 215,165 230,165 244,163 258,162 272,160 285,157 296,154 307,151 316,147 324,143 331,139 337,135 341,130 343,126 344,121 343,116"/><polyline points="57,116 56,121 57,126 59,130 63,135 69,139 76,143"/><polyline points="128,76 133,78 138,80 144,82 151,84 158,85 166,87 174,88 183,88 191,89 200,89 209,89 217,88 226,88 234,87 242,85 249,84 256,82 262,80 267,78 272,76 276,74 279,71 281,69 283,66 283,63 283,61 281,58 279,55 276,53 272,50"/><polyline points="128,50 124,53 121,55 119,58 117,61 117,63 117,66 119,69 121,71 124,74 128,76"/><polyline points="115,343 104,334 93,325 84,314 76,301 69,288 63,273 59,258 57,242 56,226 57,209 59,192 63,176 69,159 76,143 84,128 93,113 104,100 115,87 128,76 142,66 156,58 170,51 185,46 200,42"/><polyline points="183,364 179,361 175,357 171,350 168,342 165,333 163,322 161,309 159,296 158,281 157,266 157,250 157,233 158,216 159,198 161,181 163,164 165,147 168,131 171,116 175,101 179,88 183,76 187,65 191,56 196,48 200,42"/><polyline points="234,362 242,359 249,354 256,347 262,339 267,329 272,317 276,305 279,291 281,276 283,261 283,244 283,228 281,211 279,193 276,176 272,160 267,143 262,127 256,112 249,98 242,85 234,74 226,64 217,55 209,48 200,42"/><polyline points="339,290 346,276 352,261 357,246 359,230 360,213 359,197 357,180 352,164 346,148 339,133 330,118 319,104 307,92 294,80 280,70 265,61 250,54 233,48 217,44 200,42"/><polyline points="272,50 258,45 244,42 230,40 215,40 200,42"/><polyline points="209,35 204,38 200,42"/><polyline points="174,36 183,36 191,38 200,42"/><polyline points="81,84 93,74 106,64 120,57 135,50 150,46 167,43 183,42 200,42"/></g><g fill="#F97316"><circle cx="110" cy="92" r="5.6" opacity=".9"/><circle cx="108" cy="99" r="5.6" opacity=".9"/><circle cx="127" cy="96" r="4" opacity=".58"/><circle cx="109" cy="120" r="4" opacity=".58"/><circle cx="87" cy="115" r="4" opacity=".58"/><circle cx="117" cy="93" r="4" opacity=".58"/><circle cx="164" cy="96" r="4" opacity=".58"/><circle cx="135" cy="130" r="4" opacity=".58"/><circle cx="143" cy="84" r="2.4" opacity=".34"/><circle cx="117" cy="99" r="2.4" opacity=".34"/><circle cx="127" cy="110" r="2.4" opacity=".34"/><circle cx="110" cy="110" r="4" opacity=".58"/><circle cx="188" cy="179" r="5.6" opacity=".9"/><circle cx="165" cy="179" r="2.4" opacity=".34"/><circle cx="131" cy="160" r="2.4" opacity=".34"/><circle cx="121" cy="309" r="2.4" opacity=".34"/><circle cx="62" cy="210" r="2.4" opacity=".34"/><circle cx="135" cy="251" r="2.4" opacity=".34"/><circle cx="109" cy="320" r="2.4" opacity=".34"/><circle cx="235" cy="196" r="4" opacity=".58"/><circle cx="243" cy="167" r="4" opacity=".58"/><circle cx="249" cy="212" r="2.4" opacity=".34"/><circle cx="305" cy="200" r="5.6" opacity=".9"/><circle cx="315" cy="233" r="5.6" opacity=".9"/><circle cx="310" cy="230" r="4" opacity=".58"/><circle cx="325" cy="168" r="5.6" opacity=".9"/><circle cx="325" cy="139" r="5.6" opacity=".9"/><circle cx="306" cy="121" r="5.6" opacity=".9"/><circle cx="322" cy="166" r="4" opacity=".58"/><circle cx="316" cy="145" r="4" opacity=".58"/><circle cx="303" cy="139" r="2.4" opacity=".34"/><circle cx="305" cy="153" r="4" opacity=".58"/><circle cx="317" cy="127" r="2.4" opacity=".34"/><circle cx="306" cy="101" r="2.4" opacity=".34"/><circle cx="333" cy="115" r="4" opacity=".58"/><circle cx="321" cy="120" r="4" opacity=".58"/><circle cx="340" cy="184" r="2.4" opacity=".34"/><circle cx="320" cy="252" r="4" opacity=".58"/><circle cx="319" cy="205" r="2.4" opacity=".34"/><circle cx="311" cy="177" r="2.4" opacity=".34"/><circle cx="332" cy="155" r="4" opacity=".58"/><circle cx="319" cy="189" r="2.4" opacity=".34"/><circle cx="302" cy="218" r="2.4" opacity=".34"/><circle cx="299" cy="187" r="2.4" opacity=".34"/><circle cx="315" cy="204" r="2.4" opacity=".34"/><circle cx="176" cy="176" r="2.4" opacity=".34"/><circle cx="143" cy="151" r="2.4" opacity=".34"/><circle cx="168" cy="132" r="2.4" opacity=".34"/><circle cx="235" cy="128" r="2.4" opacity=".34"/><circle cx="237" cy="98" r="2.4" opacity=".34"/></g></svg></div>
+      <div class="covr-side">
+        <div>
+          <h3>圖例</h3>
+          <p class="lede" style="margin-top:10px">聚合點會隨其涵蓋的飯店數量變大。搜尋地點可直接將檢視跳到該處。</p>
+        </div>
+<ul class="lgnd">
+      <li><span class="sw"><i style="width:5px;height:5px;opacity:.34"></i></span>少於 10 家飯店</li>
+      <li><span class="sw"><i style="width:7px;height:7px;opacity:.58"></i></span>10 至 30 家飯店</li>
+      <li><span class="sw"><i style="width:9px;height:9px;opacity:.9"></i></span>超過 30 家飯店</li>
+      <li><span class="sw"><i style="width:4px;height:4px;opacity:1"></i></span>單一飯店</li>
+    </ul>
+      </div>
+    </div>
+    <p class="disclaim" style="margin-top:14px">示意圖。實際地圖以飯店資源庫中的 WGS84 座標繪製。</p>
+  </div>
+</section>
 
-    <div class="tblwrap"><div class="tblscroll">
-  <table class="tbl" style="min-width:660px">
-    <thead><tr><th>接口</th><th>方法</th><th>路径</th></tr></thead>
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">地圖提供什麼</p>
+      <h2 class="h3">三個計數， <em>其中一個隨檢視改變。</em></h2>
+      <p class="lede">兩個計數描述整個資源庫。第三個隨檢視改變，回答的是目前畫面上這個市場有多少資源。</p>
+    </div>
+<div class="defs">
+    <div><p class="dt">飯店總數</p><p class="dd">資源庫中可透過介面販售的所有飯店。</p></div>
+    <div><p class="dt">覆蓋國家與地區</p><p class="dd">這些資源橫跨的國家與地區數量。</p></div>
+    <div><p class="dt">檢視內飯店數</p><p class="dd">目前檢視範圍內的數量，隨地圖移動即時重算。</p></div>
+  </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="blk-head">
+      <p class="eyebrow micro">介面中的覆蓋資料</p>
+      <h2 class="h3">同一批資源， <em>三個端點。</em></h2>
+      <p class="lede">地圖上直觀呈現的內容，G-Link 飯店介面會以資料形式回傳：覆蓋的國家、可售飯店 ID，以及每個 ID 背後的靜態紀錄。</p>
+    </div>
+<div class="tblwrap"><div class="tblscroll">
+  <table class="tbl" style="min-width:680px">
+    <thead><tr><th>回傳內容</th><th>方法</th><th>路徑</th></tr></thead>
     <tbody>
-      <tr><td colspan="3" style="background:var(--card);font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-card);padding:11px 20px">地区静态数据</td></tr>
-      <tr><td style="background:rgba(15,17,20,.02)">查询国家列表</td><td class="t-mid" style="background:rgba(15,17,20,.02)"><span class="method">POST</span></td><td class="t-path" style="background:rgba(15,17,20,.02)">/openapi/v1/glink/region/countries</td></tr>
-      <tr><td>查询城市列表</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/region/cities</td></tr>
-      <tr><td>查询热门城市列表</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/region/hotCities</td></tr>
-      <tr><td>查询商圈列表</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/region/businessZones</td></tr>
-      <tr><td>查询行政区列表</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/region/districts</td></tr>
-      <tr><td colspan="3" style="background:var(--card);font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-card);padding:11px 20px">酒店信息</td></tr>
-      <tr><td>可售酒店 ID 列表</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/search/hotelIdList</td></tr>
-      <tr><td>查询酒店基础信息</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/hotel/detail</td></tr>
-      <tr><td>酒店每日最低价</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/hotel/lowestPrice</td></tr>
-      <tr><td>酒店静态数据增量</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/hotel/increment</td></tr>
-      <tr><td colspan="3" style="background:var(--card);font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-card);padding:11px 20px">酒店预订</td></tr>
-      <tr><td>酒店实时产品查询</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/booking/productDetails</td></tr>
-      <tr><td>试单（可订性校验）</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/booking/availabilityCheck</td></tr>
-      <tr><td>创建订单</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/booking/createOrder</td></tr>
-      <tr><td>订单支付</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/booking/payOrder</td></tr>
-      <tr><td colspan="3" style="background:var(--card);font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-card);padding:11px 20px">订单信息</td></tr>
-      <tr><td>订单详情查询</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/order/orderDetail</td></tr>
-      <tr><td>取消订单</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/order/cancelOrder</td></tr>
-      <tr><td colspan="3" style="background:var(--card);font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-card);padding:11px 20px">回调通知</td></tr>
-      <tr><td>订单状态推送</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/notify/orderStatus</td></tr>
+      <tr><td>國家清單</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/region/countries</td></tr>
+      <tr><td>可販售飯店 ID 清單</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/search/hotelIdList</td></tr>
+      <tr><td>飯店基本資訊</td><td class="t-mid"><span class="method">POST</span></td><td class="t-path">/openapi/v1/glink/hotel/detail</td></tr>
     </tbody>
   </table>
 </div></div>
+    <div class="note" style="margin-top:22px"><iconify-icon icon="solar:global-linear"></iconify-icon>
+      <span>座標採用 WGS84，與地圖繪製所用的基準相同。</span></div>
+  </div>
+</section>
 
-    <h3>完整示例——查询国家列表</h3>
-    <div class="ep">
-      <div class="ep-h">
-        <span class="method">POST</span>
-        <code>https://open.fusionconnectgroup.com/openapi/v1/glink/region/countries</code>
-      </div>
-      <div class="ep-b">
-        <h4>接口说明</h4>
-        <div class="card-meta" style="padding:0;margin-top:14px">
-          <div><span class="k">调用方</span><span class="v">合作伙伴</span></div>
-          <div><span class="k">响应方</span><span class="v">FCG</span></div>
-          <div><span class="k">限流</span><span class="v">100 req / min</span></div>
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="cards cards--2">
+      <article class="card rv">
+        <div class="card-h">
+          <p class="card-k"><span class="dot" aria-hidden="true"></span>下一步</p>
+          <h3>比對你自己的資源。</h3>
+          <p>覆蓋地圖回答 FCG 能賣什麼。飯店對應回答其中哪些是你系統裡已有的飯店，並與 FCG 飯店 ID 對上。</p>
         </div>
-        <p style="color:var(--muted);font-size:14px;line-height:23px;margin-top:16px;max-width:70ch">
-          合作伙伴调用该接口查询 FCG 系统中的国家列表，通常在搭建本地基础数据时调用一次。</p>
-      </div>
-      <div class="ep-b">
-        <h4>请求体参数</h4>
-        <div style="margin-top:14px"><ul class="plist">
-    <li><span class="pn">language</span><span class="pt">string</span><span class="pr">可选</span><span class="pd">语言。 <code class="inl">zh-CN</code> 为中文， <code class="inl">en-US</code> 为英文。默认英文。</span></li>
-  </ul></div>
-      </div>
-      <div class="ep-b">
-        <h4>响应结构</h4>
-        <div style="margin-top:14px"><ul class="plist">
-    <li><span class="pn">code</span><span class="pt">string</span><span class="pr req">必填</span><span class="pd">平台业务码。 <code class="inl">SUCCESS</code> 表示成功。供应商业务失败仍可能返回 HTTP 200，并带有 <code class="inl">code=SUPPLIER_BIZ_ERROR</code>.</span></li>
-    <li><span class="pn">data</span><span class="pt">array&lt;object&gt;</span><span class="pr">可选</span><span class="pd">国家列表。</span></li>
-    <li class="sub"><span class="pn">countryCode</span><span class="pt">string</span><span class="pr req">必填</span><span class="pd">国家编码。</span></li>
-    <li class="sub"><span class="pn">countryId</span><span class="pt">string</span><span class="pr req">必填</span><span class="pd">国家 ID。</span></li>
-    <li class="sub"><span class="pn">countryName</span><span class="pt">string</span><span class="pr req">必填</span><span class="pd">国家名称。</span></li>
-    <li><span class="pn">downstream_request_id</span><span class="pt">string</span><span class="pr">可选</span><span class="pd">G-Link 下游请求 ID。通常在调用成功后返回。</span></li>
-    <li><span class="pn">message</span><span class="pt">string</span><span class="pr req">必填</span><span class="pd">平台提示信息。成功时通常为 <code class="inl">ok</code> 。</span></li>
-    <li><span class="pn">request_id</span><span class="pt">string</span><span class="pr req">必填</span><span class="pd">平台请求 ID。</span></li>
-    <li><span class="pn">trace_id</span><span class="pt">string</span><span class="pr req">必填</span><span class="pd">平台链路追踪 ID。</span></li>
-  </ul></div>
-      </div>
-      <div class="ep-b" style="padding:0">
-        <div class="term" style="border-radius:0;border:0">
-          <div class="term-bar">
-            <span class="dot" aria-hidden="true"></span>
-            <span class="t-label">请求</span>
-            <span class="t-right">application/json</span>
-          </div>
-          <div class="term-body"><pre>{
-  <span class="t-key">"language"</span>: <span class="t-dim">"en-US"</span>
-}</pre></div>
-          <div class="term-split"><span>响应</span></div>
-          <div class="term-body"><pre>{
-  <span class="t-key">"code"</span>: <span class="t-dim">"SUCCESS"</span>,
-  <span class="t-key">"data"</span>: [
-    {
-      <span class="t-key">"countryCode"</span>: <span class="t-dim">"CN"</span>,
-      <span class="t-key">"countryId"</span>: <span class="t-dim">"5302980"</span>,
-      <span class="t-key">"countryName"</span>: <span class="t-dim">"China"</span>
-    }
-  ],
-  <span class="t-key">"message"</span>: <span class="t-dim">"ok"</span>,
-  <span class="t-key">"request_id"</span>: <span class="t-dim">"req_dc3qor2zg6omq…"</span>,
-  <span class="t-key">"trace_id"</span>: <span class="t-dim">"trc_dc3qor2zg6omq…"</span>
-}</pre></div>
+        <div class="card-f card-f--plain">
+          <a class="btn btn--sm" href="hotel-mapping.html">開啟飯店對應 <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
         </div>
-      </div>
-    </div>
-
-    <div class="note">
-      <iconify-icon icon="solar:info-circle-linear"></iconify-icon>
-      <span><strong>请判断 <code class="inl">code</code>，而不是 HTTP 状态码。</strong> 供应商业务失败会返回 HTTP 200，并带有 <code class="inl">code=SUPPLIER_BIZ_ERROR</code>。请依据响应体分支处理。</span>
-    </div>
-
-    <div class="band-foot">
-      <a class="btn" href="api-docs-errors.html">错误码说明 <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
-      <a class="tlink tlink--o" href="sdk.html">改用 SDK 对接 <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
+      </article>
+      <article class="card rv">
+        <div class="card-h">
+          <p class="card-k"><span class="dot" aria-hidden="true"></span>動手之前</p>
+          <h3>在沙箱中核對覆蓋範圍。</h3>
+          <p>飯店 ID 清單與靜態紀錄在沙箱中都可呼叫，因此在拿到正式環境金鑰之前就能驗證覆蓋範圍的假設。</p>
+        </div>
+        <div class="card-f card-f--plain">
+          <a class="btn btn--sm" href="sandbox.html">沙箱環境 <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
+          <a class="tlink" href="api-docs-hotel.html">G-Link 文件 <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
+        </div>
+      </article>
     </div>
   </div>
-</div>
-</div>
+</section>
+
+<hr class="rule">
+
+<section class="blk">
+  <div class="wrap">
+    <div class="band-foot">
+      <a class="btn" href="login.html">開啟資源覆蓋地圖 <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
+      <a class="tlink tlink--o" href="register.html">註冊取得權限 <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer class="ftr">
@@ -1272,29 +1260,29 @@ table.tbl code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em}
     <div class="ftr-top">
       <div class="ftr-brand">
         <svg viewBox="0 0 88 24" role="img" aria-label="FCG" style="height: 26px; width: auto;"><use href="#fcg-logo"></use></svg>
-        <p>FCG 开放平台：面向酒店、机票与差旅管理资源的标准化接口与灵活 SDK。</p>
+        <p>FCG 開放平台：針對飯店、機票與商旅管理資源的標準化介面與彈性 SDK。</p>
       </div>
       <div class="ftr-col">
-        <p class="ftr-h" id="ftr-products">产品</p>
+        <p class="ftr-h" id="ftr-products">產品</p>
         <nav aria-labelledby="ftr-products">
         <ul>
           <li><a href="api-docs-hotel.html">G-Link Hotel API</a></li>
           <li><a href="api-docs-flink.html">F-Link Flight API</a></li>
           <li><a href="index.html#products">TMC API</a></li>
-          <li><a href="coverage-map.html">资源覆盖地图</a></li>
-          <li><a href="hotel-mapping.html">酒店匹配</a></li>
-          <li><a href="index.html#use-cases">产品应用场景</a></li>
+          <li><a href="coverage-map.html">資源覆蓋地圖</a></li>
+          <li><a href="hotel-mapping.html">飯店對應</a></li>
+          <li><a href="index.html#use-cases">產品應用情境</a></li>
         </ul>
         </nav>
       </div>
       <div class="ftr-col">
-        <p class="ftr-h" id="ftr-developers">开发者</p>
+        <p class="ftr-h" id="ftr-developers">開發者</p>
         <nav aria-labelledby="ftr-developers">
         <ul>
-          <li><a href="api-docs-hotel.html">接口文档</a></li>
+          <li><a href="api-docs-hotel.html">介面文件</a></li>
           <li><a href="sdk.html">SDK</a></li>
           <li><a href="skills.html">Skills 技能包</a></li>
-          <li><a href="api-docs-errors.html">错误码说明</a></li>
+          <li><a href="api-docs-errors.html">錯誤碼說明</a></li>
         </ul>
         </nav>
       </div>
@@ -1302,18 +1290,18 @@ table.tbl code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em}
         <p class="ftr-h" id="ftr-platform">平台</p>
         <nav aria-labelledby="ftr-platform">
         <ul>
-          <li><a href="index.html">首页</a></li>
-          <li><a href="app-management.html">应用管理</a></li>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="app-management.html">應用程式管理</a></li>
           <li><a href="sandbox.html">沙箱</a></li>
-          <li><a href="request-trace.html">请求追踪</a></li>
-          <li><a href="ai-assistant.html">AI 助手</a></li>
-          <li><a href="register.html">注册</a></li>
+          <li><a href="request-trace.html">請求追蹤</a></li>
+          <li><a href="ai-assistant.html">AI 助理</a></li>
+          <li><a href="register.html">註冊</a></li>
         </ul>
         </nav>
       </div>
     </div>
     <div class="ftr-bot">
-      <span>© 2026 Fusion Connect Group Holdings Ltd (BVI)。保留所有权利。</span>
+      <span>© 2026 Fusion Connect Group Holdings Ltd (BVI)。保留一切權利。</span>
       <span class="mono">ENG · 简体 · 繁體</span>
     </div>
   </div>

@@ -60,9 +60,7 @@ NAV = [
 ]
 
 # The Products mega menu. Column = (eyebrow, title, items), item = (icon, label,
-# description, href). Four of the nine destinations are console surfaces this
-# prototype does not have a page for yet, so they point at the nearest section
-# that describes them — ponytail: no stub pages until the real ones land.
+# description, href). Every destination is a real page.
 MEGA = [
     (
         "For your first integration",
@@ -71,7 +69,7 @@ MEGA = [
             ("solar:widget-5-linear", "App Management",
              "Create an app and manage integration access", "app-management.html"),
             ("solar:key-minimalistic-linear", "Sandbox",
-             "Test your integration in a controlled environment", "index.html#start-integration"),
+             "Test your integration in a controlled environment", "sandbox.html"),
         ],
     ),
     (
@@ -91,11 +89,11 @@ MEGA = [
         "Operate",
         [
             ("solar:route-linear", "Request Trace",
-             "Inspect calls and diagnose integration issues", "api-docs-errors.html"),
+             "Inspect calls and diagnose integration issues", "request-trace.html"),
             ("solar:global-linear", "Coverage Map",
-             "Explore hotel supply coverage before you connect", "index.html#network"),
+             "Explore hotel supply coverage before you connect", "coverage-map.html"),
             ("solar:bed-linear", "Hotel Mapping",
-             "Standardise supplier records in one workspace", "api-docs-hotel-process.html"),
+             "Standardise supplier records in one workspace", "hotel-mapping.html"),
         ],
     ),
 ]
@@ -107,6 +105,8 @@ FOOTER_COLS = [
             ("G-Link Hotel API", "api-docs-hotel.html"),
             ("F-Link Flight API", "api-docs-flink.html"),
             ("TMC API", "index.html#products"),
+            ("Coverage Map", "coverage-map.html"),
+            ("Hotel Mapping", "hotel-mapping.html"),
             ("Product use cases", "index.html#use-cases"),
         ],
     ),
@@ -124,6 +124,8 @@ FOOTER_COLS = [
         [
             ("Home", "index.html"),
             ("App Management", "app-management.html"),
+            ("Sandbox", "sandbox.html"),
+            ("Request Trace", "request-trace.html"),
             ("AI Assistant", "ai-assistant.html"),
             ("Register", "register.html"),
         ],
@@ -185,6 +187,9 @@ def header(active="", minimal=False, locale="en", slug="index"):
   </div>
 </header>"""
 
+    mega_keys = {"sandbox", "trace", "coverage", "mapping"}
+    drop_on = ' class="drop-t on"' if active in mega_keys else ' class="drop-t"'
+
     shell = "\n".join(
         f'      <a{" class=\"on\"" if k == active else ""} href="{h}">{lb}</a>'
         for k, lb, h in NAV
@@ -240,7 +245,7 @@ def header(active="", minimal=False, locale="en", slug="index"):
     {brand}
 
     <nav class="shell" aria-label="Primary">
-      <button class="drop-t" type="button" id="mega-t" aria-expanded="false" aria-controls="mega">Products <iconify-icon class="drop-c" icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></button>
+      <button{drop_on} type="button" id="mega-t" aria-expanded="false" aria-controls="mega">Products <iconify-icon class="drop-c" icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></button>
 {shell}
     </nav>
 
@@ -646,6 +651,75 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
   .card-h,.card-f,.card-meta{padding-left:20px;padding-right:20px}
   .band-foot .btn{justify-content:flex-start}
 }
+
+/* A bare <code> falls back to the browser's monospace, which is a different
+   face from --mono and shows up as a font violation in verify-pages.js. */
+table.tbl code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em}
+.flow code{font-family:inherit;font-size:inherit;letter-spacing:inherit}
+
+/* ---------- three-up step grid (the flow page runs eight, these run three) --- */
+.steps--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+/* ---------- coverage figure ---------- */
+.covr{
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+  border:1px solid var(--line);border-radius:24px;overflow:hidden;background:#fff;
+}
+.covr-fig{
+  display:flex;align-items:center;justify-content:center;padding:26px;
+  background:var(--card);border-right:1px solid var(--hair);
+}
+.covr-fig svg{display:block;width:100%;max-width:460px;height:auto}
+.covr-side{display:flex;flex-direction:column;justify-content:center;gap:24px;padding:34px}
+.covr-side h3{font-size:19px;font-weight:500;letter-spacing:-.01em}
+.covr-side .lede{font-size:14px;line-height:23px}
+.lgnd{display:flex;flex-direction:column}
+.lgnd li{
+  display:flex;align-items:center;gap:15px;padding:13px 0;
+  border-top:1px solid var(--hair-soft);font-size:14px;color:var(--ink);
+}
+.lgnd li:last-child{border-bottom:1px solid var(--hair-soft)}
+.lgnd .sw{flex:none;width:22px;display:flex;align-items:center;justify-content:center}
+.lgnd .sw i{display:block;border-radius:999px;background:var(--accent)}
+.lgnd .cap{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted)}
+
+/* ---------- definition rows (metric or filter, label + one line) ----------
+   Capped at 940px: at the full 1200px wrap the description drifts so far from
+   its label that the pair stops reading as one row. */
+.defs{border-top:1px solid var(--hair);max-width:940px}
+.defs > div{
+  display:grid;grid-template-columns:minmax(0,250px) minmax(0,1fr);gap:24px;
+  padding:20px 0;border-bottom:1px solid var(--hair);align-items:baseline;
+}
+.defs .dt{font-size:15px;font-weight:500;letter-spacing:-.01em;color:var(--ink)}
+.defs .dd{font-size:14.5px;line-height:24px;color:var(--muted);max-width:60ch}
+/* two-up: a long reference list reads as a lookup table, not a second essay */
+.defs--2{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:60px;
+  border-top:0;max-width:100%;
+}
+.defs--2 > div{
+  grid-template-columns:minmax(0,1fr);gap:5px;padding:17px 0;align-items:start;
+  border-top:1px solid var(--hair);border-bottom:0;
+}
+@media (max-width:900px){
+  .steps--3{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .defs--2{grid-template-columns:minmax(0,1fr);column-gap:0}
+}
+@media (max-width:640px){
+  .steps--3{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .covr{grid-template-columns:minmax(0,1fr)}
+  .covr-fig{border-right:0;border-bottom:1px solid var(--hair);padding:26px}
+  .defs > div{grid-template-columns:minmax(0,1fr);gap:6px}
+}
+@media (max-width:900px){
+  .covr{grid-template-columns:minmax(0,1fr)}
+  .covr-fig{border-right:0;border-bottom:1px solid var(--hair)}
+}
 </style>"""
 
 # ------------------------------------------------------------------ assembly
@@ -724,7 +798,10 @@ DOUBLE_ORANGE = re.compile(
 # nav/footer link, and both want the same translation. Anything NOT on this
 # list is a headline fragment colliding with a label — the bug that translated
 # the hero h1 to "FCG平台" — and fails the build.
-BENIGN_COLLISIONS = {"AI Assistant", "App Management", "FCG Developer Platform"}
+BENIGN_COLLISIONS = {
+    "AI Assistant", "App Management", "FCG Developer Platform",
+    "Request Trace", "Coverage Map", "Hotel Mapping",
+}
 
 
 def check_context_collisions(html, slug):

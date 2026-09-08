@@ -18,7 +18,8 @@ const OUT = path.join(__dirname, "shots", "b-pages");
 const ALL = [
   "index", "app-management", "api-docs-hotel", "api-docs-hotel-process",
   "api-docs-hotel-apis", "api-docs-flink", "api-docs-errors", "sdk",
-  "skills", "ai-assistant", "login", "register",
+  "skills", "ai-assistant", "sandbox", "request-trace", "coverage-map",
+  "hotel-mapping", "login", "register",
 ];
 
 const pages = argv.length ? argv : ALL;
