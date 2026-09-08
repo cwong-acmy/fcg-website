@@ -4,3 +4,5 @@ Thumbs.db
 node_modules/
 .env
 .env.*
+open-portal-redesign/reference/console-dev/
+open-portal-redesign/reference/console-admin/

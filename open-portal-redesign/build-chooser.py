@@ -92,7 +92,7 @@ TEMPLATE = r"""<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FCG Developer Platform — homepage directions</title>
+<title>Open Developer Platform — homepage directions</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{--bg:#fff;--ink:#0F1114;--accent:#F97316;--card:#F3F4F6;--line:#D1D5DB;--muted:#6B7280;--ink2:#111827;--hair:rgba(15,17,20,.1)}
@@ -125,7 +125,7 @@ TEMPLATE = r"""<!doctype html>
   <div class="top">
     <div>
       <div class="lbl" style="margin-bottom:8px"><i class="dash"></i>Pick a direction</div>
-      <h1>FCG Developer Platform &mdash; homepage, realigned to the FCG brand</h1>
+      <h1>Open Developer Platform &mdash; homepage, realigned to the FCG brand</h1>
     </div>
     <div class="lbl">open.fusionconnectgroup.com/home</div>
   </div>

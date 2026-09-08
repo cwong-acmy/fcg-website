@@ -1,4 +1,4 @@
-# Brief — realign the FCG Developer Platform homepage to the FCG marketing brand
+# Brief — realign the Open Developer Platform homepage to the FCG marketing brand
 
 ## The job
 
@@ -54,7 +54,7 @@ full stop, third person). British English. Do not invent products, numbers or cl
 
 **Nav:** Home · App Management · API Docs · SDK · Skills · AI Assistant · language switcher · Login · Register
 
-**Hero.** Eyebrow "Supports both SDK and API integration". Title "FCG Developer Platform". Lede: a
+**Hero.** Eyebrow "Supports both SDK and API integration". Title "Open Developer Platform". Lede: a
 travel-focused open platform for distributors such as OTAs and travel management companies;
 standardised APIs and flexible SDKs aggregate and distribute hotel, flight and other core travel
 resources, plus TMC API capabilities so partners can launch branded travel platforms faster.

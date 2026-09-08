@@ -127,10 +127,10 @@ def header(active="", minimal=False, locale="en", slug="index"):
     """Full portal header, or the reduced brand-only header the auth pages use."""
     lang = lang_control(locale, slug)
     brand = (
-        f'<a class="brand" href="index.html" aria-label="FCG Developer Platform — home">\n'
+        f'<a class="brand" href="index.html" aria-label="Open Developer Platform — home">\n'
         f"      {LOGO.format(h=28)}\n"
         f'      <span class="brand-div" aria-hidden="true"></span>\n'
-        f'      <span class="brand-sub">Developer Platform</span>\n'
+        f'      <span class="brand-sub">Open Developer Platform</span>\n'
         f"    </a>"
     )
 
@@ -203,7 +203,7 @@ def footer():
     <div class="ftr-top">
       <div class="ftr-brand">
         {LOGO.format(h=26)}
-        <p>The FCG Developer Platform: standardised APIs and flexible SDKs for hotel, flight and travel management resources.</p>
+        <p>The Open Developer Platform: standardised APIs and flexible SDKs for hotel, flight and travel management resources.</p>
       </div>
 {chr(10).join(cols)}
     </div>
@@ -639,7 +639,7 @@ DOUBLE_ORANGE = re.compile(
 # nav/footer link, and both want the same translation. Anything NOT on this
 # list is a headline fragment colliding with a label — the bug that translated
 # the hero h1 to "FCG平台" — and fails the build.
-BENIGN_COLLISIONS = {"AI Assistant", "App Management", "FCG Developer Platform"}
+BENIGN_COLLISIONS = {"AI Assistant", "App Management", "Open Developer Platform"}
 
 
 def check_context_collisions(html, slug):

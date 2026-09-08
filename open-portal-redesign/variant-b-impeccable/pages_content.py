@@ -1020,14 +1020,14 @@ AI_ASSISTANT = f"""
         <div class="chat-h">
           <span class="av"><iconify-icon icon="solar:chat-square-code-linear"></iconify-icon></span>
           <span>
-            <strong>FCG Developer Platform AI Assistant</strong>
+            <strong>Open Developer Platform AI Assistant</strong>
             <span>Technical support · Integration consulting</span>
           </span>
           <span class="dot" aria-hidden="true" title="Online"></span>
         </div>
         <div class="chat-b">
           <div class="msg msg--ai">
-            <p>Hello. I am the FCG Developer Platform AI Assistant. I can help with API integration,
+            <p>Hello. I am the Open Developer Platform AI Assistant. I can help with API integration,
                signature authentication, order workflows and more.</p>
             <p>Type a question, or pick one of the common questions to start.</p>
           </div>
@@ -1251,47 +1251,47 @@ COPY = """<script>
 
 PAGES = [
     dict(slug="app-management", nav="apps",
-         title="App Management — FCG Developer Platform",
+         title="App Management — Open Developer Platform",
          desc="Manage the applications behind an FCG API integration. Each product carries its own credential set.",
          body=APP_MANAGEMENT),
     dict(slug="api-docs-hotel", nav="docs",
-         title="G-Link Hotel API — FCG Developer Platform",
+         title="G-Link Hotel API — Open Developer Platform",
          desc="Mandatory interfaces, static data handling and rate limits for the G-Link hotel API.",
          body=API_DOCS_HOTEL),
     dict(slug="api-docs-hotel-process", nav="docs",
-         title="G-Link Integration Flow — FCG Developer Platform",
+         title="G-Link Integration Flow — Open Developer Platform",
          desc="The recommended eight-step G-Link hotel API integration flow, search through to cancellation.",
          body=API_DOCS_HOTEL_PROCESS),
     dict(slug="api-docs-hotel-apis", nav="docs",
-         title="G-Link API Reference — FCG Developer Platform",
+         title="G-Link API Reference — Open Developer Platform",
          desc="Every G-Link hotel endpoint with methods, paths and a worked request and response example.",
          body=API_DOCS_HOTEL_APIS),
     dict(slug="api-docs-flink", nav="docs",
-         title="F-Link Flight API — FCG Developer Platform",
+         title="F-Link Flight API — Open Developer Platform",
          desc="All nineteen F-Link flight endpoints: search, ticketing, changes, refunds and reference data.",
          body=API_DOCS_FLINK),
     dict(slug="api-docs-errors", nav="docs",
-         title="Error Code Reference — FCG Developer Platform",
+         title="Error Code Reference — Open Developer Platform",
          desc="Every FCG platform error code, its cause and its resolution, across API, SDK and MCP integration.",
          body=API_DOCS_ERRORS),
     dict(slug="sdk", nav="sdk",
-         title="SDK Integration Centre — FCG Developer Platform",
+         title="SDK Integration Centre — Open Developer Platform",
          desc="Go, Java and Python SDKs for the FCG travel APIs, with install commands and changelogs.",
          body=SDK, extra=COPY),
     dict(slug="skills", nav="skills",
-         title="Skills Installation Centre — FCG Developer Platform",
+         title="Skills Installation Centre — Open Developer Platform",
          desc="Official integration skill packages for AI coding assistants, one per FCG travel API.",
          body=SKILLS, extra=COPY),
     dict(slug="ai-assistant", nav="ai",
-         title="AI Assistant — FCG Developer Platform",
-         desc="Ask the FCG Developer Platform AI Assistant about API integration, authentication and order workflows.",
+         title="AI Assistant — Open Developer Platform",
+         desc="Ask the Open Developer Platform AI Assistant about API integration, authentication and order workflows.",
          body=AI_ASSISTANT),
     dict(slug="login", nav="", minimal=True,
-         title="Sign in — FCG Developer Platform",
-         desc="Sign in to the FCG Developer Platform console.",
+         title="Sign in — Open Developer Platform",
+         desc="Sign in to the Open Developer Platform console.",
          body=LOGIN),
     dict(slug="register", nav="", minimal=True,
-         title="Register — FCG Developer Platform",
-         desc="Register a company account for free sandbox access to the FCG Developer Platform.",
+         title="Register — Open Developer Platform",
+         desc="Register a company account for free sandbox access to the Open Developer Platform.",
          body=REGISTER),
 ]

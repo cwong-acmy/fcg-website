@@ -12,8 +12,8 @@ is carried in the fragment on purpose.
 ZH_HANS = {
     # ---- chrome: nav, footer, meta ----------------------------------------
     "Skip to content": "跳转到正文",
-    "FCG Developer Platform — home": "FCG 开放平台 — 首页",
-    "Developer Platform": "开放平台",
+    "Open Developer Platform — home": "FCG 开放平台 — 首页",
+    "Open Developer Platform": "开放平台",
     "Primary": "主导航",
     "Home": "首页",
     "App Management": "应用管理",
@@ -25,7 +25,7 @@ ZH_HANS = {
     "Register": "注册",
     "Open menu": "打开菜单",
     "Back to platform": "返回平台",
-    "The FCG Developer Platform: standardised APIs and flexible SDKs for hotel, flight and travel management resources.":
+    "The Open Developer Platform: standardised APIs and flexible SDKs for hotel, flight and travel management resources.":
         "FCG 开放平台：面向酒店、机票与差旅管理资源的标准化接口与灵活 SDK。",
     "Products": "产品",
     "Product use cases": "产品应用场景",
@@ -41,39 +41,39 @@ ZH_HANS = {
     "Section": "章节",
 
     # ---- page titles and meta descriptions -------------------------------
-    "AI Assistant — FCG Developer Platform": "AI 助手 — FCG 开放平台",
-    "Ask the FCG Developer Platform AI Assistant about API integration, authentication and order workflows.":
+    "AI Assistant — Open Developer Platform": "AI 助手 — FCG 开放平台",
+    "Ask the Open Developer Platform AI Assistant about API integration, authentication and order workflows.":
         "就接口对接、签名认证与订单流程，向 FCG 开放平台 AI 助手提问。",
-    "Error Code Reference — FCG Developer Platform": "错误码说明 — FCG 开放平台",
+    "Error Code Reference — Open Developer Platform": "错误码说明 — FCG 开放平台",
     "Every FCG platform error code, its cause and its resolution, across API, SDK and MCP integration.":
         "FCG 平台全部错误码及其成因与处理方式，覆盖 API、SDK 与 MCP 三种对接方式。",
-    "F-Link Flight API — FCG Developer Platform": "F-Link 机票接口 — FCG 开放平台",
+    "F-Link Flight API — Open Developer Platform": "F-Link 机票接口 — FCG 开放平台",
     "All nineteen F-Link flight endpoints: search, ticketing, changes, refunds and reference data.":
         "F-Link 机票接口全部 19 个：查询、出票、改期、退票与基础数据。",
-    "G-Link API Reference — FCG Developer Platform": "G-Link 接口参考 — FCG 开放平台",
+    "G-Link API Reference — Open Developer Platform": "G-Link 接口参考 — FCG 开放平台",
     "Every G-Link hotel endpoint with methods, paths and a worked request and response example.":
         "G-Link 酒店接口全集，含请求方法、路径与完整的请求与响应示例。",
-    "G-Link Integration Flow — FCG Developer Platform": "G-Link 对接流程 — FCG 开放平台",
+    "G-Link Integration Flow — Open Developer Platform": "G-Link 对接流程 — FCG 开放平台",
     "The recommended eight-step G-Link hotel API integration flow, search through to cancellation.":
         "G-Link 酒店接口推荐的八步对接流程，从查询到取消订单。",
-    "G-Link Hotel API — FCG Developer Platform": "G-Link 酒店接口 — FCG 开放平台",
+    "G-Link Hotel API — Open Developer Platform": "G-Link 酒店接口 — FCG 开放平台",
     "Mandatory interfaces, static data handling and rate limits for the G-Link hotel API.":
         "G-Link 酒店接口的必接接口、静态数据处理与限流规则。",
-    "App Management — FCG Developer Platform": "应用管理 — FCG 开放平台",
+    "App Management — Open Developer Platform": "应用管理 — FCG 开放平台",
     "Manage the applications behind an FCG API integration. Each product carries its own credential set.":
         "管理 FCG 接口对接所使用的应用。每个产品拥有独立的凭证。",
-    "FCG Developer Platform": "FCG 开放平台",
+    "Open Developer Platform": "FCG 开放平台",
     "A travel-focused open platform for distributors. Standardised APIs and flexible SDKs for hotel, flight and TMC travel resources.":
         "面向分销商的旅游开放平台。以标准化接口与灵活 SDK 提供酒店、机票与 TMC 差旅资源。",
-    "Sign in — FCG Developer Platform": "登录 — FCG 开放平台",
-    "Sign in to the FCG Developer Platform console.": "登录 FCG 开放平台控制台。",
-    "Register — FCG Developer Platform": "注册 — FCG 开放平台",
-    "Register a company account for free sandbox access to the FCG Developer Platform.":
+    "Sign in — Open Developer Platform": "登录 — FCG 开放平台",
+    "Sign in to the Open Developer Platform console.": "登录 FCG 开放平台控制台。",
+    "Register — Open Developer Platform": "注册 — FCG 开放平台",
+    "Register a company account for free sandbox access to the Open Developer Platform.":
         "注册企业账号，免费获取 FCG 开放平台沙箱环境。",
-    "SDK Integration Centre — FCG Developer Platform": "SDK 接入中心 — FCG 开放平台",
+    "SDK Integration Centre — Open Developer Platform": "SDK 接入中心 — FCG 开放平台",
     "Go, Java and Python SDKs for the FCG travel APIs, with install commands and changelogs.":
         "FCG 旅游接口的 Go、Java 与 Python SDK，附安装命令与更新日志。",
-    "Skills Installation Centre — FCG Developer Platform": "Skills 安装中心 — FCG 开放平台",
+    "Skills Installation Centre — Open Developer Platform": "Skills 安装中心 — FCG 开放平台",
     "Official integration skill packages for AI coding assistants, one per FCG travel API.":
         "面向 AI 编程助手的官方对接技能包，每个 FCG 旅游接口一个。",
 
@@ -84,8 +84,8 @@ ZH_HANS = {
     "Ask directly and get an answer with code examples in seconds, grounded in the platform's own API documentation.":
         "直接提问，数秒内获得基于平台自身接口文档的回答与代码示例。",
     "Start a conversation": "开始对话",
-    "FCG Developer Platform AI Assistant": "FCG 开放平台 AI 助手",
-    "Hello. I am the FCG Developer Platform AI Assistant. I can help with API integration, signature authentication, order workflows and more.":
+    "Open Developer Platform AI Assistant": "FCG 开放平台 AI 助手",
+    "Hello. I am the Open Developer Platform AI Assistant. I can help with API integration, signature authentication, order workflows and more.":
         "您好，我是 FCG 开放平台 AI 助手。我可以协助处理接口对接、签名认证、订单流程等问题。",
     "Type a question, or pick one of the common questions to start.":
         "直接输入问题，或从常见问题中选择一个开始。",
@@ -455,7 +455,7 @@ ZH_HANS = {
     "Register for free": "免费注册",
 
     # ---- homepage ---------------------------------------------------------
-    "FCG Developer": "FCG",
+    "Open Developer": "FCG",
     "A travel-focused open platform for distributors": "面向分销商的旅游开放平台",
     "such as OTAs and travel management companies. Standardised APIs and flexible SDKs aggregate and distribute hotel, flight and other core travel resources, plus TMC API capabilities, so partners can launch branded travel platforms faster.":
         "，服务 OTA 与差旅管理公司等客户。以标准化接口与灵活 SDK 聚合并分销酒店、机票等核心旅游资源，并提供 TMC 接口能力，帮助合作伙伴更快上线自有品牌的旅游平台。",

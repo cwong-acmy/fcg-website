@@ -1,4 +1,4 @@
-# FCG Developer Platform — design system
+# Open Developer Platform — design system
 
 How to build a new page or app screen that matches the twelve pages in
 [variant-b-impeccable/](variant-b-impeccable). Written to be followed cold, without reading the existing
