@@ -1,0 +1,6 @@
+# Only the built pages ship. The generator, its content source and the
+# translation tables are internal and would otherwise be served as static
+# files off the public URL.
+*.py
+__pycache__/
+*.pyc
