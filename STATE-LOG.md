@@ -66,6 +66,11 @@ uploads, so once the project builds from GitHub the Python generator needed a ro
 **When this branch merges to `main`, the production branch setting must move with it**, or the live
 URL silently freezes at the last commit to the old branch.
 
+Proven end to end: the push of `54bd2d8` at 07:20:48Z produced a `source: git` production deployment
+at 07:20:52Z, branch `portal-redesign-direction-b`, state READY. On the live URL afterwards, all seven
+sampled pages return 200 across the three locales, and `/build-pages.py`, `/pages_content.py`,
+`/i18n_zh_hans.py`, `/__pycache__/...` and `/vercel.json` all return 404.
+
 ### Blockers / next actions
 
 - `open-portal-redesign/shots/b-pages` still holds 45MB of regenerated PNGs, uncommitted.
