@@ -666,10 +666,22 @@ table.tbl code{font-family:var(--mono);font-size:12px;letter-spacing:-.01em}
   border:1px solid var(--line);border-radius:24px;overflow:hidden;background:#fff;
 }
 .covr-fig{
-  display:flex;align-items:center;justify-content:center;padding:26px;
+  display:flex;align-items:center;justify-content:center;padding:26px;overflow:hidden;
   background:var(--card);border-right:1px solid var(--hair);
 }
-.covr-fig svg{display:block;width:100%;max-width:460px;height:auto}
+.globe{position:relative;width:100%;max-width:460px;aspect-ratio:1;margin:0 auto;user-select:none}
+.globe canvas{
+  display:block;width:100%;height:100%;border-radius:50%;cursor:grab;touch-action:none;
+  opacity:0;transition:opacity 900ms var(--ease-out);
+}
+.glabel{
+  position:absolute;padding:3px 8px;border-radius:5px;
+  background:rgba(255,255,255,.94);border:1px solid var(--hair);
+  color:var(--ink);font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  white-space:nowrap;pointer-events:none;opacity:0;z-index:2;
+  transition:opacity 400ms ease,filter 400ms ease;
+}
+@media (prefers-reduced-motion:reduce){ .globe canvas{transition:none} }
 .covr-side{display:flex;flex-direction:column;justify-content:center;gap:24px;padding:34px}
 .covr-side h3{font-size:19px;font-weight:500;letter-spacing:-.01em}
 .covr-side .lede{font-size:14px;line-height:23px}

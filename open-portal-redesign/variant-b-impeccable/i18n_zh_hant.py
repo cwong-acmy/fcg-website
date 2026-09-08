@@ -161,8 +161,8 @@ ZH_HANT = {
     '10 to 30 properties': '10 至 30 家飯店',
     'More than 30 properties': '超過 30 家飯店',
     'Individual hotel': '單一飯店',
-    'Illustrative rendering. The live map plots WGS84 coordinates from the hotel catalogue.':
-        '示意圖。實際地圖以飯店資源庫中的 WGS84 座標繪製。',
+    'The globe plots the FCG partner network. The live map in the console plots every catalogue property as a WGS84 coordinate.':
+        '地球檢視呈現的是 FCG 的合作網路。主控台中的實際地圖會把資源庫中的每一家飯店標為一個 WGS84 座標點。',
     'What the map reports': '地圖提供什麼',
     'Three counters,': '三個計數，',
     'one that follows the viewport.': '其中一個隨檢視改變。',

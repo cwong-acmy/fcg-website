@@ -154,8 +154,8 @@ ZH_HANS = {
     '10 to 30 properties': '10 至 30 家酒店',
     'More than 30 properties': '超过 30 家酒店',
     'Individual hotel': '单家酒店',
-    'Illustrative rendering. The live map plots WGS84 coordinates from the hotel catalogue.':
-        '示意图。实际地图使用酒店资源库中的 WGS84 坐标绘制。',
+    'The globe plots the FCG partner network. The live map in the console plots every catalogue property as a WGS84 coordinate.':
+        '地球视图展示的是 FCG 的合作网络。控制台中的实际地图会把资源库中的每一家酒店标为一个 WGS84 坐标点。',
     'What the map reports': '地图给出什么',
     'Three counters,': '三个计数，',
     'one that follows the viewport.': '其中一个随视图变化。',

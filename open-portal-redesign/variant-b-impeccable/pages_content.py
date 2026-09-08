@@ -8,6 +8,8 @@ on 7 September 2026. Nothing is invented. Copy is rewritten into FCG's
 declarative voice in British English; the substance is unchanged.
 """
 
+from pathlib import Path
+
 ARROW = '<iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon>'
 DL = '<iconify-icon icon="solar:download-minimalistic-linear" aria-hidden="true"></iconify-icon>'
 
@@ -1589,94 +1591,185 @@ REQUEST_TRACE = f"""
 
 # ============================================================ Coverage Map
 
-# Orthographic globe, tilt 18°, centred on 60°E so the graticule reads Europe
-# through Asia-Pacific. Back-facing segments are dropped, so the wireframe stays
-# a sphere rather than a flat rosette. Generated once and baked in: the geometry
-# is fixed, and a build-time trig loop would produce the same bytes every run.
-GRAT = (
-    '<polyline points="138,354 144,356 151,357 158,359 166,360 174,361 183,362 191,362 200,362 209,362 217,362 226,361 234,360 242,359 249,357 256,356 262,354"/>'
-    '<polyline points="76,301 84,305 93,309 104,312 115,315 128,317 142,320 156,321 170,322 185,323 200,323 215,323 230,322 244,321 258,320 272,317 285,315 296,312 307,309 316,305 324,301 331,297 337,293"/>'
-    '<polyline points="63,293 69,297 76,301"/>'
-    '<polyline points="56,226 66,230 77,234 89,238 102,242 117,244 132,247 149,249 165,250 183,251 200,251 217,251 235,250 251,249 268,247 283,244 298,242 311,238 323,234 334,230 344,226 352,221 358,216 362,211 365,205"/>'
-    '<polyline points="35,205 38,211 42,216 48,221 56,226"/>'
-    '<polyline points="76,143 84,147 93,151 104,154 115,157 128,160 142,162 156,163 170,165 185,165 200,165 215,165 230,165 244,163 258,162 272,160 285,157 296,154 307,151 316,147 324,143 331,139 337,135 341,130 343,126 344,121 343,116"/>'
-    '<polyline points="57,116 56,121 57,126 59,130 63,135 69,139 76,143"/>'
-    '<polyline points="128,76 133,78 138,80 144,82 151,84 158,85 166,87 174,88 183,88 191,89 200,89 209,89 217,88 226,88 234,87 242,85 249,84 256,82 262,80 267,78 272,76 276,74 279,71 281,69 283,66 283,63 283,61 281,58 279,55 276,53 272,50"/>'
-    '<polyline points="128,50 124,53 121,55 119,58 117,61 117,63 117,66 119,69 121,71 124,74 128,76"/>'
-    '<polyline points="115,343 104,334 93,325 84,314 76,301 69,288 63,273 59,258 57,242 56,226 57,209 59,192 63,176 69,159 76,143 84,128 93,113 104,100 115,87 128,76 142,66 156,58 170,51 185,46 200,42"/>'
-    '<polyline points="183,364 179,361 175,357 171,350 168,342 165,333 163,322 161,309 159,296 158,281 157,266 157,250 157,233 158,216 159,198 161,181 163,164 165,147 168,131 171,116 175,101 179,88 183,76 187,65 191,56 196,48 200,42"/>'
-    '<polyline points="234,362 242,359 249,354 256,347 262,339 267,329 272,317 276,305 279,291 281,276 283,261 283,244 283,228 281,211 279,193 276,176 272,160 267,143 262,127 256,112 249,98 242,85 234,74 226,64 217,55 209,48 200,42"/>'
-    '<polyline points="339,290 346,276 352,261 357,246 359,230 360,213 359,197 357,180 352,164 346,148 339,133 330,118 319,104 307,92 294,80 280,70 265,61 250,54 233,48 217,44 200,42"/>'
-    '<polyline points="272,50 258,45 244,42 230,40 215,40 200,42"/>'
-    '<polyline points="209,35 204,38 200,42"/>'
-    '<polyline points="174,36 183,36 191,38 200,42"/>'
-    '<polyline points="81,84 93,74 106,64 120,57 135,50 150,46 167,43 183,42 200,42"/>'
-)
+# The globe is the marketing site's Cobe instance, lifted from index.html at
+# build time rather than copied, so the portal and fcg.com can never drift.
+# cobe ships ESM-only; that file carries the inlined IIFE build.
+ROOT = Path(__file__).resolve().parents[2]
 
-DOTS = (
-    '<circle cx="110" cy="92" r="5.6" opacity=".9"/>'
-    '<circle cx="108" cy="99" r="5.6" opacity=".9"/>'
-    '<circle cx="127" cy="96" r="4" opacity=".58"/>'
-    '<circle cx="109" cy="120" r="4" opacity=".58"/>'
-    '<circle cx="87" cy="115" r="4" opacity=".58"/>'
-    '<circle cx="117" cy="93" r="4" opacity=".58"/>'
-    '<circle cx="164" cy="96" r="4" opacity=".58"/>'
-    '<circle cx="135" cy="130" r="4" opacity=".58"/>'
-    '<circle cx="143" cy="84" r="2.4" opacity=".34"/>'
-    '<circle cx="117" cy="99" r="2.4" opacity=".34"/>'
-    '<circle cx="127" cy="110" r="2.4" opacity=".34"/>'
-    '<circle cx="110" cy="110" r="4" opacity=".58"/>'
-    '<circle cx="188" cy="179" r="5.6" opacity=".9"/>'
-    '<circle cx="165" cy="179" r="2.4" opacity=".34"/>'
-    '<circle cx="131" cy="160" r="2.4" opacity=".34"/>'
-    '<circle cx="121" cy="309" r="2.4" opacity=".34"/>'
-    '<circle cx="62" cy="210" r="2.4" opacity=".34"/>'
-    '<circle cx="135" cy="251" r="2.4" opacity=".34"/>'
-    '<circle cx="109" cy="320" r="2.4" opacity=".34"/>'
-    '<circle cx="235" cy="196" r="4" opacity=".58"/>'
-    '<circle cx="243" cy="167" r="4" opacity=".58"/>'
-    '<circle cx="249" cy="212" r="2.4" opacity=".34"/>'
-    '<circle cx="305" cy="200" r="5.6" opacity=".9"/>'
-    '<circle cx="315" cy="233" r="5.6" opacity=".9"/>'
-    '<circle cx="310" cy="230" r="4" opacity=".58"/>'
-    '<circle cx="325" cy="168" r="5.6" opacity=".9"/>'
-    '<circle cx="325" cy="139" r="5.6" opacity=".9"/>'
-    '<circle cx="306" cy="121" r="5.6" opacity=".9"/>'
-    '<circle cx="322" cy="166" r="4" opacity=".58"/>'
-    '<circle cx="316" cy="145" r="4" opacity=".58"/>'
-    '<circle cx="303" cy="139" r="2.4" opacity=".34"/>'
-    '<circle cx="305" cy="153" r="4" opacity=".58"/>'
-    '<circle cx="317" cy="127" r="2.4" opacity=".34"/>'
-    '<circle cx="306" cy="101" r="2.4" opacity=".34"/>'
-    '<circle cx="333" cy="115" r="4" opacity=".58"/>'
-    '<circle cx="321" cy="120" r="4" opacity=".58"/>'
-    '<circle cx="340" cy="184" r="2.4" opacity=".34"/>'
-    '<circle cx="320" cy="252" r="4" opacity=".58"/>'
-    '<circle cx="319" cy="205" r="2.4" opacity=".34"/>'
-    '<circle cx="311" cy="177" r="2.4" opacity=".34"/>'
-    '<circle cx="332" cy="155" r="4" opacity=".58"/>'
-    '<circle cx="319" cy="189" r="2.4" opacity=".34"/>'
-    '<circle cx="302" cy="218" r="2.4" opacity=".34"/>'
-    '<circle cx="299" cy="187" r="2.4" opacity=".34"/>'
-    '<circle cx="315" cy="204" r="2.4" opacity=".34"/>'
-    '<circle cx="176" cy="176" r="2.4" opacity=".34"/>'
-    '<circle cx="143" cy="151" r="2.4" opacity=".34"/>'
-    '<circle cx="168" cy="132" r="2.4" opacity=".34"/>'
-    '<circle cx="235" cy="128" r="2.4" opacity=".34"/>'
-    '<circle cx="237" cy="98" r="2.4" opacity=".34"/>'
-)
+
+def cobe_lib():
+    src = (ROOT / "index.html").read_text(encoding="utf-8")
+    a = src.index("var createGlobe=function(){")
+    b = src.index("</script>", a)
+    lib = src[a:b].strip()
+    assert len(lib) > 8000 and "mapSamples" not in lib[:200], "cobe build did not match"
+    return lib
+
+
+# Same fourteen cities the marketing globe plots. Labels ride only the larger
+# markers: at 420px every label at once is unreadable.
+GLOBE_MARKERS = [
+    (13.7563, 100.5018, 0.045, "Bangkok"),
+    (35.6762, 139.6503, 0.045, "Tokyo"),
+    (31.2304, 121.4737, 0.045, "Shanghai"),
+    (51.5074, -0.1278, 0.045, "London"),
+    (25.2048, 55.2708, 0.045, "Dubai"),
+    (1.3521, 103.8198, 0.045, "Singapore"),
+    (22.3193, 114.1694, 0.045, "Hong Kong"),
+    (40.7128, -74.0060, 0.045, "New York"),
+    (-33.8688, 151.2093, 0.032, None),
+    (48.8566, 2.3522, 0.032, None),
+    (25.7617, -80.1918, 0.032, None),
+    (19.4326, -99.1332, 0.032, None),
+    (-23.5505, -46.6333, 0.032, None),
+    (33.9425, -118.4081, 0.032, None),
+]
 
 GLOBE = (
-    '<svg viewBox="0 0 400 400" role="img" '
-    'aria-label="Hotel coverage plotted as points on a globe">'
-    '<circle cx="200" cy="200" r="166" fill="#fff" stroke="#D1D5DB"/>'
-    '<g fill="none" stroke="rgba(15,17,20,.14)" stroke-width="1">' + "".join(GRAT) + "</g>"
-    '<g fill="#F97316">' + "".join(DOTS) + "</g>"
-    "</svg>"
+    '<div class="globe">'
+    '<canvas id="cobe-globe" aria-label="Hotel coverage plotted as points on a globe" '
+    'role="img"></canvas>'
+    "</div>"
 )
 
-# Entity-free labels: an &lt; splits the text node in two and the translation
-# table then has to carry both halves.
+GLOBE_INIT = """
+(function(){
+  "use strict";
+  var canvas = document.getElementById('cobe-globe');
+  if (!canvas || typeof createGlobe !== 'function') return;
+  var box = canvas.parentElement;
+  var PI = Math.PI;
+  var phi = 4.1, dragPhi = 0, down = false, x0 = 0;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var M = __MARKERS__;
+
+  var labels = M.map(function(m){
+    if (!m[3]) return null;
+    var el = document.createElement('span');
+    el.className = 'glabel';
+    el.textContent = m[3];
+    box.appendChild(el);
+    return el;
+  });
+
+  canvas.addEventListener('pointerdown', function(e){
+    down = true; x0 = e.clientX; canvas.style.cursor = 'grabbing';
+  });
+  window.addEventListener('pointerup', function(){
+    if (!down) return;
+    down = false; canvas.style.cursor = 'grab'; phi += dragPhi; dragPhi = 0;
+  }, {passive:true});
+  window.addEventListener('pointermove', function(e){
+    if (down) dragPhi = (e.clientX - x0) / 200;
+  }, {passive:true});
+
+  function world(lat, lng){
+    var a = lat * PI / 180, b = lng * PI / 180 - PI, c = Math.cos(a);
+    return [-c * Math.cos(b), Math.sin(a), c * Math.sin(b)];
+  }
+  function view(w, p, t){
+    var ca = Math.cos(t), sa = Math.sin(t), cb = Math.cos(p), sb = Math.sin(p);
+    return {
+      x: cb * w[0] + sb * w[2],
+      y: sb * sa * w[0] + ca * w[1] - cb * sa * w[2],
+      z: -sb * ca * w[0] + sa * w[1] + cb * ca * w[2]
+    };
+  }
+
+  /* Labels sit outside the point, on whichever side of the sphere it is on, so
+     they never need per-city offsets tuned to one globe size. */
+  function place(p, theta){
+    var w = canvas.offsetWidth, h = canvas.offsetHeight || w;
+    var taken = [];
+    /* front-most first, so the label that survives a collision is the one
+       nearest the viewer rather than whichever happens to be earlier in M */
+    var order = [];
+    for (var i = 0; i < M.length; i++){
+      if (labels[i]) order.push([i, view(world(M[i][0], M[i][1]), p, theta)]);
+    }
+    order.sort(function(a, b){ return b[1].z - a[1].z; });
+
+    for (var k = 0; k < order.length; k++){
+      var idx = order[k][0], v = order[k][1], el = labels[idx];
+      if (v.z <= 0.32){ el.style.opacity = '0'; el.style.filter = 'blur(3px)'; continue; }
+      var left = v.x < 0;
+      var x = (v.x * 0.8 + 1) / 2 * w + (left ? -11 : 11);
+      var y = (-v.y * 0.8 + 1) / 2 * h;
+      var half = el.offsetWidth || 60;
+      var box2 = [left ? x - half : x, y - 9, left ? x : x + half, y + 9];
+      var clash = false;
+      for (var j = 0; j < taken.length; j++){
+        var t = taken[j];
+        if (box2[0] < t[2] && box2[2] > t[0] && box2[1] < t[3] && box2[3] > t[1]){ clash = true; break; }
+      }
+      if (clash){ el.style.opacity = '0'; el.style.filter = 'blur(3px)'; continue; }
+      taken.push(box2);
+      var fade = Math.min(1, (v.z - 0.32) / 0.18);
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
+      el.style.transform = 'translate(' + (left ? '-100%' : '0') + ',-50%)';
+      el.style.opacity = fade;
+      el.style.filter = 'blur(' + ((1 - fade) * 3).toFixed(2) + 'px)';
+    }
+  }
+
+  function start(){
+    var w = canvas.offsetWidth;
+    if (!w) return;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    try {
+      createGlobe(canvas, {
+        devicePixelRatio: dpr,
+        width: w * dpr,
+        height: w * dpr,
+        phi: 0,
+        theta: 0.2,
+        dark: 0,
+        diffuse: 2,
+        mapSamples: 16000,
+        mapBrightness: 2,
+        baseColor: [0.95, 0.95, 0.95],
+        markerColor: [0.976, 0.451, 0.086],
+        glowColor: [0.953, 0.957, 0.965],
+        markers: M.map(function(m){ return {location: [m[0], m[1]], size: m[2]}; }),
+        onRender: function(s){
+          if (!down && !still) phi += 0.003;
+          var p = phi + dragPhi;
+          s.phi = p;
+          s.width = canvas.width || w * dpr;
+          s.height = canvas.height || w * dpr;
+          place(p, 0.2);
+        }
+      });
+      canvas.style.opacity = '1';
+    } catch (err) {
+      /* no WebGL: the legend beside it still carries the meaning */
+      box.setAttribute('data-globe', 'off');
+    }
+  }
+
+  if (canvas.offsetWidth > 0) start();
+  else {
+    var ro = new ResizeObserver(function(en){
+      if (en[0] && en[0].contentRect.width > 0){ ro.disconnect(); start(); }
+    });
+    ro.observe(canvas);
+  }
+})();
+""".replace(
+    "__MARKERS__",
+    "[" + ",".join(
+        "[%s,%s,%s,%s]" % (a, b, c, ('"%s"' % d) if d else "0")
+        for a, b, c, d in GLOBE_MARKERS
+    ) + "]",
+)
+
+
+def globe_scripts():
+    return f"<script>\n{cobe_lib()}\n</script>\n<script>{GLOBE_INIT}</script>"
+
+
 LEGEND = [
     ("5", "Fewer than 10 properties"),
     ("7", "10 to 30 properties"),
@@ -1743,8 +1836,8 @@ COVERAGE_MAP = f"""
 {legend()}
       </div>
     </div>
-    <p class="disclaim" style="margin-top:14px">Illustrative rendering. The live map plots WGS84
-       coordinates from the hotel catalogue.</p>
+    <p class="disclaim" style="margin-top:14px">The globe plots the FCG partner network. The live map in the console plots
+       every catalogue property as a WGS84 coordinate.</p>
   </div>
 </section>
 
@@ -2021,7 +2114,7 @@ PAGES = [
     dict(slug="coverage-map", nav="coverage",
          title="Coverage Map — FCG Developer Platform",
          desc="Explore FCG hotel supply coverage as WGS84 points on a globe before you connect.",
-         body=COVERAGE_MAP),
+         body=COVERAGE_MAP, extra=globe_scripts()),
     dict(slug="hotel-mapping", nav="mapping",
          title="Hotel Mapping — FCG Developer Platform",
          desc="Match distributor hotel inventory to FCG hotel IDs with a CSV template, upload and review.",
