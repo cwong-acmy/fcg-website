@@ -396,17 +396,22 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .card-f--plain{background:#fff;border-top:1px solid var(--hair)}
 
 /* ---------- copy row (install commands) ---------- */
-.cmd{display:flex;align-items:stretch;border:1px solid var(--dark);border-radius:12px;overflow:hidden;background:var(--dark)}
-.cmd code{flex:1;min-width:0;padding:13px 16px;font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--dark-fg);overflow-x:auto;white-space:nowrap}
+/* An install command is a thing you copy, not a terminal you read. It sits on
+   the --card grey with a hairline, and the action is a copy glyph rather than
+   the word COPY, which was the widest thing in the row. The one dark surface
+   in this system stays the .term block. */
+.cmd{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.cmd code{flex:1;min-width:0;padding:13px 16px;font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--ink);overflow-x:auto;white-space:nowrap}
 .cmd button{
-  flex:none;padding:0 16px;border:0;border-left:1px solid var(--dark-line);background:transparent;cursor:pointer;
-  color:var(--dark-muted);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  flex:none;display:inline-flex;align-items:center;justify-content:center;width:44px;
+  border:0;border-left:1px solid var(--line);background:transparent;cursor:pointer;color:var(--muted-card);
   transition:color var(--hover) ease,background var(--hover) ease,transform var(--press) var(--ease-out);
 }
-.cmd button:active{transform:scale(.96)}
-.cmd button.done{color:#fff}
+.cmd button iconify-icon{font-size:16px}
+.cmd button:active{transform:scale(.94)}
+.cmd button.done{color:var(--ok,#0E6245)}
 @media (hover:hover) and (pointer:fine){
-  .cmd button:hover{color:#fff;background:rgba(255,255,255,.06)}
+  .cmd button:hover{color:var(--ink);background:rgba(15,17,20,.05)}
 }
 
 /* ---------- stat strip variant used on inner pages ---------- */
@@ -605,10 +610,13 @@ COPY_JS = """<script>
     var code = b.parentNode.querySelector('code');
     if (!code || !navigator.clipboard) return;
     navigator.clipboard.writeText(code.textContent.trim()).then(function(){
-      var was = b.textContent;
-      b.textContent = 'Copied';
+      var was = b.innerHTML;
+      b.innerHTML = '<iconify-icon icon="solar:check-circle-linear" aria-hidden="true"></iconify-icon>';
       b.classList.add('done');
-      setTimeout(function(){ b.textContent = was; b.classList.remove('done'); }, 1600);
+      b.setAttribute('aria-label', 'Copied');
+      setTimeout(function(){
+        b.innerHTML = was; b.classList.remove('done'); b.setAttribute('aria-label', 'Copy command');
+      }, 1600);
     });
   });
 })();

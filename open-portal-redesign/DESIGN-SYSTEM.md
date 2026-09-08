@@ -491,11 +491,30 @@ Sandbox / Production, Approved / Rejected / Frozen. §11 left this open; it is n
 --warn-bg:#F8E5B9; --warn:#983705;   /* 5.86:1 — pending, timeout, in progress, skipped */
 --bad-bg:#FDE2DD;  --bad:#A41C4E;    /* 5.99:1 — failed, rejected, frozen */
 --neu-bg:#E3E8EE;  --neu:#4F566B;    /* 5.93:1 — not started, unknown, neutral */
+--info-bg:#D7EDFB; --info:#0B5A9E;   /* 5.86:1 — scope, environment, informational */
+--vio-bg:#E6E6FC;  --vio:#4B3FA8;    /* 6.63:1 — HTTP methods that write */
 ```
+
+Six pairs, not four: `info` carries scope and environment ("Mock provider", "G-Link only"), `vio` carries
+an HTTP method that writes. Methods follow the convention an API reference uses — read green, write
+violet, destructive red — because that is what a developer already reads fluently.
 
 Every pair clears 4.5:1 against its own ground. The chip is `999px`, 24px tall, 12px/500 label, with an
 optional 5px `currentColor` dot. **Never fill a button or a panel with a status colour, and orange is
 still never a status** — it remains the brand accent.
+
+### Where the accent fills, in the console only
+
+§2 says the accent never fills a panel. The console amends that in exactly three places, each decided
+deliberately on 8 September 2026:
+
+| Surface | Fill | Why |
+|---|---|---|
+| Current sidebar item | `rgba(249,115,22,.11)` | The one thing on a 17-item rail that must be findable without reading. |
+| Current step, Getting Started | `rgba(249,115,22,.11)` | Same job: which of five am I on. |
+| `.note` callout | `rgba(249,115,22,.09)`, border `.22` | Advice you are meant to notice. Scoped `.page .note`; the marketing pages keep their neutral note. |
+
+Nothing else. Not a button, not a panel body, not a table row, not a status.
 
 ### Charts are orange
 
@@ -514,8 +533,32 @@ pill for the current screen · `.top` sticky topbar with the Ctrl-K search pill 
 state · `.rank` ranking list · `.pnl` panel · `.slist` numbered step list · `.pane` request/response
 block · `.conv` chat.
 
-**One orange unit per KPI row.** `.kpis()` marks the first tile `.kpi--lead`; only that tile's unit takes
-the accent. Four orange units across four tiles is exactly the colour wash §2 exists to prevent.
+**One orange unit per KPI row.** `.kpis()` marks the leading tile `.kpi--lead`; only that tile's unit takes
+the accent. Four orange units across four tiles is exactly the colour wash §2 exists to prevent. The lead
+is **the first tile that actually carries a unit** — marking tile one blindly put the accent on a bare
+integer, where it had nothing to colour, and the rule silently never fired.
+
+**Anything that acts is a `<button>`.** A row action, a reveal, a send, a select. `href="#"` cannot express
+pressed, expanded or disabled, jumps the page to the top, and announces as a link to nowhere. `.tact button`
+and `.kv-act` keep the link and pill styling with the correct tag underneath, and `.tact .danger` marks the
+row actions that destroy something so that Freeze does not look like Download.
+
+**Secrets are retrieved, not displayed.** An app key row carries a copy control that works while the value
+is still masked, and an eye that reveals one field. There is no page-level "reveal credentials": three
+clicks putting six secrets on a screen-shared display is the wrong default, and copying is what the
+developer actually wanted.
+
+**A per-card primary is right when the cards are a choice set and wrong when they are an inventory.**
+`tmc-builder` is a choice set, so four `Select` pills are correct. `app-management` is an inventory, so the
+page keeps one black pill and each card gets a ghost `Apply for production` — which is the real per-card
+decision anyway.
+
+**Micro-labels bottom out at 10.5px.** Group labels, table headers and the console sub-label were authored
+at 9.5px, below this document's own floor.
+
+**Below 900px the sidebar collapses.** It becomes a sticky bar with the wordmark and a burger, closed by
+default. Left in flow it stacked seventeen links above the content and pushed the page head nearly two
+screens down. Touch targets go to 44px there and stay at 36–40px for a mouse, where they are correct.
 
 **Empty states are the console's most-seen screen**, not an edge case. A developer's first hour is
 entirely empty: every dev screen here ships its real first-run state, with a `--card` panel, one line of

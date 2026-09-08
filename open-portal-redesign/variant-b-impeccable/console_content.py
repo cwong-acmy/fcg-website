@@ -23,11 +23,18 @@ ARROW = '<iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></icon
 
 # ------------------------------------------------------------------ helpers
 
+def chiprow(items):
+    """The strip of context chips today's console puts above a screen title —
+    scope, environment, template source. Dropping it lost real information."""
+    out = "".join(pill(lb, k) for lb, k in items)
+    return f'      <div class="band-top" style="margin-bottom:16px;gap:8px">{out}</div>'
+
+
 def phead(h1, lede="", actions="", crumb=None):
     c = ""
     if crumb:
         parts = [f'<a href="{h}">{t}</a>' if h else f"<span>{t}</span>" for t, h in crumb]
-        c = f'      <p class="pcrumb">{" <i>/</i> ".join(parts)}</p>\n'
+        c = f'      <p class="pcrumb">{" <i aria-hidden=\"true\">/</i> ".join(parts)}</p>\n'
     l = f'          <p class="lede">{lede}</p>\n' if lede else ""
     a = f'        <div class="phead-a">{actions}</div>\n' if actions else ""
     return f"""{c}      <div class="phead">
@@ -50,7 +57,11 @@ def kpis(items):
     """The first tile in a row leads: it is the only one whose unit takes the
     accent. Four orange units in a row of four reads as a colour wash."""
     if items:
-        items = [items[0].replace('class="kpi"', 'class="kpi kpi--lead"', 1)] + list(items[1:])
+        # lead with the first tile that actually carries a unit — a bare integer
+        # gives the accent nothing to colour, which is why no orange was landing
+        i = next((n for n, it in enumerate(items) if "<u>" in it), 0)
+        items = list(items)
+        items[i] = items[i].replace('class="kpi"', 'class="kpi kpi--lead"', 1)
     return '      <div class="kpis">\n' + "\n".join(items) + "\n      </div>"
 
 
@@ -122,10 +133,16 @@ def pill(label, kind=""):
     return f'<span class="pill{k}">{b}{label}</span>'
 
 
-def tfoot(left, page_count=1):
-    pgs = "".join(f'<a href="#"{" class=\"on\"" if i == 1 else ""}>{i}</a>' for i in range(1, page_count + 1))
-    return f"""          <div class="tfoot">{left}
-            <span class="r"><span class="pg">{pgs}</span>10 / page</span>
+def tfoot(shown, total, per_page=10):
+    """Derive the pager from the numbers on the page. Hardcoding it produced
+    'Showing 7 of 122' over six page chips at ten per page — wrong twice."""
+    pages = max(1, -(-total // per_page))
+    nums = list(range(1, min(pages, 5) + 1))
+    pgs = "".join(f'<a href="#"{" class=\"on\"" if i == 1 else ""}>{i}</a>' for i in nums)
+    if pages > 5:
+        pgs += f'<span class="pg-gap">…</span><a href="#">{pages}</a>'
+    return f"""          <div class="tfoot">Showing {shown} of {total:,}
+            <span class="r"><span class="pg">{pgs}</span>{per_page} / page</span>
           </div>"""
 
 
@@ -194,7 +211,7 @@ def ring(pct, label, sub):
             <svg class="chart" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="{label}">{arc}{mid}</svg>
             <div><p style="font-size:13.5px;font-weight:500">{label}</p>
             <p style="font-size:12.5px;color:var(--muted);margin-top:4px">{sub}</p>
-            <div class="legend"><span><i></i>Succeeded</span><span><i class="q"></i>Failed</span></div></div>
+            <div class="legend"><span><i></i>Succeeded</span></div></div>
           </div>"""
 
 
@@ -265,6 +282,7 @@ _steps = "\n".join(
 )
 
 GETTING_STARTED = f"""
+{chiprow([("Sandbox available", "ok"), ("G-Link only", "info"), ("Template: default_template", "")])}
 {phead("Getting Started",
        "The five calls that take a G-Link integration from nothing to a first sandbox booking. Each step sends a real request against your sandbox credentials.",
        f'<a class="btn btn--ghost btn--sm" href="#">Refresh</a><a class="btn btn--sm" href="#">Run the full flow {ARROW}</a>',
@@ -289,7 +307,7 @@ GETTING_STARTED = f"""
           <div class="stack">
             <section class="pnl" id="step-1">
               <div class="pnl-h">
-                <span class="pill pill--q">POST</span>
+                {pill("POST", "vio method")}
                 <h2>Destination query</h2>
                 {pill("Not connected")}
                 <span class="r"><a class="btn btn--ghost btn--sm" href="../api-docs-hotel-apis.html">Endpoint docs</a>
@@ -328,20 +346,34 @@ APPS = [
      "The TMC API sandbox settles in USD only."),
 ]
 
+def secret_row(label, kind):
+    """Masked by default. Copy works without revealing; the eye reveals this one
+    field and re-masks itself. A developer wants the value in the clipboard, not
+    on a shared screen."""
+    return (f'              <div><span class="k">{label}</span><span class="v secret">'
+            f'<span>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>'
+            f'<button class="kv-act" type="button" aria-label="Copy {label.lower()}">'
+            f'<iconify-icon icon="solar:copy-linear" aria-hidden="true"></iconify-icon></button>'
+            f'<button class="kv-act" type="button" aria-expanded="false" aria-label="Reveal {label.lower()}">'
+            f'<iconify-icon icon="solar:eye-linear" aria-hidden="true"></iconify-icon></button>'
+            f'</span></div>')
+
+
 _appcards = "\n".join(f"""        <section class="pnl">
-          <div class="pnl-h"><h2>{n}</h2>{pill("Sandbox enabled", "ok")}
-            <span class="r"><a class="tlink" href="#">Apply for production {ARROW}</a></span></div>
+          <div class="pnl-h"><h2>{n}</h2>{pill("Sandbox enabled", "ok")}</div>
           <div class="pnl-b">
             <p style="font-size:13.5px;color:var(--muted);line-height:22px">{d}</p>
             <div class="kv" style="margin-top:14px">
-              <div><span class="k">App code</span><span class="v mono">{c}</span></div>
-              <div><span class="k">App key</span><span class="v mono">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span></div>
-              <div><span class="k">App secret</span><span class="v mono">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span></div>
+              <div><span class="k">App code</span><span class="v secret"><span>{c}</span>
+                <button class="kv-act" type="button" aria-label="Copy app code">
+                <iconify-icon icon="solar:copy-linear" aria-hidden="true"></iconify-icon></button></span></div>
+{secret_row("App key", "key")}
+{secret_row("App secret", "secret")}
               <div><span class="k">Created</span><span class="v">{cr}</span></div>
             </div>
             {'<div class="note" style="margin-top:14px"><iconify-icon icon="solar:info-circle-linear"></iconify-icon><span>' + note + "</span></div>" if note else ""}
           </div>
-          <div class="tfoot"><a class="btn btn--sm" href="#">Reveal credentials {ARROW}</a>
+          <div class="tfoot"><a class="btn btn--ghost btn--sm" href="#">Apply for production {ARROW}</a>
             <span class="r"><a class="tlink" href="../api-docs-hotel.html">Product docs {ARROW}</a></span></div>
         </section>""" for n, c, d, cr, note in APPS)
 
@@ -410,10 +442,26 @@ TRACE = f"""
       </div>
 """
 
+COVERAGE_MARKERS = [
+    ("Bangkok", 13.7563, 100.5018, .05), ("Tokyo", 35.6762, 139.6503, .05),
+    ("Shanghai", 31.2304, 121.4737, .05), ("Hong Kong", 22.3193, 114.1694, .05),
+    ("Singapore", 1.3521, 103.8198, .05), ("Dubai", 25.2048, 55.2708, .04),
+    ("London", 51.5074, -0.1278, .05), ("Paris", 48.8566, 2.3522, .04),
+    ("New York", 40.7128, -74.0060, .05), ("Los Angeles", 33.9425, -118.4081, .04),
+    ("Miami", 25.7617, -80.1918, .035), ("Mexico City", 19.4326, -99.1332, .035),
+    ("São Paulo", -23.5505, -46.6333, .035), ("Sydney", -33.8688, 151.2093, .04),
+]
+
 COVERAGE = f"""
 {phead("Coverage Map", "Bookable properties by country and region, plotted on WGS84 coordinates.",
+       '<div class="viewsw" role="tablist" id="cov-switch">'
+       '<button role="tab" aria-selected="true" data-view="globe">'
+       '<iconify-icon icon="solar:global-linear" aria-hidden="true"></iconify-icon>Globe</button>'
+       '<button role="tab" aria-selected="false" data-view="table">'
+       '<iconify-icon icon="solar:list-linear" aria-hidden="true"></iconify-icon>Table</button>'
+       '</div>'
        f'<a class="btn btn--ghost btn--sm" href="#">Refresh properties</a>',
-       crumb=[("Hotel catalog", None), ("Coverage map", None)])}
+       crumb=[("Hotel catalogue", None), ("Coverage map", None)])}
       <div class="stack">
 {kpis([
     kpi("Total properties", "0", "", "Awaiting first catalogue sync", "solar:buildings-2-linear"),
@@ -421,17 +469,83 @@ COVERAGE = f"""
     kpi("Properties in view", "0", "", "Pan or zoom to change", "solar:map-point-linear"),
     kpi("Catalogue source", "Mock", "", "Switches to live on production access", "solar:database-linear"),
 ])}
-{pnl("Coverage",
-     empty("No properties to plot", "The map draws once a hotel catalogue is synced to your account. Density bands are under 10, 10 to 30, and over 30 properties per cluster.",
-           "solar:map-linear", "Read the catalogue guide"),
-     right='<span class="legend"><span><i></i>Cluster</span><span><i class="q"></i>Single property</span></span>', flush=True)}
+        <section class="pnl" id="cov-globe-view">
+          <div class="pnl-h"><h2>Coverage</h2><span class="sub">Drag to spin</span>
+            <span class="r">{pill("Mock provider", "info")}</span></div>
+          <div class="globe-stage">
+            <span class="globe-search"><iconify-icon icon="solar:magnifer-linear" aria-hidden="true"></iconify-icon>Search for a place</span>
+            <div class="globe-legend">
+              <p>Density</p>
+              <span><i style="width:9px;height:9px"></i>Over 30 properties</span>
+              <span><i></i>10 to 30 properties</span>
+              <span><i class="s"></i>Under 10 properties</span>
+            </div>
+            <canvas id="cov-globe" aria-label="Coverage globe. The same globe as the FCG website."></canvas>
+          </div>
+          <div class="tfoot">Gateway cities shown while the catalogue is on the mock provider.
+            <span class="r">WGS84</span></div>
+        </section>
+        <section class="pnl is-hidden" id="cov-table-view">
+          <div class="pnl-h"><h2>Properties</h2><span class="sub">0 records</span>
+            <span class="r">{pill("Mock provider", "info")}</span></div>
+{tbl(["Property ID", "Name", "City", "Country", "Coordinates", "Chain", "Rating"], [], 900)}
+{empty("No properties to list", "The catalogue populates both views at once. Sync a property set and the globe plots it and the table lists it.", "solar:buildings-2-linear", "Read the catalogue guide")}
+        </section>
       </div>
 """
+
+COVERAGE_JS = """<script>
+(function(){
+  "use strict";
+  var sw = document.getElementById('cov-switch');
+  if (sw) {
+    sw.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if (!b) return;
+      sw.querySelectorAll('button').forEach(function(o){ o.setAttribute('aria-selected', String(o === b)); });
+      document.getElementById('cov-globe-view').classList.toggle('is-hidden', b.dataset.view !== 'globe');
+      document.getElementById('cov-table-view').classList.toggle('is-hidden', b.dataset.view !== 'table');
+    });
+  }
+
+  // The FCG website's globe, same library and same orange marker colour,
+  // in the light configuration the site uses for its light theme.
+  var canvas = document.getElementById('cov-globe');
+  if (!canvas || typeof createGlobe !== 'function') return;
+  var phi = 3.2, down = false, startX = 0, drag = 0;
+  var markers = MARKERS;
+
+  canvas.addEventListener('pointerdown', function(e){ down = true; startX = e.clientX; });
+  window.addEventListener('pointerup', function(){ down = false; phi += drag; drag = 0; }, {passive:true});
+  window.addEventListener('pointermove', function(e){ if (down) drag = (e.clientX - startX) / 200; }, {passive:true});
+
+  function draw(){
+    var w = canvas.offsetWidth;
+    if (!w) { requestAnimationFrame(draw); return; }
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    createGlobe(canvas, {
+      devicePixelRatio: dpr, width: w * dpr, height: w * dpr,
+      phi: 0, theta: 0.2,
+      dark: 0, diffuse: 2, mapSamples: 16000, mapBrightness: 2,
+      baseColor: [0.95, 0.95, 0.95],
+      markerColor: [0.97, 0.45, 0.09],
+      glowColor: [0.92, 0.92, 0.92],
+      markers: markers,
+      onRender: function(state){
+        if (!down) phi += 0.003;
+        state.phi = phi + drag;
+        state.width = canvas.width; state.height = canvas.height;
+      }
+    });
+    canvas.style.opacity = '1';
+  }
+  draw();
+})();
+</script>""".replace("MARKERS", str([{"location": [la, ln], "size": sz} for _, la, ln, sz in COVERAGE_MARKERS]).replace("'", '"'))
 
 MAPPING = f"""
 {phead("Hotel Mapping", "Match your own property inventory to platform hotel IDs by uploading a CSV.",
        f'<a class="btn btn--ghost btn--sm" href="#">Download CSV template</a><a class="btn btn--sm" href="#">Upload CSV {ARROW}</a>',
-       crumb=[("Hotel catalog", None), ("Hotel mapping", None)])}
+       crumb=[("Hotel catalogue", None), ("Hotel mapping", None)])}
       <div class="stack">
         <div class="g3">
 {pnl("Step one", '          <p style="font-size:13.5px;line-height:22px;color:var(--muted)">Download the template. It carries the columns the matcher expects: property ID and name, address, country, city, coordinates, chain, type, rating and postal code.</p>', sub="Download the template")}
@@ -487,23 +601,39 @@ FLIGHT_ORDERS = f"""
       </div>
 """
 
+def _wire(rows):
+    """A wireframe of the template, not a grey rectangle with a generic icon.
+    A chooser where every option looks identical is not a chooser."""
+    out, y = [], 10
+    for w, h in rows:
+        out.append(f'<rect x="{(100 - w) / 2:.0f}" y="{y}" width="{w}" height="{h}" rx="2" fill="#D8DBE0"/>')
+        y += h + 5
+    return ('<svg viewBox="0 0 100 74" width="100%" height="104" role="img" aria-hidden="true" '
+            'style="display:block;background:var(--card);border-radius:12px">'
+            '<rect x="6" y="5" width="88" height="4" rx="2" fill="#B9BEC6"/>' + "".join(out) + "</svg>")
+
+
+# name, description, wireframe row spec (width, height)
 TMC_TEMPLATES = [
-    ("Corporate", "A booking-first homepage for a managed travel programme, with policy and approval surfaced up front."),
-    ("Agency", "A margin-first layout for a travel agency reselling to corporate clients."),
-    ("Marketplace", "A search-led homepage for a multi-supplier marketplace."),
-    ("Minimal", "A single-column layout for embedding inside an existing intranet."),
+    ("Corporate", "A booking-first homepage for a managed travel programme, with policy and approval surfaced up front.",
+     [(88, 18), (42, 12), (88, 8)]),
+    ("Agency", "A margin-first layout for a travel agency reselling to corporate clients.",
+     [(88, 10), (88, 10), (88, 10), (40, 8)]),
+    ("Marketplace", "A search-led homepage for a multi-supplier marketplace.",
+     [(60, 8), (88, 26), (88, 8)]),
+    ("Minimal", "A single-column layout for embedding inside an existing intranet.",
+     [(52, 8), (52, 8), (52, 8)]),
 ]
 
 _tmc = "\n".join(f"""        <section class="pnl">
           <div class="pnl-h"><h2>{n}</h2></div>
           <div class="pnl-b">
-            <div style="height:104px;border-radius:12px;background:var(--card);display:grid;place-items:center">
-              <iconify-icon icon="solar:window-frame-linear" style="font-size:26px;color:var(--muted)" aria-hidden="true"></iconify-icon>
-            </div>
+            {_wire(rows)}
             <p style="font-size:13px;line-height:21px;color:var(--muted);margin-top:13px">{d}</p>
           </div>
-          <div class="tfoot"><a class="tlink" href="#">Preview {ARROW}</a><span class="r"><a class="btn btn--sm" href="#">Select</a></span></div>
-        </section>""" for n, d in TMC_TEMPLATES)
+          <div class="tfoot"><a class="tlink" href="#">Preview {ARROW}</a>
+            <span class="r"><button class="btn btn--sm" type="button">Select</button></span></div>
+        </section>""" for n, d, rows in TMC_TEMPLATES)
 
 TMC_BUILDER = f"""
 {phead("Build My TMC", "Pick a white-label homepage template, then configure brand, policy and suppliers in the white-label system.",
@@ -540,7 +670,9 @@ SDK = f"""
 {pnl("Published SDKs",
      tbl(["Product", "Language", "Package", "Version", "Published", "Install", ""],
          [[p, l, f'<span class="mono">{pk}</span>', f'<span class="mono">v{v}</span>', d,
-           f'<span class="mono" style="font-size:11.5px">{cmd}</span>',
+           f'<span class="v secret"><span style="font-size:11.5px">{cmd}</span>'
+           f'<button class="kv-act" type="button" aria-label="Copy install command">'
+           f'<iconify-icon icon="solar:copy-linear" aria-hidden="true"></iconify-icon></button></span>',
            '<span class="tact"><a href="#">Docs</a><a class="q" href="#">Download</a></span>']
           for p, l, pk, v, d, cmd in SDKS], 1000),
      sub="8 packages", flush=True)}
@@ -558,7 +690,7 @@ _skills = "\n".join(f"""        <section class="pnl">
           <div class="pnl-h"><h2>{n}</h2>{pill(f"v{v}")}<span class="r">{pill("Sandbox ready", "ok")}{pill("Production ready", "ok")}</span></div>
           <div class="pnl-b">
             <p style="font-size:13.5px;line-height:22px;color:var(--muted);max-width:74ch">{d}</p>
-            <div class="cmd" style="margin-top:14px"><code>{c}</code><button type="button">Copy</button></div>
+            <div class="cmd" style="margin-top:14px"><code>{c}</code><button type="button" aria-label="Copy command"><iconify-icon icon="solar:copy-linear" aria-hidden="true"></iconify-icon></button></div>
             <p style="font-size:12px;color:var(--muted);margin-top:12px">Works with Codex, Cursor, Claude Code, Kiro and Gemini CLI.</p>
           </div>
           <div class="tfoot"><a class="tlink" href="#">Package detail {ARROW}</a>
@@ -579,27 +711,40 @@ SKILLS = f"""
 """
 
 AI_ASSISTANT = f"""
-{phead("AI Assistant", "Ask about signing, pagination, order state machines, webhooks and error codes. It reads the same docs your integration does.",
-       f'<a class="btn btn--ghost btn--sm" href="#">New conversation</a>')}
-      <div class="stack">
-        <div class="g-side">
-{pnl("Conversations",
-     empty("One conversation open", "Older conversations are kept for 90 days and searchable from here.", "solar:chat-square-linear"),
-     flush=True)}
-          <section class="pnl">
-            <div class="pnl-h"><h2>New conversation</h2><span class="sub">Started 04:19</span>
-              <span class="r">{pill("Reads your app context", "ok")}</span></div>
-            <div class="conv">
-              <div class="bub bub--ai">Ask a question to start. I can read your application list, your sandbox credentials scope and the published API docs, so questions about your own integration work without pasting anything.</div>
+      <div class="wsp">
+        <aside class="wsp-side">
+          <div class="wsp-side-h">
+            <p>Conversation history</p>
+            <a class="btn btn--sm" href="#">New</a>
+          </div>
+          <div class="convs">
+            <div class="conv-item on"><b>New conversation</b><span>08 Sept &middot; 04:19</span></div>
+          </div>
+        </aside>
+        <section class="wsp-main">
+          <div class="wsp-h">
+            <div><h1>AI Assistant</h1>
+              <p>Answers on API integration, signing, orders, webhooks and MCP.</p></div>
+            <span class="r">{pill("Reads your app context", "ok")}</span>
+          </div>
+          <div class="thread">
+            <div class="thread-empty">
+              <h2>A new conversation has started</h2>
+              <p>Type your question below. The assistant can read your application list, your sandbox
+                 credential scope and the published API docs, so questions about your own integration
+                 work without pasting anything in.</p>
             </div>
+          </div>
+          <div class="wsp-f">
             <div class="composer">
-              <input type="text" placeholder="Why does availabilityCheck return an empty rate plan list?" aria-label="Message">
+              <input type="text" aria-label="Message"
+                placeholder="Enter your question and press Enter to send. Shift and Enter starts a new line.">
               <button class="btn btn--sm" type="button">Send {ARROW}</button>
             </div>
-            <div class="tfoot">Answers are guidance, not a commitment. Refunds, billing and contractual questions need a ticket.
-              <span class="r"><a class="tlink" href="tickets.html">Raise a ticket {ARROW}</a></span></div>
-          </section>
-        </div>
+            <p class="disclaim">Answers are guidance, not a commitment. Refunds, billing and contractual
+              questions need a <a href="tickets.html">ticket</a>.</p>
+          </div>
+        </section>
       </div>
 """
 
@@ -693,21 +838,23 @@ ADMIN_USERS = f"""
          [[f'<span class="mono">{a}</span>', c,
            st(s, "ok" if s == "Completed" else ("warn" if s == "Skipped" else "")),
            pill(d, "ok" if d == "Approved" else "warn"), r,
-           '<span class="tact"><a href="#">Open</a><a class="q" href="#">Disable</a></span>']
+           '<span class="tact"><button type="button">Open</button>'
+           '<button type="button" class="danger">Disable</button></span>']
           for a, c, s, d, r in USERS], 940),
      sub="60 records", right='<span class="pill pill--q">Developers</span><span class="pill pill--q">Administrators</span>', flush=True)}
-{tfoot("Showing 7 of 60", 6)}
+{tfoot(7, 60)}
       </div>
 """
 
+# app, developer, provider, environment, status, kind, applied, waiting
 REVIEWS = [
-    ("G-Link Hotel API", "northwind-ota", "GLINK", "Production", "Production live", "ok"),
-    ("F-Link Flight API", "northwind-ota", "FLINK", "Sandbox", "Sandbox enabled", "ok"),
-    ("TMC White Label", "meridian-tmc", "TMC", "Sandbox", "Sandbox enabled", "ok"),
-    ("G-Link Hotel API", "kestrel-holidays", "GLINK", "Sandbox", "Pending sandbox", "warn"),
-    ("F-Link Flight API", "solstice-group", "FLINK", "Sandbox", "Pending sandbox", "warn"),
-    ("G-Link Hotel API", "voyage-labs", "GLINK", "Production", "Pending production approval", "warn"),
-    ("TMC White Label", "atlas-corporate", "TMC", "Sandbox", "Frozen", "bad"),
+    ("G-Link Hotel API", "northwind-ota", "GLINK", "Production", "Production live", "ok", "8 Sept", "—"),
+    ("F-Link Flight API", "northwind-ota", "FLINK", "Sandbox", "Sandbox enabled", "ok", "8 Sept", "—"),
+    ("TMC White Label", "meridian-tmc", "TMC", "Sandbox", "Sandbox enabled", "ok", "4 Sept", "—"),
+    ("G-Link Hotel API", "kestrel-holidays", "GLINK", "Sandbox", "Pending sandbox", "warn", "1 Sept", "7 days"),
+    ("F-Link Flight API", "solstice-group", "FLINK", "Sandbox", "Pending sandbox", "warn", "31 Aug", "8 days"),
+    ("G-Link Hotel API", "voyage-labs", "GLINK", "Production", "Pending production approval", "warn", "4 Sept", "4 days"),
+    ("TMC White Label", "atlas-corporate", "TMC", "Sandbox", "Frozen", "bad", "25 Aug", "—"),
 ]
 
 ADMIN_REVIEW = f"""
@@ -723,13 +870,17 @@ ADMIN_REVIEW = f"""
 {pnl("Access requests",
      '          ' + counts([("All", 122, True), ("Pending sandbox", 10, False), ("Sandbox enabled", 101, False),
                             ("Pending production", 4, False), ("Production live", 7, False), ("Frozen", 0, False)]) +
-     tbl(["App", "Developer", "Provider", "Environment", "Status", ""],
+     tbl(["App", "Developer", "Provider", "Environment", "Status", "Applied", "Waiting", ""],
          [[f'{a}<br><span class="mono" style="font-size:11px;color:var(--muted)">{a.lower().replace(" ", "-")}</span>',
-           f'<span class="mono">{d}</span>', f'<span class="mono">{p}</span>', e, st(s, k),
-           '<span class="tact"><a href="#">Edit credentials</a><a class="q" href="#">' + ("Freeze" if k == "ok" else "Approve") + "</a></span>"]
-          for a, d, p, e, s, k in REVIEWS], 980),
+           f'<span class="mono">{d}</span>', f'<span class="mono">{p}</span>', e, st(s, k), ap,
+           f'<span class="mono"{" style=\"color:var(--warn)\"" if w != "—" else ""}>{w}</span>',
+           '<span class="tact"><button type="button">Edit credentials</button>'
+           + ('<button type="button" class="danger">Freeze</button>' if k == "ok"
+              else '<button type="button">Unfreeze</button>' if s == "Frozen"
+              else '<button type="button">Approve</button>') + "</span>"]
+          for a, d, p, e, s, k, ap, w in REVIEWS], 1120),
      sub="122 records", flush=True)}
-{tfoot("Showing 7 of 122", 6)}
+{tfoot(7, 122)}
       </div>
 """
 
@@ -755,10 +906,11 @@ ADMIN_TICKETS = f"""
      '          ' + counts([("All tickets", 16, True), ("Pending", 3, False), ("Processing", 6, False), ("Resolved", 7, False)]) +
      tbl(["Ticket no.", "Title", "Type", "Status", "Assignee", ""],
          [[f'<span class="mono" style="font-size:11.5px">{no}</span>', t, ty, st(s, k), "admin",
-           '<span class="tact"><a href="#">Open</a><a class="q" href="#">Transfer</a></span>']
+           '<span class="tact"><button type="button">Open</button>'
+           '<button type="button" class="q">Transfer</button></span>']
           for no, t, ty, s, k in TICKET_ROWS], 980),
      sub="16 tickets", flush=True)}
-{tfoot("Showing 5 of 16", 2)}
+{tfoot(5, 16)}
       </div>
 """
 
@@ -799,7 +951,35 @@ ADMIN_TRACE = f"""
            f'<span class="mono" style="font-size:11.5px">{a}</span>', f'<span class="mono">{t}</span>']
           for i, e, p, s, k, d, a, t in TRACE_ROWS], 1040),
      sub="100 loaded", flush=True)}
-{tfoot("Showing 5 of 100", 10)}
+{tfoot(5, 100)}
+{pnl("Request detail",
+     f'''          <div class="kv" style="margin-bottom:18px">
+            <div><span class="k">Trace</span><span class="v mono">trc_9a41a5be</span></div>
+            <div><span class="k">Endpoint</span><span class="v mono">POST /openapi/v1/glink/hotel/lowestPrice</span></div>
+            <div><span class="k">Outcome</span><span class="v">{st("Failed", "bad")} <span style="color:var(--muted)">422 after 206ms</span></span></div>
+            <div><span class="k">Developer</span><span class="v mono">northwind-ota &middot; glink-hotel &middot; production</span></div>
+          </div>
+          <div class="note"><iconify-icon icon="solar:danger-triangle-linear"></iconify-icon>
+            <span><strong>Check-in date is in the past.</strong> The lowest-price endpoint rejects a stay that
+            has already started. Error <span class="mono">GL-1042</span>; the caller should validate the date
+            against the property time zone, not the server clock.</span></div>
+          <div class="g2" style="margin-top:18px">
+            <div><p class="kpi-k" style="margin-bottom:9px">Request</p>
+              <div class="pane">{{
+  "hotelId": "GL-88213",
+  "checkIn": "2026-09-01",
+  "checkOut": "2026-09-03",
+  "rooms": 1
+}}</div></div>
+            <div><p class="kpi-k" style="margin-bottom:9px">Response</p>
+              <div class="pane">{{
+  "code": "GL-1042",
+  "message": "checkIn must be a future date",
+  "traceId": "trc_9a41a5be"
+}}</div></div>
+          </div>''',
+     sub="The row selected above",
+     right='<a class="tlink" href="../api-docs-errors.html">Error code reference ' + ARROW + '</a>')}
       </div>
 """
 
@@ -821,7 +1001,8 @@ ADMIN_SDK = f"""
 {pnl("SDK packages",
      tbl(["Package", "Identifier", "Product", "Language", "Status", "Updated", ""],
          [[n, f'<span class="mono">{i}</span>', f'<span class="mono">{p}</span>', l, st("Active", "ok"), u,
-           '<span class="tact"><a href="#">Edit</a><a href="#">Upload version</a><a class="q" href="#">Versions</a></span>']
+           '<span class="tact"><button type="button">Edit</button><button type="button">Upload version</button>'
+           '<button type="button" class="q">Versions</button></span>']
           for n, i, p, l, u in SDK_MGMT_ROWS], 1060),
      sub="8 packages", flush=True)}
       </div>
@@ -851,16 +1032,18 @@ ADMIN_DOCS = f"""
      tbl(["Version", "File", "Product", "Locale", "Endpoints", "Status", "Uploaded", ""],
          [[f'<span class="mono">{v}</span>', f'<span class="mono" style="font-size:11.5px">{f}</span>',
            f'<span class="mono">{p}</span>', f'<span class="mono">{l}</span>', str(e), st("Published", "ok"), u,
-           '<span class="tact"><a href="#">Update</a><a href="#">Detail</a><a class="q" href="#">Publish</a></span>']
+           '<span class="tact"><button type="button">Update</button><button type="button">Detail</button>'
+           '<button type="button" class="q">Publish</button></span>']
           for v, f, p, l, e, u in DOCS_ROWS], 1100),
      sub="37 versions", flush=True)}
-{tfoot("Showing 6 of 37", 4)}
+{tfoot(6, 37)}
       </div>
 """
 
 # ------------------------------------------------------------------ registry
 
 from console_nav import DEV_NAV, ADMIN_NAV  # noqa: E402
+from build_console_globe import GLOBE_LIB  # noqa: E402
 
 _D = dict(nav=DEV_NAV, who="developer", initials="D", role="Sandbox")
 _A = dict(nav=ADMIN_NAV, who="admin", initials="C", role="Platform admin")
@@ -877,7 +1060,8 @@ SCREENS = [
     dict(slug="trace", active="trace", title="Request Trace — Open Developer Platform",
          desc="Every API call your applications make, with payload, timing and failure reason.", body=TRACE, **_D),
     dict(slug="coverage", active="coverage", title="Coverage Map — Open Developer Platform",
-         desc="Bookable properties by country and region, plotted on WGS84 coordinates.", body=COVERAGE, **_D),
+         desc="Bookable properties by country and region, plotted on WGS84 coordinates.",
+         body=COVERAGE, extra=GLOBE_LIB + COVERAGE_JS, **_D),
     dict(slug="hotel-mapping", active="mapping", title="Hotel Mapping — Open Developer Platform",
          desc="Match your own property inventory to platform hotel IDs by uploading a CSV.", body=MAPPING, **_D),
     dict(slug="hotel-orders", active="horders", title="Hotel Orders — Open Developer Platform",
@@ -891,7 +1075,8 @@ SCREENS = [
     dict(slug="skills", active="skills", title="Skills — Open Developer Platform",
          desc="Official skill packages that teach an AI coding assistant how these APIs behave.", body=SKILLS, **_D),
     dict(slug="ai-assistant", active="ai", title="AI Assistant — Open Developer Platform",
-         desc="Ask about signing, pagination, order state machines, webhooks and error codes.", body=AI_ASSISTANT, **_D),
+         desc="Ask about signing, pagination, order state machines, webhooks and error codes.",
+         body=AI_ASSISTANT, page_cls="page--full", **_D),
     dict(slug="tickets", active="tickets", title="My Tickets — Open Developer Platform",
          desc="Technical and commercial requests, tracked to resolution with a named assignee.", body=TICKETS, **_D),
 

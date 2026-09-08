@@ -760,7 +760,7 @@ def sdk_cards():
       <h4>Install</h4>
       <div class="cmd" style="margin-top:12px">
         <code>{cmd}</code>
-        <button type="button">Copy</button>
+        <button type="button" aria-label="Copy command"><iconify-icon icon="solar:copy-linear" aria-hidden="true"></iconify-icon></button>
       </div>
     </div>
     <div class="card-f">
@@ -896,7 +896,7 @@ def skill_cards():
       <h4>Remote install</h4>
       <div class="cmd" style="margin-top:12px">
         <code>{cmd}</code>
-        <button type="button">Copy</button>
+        <button type="button" aria-label="Copy command"><iconify-icon icon="solar:copy-linear" aria-hidden="true"></iconify-icon></button>
       </div>
     </div>
     <div class="card-f">

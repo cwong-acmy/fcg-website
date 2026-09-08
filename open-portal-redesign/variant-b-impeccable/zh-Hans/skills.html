@@ -163,7 +163,7 @@ h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent-ink
   display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:999px;
   background:var(--ink-2);color:#fff;font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
 }
-.dot{width:6px;height:6px;border-radius:999px;background:var(--accent);flex:none;box-shadow:0 0 8px rgba(249,115,22,.4)}
+.dot{width:6px;height:6px;border-radius:999px;background:var(--accent);flex:none}
 .method{
   display:inline-flex;align-items:center;justify-content:center;
   min-width:46px;height:19px;padding:0 6px;border-radius:4px;
@@ -708,17 +708,22 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
 .card-f--plain{background:#fff;border-top:1px solid var(--hair)}
 
 /* ---------- copy row (install commands) ---------- */
-.cmd{display:flex;align-items:stretch;border:1px solid var(--dark);border-radius:12px;overflow:hidden;background:var(--dark)}
-.cmd code{flex:1;min-width:0;padding:13px 16px;font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--dark-fg);overflow-x:auto;white-space:nowrap}
+/* An install command is a thing you copy, not a terminal you read. It sits on
+   the --card grey with a hairline, and the action is a copy glyph rather than
+   the word COPY, which was the widest thing in the row. The one dark surface
+   in this system stays the .term block. */
+.cmd{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.cmd code{flex:1;min-width:0;padding:13px 16px;font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--ink);overflow-x:auto;white-space:nowrap}
 .cmd button{
-  flex:none;padding:0 16px;border:0;border-left:1px solid var(--dark-line);background:transparent;cursor:pointer;
-  color:var(--dark-muted);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  flex:none;display:inline-flex;align-items:center;justify-content:center;width:44px;
+  border:0;border-left:1px solid var(--line);background:transparent;cursor:pointer;color:var(--muted-card);
   transition:color var(--hover) ease,background var(--hover) ease,transform var(--press) var(--ease-out);
 }
-.cmd button:active{transform:scale(.96)}
-.cmd button.done{color:#fff}
+.cmd button iconify-icon{font-size:16px}
+.cmd button:active{transform:scale(.94)}
+.cmd button.done{color:var(--ok,#0E6245)}
 @media (hover:hover) and (pointer:fine){
-  .cmd button:hover{color:#fff;background:rgba(255,255,255,.06)}
+  .cmd button:hover{color:var(--ink);background:rgba(15,17,20,.05)}
 }
 
 /* ---------- stat strip variant used on inner pages ---------- */
@@ -982,7 +987,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
       <h4>远程安装</h4>
       <div class="cmd" style="margin-top:12px">
         <code>npx @mongoui/skills install glink-hotel-api --tool codex</code>
-        <button type="button">复制</button>
+        <button type="button" aria-label="复制命令"><iconify-icon icon="solar:copy-linear" aria-hidden="true"></iconify-icon></button>
       </div>
     </div>
     <div class="card-f">
@@ -1005,7 +1010,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
       <h4>远程安装</h4>
       <div class="cmd" style="margin-top:12px">
         <code>npx @mongoui/skills install flink-flight-api --tool codex</code>
-        <button type="button">复制</button>
+        <button type="button" aria-label="复制命令"><iconify-icon icon="solar:copy-linear" aria-hidden="true"></iconify-icon></button>
       </div>
     </div>
     <div class="card-f">
@@ -1028,7 +1033,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
       <h4>远程安装</h4>
       <div class="cmd" style="margin-top:12px">
         <code>npx @mongoui/skills install tmc-api --tool codex</code>
-        <button type="button">复制</button>
+        <button type="button" aria-label="复制命令"><iconify-icon icon="solar:copy-linear" aria-hidden="true"></iconify-icon></button>
       </div>
     </div>
     <div class="card-f">

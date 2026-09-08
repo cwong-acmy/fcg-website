@@ -38,6 +38,7 @@ ZH_HANT = {
     "Product use cases": "產品應用情境",
     "Developers": "開發者",
     "Platform": "平台",
+    "Copy command": "複製命令",
     # inside a heading only: the hero h1's second line, which is the
     # same word as the footer column but means the product, not a section
     "h:Platform": "平台",

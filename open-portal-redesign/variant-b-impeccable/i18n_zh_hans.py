@@ -31,6 +31,7 @@ ZH_HANS = {
     "Product use cases": "产品应用场景",
     "Developers": "开发者",
     "Platform": "平台",
+    "Copy command": "复制命令",
     # inside a heading only: the hero h1's second line, which is the
     # same word as the footer column but means the product, not a section
     "h:Platform": "平台",
