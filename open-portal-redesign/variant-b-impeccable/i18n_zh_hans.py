@@ -282,6 +282,10 @@ ZH_HANS = {
     "Explore hotel supply coverage before you connect": "接入前先了解酒店资源覆盖情况",
     "Standardise supplier records in one workspace": "在同一工作台中标准化供应商数据",
     # ---- chrome: nav, footer, meta ----------------------------------------
+    # the brand lockup runs on two lines; Chinese carries "open" inside
+    # 开放平台 already, so the first line takes the reader instead
+    'Open': '开发者',
+    'FCG Open Developer Platform — home': 'FCG 开放平台 — 首页',
     "Skip to content": "跳转到正文",
     "FCG Developer Platform — home": "FCG 开放平台 — 首页",
     "Developer Platform": "开放平台",

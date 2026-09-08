@@ -169,10 +169,10 @@ def header(active="", minimal=False, locale="en", slug="index"):
     """Full portal header, or the reduced brand-only header the auth pages use."""
     lang = lang_control(locale, slug)
     brand = (
-        f'<a class="brand" href="index.html" aria-label="FCG Developer Platform — home">\n'
+        f'<a class="brand" href="index.html" aria-label="FCG Open Developer Platform — home">\n'
         f"      {LOGO.format(h=28)}\n"
         f'      <span class="brand-div" aria-hidden="true"></span>\n'
-        f'      <span class="brand-sub">Developer Platform</span>\n'
+        f'      <span class="brand-sub">Open<br>Developer Platform</span>\n'
         f"    </a>"
     )
 
@@ -812,6 +812,7 @@ DOUBLE_ORANGE = re.compile(
 # the hero h1 to "FCG平台" — and fails the build.
 BENIGN_COLLISIONS = {
     "AI Assistant", "App Management", "FCG Developer Platform",
+    "FCG Open Developer Platform",
     "Request Trace", "Coverage Map", "Hotel Mapping",
 }
 

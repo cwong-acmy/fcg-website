@@ -289,6 +289,10 @@ ZH_HANT = {
     "Explore hotel supply coverage before you connect": "介接前先了解飯店資源覆蓋範圍",
     "Standardise supplier records in one workspace": "在同一工作區標準化供應商資料",
     # ---- chrome: nav, footer, meta ----------------------------------------
+    # the brand lockup runs on two lines; Chinese carries "open" inside
+    # 开放平台 already, so the first line takes the reader instead
+    'Open': '開發者',
+    'FCG Open Developer Platform — home': 'FCG 開放平台 — 首頁',
     "Skip to content": "跳至主要內容",
     "FCG Developer Platform — home": "FCG 開放平台 — 首頁",
     "Developer Platform": "開放平台",
