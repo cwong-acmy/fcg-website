@@ -172,7 +172,7 @@ def header(active="", minimal=False, locale="en", slug="index"):
         f'<a class="brand" href="index.html" aria-label="FCG Open Developer Platform — home">\n'
         f"      {LOGO.format(h=28)}\n"
         f'      <span class="brand-div" aria-hidden="true"></span>\n'
-        f'      <span class="brand-sub">Open<br>Developer Platform</span>\n'
+        f'      <span class="brand-sub">Open Developer Platform</span>\n'
         f"    </a>"
     )
 
@@ -293,7 +293,7 @@ def footer():
     <div class="ftr-top">
       <div class="ftr-brand">
         {LOGO.format(h=26)}
-        <p>The FCG Developer Platform: standardised APIs and flexible SDKs for hotel, flight and travel management resources.</p>
+        <p>The FCG Open Developer Platform: standardised APIs and flexible SDKs for hotel, flight and travel management resources.</p>
       </div>
 {chr(10).join(cols)}
     </div>

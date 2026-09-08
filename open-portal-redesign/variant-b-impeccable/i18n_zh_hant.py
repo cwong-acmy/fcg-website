@@ -18,7 +18,6 @@ would have produced mainland phrasing in Traditional characters:
 
 ZH_HANT = {
     # ---- Sandbox, Request Trace, Coverage Map, Hotel Mapping -------------
-    'Sandbox Environment — FCG Developer Platform': '沙箱環境 — FCG 開放平台',
     'Three FCG API sandboxes, one per product, open from registration and free of production data.':
         'FCG 提供三個介面沙箱，每個產品各一個，註冊即開通，且不接觸正式環境資料。',
     'Integration and debugging': '介接與除錯',
@@ -76,7 +75,6 @@ ZH_HANT = {
     'Sandbox traffic lands in Request Trace alongside production traffic, filtered by environment. Each call keeps its trace ID, path, status and duration.':
         '沙箱流量與正式環境流量一併進入請求追蹤，可依環境篩選。每次呼叫都保留 trace ID、路徑、狀態與耗時。',
     'Open Request Trace': '開啟請求追蹤',
-    'Request Trace — FCG Developer Platform': '請求追蹤 — FCG 開放平台',
     'Inspect and analyse FCG API request flows by trace ID, application, environment and status.':
         '依 trace ID、應用程式、環境與狀態檢視並分析 FCG 介面請求流程。',
     'Inspect and analyse API request flows to locate issues quickly.': '檢視並分析介面請求流程，快速定位問題。',
@@ -141,7 +139,6 @@ ZH_HANT = {
     'Narrow the table to the failing calls, export the CSV, and attach it to a ticket. Support cannot trace a failure without the platform IDs the export carries.':
         '把清單收斂到失敗的呼叫，匯出 CSV，並附在工單上。少了匯出檔中的平台 ID，技術支援無法追查故障。',
     'Start in sandbox': '先從沙箱開始',
-    'Coverage Map — FCG Developer Platform': '資源覆蓋地圖 — FCG 開放平台',
     'Explore FCG hotel supply coverage as WGS84 points on a globe before you connect.':
         '介接前，先在地球檢視上以 WGS84 座標點查看 FCG 飯店資源覆蓋範圍。',
     'Hotel catalogue': '飯店資源庫',
@@ -197,7 +194,6 @@ ZH_HANT = {
     'G-Link docs': 'G-Link 文件',
     'Open the Coverage Map': '開啟資源覆蓋地圖',
     'Register for access': '註冊取得權限',
-    'Hotel Mapping — FCG Developer Platform': '飯店對應 — FCG 開放平台',
     'Match distributor hotel inventory to FCG hotel IDs with a CSV template, upload and review.':
         '透過 CSV 範本上傳與審核，把分銷方的飯店庫存對應到 FCG 飯店 ID。',
     'Property mapping': '飯店對應',
@@ -288,14 +284,40 @@ ZH_HANT = {
     "Inspect calls and diagnose integration issues": "檢視呼叫並診斷介接問題",
     "Explore hotel supply coverage before you connect": "介接前先了解飯店資源覆蓋範圍",
     "Standardise supplier records in one workspace": "在同一工作區標準化供應商資料",
+    # ---- renamed to Open Developer Platform --------------------------------
+    'AI Assistant — FCG Open Developer Platform': 'AI 助理 — FCG 開放平台',
+    'App Management — FCG Open Developer Platform': '應用程式管理 — FCG 開放平台',
+    'Ask the FCG Open Developer Platform AI Assistant about API integration, authentication and order workflows.':
+        '關於介面對接、簽章驗證與訂單流程，可直接詢問 FCG 開放平台 AI 助理。',
+    'Coverage Map — FCG Open Developer Platform': '資源覆蓋地圖 — FCG 開放平台',
+    'Error Code Reference — FCG Open Developer Platform': '錯誤碼說明 — FCG 開放平台',
+    'F-Link Flight API — FCG Open Developer Platform': 'F-Link 機票介面 — FCG 開放平台',
+    'FCG Open Developer': 'FCG',
+    'FCG Open Developer Platform': 'FCG 開放平台',
+    'FCG Open Developer Platform AI Assistant': 'FCG 開放平台 AI 助理',
+    'G-Link API Reference — FCG Open Developer Platform': 'G-Link 介面參考 — FCG 開放平台',
+    'G-Link Hotel API — FCG Open Developer Platform': 'G-Link 飯店介面 — FCG 開放平台',
+    'G-Link Integration Flow — FCG Open Developer Platform': 'G-Link 對接流程 — FCG 開放平台',
+    'Hello. I am the FCG Open Developer Platform AI Assistant. I can help with API integration, signature authentication, order workflows and more.':
+        '您好，我是 FCG 開放平台 AI 助理。我可以協助處理介面對接、簽章驗證、訂單流程等問題。',
+    'Hotel Mapping — FCG Open Developer Platform': '飯店對應 — FCG 開放平台',
+    'Open Developer Platform': '開放平台',
+    'Register a company account for free sandbox access to the FCG Open Developer Platform.':
+        '註冊企業帳號，免費取得 FCG 開放平台沙箱環境。',
+    'Register — FCG Open Developer Platform': '註冊 — FCG 開放平台',
+    'Request Trace — FCG Open Developer Platform': '請求追蹤 — FCG 開放平台',
+    'SDK Integration Centre — FCG Open Developer Platform': 'SDK 整合中心 — FCG 開放平台',
+    'Sandbox Environment — FCG Open Developer Platform': '沙箱環境 — FCG 開放平台',
+    'Sign in to the FCG Open Developer Platform console.': '登入 FCG 開放平台主控台。',
+    'Sign in — FCG Open Developer Platform': '登入 — FCG 開放平台',
+    'Skills Installation Centre — FCG Open Developer Platform': 'Skills 安裝中心 — FCG 開放平台',
+    'The FCG Open Developer Platform: standardised APIs and flexible SDKs for hotel, flight and travel management resources.':
+        'FCG 開放平台：針對飯店、機票與商旅管理資源的標準化介面與彈性 SDK。',
     # ---- chrome: nav, footer, meta ----------------------------------------
     # the brand lockup runs on two lines; Chinese carries "open" inside
     # 开放平台 already, so the first line takes the reader instead
-    'Open': '開發者',
     'FCG Open Developer Platform — home': 'FCG 開放平台 — 首頁',
     "Skip to content": "跳至主要內容",
-    "FCG Developer Platform — home": "FCG 開放平台 — 首頁",
-    "Developer Platform": "開放平台",
     "Primary": "主導覽",
     "Home": "首頁",
     "App Management": "應用程式管理",
@@ -307,8 +329,6 @@ ZH_HANT = {
     "Register": "註冊",
     "Open menu": "開啟選單",
     "Back to platform": "返回平台",
-    "The FCG Developer Platform: standardised APIs and flexible SDKs for hotel, flight and travel management resources.":
-        "FCG 開放平台：針對飯店、機票與商旅管理資源的標準化介面與彈性 SDK。",
     "Products": "產品",
     "Product use cases": "產品應用情境",
     "Developers": "開發者",
@@ -323,39 +343,22 @@ ZH_HANT = {
     "Section": "章節",
 
     # ---- page titles and meta descriptions -------------------------------
-    "AI Assistant — FCG Developer Platform": "AI 助理 — FCG 開放平台",
-    "Ask the FCG Developer Platform AI Assistant about API integration, authentication and order workflows.":
-        "關於介面對接、簽章驗證與訂單流程，可直接詢問 FCG 開放平台 AI 助理。",
-    "Error Code Reference — FCG Developer Platform": "錯誤碼說明 — FCG 開放平台",
     "Every FCG platform error code, its cause and its resolution, across API, SDK and MCP integration.":
         "FCG 平台所有錯誤碼及其成因與處理方式，涵蓋 API、SDK 與 MCP 三種對接方式。",
-    "F-Link Flight API — FCG Developer Platform": "F-Link 機票介面 — FCG 開放平台",
     "All nineteen F-Link flight endpoints: search, ticketing, changes, refunds and reference data.":
         "F-Link 機票介面共 19 個：查詢、開票、改期、退票與基礎資料。",
-    "G-Link API Reference — FCG Developer Platform": "G-Link 介面參考 — FCG 開放平台",
     "Every G-Link hotel endpoint with methods, paths and a worked request and response example.":
         "G-Link 飯店介面全集，含請求方法、路徑與完整的請求與回應範例。",
-    "G-Link Integration Flow — FCG Developer Platform": "G-Link 對接流程 — FCG 開放平台",
     "The recommended eight-step G-Link hotel API integration flow, search through to cancellation.":
         "G-Link 飯店介面建議的八步對接流程，從查詢到取消訂單。",
-    "G-Link Hotel API — FCG Developer Platform": "G-Link 飯店介面 — FCG 開放平台",
     "Mandatory interfaces, static data handling and rate limits for the G-Link hotel API.":
         "G-Link 飯店介面的必接介面、靜態資料處理與流量限制規則。",
-    "App Management — FCG Developer Platform": "應用程式管理 — FCG 開放平台",
     "Manage the applications behind an FCG API integration. Each product carries its own credential set.":
         "管理 FCG 介面對接所使用的應用程式。每個產品都有獨立的憑證。",
-    "FCG Developer Platform": "FCG 開放平台",
     "A travel-focused open platform for distributors. Standardised APIs and flexible SDKs for hotel, flight and TMC travel resources.":
         "為分銷商打造的旅遊開放平台。以標準化介面與彈性 SDK 提供飯店、機票與 TMC 商旅資源。",
-    "Sign in — FCG Developer Platform": "登入 — FCG 開放平台",
-    "Sign in to the FCG Developer Platform console.": "登入 FCG 開放平台主控台。",
-    "Register — FCG Developer Platform": "註冊 — FCG 開放平台",
-    "Register a company account for free sandbox access to the FCG Developer Platform.":
-        "註冊企業帳號，免費取得 FCG 開放平台沙箱環境。",
-    "SDK Integration Centre — FCG Developer Platform": "SDK 整合中心 — FCG 開放平台",
     "Go, Java and Python SDKs for the FCG travel APIs, with install commands and changelogs.":
         "FCG 旅遊介面的 Go、Java 與 Python SDK，附安裝指令與變更紀錄。",
-    "Skills Installation Centre — FCG Developer Platform": "Skills 安裝中心 — FCG 開放平台",
     "Official integration skill packages for AI coding assistants, one per FCG travel API.":
         "針對 AI 程式助理的官方對接技能包，每個 FCG 旅遊介面各一個。",
 
@@ -366,9 +369,6 @@ ZH_HANT = {
     "Ask directly and get an answer with code examples in seconds, grounded in the platform's own API documentation.":
         "直接提問，數秒內取得以平台介面文件為依據的回答與程式範例。",
     "Start a conversation": "開始對話",
-    "FCG Developer Platform AI Assistant": "FCG 開放平台 AI 助理",
-    "Hello. I am the FCG Developer Platform AI Assistant. I can help with API integration, signature authentication, order workflows and more.":
-        "您好，我是 FCG 開放平台 AI 助理。我可以協助處理介面對接、簽章驗證、訂單流程等問題。",
     "Type a question, or pick one of the common questions to start.":
         "直接輸入問題，或從常見問題中挑一個開始。",
     "How do I generate a request signature?": "如何產生請求簽章？",
@@ -737,7 +737,6 @@ ZH_HANT = {
     "Register for free": "免費註冊",
 
     # ---- homepage ---------------------------------------------------------
-    "FCG Developer": "FCG",
     "A travel-focused open platform for distributors": "為分銷商打造的旅遊開放平台",
     "such as OTAs and travel management companies. Standardised APIs and flexible SDKs aggregate and distribute hotel, flight and other core travel resources, plus TMC API capabilities, so partners can launch branded travel platforms faster.":
         "，服務 OTA 與商旅管理公司等客戶。以標準化介面與彈性 SDK 彙整並分銷飯店、機票等核心旅遊資源，並提供 TMC 介面能力，協助合作夥伴更快推出自有品牌的旅遊平台。",

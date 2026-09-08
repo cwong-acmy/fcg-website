@@ -11,7 +11,6 @@ is carried in the fragment on purpose.
 
 ZH_HANS = {
     # ---- Sandbox, Request Trace, Coverage Map, Hotel Mapping -------------
-    'Sandbox Environment — FCG Developer Platform': '沙箱环境 — FCG 开放平台',
     'Three FCG API sandboxes, one per product, open from registration and free of production data.':
         'FCG 提供三个接口沙箱，每个产品各一个，注册即开通，且不接触生产数据。',
     'Integration and debugging': '接入与调试',
@@ -69,7 +68,6 @@ ZH_HANS = {
     'Sandbox traffic lands in Request Trace alongside production traffic, filtered by environment. Each call keeps its trace ID, path, status and duration.':
         '沙箱流量与生产流量一同进入请求追踪，可按环境筛选。每次调用都保留 trace ID、请求路径、状态与耗时。',
     'Open Request Trace': '打开请求追踪',
-    'Request Trace — FCG Developer Platform': '请求追踪 — FCG 开放平台',
     'Inspect and analyse FCG API request flows by trace ID, application, environment and status.':
         '按 trace ID、应用、环境与状态查看并分析 FCG 接口请求链路。',
     'Inspect and analyse API request flows to locate issues quickly.': '查看并分析接口请求链路，快速定位问题。',
@@ -134,7 +132,6 @@ ZH_HANS = {
     'Narrow the table to the failing calls, export the CSV, and attach it to a ticket. Support cannot trace a failure without the platform IDs the export carries.':
         '把列表收窄到失败的调用，导出 CSV，并附在工单中。没有导出文件中的平台 ID，技术支持无法追溯故障。',
     'Start in sandbox': '先从沙箱开始',
-    'Coverage Map — FCG Developer Platform': '资源覆盖地图 — FCG 开放平台',
     'Explore FCG hotel supply coverage as WGS84 points on a globe before you connect.':
         '接入前，先在地球视图上以 WGS84 坐标点查看 FCG 酒店资源覆盖情况。',
     'Hotel catalogue': '酒店资源库',
@@ -190,7 +187,6 @@ ZH_HANS = {
     'G-Link docs': 'G-Link 文档',
     'Open the Coverage Map': '打开资源覆盖地图',
     'Register for access': '注册获取权限',
-    'Hotel Mapping — FCG Developer Platform': '酒店匹配 — FCG 开放平台',
     'Match distributor hotel inventory to FCG hotel IDs with a CSV template, upload and review.':
         '通过 CSV 模板上传并审核，把分销方的酒店库存与 FCG 酒店 ID 对应起来。',
     'Property mapping': '酒店匹配',
@@ -281,14 +277,40 @@ ZH_HANS = {
     "Inspect calls and diagnose integration issues": "查看调用记录并排查接入问题",
     "Explore hotel supply coverage before you connect": "接入前先了解酒店资源覆盖情况",
     "Standardise supplier records in one workspace": "在同一工作台中标准化供应商数据",
+    # ---- renamed to Open Developer Platform --------------------------------
+    'AI Assistant — FCG Open Developer Platform': 'AI 助手 — FCG 开放平台',
+    'App Management — FCG Open Developer Platform': '应用管理 — FCG 开放平台',
+    'Ask the FCG Open Developer Platform AI Assistant about API integration, authentication and order workflows.':
+        '就接口对接、签名认证与订单流程，向 FCG 开放平台 AI 助手提问。',
+    'Coverage Map — FCG Open Developer Platform': '资源覆盖地图 — FCG 开放平台',
+    'Error Code Reference — FCG Open Developer Platform': '错误码说明 — FCG 开放平台',
+    'F-Link Flight API — FCG Open Developer Platform': 'F-Link 机票接口 — FCG 开放平台',
+    'FCG Open Developer': 'FCG',
+    'FCG Open Developer Platform': 'FCG 开放平台',
+    'FCG Open Developer Platform AI Assistant': 'FCG 开放平台 AI 助手',
+    'G-Link API Reference — FCG Open Developer Platform': 'G-Link 接口参考 — FCG 开放平台',
+    'G-Link Hotel API — FCG Open Developer Platform': 'G-Link 酒店接口 — FCG 开放平台',
+    'G-Link Integration Flow — FCG Open Developer Platform': 'G-Link 对接流程 — FCG 开放平台',
+    'Hello. I am the FCG Open Developer Platform AI Assistant. I can help with API integration, signature authentication, order workflows and more.':
+        '您好，我是 FCG 开放平台 AI 助手。我可以协助处理接口对接、签名认证、订单流程等问题。',
+    'Hotel Mapping — FCG Open Developer Platform': '酒店匹配 — FCG 开放平台',
+    'Open Developer Platform': '开放平台',
+    'Register a company account for free sandbox access to the FCG Open Developer Platform.':
+        '注册企业账号，免费获取 FCG 开放平台沙箱环境。',
+    'Register — FCG Open Developer Platform': '注册 — FCG 开放平台',
+    'Request Trace — FCG Open Developer Platform': '请求追踪 — FCG 开放平台',
+    'SDK Integration Centre — FCG Open Developer Platform': 'SDK 接入中心 — FCG 开放平台',
+    'Sandbox Environment — FCG Open Developer Platform': '沙箱环境 — FCG 开放平台',
+    'Sign in to the FCG Open Developer Platform console.': '登录 FCG 开放平台控制台。',
+    'Sign in — FCG Open Developer Platform': '登录 — FCG 开放平台',
+    'Skills Installation Centre — FCG Open Developer Platform': 'Skills 安装中心 — FCG 开放平台',
+    'The FCG Open Developer Platform: standardised APIs and flexible SDKs for hotel, flight and travel management resources.':
+        'FCG 开放平台：面向酒店、机票与差旅管理资源的标准化接口与灵活 SDK。',
     # ---- chrome: nav, footer, meta ----------------------------------------
     # the brand lockup runs on two lines; Chinese carries "open" inside
     # 开放平台 already, so the first line takes the reader instead
-    'Open': '开发者',
     'FCG Open Developer Platform — home': 'FCG 开放平台 — 首页',
     "Skip to content": "跳转到正文",
-    "FCG Developer Platform — home": "FCG 开放平台 — 首页",
-    "Developer Platform": "开放平台",
     "Primary": "主导航",
     "Home": "首页",
     "App Management": "应用管理",
@@ -300,8 +322,6 @@ ZH_HANS = {
     "Register": "注册",
     "Open menu": "打开菜单",
     "Back to platform": "返回平台",
-    "The FCG Developer Platform: standardised APIs and flexible SDKs for hotel, flight and travel management resources.":
-        "FCG 开放平台：面向酒店、机票与差旅管理资源的标准化接口与灵活 SDK。",
     "Products": "产品",
     "Product use cases": "产品应用场景",
     "Developers": "开发者",
@@ -316,39 +336,22 @@ ZH_HANS = {
     "Section": "章节",
 
     # ---- page titles and meta descriptions -------------------------------
-    "AI Assistant — FCG Developer Platform": "AI 助手 — FCG 开放平台",
-    "Ask the FCG Developer Platform AI Assistant about API integration, authentication and order workflows.":
-        "就接口对接、签名认证与订单流程，向 FCG 开放平台 AI 助手提问。",
-    "Error Code Reference — FCG Developer Platform": "错误码说明 — FCG 开放平台",
     "Every FCG platform error code, its cause and its resolution, across API, SDK and MCP integration.":
         "FCG 平台全部错误码及其成因与处理方式，覆盖 API、SDK 与 MCP 三种对接方式。",
-    "F-Link Flight API — FCG Developer Platform": "F-Link 机票接口 — FCG 开放平台",
     "All nineteen F-Link flight endpoints: search, ticketing, changes, refunds and reference data.":
         "F-Link 机票接口全部 19 个：查询、出票、改期、退票与基础数据。",
-    "G-Link API Reference — FCG Developer Platform": "G-Link 接口参考 — FCG 开放平台",
     "Every G-Link hotel endpoint with methods, paths and a worked request and response example.":
         "G-Link 酒店接口全集，含请求方法、路径与完整的请求与响应示例。",
-    "G-Link Integration Flow — FCG Developer Platform": "G-Link 对接流程 — FCG 开放平台",
     "The recommended eight-step G-Link hotel API integration flow, search through to cancellation.":
         "G-Link 酒店接口推荐的八步对接流程，从查询到取消订单。",
-    "G-Link Hotel API — FCG Developer Platform": "G-Link 酒店接口 — FCG 开放平台",
     "Mandatory interfaces, static data handling and rate limits for the G-Link hotel API.":
         "G-Link 酒店接口的必接接口、静态数据处理与限流规则。",
-    "App Management — FCG Developer Platform": "应用管理 — FCG 开放平台",
     "Manage the applications behind an FCG API integration. Each product carries its own credential set.":
         "管理 FCG 接口对接所使用的应用。每个产品拥有独立的凭证。",
-    "FCG Developer Platform": "FCG 开放平台",
     "A travel-focused open platform for distributors. Standardised APIs and flexible SDKs for hotel, flight and TMC travel resources.":
         "面向分销商的旅游开放平台。以标准化接口与灵活 SDK 提供酒店、机票与 TMC 差旅资源。",
-    "Sign in — FCG Developer Platform": "登录 — FCG 开放平台",
-    "Sign in to the FCG Developer Platform console.": "登录 FCG 开放平台控制台。",
-    "Register — FCG Developer Platform": "注册 — FCG 开放平台",
-    "Register a company account for free sandbox access to the FCG Developer Platform.":
-        "注册企业账号，免费获取 FCG 开放平台沙箱环境。",
-    "SDK Integration Centre — FCG Developer Platform": "SDK 接入中心 — FCG 开放平台",
     "Go, Java and Python SDKs for the FCG travel APIs, with install commands and changelogs.":
         "FCG 旅游接口的 Go、Java 与 Python SDK，附安装命令与更新日志。",
-    "Skills Installation Centre — FCG Developer Platform": "Skills 安装中心 — FCG 开放平台",
     "Official integration skill packages for AI coding assistants, one per FCG travel API.":
         "面向 AI 编程助手的官方对接技能包，每个 FCG 旅游接口一个。",
 
@@ -359,9 +362,6 @@ ZH_HANS = {
     "Ask directly and get an answer with code examples in seconds, grounded in the platform's own API documentation.":
         "直接提问，数秒内获得基于平台自身接口文档的回答与代码示例。",
     "Start a conversation": "开始对话",
-    "FCG Developer Platform AI Assistant": "FCG 开放平台 AI 助手",
-    "Hello. I am the FCG Developer Platform AI Assistant. I can help with API integration, signature authentication, order workflows and more.":
-        "您好，我是 FCG 开放平台 AI 助手。我可以协助处理接口对接、签名认证、订单流程等问题。",
     "Type a question, or pick one of the common questions to start.":
         "直接输入问题，或从常见问题中选择一个开始。",
     "How do I generate a request signature?": "如何生成请求签名？",
@@ -730,7 +730,6 @@ ZH_HANS = {
     "Register for free": "免费注册",
 
     # ---- homepage ---------------------------------------------------------
-    "FCG Developer": "FCG",
     "A travel-focused open platform for distributors": "面向分销商的旅游开放平台",
     "such as OTAs and travel management companies. Standardised APIs and flexible SDKs aggregate and distribute hotel, flight and other core travel resources, plus TMC API capabilities, so partners can launch branded travel platforms faster.":
         "，服务 OTA 与差旅管理公司等客户。以标准化接口与灵活 SDK 聚合并分销酒店、机票等核心旅游资源，并提供 TMC 接口能力，帮助合作伙伴更快上线自有品牌的旅游平台。",
