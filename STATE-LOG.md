@@ -4,6 +4,12 @@
 
 ### What changed
 
+**The Chinese name is 开放平台 / 開放平台** (Crystal, 8 September) — the FCG prefix is dropped, matching
+the English name losing it. The hero sets it across two lines as 开放 / 平台, and the heading-scoped
+`h:Platform` entry that used to carry the whole name is back to 平台. Removing the Latin "FCG " left a
+space wedged between two CJK characters in four strings; those were closed up, and the spaces that sit
+before Latin runs (开放平台 AI 助手) were kept.
+
 **The product is now "Open Developer Platform"**, renamed across the English build and both Chinese
 locale tables. 47 files, 36 pages rebuilt, translation coverage still complete. The lockup reads FCG
 wordmark, hairline divider, "Open Developer Platform"; the hero h1 is `Open Developer<br>Platform`.
@@ -48,8 +54,6 @@ truncates to "FCG Developer Plat…" at 1440px. All of it is fixed in the rebuil
 
 ### Blockers
 
-- **Chinese product name undecided.** English dropped "FCG" from the name; 开放平台 has not. Options are
-  to leave it, or move to 开放开发者平台. Crystal's call.
 - **Small orange text still unresolved** from the previous session: `#F97316` is 2.80:1 on white.
   Nothing in the console uses orange below 18px, so the console is unaffected either way, but the
   recommendation stands at `#C2410C` for small orange text.

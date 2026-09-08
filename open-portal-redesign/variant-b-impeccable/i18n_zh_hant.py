@@ -19,7 +19,7 @@ would have produced mainland phrasing in Traditional characters:
 ZH_HANT = {
     # ---- chrome: nav, footer, meta ----------------------------------------
     "Skip to content": "跳至主要內容",
-    "Open Developer Platform — home": "FCG 開放平台 — 首頁",
+    "Open Developer Platform — home": "開放平台 — 首頁",
     "Open Developer Platform": "開放平台",
     "Primary": "主導覽",
     "Home": "首頁",
@@ -33,14 +33,14 @@ ZH_HANT = {
     "Open menu": "開啟選單",
     "Back to platform": "返回平台",
     "The Open Developer Platform: standardised APIs and flexible SDKs for hotel, flight and travel management resources.":
-        "FCG 開放平台：針對飯店、機票與商旅管理資源的標準化介面與彈性 SDK。",
+        "開放平台：針對飯店、機票與商旅管理資源的標準化介面與彈性 SDK。",
     "Products": "產品",
     "Product use cases": "產品應用情境",
     "Developers": "開發者",
     "Platform": "平台",
     # inside a heading only: the hero h1's second line, which is the
     # same word as the footer column but means the product, not a section
-    "h:Platform": "開放平台",
+    "h:Platform": "平台",
     "Error code reference": "錯誤碼說明",
     "© 2026 Fusion Connect Group Holdings Ltd (BVI). All rights reserved.":
         "© 2026 Fusion Connect Group Holdings Ltd (BVI)。保留一切權利。",
@@ -48,39 +48,39 @@ ZH_HANT = {
     "Section": "章節",
 
     # ---- page titles and meta descriptions -------------------------------
-    "AI Assistant — Open Developer Platform": "AI 助理 — FCG 開放平台",
+    "AI Assistant — Open Developer Platform": "AI 助理 — 開放平台",
     "Ask the Open Developer Platform AI Assistant about API integration, authentication and order workflows.":
-        "關於介面對接、簽章驗證與訂單流程，可直接詢問 FCG 開放平台 AI 助理。",
-    "Error Code Reference — Open Developer Platform": "錯誤碼說明 — FCG 開放平台",
+        "關於介面對接、簽章驗證與訂單流程，可直接詢問開放平台 AI 助理。",
+    "Error Code Reference — Open Developer Platform": "錯誤碼說明 — 開放平台",
     "Every FCG platform error code, its cause and its resolution, across API, SDK and MCP integration.":
         "FCG 平台所有錯誤碼及其成因與處理方式，涵蓋 API、SDK 與 MCP 三種對接方式。",
-    "F-Link Flight API — Open Developer Platform": "F-Link 機票介面 — FCG 開放平台",
+    "F-Link Flight API — Open Developer Platform": "F-Link 機票介面 — 開放平台",
     "All nineteen F-Link flight endpoints: search, ticketing, changes, refunds and reference data.":
         "F-Link 機票介面共 19 個：查詢、開票、改期、退票與基礎資料。",
-    "G-Link API Reference — Open Developer Platform": "G-Link 介面參考 — FCG 開放平台",
+    "G-Link API Reference — Open Developer Platform": "G-Link 介面參考 — 開放平台",
     "Every G-Link hotel endpoint with methods, paths and a worked request and response example.":
         "G-Link 飯店介面全集，含請求方法、路徑與完整的請求與回應範例。",
-    "G-Link Integration Flow — Open Developer Platform": "G-Link 對接流程 — FCG 開放平台",
+    "G-Link Integration Flow — Open Developer Platform": "G-Link 對接流程 — 開放平台",
     "The recommended eight-step G-Link hotel API integration flow, search through to cancellation.":
         "G-Link 飯店介面建議的八步對接流程，從查詢到取消訂單。",
-    "G-Link Hotel API — Open Developer Platform": "G-Link 飯店介面 — FCG 開放平台",
+    "G-Link Hotel API — Open Developer Platform": "G-Link 飯店介面 — 開放平台",
     "Mandatory interfaces, static data handling and rate limits for the G-Link hotel API.":
         "G-Link 飯店介面的必接介面、靜態資料處理與流量限制規則。",
-    "App Management — Open Developer Platform": "應用程式管理 — FCG 開放平台",
+    "App Management — Open Developer Platform": "應用程式管理 — 開放平台",
     "Manage the applications behind an FCG API integration. Each product carries its own credential set.":
         "管理 FCG 介面對接所使用的應用程式。每個產品都有獨立的憑證。",
-    "Open Developer Platform": "FCG 開放平台",
+    "Open Developer Platform": "開放平台",
     "A travel-focused open platform for distributors. Standardised APIs and flexible SDKs for hotel, flight and TMC travel resources.":
         "為分銷商打造的旅遊開放平台。以標準化介面與彈性 SDK 提供飯店、機票與 TMC 商旅資源。",
-    "Sign in — Open Developer Platform": "登入 — FCG 開放平台",
-    "Sign in to the Open Developer Platform console.": "登入 FCG 開放平台主控台。",
-    "Register — Open Developer Platform": "註冊 — FCG 開放平台",
+    "Sign in — Open Developer Platform": "登入 — 開放平台",
+    "Sign in to the Open Developer Platform console.": "登入開放平台主控台。",
+    "Register — Open Developer Platform": "註冊 — 開放平台",
     "Register a company account for free sandbox access to the Open Developer Platform.":
-        "註冊企業帳號，免費取得 FCG 開放平台沙箱環境。",
-    "SDK Integration Centre — Open Developer Platform": "SDK 整合中心 — FCG 開放平台",
+        "註冊企業帳號，免費取得開放平台沙箱環境。",
+    "SDK Integration Centre — Open Developer Platform": "SDK 整合中心 — 開放平台",
     "Go, Java and Python SDKs for the FCG travel APIs, with install commands and changelogs.":
         "FCG 旅遊介面的 Go、Java 與 Python SDK，附安裝指令與變更紀錄。",
-    "Skills Installation Centre — Open Developer Platform": "Skills 安裝中心 — FCG 開放平台",
+    "Skills Installation Centre — Open Developer Platform": "Skills 安裝中心 — 開放平台",
     "Official integration skill packages for AI coding assistants, one per FCG travel API.":
         "針對 AI 程式助理的官方對接技能包，每個 FCG 旅遊介面各一個。",
 
@@ -91,9 +91,9 @@ ZH_HANT = {
     "Ask directly and get an answer with code examples in seconds, grounded in the platform's own API documentation.":
         "直接提問，數秒內取得以平台介面文件為依據的回答與程式範例。",
     "Start a conversation": "開始對話",
-    "Open Developer Platform AI Assistant": "FCG 開放平台 AI 助理",
+    "Open Developer Platform AI Assistant": "開放平台 AI 助理",
     "Hello. I am the Open Developer Platform AI Assistant. I can help with API integration, signature authentication, order workflows and more.":
-        "您好，我是 FCG 開放平台 AI 助理。我可以協助處理介面對接、簽章驗證、訂單流程等問題。",
+        "您好，我是開放平台 AI 助理。我可以協助處理介面對接、簽章驗證、訂單流程等問題。",
     "Type a question, or pick one of the common questions to start.":
         "直接輸入問題，或從常見問題中挑一個開始。",
     "How do I generate a request signature?": "如何產生請求簽章？",
@@ -462,7 +462,7 @@ ZH_HANT = {
     "Register for free": "免費註冊",
 
     # ---- homepage ---------------------------------------------------------
-    "Open Developer": "FCG",
+    "Open Developer": "開放",
     "A travel-focused open platform for distributors": "為分銷商打造的旅遊開放平台",
     "such as OTAs and travel management companies. Standardised APIs and flexible SDKs aggregate and distribute hotel, flight and other core travel resources, plus TMC API capabilities, so partners can launch branded travel platforms faster.":
         "，服務 OTA 與商旅管理公司等客戶。以標準化介面與彈性 SDK 彙整並分銷飯店、機票等核心旅遊資源，並提供 TMC 介面能力，協助合作夥伴更快推出自有品牌的旅遊平台。",
