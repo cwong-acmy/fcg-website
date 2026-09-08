@@ -483,16 +483,28 @@ python3 build-console.py
 A console is mostly state: Success / Failed / Timeout, Pending / Processing / Resolved,
 Sandbox / Production, Approved / Rejected / Frozen. §11 left this open; it is now decided.
 
+**Status is a chip, not a coloured word.** A filled ground is findable in a hundred-row table in a way a
+6px dot beside grey text is not. Ground and label are a matched pair, Stripe's badge palette:
+
 ```css
---ok:#1F7A5C;   /* success, approved, active, published */
---warn:#946200; /* pending, timeout, in progress, skipped */
---bad:#B3261E;  /* failed, rejected, frozen */
+--ok-bg:#CBF4C9;   --ok:#0E6245;     /* 6.07:1 — success, approved, active, published */
+--warn-bg:#F8E5B9; --warn:#983705;   /* 5.86:1 — pending, timeout, in progress, skipped */
+--bad-bg:#FDE2DD;  --bad:#A41C4E;    /* 5.99:1 — failed, rejected, frozen */
+--neu-bg:#E3E8EE;  --neu:#4F566B;    /* 5.93:1 — not started, unknown, neutral */
 ```
 
-All three clear 4.5:1 on white. **Colour lands on the 6px dot, not the whole row.** Label text stays ink,
-with one exception: a failure keeps its label in `--bad`, because a failed row must be findable by eye in
-a hundred-row trace table. Status colour never fills a button, a panel or a badge background, and
-**orange is still never a status** — it remains the brand accent.
+Every pair clears 4.5:1 against its own ground. The chip is `999px`, 24px tall, 12px/500 label, with an
+optional 5px `currentColor` dot. **Never fill a button or a panel with a status colour, and orange is
+still never a status** — it remains the brand accent.
+
+### Charts are orange
+
+Decided 8 September 2026. Bars, lines, the area fill under a line, the share ring and ranking tracks all
+use `--accent` `#F97316`; the secondary series is `#FBD3B4`, the same hue lightened. The latest point on a
+line takes an ink dot, so the one thing the eye should land on is not the same colour as everything else.
+
+This is a deliberate exception to §2's "never an orange fill". That rule is written about marketing
+panels and buttons — surfaces a reader looks past. A data mark is the content, not its container.
 
 ### Components the console adds
 
@@ -519,4 +531,5 @@ plain guidance and the action that fills it.
   carries one series, and failures live in their own tile and table. If both must share a panel, plot the
   failure *rate*, not the count.
 
-Charts are ink and one grey. The only accent a chart gets is the orange dot on the latest point.
+Reviewers see the whole set side by side against today's console at
+`compare/console-redesign-review.html`, built by `compare/build-compare.py`.
