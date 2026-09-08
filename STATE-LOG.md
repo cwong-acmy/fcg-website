@@ -1,5 +1,48 @@
 # STATE-LOG — FCG Website
 
+## 2026-09-08 — Branch cut for the logged-in console; blocked on sign-in
+
+### What changed
+
+**New branch `portal-app-internals`, cut off `portal-redesign-direction-b`** so it inherits Direction B
+verbatim (tokens, generator, copy-rule checks, three locales). No files changed yet — this session
+scoped the work and stopped at an authentication gate.
+
+**Scope agreed with Crystal:** redesign the *logged-in console* — the authenticated product UI behind
+`/login` — not a second pass on the existing twelve public pages. Coverage is "all" screens the real
+console exposes, both the **dev view** and the **admin view** (two separate 1Password logins:
+`Open Platform - Dev Login`, Google SSO; `Open Platform - Admin Login`, crystal.wong@accomy.com).
+
+### Decisions
+
+- **Do not extrapolate the console from public pages.** Crystal has credentials, so the redesign is
+  built against the real console's information architecture rather than a plausible invention. This
+  reverses the default that produced the twelve public pages, where no login existed.
+- **Console screens go through the same generator**, not hand-written HTML — `build-pages.py` lifts the
+  shell from `index.html`, so tokens cannot drift and the copy-rule assertions still run. The console
+  gets its own CSS block (persistent sidebar, denser rhythm) instead of the 128–170px marketing section
+  rhythm; the accent law and type scale are unchanged.
+- **Claude does not type the password.** Entering credentials into a login form is a standing
+  prohibition, so the sign-in is Crystal's and the crawl afterwards is Claude's. Chrome for Testing on
+  `localhost:9222` was fronted at the login page for her.
+
+### Blockers
+
+- **BLOCKED: nobody is signed in.** Every console screen is behind `/login`. Waiting on Crystal to sign
+  in on the `:9222` browser as dev, then as admin, saying which each time.
+- `/admin` returns a React Router 404, so the admin view is role-gated on the same routes rather than a
+  separate path — the difference between the two views can only be established by capturing both.
+- Carried over from the previous session: the small-orange-text decision (`#C2410C` for small text)
+  is still unanswered, and the six untracked duplicate full-tree copies (`about/`, `whitelabel/`,
+  `atlas/`, `agreeease/`, `corporate-booking-tool/`, `advisory-implementation/`) still need a delete
+  decision. They are untracked and were not committed.
+
+### Next actions
+
+1. Crystal signs in (dev first, then admin); Claude crawls each view and captures every screen.
+2. Map the real console IA, then build the console shell plus every screen through `build-pages.py`.
+3. Apply the small-orange-text decision to the console build at the same time.
+
 ## 2026-09-07 (session 2) — Simplified and Traditional Chinese, and a design-system spec
 
 ### What changed
