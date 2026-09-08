@@ -1,5 +1,63 @@
 # STATE-LOG — FCG Website
 
+## 2026-09-08 (session 5) — Open Developer Platform everywhere
+
+### What changed
+
+The rename now covers the whole portal, not just the header: hero `h1`, all sixteen page `<title>`s,
+the meta descriptions and the footer brand line. No built page in any locale contains the old name.
+
+**The nav lockup went back to one text node.** Instead of a `<br>`, a 128px cap on `.brand-sub` lets
+each language break where it wants: `OPEN DEVELOPER` measures 123px and the full string 191px, so
+English wraps as `OPEN DEVELOPER` / `PLATFORM`, while `开放平台` / `開放平台` fits on one line. Neither
+language needs a translation of the bare word "Open", which the `<br>` version had forced.
+
+Twenty-six translation keys the rename orphaned were removed. Both tables hold the same 841 keys.
+
+### Decisions
+
+- **Measure, then cap.** The break point is a measured number, not a guess: any cap between 123px and
+  191px produces the requested split, and 128px leaves a little headroom without admitting a third word.
+- **The Chinese hero is unchanged by the rename.** `FCG Open Developer` maps to `FCG` and the
+  heading-scoped `h:Platform` override still supplies `开放平台`, so the hero reads `FCG` / `开放平台`
+  exactly as before.
+- **Derived the new translations rather than retyping them.** Every renamed string is an old one with
+  "Open " inserted and the same Chinese value, so the new keys were generated from the old table and
+  the old keys deleted. Two strings needed a human decision: `Open Developer Platform` → `开放平台`
+  and `FCG Open Developer` → `FCG`.
+
+### Verified
+
+`verify-pages.js`: 0 failing checks out of 48, in each of the three locales. Header still flush to the
+content column at 1440 / 1366 / 1280 / 1180 / 1100 / 1024. Live after the push of `dcb5673`
+(deployment READY from `source: git`, four seconds later): the English header serves
+`Open Developer Platform`, zh-Hant serves `開放平台`, the hero serves `FCG Open Developer<br>Platform`,
+`/sandbox.html` titles as `Sandbox Environment — FCG Open Developer Platform`, and the old name
+appears zero times on the live homepage.
+
+### Learnings
+
+**Problem.** Roll a name change through generated pages and two translation tables without hand-editing
+forty strings or leaving the tables holding both spellings.
+
+**Approach.** Rename in the source of truth (one `str.replace` in `pages_content.py`, three literals in
+the donor), let the build's missing-string report enumerate the fallout, then derive each new Chinese
+value from the old key rather than retyping it — the mapping is "same string with a word inserted", so
+the translation is unchanged. Finish by deleting the keys that are no longer extracted from any page.
+
+**Judgment calls — what was NOT done, and why.**
+- Did not keep the `<br>` from the previous pass. It forced every locale into the same break and made
+  the bare word "Open" a translatable string that Chinese has no use for.
+- Did not guess the wrap width. Two measurements settled it; a `ch` or `em` cap would drift with the font.
+- Did not leave the orphaned keys in place. They are harmless to the build but leave two spellings of
+  every page title for the next person to choose between.
+- Did not touch the marketing site at the repo root. Its header carries no `brand-sub` lockup, and the
+  rename request was about the portal.
+
+**Reusable rule.** For a rename across generated output, edit the source, let the build's own failure
+list the consequences, and derive the new translations from the old ones by transformation. Then sweep
+the keys nothing extracts any more, or the table grows a second copy of itself every rename.
+
 ## 2026-09-08 (session 4) — Header lockup renamed, on two lines
 
 ### What changed
