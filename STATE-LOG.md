@@ -97,6 +97,25 @@ every screen under 900px; endpoint paths truncated mid-word on the one screen th
 micro-labels were 9.5px, below this system's own 11px floor; the review queue had no waiting-since column,
 which is the field triage actually sorts on.
 
+### Hosted for the team
+
+The whole build is live and clickable at
+https://fcg-website-3wwgfetv0-crystalwong-accomycoms-projects.vercel.app — 58 pages: the 12 ODP public
+pages, both Chinese editions, and all 21 console screens, with the links working between them. Deployed as
+a **preview** to the work team's existing `fcg-website` Vercel project (`prj_bIBO2PVjRM052GwQXYZN0ZxoPCWB`,
+`team_SyKixqrcZUCIGFNYQC13rwVl`) using the recorded work token, never `--prod`.
+
+Every route returned 302 at first: the project had `ssoProtection: all_except_custom_domains`, which
+covers preview URLs. Crystal approved turning it off, so `ssoProtection` is now `null` and preview URLs on
+this project are publicly readable. **Reversible in one click in project settings if that is ever wrong.**
+Verified after the change: nine routes across both locales and both console roles all return 200, and the
+production alias `fcg-website-one.vercel.app` is untouched at 164,474 bytes, still serving the old
+marketing generation.
+
+Note hostmyclaude cannot host this: it serves one file per upload and mints a new slug each time, so a
+36-page site with links between its pages cannot be stitched together there. The side-by-side review page
+stays on hostmyclaude because it is genuinely one file.
+
 ### Blockers
 
 - **i18n for the console not started** (63 pages when it is).
