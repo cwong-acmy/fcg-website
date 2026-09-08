@@ -17,6 +17,24 @@ would have produced mainland phrasing in Traditional characters:
 """
 
 ZH_HANT = {
+    # ---- Products mega menu ----------------------------------------------
+    "For your first integration": "給第一次介接",
+    "For developers": "給開發者",
+    "For operations and support": "給營運與支援",
+    "Build": "建置",
+    "Operate": "營運",
+    "More": "更多",
+    "Request Trace": "請求追蹤",
+    "Coverage Map": "資源覆蓋地圖",
+    "Hotel Mapping": "飯店對應",
+    "Create an app and manage integration access": "建立應用程式並管理介接權限",
+    "Test your integration in a controlled environment": "在受控環境中測試介接",
+    "Explore endpoints, schemas and request examples": "查閱端點、資料結構與請求範例",
+    "Generate client code and integration examples": "產生用戶端程式碼與介接範例",
+    "Use reusable guidance for common API workflows": "沿用常見介面流程的可重複指引",
+    "Inspect calls and diagnose integration issues": "檢視呼叫並診斷介接問題",
+    "Explore hotel supply coverage before you connect": "介接前先了解飯店資源覆蓋範圍",
+    "Standardise supplier records in one workspace": "在同一工作區標準化供應商資料",
     # ---- chrome: nav, footer, meta ----------------------------------------
     "Skip to content": "跳至主要內容",
     "FCG Developer Platform — home": "FCG 開放平台 — 首頁",

@@ -236,6 +236,54 @@ h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent)}
 .mnav .m-cta .lang{display:grid;grid-template-columns:repeat(3,1fr);width:100%;margin-top:2px}
 .mnav .m-cta .lang button{height:36px;padding:0;font-size:12.5px}
 
+/* ---------- Products mega menu ---------- */
+.shell .drop-t{
+  display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 15px;
+  border:0;border-radius:999px;background:transparent;cursor:pointer;
+  font-family:inherit;font-size:13.5px;font-weight:400;color:var(--ink);white-space:nowrap;
+  transition:background var(--hover) ease,color var(--hover) ease,transform var(--press) var(--ease-out);
+}
+.shell .drop-t:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){ .shell .drop-t:hover{background:#fff} }
+.shell .drop-t[aria-expanded="true"]{background:#fff;font-weight:500}
+/* the chevron is the shared arrow glyph turned, so the menu adds no new icon */
+.drop-c{font-size:14px;transform:rotate(90deg);transition:transform 240ms var(--ease-out)}
+.drop-t[aria-expanded="true"] .drop-c{transform:rotate(-90deg)}
+
+.mega{
+  position:absolute;left:0;right:0;top:100%;
+  display:none;opacity:0;transform:translateY(-8px);
+  transition:opacity 220ms var(--ease-out),transform 220ms var(--ease-out),
+             display 220ms allow-discrete;
+}
+.mega.open{display:block;opacity:1;transform:none}
+@starting-style{ .mega.open{opacity:0;transform:translateY(-8px)} }
+.mega-in{padding-top:8px;padding-bottom:8px}
+.mega-card{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 40px;
+  padding:32px 34px 34px;
+  background:#fff;border:1px solid var(--hair);border-radius:24px;
+  box-shadow:0 30px 70px -34px rgba(15,17,20,.34),0 2px 6px rgba(15,17,20,.04);
+}
+.mega-e{color:var(--muted)}
+.mega-h{font-size:27px;font-weight:600;letter-spacing:-.025em;margin:14px 0 16px}
+.mega-col ul{display:flex;flex-direction:column;gap:2px}
+.mega-i{
+  display:flex;align-items:flex-start;gap:14px;padding:11px 12px;border-radius:14px;
+  transition:background var(--hover) ease,transform var(--press) var(--ease-out);
+}
+.mega-i:active{transform:scale(.99)}
+@media (hover:hover) and (pointer:fine){ .mega-i:hover{background:var(--shell)} }
+.mega-ic{
+  display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:40px;height:40px;border:1px solid var(--hair);border-radius:11px;
+  background:#fff;font-size:19px;color:var(--ink);
+}
+.mega-tx b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.mega-tx span{display:block;margin-top:3px;font-size:13px;line-height:1.45;color:var(--muted)}
+.mnav .m-h{color:var(--muted);margin:18px 0 4px}
+.mnav .m-h:first-child{margin-top:2px}
+
 /* ============================================================
    HERO
    ============================================================ */
@@ -458,6 +506,7 @@ html.js .rv.in{opacity:1;transform:none;transition:opacity 1s var(--ease),transf
 }
 @media (max-width:1000px){
   .shell,.nav-right .login,.nav-right .lang{display:none}
+  .mega{display:none}
   .burger{display:flex}
   .nav-right{gap:10px}
   .hero-in{grid-template-columns:minmax(0,1fr);gap:56px}
@@ -882,7 +931,7 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
     </a>
 
     <nav class="shell" aria-label="主導覽">
-      <a href="index.html">首頁</a>
+      <button class="drop-t" type="button" id="mega-t" aria-expanded="false" aria-controls="mega">產品 <iconify-icon class="drop-c" icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></button>
       <a class="on" href="app-management.html">應用程式管理</a>
       <a href="api-docs-hotel.html">介面文件</a>
       <a href="sdk.html">SDK</a>
@@ -904,16 +953,93 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
     </div>
   </div>
 
+  <div class="mega" id="mega">
+    <div class="wrap mega-in">
+      <div class="mega-card">
+        <div class="mega-col">
+          <p class="micro mega-e">給第一次介接</p>
+          <p class="mega-h" id="mega-h0">開始</p>
+          <nav aria-labelledby="mega-h0">
+          <ul>
+            <li><a class="mega-i" href="app-management.html">
+              <span class="mega-ic"><iconify-icon icon="solar:widget-5-linear" aria-hidden="true"></iconify-icon></span>
+              <span class="mega-tx"><b>應用程式管理</b><span>建立應用程式並管理介接權限</span></span>
+            </a></li>
+            <li><a class="mega-i" href="index.html#start-integration">
+              <span class="mega-ic"><iconify-icon icon="solar:key-minimalistic-linear" aria-hidden="true"></iconify-icon></span>
+              <span class="mega-tx"><b>沙箱</b><span>在受控環境中測試介接</span></span>
+            </a></li>
+          </ul>
+          </nav>
+        </div>
+        <div class="mega-col">
+          <p class="micro mega-e">給開發者</p>
+          <p class="mega-h" id="mega-h1">建置</p>
+          <nav aria-labelledby="mega-h1">
+          <ul>
+            <li><a class="mega-i" href="api-docs-hotel.html">
+              <span class="mega-ic"><iconify-icon icon="solar:document-text-linear" aria-hidden="true"></iconify-icon></span>
+              <span class="mega-tx"><b>介面文件</b><span>查閱端點、資料結構與請求範例</span></span>
+            </a></li>
+            <li><a class="mega-i" href="sdk.html">
+              <span class="mega-ic"><iconify-icon icon="solar:code-square-linear" aria-hidden="true"></iconify-icon></span>
+              <span class="mega-tx"><b>SDK</b><span>產生用戶端程式碼與介接範例</span></span>
+            </a></li>
+            <li><a class="mega-i" href="skills.html">
+              <span class="mega-ic"><iconify-icon icon="solar:bolt-linear" aria-hidden="true"></iconify-icon></span>
+              <span class="mega-tx"><b>Skills 技能包</b><span>沿用常見介面流程的可重複指引</span></span>
+            </a></li>
+          </ul>
+          </nav>
+        </div>
+        <div class="mega-col">
+          <p class="micro mega-e">給營運與支援</p>
+          <p class="mega-h" id="mega-h2">營運</p>
+          <nav aria-labelledby="mega-h2">
+          <ul>
+            <li><a class="mega-i" href="api-docs-errors.html">
+              <span class="mega-ic"><iconify-icon icon="solar:route-linear" aria-hidden="true"></iconify-icon></span>
+              <span class="mega-tx"><b>請求追蹤</b><span>檢視呼叫並診斷介接問題</span></span>
+            </a></li>
+            <li><a class="mega-i" href="index.html#network">
+              <span class="mega-ic"><iconify-icon icon="solar:global-linear" aria-hidden="true"></iconify-icon></span>
+              <span class="mega-tx"><b>資源覆蓋地圖</b><span>介接前先了解飯店資源覆蓋範圍</span></span>
+            </a></li>
+            <li><a class="mega-i" href="api-docs-hotel-process.html">
+              <span class="mega-ic"><iconify-icon icon="solar:bed-linear" aria-hidden="true"></iconify-icon></span>
+              <span class="mega-tx"><b>飯店對應</b><span>在同一工作區標準化供應商資料</span></span>
+            </a></li>
+          </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="mnav" id="mnav">
     <div class="wrap">
-      <ul>
-        <li><a href="index.html">首頁</a></li>
-        <li><a href="app-management.html">應用程式管理</a></li>
-        <li><a href="api-docs-hotel.html">介面文件</a></li>
-        <li><a href="sdk.html">SDK</a></li>
-        <li><a href="skills.html">Skills 技能包</a></li>
-        <li><a href="ai-assistant.html">AI 助理</a></li>
-      </ul>
+        <p class="micro m-h">開始</p>
+        <ul>
+          <li><a href="app-management.html">應用程式管理</a></li>
+          <li><a href="index.html#start-integration">沙箱</a></li>
+        </ul>
+        <p class="micro m-h">建置</p>
+        <ul>
+          <li><a href="api-docs-hotel.html">介面文件</a></li>
+          <li><a href="sdk.html">SDK</a></li>
+          <li><a href="skills.html">Skills 技能包</a></li>
+        </ul>
+        <p class="micro m-h">營運</p>
+        <ul>
+          <li><a href="api-docs-errors.html">請求追蹤</a></li>
+          <li><a href="index.html#network">資源覆蓋地圖</a></li>
+          <li><a href="api-docs-hotel-process.html">飯店對應</a></li>
+        </ul>
+        <p class="micro m-h">更多</p>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="ai-assistant.html">AI 助理</a></li>
+        </ul>
       <div class="m-cta">
         <a class="btn btn--ghost" href="login.html">登入 <iconify-icon icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></a>
         <div class="lang" role="group" aria-label="語言">
@@ -1120,6 +1246,30 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
       burger.setAttribute('aria-label','Open menu');
     }
   });
+  }
+
+
+  /* products mega menu — click to toggle, click-away / Escape to close */
+  var megaT = document.getElementById('mega-t');
+  var mega = document.getElementById('mega');
+  if (megaT && mega){
+    var setMega = function(open){
+      mega.classList.toggle('open', open);
+      megaT.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    megaT.addEventListener('click', function(e){
+      e.stopPropagation();
+      setMega(!mega.classList.contains('open'));
+    });
+    mega.addEventListener('click', function(e){
+      if (e.target.closest('a')) setMega(false);
+    });
+    document.addEventListener('click', function(e){
+      if (mega.classList.contains('open') && !mega.contains(e.target)) setMega(false);
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && mega.classList.contains('open')){ setMega(false); megaT.focus(); }
+    });
   }
 
   /* language toggle (visual state only) */

@@ -10,6 +10,24 @@ is carried in the fragment on purpose.
 """
 
 ZH_HANS = {
+    # ---- Products mega menu ----------------------------------------------
+    "For your first integration": "面向首次接入",
+    "For developers": "面向开发者",
+    "For operations and support": "面向运营与支持",
+    "Build": "构建",
+    "Operate": "运营",
+    "More": "更多",
+    "Request Trace": "请求追踪",
+    "Coverage Map": "资源覆盖地图",
+    "Hotel Mapping": "酒店匹配",
+    "Create an app and manage integration access": "创建应用并管理接入权限",
+    "Test your integration in a controlled environment": "在受控环境中测试接入",
+    "Explore endpoints, schemas and request examples": "查阅接口、数据结构与请求示例",
+    "Generate client code and integration examples": "生成客户端代码与接入示例",
+    "Use reusable guidance for common API workflows": "复用常见接口流程的操作指引",
+    "Inspect calls and diagnose integration issues": "查看调用记录并排查接入问题",
+    "Explore hotel supply coverage before you connect": "接入前先了解酒店资源覆盖情况",
+    "Standardise supplier records in one workspace": "在同一工作台中标准化供应商数据",
     # ---- chrome: nav, footer, meta ----------------------------------------
     "Skip to content": "跳转到正文",
     "FCG Developer Platform — home": "FCG 开放平台 — 首页",

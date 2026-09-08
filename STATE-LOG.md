@@ -1,5 +1,70 @@
 # STATE-LOG — FCG Website
 
+## 2026-09-08 — Products mega menu in the Direction B nav
+
+### What changed
+
+**A `Products` mega menu** in the portal's pill nav, from a screenshot Crystal supplied: three columns
+(Start / Build / Operate) with nine icon-and-description links. Added to
+[build-pages.py](open-portal-redesign/variant-b-impeccable/build-pages.py) as a `MEGA` table, so all
+twelve pages in all three locales get it from one definition. `Home` left the top-level nav (the logo
+still links home) and moved into the mobile drawer under a `More` group, matching the screenshot.
+
+CSS and the ~20 lines of behaviour went into
+[index.html](open-portal-redesign/variant-b-impeccable/index.html), the shell donor, so they propagate
+on the next build. Click to toggle, click-away and Escape to close, focus returns to the trigger.
+17 new strings added to both Chinese tables; build reports fully translated.
+
+### Decisions
+
+- **Existing tokens only, no new icon.** The panel is `--hair` borders, `--shell` hover, `.micro`
+  eyebrows, 999px pills, Inter — the same grammar as the rest of the header. The chevron is the shared
+  `solar:arrow-right-linear` rotated 90°, so the menu adds nothing to the icon payload. Every mega icon
+  is one already used elsewhere in the build, so no unverified Iconify name can silently render blank.
+- **No stub pages for the four console surfaces that do not exist.** Sandbox, Request Trace, Coverage Map
+  and Hotel Mapping point at the nearest real surface (`index.html#start-integration`,
+  `api-docs-errors.html`, `index.html#network`, `api-docs-hotel-process.html`). Empty stubs would look
+  like shipped pages in a prototype that is being reviewed for direction.
+- **Click, not hover, to open.** Hover intent needs timers and a safe triangle; the click toggle is
+  keyboard- and touch-correct with no extra state.
+- **Mobile drawer repeats the mega, then adds whatever top-level links it misses.** The `seen` set is
+  computed from hrefs, so the drawer cannot drift from the panel when `MEGA` or `NAV` changes.
+
+### Verified
+
+Local server, en and zh-Hant at 1440×900 and 375×812: panel renders as designed, toggle / click-away /
+Escape all correct, drawer groups render, Chinese copy fits the columns. Build: 36 pages, both locales
+fully translated.
+
+### Blockers / next actions
+
+- Crystal to confirm the four placeholder destinations, or ask for real stub pages.
+- Not committed, not deployed — working tree only, on `portal-redesign-direction-b`.
+
+### Learnings
+
+**Problem.** Add a mega menu to a portal whose twelve pages are generated from one donor file, without
+letting the nav drift between pages or locales.
+
+**Approach.** Put the content in one Python table and derive three consumers from it — the desktop panel,
+the mobile drawer, and the drawer's "everything the panel missed" list via a set of hrefs. Put CSS and JS
+in the donor `index.html`, never in a generated page. Add the English strings, run the build, and let its
+hard-fail on untranslated strings enumerate exactly what the Chinese tables need.
+
+**Judgment calls — what was NOT done, and why.**
+- Did not invent Iconify names. Every icon was grepped out of the existing pages first; a wrong Solar name
+  renders as blank space with no error, which a screenshot review would miss.
+- Did not create stub pages for the four missing console surfaces. In a direction review, a stub reads as
+  a shipped page and invites feedback on work that does not exist.
+- Did not add hover-to-open. It needs open/close timers and a safe-triangle to not fight the pointer, for
+  a nav that already works from click, keyboard and touch.
+- Did not hand-translate before building. The builder's missing-string report is the authoritative list;
+  guessing it produces both gaps and dead keys.
+
+**Reusable rule.** In a generator with a donor file, new chrome goes in exactly two places — one data table
+for content, the donor for CSS and behaviour. Let the build's own failure mode enumerate the follow-up work
+instead of predicting it.
+
 ## 2026-09-07 (session 2) — Simplified and Traditional Chinese, and a design-system spec
 
 ### What changed

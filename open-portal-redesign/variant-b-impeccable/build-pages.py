@@ -52,12 +52,52 @@ for name, blob, need in (
 
 # key, label, href
 NAV = [
-    ("home", "Home", "index.html"),
     ("apps", "App Management", "app-management.html"),
     ("docs", "API Docs", "api-docs-hotel.html"),
     ("sdk", "SDK", "sdk.html"),
     ("skills", "Skills", "skills.html"),
     ("ai", "AI Assistant", "ai-assistant.html"),
+]
+
+# The Products mega menu. Column = (eyebrow, title, items), item = (icon, label,
+# description, href). Four of the nine destinations are console surfaces this
+# prototype does not have a page for yet, so they point at the nearest section
+# that describes them — ponytail: no stub pages until the real ones land.
+MEGA = [
+    (
+        "For your first integration",
+        "Start",
+        [
+            ("solar:widget-5-linear", "App Management",
+             "Create an app and manage integration access", "app-management.html"),
+            ("solar:key-minimalistic-linear", "Sandbox",
+             "Test your integration in a controlled environment", "index.html#start-integration"),
+        ],
+    ),
+    (
+        "For developers",
+        "Build",
+        [
+            ("solar:document-text-linear", "API Docs",
+             "Explore endpoints, schemas and request examples", "api-docs-hotel.html"),
+            ("solar:code-square-linear", "SDK",
+             "Generate client code and integration examples", "sdk.html"),
+            ("solar:bolt-linear", "Skills",
+             "Use reusable guidance for common API workflows", "skills.html"),
+        ],
+    ),
+    (
+        "For operations and support",
+        "Operate",
+        [
+            ("solar:route-linear", "Request Trace",
+             "Inspect calls and diagnose integration issues", "api-docs-errors.html"),
+            ("solar:global-linear", "Coverage Map",
+             "Explore hotel supply coverage before you connect", "index.html#network"),
+            ("solar:bed-linear", "Hotel Mapping",
+             "Standardise supplier records in one workspace", "api-docs-hotel-process.html"),
+        ],
+    ),
 ]
 
 FOOTER_COLS = [
@@ -149,13 +189,58 @@ def header(active="", minimal=False, locale="en", slug="index"):
         f'      <a{" class=\"on\"" if k == active else ""} href="{h}">{lb}</a>'
         for k, lb, h in NAV
     )
-    mob = "\n".join(f'        <li><a href="{h}">{lb}</a></li>' for _, lb, h in NAV)
+
+    mega_cols, mob_groups = [], []
+    seen = set()
+    for i, (eyebrow, title, items) in enumerate(MEGA):
+        cid = f"mega-h{i}"
+        lis = "\n".join(
+            '            <li><a class="mega-i" href="%s">\n'
+            '              <span class="mega-ic"><iconify-icon icon="%s" aria-hidden="true"></iconify-icon></span>\n'
+            '              <span class="mega-tx"><b>%s</b><span>%s</span></span>\n'
+            '            </a></li>' % (h, ic, lb, desc)
+            for ic, lb, desc, h in items
+        )
+        mega_cols.append(
+            '        <div class="mega-col">\n'
+            '          <p class="micro mega-e">%s</p>\n'
+            '          <p class="mega-h" id="%s">%s</p>\n'
+            '          <nav aria-labelledby="%s">\n'
+            '          <ul>\n%s\n          </ul>\n'
+            '          </nav>\n'
+            '        </div>' % (eyebrow, cid, title, cid, lis)
+        )
+        seen.update(h for _, _, _, h in items)
+        mob_items = "\n".join(
+            f'          <li><a href="{h}">{lb}</a></li>' for _, lb, _, h in items
+        )
+        mob_groups.append(
+            '        <p class="micro m-h">%s</p>\n        <ul>\n%s\n        </ul>' % (title, mob_items)
+        )
+
+    # the drawer repeats the mega menu, then whatever top-level links it misses
+    rest = "\n".join(
+        f'          <li><a href="{h}">{lb}</a></li>' for _, lb, h in NAV if h not in seen
+    )
+    mob = "\n".join(mob_groups) + (
+        '\n        <p class="micro m-h">More</p>\n        <ul>\n'
+        '          <li><a href="index.html">Home</a></li>\n%s\n        </ul>' % rest
+    )
+
+    mega = (
+        '  <div class="mega" id="mega">\n'
+        '    <div class="wrap mega-in">\n'
+        '      <div class="mega-card">\n%s\n      </div>\n'
+        '    </div>\n'
+        '  </div>' % "\n".join(mega_cols)
+    )
 
     return f"""<header class="hdr" id="hdr">
   <div class="wrap hdr-in">
     {brand}
 
     <nav class="shell" aria-label="Primary">
+      <button class="drop-t" type="button" id="mega-t" aria-expanded="false" aria-controls="mega">Products <iconify-icon class="drop-c" icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon></button>
 {shell}
     </nav>
 
@@ -169,11 +254,11 @@ def header(active="", minimal=False, locale="en", slug="index"):
     </div>
   </div>
 
+{mega}
+
   <div class="mnav" id="mnav">
     <div class="wrap">
-      <ul>
 {mob}
-      </ul>
       <div class="m-cta">
         <a class="btn btn--ghost" href="login.html">Login {ARROW}</a>
         {lang}
