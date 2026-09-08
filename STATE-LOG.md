@@ -1,5 +1,86 @@
 # STATE-LOG — FCG Website
 
+## 2026-09-08 (session 3) — The marketing globe, and the portal deployed
+
+### What changed
+
+**Coverage Map runs the marketing site's Cobe globe.** The hand-drawn SVG wireframe is gone.
+`pages_content.py` reads the inlined Cobe IIFE out of the repo-root
+[index.html](index.html) at build time rather than copying it, so the portal and fcg.com cannot
+drift. Same fourteen cities, same `#F97316` markers, configured for the portal's light palette
+(`dark:0`, `--card` glow, `mapBrightness:2`).
+
+**Deployed to production** — [fcg-open-developer-platform.vercel.app](https://fcg-open-developer-platform.vercel.app).
+All 48 pages live, both Chinese locales included.
+
+### Decisions
+
+- **Route arcs dropped.** On the marketing site they are labelled flight routes (`BKK → LHR`),
+  which say nothing about hotel coverage; unlabelled they would be pure decoration.
+- **Labels on the eight larger markers only**, positioned on whichever side of the sphere the point
+  sits so no per-city offsets are needed, with a front-most-first collision pass. The marketing
+  site's fourteen hand-tuned labels turn into a smudge at 460px.
+- **Label threshold raised to `z > 0.32`.** At the marketing site's 0.18 a label appears while still
+  3px blurred and reads as a smear against the panel edge.
+- **`.vercelignore` added** to the variant folder. Without it a static deploy would serve
+  `build-pages.py`, `pages_content.py` and the translation tables off the public URL.
+- **Account map corrected.** `~/.claude/project-accounts.md` had no row for this project.
+
+### The hosting picture, established by API
+
+Two Vercel projects on work team `team_SyKixqrcZUCIGFNYQC13rwVl`:
+
+- `fcg-website` (`prj_bIBO2PVjRM052GwQXYZN0ZxoPCWB`) — Git-connected to `cwong-acmy/fcg-website`,
+  production branch `main`.
+- `fcg-open-developer-platform` (`prj_dhe1toSi7yeTJOKGuUsOwKWqhUuG`) — **no Git connection at all.**
+  CLI-deployed only. Its previous and only deployment was `source: cli` at 13:59 on 8 September,
+  which is why the live URL showed the pre-mega nav and 404'd on the four new pages while the
+  branch had been pushed for hours. **Pushing to GitHub does not update this URL.**
+
+### Verified against the real destination
+
+On `https://fcg-open-developer-platform.vercel.app`, not localhost: `/`, `/sandbox.html`,
+`/request-trace.html`, `/coverage-map.html`, `/hotel-mapping.html`, `/zh-Hant/coverage-map.html`
+and `/zh-Hans/sandbox.html` all return 200. `/build-pages.py`, `/pages_content.py` and `/i18n.py`
+return 404, so the ignore file holds. The live coverage page reports `globeOpacity: 1` with labels
+rendering and no page errors. Deployment `dpl_9kUm1CQCoGSvrqgJHm2nBeiGc18P`, from commit `6d819bd`.
+
+`verify-pages.js` locally: 0 failing checks out of 48, in each of the three locales.
+
+### Blockers / next actions
+
+- The live URL is only as current as the last manual `vercel deploy`. Either remember to redeploy
+  after every change, or connect the project to the repo so a branch push ships it.
+- `open-portal-redesign/shots/b-pages` still holds 45MB of regenerated PNGs, uncommitted.
+
+### Learnings
+
+**Problem.** "Use the globe from the FCG website" on a page in a sibling build, and work out why a
+Vercel URL that certainly exists was serving a version from before the day's work.
+
+**Approach.** For the globe: find the real implementation rather than reproducing its look — it was
+an inlined Cobe IIFE in the marketing `index.html`. Read it at build time so there is one copy, and
+re-tune only what the new context changes (palette, size, label density). For the URL: ask the
+provider API which project serves it, then read `link` and the deployment `source` rather than
+assuming a Git connection exists.
+
+**Judgment calls — what was NOT done, and why.**
+- Did not copy the 11.6KB Cobe build into `pages_content.py`. A second copy drifts the first time
+  either file is touched; reading it keeps one source and the assert fails loudly if it moves.
+- Did not keep the route arcs, and did not relabel them as something coverage-related. Both would
+  have been decoration dressed as data.
+- Did not carry over the marketing globe's `HOTELS: 4.3M+` overlay. It is a marketing figure, not a
+  portal fact, and this page deliberately carries no counts.
+- Did not deploy from the repo root. Root `.vercel/` points at `fcg-website`, a different project;
+  deploying from there would have pushed the marketing site into the portal's URL.
+- Did not assume the missing pages meant a failed deploy. The deployment was `READY` — it was simply
+  older than the work, which the API's `created` timestamp settles in one call.
+
+**Reusable rule.** When asked to reuse a component from a sibling surface, import the implementation
+at build time rather than reproducing the appearance. And when a live URL looks stale, read the
+project's `link` and its latest deployment's `source` before touching anything: "pushed to GitHub"
+and "deployed" are the same sentence only when a Git connection exists.
+
 ## 2026-09-08 (session 2) — The four Products pages, built and design-checked
 
 ### What changed
