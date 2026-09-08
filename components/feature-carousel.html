@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FCG · Feature carousel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Colors — from design-tokens.json */
+      --primary: #111827;
+      --primary-hover: #141b2b;
+      --primary-focus: #2e3848;
+      --accent: #f97316;
+      --bg: #ffffff;
+      --bg-soft: #f3f4f6;
+      --bg-dark: #050505;
+      --card-dark: #121212;
+      --fg: #0f1114;
+      --muted: #6b7280;
+      --muted-2: #4b5563;
+      --border: #e5e7eb;
+      --border-dark: #2a2a2a;
+      --border-soft: rgba(0,0,0,0.06);
+
+      /* Radii */
+      --r-xs: 2px;
+      --r-md: 8px;
+      --r-lg: 15px;
+      --r-xl: 24px;
+      --r-2xl: 32px;
+      --r-pill: 9999px;
+
+      /* Shadows */
+      --shadow-card: rgba(0, 0, 0, 0.15) 0px 0px 10px 0px;
+      --shadow-soft: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+      --shadow-glow-accent: rgba(249, 115, 22, 0.4) 0px 0px 8px 0px;
+      --shadow-xl: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.08) 0px 8px 10px -6px;
+
+      /* Motion */
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur-sm: 150ms;
+      --dur-md: 300ms;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ====================================================
+       COMPONENT-SCOPED STYLES · prefix: fcg-feat-carousel-
+       ==================================================== */
+
+    .fcg-feat-carousel {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 32px 128px;
+    }
+
+    .fcg-feat-carousel-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 32px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .fcg-feat-carousel-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+    }
+
+    .fcg-feat-carousel-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 48px;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      color: var(--fg);
+      margin: 0 0 12px;
+      max-width: 720px;
+    }
+
+    .fcg-feat-carousel-clarifier {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--muted-2);
+      max-width: 640px;
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .fcg-feat-carousel-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* Stage layout — left chip rail, right card */
+    .fcg-feat-carousel-stage {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    /* Left rail · clickable feature list */
+    .fcg-feat-carousel-rail {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fcg-feat-carousel-chip {
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--primary);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid transparent;
+      border-radius: var(--r-pill);
+      padding: 14px 20px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition:
+        background-color var(--dur-sm) var(--ease),
+        color var(--dur-sm) var(--ease),
+        border-color var(--dur-sm) var(--ease),
+        transform var(--dur-sm) var(--ease);
+    }
+
+    .fcg-feat-carousel-chip:hover {
+      background: rgba(0, 0, 0, 0.07);
+    }
+
+    .fcg-feat-carousel-chip:focus-visible {
+      outline: 2px solid #e9f1fb;
+      outline-offset: 2px;
+    }
+
+    .fcg-feat-carousel-chip[aria-current="true"] {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .fcg-feat-carousel-chip-index {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .fcg-feat-carousel-chip[aria-current="true"] .fcg-feat-carousel-chip-index {
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Right card · slide viewport */
+    .fcg-feat-carousel-viewport {
+      position: relative;
+      background: #ffffff;
+      border-radius: var(--r-2xl);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .fcg-feat-carousel-track {
+      position: relative;
+      flex: 1;
+      min-height: 420px;
+    }
+
+    .fcg-feat-carousel-slide {
+      position: absolute;
+      inset: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateX(24px);
+      transition:
+        opacity var(--dur-md) var(--ease),
+        transform var(--dur-md) var(--ease);
+      pointer-events: none;
+    }
+
+    .fcg-feat-carousel-slide[aria-hidden="false"] {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .fcg-feat-carousel-num {
+      position: absolute;
+      top: 32px;
+      right: 32px;
+      font-weight: 500;
+      font-size: 30px;
+      color: var(--border);
+      letter-spacing: -0.02em;
+    }
+
+    .fcg-feat-carousel-icon-tile {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--r-md);
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin-bottom: 80px;
+    }
+
+    .fcg-feat-carousel-slide-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 12px;
+    }
+
+    .fcg-feat-carousel-slide-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--fg);
+      margin: 0 0 12px;
+    }
+
+    .fcg-feat-carousel-slide-clarifier {
+      font-size: 14px;
+      color: var(--muted-2);
+      line-height: 1.5;
+      margin: 0 0 24px;
+      max-width: 560px;
+    }
+
+    .fcg-feat-carousel-slide-clarifier em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .fcg-feat-carousel-meta-strip {
+      margin-top: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      flex-wrap: wrap;
+    }
+
+    .fcg-feat-carousel-meta-strip span + span {
+      color: var(--fg);
+    }
+
+    /* Controls bar — pill icon buttons + dots */
+    .fcg-feat-carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px 28px;
+      border-top: 1px solid var(--border);
+      gap: 16px;
+    }
+
+    .fcg-feat-carousel-arrows {
+      display: flex;
+      gap: 8px;
+    }
+
+    .fcg-feat-carousel-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition:
+        background-color var(--dur-sm) var(--ease),
+        color var(--dur-sm) var(--ease),
+        border-color var(--dur-sm) var(--ease),
+        transform var(--dur-sm) var(--ease);
+    }
+
+    .fcg-feat-carousel-arrow:hover {
+      background: rgba(0,0,0,0.04);
+      color: var(--accent);
+    }
+
+    .fcg-feat-carousel-arrow:focus-visible {
+      outline: 2px solid #e9f1fb;
+      outline-offset: 2px;
+    }
+
+    .fcg-feat-carousel-arrow svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .fcg-feat-carousel-dots {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .fcg-feat-carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: var(--r-pill);
+      background: var(--border);
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      transition:
+        background-color var(--dur-sm) var(--ease),
+        box-shadow var(--dur-sm) var(--ease),
+        transform var(--dur-sm) var(--ease);
+    }
+
+    .fcg-feat-carousel-dot:hover {
+      background: var(--muted);
+    }
+
+    .fcg-feat-carousel-dot[aria-current="true"] {
+      background: var(--accent);
+      box-shadow: var(--shadow-glow-accent);
+    }
+
+    .fcg-feat-carousel-dot:focus-visible {
+      outline: 2px solid #e9f1fb;
+      outline-offset: 3px;
+    }
+
+    .fcg-feat-carousel-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .fcg-feat-carousel-counter b {
+      color: var(--fg);
+      font-weight: 500;
+    }
+
+    /* Footer CTA row */
+    .fcg-feat-carousel-footer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .fcg-feat-carousel-btn {
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      transition:
+        background-color var(--dur-sm) var(--ease),
+        color var(--dur-sm) var(--ease),
+        transform var(--dur-sm) var(--ease);
+    }
+
+    .fcg-feat-carousel-btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 16px 32px;
+      border-radius: var(--r-pill);
+    }
+
+    .fcg-feat-carousel-btn-primary:hover {
+      background: var(--primary-hover);
+      transform: scale(1.004);
+    }
+
+    .fcg-feat-carousel-btn-secondary {
+      background: rgba(0, 0, 0, 0.06);
+      color: var(--primary);
+      padding: 14px 28px;
+      border-radius: var(--r-pill);
+    }
+
+    .fcg-feat-carousel-btn-secondary:hover { background: rgba(0, 0, 0, 0.09); }
+
+    .fcg-feat-carousel-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .fcg-feat-carousel { padding: 64px 24px 96px; }
+      .fcg-feat-carousel-title { font-size: 36px; }
+      .fcg-feat-carousel-stage {
+        grid-template-columns: 1fr;
+      }
+      .fcg-feat-carousel-rail {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+      .fcg-feat-carousel-chip {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .fcg-feat-carousel-slide { padding: 32px 24px; }
+      .fcg-feat-carousel-controls { padding: 16px 24px 24px; }
+      .fcg-feat-carousel-num { top: 24px; right: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="fcg-feat-carousel" aria-label="Feature carousel">
+
+    <header class="fcg-feat-carousel-head">
+      <div>
+        <p class="fcg-feat-carousel-eyebrow">Capabilities · Connect · Operate · Experience</p>
+        <h2 class="fcg-feat-carousel-title">The infrastructure behind how travel actually works.</h2>
+        <p class="fcg-feat-carousel-clarifier">Four capabilities. One connection layer. Routed through the same open architecture.</p>
+      </div>
+      <span class="fcg-feat-carousel-meta">4 slides · auto-paced off</span>
+    </header>
+
+    <div class="fcg-feat-carousel-stage">
+
+      <!-- Left rail · clickable feature list -->
+      <nav class="fcg-feat-carousel-rail" role="tablist" aria-label="Feature selector">
+        <button class="fcg-feat-carousel-chip" role="tab" aria-current="true" data-target="0">
+          <span class="fcg-feat-carousel-chip-index">01</span>
+          <span>G-Link routing</span>
+        </button>
+        <button class="fcg-feat-carousel-chip" role="tab" aria-current="false" data-target="1">
+          <span class="fcg-feat-carousel-chip-index">02</span>
+          <span>F-Link content layer</span>
+        </button>
+        <button class="fcg-feat-carousel-chip" role="tab" aria-current="false" data-target="2">
+          <span class="fcg-feat-carousel-chip-index">03</span>
+          <span>Atlas TMC OS</span>
+        </button>
+        <button class="fcg-feat-carousel-chip" role="tab" aria-current="false" data-target="3">
+          <span class="fcg-feat-carousel-chip-index">04</span>
+          <span>AgreeEase contracts</span>
+        </button>
+      </nav>
+
+      <!-- Right viewport · stacked slides + controls -->
+      <div class="fcg-feat-carousel-viewport" aria-live="polite">
+
+        <div class="fcg-feat-carousel-track">
+
+          <!-- Slide 01 · G-Link -->
+          <article class="fcg-feat-carousel-slide" role="tabpanel" aria-hidden="false" data-slide="0">
+            <div class="fcg-feat-carousel-num">01</div>
+            <div class="fcg-feat-carousel-icon-tile" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6" cy="6" r="2"/>
+                <circle cx="18" cy="6" r="2"/>
+                <circle cx="6" cy="18" r="2"/>
+                <circle cx="18" cy="18" r="2"/>
+                <path d="M8 6h8M6 8v8M18 8v8M8 18h8"/>
+              </svg>
+            </div>
+            <p class="fcg-feat-carousel-slide-eyebrow">G-Link · Booking routing</p>
+            <h3 class="fcg-feat-carousel-slide-title">Open connections, not locked platforms.</h3>
+            <p class="fcg-feat-carousel-slide-clarifier">One API call routes to every major airline, 4.3M+ hotels, and ground supply. <em>Already connected.</em> Configurable by policy, market, and rate type.</p>
+            <div class="fcg-feat-carousel-meta-strip">
+              <span>Connection layer</span>
+              <span>Live in 12 markets</span>
+            </div>
+          </article>
+
+          <!-- Slide 02 · F-Link -->
+          <article class="fcg-feat-carousel-slide" role="tabpanel" aria-hidden="true" data-slide="1">
+            <div class="fcg-feat-carousel-num">02</div>
+            <div class="fcg-feat-carousel-icon-tile" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                <path d="M14 17.5h7M14 14.5l7 3-7 3"/>
+              </svg>
+            </div>
+            <p class="fcg-feat-carousel-slide-eyebrow">F-Link · Content layer</p>
+            <h3 class="fcg-feat-carousel-slide-title">Deduplicated hotel content. One source.</h3>
+            <p class="fcg-feat-carousel-slide-clarifier">24.9M+ room types mapped, normalized, and reconciled across suppliers. <em>One property record</em> across every channel. Mapping audit on every push.</p>
+            <div class="fcg-feat-carousel-meta-strip">
+              <span>Content layer</span>
+              <span>24.9M+ room types</span>
+            </div>
+          </article>
+
+          <!-- Slide 03 · Atlas TMC OS -->
+          <article class="fcg-feat-carousel-slide" role="tabpanel" aria-hidden="true" data-slide="2">
+            <div class="fcg-feat-carousel-num">03</div>
+            <div class="fcg-feat-carousel-icon-tile" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="14" rx="2"/>
+                <path d="M3 9h18M8 21h8M12 17v4"/>
+              </svg>
+            </div>
+            <p class="fcg-feat-carousel-slide-eyebrow">Atlas TMC OS · Operations</p>
+            <h3 class="fcg-feat-carousel-slide-title">One hub. Every client, every booking.</h3>
+            <p class="fcg-feat-carousel-slide-clarifier">Replaces the spreadsheet, the inbox, the legacy backend. <em>The infrastructure</em> that lets a TMC scale without re-platforming.</p>
+            <div class="fcg-feat-carousel-meta-strip">
+              <span>Operations layer</span>
+              <span>TMC · Mid-end</span>
+            </div>
+          </article>
+
+          <!-- Slide 04 · AgreeEase -->
+          <article class="fcg-feat-carousel-slide" role="tabpanel" aria-hidden="true" data-slide="3">
+            <div class="fcg-feat-carousel-num">04</div>
+            <div class="fcg-feat-carousel-icon-tile" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+                <path d="M14 3v6h6M9 13h6M9 17h4"/>
+              </svg>
+            </div>
+            <p class="fcg-feat-carousel-slide-eyebrow">AgreeEase · Contract mapping</p>
+            <h3 class="fcg-feat-carousel-slide-title">Negotiated rates, mapped automatically.</h3>
+            <p class="fcg-feat-carousel-slide-clarifier">Loads, validates, and routes contracted rates across G-Link and F-Link. <em>From a single hotel deal to enterprise-wide programs.</em></p>
+            <div class="fcg-feat-carousel-meta-strip">
+              <span>Contract layer</span>
+              <span>Auto-mapped &amp; audited</span>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Controls -->
+        <div class="fcg-feat-carousel-controls">
+          <div class="fcg-feat-carousel-arrows">
+            <button class="fcg-feat-carousel-arrow" data-dir="prev" aria-label="Previous slide">
+              <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+            <button class="fcg-feat-carousel-arrow" data-dir="next" aria-label="Next slide">
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+
+          <div class="fcg-feat-carousel-dots" role="tablist" aria-label="Slide pagination">
+            <button class="fcg-feat-carousel-dot" aria-current="true" aria-label="Slide 1" data-target="0"></button>
+            <button class="fcg-feat-carousel-dot" aria-current="false" aria-label="Slide 2" data-target="1"></button>
+            <button class="fcg-feat-carousel-dot" aria-current="false" aria-label="Slide 3" data-target="2"></button>
+            <button class="fcg-feat-carousel-dot" aria-current="false" aria-label="Slide 4" data-target="3"></button>
+          </div>
+
+          <p class="fcg-feat-carousel-counter"><b data-counter-current>01</b> / <span data-counter-total>04</span></p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="fcg-feat-carousel-footer">
+      <a href="#" class="fcg-feat-carousel-btn fcg-feat-carousel-btn-primary">
+        Book a demo
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#" class="fcg-feat-carousel-btn fcg-feat-carousel-btn-secondary">Explore the architecture</a>
+    </div>
+
+  </section>
+
+  <script>
+    (function () {
+      var root = document.querySelector('.fcg-feat-carousel');
+      if (!root) return;
+
+      var slides = root.querySelectorAll('[data-slide]');
+      var chips = root.querySelectorAll('.fcg-feat-carousel-chip[data-target]');
+      var dots = root.querySelectorAll('.fcg-feat-carousel-dot[data-target]');
+      var prev = root.querySelector('[data-dir="prev"]');
+      var next = root.querySelector('[data-dir="next"]');
+      var counter = root.querySelector('[data-counter-current]');
+      var total = slides.length;
+      var current = 0;
+
+      function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+      function go(index) {
+        if (index < 0) index = total - 1;
+        if (index >= total) index = 0;
+        current = index;
+
+        slides.forEach(function (s, i) {
+          s.setAttribute('aria-hidden', i === current ? 'false' : 'true');
+        });
+        chips.forEach(function (c, i) {
+          c.setAttribute('aria-current', i === current ? 'true' : 'false');
+        });
+        dots.forEach(function (d, i) {
+          d.setAttribute('aria-current', i === current ? 'true' : 'false');
+        });
+        if (counter) counter.textContent = pad(current + 1);
+      }
+
+      prev && prev.addEventListener('click', function () { go(current - 1); });
+      next && next.addEventListener('click', function () { go(current + 1); });
+
+      chips.forEach(function (c) {
+        c.addEventListener('click', function () {
+          go(parseInt(c.getAttribute('data-target'), 10));
+        });
+      });
+      dots.forEach(function (d) {
+        d.addEventListener('click', function () {
+          go(parseInt(d.getAttribute('data-target'), 10));
+        });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') go(current - 1);
+        else if (e.key === 'ArrowRight') go(current + 1);
+      });
+    })();
+  </script>
+</body>
+</html>

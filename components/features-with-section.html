@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FCG · Features section</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Colors — from design-tokens.json */
+    --primary: #111827;
+    --primary-hover: #141b2b;
+    --primary-focus: #2e3848;
+    --accent: #f97316;
+    --bg: #ffffff;
+    --bg-soft: #f3f4f6;
+    --bg-dark: #050505;
+    --card-dark: #121212;
+    --fg: #0f1114;
+    --muted: #6b7280;
+    --muted-2: #4b5563;
+    --border: #e5e7eb;
+    --border-dark: #2a2a2a;
+    --border-soft: rgba(0,0,0,0.06);
+
+    /* Radii */
+    --r-xs: 2px;
+    --r-md: 8px;
+    --r-lg: 15px;
+    --r-xl: 24px;
+    --r-2xl: 32px;
+    --r-pill: 9999px;
+
+    /* Shadows */
+    --shadow-card: rgba(0, 0, 0, 0.15) 0px 0px 10px 0px;
+    --shadow-soft: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    --shadow-glow-accent: rgba(249, 115, 22, 0.4) 0px 0px 8px 0px;
+    --shadow-xl: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.08) 0px 8px 10px -6px;
+
+    /* Motion */
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --dur-sm: 150ms;
+    --dur-md: 300ms;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === COMPONENT-SCOPED STYLES === */
+
+  .fcg-fws {
+    background: var(--bg);
+    padding: 128px 32px;
+  }
+  .fcg-fws-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  /* Section hero */
+  .fcg-fws-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 880px;
+    margin-bottom: 80px;
+  }
+  .fcg-fws-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted-2);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .fcg-fws-headline {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 72px;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    color: var(--fg);
+    margin: 0;
+  }
+  .fcg-fws-clarifier {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--muted-2);
+    line-height: 1.55;
+    max-width: 640px;
+    margin: 0;
+  }
+  .fcg-fws-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  /* Buttons */
+  .fcg-fws-btn {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    border: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    border-radius: var(--r-pill);
+    transition:
+      background-color var(--dur-sm) var(--ease),
+      color var(--dur-sm) var(--ease),
+      transform var(--dur-sm) var(--ease);
+  }
+  .fcg-fws-btn:focus-visible { outline: 2px solid #e9f1fb; outline-offset: 2px; }
+  .fcg-fws-btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+    padding: 16px 32px;
+  }
+  .fcg-fws-btn-primary:hover {
+    background: var(--primary-hover);
+    transform: scale(1.004);
+  }
+  .fcg-fws-btn-secondary {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--primary);
+    padding: 14px 28px;
+  }
+  .fcg-fws-btn-secondary:hover { background: rgba(0, 0, 0, 0.09); }
+  .fcg-fws-arrow {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none; stroke-width: 1.6;
+  }
+
+  /* Grid */
+  .fcg-fws-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 1100px) {
+    .fcg-fws-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .fcg-fws-grid { grid-template-columns: 1fr; }
+    .fcg-fws-headline { font-size: 48px; }
+    .fcg-fws { padding: 80px 24px; }
+  }
+
+  /* Light card */
+  .fcg-fws-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: var(--r-2xl);
+    border: 1px solid rgba(0, 0, 0, 0);
+    padding: 40px;
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--dur-sm) var(--ease), box-shadow var(--dur-sm) var(--ease);
+  }
+  .fcg-fws-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      rgba(0, 0, 0, 0.12) 0px 24px 32px -6px,
+      rgba(0, 0, 0, 0.10) 0px 10px 14px -6px;
+  }
+  .fcg-fws-num {
+    position: absolute;
+    top: 28px; right: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--border);
+    letter-spacing: 0.02em;
+  }
+  .fcg-fws-icon {
+    width: 48px; height: 48px;
+    border-radius: var(--r-md);
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--primary);
+    margin-bottom: 80px;
+    flex-shrink: 0;
+  }
+  .fcg-fws-card h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+  }
+  .fcg-fws-body {
+    font-size: 14px;
+    color: var(--muted-2);
+    line-height: 1.55;
+    margin: 0 0 24px;
+  }
+  .fcg-fws-body em {
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 500;
+  }
+  .fcg-fws-meta {
+    margin-top: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted-2);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Dark card variant */
+  .fcg-fws-card-dark {
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    box-shadow: none;
+    color: #ffffff;
+  }
+  .fcg-fws-card-dark .fcg-fws-num { color: rgba(255,255,255,0.18); }
+  .fcg-fws-card-dark .fcg-fws-icon {
+    background: rgba(255,255,255,0.06);
+    border-color: var(--border-dark);
+    color: #ffffff;
+  }
+  .fcg-fws-card-dark h3 { color: #ffffff; }
+  .fcg-fws-card-dark .fcg-fws-body { color: rgba(255,255,255,0.72); }
+  .fcg-fws-card-dark .fcg-fws-meta {
+    border-color: var(--border-dark);
+    color: rgba(255,255,255,0.6);
+  }
+  .fcg-fws-card-dark:hover {
+    transform: translateY(-2px);
+    box-shadow: rgba(0,0,0,0.4) 0px 24px 32px -6px;
+  }
+
+  /* Section-end prompt */
+  .fcg-fws-prompt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .fcg-fws-prompt-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .fcg-fws-prompt-text .fcg-fws-arrow-mark {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    margin-right: 8px;
+  }
+
+</style>
+</head>
+<body>
+  <!-- ============ COMPONENT MARKUP START ============ -->
+  <section class="fcg-fws">
+    <div class="fcg-fws-inner">
+
+      <!-- Section hero -->
+      <header class="fcg-fws-hero">
+        <p class="fcg-fws-eyebrow">The connection layer · F-Link</p>
+        <h2 class="fcg-fws-headline">Open connections, not locked platforms.</h2>
+        <p class="fcg-fws-clarifier">One API into the supply infrastructure behind travel. Hotels, air, rail, ground. Deduplicated content and routed bookings under a single contract.</p>
+        <div class="fcg-fws-cta-row">
+          <a href="#" class="fcg-fws-btn fcg-fws-btn-primary">Book a demo
+            <svg class="fcg-fws-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#" class="fcg-fws-btn fcg-fws-btn-secondary">Explore the architecture</a>
+        </div>
+      </header>
+
+      <!-- Feature grid -->
+      <div class="fcg-fws-grid">
+
+        <!-- Card 1 -->
+        <article class="fcg-fws-card">
+          <div class="fcg-fws-num">01</div>
+          <div class="fcg-fws-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>
+            </svg>
+          </div>
+          <h3>One API. Every supply path.</h3>
+          <p class="fcg-fws-body">4.3M+ hotels. 24.9M+ room types. Every major airline. <em>One connection to all of it.</em></p>
+          <div class="fcg-fws-meta">
+            <span>Layer</span>
+            <span>Supply / API</span>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="fcg-fws-card">
+          <div class="fcg-fws-num">02</div>
+          <div class="fcg-fws-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12h4l3-8 4 16 3-8h4"/>
+            </svg>
+          </div>
+          <h3>Deduplicated content, end to end.</h3>
+          <p class="fcg-fws-body">Mapped properties. Normalised room types. Reconciled rates across every connected source. <em>One canonical record</em> per stay.</p>
+          <div class="fcg-fws-meta">
+            <span>Layer</span>
+            <span>Content / Mapping</span>
+          </div>
+        </article>
+
+        <!-- Card 3 — dark variant for the scale claim -->
+        <article class="fcg-fws-card fcg-fws-card-dark">
+          <div class="fcg-fws-num">03</div>
+          <div class="fcg-fws-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/>
+            </svg>
+          </div>
+          <h3>Asia-native. Globally connected.</h3>
+          <p class="fcg-fws-body">300+ travel brands, TMCs, and hotel groups. Already on the network. From a single API call to the largest TMC migration.</p>
+          <div class="fcg-fws-meta">
+            <span>Reach</span>
+            <span>APAC · Global</span>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="fcg-fws-card">
+          <div class="fcg-fws-num">04</div>
+          <div class="fcg-fws-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 6h16M4 12h16M4 18h10"/>
+              <circle cx="19" cy="18" r="2"/>
+            </svg>
+          </div>
+          <h3>Routed bookings, audited end to end.</h3>
+          <p class="fcg-fws-body">Policy-aware routing. Source-of-truth audit. Reconciliation at the booking level. <em>Live in days, not quarters.</em></p>
+          <div class="fcg-fws-meta">
+            <span>Layer</span>
+            <span>Booking / Routing</span>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Section-end prompt -->
+      <div class="fcg-fws-prompt">
+        <p class="fcg-fws-prompt-text"><span class="fcg-fws-arrow-mark">&gt;</span>Five moves from contract to connection.</p>
+        <a href="#" class="fcg-fws-btn fcg-fws-btn-secondary">See the supply paths</a>
+      </div>
+
+    </div>
+  </section>
+  <!-- ============ COMPONENT MARKUP END ============ -->
+</body>
+</html>

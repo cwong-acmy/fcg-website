@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FCG Components — extracted from hostmyclaudehtml.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Colors — from design-tokens.json */
+    --primary: #111827;
+    --primary-hover: #141b2b;
+    --primary-focus: #2e3848;
+    --accent: #f97316;
+    --bg: #ffffff;
+    --bg-soft: #f3f4f6;
+    --bg-dark: #050505;
+    --card-dark: #121212;
+    --fg: #0f1114;
+    --muted: #6b7280;
+    --muted-2: #4b5563;
+    --border: #e5e7eb;
+    --border-dark: #2a2a2a;
+    --border-soft: rgba(0,0,0,0.06);
+
+    /* Radii */
+    --r-xs: 2px;
+    --r-md: 8px;
+    --r-lg: 15px;
+    --r-xl: 24px;
+    --r-2xl: 32px;
+    --r-pill: 9999px;
+
+    /* Shadows */
+    --shadow-card: rgba(0, 0, 0, 0.15) 0px 0px 10px 0px;
+    --shadow-soft: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    --shadow-glow-accent: rgba(249, 115, 22, 0.4) 0px 0px 8px 0px;
+    --shadow-xl: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.08) 0px 8px 10px -6px;
+
+    /* Motion */
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --dur-sm: 150ms;
+    --dur-md: 300ms;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Page chrome */
+  .page { max-width: 1280px; margin: 0 auto; padding: 64px 32px 128px; }
+  .page-head { margin-bottom: 80px; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-weight: 500;
+    font-size: 72px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin: 16px 0 24px;
+  }
+  .lede {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--muted-2);
+    max-width: 640px;
+    line-height: 1.55;
+  }
+
+  /* Section */
+  section { margin-top: 96px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+  .section-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .group { display: flex; flex-direction: column; gap: 32px; }
+  .row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+  .grid-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 900px) { .grid-cards { grid-template-columns: 1fr; } h1 { font-size: 48px; } }
+
+  /* === BUTTONS === */
+  .btn {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    border: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition:
+      background-color var(--dur-sm) var(--ease),
+      color var(--dur-sm) var(--ease),
+      transform var(--dur-sm) var(--ease),
+      box-shadow var(--dur-sm) var(--ease);
+  }
+  .btn:focus-visible { outline: 2px solid #e9f1fb; outline-offset: 2px; }
+
+  /* Primary pill — "Book a demo" */
+  .btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+    padding: 16px 32px;
+    border-radius: var(--r-pill);
+  }
+  .btn-primary:hover {
+    background: var(--primary-hover);
+    transform: scale(1.004);
+  }
+  .btn-primary:active { transform: scale(0.99); }
+
+  .btn-primary-sm {
+    background: var(--primary);
+    color: #ffffff;
+    padding: 14px 32px;
+    border-radius: var(--r-pill);
+  }
+  .btn-primary-sm:hover { background: var(--primary-hover); transform: scale(1.004); }
+
+  /* Secondary soft pill — "Schedule a Call" */
+  .btn-secondary {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--primary);
+    padding: 14px 28px;
+    border-radius: var(--r-pill);
+  }
+  .btn-secondary:hover { background: rgba(0, 0, 0, 0.09); }
+
+  /* Ghost / link */
+  .btn-ghost {
+    background: transparent;
+    color: var(--primary);
+    padding: 12px 20px;
+    border-radius: var(--r-pill);
+  }
+  .btn-ghost:hover { color: var(--accent); }
+
+  /* Accent (rare — used for badges/pills accent) */
+  .btn-accent {
+    background: var(--accent);
+    color: #ffffff;
+    padding: 14px 28px;
+    border-radius: var(--r-pill);
+    box-shadow: var(--shadow-glow-accent);
+  }
+  .btn-accent:hover { filter: brightness(1.05); }
+
+  .arrow-icon {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none; stroke-width: 1.6;
+  }
+
+  /* === CARDS === */
+
+  /* Product feature card (light, large, numbered) — from card-default-md screenshots */
+  .card-product {
+    position: relative;
+    background: #ffffff;
+    border-radius: var(--r-2xl);
+    border: 1px solid rgba(0, 0, 0, 0);
+    padding: 40px;
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-product .num {
+    position: absolute;
+    top: 32px; right: 32px;
+    font-weight: 500;
+    font-size: 30px;
+    color: var(--border);
+    letter-spacing: -0.02em;
+  }
+  .card-product .icon-tile {
+    width: 48px; height: 48px;
+    border-radius: var(--r-md);
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--primary);
+    margin-bottom: 120px;
+  }
+  .card-product h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+  .card-product .body {
+    font-size: 14px;
+    color: var(--muted-2);
+    line-height: 1.5;
+    margin: 0 0 24px;
+  }
+  .card-product .body em {
+    color: var(--accent);
+    font-style: normal;
+    font-weight: 500;
+  }
+  .card-product .meta {
+    margin-top: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Concentric ring decoration (from screenshots) */
+  .card-product .rings {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 280px; height: 280px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .card-product .rings .ring {
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+  }
+  .card-product .rings .ring.r2 { inset: 40px; }
+  .card-product .rings .ring.r3 { inset: 80px; }
+  .card-product .rings .dot {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: var(--muted);
+    border-radius: 9999px;
+  }
+  .card-product .rings .dot.d1 { top: -3px; left: 50%; transform: translateX(-50%); }
+  .card-product .rings .dot.d2 { top: 50%; right: -3px; transform: translateY(-50%); }
+  .card-product .rings .dot.d3 { bottom: -3px; left: 30%; }
+
+  /* Soft small card (variant 1 — bg 5% black, 16px radius) */
+  .card-soft {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--fg);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 16px;
+    font-size: 14px;
+  }
+
+  /* Dark card (variant 2 — bg #121212, radius 32, border #2a2a2a) */
+  .card-dark {
+    background: var(--card-dark);
+    color: #ffffff;
+    border-radius: var(--r-2xl);
+    border: 1px solid var(--border-dark);
+    padding: 40px;
+  }
+  .card-dark h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+  }
+  .card-dark p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    margin: 0;
+  }
+
+  /* === NAV === */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: #ffffff;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-xl);
+  }
+  .nav .brand {
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .nav .links {
+    display: flex; align-items: center; gap: 4px;
+    background: rgba(0,0,0,0.04);
+    padding: 6px 10px;
+    border-radius: var(--r-pill);
+  }
+  .nav .links a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: var(--r-pill);
+    transition: color var(--dur-sm) var(--ease), background var(--dur-sm) var(--ease);
+  }
+  .nav .links a:hover { color: var(--accent); background: rgba(255,255,255,0.7); }
+  .nav .links .divider { width: 1px; height: 16px; background: var(--border); margin: 0 4px; }
+  .nav .icon-btn {
+    width: 32px; height: 32px;
+    border-radius: var(--r-pill);
+    border: 0;
+    background: transparent;
+    color: var(--primary);
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .nav .icon-btn:hover { background: rgba(0,0,0,0.05); }
+  .nav .actions { display: flex; align-items: center; gap: 8px; }
+
+  /* === INPUT === */
+  .input {
+    color: var(--fg);
+    border: 0;
+    border-bottom: 1px solid var(--fg);
+    border-radius: 0;
+    background: transparent;
+    font-size: 16px;
+    font-family: inherit;
+    padding: 10px 0;
+    outline: none;
+    width: 280px;
+  }
+  .input::placeholder { color: var(--muted); }
+  .input:focus { border-bottom-color: var(--accent); }
+
+  /* === LINK === */
+  .link {
+    color: var(--muted);
+    font-size: 10.4px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: color var(--dur-sm) var(--ease);
+  }
+  .link:hover { color: var(--accent); }
+
+  /* === BADGES === */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 8px 14px;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--border);
+    background: #ffffff;
+  }
+  .badge .dot {
+    width: 6px; height: 6px;
+    border-radius: 9999px;
+    background: var(--accent);
+    box-shadow: var(--shadow-glow-accent);
+  }
+  .badge-dark {
+    background: var(--card-dark);
+    color: #ffffff;
+    border-color: var(--border-dark);
+  }
+
+  /* === COLOR SWATCHES === */
+  .swatch {
+    border-radius: var(--r-md);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .swatch .chip { height: 80px; }
+  .swatch .meta {
+    padding: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted-2);
+  }
+  .swatch .name { color: var(--fg); font-weight: 500; }
+
+  /* === TYPE SCALE === */
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    gap: 32px;
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+  }
+  .type-row .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    width: 140px;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .type-row .sample { line-height: 1.1; letter-spacing: -0.025em; }
+
+  .t-h1 { font-size: 96px; font-weight: 500; letter-spacing: -0.05em; }
+  .t-h2 { font-size: 72px; font-weight: 500; letter-spacing: -0.05em; }
+  .t-h3 { font-size: 48px; font-weight: 500; letter-spacing: -0.025em; }
+  .t-h4 { font-size: 30px; font-weight: 500; letter-spacing: -0.025em; }
+  .t-body-lg { font-size: 18px; font-weight: 300; letter-spacing: 0; }
+  .t-body { font-size: 14px; font-weight: 400; }
+  .t-mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+</style>
+</head>
+<body>
+  <main class="page">
+
+    <header class="page-head">
+      <div class="eyebrow">Components / extracted from hostmyclaudehtml.com</div>
+      <h1>The component system.</h1>
+      <p class="lede">Buttons, cards, nav, and tokens reproduced from the design extract. Inter for type, dark navy primary, orange accent, pill geometry, 32px radius on large cards.</p>
+    </header>
+
+    <!-- =================== BUTTONS =================== -->
+    <section>
+      <div class="section-head">
+        <h2>Buttons</h2>
+        <span class="section-meta">3 instances · sm · pill (radius 9999)</span>
+      </div>
+
+      <div class="group">
+        <div class="row">
+          <button class="btn btn-primary">Book a demo
+            <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+
+          <button class="btn btn-primary-sm">Book a demo
+            <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+
+          <button class="btn btn-secondary">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;">&lt;/&gt;</span>
+            Schedule a Call
+          </button>
+
+          <button class="btn btn-ghost">Learn more</button>
+
+          <button class="btn btn-accent">Get started
+            <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== CARDS =================== -->
+    <section>
+      <div class="section-head">
+        <h2>Cards</h2>
+        <span class="section-meta">13 instances · radius 32 · padding 40</span>
+      </div>
+
+      <div class="grid-cards">
+        <!-- Card 1 -->
+        <article class="card-product">
+          <div class="num">01</div>
+          <div class="icon-tile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M4 4l16 8-16 8 4-8-4-8z"/>
+            </svg>
+          </div>
+          <div class="rings">
+            <div class="ring"></div>
+            <div class="ring r2"></div>
+            <div class="ring r3"></div>
+            <div class="dot d1"></div>
+            <div class="dot d2"></div>
+            <div class="dot d3"></div>
+          </div>
+          <h3>Corporate Booking Tool</h3>
+          <p class="body">Flights, hotels, and ground transport for the modern traveler. Self-service, policy-enforced, mobile-first. <em>Live in days, not quarters.</em></p>
+          <div class="meta">
+            <span>Category</span>
+            <span>Front-end / Corporate</span>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card-product">
+          <div class="num">02</div>
+          <div class="icon-tile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M3 3l7 17 2-7 7-2L3 3z"/>
+            </svg>
+          </div>
+          <div class="rings">
+            <div class="ring"></div>
+            <div class="ring r2"></div>
+            <div class="ring r3"></div>
+            <div class="dot d2"></div>
+          </div>
+          <h3>Agent Booking Tool</h3>
+          <p class="body">The cockpit for TMC agents. Unified search across flights, hotels, rail, and ground. Multi-option quote builder, negotiated rate auto-application, and full booking-on-behalf audit trails. <em>Everything in one place. Nothing missed.</em></p>
+          <div class="meta">
+            <span>Category</span>
+            <span>Front-end / Agent</span>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card-product">
+          <div class="num">03</div>
+          <div class="icon-tile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="3" width="6" height="6" rx="1"/>
+              <rect x="15" y="3" width="6" height="6" rx="1"/>
+              <rect x="9" y="15" width="6" height="6" rx="1"/>
+              <path d="M6 9v3h12v3M12 12v3"/>
+            </svg>
+          </div>
+          <div class="rings">
+            <div class="ring"></div>
+            <div class="ring r2"></div>
+            <div class="ring r3"></div>
+            <div class="dot d1"></div>
+            <div class="dot d3"></div>
+          </div>
+          <h3>Atlas TMC OS</h3>
+          <p class="body"><em>One hub.</em> Every client, every booking, every incident. Atlas replaces the spreadsheet, the inbox, the legacy system. The infrastructure that lets a TMC scale.</p>
+          <div class="meta">
+            <span>Category</span>
+            <span>Mid-end / Operations</span>
+          </div>
+        </article>
+      </div>
+
+      <!-- Card variants -->
+      <div class="grid-cards" style="margin-top:24px;">
+        <div class="card-soft">
+          <strong style="display:block;margin-bottom:6px;">Soft card</strong>
+          <span style="color:var(--muted-2);">bg rgba(0,0,0,0.05) · radius 16 · padding 16 · border rgba(0,0,0,0.12)</span>
+        </div>
+        <div class="card-dark">
+          <h3>Dark card</h3>
+          <p>bg #121212 · radius 32 · padding 40 · border #2a2a2a. Used in dark sections of the page.</p>
+        </div>
+        <div class="card-product" style="min-height:0;padding:24px;box-shadow:none;border:1px solid var(--border);">
+          <h3 style="font-size:18px;margin:0 0 8px;">White card (flat)</h3>
+          <p style="font-size:13px;color:var(--muted-2);margin:0;">No shadow variant — same radius, same padding rhythm, with a 1px border instead of elevation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== NAV =================== -->
+    <section>
+      <div class="section-head">
+        <h2>Navigation</h2>
+        <span class="section-meta">pill nav · sticky · 1280 max</span>
+      </div>
+
+      <nav class="nav">
+        <div class="brand">▲ FCG</div>
+        <div class="links">
+          <a href="#">Product Features</a>
+          <span class="divider"></span>
+          <a href="#">Pricing</a>
+          <a href="#">About</a>
+        </div>
+        <div class="actions">
+          <button class="icon-btn" aria-label="Search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </button>
+          <button class="icon-btn" aria-label="Account">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          </button>
+        </div>
+      </nav>
+    </section>
+
+    <!-- =================== BADGES =================== -->
+    <section>
+      <div class="section-head">
+        <h2>Badges &amp; status</h2>
+        <span class="section-meta">JetBrains Mono · uppercase · pill</span>
+      </div>
+      <div class="row">
+        <span class="badge"><span class="dot"></span> Live network</span>
+        <span class="badge badge-dark"><span class="dot"></span> Network active</span>
+        <span class="badge" style="background:var(--bg-soft);">Front-end / Corporate</span>
+      </div>
+    </section>
+
+    <!-- =================== INPUTS =================== -->
+    <section>
+      <div class="section-head">
+        <h2>Inputs</h2>
+        <span class="section-meta">underline · no radius · 16px</span>
+      </div>
+      <div class="row">
+        <input class="input" placeholder="your@email.com" />
+        <button class="btn btn-primary-sm">Subscribe</button>
+      </div>
+    </section>
+
+    <!-- =================== COLOR =================== -->
+    <section>
+      <div class="section-head">
+        <h2>Color</h2>
+        <span class="section-meta">14 unique · disciplined palette</span>
+      </div>
+      <div class="swatches">
+        <div class="swatch"><div class="chip" style="background:#111827;"></div><div class="meta"><div class="name">primary</div>#111827</div></div>
+        <div class="swatch"><div class="chip" style="background:#f97316;"></div><div class="meta"><div class="name">accent</div>#f97316</div></div>
+        <div class="swatch"><div class="chip" style="background:#0f1114;"></div><div class="meta"><div class="name">fg</div>#0f1114</div></div>
+        <div class="swatch"><div class="chip" style="background:#121212;"></div><div class="meta"><div class="name">card-dark</div>#121212</div></div>
+        <div class="swatch"><div class="chip" style="background:#4b5563;"></div><div class="meta"><div class="name">muted-2</div>#4b5563</div></div>
+        <div class="swatch"><div class="chip" style="background:#6b7280;"></div><div class="meta"><div class="name">muted</div>#6b7280</div></div>
+        <div class="swatch"><div class="chip" style="background:#9ca3af;"></div><div class="meta"><div class="name">muted-3</div>#9ca3af</div></div>
+        <div class="swatch"><div class="chip" style="background:#d1d5db;border-bottom:1px solid var(--border);"></div><div class="meta"><div class="name">border-2</div>#d1d5db</div></div>
+        <div class="swatch"><div class="chip" style="background:#e5e7eb;"></div><div class="meta"><div class="name">border</div>#e5e7eb</div></div>
+        <div class="swatch"><div class="chip" style="background:#f3f4f6;"></div><div class="meta"><div class="name">bg-soft</div>#f3f4f6</div></div>
+        <div class="swatch"><div class="chip" style="background:#2a2a2a;"></div><div class="meta"><div class="name">border-dark</div>#2a2a2a</div></div>
+        <div class="swatch"><div class="chip" style="background:#ffffff;border:1px solid var(--border);"></div><div class="meta"><div class="name">bg</div>#ffffff</div></div>
+      </div>
+    </section>
+
+    <!-- =================== TYPE =================== -->
+    <section>
+      <div class="section-head">
+        <h2>Typography</h2>
+        <span class="section-meta">Inter · JetBrains Mono · tight letter-spacing</span>
+      </div>
+      <div>
+        <div class="type-row"><div class="label">H1 / 96 / 500</div><div class="sample t-h1">Display</div></div>
+        <div class="type-row"><div class="label">H2 / 72 / 500</div><div class="sample t-h2">Headline</div></div>
+        <div class="type-row"><div class="label">H3 / 48 / 500</div><div class="sample t-h3">Section title</div></div>
+        <div class="type-row"><div class="label">H4 / 30 / 500</div><div class="sample t-h4">Subsection</div></div>
+        <div class="type-row"><div class="label">Body lg / 18 / 300</div><div class="sample t-body-lg">Modular infrastructure for TMCs and corporate travel programs.</div></div>
+        <div class="type-row"><div class="label">Body / 14 / 400</div><div class="sample t-body">Self-service, policy-enforced, mobile-first.</div></div>
+        <div class="type-row"><div class="label">Mono / 12 / 400</div><div class="sample t-mono">FRONT-END / CORPORATE</div></div>
+      </div>
+    </section>
+
+    <!-- =================== RADIUS / SHADOW =================== -->
+    <section>
+      <div class="section-head">
+        <h2>Radius &amp; elevation</h2>
+        <span class="section-meta">flat material · soft shadows</span>
+      </div>
+      <div class="row" style="gap:24px;">
+        <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">
+          <div style="width:80px;height:80px;background:#fff;border:1px solid var(--border);border-radius:2px;margin-bottom:8px;"></div>xs · 2
+        </div>
+        <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">
+          <div style="width:80px;height:80px;background:#fff;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;"></div>md · 8
+        </div>
+        <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">
+          <div style="width:80px;height:80px;background:#fff;border:1px solid var(--border);border-radius:15px;margin-bottom:8px;"></div>lg · 15
+        </div>
+        <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">
+          <div style="width:80px;height:80px;background:#fff;border:1px solid var(--border);border-radius:24px;margin-bottom:8px;"></div>xl · 24
+        </div>
+        <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">
+          <div style="width:80px;height:80px;background:#fff;border:1px solid var(--border);border-radius:32px;margin-bottom:8px;"></div>2xl · 32
+        </div>
+        <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">
+          <div style="width:80px;height:80px;background:#fff;border:1px solid var(--border);border-radius:9999px;margin-bottom:8px;"></div>pill · 9999
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:48px;gap:32px;">
+        <div style="width:160px;height:120px;background:#fff;border-radius:24px;box-shadow:var(--shadow-card);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">shadow-card</div>
+        <div style="width:160px;height:120px;background:#fff;border-radius:24px;box-shadow:var(--shadow-xl);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">shadow-xl</div>
+        <div style="width:160px;height:120px;background:#fff;border-radius:24px;box-shadow:var(--shadow-glow-accent);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">glow-accent</div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FCG · Features · AI chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Colors — from design-tokens.json */
+      --primary: #111827;
+      --primary-hover: #141b2b;
+      --primary-focus: #2e3848;
+      --accent: #f97316;
+      --bg: #ffffff;
+      --bg-soft: #f3f4f6;
+      --bg-dark: #050505;
+      --card-dark: #121212;
+      --fg: #0f1114;
+      --muted: #6b7280;
+      --muted-2: #4b5563;
+      --border: #e5e7eb;
+      --border-dark: #2a2a2a;
+      --border-soft: rgba(0,0,0,0.06);
+
+      /* Radii */
+      --r-xs: 2px;
+      --r-md: 8px;
+      --r-lg: 15px;
+      --r-xl: 24px;
+      --r-2xl: 32px;
+      --r-pill: 9999px;
+
+      /* Shadows */
+      --shadow-card: rgba(0, 0, 0, 0.15) 0px 0px 10px 0px;
+      --shadow-soft: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+      --shadow-glow-accent: rgba(249, 115, 22, 0.4) 0px 0px 8px 0px;
+      --shadow-xl: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.08) 0px 8px 10px -6px;
+
+      /* Motion */
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --dur-sm: 150ms;
+      --dur-md: 300ms;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === COMPONENT === */
+    .fcg-feat-aichat {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 32px;
+    }
+
+    .fcg-feat-aichat-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+
+    .fcg-feat-aichat-head {
+      max-width: 760px;
+      margin-bottom: 56px;
+    }
+
+    .fcg-feat-aichat-h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 48px;
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+      margin: 0 0 16px;
+    }
+    .fcg-feat-aichat-h2 em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .fcg-feat-aichat-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--muted-2);
+      line-height: 1.55;
+      margin: 0;
+      max-width: 620px;
+    }
+
+    /* Grid */
+    .fcg-feat-aichat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .fcg-feat-aichat-grid > .fcg-feat-aichat-card-hero {
+      grid-column: 1 / -1;
+    }
+    @media (max-width: 900px) {
+      .fcg-feat-aichat-grid { grid-template-columns: 1fr; }
+      .fcg-feat-aichat-h2 { font-size: 36px; }
+      .fcg-feat-aichat { padding: 64px 24px; }
+    }
+
+    /* Product card (light) */
+    .fcg-feat-aichat-card {
+      position: relative;
+      background: #ffffff;
+      border-radius: var(--r-2xl);
+      padding: 40px;
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      transition: transform var(--dur-sm) var(--ease);
+    }
+    .fcg-feat-aichat-card:hover {
+      transform: scale(1.004);
+    }
+
+    .fcg-feat-aichat-card-hero {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 48px;
+      align-items: stretch;
+      padding: 48px;
+      min-height: 480px;
+    }
+    @media (max-width: 900px) {
+      .fcg-feat-aichat-card-hero { grid-template-columns: 1fr; padding: 32px; min-height: 0; }
+    }
+
+    .fcg-feat-aichat-card-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .fcg-feat-aichat-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .fcg-feat-aichat-h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: var(--primary);
+      margin: 16px 0 12px;
+    }
+    .fcg-feat-aichat-h3 em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .fcg-feat-aichat-body {
+      font-size: 14px;
+      color: var(--muted-2);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .fcg-feat-aichat-meta {
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Chat panel — soft surface */
+    .fcg-feat-aichat-chat {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .fcg-feat-aichat-chat-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0 4px 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+      padding-bottom: 12px;
+    }
+    .fcg-feat-aichat-chat-meta .fcg-feat-aichat-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 9999px;
+      background: var(--accent);
+      box-shadow: var(--shadow-glow-accent);
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .fcg-feat-aichat-msg {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      max-width: 92%;
+    }
+    .fcg-feat-aichat-msg-in { align-self: flex-start; }
+    .fcg-feat-aichat-msg-out {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .fcg-feat-aichat-chip {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--border);
+      background: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--primary);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .fcg-feat-aichat-msg-out .fcg-feat-aichat-chip {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .fcg-feat-aichat-bubble {
+      border-radius: var(--r-lg);
+      padding: 12px 16px;
+      font-size: 13px;
+      line-height: 1.5;
+      background: #ffffff;
+      color: var(--fg);
+      border: 1px solid var(--border);
+    }
+    .fcg-feat-aichat-msg-out .fcg-feat-aichat-bubble {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .fcg-feat-aichat-bubble code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.02em;
+      background: rgba(0,0,0,0.06);
+      color: var(--primary);
+      padding: 1px 6px;
+      border-radius: var(--r-xs);
+    }
+    .fcg-feat-aichat-msg-out .fcg-feat-aichat-bubble code {
+      background: rgba(255,255,255,0.12);
+      color: #ffffff;
+    }
+    .fcg-feat-aichat-bubble em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+    .fcg-feat-aichat-msg-out .fcg-feat-aichat-bubble em {
+      color: #ffd9be;
+    }
+
+    .fcg-feat-aichat-stamp {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 4px;
+      display: block;
+    }
+
+    .fcg-feat-aichat-input {
+      margin-top: 4px;
+      background: var(--card-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--r-xl);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .fcg-feat-aichat-input-label {
+      flex: 1;
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+    }
+    .fcg-feat-aichat-input-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--border-dark);
+      background: transparent;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--dur-sm) var(--ease);
+    }
+    .fcg-feat-aichat-input-icon:hover { background: rgba(255,255,255,0.08); }
+    .fcg-feat-aichat-input-send {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      box-shadow: var(--shadow-glow-accent);
+    }
+
+    /* Supporting cards illustration */
+    .fcg-feat-aichat-illus {
+      flex: 1;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 20px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .fcg-feat-aichat-trace {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .fcg-feat-aichat-trace-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 10px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+    .fcg-feat-aichat-trace-row .fcg-feat-aichat-trace-tag {
+      color: var(--muted);
+    }
+    .fcg-feat-aichat-trace-row .fcg-feat-aichat-trace-match {
+      color: var(--accent);
+    }
+
+    .fcg-feat-aichat-route {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .fcg-feat-aichat-route-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 10px 14px;
+    }
+    .fcg-feat-aichat-route-row .fcg-feat-aichat-route-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--primary);
+      flex: 1;
+    }
+    .fcg-feat-aichat-route-bar {
+      flex: 2;
+      height: 6px;
+      background: var(--bg-soft);
+      border-radius: var(--r-pill);
+      overflow: hidden;
+      position: relative;
+    }
+    .fcg-feat-aichat-route-bar > span {
+      display: block;
+      height: 100%;
+      background: var(--primary);
+      border-radius: var(--r-pill);
+    }
+    .fcg-feat-aichat-route-bar.fcg-feat-aichat-accent > span {
+      background: var(--accent);
+    }
+    .fcg-feat-aichat-route-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      min-width: 36px;
+      text-align: right;
+    }
+
+    /* CTA row */
+    .fcg-feat-aichat-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 56px;
+      align-items: center;
+    }
+    .fcg-feat-aichat-btn {
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition:
+        background-color var(--dur-sm) var(--ease),
+        color var(--dur-sm) var(--ease),
+        transform var(--dur-sm) var(--ease);
+    }
+    .fcg-feat-aichat-btn:focus-visible { outline: 2px solid #e9f1fb; outline-offset: 2px; }
+    .fcg-feat-aichat-btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 16px 32px;
+      border-radius: var(--r-pill);
+    }
+    .fcg-feat-aichat-btn-primary:hover {
+      background: var(--primary-hover);
+      transform: scale(1.004);
+    }
+    .fcg-feat-aichat-btn-secondary {
+      background: rgba(0, 0, 0, 0.06);
+      color: var(--primary);
+      padding: 14px 28px;
+      border-radius: var(--r-pill);
+    }
+    .fcg-feat-aichat-btn-secondary:hover { background: rgba(0, 0, 0, 0.09); }
+    .fcg-feat-aichat-prompt {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      margin-left: 8px;
+    }
+    .fcg-feat-aichat-prompt b {
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .fcg-feat-aichat-icon {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+  </style>
+</head>
+<body>
+
+  <section class="fcg-feat-aichat">
+
+    <header class="fcg-feat-aichat-head">
+      <p class="fcg-feat-aichat-eyebrow">Features · Mapping &amp; routing</p>
+      <h2 class="fcg-feat-aichat-h2">The mapping layer that turns <em>contracts into schema</em>.</h2>
+      <p class="fcg-feat-aichat-sub">AgreeEase reads negotiated terms, deduplicates supply, and routes bookings. One layer. Many sources.</p>
+    </header>
+
+    <div class="fcg-feat-aichat-grid">
+
+      <!-- HERO CARD — Chat -->
+      <article class="fcg-feat-aichat-card fcg-feat-aichat-card-hero">
+
+        <div class="fcg-feat-aichat-card-copy">
+          <div>
+            <span class="fcg-feat-aichat-num">01 · AgreeEase</span>
+            <h3 class="fcg-feat-aichat-h3">Contract clauses, mapped to schema.</h3>
+            <p class="fcg-feat-aichat-body">A negotiated PDF goes in. Structured rate logic comes out. AgreeEase maps clauses to fields, flags conflicts, and writes the result to the booking layer. <em>From a single hotel contract to the largest TMC migration.</em></p>
+          </div>
+          <div class="fcg-feat-aichat-meta">
+            <span>Capability</span>
+            <span>Mapping · AgreeEase</span>
+          </div>
+        </div>
+
+        <div class="fcg-feat-aichat-chat">
+          <div class="fcg-feat-aichat-chat-meta">
+            <span><span class="fcg-feat-aichat-dot"></span>FIG · Routing trace</span>
+            <span>Session 04812</span>
+          </div>
+
+          <div class="fcg-feat-aichat-msg fcg-feat-aichat-msg-out">
+            <span class="fcg-feat-aichat-chip">TM</span>
+            <div>
+              <div class="fcg-feat-aichat-bubble">
+                Map the <code>Marriott APAC Q3</code> contract. Conflict on cancellation window with the prior version.
+              </div>
+              <span class="fcg-feat-aichat-stamp">TMC ops · 09:14</span>
+            </div>
+          </div>
+
+          <div class="fcg-feat-aichat-msg fcg-feat-aichat-msg-in">
+            <span class="fcg-feat-aichat-chip">AE</span>
+            <div>
+              <div class="fcg-feat-aichat-bubble">
+                Clauses parsed. <em>14 fields mapped</em>. Cancellation window resolves to <code>72h</code> on the Q3 contract. Prior version held <code>48h</code>. Routed to review.
+              </div>
+              <span class="fcg-feat-aichat-stamp">AgreeEase · 09:14</span>
+            </div>
+          </div>
+
+          <div class="fcg-feat-aichat-msg fcg-feat-aichat-msg-out">
+            <span class="fcg-feat-aichat-chip">TM</span>
+            <div>
+              <div class="fcg-feat-aichat-bubble">
+                Apply the Q3 version. Push to <code>G-Link</code> for the APAC desks.
+              </div>
+              <span class="fcg-feat-aichat-stamp">TMC ops · 09:15</span>
+            </div>
+          </div>
+
+          <div class="fcg-feat-aichat-msg fcg-feat-aichat-msg-in">
+            <span class="fcg-feat-aichat-chip">AE</span>
+            <div>
+              <div class="fcg-feat-aichat-bubble">
+                Written to schema. Live across <em>14 markets</em>. Audit trail at <code>/agreements/04812</code>.
+              </div>
+              <span class="fcg-feat-aichat-stamp">AgreeEase · 09:15</span>
+            </div>
+          </div>
+
+          <div class="fcg-feat-aichat-input">
+            <button class="fcg-feat-aichat-input-icon" aria-label="Attach">
+              <svg class="fcg-feat-aichat-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <button class="fcg-feat-aichat-input-icon" aria-label="Source">
+              <svg class="fcg-feat-aichat-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+            </button>
+            <span class="fcg-feat-aichat-input-label">Ask AgreeEase</span>
+            <button class="fcg-feat-aichat-input-icon fcg-feat-aichat-input-send" aria-label="Send">
+              <svg class="fcg-feat-aichat-icon" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </article>
+
+      <!-- CARD 02 — Deduplication -->
+      <article class="fcg-feat-aichat-card">
+        <div>
+          <span class="fcg-feat-aichat-num">02 · Deduplication</span>
+          <h3 class="fcg-feat-aichat-h3">One hotel. Many sources. <em>One record.</em></h3>
+          <p class="fcg-feat-aichat-body">Property feeds from GDS, direct, and aggregator paths reconcile against a single canonical record. No duplicate inventory. No conflicting room types.</p>
+        </div>
+
+        <div class="fcg-feat-aichat-illus">
+          <div class="fcg-feat-aichat-trace">
+            <div class="fcg-feat-aichat-trace-row">
+              <span>GDS · Sabre</span>
+              <span class="fcg-feat-aichat-trace-match">Match · 0.98</span>
+            </div>
+            <div class="fcg-feat-aichat-trace-row">
+              <span>Direct · Marriott</span>
+              <span class="fcg-feat-aichat-trace-match">Match · 0.97</span>
+            </div>
+            <div class="fcg-feat-aichat-trace-row">
+              <span>Aggregator · HBX</span>
+              <span class="fcg-feat-aichat-trace-match">Match · 0.94</span>
+            </div>
+            <div class="fcg-feat-aichat-trace-row">
+              <span class="fcg-feat-aichat-trace-tag">Canonical</span>
+              <span>JW Marriott HK · ID 048-12</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fcg-feat-aichat-meta">
+          <span>Capability</span>
+          <span>Mapping · G-Link</span>
+        </div>
+      </article>
+
+      <!-- CARD 03 — Routing -->
+      <article class="fcg-feat-aichat-card">
+        <div>
+          <span class="fcg-feat-aichat-num">03 · Routing</span>
+          <h3 class="fcg-feat-aichat-h3">Bookings routed by policy, not by guess.</h3>
+          <p class="fcg-feat-aichat-body">Each search resolves against negotiated rates, market rules, and supply paths. Routing decisions stay observable, with a full trace on every booking.</p>
+        </div>
+
+        <div class="fcg-feat-aichat-illus">
+          <div class="fcg-feat-aichat-route">
+            <div class="fcg-feat-aichat-route-row">
+              <span class="fcg-feat-aichat-route-label">Negotiated · direct</span>
+              <span class="fcg-feat-aichat-route-bar fcg-feat-aichat-accent"><span style="width:78%"></span></span>
+              <span class="fcg-feat-aichat-route-pct">78%</span>
+            </div>
+            <div class="fcg-feat-aichat-route-row">
+              <span class="fcg-feat-aichat-route-label">GDS · fallback</span>
+              <span class="fcg-feat-aichat-route-bar"><span style="width:16%"></span></span>
+              <span class="fcg-feat-aichat-route-pct">16%</span>
+            </div>
+            <div class="fcg-feat-aichat-route-row">
+              <span class="fcg-feat-aichat-route-label">Aggregator · overflow</span>
+              <span class="fcg-feat-aichat-route-bar"><span style="width:6%"></span></span>
+              <span class="fcg-feat-aichat-route-pct">6%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fcg-feat-aichat-meta">
+          <span>Capability</span>
+          <span>Routing · F-Link</span>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="fcg-feat-aichat-cta">
+      <button class="fcg-feat-aichat-btn fcg-feat-aichat-btn-primary">Request sandbox access
+        <svg class="fcg-feat-aichat-icon" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+      <button class="fcg-feat-aichat-btn fcg-feat-aichat-btn-secondary">Read the architecture</button>
+      <span class="fcg-feat-aichat-prompt"><b>&gt;</b> See how AgreeEase maps a real contract.</span>
+    </div>
+
+  </section>
+
+</body>
+</html>
