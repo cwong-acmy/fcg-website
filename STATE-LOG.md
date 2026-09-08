@@ -1,5 +1,70 @@
 # STATE-LOG — FCG Website
 
+## 2026-09-08 (session 4) — Header lockup renamed, on two lines
+
+### What changed
+
+The header brand lockup reads **Open Developer Platform** on every page, on two lines: `OPEN` above
+`DEVELOPER PLATFORM`. The brand link's `aria-label` follows the new name.
+
+One extra word does not fit on one line. The header already sat flush against the 1200px content
+column with zero slack, so a third word would have pushed it past the column again and scrolled the
+document sideways below ~1230px. Breaking after the qualifier keeps `DEVELOPER PLATFORM` as the
+longest line, so the brand column keeps its exact width and the header still aligns from 1180px up.
+
+### Decisions
+
+- **One text node per line, not a CSS wrap.** Natural wrapping at any width that fits
+  `DEVELOPER PLATFORM` breaks as `OPEN DEVELOPER` / `PLATFORM`, which splits the noun phrase. An
+  explicit `<br>` gives the reading order the label wants.
+- **Each locale sets its own break.** `开放平台` / `開放平台` already carries "open", so a literal
+  translation of `Open` would have read "Open Open Platform". The first line takes `开发者` /
+  `開發者` instead, so Chinese reads Developer / Open Platform on two lines.
+- `.brand-div` grew from 20px to 27px so the rule spans a two-line label rather than half of it.
+- Mobile is unchanged: `.brand-div` and `.brand-sub` are already hidden under 640px.
+
+### Left alone deliberately
+
+The request was the header. Three other places still carry the old name, and changing them is a
+naming decision rather than a layout one:
+
+- The homepage hero `h1`: `FCG Developer<br>Platform`.
+- Every page `<title>`: `… — FCG Developer Platform` (index.html's own title is already
+  `Open Developer Platform`, so the set is already inconsistent).
+- The footer brand line: "The FCG Developer Platform: standardised APIs and flexible SDKs…".
+
+### Verified
+
+`verify-pages.js`: 0 failing checks out of 48, in each of the three locales. Header sits flush to the
+content column at 1440 / 1366 / 1280 / 1180 / 1100 / 1024, no document overflow at any of them.
+Live on the production URL after the push of `0a4d5be`: the English header serves
+`Open<br>Developer Platform` and zh-Hant serves `開發者<br>開放平台`, deployment READY from
+`source: git` five seconds after the push.
+
+### Learnings
+
+**Problem.** Add a word to a header lockup that had no horizontal room left, without breaking the
+Chinese editions.
+
+**Approach.** Check the constraint before the copy: the header's right edge was already flush with
+the content column, so this was a layout problem wearing a copy request. Break the label into two
+lines at the qualifier, then confirm the longest line is unchanged — that is what keeps the column
+width, and therefore the alignment, intact. Verify at every breakpoint, not just the design width.
+
+**Judgment calls — what was NOT done, and why.**
+- Did not let CSS choose the break. The only widths that fit `DEVELOPER PLATFORM` also fit
+  `OPEN DEVELOPER`, so natural wrapping splits the noun phrase every time.
+- Did not translate `Open` literally. Chinese already says "open platform"; a literal line would
+  have doubled the word.
+- Did not shrink the nav type further to fit one line. It is already at 13px, down from 13.5px
+  earlier today, and a fourth reduction would be paying for a line break with legibility.
+- Did not rename the hero h1, the page titles or the footer line. The ask was the header, and those
+  are a naming call for Crystal.
+
+**Reusable rule.** When a copy change lands in fixed chrome, measure the chrome first. If the
+element is already flush to its column, the change is a layout task, and the test of a two-line fix
+is whether the longest line stayed the same.
+
 ## 2026-09-08 (session 3) — The marketing globe, and the portal deployed
 
 ### What changed
