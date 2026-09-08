@@ -47,10 +47,27 @@ rendering and no page errors. Deployment `dpl_9kUm1CQCoGSvrqgJHm2nBeiGc18P`, fro
 
 `verify-pages.js` locally: 0 failing checks out of 48, in each of the three locales.
 
+### Git connection (added same session)
+
+`fcg-open-developer-platform` is now connected to `cwong-acmy/fcg-website`, root directory
+`open-portal-redesign/variant-b-impeccable`, **production branch `portal-redesign-direction-b`** —
+not `main`, because `main` has no `open-portal-redesign/` directory at all (it is at
+`6999dd1 Checkpoint: Full Website V8`, the marketing site only). A production build from `main`
+would have had no root directory to build.
+
+Two API notes worth keeping. `PATCH /v9/projects/{id}` rejects both `link` and `productionBranch`
+as unknown properties; the production branch is set by **`PATCH /v1/projects/{id}/branch`** with
+`{"branch": "..."}`. And `POST /v9/projects/{id}/link` accepts a `productionBranch` field but
+silently ignores it — it returned `main` after being asked for the branch.
+
+`vercel.json` was added alongside `.vercelignore`: the ignore file only governs what the CLI
+uploads, so once the project builds from GitHub the Python generator needed a route-level 404 too.
+
+**When this branch merges to `main`, the production branch setting must move with it**, or the live
+URL silently freezes at the last commit to the old branch.
+
 ### Blockers / next actions
 
-- The live URL is only as current as the last manual `vercel deploy`. Either remember to redeploy
-  after every change, or connect the project to the repo so a branch push ships it.
 - `open-portal-redesign/shots/b-pages` still holds 45MB of regenerated PNGs, uncommitted.
 
 ### Learnings
