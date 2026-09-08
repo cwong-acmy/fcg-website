@@ -99,22 +99,25 @@ which is the field triage actually sorts on.
 
 ### Hosted for the team
 
-The whole build is live and clickable at
-https://fcg-website-3wwgfetv0-crystalwong-accomycoms-projects.vercel.app — 58 pages: the 12 ODP public
-pages, both Chinese editions, and all 21 console screens, with the links working between them. Deployed as
-a **preview** to the work team's existing `fcg-website` Vercel project (`prj_bIBO2PVjRM052GwQXYZN0ZxoPCWB`,
-`team_SyKixqrcZUCIGFNYQC13rwVl`) using the recorded work token, never `--prod`.
+**https://fcg-open-developer-platform.vercel.app** — 58 pages: the 12 Open Developer Platform public pages,
+both Chinese editions, and all 21 console screens, with links working between them. No login.
 
-Every route returned 302 at first: the project had `ssoProtection: all_except_custom_domains`, which
-covers preview URLs. Crystal approved turning it off, so `ssoProtection` is now `null` and preview URLs on
-this project are publicly readable. **Reversible in one click in project settings if that is ever wrong.**
-Verified after the change: nine routes across both locales and both console roles all return 200, and the
-production alias `fcg-website-one.vercel.app` is untouched at 164,474 bytes, still serving the old
-marketing generation.
+It has **its own Vercel project**, `fcg-open-developer-platform` (`prj_dhe1toSi7yeTJOKGuUsOwKWqhUuG`) on the
+work team, deployed to that project's production so the address is stable and survives a redeploy. Two
+things it deliberately does not do: it does not sit on the marketing project, and it does not touch
+`fcg-website-one.vercel.app`, which still serves the old marketing generation at 164,474 bytes, verified
+after every step.
 
-Note hostmyclaude cannot host this: it serves one file per upload and mints a new slug each time, so a
-36-page site with links between its pages cannot be stitched together there. The side-by-side review page
-stays on hostmyclaude because it is genuinely one file.
+Route taken and why. A preview deploy to the existing `fcg-website` project came first; every route
+returned 302 because that project had `ssoProtection: all_except_custom_domains`, which covers preview
+URLs. Crystal approved switching it off, that made the preview public, and then she asked for a stable
+address that does not replace the marketing site. A preview URL is per-deployment, so the answer was a
+dedicated project rather than an alias on the old one. **`ssoProtection` on `fcg-website` has been restored
+to its original value** now that nothing depends on it being off.
+
+hostmyclaude cannot host this: it serves one file per upload and mints a new slug each time, so a 36-page
+site with links between its pages cannot be stitched together there. The side-by-side review page stays on
+hostmyclaude because it genuinely is one file.
 
 ### Blockers
 
