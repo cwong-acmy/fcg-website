@@ -122,6 +122,12 @@ h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent-ink
   .btn--ghost:hover{background:var(--card);border-color:var(--ink)}
 }
 .btn--sm{height:40px;padding:0 8px 0 18px;font-size:13.5px}
+/* The tighter right padding exists to sit under the trailing arrow glyph.
+   A button with no glyph has nothing filling it, so its label lands 10px
+   right of centre — which is every white ghost button that is just a word.
+   Symmetric padding whenever there is no icon. */
+.btn:not(:has(iconify-icon)){padding-left:24px;padding-right:24px;justify-content:center}
+.btn--sm:not(:has(iconify-icon)){padding-left:17px;padding-right:17px}
 .btn--sm iconify-icon{width:24px;height:24px;padding:5px;font-size:14px}
 .tlink{
   display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:500;

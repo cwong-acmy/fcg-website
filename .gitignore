@@ -24,3 +24,7 @@ open-portal-redesign/reference/console-admin/
 # Python bytecode
 __pycache__/
 *.pyc
+
+# Comparison screenshots: regenerate with compare/build-compare.py
+open-portal-redesign/compare/shots/
+open-portal-redesign/compare/jpg/

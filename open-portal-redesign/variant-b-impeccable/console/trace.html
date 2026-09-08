@@ -123,6 +123,12 @@ h1 em,h2 em,.h2 em,.h3 em{display:block;font-style:normal;color:var(--accent-ink
   .btn--ghost:hover{background:var(--card);border-color:var(--ink)}
 }
 .btn--sm{height:40px;padding:0 8px 0 18px;font-size:13.5px}
+/* The tighter right padding exists to sit under the trailing arrow glyph.
+   A button with no glyph has nothing filling it, so its label lands 10px
+   right of centre — which is every white ghost button that is just a word.
+   Symmetric padding whenever there is no icon. */
+.btn:not(:has(iconify-icon)){padding-left:24px;padding-right:24px;justify-content:center}
+.btn--sm:not(:has(iconify-icon)){padding-left:17px;padding-right:17px}
 .btn--sm iconify-icon{width:24px;height:24px;padding:5px;font-size:14px}
 .tlink{
   display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:500;
@@ -875,12 +881,16 @@ code.inl{font-family:var(--mono);font-size:12.5px;background:var(--card);border:
    opened forty times a day must not fade in.
    ============================================================ */
 :root{
-  /* Status is the one place the console needs colour the marketing site
-     does not have. Desaturated so they read as state, never as brand, and
-     all three clear 4.5:1 on white. Orange stays brand-only. */
-  --ok:#1F7A5C;
-  --warn:#946200;
-  --bad:#B3261E;
+  /* Status colour, Stripe-bright. Two tokens per state, for the same reason
+     --accent and --accent-ink are split: the DOT wants the vivid hue, the
+     LABEL wants a hue you can actually read at 13px.
+       dot  — vivid, no contrast requirement, it is a shape
+       ink  — the same hue carried down to at least 4.5:1 on white
+     Never fill a button or a panel with either. */
+  --ok-bg:#CBF4C9;   --ok:#0E6245;     /* 6.07:1 on its own ground */
+  --warn-bg:#F8E5B9; --warn:#983705;   /* 5.86:1 */
+  --bad-bg:#FDE2DD;  --bad:#A41C4E;    /* 5.99:1 */
+  --neu-bg:#E3E8EE;  --neu:#4F566B;    /* 5.93:1 */
   --side:252px;
 }
 
@@ -976,18 +986,25 @@ body{overflow-x:visible}
 .fbar-a{margin-left:auto;display:flex;gap:9px;align-self:flex-end}
 
 /* ---------- status ---------- */
-.st{display:inline-flex;align-items:center;gap:7px;font-size:13px;white-space:nowrap}
-.st b{width:6px;height:6px;border-radius:50%;background:var(--line);flex:none}
-.st--ok b{background:var(--ok)}
-.st--warn b{background:var(--warn)}
-.st--bad b{background:var(--bad)}
-.st--bad{color:var(--bad)}
-.st--live b{background:var(--ok);box-shadow:0 0 0 3px rgba(31,122,92,.14)}
+/* Status is a chip, not a dot beside grey text: a filled ground is findable
+   in a hundred-row table in a way a 6px dot is not. Ground and label are a
+   matched pair, every one of them above 5.8:1. */
+.st{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 11px;border-radius:999px;
+  font-size:12px;font-weight:500;letter-spacing:-.005em;white-space:nowrap;
+  background:var(--neu-bg);color:var(--neu)}
+.st b{width:5px;height:5px;border-radius:50%;background:currentColor;flex:none;opacity:.85}
+.st--ok{background:var(--ok-bg);color:var(--ok)}
+.st--warn{background:var(--warn-bg);color:var(--warn)}
+.st--bad{background:var(--bad-bg);color:var(--bad)}
+.st--live{background:var(--ok-bg);color:var(--ok)}
 .pill{display:inline-flex;align-items:center;gap:7px;height:24px;padding:0 10px;border:1px solid var(--line);
   border-radius:999px;font-size:11.5px;color:var(--ink);background:#fff;white-space:nowrap}
 .pill--q{background:var(--card);border-color:transparent;color:var(--muted-card)}
-.pill b{width:6px;height:6px;border-radius:50%;background:var(--line);flex:none}
-.pill--ok b{background:var(--ok)} .pill--warn b{background:var(--warn)} .pill--bad b{background:var(--bad)}
+.pill b{width:5px;height:5px;border-radius:50%;background:currentColor;flex:none;opacity:.85}
+/* the same chip vocabulary, so a status reads the same wherever it appears */
+.pill--ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}
+.pill--warn{background:var(--warn-bg);color:var(--warn);border-color:transparent}
+.pill--bad{background:var(--bad-bg);color:var(--bad);border-color:transparent}
 
 /* ---------- counts strip (All 122 / Pending 10 / …) ---------- */
 .counts{display:flex;flex-wrap:wrap;gap:2px;padding:3px;background:var(--shell);border:1px solid var(--hair);
@@ -1012,22 +1029,22 @@ body{overflow-x:visible}
 /* ---------- charts: ink first, one orange highlight, never a colour wheel ---------- */
 .chart{width:100%;height:auto;display:block;overflow:visible}
 .chart .grid{stroke:var(--hair);stroke-width:1}
-.chart .bar{fill:var(--ink)}
-.chart .bar--q{fill:#C9CDD3}
-.chart .ln{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
-.chart .ln--q{stroke:#C9CDD3;stroke-dasharray:3 3}
-.chart .area{fill:rgba(15,17,20,.05)}
-.chart .pt{fill:var(--accent)}
+.chart .bar{fill:var(--accent)}
+.chart .bar--q{fill:#FBD3B4}
+.chart .ln{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.chart .ln--q{stroke:#FBD3B4;stroke-dasharray:3 3}
+.chart .area{fill:rgba(249,115,22,.10)}
+.chart .pt{fill:var(--ink)}
 .chart text{font-family:var(--mono);font-size:9px;fill:var(--muted);letter-spacing:.06em}
 .legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px}
 .legend span{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:var(--muted)}
-.legend i{width:14px;height:2px;background:var(--ink);border-radius:2px}
-.legend i.q{background:#C9CDD3}
+.legend i{width:14px;height:2px;background:var(--accent);border-radius:2px}
+.legend i.q{background:#FBD3B4}
 .ring{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
 /* the ring is a fixed 128px dial; .chart{width:100%} would blow it up to the panel width */
 .ring svg.chart{flex:none;width:128px;height:128px}
-.ring .seg-a{stroke:var(--ink)}
-.ring .seg-b{stroke:#C9CDD3}
+.ring .seg-a{stroke:var(--accent)}
+.ring .seg-b{stroke:#FBD3B4}
 .ring .seg-0{stroke:var(--card)}
 
 /* ---------- ranking list ---------- */
@@ -1038,7 +1055,7 @@ body{overflow-x:visible}
 .rank .p{font-family:var(--mono);font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rank .v{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--muted-card);flex:none}
 .rank .track{flex:0 0 96px;height:3px;border-radius:2px;background:var(--card);overflow:hidden}
-.rank .track i{display:block;height:100%;background:var(--ink)}
+.rank .track i{display:block;height:100%;background:var(--accent)}
 
 /* ---------- console tables ---------- */
 .pnl table.tbl th{background:#fff}
