@@ -69,6 +69,34 @@ Implementation is a clean token split: `--accent-ink` colours every orange chara
 so the contrast value is now genuinely one line. The eyebrow dash moved to `currentColor` — it sits 10px
 from its label and two different oranges side by side read as a mistake.
 
+### Reviewed, and what the review changed
+
+An Impeccable `critique` ran over all 21 screens: an independent design review and a deterministic
+detector plus browser sweep at 1440px and 390px, as two isolated agents. Both reports acted on in `22cf0ac`.
+
+The two that mattered most were mobile and semantics. **The sidebar did not collapse below 900px** — all
+seventeen links stacked above the content and pushed the page head nearly two screens down — and
+**everything that acted was an `href="#"` anchor**, 224 of them, including every destructive admin action.
+An anchor cannot express pressed, expanded or disabled and announces as a link to nowhere; the console
+build had never inherited the dead-href assertion the public pages run.
+
+The review also answered Crystal's question about the per-card primary, and the answer generalised into a
+rule now in the spec: **a per-card primary is right when the cards are a choice set and wrong when they
+are an inventory.** App Management is an inventory, so its three black "Reveal credentials" pills are gone;
+each key row copies while masked and reveals one field at a time, and each card's real decision — Apply for
+production — is now its ghost control. Build My TMC is a genuine choice set, so its four Select pills stay,
+and its four identical grey rectangles became four distinct wireframes.
+
+**A failure view now exists.** Request Trace's own lede promised "payload, timing and failure reason" and
+the console shipped no error state at all, on a platform whose value proposition is debugging. There is a
+request-detail pane with a 422, the error code, and both payloads.
+
+Smaller: panel footers bottom-anchor so card action rows align; pagination is derived rather than
+hardcoded (it read "Showing 7 of 122" over six chips at ten per page); the topbar search pill burst on
+every screen under 900px; endpoint paths truncated mid-word on the one screen that teaches the paths;
+micro-labels were 9.5px, below this system's own 11px floor; the review queue had no waiting-since column,
+which is the field triage actually sorts on.
+
 ### Blockers
 
 - **i18n for the console not started** (63 pages when it is).
