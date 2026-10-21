@@ -123,7 +123,9 @@ python3 tools/build-site.py --check
 - [ ] 手机菜单能打开、关闭，链接全部可用
 - [ ] 浅色、深色模式都正常
 - [ ] 浏览器控制台无报错
-- [ ] 部署：根据项目说明，生产环境目前由 Vercel CLI 从 `codex/drafts` 的工作区部署（`vercel deploy --prod`），部署前请先运行 `python3 tools/build-site.py`
+- [ ] **部署（重要）：** Vercel 项目 `fcg-website` 已连接 GitHub，**生产分支是 `main`**，推送到 `main` 会立即自动部署到 fcg-website-one.vercel.app。目前线上版本是 2026-08-26 通过 Vercel CLI 从 `codex/drafts` 手动部署的，而 `main` 仍是 5 月的旧版本。**在 Marketing 确认上线之前，请勿推送或合并到 `main`**，否则会把旧版本或未完成的博客发布上线。
+- [ ] 上线流程建议：`codex/blog` 审查后合并到 `codex/drafts`；正式文章到位并经 Marketing 确认后，再将 `codex/drafts` 合并到 `main` 触发生产部署。部署前请先运行 `python3 tools/build-site.py`。
+- [ ] 预览：推送 `codex/blog` 已自动生成 Vercel 预览部署 `fcg-website-f5tuhdsv1-crystalwong-accomycoms-projects.vercel.app`（需登录 Vercel 团队账号查看），不影响线上。
 - [ ] 确认正式域名：`tools/build-site.py` 中的 `SITE` 目前为 `https://www.fusionconnectgroup.com`，用于 canonical、OG、RSS。如有不同请修改后重新构建。
 - [ ] 订阅框目前**未接入任何服务**，提交后只显示"尚未开放、邮箱未保存"。接入邮件服务前请保持现状，不要显示虚假的"订阅成功"。
 - [ ] 占位文章在正式文章到位前**不要**改成 `draft: false`
@@ -160,7 +162,7 @@ python3 tools/build-site.py --check
 4. **图片：** 文章配图存放在仓库里，还是使用 CDN 或对象存储（例如 OSS、S3）？是否需要自动压缩、生成 WebP？
 5. **审核与预览：** 发布前是否需要预览链接（例如 Vercel Preview）和审批流程？由谁审批？
 6. **定时发布：** 是否需要按日期自动上线？
-7. **部署：** 合并到哪个分支会触发生产部署？是否可以在 CI 中加入 `build-site.py --check`？
+7. **部署：** 目前推送 `main` 会触发生产部署，但线上内容来自 CLI 手动部署。是否统一为"`main` 即线上版本"、只通过 Git 部署？是否可以在 CI 中加入 `build-site.py --check`？
 8. **订阅：** 邮件订阅建议接入哪个服务？由谁维护订阅名单？
 9. **多语言：** 博客是否需要中文版本？如需要，网址结构如何规划（例如 `/zh/blog/`）？
 10. **上线：** 新官网替换 Wix 时，旧网址的 301 重定向由谁负责？
