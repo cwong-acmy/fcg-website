@@ -20,5 +20,5 @@ This is the main FCG Website project folder. It contains the website pages, reus
 - Do not move or consolidate the separate `FCG Website - ...` folders without Crystal approving a move plan first.
 - Do not delete old page versions; archive them after review.
 - Keep edits small and explain visual/content changes in plain English.
-- Do not start a local preview unless Crystal explicitly asks.
+- A requested build or design change permits starting/opening a local preview to show the result. Explain what Crystal should see; ask before restarting a preview she deliberately stopped.
 
