@@ -1,0 +1,180 @@
+{
+  "_readme": "Source of truth for the blog. Edit here, then run `python3 tools/build-site.py`. Order = newest first; the first post is featured. `draft: true` adds noindex and the draft note. `date` (YYYY-MM-DD) is optional: drafts show 'Draft' instead. `products` lists page filenames (without .html) that show this post under Related reading. `body` is trusted HTML written by the team.",
+  "posts": [
+    {
+      "slug": "ai-agents-live-travel-inventory",
+      "title": "Placeholder: connecting AI agents to live travel inventory",
+      "excerpt": "Placeholder excerpt. Replace with the first two sentences of the real post once it is approved.",
+      "topic": "product",
+      "tags": [
+        "product",
+        "ai"
+      ],
+      "minutes": 6,
+      "image": "assets/images/about/fcg-editorial-flow-large.png",
+      "author": "FCG Team",
+      "role": "Byline to confirm",
+      "products": [
+        "ai-booking-tool",
+        "developer"
+      ],
+      "cta": {
+        "title": "See the AI Booking Tool",
+        "text": "Connect AI to live travel inventory.",
+        "href": "ai-booking-tool.html",
+        "label": "Explore AI Booking Tool"
+      },
+      "draft": true,
+      "body": "<p>Placeholder body. The approved article text goes here.</p><h2>Placeholder section heading</h2><p>Placeholder paragraph.</p>"
+    },
+    {
+      "slug": "g-link-f-link-supplier-failover",
+      "title": "Placeholder: how G-Link and F-Link handle supplier failover",
+      "excerpt": "Placeholder excerpt for an engineering post.",
+      "topic": "engineering",
+      "tags": [
+        "engineering"
+      ],
+      "minutes": 8,
+      "image": "assets/images/about/fcg-editorial-flow-secondary.png",
+      "author": "FCG Team",
+      "role": "Byline to confirm",
+      "products": [
+        "glink",
+        "flink",
+        "developer"
+      ],
+      "cta": {
+        "title": "Connect through G-Link",
+        "text": "Connect to 4.35M+ hotels through one API.",
+        "href": "glink.html",
+        "label": "Explore G-Link"
+      },
+      "draft": true,
+      "body": "<p>Placeholder body. The approved article text goes here.</p>"
+    },
+    {
+      "slug": "ai-mapping-hotel-room-data",
+      "title": "Placeholder: cleaning hotel and room data with AI",
+      "excerpt": "Placeholder excerpt for an AI post.",
+      "topic": "ai",
+      "tags": [
+        "ai",
+        "product"
+      ],
+      "minutes": 5,
+      "image": "assets/images/about/fcg-editorial-flow-small.png",
+      "author": "FCG Team",
+      "role": "Byline to confirm",
+      "products": [
+        "glink"
+      ],
+      "cta": {
+        "title": "Connect through G-Link",
+        "text": "Connect to 4.35M+ hotels through one API.",
+        "href": "glink.html",
+        "label": "Explore G-Link"
+      },
+      "draft": true,
+      "body": "<p>Placeholder body. The approved article text goes here.</p>"
+    },
+    {
+      "slug": "what-tmcs-in-asia-are-asking-for",
+      "title": "Placeholder: what TMCs in Asia are asking for",
+      "excerpt": "Placeholder excerpt for an industry post.",
+      "topic": "industry",
+      "tags": [
+        "industry"
+      ],
+      "minutes": 7,
+      "image": "assets/images/atlas-product/editorial-operations.jpg",
+      "author": "FCG Team",
+      "role": "Byline to confirm",
+      "products": [
+        "atlas",
+        "corporate-booking-tool",
+        "addn"
+      ],
+      "cta": {
+        "title": "Run operations on Atlas",
+        "text": "Mid-office ops, duty of care, and a unified inbox.",
+        "href": "atlas.html",
+        "label": "Explore Atlas"
+      },
+      "draft": true,
+      "body": "<p>Placeholder body. The approved article text goes here.</p>"
+    },
+    {
+      "slug": "agreeease-rate-workflows",
+      "title": "Placeholder: rate workflows in AgreeEase",
+      "excerpt": "Placeholder excerpt for a product post.",
+      "topic": "product",
+      "tags": [
+        "product"
+      ],
+      "minutes": 4,
+      "image": "assets/images/agreeease-product/sourcing-editorial.png",
+      "author": "FCG Team",
+      "role": "Byline to confirm",
+      "products": [
+        "agreeease"
+      ],
+      "cta": {
+        "title": "Source hotels with AgreeEase",
+        "text": "Hotel sourcing, RFPs, and rate workflows.",
+        "href": "agreeease.html",
+        "label": "Explore AgreeEase"
+      },
+      "draft": true,
+      "body": "<p>Placeholder body. The approved article text goes here.</p>"
+    },
+    {
+      "slug": "mcp-server-for-travel-booking",
+      "title": "Placeholder: an MCP server for travel booking",
+      "excerpt": "Placeholder excerpt for an engineering post.",
+      "topic": "engineering",
+      "tags": [
+        "engineering",
+        "ai"
+      ],
+      "minutes": 9,
+      "image": "assets/images/about/fcg-editorial-flow-secondary.png",
+      "author": "FCG Team",
+      "role": "Byline to confirm",
+      "products": [
+        "ai-booking-tool",
+        "developer"
+      ],
+      "cta": {
+        "title": "See the AI Booking Tool",
+        "text": "Connect AI to live travel inventory.",
+        "href": "ai-booking-tool.html",
+        "label": "Explore AI Booking Tool"
+      },
+      "draft": true,
+      "body": "<p>Placeholder body. The approved article text goes here.</p>"
+    },
+    {
+      "slug": "company-news",
+      "title": "Placeholder: company news",
+      "excerpt": "Placeholder excerpt for a company post.",
+      "topic": "company",
+      "tags": [
+        "company"
+      ],
+      "minutes": 3,
+      "image": "assets/images/atlas-product/editorial-intelligence.jpg",
+      "author": "FCG Team",
+      "role": "Byline to confirm",
+      "products": [],
+      "cta": {
+        "title": "Meet FCG",
+        "text": "Who we are and what we build.",
+        "href": "about.html",
+        "label": "About FCG"
+      },
+      "draft": true,
+      "body": "<p>Placeholder body. The approved article text goes here.</p>"
+    }
+  ]
+}
