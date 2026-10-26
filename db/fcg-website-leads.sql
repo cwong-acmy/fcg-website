@@ -1,4 +1,5 @@
--- FCG website forms: schema `fcg_website`. NOT APPLIED. Pick the Supabase project first (see HANDOVER-BLOG.md section 9).
+-- FCG website forms: schema `fcg_website` on Supabase project accomy-projects (iedubjxycyvqptkcezlp).
+-- Applied via the Management API on 2026-10-26; fcg_website added to the exposed schemas. Server key: per-app sb_secret `fcg_website`.
 -- Same shape as accomy.com's `website` schema, kept separate so FCG and Accomy leads never mix.
 -- Source of truth for /api/book-demo and /api/subscribe; the Lark Base tables are a mirror. Re-runnable.
 

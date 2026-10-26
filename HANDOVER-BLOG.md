@@ -45,7 +45,7 @@
 - `.github/workflows/build-site.yml`：推送后自动运行构建并提交生成的页面
 - `contact.html`：Book a demo 表单页
 - `api/book-demo.js`、`api/subscribe.js`、`api/_lib.js`：表单后端（Vercel Functions），`tools/test-forms.js`：测试
-- `db/fcg-website-leads.sql`：表单数据表（**尚未执行**）
+- `db/fcg-website-leads.sql`：表单数据表（2026-10-26 已在 Supabase `accomy-projects` 执行，schema `fcg_website`）
 - `favicon.svg`、`robots.txt`、`sitemap.xml`（后者由脚本生成）
 - `blog/_post.html`：文章页模板
 - `blog/*.html`、`blog/feed.xml`：脚本生成，**请勿手动编辑**
@@ -150,7 +150,7 @@ python3 tools/build-site.py --check
 2. **staging 加 noindex：** `add_header X-Robots-Tag "noindex" always;`（只加在 staging）。
 3. **启用自动构建：** 合并后 Action 会在推送时运行。请确认仓库 Settings → Actions 允许 workflow 写入（Read and write permissions），以及受保护分支是否允许 Action 推送。
 4. **表单后端运行在哪里：** `api/` 是 Vercel Functions，生产环境若在 Vercel 可直接使用。staging 是 nginx，无法运行 `api/`，可以把 `/api/` 反向代理到 Vercel 部署，或改为 Supabase Edge Function。未接通时表单会显示"未能发送，请发邮件到 hello@"，不会假装成功。
-5. **Supabase：** 选择项目并执行 `db/fcg-website-leads.sql`，把 `fcg_website` 加入 Exposed schemas。注意：工作账号的 Supabase 是免费版，约一周无流量会暂停，暂停期间表单全部失败。建议付费版，或每周检查行数。
+5. **Supabase：** 已完成：`accomy-projects` 中的 `fcg_website` schema 已建好并开放，专用密钥已生成（值由 Crystal 私下提供）。飞书多维表格和群聊也已建好，端到端测试通过。注意：工作账号的 Supabase 是免费版，约一周无流量会暂停，暂停期间表单全部失败。建议付费版，或每周检查行数。
 6. **Pages CMS 编辑权限：** 每位 Marketing 编辑需要 GitHub 账号和仓库写权限。是否保存即上线，还是先到分支审核再合并，请确认。
 7. **上线前（独立审查 2026-10-26 提出）：**
    - 在 Vercel Firewall 为 `/api/*` 加限流规则（代码内的限流只在单个实例内有效，挡不住分布式刷量）。
