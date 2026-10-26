@@ -17,7 +17,7 @@
 }
 
 html[data-theme="light"] {
-    --fcg-live-text: #c2410c; /* orange-700: 4.5:1+ on the light nav for the LIVE.NETWORK badge */
+    --fcg-live-text: #9a3412; /* orange-800: 6.2:1 on the badge's orange tint (orange-700 was 4.42 once the tint is counted) */
     --color-bg: #f7f8fa;
     --color-fg: #0f1114;
     --color-card: #ffffff;
@@ -748,3 +748,8 @@ html[data-theme="light"] body :is(.fcg-hero2-button-secondary, .fcg-default-hero
     text-underline-offset: 6px;
 }
 html.fcg-menu-open { overflow: hidden; }
+
+/* Skip link (in _shell/nav.html): hidden until keyboard focus, then pinned top-left above the fixed nav. */
+.fcg-skip { position: absolute; left: 12px; top: -64px; z-index: 100; padding: 10px 16px; border-radius: 9999px; background: var(--color-fg, #0f1114); color: var(--color-bg, #fff); font-size: 14px; text-decoration: none; }
+.fcg-skip:focus { top: 12px; outline: 2px solid #F97316; outline-offset: 2px; }
+#content:focus { outline: none; }

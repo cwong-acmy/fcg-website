@@ -5,10 +5,12 @@
     python3 tools/build-site.py --check  # exit 1 if any page is out of date
 
 1. Copies _shell/nav.html and _shell/footer.html into every page (between SHARED:NAV / SHARED:FOOTER markers).
-2. Renders the blog from blog/posts.json: index cards, the homepage strip,
-   "Related reading" on product pages, one page per post, and blog/feed.xml.
+2. Renders the blog from blog/posts/<slug>.json (one file per post, edited in Pages CMS or by hand):
+   index cards, the homepage strip, "Related reading" on product pages, one page per post,
+   blog/feed.xml and sitemap.xml.
 
-Edit _shell/nav.html, _shell/footer.html, _shell/blog-head.html and blog/posts.json, never the generated regions.
+Edit _shell/*.html and blog/posts/*.json, never the generated regions. The GitHub Action in
+.github/workflows/build-site.yml runs this on every push, so a CMS save rebuilds the pages.
 """
 import html
 import json
@@ -21,6 +23,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://www.fusionconnectgroup.com"  # launch domain for canonical/OG/RSS; the blog ships with the redesign
 SKIP = {"components.html", "nav-preview.html"}  # design reference + throwaway nav preview, not live pages
+NO_STRIP = {"about.html", "contact.html"}  # nav/footer only, no blog strip
+WPM = 220  # reading speed for the "N min read" label
+DEFAULT_CTA = {"title": "Talk to FCG", "text": "See how FCG connects your team to live travel supply.",
+               "href": "contact.html", "label": "Book a demo"}
+ICON = '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
 TOPICS = {"product": "Product", "engineering": "Engineering", "ai": "AI", "industry": "Industry", "company": "Company"}
 STRIP_BEFORE = [  # first marker found on a page is where the blog strip goes
     "<!-- ===== CLOSING CTA ===== -->",
@@ -155,14 +162,49 @@ def feed(posts):
             + "".join(i + "\n" for i in items) + "  </channel>\n</rss>\n")
 
 
+def load_posts():
+    """One JSON file per post; the filename is the URL slug. Featured first, then newest first."""
+    pages = {f.stem for f in ROOT.glob("*.html")}
+    posts = []
+    for f in sorted((ROOT / "blog" / "posts").glob("*.json")):
+        p = json.loads(f.read_text(encoding="utf-8"))
+        p["slug"] = f.stem
+        where = f"blog/posts/{f.name}"
+        assert re.fullmatch(r"[a-z0-9-]+", p["slug"]), f"{where}: filename must be lowercase letters, numbers and hyphens"
+        for k in ("title", "excerpt", "topic", "image", "author", "body"):
+            assert str(p.get(k) or "").strip(), f"{where}: '{k}' is empty"
+        p.setdefault("tags", [p["topic"]])
+        p.setdefault("products", [])
+        p.setdefault("role", "")
+        p["image"] = p["image"].lstrip("/")  # Pages CMS writes /assets/...; pages prefix their own root
+        assert p["topic"] in TOPICS and set(p["tags"]) <= set(TOPICS), f"{where}: unknown topic"
+        assert set(p["products"]) <= pages, f"{where}: unknown product page {set(p['products']) - pages}"
+        assert re.fullmatch(r"[\w./-]+", p["image"]), f"{where}: image path must be plain (no quotes or spaces): {p['image']}"
+        assert (ROOT / p["image"]).is_file(), f"{where}: image not found: {p['image']}"
+        if p.get("date"):
+            p["date"] = str(p["date"])[:10]
+            datetime.fromisoformat(p["date"])
+        assert p.get("draft") or p.get("date"), f"{where}: a published post (draft off) needs a date"
+        p["cta"] = p.get("cta") if (p.get("cta") or {}).get("href") else DEFAULT_CTA
+        words = len(re.sub(r"<[^>]+>", " ", p["body"]).split())
+        p["minutes"] = p.get("minutes") or max(1, round(words / WPM))
+        posts.append(p)
+    assert posts, "no posts in blog/posts/"
+    posts.sort(key=lambda p: p["slug"])
+    posts.sort(key=lambda p: p.get("date") or "", reverse=True)
+    posts.sort(key=lambda p: not p.get("featured"))
+    return posts
+
+
+def sitemap(pages, posts):
+    urls = [f"{SITE}/{'' if p == 'index.html' else p}" for p in pages]
+    urls += [f"{SITE}/blog/{p['slug']}.html" for p in posts if not p.get("draft")]
+    body = "".join(f"  <url><loc>{esc(u)}</loc></url>\n" for u in urls)
+    return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}</urlset>\n'
+
+
 def build():
-    data = json.loads(read("blog/posts.json"))
-    posts = data["posts"]
-    for p in posts:
-        assert p["topic"] in TOPICS and set(p["tags"]) <= set(TOPICS), f"unknown topic in {p['slug']}"
-        assert re.fullmatch(r"[a-z0-9-]+", p["slug"]), f"bad slug {p['slug']}"
-        assert re.fullmatch(r"[\w./-]+", p["image"]), f"image path must be plain (no quotes or spaces): {p['image']}"
-        assert (ROOT / p["image"]).is_file(), f"image not found: {p['image']}"
+    posts = load_posts()
     head = read("_shell/blog-head.html")
     css = '<link rel="stylesheet" href="assets/css/fcg-blog.css">'
     out = {}
@@ -171,8 +213,11 @@ def build():
         if page.name in SKIP:
             continue
         text = chrome(page.read_text(encoding="utf-8"), "")
-        if page.name == "blog.html":
+        if "<!-- BUILD:HEAD -->" in text:
             text = region(text, "BUILD:HEAD", head.replace("{{root}}", "").rstrip("\n"))
+        elif ICON not in text:
+            text = text.replace("</head>", f"    {ICON}\n</head>", 1)
+        if page.name == "blog.html":
             used = [t for t in TOPICS if any(t in p["tags"] for p in posts)]
             tags = ['                    <button class="blog-tag" type="button" data-tag="all" aria-pressed="true">All posts</button>']
             tags += [f'                    <button class="blog-tag" type="button" data-tag="{t}" aria-pressed="false">{TOPICS[t]}</button>' for t in used]
@@ -184,7 +229,7 @@ def build():
         elif page.name == "index.html":
             text = ensure_region(text, "BLOG:LATEST", css)
             text = region(text, "BLOG:LATEST", strip(posts[:3], "Latest from the blog", "All posts"))
-        elif page.name != "about.html":
+        elif page.name not in NO_STRIP:
             slug = page.stem
             mine = [p for p in posts if slug in p["products"]]
             picks = (mine + [p for p in posts if p not in mine])[:3]  # top up with latest so the row is always full
@@ -196,15 +241,20 @@ def build():
     for p in posts:
         out[ROOT / "blog" / f"{p['slug']}.html"] = post_page(p, posts, head)
     out[ROOT / "blog" / "feed.xml"] = feed(posts)
+    out[ROOT / "sitemap.xml"] = sitemap(sorted(k.name for k in out if k.parent == ROOT), posts)
 
     stale = [k for k, v in out.items() if not k.exists() or k.read_text(encoding="utf-8") != v]
-    orphans = [f for f in (ROOT / "blog").glob("*.html") if f.name != "_post.html" and f not in out]
-    for f in orphans:
-        print("orphan (not in posts.json, delete it if the post was removed or renamed):", f.relative_to(ROOT))
+    orphans = [f for f in (ROOT / "blog").glob("*.html") if f.name != "_post.html" and f not in out
+               and "Generated by tools/build-site.py" in f.read_text(encoding="utf-8")]  # never touch hand-written files
     if "--check" in sys.argv:
         for k in stale:
             print("out of date:", k.relative_to(ROOT))
+        for f in orphans:
+            print("orphan (its blog/posts/ file was removed or renamed):", f.relative_to(ROOT))
         return 1 if stale or orphans else 0
+    for f in orphans:  # generated pages only, so a post deleted in the CMS takes its page with it
+        f.unlink()
+        print("removed", f.relative_to(ROOT))
     for k in stale:
         k.write_text(out[k], encoding="utf-8")
         print("wrote", k.relative_to(ROOT))

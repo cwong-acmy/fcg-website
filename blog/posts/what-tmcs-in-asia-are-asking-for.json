@@ -1,0 +1,24 @@
+{
+  "title": "Placeholder: what TMCs in Asia are asking for",
+  "excerpt": "Placeholder excerpt for an industry post.",
+  "draft": true,
+  "topic": "industry",
+  "tags": [
+    "industry"
+  ],
+  "products": [
+    "atlas",
+    "corporate-booking-tool",
+    "addn"
+  ],
+  "image": "assets/images/atlas-product/editorial-operations.jpg",
+  "author": "FCG Team",
+  "role": "Byline to confirm",
+  "cta": {
+    "title": "Run operations on Atlas",
+    "text": "Mid-office ops, duty of care, and a unified inbox.",
+    "href": "atlas.html",
+    "label": "Explore Atlas"
+  },
+  "body": "<p>Placeholder body. The approved article text goes here.</p>"
+}

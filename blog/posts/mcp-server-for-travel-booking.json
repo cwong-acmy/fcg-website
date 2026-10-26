@@ -1,0 +1,24 @@
+{
+  "title": "Placeholder: an MCP server for travel booking",
+  "excerpt": "Placeholder excerpt for an engineering post.",
+  "draft": true,
+  "topic": "engineering",
+  "tags": [
+    "engineering",
+    "ai"
+  ],
+  "products": [
+    "ai-booking-tool",
+    "developer"
+  ],
+  "image": "assets/images/about/fcg-editorial-flow-secondary.png",
+  "author": "FCG Team",
+  "role": "Byline to confirm",
+  "cta": {
+    "title": "See the AI Booking Tool",
+    "text": "Connect AI to live travel inventory.",
+    "href": "ai-booking-tool.html",
+    "label": "Explore AI Booking Tool"
+  },
+  "body": "<p>Placeholder body. The approved article text goes here.</p>"
+}

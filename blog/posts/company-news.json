@@ -1,0 +1,20 @@
+{
+  "title": "Placeholder: company news",
+  "excerpt": "Placeholder excerpt for a company post.",
+  "draft": true,
+  "topic": "company",
+  "tags": [
+    "company"
+  ],
+  "products": [],
+  "image": "assets/images/atlas-product/editorial-intelligence.jpg",
+  "author": "FCG Team",
+  "role": "Byline to confirm",
+  "cta": {
+    "title": "Meet FCG",
+    "text": "Who we are and what we build.",
+    "href": "about.html",
+    "label": "About FCG"
+  },
+  "body": "<p>Placeholder body. The approved article text goes here.</p>"
+}

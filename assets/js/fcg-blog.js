@@ -1,4 +1,4 @@
-// Blog index topic filter (shareable via ?topic=) and the not-yet-connected subscribe form.
+// Blog index topic filter (shareable via ?topic=), the newsletter box and the book-a-demo form.
 document.addEventListener('DOMContentLoaded', function () {
     const tags = document.querySelectorAll('.blog-tag');
     const posts = document.querySelectorAll('.blog .post');
@@ -32,12 +32,64 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // ponytail: no email provider is chosen yet, so the form says so instead of faking success. Wire the provider here.
+    // Forms post to /api/* (Vercel functions in api/). Success is shown only after the server saved the row.
+    function post(path, data) {
+        return fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data), signal: AbortSignal.timeout(15000) })
+            .then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { ok: r.ok, error: b.error }; }); })
+            .catch(function () { return { ok: false }; });
+    }
+    function say(el, text, isError) {
+        el.textContent = text;
+        el.classList.toggle('is-error', !!isError);
+    }
+    const FALLBACK = 'We could not send this. Please try again or email hello@fusionconnectgroup.com.';
+
     document.querySelectorAll('.blog-sub').forEach(function (form) {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             const status = form.querySelector('.blog-sub-status');
-            if (status) status.textContent = 'Subscriptions open when the blog launches. Your email was not saved.';
+            const input = form.querySelector('input[type=email]');
+            if (!input.checkValidity()) { say(status, 'Enter a valid work email.', true); input.focus(); return; }
+            const btn = form.querySelector('button[type=submit]');
+            btn.disabled = true;
+            post('/api/subscribe', { email: input.value, source: 'blog_newsletter', website: (form.querySelector('[name=website]') || {}).value || '' })
+                .then(function (r) {
+                    btn.disabled = false;
+                    if (r.ok) { say(status, 'Thanks, you are subscribed.'); form.reset(); }
+                    else say(status, r.error || FALLBACK, true);
+                });
         });
     });
+
+    const demo = document.getElementById('demoForm');
+    if (demo) {
+        const product = new URLSearchParams(location.search).get('product');
+        const select = demo.querySelector('[name=product]');
+        if (product && select.querySelector('option[value="' + CSS.escape(product) + '"]')) select.value = product;
+        demo.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const status = demo.querySelector('.demo-status');
+            let firstBad = null;
+            demo.querySelectorAll('input, select, textarea').forEach(function (el) {
+                if (el.name === 'website') return;
+                const bad = !el.checkValidity();
+                el.setAttribute('aria-invalid', String(bad));
+                if (bad && !firstBad) firstBad = el;
+            });
+            if (firstBad) { say(status, 'Please fill in the highlighted fields.', true); firstBad.focus(); return; }
+            const data = Object.fromEntries(new FormData(demo));
+            data.page = location.pathname + location.search;
+            const btn = demo.querySelector('button[type=submit]');
+            btn.disabled = true;
+            say(status, 'Sending…');
+            post('/api/book-demo', data).then(function (r) {
+                btn.disabled = false;
+                if (!r.ok) { say(status, r.error || FALLBACK, true); return; }
+                demo.hidden = true;
+                const done = document.getElementById('demoDone');
+                done.hidden = false;
+                done.focus();
+            });
+        });
+    }
 });

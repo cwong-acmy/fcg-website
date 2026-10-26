@@ -1,0 +1,22 @@
+{
+  "title": "Placeholder: rate workflows in AgreeEase",
+  "excerpt": "Placeholder excerpt for a product post.",
+  "draft": true,
+  "topic": "product",
+  "tags": [
+    "product"
+  ],
+  "products": [
+    "agreeease"
+  ],
+  "image": "assets/images/agreeease-product/sourcing-editorial.png",
+  "author": "FCG Team",
+  "role": "Byline to confirm",
+  "cta": {
+    "title": "Source hotels with AgreeEase",
+    "text": "Hotel sourcing, RFPs, and rate workflows.",
+    "href": "agreeease.html",
+    "label": "Explore AgreeEase"
+  },
+  "body": "<p>Placeholder body. The approved article text goes here.</p>"
+}

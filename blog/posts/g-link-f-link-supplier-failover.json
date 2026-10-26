@@ -1,0 +1,24 @@
+{
+  "title": "Placeholder: how G-Link and F-Link handle supplier failover",
+  "excerpt": "Placeholder excerpt for an engineering post.",
+  "draft": true,
+  "topic": "engineering",
+  "tags": [
+    "engineering"
+  ],
+  "products": [
+    "glink",
+    "flink",
+    "developer"
+  ],
+  "image": "assets/images/about/fcg-editorial-flow-secondary.png",
+  "author": "FCG Team",
+  "role": "Byline to confirm",
+  "cta": {
+    "title": "Connect through G-Link",
+    "text": "Connect to 4.35M+ hotels through one API.",
+    "href": "glink.html",
+    "label": "Explore G-Link"
+  },
+  "body": "<p>Placeholder body. The approved article text goes here.</p>"
+}

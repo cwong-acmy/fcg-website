@@ -1,0 +1,23 @@
+{
+  "title": "Placeholder: cleaning hotel and room data with AI",
+  "excerpt": "Placeholder excerpt for an AI post.",
+  "draft": true,
+  "topic": "ai",
+  "tags": [
+    "ai",
+    "product"
+  ],
+  "products": [
+    "glink"
+  ],
+  "image": "assets/images/about/fcg-editorial-flow-small.png",
+  "author": "FCG Team",
+  "role": "Byline to confirm",
+  "cta": {
+    "title": "Connect through G-Link",
+    "text": "Connect to 4.35M+ hotels through one API.",
+    "href": "glink.html",
+    "label": "Explore G-Link"
+  },
+  "body": "<p>Placeholder body. The approved article text goes here.</p>"
+}

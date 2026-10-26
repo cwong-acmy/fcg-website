@@ -1,6 +1,6 @@
 # FCG 官网博客：交接说明（技术团队）
 
-**日期：** 2026-10-21
+**日期：** 2026-10-21（2026-10-26 更新：Pages CMS、自动构建、Book a demo 表单、订阅、无障碍修复）
 **负责人：** Crystal Wong（Marketing）
 **代码仓库：** `cwong-acmy/fcg-website`，分支 `codex/blog`（基于 `codex/drafts`，审查后合并回 `codex/drafts`）
 **适用范围：** 官网改版项目（静态 HTML 站点）。目前线上的 fusionconnectgroup.com 仍是 Wix，**本次不涉及 Wix**。博客将随新官网一起上线。
@@ -9,7 +9,7 @@
 
 ## 1. 一句话总结
 
-新官网增加了博客：每个页面的导航栏和页脚都有 Blog 入口，首页和产品页有文章推荐区，每篇文章有独立页面，手机端菜单已修好。所有博客内容来自一个数据文件 `blog/posts.json`，运行一条命令即可生成全部页面。
+新官网增加了博客：每个页面的导航栏和页脚都有 Blog 入口，首页和产品页有文章推荐区，每篇文章有独立页面，手机端菜单已修好。每篇文章是 `blog/posts/` 下的一个 JSON 文件，Marketing 用 Pages CMS 网页后台编辑，GitHub Action 自动生成全部页面。
 
 **需要你们做两件事：**
 1. 审查、合并并部署本次改动（第 2 至第 6 节）。
@@ -40,7 +40,13 @@
 
 **新增**
 - `blog.html`：博客首页
-- `blog/posts.json`：**全部文章数据（唯一需要日常编辑的文件）**
+- `blog/posts/<slug>.json`：**每篇文章一个文件（文件名即网址），Marketing 在 Pages CMS 中编辑**
+- `.pages.yml`：Pages CMS 配置
+- `.github/workflows/build-site.yml`：推送后自动运行构建并提交生成的页面
+- `contact.html`：Book a demo 表单页
+- `api/book-demo.js`、`api/subscribe.js`、`api/_lib.js`：表单后端（Vercel Functions），`tools/test-forms.js`：测试
+- `db/fcg-website-leads.sql`：表单数据表（**尚未执行**）
+- `favicon.svg`、`robots.txt`、`sitemap.xml`（后者由脚本生成）
 - `blog/_post.html`：文章页模板
 - `blog/*.html`、`blog/feed.xml`：脚本生成，**请勿手动编辑**
 - `_shell/blog-head.html`：博客页面共用的 head
@@ -85,93 +91,79 @@ python3 tools/build-site.py --check
 
 ---
 
-## 5. 发文流程（当前方案）
+## 5. 发文流程：Marketing 用 Pages CMS
 
-1. 编辑 `blog/posts.json`，新文章加在最前面（第一篇会自动成为置顶文章）。
-2. 配图放在 `assets/images/` 下，路径不能含空格或引号。文件不存在时脚本会报错停止。
-3. 运行 `python3 tools/build-site.py`。
-4. 本地预览，然后提交并部署。
+**界面：** [app.pagescms.org](https://app.pagescms.org)，用 GitHub 账号登录，选择 `cwong-acmy/fcg-website` 和分支。左侧 "Blog posts" 是文章列表，点 "Add an entry" 新建，表单字段见 `.pages.yml`（标题、摘要、草稿开关、日期、话题、关联产品页、封面图上传、作者、正文富文本编辑器）。封面图和正文图片上传到 `assets/images/blog/`。
 
-**字段说明**
+**流程：**
+1. Marketing 在 Pages CMS 中新建或编辑文章，点 Save。每次保存就是一次 Git 提交。
+2. GitHub Action（`.github/workflows/build-site.yml`）自动运行 `python3 tools/build-site.py` 和表单测试，把生成的页面提交回同一分支。删除的文章，其页面也会被自动删除。
+3. 部署流程拿到新提交后发布（见第 8 节）。
 
-| 字段 | 必填 | 说明 |
-|---|---|---|
-| `slug` | 是 | 网址名，只能用小写字母、数字、连字符。上线后不要改（会产生死链）。 |
-| `title`、`excerpt` | 是 | 标题、摘要（摘要用于卡片、SEO 描述、RSS）。 |
-| `topic` | 是 | 主话题：`product`、`engineering`、`ai`、`industry`、`company` 之一。 |
-| `tags` | 是 | 筛选用话题，可多个，取值同上。 |
-| `minutes` | 是 | 阅读时长（分钟）。 |
-| `image` | 是 | 配图路径。图标类 SVG 请加 `"contain": true`，避免被裁切拉伸。 |
-| `author`、`role` | 是 | 作者与职位。 |
-| `products` | 否 | 关联产品页的文件名（不含 `.html`），例如 `["atlas"]`。文章会出现在这些产品页的 "Related reading" 中。 |
-| `cta` | 是 | 文章底部的产品卡片：`title`、`text`、`href`、`label`。 |
-| `draft` | 否 | `true` 时为草稿：页面显示草稿提示，加 `noindex`，不进 RSS。 |
-| `date` | 否 | `YYYY-MM-DD`。正式发布时请填写。 |
-| `body` | 是 | 正文 HTML（由团队编写，脚本不做过滤），可用 `<p>`、`<h2>`、`<ul>`、`<a>`。 |
+**规则（脚本会检查，不符合时 Action 失败，页面不更新）：**
+- 文件名（网址）在第一次保存时由标题生成，之后改标题不会改网址。上线后不要改文件名。
+- 关闭"草稿"即发布，发布的文章必须填日期。草稿自动 `noindex`，不进 RSS 和 sitemap。
+- 排序：勾选 Featured 的置顶，其余按日期从新到旧。阅读时长按正文字数自动计算。
+- 结尾 CTA 可不填，默认是 "Book a demo" 链接到 `contact.html`。
 
-**删除或改名文章时：** 脚本会提示旧页面成为孤立文件（orphan），请手动删除该文件。
+**手动方式（技术团队）：** 直接编辑 `blog/posts/*.json`，运行 `python3 tools/build-site.py`，提交。
 
-**现状：** 目前 7 篇文章均为**占位内容**（`draft: true`），正式文章由 Marketing 提供。
+**需要验证（Pages CMS 文档未明确，请在接入时测试）：** `filename: "{primary}.json"` 是否把标题转为小写连字符的文件名；图片字段保存的路径格式（脚本已兼容开头带 `/` 的路径）；`select` 多选在 JSON 中保存为数组。
+
+**现状：** 7 篇文章仍是占位内容（`draft: true`）。
 
 ---
 
-## 6. 上线前检查清单
+## 6. 表单：Book a demo 与博客订阅（参照 accomy.com 的做法）
 
-- [ ] 审查 `codex/blog` 分支 diff 后合并到 `codex/drafts`
-- [ ] `python3 tools/build-site.py --check` 返回 0
-- [ ] 桌面（1440px）与手机（375px）都检查：博客首页、任一文章页、首页、任一产品页
-- [ ] 手机菜单能打开、关闭，链接全部可用
-- [ ] 浅色、深色模式都正常
-- [ ] 浏览器控制台无报错
-- [ ] **部署（重要）：** Vercel 项目 `fcg-website` 已连接 GitHub，**生产分支是 `main`**，推送到 `main` 会立即自动部署到 fcg-website-one.vercel.app。目前线上版本是 2026-08-26 通过 Vercel CLI 从 `codex/drafts` 手动部署的，而 `main` 仍是 5 月的旧版本。**在 Marketing 确认上线之前，请勿推送或合并到 `main`**，否则会把旧版本或未完成的博客发布上线。
-- [ ] 上线流程建议：`codex/blog` 审查后合并到 `codex/drafts`；正式文章到位并经 Marketing 确认后，再将 `codex/drafts` 合并到 `main` 触发生产部署。部署前请先运行 `python3 tools/build-site.py`。
-- [ ] 预览：推送 `codex/blog` 已自动生成 Vercel 预览部署：https://fcg-website-git-codex-blog-crystalwong-accomycoms-projects.vercel.app （始终指向 `codex/blog` 的最新版本，需登录 Vercel 团队账号查看），不影响线上。
-- [ ] 确认正式域名：`tools/build-site.py` 中的 `SITE` 目前为 `https://www.fusionconnectgroup.com`，用于 canonical、OG、RSS。如有不同请修改后重新构建。
-- [ ] 订阅框目前**未接入任何服务**，提交后只显示"尚未开放、邮箱未保存"。接入邮件服务前请保持现状，不要显示虚假的"订阅成功"。
-- [ ] 占位文章在正式文章到位前**不要**改成 `draft: false`
+**以前的问题：** 所有 "Book a demo" 按钮只跳到本页底部的 CTA 区，而 CTA 区的按钮又链接回自己，**网站没有任何表单**，只有 `hello@` 邮件链接。
 
----
+**现在：**
+- 新页面 `contact.html`：姓名、工作邮箱、公司、职位、公司类型、地区、感兴趣的产品（从产品页进入时自动选中，例如 `contact.html?product=atlas`）、留言。产品页、About、Payment 的 Book a demo / Schedule a call 按钮和页脚 Contact 都指向这里。
+- 博客订阅框接入真实提交。
+- 后端 `api/book-demo.js`、`api/subscribe.js`，与 accomy.com 相同的处理顺序：服务端校验（与表单相同的选项列表）、隐藏陷阱字段防机器人、每个 IP 10 分钟 8 次限流；**先写入 Supabase**（`fcg_website.leads` / `fcg_website.subscribers`），成功后才向访客显示成功；再尽力同步到飞书（多维表格一行 + 群聊卡片），飞书失败不影响访客。同一邮箱重复订阅不报错、不重复通知。
+- **与 Accomy 数据分开：** 独立 schema、独立多维表格和群聊。
 
-## 7. 需要你们回复的问题：如何上传文章
+**环境变量（在部署平台设置，不要提交到仓库）：** `SUPABASE_URL`、`SUPABASE_SECRET_KEY`、`FCG_DB_SCHEMA`（默认 `fcg_website`）、`LARK_APP_ID`、`LARK_APP_SECRET`、`LARK_LEADS_BASE_APP_TOKEN`、`LARK_LEADS_DEMO_TABLE_ID`、`LARK_LEADS_SUBSCRIBERS_TABLE_ID`、`LARK_LEADS_CHAT_ID`。
 
-目前的方式是编辑 JSON 再运行脚本，对技术团队可行，但 Marketing 无法自行发文。请评估并回复以下问题：
+**测试：** `node --test tools/test-forms.js`（Supabase 和飞书已模拟，不需要密钥）。
 
-1. **谁来发文？** 由技术团队代发，还是 Marketing 自行发布？
-2. **用什么方式上传？** 你们倾向哪种方案（或其他建议）：
-   - **A.** 保持现状：编辑 `blog/posts.json`，通过 Git PR 提交，合并后自动部署。
-   - **B.** 接入 Headless CMS（例如 Strapi、Sanity、Contentful 或 Decap CMS），Marketing 在后台写文章，构建时拉取内容。
-   - **C.** 从飞书文档导出（Marketing 在飞书写稿），再由脚本或流程转换为 `posts.json`。
-   - **D.** 其他方案，请说明。
-
-   **Marketing 的初步建议（请技术团队评估后决定）：** Marketing 已有正式文章内容，希望能自行发布，因此倾向**基于 Git 的 CMS**。文章已存放在仓库中的 `blog/posts.json`，这类 CMS 只是提供一个网页编辑界面来修改这个文件，不需要数据库或服务器，每次保存都是一次 Git 提交，可随时回滚。
-
-   | 方案 | 优点 | 需要注意 |
-   |---|---|---|
-   | **Pages CMS**（[pagescms.org](https://pagescms.org)，Marketing 首选） | 免费、托管版无需部署；用 GitHub 登录；只需在仓库加一个配置文件 `.pages.yml` | 尚未验证能否直接编辑 `posts.json` 这种"文章数组"格式；如不支持，可能需要把每篇文章拆成单独文件，并相应修改 `build-site.py` |
-   | **Decap CMS** | 免费、开源、成熟 | 部署在 Vercel 时需要另外搭建 GitHub OAuth 登录服务 |
-   | **TinaCMS** | 可视化实时编辑体验好 | 配置较多；超出小团队规模需付费 |
-   | **Sanity / Contentful**（Headless CMS） | 适合多人协作、多语言 | 需要改造构建流程，构建时从 API 拉取内容 |
-
-   **无论选哪个方案，都需要：**
-   - 每位编辑都要有 GitHub 账号，并拥有 `cwong-acmy/fcg-website` 的访问权限（Headless CMS 方案除外）。
-   - 部署时自动运行 `python3 tools/build-site.py`。目前 Vercel 直接发布静态文件、没有构建步骤，需要在 Vercel 项目设置中加入该构建命令，并确认构建环境有 Python 3。否则在 CMS 中保存的文章不会出现在网站上。
-
-   请告诉我们：你们选择哪个方案、预计工作量，以及上述两点是否可行。
-
-3. **正文格式：** 写手更习惯 Markdown 还是富文本编辑器？是否需要我们把 `body` 改为支持 Markdown？
-4. **图片：** 文章配图存放在仓库里，还是使用 CDN 或对象存储（例如 OSS、S3）？是否需要自动压缩、生成 WebP？
-5. **审核与预览：** 发布前是否需要预览链接（例如 Vercel Preview）和审批流程？由谁审批？
-6. **定时发布：** 是否需要按日期自动上线？
-7. **部署：** 目前推送 `main` 会触发生产部署，但线上内容来自 CLI 手动部署。是否统一为"`main` 即线上版本"、只通过 Git 部署？是否可以在 CI 中加入 `build-site.py --check`？
-8. **订阅：** 邮件订阅建议接入哪个服务？由谁维护订阅名单？
-9. **多语言：** 博客是否需要中文版本？如需要，网址结构如何规划（例如 `/zh/blog/`）？
-10. **上线：** 新官网替换 Wix 时，旧网址的 301 重定向由谁负责？
-
-请直接在群聊中回复，或联系 Crystal Wong（crystal.wong@accomy.com）。
+**订阅是单次确认（single opt-in）。** 正式群发邮件前需要加确认邮件（double opt-in）。
 
 ---
 
-## 8. 联系人
+## 7. 无障碍与 SEO 修复（2026-10-26）
+
+- 页脚版权文字对比度：浅色 2.59 → 5.19，深色 2.48 → 6.25；LIVE.NETWORK 标签 4.42 → 6.24（WCAG AA 要求 4.5）
+- 手机端主题开关加了无障碍名称；每页新增 "Skip to content" 跳转链接
+- 新增 favicon、`robots.txt`、`sitemap.xml`（脚本生成，只含已发布文章）
+- 博客页、文章页、表单页 axe 扫描 0 个问题（1440px 与 375px）。产品页正文里原有的小字对比度问题（如 Atlas 的 `.url`、`.tag`）不在本次范围。
+
+---
+
+## 8. 需要技术团队处理
+
+1. **预发布环境暴露了内部文件：** staging 用 nginx 直接发布仓库，`.vercelignore` 不起作用，`HANDOVER-BLOG.md`、`AGENTS.md`、`README.md`、`tools/`、`_shell/`、`blog/_post.html`、`components.html`、`nav-preview.html` 都能被公开访问。建议只发布网站需要的文件（HTML、`assets/`、`blog/`、`favicon.svg`、`robots.txt`、`sitemap.xml`），或在 nginx 中屏蔽：
+   ```nginx
+   location ~* (\.md$|^/tools/|^/_shell/|^/db/|^/blog/posts/|^/blog/_post\.html$|^/(components|nav-preview)\.html$|/\.) { return 404; }
+   ```
+2. **staging 加 noindex：** `add_header X-Robots-Tag "noindex" always;`（只加在 staging）。
+3. **启用自动构建：** 合并后 Action 会在推送时运行。请确认仓库 Settings → Actions 允许 workflow 写入（Read and write permissions），以及受保护分支是否允许 Action 推送。
+4. **表单后端运行在哪里：** `api/` 是 Vercel Functions，生产环境若在 Vercel 可直接使用。staging 是 nginx，无法运行 `api/`，可以把 `/api/` 反向代理到 Vercel 部署，或改为 Supabase Edge Function。未接通时表单会显示"未能发送，请发邮件到 hello@"，不会假装成功。
+5. **Supabase：** 选择项目并执行 `db/fcg-website-leads.sql`，把 `fcg_website` 加入 Exposed schemas。注意：工作账号的 Supabase 是免费版，约一周无流量会暂停，暂停期间表单全部失败。建议付费版，或每周检查行数。
+6. **Pages CMS 编辑权限：** 每位 Marketing 编辑需要 GitHub 账号和仓库写权限。是否保存即上线，还是先到分支审核再合并，请确认。
+7. **上线前（独立审查 2026-10-26 提出）：**
+   - 在 Vercel Firewall 为 `/api/*` 加限流规则（代码内的限流只在单个实例内有效，挡不住分布式刷量）。
+   - 订阅名单正式群发前加确认邮件（double opt-in），否则任何人都能替别人订阅。
+   - 如果分支受保护，需要允许 Action 推送，否则自动构建的提交会失败。
+   - 用一篇文章测试 Pages CMS 富文本编辑器保存后，正文 HTML 是否被改写。
+   - 每次 CMS 保存会部署两次（先是旧页面，再是 Action 重建后的页面）。可在 Vercel 设置 Ignored Build Step，只部署 Action 的提交。
+   - 用真实群聊测试一次：留言中输入 `<at id=all></at>` 不应 @ 所有人（代码已去掉 `<` `>`）。
+8. **部署（重要）：** Vercel 项目 `fcg-website` 的生产分支是 `main`，推送 `main` 会立即部署。**在 Marketing 确认前，请勿推送或合并到 `main`**。
+
+---
+
+## 9. 联系人
 
 - **内容、设计、优先级：** Crystal Wong
 - **技术细节：** 见本文件第 2 至第 5 节，以及 `codex/blog` 分支的提交说明

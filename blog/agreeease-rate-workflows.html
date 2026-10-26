@@ -44,6 +44,7 @@
     </script>
     <link rel="stylesheet" href="../assets/css/fcg-chrome.css">
     <link rel="stylesheet" href="../assets/css/fcg-brand-theme.css">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../assets/css/fcg-blog.css">
     <script src="../assets/js/fcg-blog.js" defer></script>
     <title>Placeholder: rate workflows in AgreeEase | FCG Blog</title>
@@ -62,6 +63,7 @@
 </head>
 <body class="bg-background text-foreground antialiased">
 <!-- SHARED:NAV -->
+    <a class="fcg-skip" href="#content">Skip to content</a>
     <nav class="marine-header-section fcg-dropdown-nav fixed top-0 z-50 w-full border-b">
         <div class="w-full px-4 md:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center gap-8">
@@ -167,7 +169,7 @@
                 <label id="themeToggleControl" class="flex items-center gap-3 cursor-pointer group">
                     <span class="text-xs font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors hidden sm:block uppercase">MODE</span>
                     <div class="relative">
-                        <input type="checkbox" id="themeToggle" class="sr-only peer" checked>
+                        <input type="checkbox" id="themeToggle" class="sr-only peer" aria-label="Dark mode" checked>
                         <div class="w-10 h-5 rounded-full peer peer-checked:bg-orange-900/40 border transition-all bg-zinc-800 border-white/10"></div>
                         <div class="absolute left-1 top-1 w-3 h-3 bg-zinc-500 rounded-full peer-checked:translate-x-5 peer-checked:bg-orange-500 transition-all shadow-[0_0_8px_rgba(249,115,22,0.4)] peer-checked:shadow-[0_0_12px_rgba(249,115,22,0.8)]"></div>
                     </div>
@@ -197,6 +199,7 @@
         </div>
     </div>
     <script src="../assets/js/fcg-nav.js" defer></script>
+    <span id="content" tabindex="-1"></span>
 <!-- /SHARED:NAV -->
 <main>
     <article class="article">
@@ -208,7 +211,7 @@
             <p class="article-dek">Placeholder excerpt for a product post.</p>
             <div class="article-byline">
                 <span class="post-author"><span class="post-avatar" aria-hidden="true">FT</span><span>FCG Team<small>Byline to confirm</small></span></span>
-                <p class="post-meta"><span>Draft</span><span>4 min read</span></p>
+                <p class="post-meta"><span>Draft</span><span>1 min read</span></p>
             </div>
             <div class="article-hero post-media" style="background-image: url('../assets/images/agreeease-product/sourcing-editorial.png');" aria-hidden="true"></div>
             <p class="draft-note" role="note">Draft: this post is placeholder content and is hidden from search engines.</p>
@@ -229,7 +232,7 @@
             <article class="post" data-tags="product ai">
                 <div class="post-media" style="background-image: url('../assets/images/about/fcg-editorial-flow-large.png');" aria-hidden="true"></div>
                 <div class="post-body">
-                    <p class="post-meta"><span>Draft</span><span>6 min read</span></p>
+                    <p class="post-meta"><span>Draft</span><span>1 min read</span></p>
                     <h3 class="post-title"><a href="../blog/ai-agents-live-travel-inventory.html">Placeholder: connecting AI agents to live travel inventory</a></h3>
                     <p class="post-excerpt">Placeholder excerpt. Replace with the first two sentences of the real post once it is approved.</p>
                     <div class="post-foot">
@@ -241,7 +244,7 @@
             <article class="post" data-tags="ai product">
                 <div class="post-media" style="background-image: url('../assets/images/about/fcg-editorial-flow-small.png');" aria-hidden="true"></div>
                 <div class="post-body">
-                    <p class="post-meta"><span>Draft</span><span>5 min read</span></p>
+                    <p class="post-meta"><span>Draft</span><span>1 min read</span></p>
                     <h3 class="post-title"><a href="../blog/ai-mapping-hotel-room-data.html">Placeholder: cleaning hotel and room data with AI</a></h3>
                     <p class="post-excerpt">Placeholder excerpt for an AI post.</p>
                     <div class="post-foot">
@@ -250,15 +253,15 @@
                     </div>
                 </div>
             </article>
-            <article class="post" data-tags="engineering">
-                <div class="post-media" style="background-image: url('../assets/images/about/fcg-editorial-flow-secondary.png');" aria-hidden="true"></div>
+            <article class="post" data-tags="company">
+                <div class="post-media" style="background-image: url('../assets/images/atlas-product/editorial-intelligence.jpg');" aria-hidden="true"></div>
                 <div class="post-body">
-                    <p class="post-meta"><span>Draft</span><span>8 min read</span></p>
-                    <h3 class="post-title"><a href="../blog/g-link-f-link-supplier-failover.html">Placeholder: how G-Link and F-Link handle supplier failover</a></h3>
-                    <p class="post-excerpt">Placeholder excerpt for an engineering post.</p>
+                    <p class="post-meta"><span>Draft</span><span>1 min read</span></p>
+                    <h3 class="post-title"><a href="../blog/company-news.html">Placeholder: company news</a></h3>
+                    <p class="post-excerpt">Placeholder excerpt for a company post.</p>
                     <div class="post-foot">
                         <span class="post-author"><span class="post-avatar" aria-hidden="true">FT</span>FCG Team</span>
-                        <a class="post-chip" href="../blog.html?topic=engineering">Engineering</a>
+                        <a class="post-chip" href="../blog.html?topic=company">Company</a>
                     </div>
                 </div>
             </article>
@@ -275,13 +278,13 @@
             .site-footer .ft-link { color:#6b7280; transition: color .2s ease; }
             .site-footer .ft-link:hover { color:#0f1114; }
             .site-footer .ft-logo svg path { fill:#0f1114; }
-            .site-footer .ft-copy { color: rgba(15,17,20,.4); }
+            .site-footer .ft-copy { color: rgba(15,17,20,.62); }
             html[data-theme="dark"] .site-footer { background:#000; border-color: rgba(255,255,255,.1); color:#a1a1aa; }
             html[data-theme="dark"] .site-footer .ft-head { color:#ffffff; }
             html[data-theme="dark"] .site-footer .ft-link { color:#a1a1aa; }
             html[data-theme="dark"] .site-footer .ft-link:hover { color:#ffffff; }
             html[data-theme="dark"] .site-footer .ft-logo svg path { fill:#ffffff; }
-            html[data-theme="dark"] .site-footer .ft-copy { color: rgba(255,255,255,.3); }
+            html[data-theme="dark"] .site-footer .ft-copy { color: rgba(255,255,255,.55); }
         </style>
         <div class="max-w-[100rem] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-[4rem] md:gap-[2rem]">
 
@@ -312,7 +315,7 @@
                 <a href="../about.html" class="ft-link">About</a>
                 <a href="../blog.html" class="ft-link">Blog</a>
                 <a href="../developer.html" class="ft-link">Developer</a>
-                <a href="mailto:hello@fusionconnectgroup.com" class="ft-link">Contact</a>
+                <a href="../contact.html" class="ft-link">Contact</a>
             </div>
 
             <div class="col-span-1 md:col-span-3 flex flex-col md:items-end gap-4">

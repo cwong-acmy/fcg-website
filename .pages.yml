@@ -1,0 +1,109 @@
+# Pages CMS (https://app.pagescms.org): Marketing's editor for the FCG blog.
+# Each save is a Git commit; .github/workflows/build-site.yml then rebuilds the HTML pages.
+media:
+  input: assets/images/blog
+  output: /assets/images/blog
+  categories: [image]
+
+content:
+  - name: posts
+    label: Blog posts
+    type: collection
+    path: blog/posts
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: title
+      fields: [title, draft, date, topic]
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+        description: The file name (and the post's web address) is made from the title when the post is first saved. Changing the title later does not change the address.
+      - name: excerpt
+        label: Summary
+        type: text
+        required: true
+        description: One or two sentences. Shown on cards, in Google results and in the RSS feed.
+      - name: draft
+        label: Draft
+        type: boolean
+        default: true
+        description: A draft still appears on the blog with a draft note, but is hidden from Google, RSS and the sitemap. Turn off to publish; a published post needs a date.
+      - name: featured
+        label: Featured at the top of the blog
+        type: boolean
+        default: false
+      - name: date
+        label: Publish date
+        type: date
+      - name: topic
+        label: Main topic
+        type: select
+        required: true
+        options:
+          values:
+            - { value: product, label: Product }
+            - { value: engineering, label: Engineering }
+            - { value: ai, label: AI }
+            - { value: industry, label: Industry }
+            - { value: company, label: Company }
+      - name: tags
+        label: Filter topics
+        type: select
+        description: Topics this post appears under in the blog filter. Include the main topic.
+        options:
+          multiple: true
+          values: [product, engineering, ai, industry, company]
+      - name: products
+        label: Show on product pages
+        type: select
+        description: The post appears in "Related reading" on these pages.
+        options:
+          multiple: true
+          values:
+            - { value: corporate-booking-tool, label: Corporate Booking Tool }
+            - { value: ai-booking-tool, label: AI Booking Tool }
+            - { value: agreeease, label: AgreeEase }
+            - { value: atlas, label: Atlas }
+            - { value: glink, label: G-Link }
+            - { value: flink, label: F-Link }
+            - { value: addn, label: ADDN }
+            - { value: payment, label: Payment }
+            - { value: developer, label: Developer }
+      - name: image
+        label: Cover image
+        type: image
+        required: true
+        description: Landscape, at least 1600px wide. File names without spaces.
+      - name: contain
+        label: Cover is a logo or icon (do not crop)
+        type: boolean
+        default: false
+      - name: author
+        label: Author
+        type: string
+        required: true
+        default: FCG Team
+      - name: role
+        label: Author role
+        type: string
+      - name: cta
+        label: Call to action at the end (optional, defaults to "Book a demo")
+        type: object
+        fields:
+          - { name: title, label: Heading, type: string }
+          - { name: text, label: Text, type: string }
+          - { name: href, label: Link (a page such as atlas.html), type: string }
+          - { name: label, label: Button text, type: string }
+      - name: body
+        label: Article
+        type: rich-text
+        required: true
+        options:
+          format: html
