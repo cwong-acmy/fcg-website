@@ -1,0 +1,80 @@
+{
+  "_readme": "Per-page <title>, meta description, canonical, Open Graph and JSON-LD for the core pages. tools/build-site.py writes them into each page's BUILD:SEO region. Titles under 60 characters, descriptions under 160. sameAs: add official profile URLs (LinkedIn etc.) when they exist; never guess them.",
+  "organization": {
+    "name": "Fusion Connect Group",
+    "alternateName": [
+      "FCG",
+      "FCG Group"
+    ],
+    "description": "Fusion Connect Group (FCG) is a travel technology company that gives TMCs, travel agencies, builders and corporate travel programmes API access to hotel and flight supply. Started in China, now global.",
+    "logo": "assets/images/fcg-logo.svg",
+    "email": "hello@fusionconnectgroup.com",
+    "sameAs": []
+  },
+  "og_image": "assets/images/about/fcg-editorial-flow-large.png",
+  "pages": {
+    "index.html": {
+      "title": "Fusion Connect Group (FCG): hotel and flight supply APIs",
+      "description": "G-Link and F-Link connect TMCs, builders and corporate travel programmes to 4.35M+ hotels and GDS, NDC and LCC flight content through one API.",
+      "schema": "WebSite"
+    },
+    "about.html": {
+      "title": "About Fusion Connect Group (FCG)",
+      "description": "Fusion Connect Group (FCG) builds direct, AI-powered API access to hotel and flight supply for travel businesses. Started in China, now global.",
+      "schema": "AboutPage"
+    },
+    "addn.html": {
+      "title": "ADDN distribution network | Fusion Connect Group",
+      "description": "ADDN is FCG's AI-Powered Decentralized Distribution Network: independently deployable travel and payment infrastructure that runs across independent hubs.",
+      "schema": "SoftwareApplication",
+      "name": "ADDN"
+    },
+    "agreeease.html": {
+      "title": "AgreeEase hotel RFP and rate sourcing | Fusion Connect Group",
+      "description": "AgreeEase is a white-label hotel RFP platform: source supply, negotiate terms, sign contracts and get flagged when live rates drift from what you agreed.",
+      "schema": "SoftwareApplication",
+      "name": "AgreeEase"
+    },
+    "ai-booking-tool.html": {
+      "title": "AI Booking Tool for business travel | Fusion Connect Group",
+      "description": "Travellers plan and book trips in plain language or by voice against FCG's full hotel and flight content, including inside Microsoft 365.",
+      "schema": "SoftwareApplication",
+      "name": "FCG AI Booking Tool"
+    },
+    "atlas.html": {
+      "title": "Atlas TMC operating system | Fusion Connect Group",
+      "description": "Atlas puts a travel team's communications, operations, finance and duty of care in one platform, running on FCG's ADDN network.",
+      "schema": "SoftwareApplication",
+      "name": "Atlas"
+    },
+    "corporate-booking-tool.html": {
+      "title": "White-label corporate booking tool | Fusion Connect Group",
+      "description": "Run your own branded corporate booking platform on your own domain, connected to FCG's full hotel and flight content. You deploy and operate it.",
+      "schema": "SoftwareApplication",
+      "name": "FCG Corporate Booking Tool"
+    },
+    "developer.html": {
+      "title": "Travel APIs for hotels and flights | Fusion Connect Group",
+      "description": "Build on G-Link and F-Link: one connection to 4.35M+ hotel records plus GDS, NDC and LCC air. Integrate by API, SDK or Skills, with sandbox access.",
+      "schema": "WebPage"
+    },
+    "flink.html": {
+      "title": "F-Link flight content engine | Fusion Connect Group",
+      "description": "F-Link consolidates GDS, NDC and low-cost carrier content into one pre-validated air feed, reachable through a single FCG connection.",
+      "schema": "SoftwareApplication",
+      "name": "F-Link"
+    },
+    "glink.html": {
+      "title": "G-Link hotel content engine | Fusion Connect Group",
+      "description": "G-Link normalises GDS, channel manager, aggregator and direct-contract hotel supply into one chain: 4.35M+ hotels in 220+ countries, one connection.",
+      "schema": "SoftwareApplication",
+      "name": "G-Link"
+    },
+    "payment.html": {
+      "title": "China hotel payment settlement | Fusion Connect Group",
+      "description": "Settle Chinese hotel bookings without the FX detour. With Conferma, FCG delivers compliant cross-border hotel settlement for TMCs and agencies.",
+      "schema": "Service",
+      "name": "China hotel payment settlement"
+    }
+  }
+}

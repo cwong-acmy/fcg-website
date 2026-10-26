@@ -28,6 +28,61 @@ WPM = 220  # reading speed for the "N min read" label
 DEFAULT_CTA = {"title": "Talk to FCG", "text": "See how FCG connects your team to live travel supply.",
                "href": "contact.html", "label": "Book a demo"}
 ICON = '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
+SEO = json.loads((ROOT / "_shell" / "seo.json").read_text(encoding="utf-8"))
+ORG_ID = f"{SITE}/#organization"
+
+
+def org_ld():
+    o = SEO["organization"]
+    d = {"@type": "Organization", "@id": ORG_ID, "name": o["name"], "alternateName": o["alternateName"], "url": f"{SITE}/",
+         "logo": f"{SITE}/{o['logo']}", "email": o["email"], "description": o["description"]}
+    if o["sameAs"]:
+        d["sameAs"] = o["sameAs"]
+    return d
+
+
+def seo_head(name, s):
+    """<title>, description, canonical, Open Graph and one JSON-LD @graph for a core page, from _shell/seo.json."""
+    assert len(s["title"]) <= 60 and len(s["description"]) <= 160, f"{name}: title <= 60 and description <= 160 characters"
+    url = f"{SITE}/" if name == "index.html" else f"{SITE}/{name}"
+    kind = s["schema"]
+    graph = [org_ld()]
+    if kind == "WebSite":
+        graph.append({"@type": "WebSite", "@id": f"{SITE}/#website", "url": f"{SITE}/", "name": SEO["organization"]["name"],
+                      "alternateName": "FCG", "publisher": {"@id": ORG_ID}})
+    elif kind in ("SoftwareApplication", "Service"):
+        item = {"@type": kind, "name": s["name"], "description": s["description"], "url": url}
+        if kind == "Service":
+            item["provider"] = {"@id": ORG_ID}
+        else:
+            item.update(publisher={"@id": ORG_ID}, applicationCategory="BusinessApplication", operatingSystem="Web")
+        graph.append(item)
+    graph.append({"@type": "AboutPage" if kind == "AboutPage" else "WebPage", "@id": f"{url}#webpage", "url": url, "name": s["title"],
+                  "description": s["description"], "isPartOf": {"@id": f"{SITE}/#website"}, "about": {"@id": ORG_ID}})
+    ld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("</", "<\\/")
+    img = f"{SITE}/{SEO['og_image']}"
+    return "\n".join([
+        f"    <title>{esc(s['title'])}</title>",
+        f'    <meta name="description" content="{esc(s["description"])}">',
+        f'    <link rel="canonical" href="{url}">',
+        '    <meta property="og:type" content="website">',
+        f'    <meta property="og:site_name" content="{esc(SEO["organization"]["name"])}">',
+        f'    <meta property="og:title" content="{esc(s["title"])}">',
+        f'    <meta property="og:description" content="{esc(s["description"])}">',
+        f'    <meta property="og:url" content="{url}">',
+        f'    <meta property="og:image" content="{img}">',
+        '    <meta name="twitter:card" content="summary_large_image">',
+        f'    <script type="application/ld+json">{ld}</script>',
+    ])
+
+
+def ensure_seo_region(text, name):
+    """First run only: replace the page's own <title> with an empty BUILD:SEO region."""
+    if "<!-- BUILD:SEO -->" not in text:
+        text, n = re.subn(r"[ \t]*<title>.*?</title>\n", "", text, count=1, flags=re.S)
+        assert n == 1, f"{name}: no <title> to replace"
+        text = text.replace("</head>", "<!-- BUILD:SEO --><!-- /BUILD:SEO -->\n</head>", 1)
+    return text
 TOPICS = {"product": "Product", "engineering": "Engineering", "ai": "AI", "industry": "Industry", "company": "Company"}
 STRIP_BEFORE = [  # first marker found on a page is where the blog strip goes
     "<!-- ===== CLOSING CTA ===== -->",
@@ -120,7 +175,7 @@ def post_page(p, posts, head):
     url = f"{SITE}/blog/{p['slug']}.html"
     ld = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": p["title"], "description": p["excerpt"],
           "url": url, "image": f"{SITE}/{p['image']}", "author": {"@type": "Person" if p["author"] != "FCG Team" else "Organization", "name": p["author"]},
-          "publisher": {"@type": "Organization", "name": "FCG Group", "url": SITE}}
+          "publisher": {"@type": "Organization", "@id": ORG_ID, "name": SEO["organization"]["name"], "url": f"{SITE}/"}}
     if p.get("date"):
         ld["datePublished"] = p["date"]
     cta = p["cta"]
@@ -217,6 +272,8 @@ def build():
             text = region(text, "BUILD:HEAD", head.replace("{{root}}", "").rstrip("\n"))
         elif ICON not in text:
             text = text.replace("</head>", f"    {ICON}\n</head>", 1)
+        if page.name in SEO["pages"]:
+            text = region(ensure_seo_region(text, page.name), "BUILD:SEO", seo_head(page.name, SEO["pages"][page.name]))
         if page.name == "blog.html":
             used = [t for t in TOPICS if any(t in p["tags"] for p in posts)]
             tags = ['                    <button class="blog-tag" type="button" data-tag="all" aria-pressed="true">All posts</button>']
