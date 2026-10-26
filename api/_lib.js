@@ -47,7 +47,7 @@ async function insertRow(table, row, env = process.env, fetchImpl = fetch) {
       "Content-Profile": env.FCG_DB_SCHEMA || "fcg_website", Prefer: "return=representation",
     },
     body: JSON.stringify(row),
-    signal: AbortSignal.timeout(4000),
+    signal: AbortSignal.timeout(8000),
   });
   const text = await res.text().catch(() => "");
   // Only the email unique index means "already subscribed"; any other conflict must surface.
@@ -68,7 +68,7 @@ async function tenantToken(env, fetchImpl) {
   const res = await fetchImpl(`${FEISHU}/open-apis/auth/v3/tenant_access_token/internal`, {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ app_id: env.LARK_APP_ID, app_secret: env.LARK_APP_SECRET }),
-    signal: AbortSignal.timeout(2500),
+    signal: AbortSignal.timeout(5000),
   });
   const data = await res.json();
   if (!res.ok || data.code !== 0 || !data.tenant_access_token) throw new Error(`Lark token error ${data.code}: ${data.msg}`);
@@ -80,7 +80,7 @@ async function larkPost(path, body, env, fetchImpl) {
   const t = await tenantToken(env, fetchImpl);
   const res = await fetchImpl(`${FEISHU}${path}`, {
     method: "POST", headers: { Authorization: `Bearer ${t}`, "Content-Type": "application/json" },
-    body: JSON.stringify(body), signal: AbortSignal.timeout(2500),
+    body: JSON.stringify(body), signal: AbortSignal.timeout(5000),
   });
   const data = await res.json().catch(() => ({}));
   // A 91403 on the Base write means the app is not a collaborator on that Base (document ACL), not a missing scope.
