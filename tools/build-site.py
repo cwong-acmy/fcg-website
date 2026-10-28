@@ -23,7 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://www.fusionconnectgroup.com"  # launch domain for canonical/OG/RSS; the blog ships with the redesign
 SKIP = {"components.html", "nav-preview.html"}  # design reference + throwaway nav preview, not live pages
-NO_STRIP = {"about.html", "contact.html"}  # nav/footer only, no blog strip
+NO_STRIP = {"about.html", "contact.html", "404.html"}  # nav/footer only, no blog strip
 WPM = 220  # reading speed for the "N min read" label
 DEFAULT_CTA = {"title": "Talk to FCG", "text": "See how FCG connects your team to live travel supply.",
                "href": "contact.html", "label": "Book a demo"}
@@ -298,7 +298,7 @@ def build():
     for p in posts:
         out[ROOT / "blog" / f"{p['slug']}.html"] = post_page(p, posts, head)
     out[ROOT / "blog" / "feed.xml"] = feed(posts)
-    out[ROOT / "sitemap.xml"] = sitemap(sorted(k.name for k in out if k.parent == ROOT), posts)
+    out[ROOT / "sitemap.xml"] = sitemap(sorted(k.name for k in out if k.parent == ROOT and k.name != "404.html"), posts)
 
     stale = [k for k, v in out.items() if not k.exists() or k.read_text(encoding="utf-8") != v]
     orphans = [f for f in (ROOT / "blog").glob("*.html") if f.name != "_post.html" and f not in out

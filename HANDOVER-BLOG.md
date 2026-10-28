@@ -149,7 +149,19 @@ python3 tools/build-site.py --check
    ```
 2. **staging 加 noindex：** `add_header X-Robots-Tag "noindex" always;`（只加在 staging）。
 3. **启用自动构建：** 合并后 Action 会在推送时运行。请确认仓库 Settings → Actions 允许 workflow 写入（Read and write permissions），以及受保护分支是否允许 Action 推送。
-4. **表单后端运行在哪里：** `api/` 是 Vercel Functions，生产环境若在 Vercel 可直接使用。staging 是 nginx，无法运行 `api/`，可以把 `/api/` 反向代理到 Vercel 部署，或改为 Supabase Edge Function。未接通时表单会显示"未能发送，请发邮件到 hello@"，不会假装成功。
+4. **表单后端运行在哪里：** `api/` 是 Vercel Functions，生产环境若在 Vercel 可直接使用。staging 是 nginx，无法运行 `api/`，所以 `/api/book-demo`、`/api/subscribe` 返回 nginx 404。未接通时表单会显示"未能发送，请发邮件到 hello@"，不会假装成功。
+   - **预发布接口地址：** `https://fcg-website-git-codex-blog-crystalwong-accomycoms-projects.vercel.app`（`codex/blog` 分支的固定预览地址，9 个环境变量已在 Vercel Preview 环境设置好）。
+   - **该地址有 Vercel 登录保护**，直接访问会 302 跳转到登录页。nginx 代理时需带上 bypass 请求头，密钥由 Crystal 私下提供：
+   ```nginx
+   location /api/ {
+       proxy_pass https://fcg-website-git-codex-blog-crystalwong-accomycoms-projects.vercel.app;
+       proxy_set_header Host fcg-website-git-codex-blog-crystalwong-accomycoms-projects.vercel.app;
+       proxy_ssl_server_name on;
+       proxy_set_header x-vercel-protection-bypass "<由 Crystal 私下提供>";
+   }
+   ```
+   - 前端无需修改。注意：经代理后所有访客在 Vercel 看来是同一个 IP（nginx 服务器），所以"每 IP 10 分钟 8 次"的限流在 staging 上是所有测试人员共用的。
+   - 另一种方案是改为 Supabase Edge Function，工作量更大。
 5. **Supabase：** 已完成：`accomy-projects` 中的 `fcg_website` schema 已建好并开放，专用密钥已生成（值由 Crystal 私下提供）。飞书多维表格和群聊也已建好，端到端测试通过。注意：工作账号的 Supabase 是免费版，约一周无流量会暂停，暂停期间表单全部失败。建议付费版，或每周检查行数。
 6. **Pages CMS 编辑权限：** 每位 Marketing 编辑需要 GitHub 账号和仓库写权限。是否保存即上线，还是先到分支审核再合并，请确认。
 7. **上线前（独立审查 2026-10-26 提出）：**
@@ -160,6 +172,7 @@ python3 tools/build-site.py --check
    - 每次 CMS 保存会部署两次（先是旧页面，再是 Action 重建后的页面）。可在 Vercel 设置 Ignored Build Step，只部署 Action 的提交。
    - 用真实群聊测试一次：留言中输入 `<at id=all></at>` 不应 @ 所有人（代码已去掉 `<` `>`）。
 8. **部署（重要）：** Vercel 项目 `fcg-website` 的生产分支是 `main`，推送 `main` 会立即部署。**在 Marketing 确认前，请勿推送或合并到 `main`**。
+9. **404 页面：** 已补官网风格的 `404.html`（任意层级的错误网址都能正常显示样式，已设 noindex，不进 sitemap）。请在 nginx 配置 `error_page 404 /404.html;`，并去掉把未知路径回落到首页的规则（如 `try_files ... /index.html`），否则错误网址会返回 200 和首页。Vercel 会自动使用 `404.html`。
 
 ---
 
