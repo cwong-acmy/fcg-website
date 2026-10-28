@@ -258,8 +258,17 @@ def sitemap(pages, posts):
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}</urlset>\n'
 
 
+SOON = """            <div class="blog-soon">
+                <p class="blog-soon-title">Coming soon</p>
+                <p>Our first articles are on the way. Subscribe above to get them first.</p>
+            </div>"""
+
+
 def build():
     posts = load_posts()
+    # Drafts still get their own (noindex) page for review by direct link, but are never listed.
+    # No published post yet: the blog shows "Coming soon" and the home/product strips stay empty.
+    public = [p for p in posts if not p.get("draft")]
     head = read("_shell/blog-head.html")
     css = '<link rel="stylesheet" href="assets/css/fcg-blog.css">'
     out = {}
@@ -275,28 +284,31 @@ def build():
         if page.name in SEO["pages"]:
             text = region(ensure_seo_region(text, page.name), "BUILD:SEO", seo_head(page.name, SEO["pages"][page.name]))
         if page.name == "blog.html":
-            used = [t for t in TOPICS if any(t in p["tags"] for p in posts)]
-            tags = ['                    <button class="blog-tag" type="button" data-tag="all" aria-pressed="true">All posts</button>']
+            used = [t for t in TOPICS if any(t in p["tags"] for p in public)]
+            tags = ['                    <button class="blog-tag" type="button" data-tag="all" aria-pressed="true">All posts</button>'] if public else []
             tags += [f'                    <button class="blog-tag" type="button" data-tag="{t}" aria-pressed="false">{TOPICS[t]}</button>' for t in used]
             text = region(text, "BLOG:TAGS", "\n".join(tags))
             # ponytail: one page of cards; add pagination once there are more than ~24 posts
-            cards = [card(posts[0], "", featured=True, h="h2"), '            <div class="blog-grid">']
-            cards += [card(p, "") for p in posts[1:]] + ["            </div>"]
+            if public:
+                cards = [card(public[0], "", featured=True, h="h2"), '            <div class="blog-grid">']
+                cards += [card(p, "") for p in public[1:]] + ["            </div>"]
+            else:
+                cards = [SOON]
             text = region(text, "BLOG:CARDS", "\n".join(cards))
         elif page.name == "index.html":
             text = ensure_region(text, "BLOG:LATEST", css)
-            text = region(text, "BLOG:LATEST", strip(posts[:3], "Latest from the blog", "All posts"))
+            text = region(text, "BLOG:LATEST", strip(public[:3], "Latest from the blog", "All posts") if public else "")
         elif page.name not in NO_STRIP:
             slug = page.stem
-            mine = [p for p in posts if slug in p["products"]]
-            picks = (mine + [p for p in posts if p not in mine])[:3]  # top up with latest so the row is always full
+            mine = [p for p in public if slug in p["products"]]
+            picks = (mine + [p for p in public if p not in mine])[:3]  # top up with latest so the row is always full
             text = ensure_region(text, "BLOG:RELATED", css)
             title = "Related reading" if mine else "From the blog"
-            text = region(text, "BLOG:RELATED", strip(picks, title, "All posts"))
+            text = region(text, "BLOG:RELATED", strip(picks, title, "All posts") if public else "")
         out[page] = text
 
     for p in posts:
-        out[ROOT / "blog" / f"{p['slug']}.html"] = post_page(p, posts, head)
+        out[ROOT / "blog" / f"{p['slug']}.html"] = post_page(p, posts if p.get("draft") else public, head)
     out[ROOT / "blog" / "feed.xml"] = feed(posts)
     out[ROOT / "sitemap.xml"] = sitemap(sorted(k.name for k in out if k.parent == ROOT and k.name != "404.html"), posts)
 

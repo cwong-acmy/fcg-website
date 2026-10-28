@@ -63,6 +63,8 @@
 
 .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .blog-empty { padding: 64px 0; text-align: center; color: var(--fcg-muted); }
+.blog-soon { padding: 96px 24px; text-align: center; color: var(--fcg-muted); border-top: 1px solid var(--fcg-border); }
+.blog-soon-title { font-size: clamp(32px, 4vw, 48px); font-weight: 500; line-height: 1; letter-spacing: -0.025em; color: var(--fcg-fg); margin: 0 0 16px; }
 
 /* ---------- Strips on home and product pages ---------- */
 .blog-strip-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 40px; }
