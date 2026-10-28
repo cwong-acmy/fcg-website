@@ -28,7 +28,9 @@ WPM = 220  # reading speed for the "N min read" label
 DEFAULT_CTA = {"title": "Talk to FCG", "text": "See how FCG connects your team to live travel supply.",
                "href": "contact.html", "label": "Book a demo"}
 ICON = '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
-POSTHOG_KEY = ""  # FCG Website project token (public, phc_...). Empty = no tracking on any page.
+# PostHog "FCG Website" project 693521 (org Fusion Connect Group, US cloud); public token, also in 1Password
+# LLM Automations "PostHog - FCG Website project token". Empty = no tracking on any page.
+POSTHOG_KEY = "phc_zUEdMcAbLzpFBva9aVHXWi2tGesuFFdvCgw6Wd3LGg96"
 SEO = json.loads((ROOT / "_shell" / "seo.json").read_text(encoding="utf-8"))
 ORG_ID = f"{SITE}/#organization"
 
