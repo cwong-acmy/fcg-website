@@ -35,8 +35,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Forms post to /api/* (Vercel functions in api/). Success is shown only after the server saved the row.
     function post(path, data) {
         return fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data), signal: AbortSignal.timeout(15000) })
-            .then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { ok: r.ok, error: b.error }; }); })
+            .then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { ok: r.ok, status: r.status, error: b.error }; }); })
             .catch(function () { return { ok: false }; });
+    }
+    // Same event names as accomy.com (src/lib/analytics.ts). posthog only exists on the live domain.
+    function track(event, props) {
+        if (window.posthog) window.posthog.capture(event, props);
     }
     function say(el, text, isError) {
         el.textContent = text;
@@ -55,8 +59,8 @@ document.addEventListener('DOMContentLoaded', function () {
             post('/api/subscribe', { email: input.value, source: 'blog_newsletter', website: (form.querySelector('[name=website]') || {}).value || '' })
                 .then(function (r) {
                     btn.disabled = false;
-                    if (r.ok) { say(status, 'Thanks, you are subscribed.'); form.reset(); }
-                    else say(status, r.error || FALLBACK, true);
+                    if (r.ok) { say(status, 'Thanks, you are subscribed.'); form.reset(); track('newsletter_subscribed', { locale: 'en', source: 'blog' }); }
+                    else { say(status, r.error || FALLBACK, true); track('lead_submit_failed', { form: 'newsletter', status: r.status }); }
                 });
         });
     });
@@ -84,7 +88,8 @@ document.addEventListener('DOMContentLoaded', function () {
             say(status, 'Sending…');
             post('/api/book-demo', data).then(function (r) {
                 btn.disabled = false;
-                if (!r.ok) { say(status, r.error || FALLBACK, true); return; }
+                if (!r.ok) { say(status, r.error || FALLBACK, true); track('lead_submit_failed', { form: 'book_demo', status: r.status }); return; }
+                track('lead_submitted', { form: 'book_demo', product: data.product });
                 demo.hidden = true;
                 const done = document.getElementById('demoDone');
                 done.hidden = false;

@@ -28,6 +28,7 @@ WPM = 220  # reading speed for the "N min read" label
 DEFAULT_CTA = {"title": "Talk to FCG", "text": "See how FCG connects your team to live travel supply.",
                "href": "contact.html", "label": "Book a demo"}
 ICON = '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
+POSTHOG_KEY = ""  # FCG Website project token (public, phc_...). Empty = no tracking on any page.
 SEO = json.loads((ROOT / "_shell" / "seo.json").read_text(encoding="utf-8"))
 ORG_ID = f"{SITE}/#organization"
 
@@ -112,6 +113,15 @@ def chrome(text, root):
             text = text[:m.start()] + f"<!-- {name} --><!-- /{name} -->\n" + text[m.end():]
     text = region(text, "SHARED:NAV", read("_shell/nav.html").replace("{{root}}", root).rstrip("\n"))
     return region(text, "SHARED:FOOTER", read("_shell/footer.html").replace("{{root}}", root).rstrip("\n"))
+
+
+def analytics(text):
+    """PostHog (_shell/posthog.html) at the end of every page's <head>; an empty region until POSTHOG_KEY is set."""
+    assert not POSTHOG_KEY or re.fullmatch(r"phc_\w+", POSTHOG_KEY), "POSTHOG_KEY must be a phc_ project token"
+    if "<!-- BUILD:ANALYTICS -->" not in text:
+        text = text.replace("</head>", "<!-- BUILD:ANALYTICS --><!-- /BUILD:ANALYTICS -->\n</head>", 1)
+    snippet = read("_shell/posthog.html").replace("{{key}}", POSTHOG_KEY).rstrip("\n") if POSTHOG_KEY else ""
+    return region(text, "BUILD:ANALYTICS", snippet)
 
 
 def card(p, root, featured=False, h="h3"):
@@ -305,10 +315,10 @@ def build():
             text = ensure_region(text, "BLOG:RELATED", css)
             title = "Related reading" if mine else "From the blog"
             text = region(text, "BLOG:RELATED", strip(picks, title, "All posts") if public else "")
-        out[page] = text
+        out[page] = analytics(text)
 
     for p in posts:
-        out[ROOT / "blog" / f"{p['slug']}.html"] = post_page(p, posts if p.get("draft") else public, head)
+        out[ROOT / "blog" / f"{p['slug']}.html"] = analytics(post_page(p, posts if p.get("draft") else public, head))
     out[ROOT / "blog" / "feed.xml"] = feed(posts)
     out[ROOT / "sitemap.xml"] = sitemap(sorted(k.name for k in out if k.parent == ROOT and k.name != "404.html"), posts)
 
