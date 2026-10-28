@@ -31,6 +31,9 @@ ICON = '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
 # PostHog "FCG Website" project 693521 (org Fusion Connect Group, US cloud); public token, also in 1Password
 # LLM Automations "PostHog - FCG Website project token". Empty = no tracking on any page.
 POSTHOG_KEY = "phc_zUEdMcAbLzpFBva9aVHXWi2tGesuFFdvCgw6Wd3LGg96"
+# Google Tag Manager "FCG" container for www.fusionconnectgroup.com; it loads GA4 G-QM59ND5BC3.
+# 1Password LLM Automations "Google Analytics + Tag Manager - FCG Website".
+GTM_ID = "GTM-MKFC3SDS"
 SEO = json.loads((ROOT / "_shell" / "seo.json").read_text(encoding="utf-8"))
 ORG_ID = f"{SITE}/#organization"
 
@@ -118,11 +121,13 @@ def chrome(text, root):
 
 
 def analytics(text):
-    """PostHog (_shell/posthog.html) at the end of every page's <head>; an empty region until POSTHOG_KEY is set."""
+    """PostHog + GTM (_shell/analytics.html) at the end of every page's <head>; an empty region until both IDs are set."""
     assert not POSTHOG_KEY or re.fullmatch(r"phc_\w+", POSTHOG_KEY), "POSTHOG_KEY must be a phc_ project token"
+    assert not GTM_ID or re.fullmatch(r"GTM-[A-Z0-9]+", GTM_ID), "GTM_ID must look like GTM-XXXX"
     if "<!-- BUILD:ANALYTICS -->" not in text:
         text = text.replace("</head>", "<!-- BUILD:ANALYTICS --><!-- /BUILD:ANALYTICS -->\n</head>", 1)
-    snippet = read("_shell/posthog.html").replace("{{key}}", POSTHOG_KEY).rstrip("\n") if POSTHOG_KEY else ""
+    snippet = (read("_shell/analytics.html").replace("{{key}}", POSTHOG_KEY).replace("{{gtm}}", GTM_ID).rstrip("\n")
+               if POSTHOG_KEY and GTM_ID else "")
     return region(text, "BUILD:ANALYTICS", snippet)
 
 

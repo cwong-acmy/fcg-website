@@ -38,9 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { ok: r.ok, status: r.status, error: b.error }; }); })
             .catch(function () { return { ok: false }; });
     }
-    // Same event names as accomy.com (src/lib/analytics.ts). posthog only exists on the live domain.
+    // Same event names as accomy.com (src/lib/analytics.ts, lp-lead.ts). posthog and dataLayer only exist on the live domain.
     function track(event, props) {
         if (window.posthog) window.posthog.capture(event, props);
+        if (window.dataLayer && event === 'lead_submitted') window.dataLayer.push(Object.assign({ event: 'generate_lead' }, props));
     }
     function say(el, text, isError) {
         el.textContent = text;
