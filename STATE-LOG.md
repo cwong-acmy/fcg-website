@@ -8,6 +8,13 @@
 - **Docs:** studio link swapped to the Vercel URL in the design bible, visual reference kit, Buzz handover, FCG-DESIGN, brand kit, Developer Platform system and film contract, plus the 7 matching wiki pages (patched in place).
 - **Open:** not pushed (this branch is the Developer Platform's production branch, so a push redeploys it). The 02.FCG single-file studio is now the older copy. The site is public, including the Calendly reference frames.
 
+### Learnings
+
+- **Problem:** browser tests of the studio showed 6 wrong-size exports and a 16 s first export, neither of which was real.
+- **Approach:** (1) Compared each bad PNG with the on-screen frame: they matched, so the exporter was faithful and the state was stale. (2) Found the first test, which had timed out, still running in the page and changing settings. Reloaded, re-ran: 202 of 202. (3) Re-timed in a front tab of Chrome for Testing: first export 71 ms, so the 16 s was the hidden pane throttling timers.
+- **Judgment calls:** Did NOT add caching or warm-up code for a slowness that only exists in a hidden pane. Did NOT trust any timing from the hidden built-in pane.
+- **Rule:** Reload the page after any timed-out browser script, and take timings only from a visible tab.
+
 ## 2026-10-28 ~10:15 UTC — Search Console: property added, BLOCKED on DNS record
 
 - Search Console (crystal.wong@fusionconnectgroup.com): Domain property `fusionconnectgroup.com` added, unverified. DNS is at GoDaddy (ns63/ns64.domaincontrol.com; existing TXT is only the Outlook SPF). Did not use Google's "sign in to GoDaddy" flow (needs FCG's GoDaddy login + OAuth grant). TXT to add at the apex: `google-site-verification=h6q4K8DAr0PecM8EyXmac6yN89PmyarrfBQdmDuR5kA` (also in 1Password item `f6gg3fs3vj3baggj42j5qiwzym`, field "Search Console DNS TXT"). After it resolves: Search Console → Verify, then link to GA4 property 561108472 and submit `https://www.fusionconnectgroup.com/sitemap.xml`. Fallback after launch: URL-prefix property verified through GA4/GTM, no DNS needed.
