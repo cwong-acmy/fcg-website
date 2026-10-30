@@ -957,9 +957,11 @@ function fit(){
 }
 // Fonts must be loaded or the PNG silently falls back to a system face.
 async function fontsOk(){
-  await Promise.all(["300","400","500","600"].map(w=>document.fonts.load(`${w} 40px Inter`)));
+  // Caveat is used only on the Guide kraft cover, so it would otherwise load lazily and miss the first export.
+  const need=["300 40px Inter","400 40px Inter","500 40px Inter","600 40px Inter","600 40px Caveat"];
+  await Promise.all(need.map(f=>document.fonts.load(f)));
   await document.fonts.ready;
-  return ["400","500"].every(w=>document.fonts.check(`${w} 40px Inter`));
+  return need.every(f=>document.fonts.check(f));
 }
 async function renderPNG(scale=1){
   // modern-screenshot hands the DOM to the browser's own renderer (SVG foreignObject),

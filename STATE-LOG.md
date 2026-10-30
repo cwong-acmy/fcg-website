@@ -1,5 +1,10 @@
 # STATE-LOG — FCG Website
 
+## 2026-10-30 (evening) — Ad Studio export now waits for every brand font VERIFIED
+
+- **Changed:** `fontsOk()` loads and checks Inter 300 to 600 and Caveat. Caveat is used only on the Guide kraft cover and loaded lazily, so an export straight after switching to it could catch a fallback face. Found while building the Accomy and Runway studios (same fix there).
+- **Verified:** full suite on the change, then live: 202 of 202 exports, layout identical to the previous live version, real Export click saved a 1080×1080 PNG, 0 outside requests, 0 page errors. Redeployed; live byte-identical.
+
 ## 2026-10-30 (later) — Ad Studio: long text wraps, Enter makes line breaks VERIFIED
 
 - **Problem (Alfred):** a headline with no spaces ran off the canvas or under the guide card.
