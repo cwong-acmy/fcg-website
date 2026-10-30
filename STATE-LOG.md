@@ -5,6 +5,13 @@
 - **Changed:** `fontsOk()` loads and checks Inter 300 to 600 and Caveat. Caveat is used only on the Guide kraft cover and loaded lazily, so an export straight after switching to it could catch a fallback face. Found while building the Accomy and Runway studios (same fix there).
 - **Verified:** full suite on the change, then live: 202 of 202 exports, layout identical to the previous live version, real Export click saved a 1080×1080 PNG, 0 outside requests, 0 page errors. Redeployed; live byte-identical.
 
+### Learnings
+
+- **Problem:** porting the studio fixes to Accomy and Runway showed layout differences that were not real, and one change that was not harmless.
+- **Approach:** (1) Compared every template's text boxes against the original file, not just export sizes. (2) For each difference, re-measured that one template after fonts and images had fully loaded: Desk note (Caveat) and Character side (line art) were identical, so the gaps were measure-too-early. (3) Turned the font finding into a fix: the export check now loads every brand font, not just the body face.
+- **Judgment calls:** Dropped the global `overflow-wrap:break-word` for the new studios: it splits words that already overflow a narrow box (Accomy's 8ch kraft card). Kept it on FCG, where the full comparison showed no such case. Did NOT take the taken `runway-ad-studio.vercel.app` name as an error to fight; added a clear free domain instead.
+- **Rule:** Before calling a layout difference real, re-measure after every font and image has loaded.
+
 ## 2026-10-30 (later) — Ad Studio: long text wraps, Enter makes line breaks VERIFIED
 
 - **Problem (Alfred):** a headline with no spaces ran off the canvas or under the guide card.
