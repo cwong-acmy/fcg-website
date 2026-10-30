@@ -1,5 +1,324 @@
 # STATE-LOG — FCG Website
 
+## 2026-10-30 — FCG Ad Studio standalone on Vercel VERIFIED
+
+- **Built:** `ad-studio/` from `02.FCG/03.Brand Assets/06.Ad Templates/fcg-ad-studio.html`. Fonts (Inter 300 to 600, Caveat 600 from @fontsource 5.3.0), modern-screenshot 4.7.0 and the 31 Calendly reference frames ship in the folder; no Google Fonts or CDN. Export swapped from html2canvas to modern-screenshot (browser renderer, real shadows), blocked with a message if Inter has not loaded, and downloads the PNG directly (was a right-click popup). Autosave to localStorage, Reset template, Copy link (one template, no photos; link input validated against known templates/options).
+- **Deployed:** new work-team project `fcg-ad-studio` (`prj_LYlxK7G0PUu8eP3Aalo7sOG9PqA2`), CLI, not git-connected. https://fcg-ad-studio.vercel.app public 200, byte-identical to `ad-studio/index.html`.
+- **Verified on the live site (Chrome for Testing, front tab):** Export button saved a 1080×1080 PNG; 202 of 202 template/layout/size exports at the right size and not blank; 0 outside requests; 0 page errors. Locally: autosave survives reload, share link restores in a clean browser, hostile link (HTML in a field, non-image data URL, unknown template) rendered as text or dropped, Reset restores defaults, no sideways scroll at 375 px. First export about 70 ms visible (16 s seen only in a hidden pane, timer throttling).
+- **Docs:** studio link swapped to the Vercel URL in the design bible, visual reference kit, Buzz handover, FCG-DESIGN, brand kit, Developer Platform system and film contract, plus the 7 matching wiki pages (patched in place).
+- **Open:** not pushed (this branch is the Developer Platform's production branch, so a push redeploys it). The 02.FCG single-file studio is now the older copy. The site is public, including the Calendly reference frames.
+
+## 2026-10-28 ~10:15 UTC — Search Console: property added, BLOCKED on DNS record
+
+- Search Console (crystal.wong@fusionconnectgroup.com): Domain property `fusionconnectgroup.com` added, unverified. DNS is at GoDaddy (ns63/ns64.domaincontrol.com; existing TXT is only the Outlook SPF). Did not use Google's "sign in to GoDaddy" flow (needs FCG's GoDaddy login + OAuth grant). TXT to add at the apex: `google-site-verification=h6q4K8DAr0PecM8EyXmac6yN89PmyarrfBQdmDuR5kA` (also in 1Password item `f6gg3fs3vj3baggj42j5qiwzym`, field "Search Console DNS TXT"). After it resolves: Search Console → Verify, then link to GA4 property 561108472 and submit `https://www.fusionconnectgroup.com/sitemap.xml`. Fallback after launch: URL-prefix property verified through GA4/GTM, no DNS needed.
+- Google flagged an "Important account alert" on the FCG Google login; left for Crystal.
+
+## 2026-10-28 ~10:00 UTC — FCG GA4 + Tag Manager set up; all analytics committed (not pushed)
+
+- Google, as crystal.wong@fusionconnectgroup.com: GA account "FCG" 413727466, property "Fusion Connect Group" 561108472 (created by Crystal at sign-in); web stream "FCG Website" 16219846406 for www.fusionconnectgroup.com, enhanced measurement on, **G-QM59ND5BC3**. Tag Manager account "FCG" 6400643995 (country left at default United States, no FCG HQ source found; editable in GTM Admin), container 284017516 **GTM-MKFC3SDS**; tag "GA4 - FCG Website" on Initialization - All Pages; published version 2 (public gtm.js serves version 2 with G-QM59ND5BC3). GTM terms + GDPR Data Processing Terms accepted; "share data anonymously" left off. User-provided data collection not enabled by me; its GA setting page did not open, so its state is UNVERIFIED.
+- 1Password LLM Automations `f6gg3fs3vj3baggj42j5qiwzym` "Google Analytics + Tag Manager - FCG Website" (read back OK).
+- Commit `943e966` on codex/blog: `_shell/posthog.html` renamed `_shell/analytics.html` with PostHog + GTM loaders (live domain only); `GTM_ID` in build-site.py; successful demo booking also pushes `generate_lead` to dataLayer (as accomy LP pages). 21 pages carry both; `--check` OK; form tests 7/7. Runtime on a local copy (gate bypassed): GTM-MKFC3SDS loaded and sent `g/collect?tid=G-QM59ND5BC3`; PostHog loaded. Skipped vs accomy: Google Ads + Meta pixel tags (no FCG ads), GTM noscript iframe.
+- **Pushed** codex/blog `00a297d..943e966` (Crystal approved; main untouched). Build site Action `40666504687` success, no rebuild commit. Vercel preview VERIFIED: 21/21 pages carry PostHog `phc_zUEd…` + GTM-MKFC3SDS + the live-domain gate; fcg-blog.js has the new events; unknown path returns 404 page with the snippet. Staging not re-checked (does not auto-sync; Lucas to pull). Next: after launch, check GA Realtime and PostHog for first live visits; add Search Console.
+
+## 2026-10-28 09:30 UTC — FCG PostHog live in code; GA/GTM waiting on FCG Google sign-in
+
+- Decision (Crystal): FCG gets its own analytics accounts under crystal.wong@fusionconnectgroup.com, not Accomy's (Accomy PostHog free plan is capped at one project; Accomy GA blocks property creation for her login).
+- PostHog: Crystal signed up; org "Fusion Connect Group" `01a181d3-f505-0000-69cb-dd2737f6fdc2`, US cloud. Project 693521 renamed "FCG Website"; session replay, heatmaps, autocapture on; UTC (as Accomy); authorized URLs www + apex. Token in 1Password LLM Automations item `6imlb6rlovq3d4gg5jd66zdl4u` "PostHog - FCG Website project token" (read back OK).
+- Commit `773fb5c` on codex/blog (local, ahead 2 with `6c21fdb`): `POSTHOG_KEY` set; 21 pages carry the snippet; `--check` OK, form tests 7/7. Ingestion VERIFIED: test event `fcg_setup_test` from a local copy (snippet run without the domain gate) landed in project 693521 at 2026-10-28T09:27:32Z with locale en. On the real pages tracking still only runs on fusionconnectgroup.com.
+- Next: Crystal signs in to Google as the FCG email; then FCG GA4 account/property/web stream + FCG GTM account/container with GA4 tag, publish, save IDs to 1Password, add GTM to the build, push on approval.
+
+## 2026-10-28 — Analytics parity with accomy.com (PostHog), waiting on FCG key
+
+- accomy.com today: PostHog on every page (project 511406, US cloud, `defaults: 2025-05-24`, `person_profiles: identified_only`, `locale` super property; replay/heatmaps are project toggles), events `lead_submitted {form}`, `lead_submit_failed`, `newsletter_subscribed`; GTM `GTM-NB2SMNHL` only on `/lp/*` ad landing pages; no cookie banner.
+- Decision (Crystal): separate "FCG Website" project in the same Accomy PostHog organisation. GTM skipped until FCG runs ads.
+- Commit `6c21fdb` on codex/blog, **local, not pushed**: `_shell/posthog.html` (accomy snippet, runs only on fusionconnectgroup.com) injected into every page via a BUILD:ANALYTICS region; form events in `assets/js/fcg-blog.js`. `POSTHOG_KEY` in `tools/build-site.py` is empty, so nothing loads yet. Checks: build `--check` OK, form tests 7/7, fake-key dry run put the snippet on 21 pages, loader ran in the browser (loaded, api_host us.i.posthog.com, locale en), gated off on localhost.
+- **2026-10-28 ~09:20 UTC, Crystal signed in (crystal.wong@accomy.com) in the built-in browser. BLOCKED twice:** (1) PostHog org "Accomy" has one project, "Default project" 511406, shared by accomy.com, Salta and COS; creating "FCG Website" returned 403 "maximum limit of allowed projects for your current plan". (2) GA account "Accomy" (a349619002, property p482616162): Create → Property is disabled for this login (account-level role too low); creating a new GA *account* is allowed. accomy.com GTM container `GTM-NB2SMNHL` (named travel.accomy.com) loads GA4 `G-60NPV3PTS8`, Google Ads `AW-16938812305` conversion, conversion linker, Meta pixel. Nothing created, nothing saved to 1Password.
+- **Earlier blocker:** LLM Automations has no Accomy PostHog personal API key (only the public SMEP/accomy.com token and Larry's separate account), and the browser is not signed in, so the project must be created by Crystal. Next: set the key, rebuild, push; verify first events after the live domain serves the new build (staging is gated off by design).
+
+## 2026-10-28 — Blog "Coming soon" until first real post (Crystal)
+
+- Commit `00a297d` on codex/blog, **pushed 08:30 UTC** (Crystal approved; main untouched). Build site Action run `40657336945` success, no rebuild commit. Vercel preview `dpl_DPPk5gjrP9Ztpr7g2ykGvypPcw3R` VERIFIED: blog.html shows Coming soon, homepage 0 cards, pages identical to the commit apart from Vercel's feedback script. **Staging NOT updated** as of 08:36 UTC (still Last-Modified 06:35): staging does not auto-pull on push; ask Lucas how/when it syncs. `build-site.py` lists only published posts; with none, blog.html shows a Coming soon panel (subscribe kept), the home and product strips are empty, and the filter buttons are hidden. Draft pages still build (noindex) for review by direct URL. Checked: `--check` OK, form tests 7/7, local preview screenshot; publishing one post in a scratchpad copy restored cards, sitemap and RSS.
+- Pages CMS fields vs design: all 14 fields are used by the build/templates; gaps: no separate SEO title/description, no cover alt text, no updated date, editors must include the main topic in Filter topics.
+
+## 2026-10-28 08:20 UTC — Staging retest after Lucas's nginx proxy: VERIFIED
+
+- **Forms through www-staging (real page, built-in browser):** `contact.html?product=atlas` pre-selected Atlas; `POST /api/book-demo 200`, thank-you panel shown. Blog subscribe `200`, "Thanks, you are subscribed." Supabase `fcg_website.leads` `f3ec9d62-8587-4296-bb76-84e4f158a110`, `subscribers` `31b197fa-ba04-4102-8ffb-6979bd99883a`; Feishu Base demo `reczz28SlJl4nXmP`, subscribers `reczz28SlK9plOkT` (Supabase ids match); 2 cards in the FCG leads group (`om_x100b612f4cc830a0c1375a72694415c`, `om_x100b612f4db5a8b8cf04f23e5117ee8`). Test tag `STAGING-TEST-10280819`, rows left in place. Read back with the Cosmo bot via the API (Lark MCP was disconnected).
+- **Staging = codex/blog @ e2d2a72** (index, blog, contact, 404, JS, CSS, robots, sitemap byte-identical). Every response has `X-Robots-Tag: noindex`; real 404s; internal files (md, tools, _shell, db, api source, blog/posts JSON, .git) now 404; favicon, skip link, phone-menu label OK; no sideways scroll at 375; no console errors. 7 posts, all `draft: true`. Last 3 Build site Actions green.
+- **Still open for launch:** real articles replace placeholders; Pages CMS access for Marketing + one real save test (filename, image path, rich-text HTML); how production nginx picks up new commits after a CMS save (staging's update method unknown); production env vars on Vercel; Vercel firewall rate limit; double opt-in; Supabase free-plan pause risk; do not push `main` until Marketing confirms.
+
+## 2026-10-28 — 404 page + staging form 404s (Lucas Li, Feishu)
+
+- **404:** added `404.html` (shared nav/footer via `tools/build-site.py`, `<base href="/">` so it styles at any missing path, noindex, excluded from sitemap). Checked locally at `/404.html` and a nested path: CSS, links, images resolve from root. Commit `e2d2a72` on codex/blog, pushed; preview `dpl_AXDAZsXoiGfEYBw64rU63kpnatnx` READY. nginx still needs `error_page 404 /404.html;` and the homepage catch-all removed (their ops).
+- **Staging forms 404:** `api/` is Vercel Functions; nginx cannot run them. The codex/blog preview already exists with all 9 env vars (Preview target), and `accomy-projects` Supabase is ACTIVE_HEALTHY (2026-10-28). Blocker: project SSO protection (`all_except_custom_domains`) 302s every preview request to Vercel login, so an nginx proxy would fail. Handover §8.4 now has the proxy snippet with an `x-vercel-protection-bypass` header.
+- **Bypass secret created 2026-10-28** (Crystal approved): Protection Bypass for Automation on fcg-website, stored in 1Password LLM Automations item `ybsp4ahj5xx35jrowdfoipr6vm`. Verified on the codex/blog alias: no header 302, with header GET /api/subscribe 405, unknown path 404 with the new page, POST /api/subscribe 200 `{"ok":true}`; Supabase `fcg_website.subscribers` row `cb126ada-106c-43c3-8e0b-65c214fd49ff` (bypass-test-1793169482@accomy.com, test row, left in place). Lark mirror is best-effort and was not read back.
+- **Open:** Crystal sends the secret to FCG ops privately; they add the proxy; then re-test through their staging host. Behind a proxy all visitors share nginx's IP, so the 8/10-min rate limit is shared on staging.
+
+## 2026-10-26 (late) — SEO/GEO audit against the vault playbooks (assessment only, nothing changed)
+
+- Source checklist: FCG Vault `10 - Reviews & Learnings/08 - SEO.md` + wiki concepts (aeo, geo-passage-citability, long-tail-first, reddit-as-llm-citation, falsifiable-seo, aeo-8-week-warmup).
+- **Live www.fusionconnectgroup.com is no longer Wix:** nginx serving an older static build (Last-Modified 2026-07-20). Every unknown path returns the homepage with 200, including `/robots.txt`, `/sitemap.xml`, `/about.html`, `/blog.html` (soft-404 catch-all). About, AI Booking Tool, Corporate Booking Tool and Payment are live only as `*_crystal-denzel-edit.html`, and the homepage links to those names. Apex and www both answer 200 (no redirect, no canonical).
+- Core pages (live and codex/blog): 0/11 meta description, canonical, OG or JSON-LD; homepage has 2 H1s; 0 question-form H2s; "Fusion Connect Group" only on About. No analytics on any page. Homepage CLS 0.25 in a throttled mobile test. Tailwind Play CDN in production.
+- Fine: static HTML, AI crawlers (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot) get 200.
+- Web search: "Fusion Connect Group" returns other companies; only hit is the BTS exhibitor page (listed under Accomy Singapore). Category queries do not surface FCG.
+- Not checked: Search Console / Bing indexing (no access), PageSpeed API (daily quota hit), backlinks, live LLM answers.
+- **Fixed (code side), commit `7cc8a7e` on codex/blog, **pushed 2026-10-26**; Action run 40291163159 success; preview `dpl_FUns2bxxiNRAXsoZrBsLSPdKfV58` READY and shows the new titles, canonicals and JSON-LD:** `_shell/seo.json` (Crystal-approved titles/descriptions) → BUILD:SEO region with canonical, OG and JSON-LD @graph (Organization "Fusion Connect Group", WebSite, SoftwareApplication x7, Service for payment); homepage second H1 → H2 (identical render). Open: official sameAs profile URLs (none found by search), footer "© FCG Group" legal naming, server-side items for tech.
+
+## 2026-10-26 — Staging review of the blog (www-staging.fusionconnectgroup.com)
+
+- Staging serves `codex/blog` @ 4c2130a byte-for-byte (checked index, blog, posts.json, feed, a post, CSS/JS). Host is nginx, not Vercel, so `.vercelignore` does nothing there.
+- Works: Blog in nav + footer + phone menu, blog index, filters (?topic=, aria-pressed, live count), post pages, related reading, honest subscribe message, dark mode, no sideways scroll at 375, no console errors on blog pages.
+- Fix before launch: internal files are public on staging (HANDOVER-BLOG.md with Crystal's email, AGENTS.md, README.md, tools/build-site.py, _shell/, blog/_post.html, components.html, nav-preview.html); footer copyright contrast 2.59 light / 2.48 dark (needs 4.5); LIVE.NETWORK tag 4.42; phone theme toggle has no label; no skip link; no favicon; no robots/sitemap; staging not noindexed (canonical points to www, which mitigates).
+- Marketing self-publishing: NOT possible yet. Every edit to posts.json needs `build-site.py` to regenerate HTML, and staging has no build step. Pages CMS supports JSON + list fields, but the wrapped `{"posts":[...]}` shape is unconfirmed; needs a short spike plus a GitHub Action that runs the build on each commit.
+- Next: send the review to the tech team; decide CMS + build pipeline.
+
+### Build (same day) — commit `6bb9c84` on `codex/blog`, local only, NOT pushed
+- Decided: **Pages CMS, no Contentful** for FCG (static site; free; Contentful free tier = 1 space/org, no roles, would need a fetch-at-build pipeline).
+- Posts are now `blog/posts/<slug>.json` (posts.json removed); `.pages.yml`; `.github/workflows/build-site.yml` rebuilds + commits on push.
+- `contact.html` book-a-demo form + real newsletter submit; `api/` endpoints ported from accomy.com (Supabase `fcg_website` first, then Lark). SQL in `db/` NOT applied; no env vars, Base tables or chat set up.
+- A11y/SEO fixes in; axe 0 violations on blog, post, contact at 1440 and 375. `node --test tools/test-forms.js` 7/7; `build-site.py --check` 0. Independent security review: no critical/high; code-side mediums/lows fixed, the rest are in HANDOVER section 8.
+- Open: push `codex/blog` (makes a Vercel preview only), tech items in HANDOVER section 8, which Lark chat gets FCG demo cards, Supabase project choice (free plan pauses).
+- **Pushed** `codex/blog` @ `6bb9c84` (2026-10-26). Action "Build site" run 40287686097 success (nothing to rebuild). Vercel `fcg-website` preview success; `fcg-open-developer-platform` status fails on this and the previous commit (pre-existing, unrelated).
+- **Lark created by Cosmo bot, verified by API readback:** Base "FCG – Website leads" `J7e4b3B09abc15sRlkZcFfXZnNt` (https://tianxiafangcang.feishu.cn/base/J7e4b3B09abc15sRlkZcFfXZnNt), Crystal full access; tables Demo requests `tbl6Wn4lZGX5xLIz`, Newsletter subscribers `tbl9GhYKsc9KAnsi` (fields MATCH code); group "FCG – Website leads" `oc_19a595c1c738ef92834c345bd52cc26e`, Crystal owner, only human member. The empty default table 数据表 was left in place (not deleted).
+- **E2E test (Lark half):** real api/ handlers, Supabase stubbed: 200/200, 1 row per table + 2 cards tagged TEST-074702, `<at id=all>` did not mention anyone. Test rows left in the Base, safe to delete. Supabase half BLOCKED until a project is chosen and the SQL applied. These ids are kept here, not in HANDOVER-BLOG.md, because staging currently serves that file publicly.
+- **Supabase (Crystal: use accomy-projects):** `iedubjxycyvqptkcezlp` was ACTIVE_HEALTHY. Applied `db/fcg-website-leads.sql` → schema `fcg_website` (tables leads, subscribers; unique `subscribers_email_key`; anon/authenticated 0 grants); appended `fcg_website` to PostgREST exposed schemas (existing list kept). Per-app sb_secret key `fcg_website` (key id 885989e7-2263-4e15-9b1b-3f0b262a792f) stored in 1Password LLM Automations item `i42o67nitkfxgasb2gwbaho3tu` (credential + SUPABASE_URL fields).
+- **Real E2E (2026-10-26 07:50 UTC):** real handlers + real Supabase + real Lark: demo 200 (PG `d3ca9d65…` = Base row), subscribe 200 (PG `57c86422…`, `1cc90079…` = Base rows), repeat sign-up 200 with no new row/card, 5 cards total, `<at id=all>` no mention. Test rows tagged TEST-0747xx/0750xx remain in PG and Base. Not yet tested through a deployed URL: Vercel env vars not set.
+- Local commits `20561ce` (timeouts 5s/8s + vercel.json maxDuration 30; a real run took ~4s) and `f25ccdd` (docs), NOT pushed.
+- **Preview VERIFIED (2026-10-26 08:02 UTC):** 9 form env vars set on Vercel `fcg-website` **Preview only** (production has none). Pushed `f25ccdd`; deploy `dpl_8BjcLsJJqsJ7rt3iJF4YJW6WRHNY` READY (preview) at fcg-website-git-codex-blog-crystalwong-accomycoms-projects.vercel.app. Real browser submissions (Crystal signed in to Vercel in Chrome for Testing): `POST /api/book-demo 200`, `POST /api/subscribe 200`; PG leads `ca0a00bf-c585-4db6-970f-dbd232888f32` and subscribers `39965731-b8d4-4e77-ac9f-5fb1f43d14bc` match their Base rows' Supabase id; 2 cards in the FCG group. Test tag PREVIEW-080220. Production env vars still to set at launch.
+- ⚠ During setup, `GET /v1/projects/{ref}/postgrest` printed the project's legacy `jwt_secret` into the local session transcript (not sent anywhere else). Crystal to decide on rotating it.
+- Learning: a "generated file" marker string that also appears in the template's own comment makes a marker-based cleanup delete the template. Exclude source files by name, not by content.
+
+## 2026-10-21 (final) — Blog ported to codex/drafts, pushed as codex/blog
+
+### What changed
+
+- **Ported, not copied.** The blog work was redone on `origin/codex/drafts` (890d1dc), the version
+  fcg-website-one.vercel.app serves. It lives in branch **`codex/blog`**, commit **`ff08801`**, pushed
+  to origin. The worktree is at `.claude/worktrees/codex-blog`.
+- **Uses the drafts conventions.** `_shell/nav.html` and `_shell/footer.html` are the build source; no
+  `partials/` folder. `_shell` had drifted from the live pages, so it was refreshed from them first
+  (4.35M+, Atlas, programmes). The pages' hand-built nav and footer are wrapped once in
+  `SHARED:NAV` / `SHARED:FOOTER` markers.
+- **Page structure on drafts:**
+  - nav reads Products · Network · Developer · About · Blog
+  - the phone menu has Products, Network and Company groups
+  - "Related reading" sits above the Closing CTA on 9 product pages (addn, agreeease, ai-booking-tool,
+    atlas, corporate-booking-tool, developer, flink, glink, payment)
+  - "Latest from the blog" sits above the footer on index
+  - about gets the nav/footer only
+- **Posts remapped to current pages.** CTAs reuse the nav's own descriptors. Three placeholder images
+  that don't exist on drafts were swapped for existing Atlas/AgreeEase imagery, and the build now
+  fails on a missing image.
+- **`HANDOVER-BLOG.md`** is updated for drafts (file list, markers, `_shell`, deploy note) and committed
+  on the branch. It is excluded from deploys via `.vercelignore`.
+
+### Verified
+
+- `build-site.py --check` exits 0.
+- All 11 pages are byte-identical to codex/drafts outside the shared regions plus one CSS link
+  (checked with a script).
+- Preview at 1440 and 375: no sideways scroll and no failed resource loads on blog, a post, payment
+  and glink. The phone menu opens with 11 links.
+- **Not deployed.** Production deploys by Vercel CLI from the codex/drafts working tree.
+
+**Vercel topology (API, 2026-10-21):** project `fcg-website` (prj_bIBO2PVjRM052GwQXYZN0ZxoPCWB) is
+Git-connected with **productionBranch = `main`**.
+- **Production today** is a CLI deploy of `codex/drafts` (2026-08-26). `main` is still May V8.
+- **Pushing `main` deploys production**, and would replace the June/August site with whatever is on
+  `main`. Treat it as a deploy.
+- **The push of `codex/blog` made a preview deployment:** fcg-website-f5tuhdsv1-crystalwong-accomycoms-projects.vercel.app.
+  It returns 302 to the Vercel login (deployment protection), so viewers need team access.
+
+### Blockers / next actions
+
+- The tech team reviews `codex/blog`, merges it into `codex/drafts`, then deploys, and replies in the
+  group chat on the CMS choice.
+- **Done 2026-10-21:**
+  - The 2 unpushed drafts commits were rebuilt as one clean commit, `a03ab11`, pushed to
+    `origin/codex/drafts` (STATE-LOG, AGENTS.md preview rule, reference/DESIGN.md path). The six
+    gitlinks were dropped. Backup of the old tip: local branch `backup/codex-drafts-pre-clean-20261021`
+    (0435e10).
+  - The superseded first attempt was cleared from this checkout: page/theme/DESIGN.md edits reverted,
+    and its blog/partials/tools/js/css files plus the old handover doc removed. The workspace preview
+    entry `fcg-blog-mirror` was removed and its server stopped.
+  - `.impeccable/` (the critique archive) was left in place.
+- The handover doc on `codex/blog` (`faa3ad8`) now warns that pushing `main` deploys production.
+- Vercel API after the pushes: all new deployments are previews (target none). The live
+  `/blog.html` still returns 404, so production is unchanged.
+- `codex/blog` is one commit behind `codex/drafts` (`a03ab11` only touches docs). The merge should be
+  clean.
+
+### Learnings
+
+**Problem.** A whole feature was built on the wrong branch's copy of a site.
+
+**Approach.**
+1. Find the live version: `git log --all -- <pages>`, `git branch --contains`, and curl the deployed
+   URL for a page that exists on only one branch.
+2. Make a worktree from the remote branch.
+3. Port the reusable parts.
+4. Re-derive the shared nav from the live pages, not the stale `_shell`.
+5. Prove the page bodies are untouched with a strip-and-compare script.
+
+**Judgment calls, what was NOT done and why:**
+- Did not build on local `codex/drafts`: its 2 unpushed commits are WIP gitlinks.
+- Did not merge into `codex/drafts` or deploy: the team reviews first, and production is a CLI deploy.
+- Did not delete the first attempt: it needs Crystal's approval.
+
+**Reusable rule.** Before editing a multi-branch site, confirm which branch the deployed URL serves.
+The checked-out branch is not evidence.
+
+## 2026-10-21 (later) — Blog wired through the whole site (WIP, uncommitted)
+
+### What changed
+
+All six critique actions ran (layout, shape, adapt, harden, typeset, polish).
+
+- **One nav and footer for the site.** `partials/nav.html` and `partials/footer.html` are now the
+  source. `python3 tools/build-site.py` copies them into the 11 live pages and the blog. Blog sits in
+  the nav after About and in the footer's Company column. `index-variation-1.html` and `components.html`
+  are skipped (archived variant and design reference).
+- **Working phone menu on every page.** The hamburger used to jump to `#capabilities`. It now opens a
+  drawer (`assets/js/fcg-nav.js`). Esc and link taps close it; the current page is underlined in orange.
+- **Blog from one data file.** `blog/posts.json` drives:
+  - the index cards
+  - the "Latest from the blog" strip on index.html
+  - "Related reading" on each product page (topped up to 3 with the latest posts)
+  - one page per post, built from `blog/_post.html`
+  - `blog/feed.xml`
+- **Article page:**
+  - breadcrumb, title, dek and byline
+  - hero image and a 680px reading column
+  - a dark product call-to-action card
+  - "Keep reading" related posts
+  - canonical, OG and BlogPosting JSON-LD
+  - noindex plus a visible draft note while `draft: true`
+- **Blog index:**
+  - eyebrow removed
+  - topic filter is shareable via `?topic=`, with a live "Showing N posts" count
+  - chips are 44px tall, with a fade cue on phones
+  - one link per card (stretched-link pattern)
+  - reduced-motion guard
+  - the subscribe form says it isn't connected instead of faking success
+  - the pager was removed (one page of posts)
+- **Contrast and tokens:**
+  - card meta uses `--fcg-muted` (5.8:1)
+  - the email placeholder was fixed
+  - the LIVE.NETWORK badge uses `--fcg-live-text` (#c2410c) in light mode on every page
+  - footer text is 12px instead of 10.4px
+  - DESIGN.md now notes that Inter is the real meta font (JetBrains Mono is never loaded)
+- **Leaner blog.html.** It is 1,627 lines shorter. Its head CSS moved to `assets/css/fcg-chrome.css`
+  and `assets/css/fcg-blog.css`.
+- **Nav copy unified.** The AI Booking Tool descriptor on `ai-booking-tool.html` was the one page that
+  differed; it now matches the other ten.
+
+### Verified (local preview at 1440 and 375, light and dark)
+
+- `build-site.py --check` exits 0 after a build.
+- The impeccable detector shows 0 low-contrast findings on blog.html (it was 8).
+- No console errors, and no page-level sideways scroll on the blog, a post, index or agreeease.
+- The menu opens and closes, and `?topic=engineering` shows 2 posts.
+- An independent code review found 3 issues, all fixed: `{{` in post text crashed the build, removed
+  posts left orphan pages, and drafts leaked into the RSS feed. Each fix was re-tested on a temp copy.
+
+**Wrong base found (2026-10-21):** the blog work was built on the May 12 "Full Website V8" pages,
+which are on `main` and `portal-redesign-direction-b`. The current marketing site is `codex/drafts`.
+It has June to August commits, a new 4-item nav, a light footer and a different page set (payment,
+glink, flink, developer, addn; no api-access or whitelabel). fcg-website-one.vercel.app serves the
+`codex/drafts` version: `api-access.html` and `blog.html` return 404 there. The blog needs porting
+onto `codex/drafts` before any commit, and HANDOVER-BLOG.md's page list must be updated to match.
+
+### Blockers / next actions
+
+- **Commit branch:** Crystal to choose; `codex/drafts` was proposed. Commit only these files:
+  - the 11 pages, `blog.html` and `blog/`
+  - `partials/`, `tools/`, `assets/js/`
+  - the 3 CSS files
+  - DESIGN.md and STATE-LOG.md
+
+  Leave out the unrelated portal and `__pycache__` changes in the tree.
+- **Real posts:** replace the placeholders in `blog/posts.json`, set `draft: false` and a `date`, then
+  rebuild.
+- **Handover:** `HANDOVER-BLOG.md` (Simplified Chinese) is for the Chinese tech team. It covers the changes,
+  the build, the post fields and a checklist. It asks 10 questions on how posts get uploaded, and
+  recommends a Git-based CMS for the team to decide on (Pages CMS preferred; Decap, Tina and
+  Sanity/Contentful compared). Crystal has the real post content ready. Fill in the reply channel in
+  section 7 before sending.
+- **Subscribe:** choose an email provider and wire it in `assets/js/fcg-blog.js`.
+- **Domain:** `SITE` in `tools/build-site.py` assumes https://www.fusionconnectgroup.com for
+  canonical/OG/RSS. Confirm it at launch.
+- **Shared head CSS:** other pages still carry their own inline copy of the nav CSS. Only the blog pages
+  use `fcg-chrome.css`.
+
+### Learnings
+
+**Problem.** Add a blog link and a phone menu to 12 hand-copied static pages without a framework, and keep them in sync.
+
+**Approach.**
+1. Hash each page's nav and footer to find the canonical copy and the outliers.
+2. Make the canonical copy a partial.
+3. Use a stdlib script that rewrites only the regions between existing marker comments.
+4. Drive the blog cards, strips, post pages and feed from one JSON file.
+5. Add a `--check` mode so drift is detectable.
+
+**Judgment calls, what was NOT done and why:**
+- No JavaScript include (no fetch of partials): it would break no-JS, SEO and the first paint.
+- No static site generator: there is too little content to justify one, and Vercel serves the folder as-is.
+- The other pages' inline head CSS was left alone: rewriting it is a larger, riskier change than the
+  request covered.
+- Drafts got noindex rather than invented dates.
+
+**Reusable rule.** To share chrome across a static site, hash the copies first, then sync from one
+partial between markers with a `--check` mode. Don't move rendering to the client.
+
+## 2026-10-21 — Blog page (WIP, uncommitted)
+
+### What changed
+
+New `blog.html` at the repo root: a Cloudflare-blog-style layout in FCG styling. Large heading and
+intro, email subscribe field, topic filter buttons, one featured post, a 3-column card grid and a
+pager. The nav, footer, theme toggle and script are copied from `about.html`, so they match exactly.
+The page's own nav and footer link to Blog.
+
+### Decisions
+
+- **All posts are labelled placeholders.** Titles, excerpts and dates say "Placeholder", so no
+  FCG articles were invented.
+- **Built in this repo, not on the live site.** fusionconnectgroup.com runs on Wix (DNS only on
+  Cloudflare), so the page can't be pushed there from here.
+- **Not committed.** The checkout is on `portal-redesign-direction-b`, which auto-deploys the Open
+  Developer Platform and already has unrelated changed screenshots. The marketing site's branch
+  is `codex/drafts`.
+
+### Verified (local preview only)
+
+Light and dark mode both render. At 375px the grid is one column with no sideways scroll. The
+Engineering filter shows its 2 posts. No console errors. Preview: `fcg-blog-mirror` in the
+workspace `.claude/launch.json`, serving a copy of the page from the session scratchpad.
+
+Follow-up: the page opens in light mode, as the code already defaulted to light (the dark view came from a
+saved test toggle in the preview, now cleared). Card footers now wrap, so the topic label stays inside
+narrow cards.
+
+### Critique (/impeccable, same day)
+
+Score 18/36 (Acceptable). The two P0s: the blog has no inbound links, and there is no article template
+(every card links to `#`). The P1s: the phone menu is broken site-wide (the hamburger links to
+`#capabilities` on index, about, api-access and blog), and canonical/OG/RSS/schema are missing.
+The P2: faint meta text (3.9:1), orange-on-light text (2.6:1), and JetBrains Mono that is never loaded
+(the theme forces Inter with !important). Snapshot: `.impeccable/critique/2026-10-21T09-10-17Z__blog-html.md`.
+
+**Crystal's decisions:** fix all the issues; Blog goes top-level in the nav after About; the blog
+launches with the redesign, not on Wix.
+
+### Blockers / next actions
+
+- Crystal to choose the commit branch (`codex/drafts` was proposed).
+- Add a Blog link to every other page's nav and footer.
+- Replace the placeholder posts with real content.
+- Connect the subscribe form; it currently only changes its button text.
+- Wix question settled: the blog launches with the redesign.
+- Action order: shared nav/footer + Blog everywhere, then the article template, then the phone menu, then SEO basics, then contrast/fonts, then polish.
+
 ## 2026-09-08 (session 5) — Open Developer Platform everywhere
 
 ### What changed
