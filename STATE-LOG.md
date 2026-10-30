@@ -1,5 +1,11 @@
 # STATE-LOG — FCG Website
 
+## 2026-10-30 (later) — Ad Studio: long text wraps, Enter makes line breaks VERIFIED
+
+- **Problem (Alfred):** a headline with no spaces ran off the canvas or under the guide card.
+- **Fix:** headline, claim, cover, closing and question are now multi-line boxes; Enter becomes a `<br>` in every field except the ones templates split into rows (items, speakers, POV). `.ad` uses `overflow-wrap:break-word`; `anywhere` switches on only when a field (not legal) holds 20+ characters with no space. A global `anywhere` was tried first and rejected: it squeezed Award/Badge 4:5 (orphan full stop) and split Big number 4:3 ("201 / 3").
+- **Verified:** the reported string on Guide Cover and Cover bleed 4:5 stays inside the canvas; Enter gives one `<br>`. Pixel comparison of all 202 combinations with default copy, old live vs new: 182 identical, the 20 Gradient/Soft field covers differ by the same amount as the live site against itself (grain noise, 4.3). Deployed; live byte-identical to `ad-studio/index.html`; the reported case re-checked on the live URL.
+
 ## 2026-10-30 — FCG Ad Studio standalone on Vercel VERIFIED
 
 - **Built:** `ad-studio/` from `02.FCG/03.Brand Assets/06.Ad Templates/fcg-ad-studio.html`. Fonts (Inter 300 to 600, Caveat 600 from @fontsource 5.3.0), modern-screenshot 4.7.0 and the 31 Calendly reference frames ship in the folder; no Google Fonts or CDN. Export swapped from html2canvas to modern-screenshot (browser renderer, real shadows), blocked with a message if Inter has not loaded, and downloads the PNG directly (was a right-click popup). Autosave to localStorage, Reset template, Copy link (one template, no photos; link input validated against known templates/options).

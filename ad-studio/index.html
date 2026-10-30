@@ -57,6 +57,7 @@ main{padding-block:24px;padding-left:24px;padding-right:max(16px,env(safe-area-i
 .bar{display:flex;gap:10px;align-items:center;width:100%;justify-content:space-between;flex-wrap:wrap}
 .meta{color:var(--c-muted);font-size:13px}
 .btn{background:var(--p500);color:#0F1114;border:0;border-radius:9999px;padding:12px 20px;font:500 15px var(--display);cursor:pointer;transition:background .2s cubic-bezier(.4,0,.2,1)}
+.ad.wrapany{overflow-wrap:anywhere}
 .btn.ghost{background:transparent;color:var(--c-fg);box-shadow:inset 0 0 0 1px var(--c-line)}.acts{display:flex;gap:8px;flex-wrap:wrap}.btn.ghost:hover{background:var(--surface)}.btn:disabled{opacity:.6;cursor:progress}
 .btn:hover{background:var(--p600)}.btn:active{background:var(--p700)}
 .stage{width:100%;flex:1;display:flex;align-items:flex-start;justify-content:center}
@@ -73,7 +74,7 @@ main{padding-block:24px;padding-left:24px;padding-right:max(16px,env(safe-area-i
    Formats: fmt-sq 1:1, fmt-pt 4:5, fmt-wd 1.91:1, fmt-st 9:16 (story keeps text inside the 14%-80% safe zone).
    Modes: mode-type (no visual, text anchored low), mode-side (visual after text), mode-lead (visual first).
    On wide every visual mode becomes two columns; elsewhere it stacks. .bleed visuals run off the canvas edge. */
-.ad{position:relative;overflow:hidden;display:flex;flex-direction:column;padding:calc(var(--u)*6);font-family:var(--display);color:var(--text)}
+.ad{position:relative;overflow:hidden;overflow-wrap:break-word;display:flex;flex-direction:column;padding:calc(var(--u)*6);font-family:var(--display);color:var(--text)}
 .ad.fmt-st{padding:calc(var(--u)*26) calc(var(--u)*7) calc(var(--u)*37)} /* 14% top, 20% bottom kept clear for platform UI */
 .ad .glow{position:absolute;inset:0;pointer-events:none}
 .ad>*:not(.glow){position:relative}
@@ -832,7 +833,9 @@ const META={headline:["Headline",10],sup:["Supporting line",10],claim:["Claim",8
 Object.assign(META,{series:["Series name",3],caption:["Caption (one line per row)",14],caption2:["Screen insert caption",6],question:["Question card",12],headline:META.headline,
   feature:["Feature name"],partner:["Partner"],closing:["Closing line",8],pov:["POV caption (one line per row)",16],benefit:["Benefit line",8],words:["Caption words"],key:["Highlighted word"],close:["Closing question"],card:["Hand-lettered card",4]});
 Object.assign(META,{palette:["Palette",null,"choice",["Dusk","Moss","Ember","Dawn","Sky","Graphite"]],style:["Style",null,"choice",GSTYLES],direction:["Direction",null,"choice",GDIRS],overlay:["Design overlay",null,"choice",GOVERLAYS],mockup:["UI mockup (Product card layout)",null,"choice",Object.keys(MOCK)],variation:["Variation (any number reshuffles the glow)"],pill:["Pill text",4],partner:["Partner name"],foot:["Corner note (optional)"],eyebrow:["Eyebrow (category)",2],title:["Title",14],byline:["Byline"],date:["Date"]});
-const LONG=new Set(["title","items","speakers","quote","sup","caption","pov","benefit"]);
+const LONG=new Set(["title","items","speakers","quote","sup","caption","pov","benefit","headline","claim","cover","closing","question"]);
+// Fields the templates split into rows themselves; every other field turns Enter into a line break.
+const SPLIT=new Set(["items","speakers","pov"]);
 const LAYERS={"Full frame":"full","Background plate":"plate","Overlay only":"overlay"};
 const HILL="#FED7AA";
 
@@ -858,7 +861,7 @@ function fieldsFor(){
     const w=document.createElement("label");w.className="field";
     const hint=document.createElement("em");
     const count=()=>{ if(kind==="lines"){const n=lines(v[k]).length;hint.textContent=`${n} lines`;} else if(max){const n=words(v[k]);hint.textContent=`${n}/${max} words`;hint.className=n>max?"over":"";} };
-    const span=document.createElement("span");span.textContent=label;span.appendChild(hint);w.appendChild(span);
+    const span=document.createElement("span");span.textContent=label+(LONG.has(k)&&!SPLIT.has(k)&&META[k]?.[2]!=="lines"?" (Enter for a new line)":"");span.appendChild(hint);w.appendChild(span);
     if(kind==="choice"){const row=document.createElement("div");row.className="chips";w.appendChild(row);chips(row,META[k][3],v[k],o=>{v[k]=o;draw();fieldsFor();});}
     else if(k.startsWith("photo")){
       const inp=document.createElement("input");inp.type="file";inp.accept="image/png,image/jpeg,image/webp";
@@ -914,7 +917,7 @@ function ui(){
 }
 function draw(){
   const t=TEMPLATES[state.tpl], raw=state.values[state.tpl] ||= {...t.fields}, f={};
-  for(const k in raw) f[k]=typeof raw[k]==="string"?esc(raw[k]):raw[k];
+  for(const k in raw) f[k]=typeof raw[k]==="string"?(SPLIT.has(k)||raw[k].startsWith("data:")?esc(raw[k]):esc(raw[k]).replace(/\n/g,"<br>")):raw[k];
   const [W,H]=SIZES[state.size], bg=BGS[state.bg], u=Math.min(W,H)/100;
   const fmt=W/H>1.5?"wd":H/W>1.5?"st":H>W?"pt":"sq";
   const show=id=>$(id).checked;
@@ -923,13 +926,16 @@ function draw(){
   const x={W,H,wd:fmt==="wd",t:h=>h+cta+legal,logo:show("t-logo"),ink:bg.dark?"#FFFFFF":"#0F1114"};
   const r=t.render(f,state.layout,x);
   const ad=$("ad"), R=roles(state.bg);
+  // ponytail: a run of 20+ characters with no space (a pasted URL, a test string) can't wrap and pushes its column off the canvas.
+  // Only then let text break anywhere; normal copy keeps word-boundary wrapping, which "anywhere" would squeeze.
+  const wrap=Object.entries(raw).some(([k,v])=>k!=="legal"&&typeof v==="string"&&!v.startsWith("data:")&&/\S{20,}/.test(v))?" wrapany":"";
   if(r.scene){ const lay=LAYERS[state.layer];
-    ad.className=`ad fmt-${fmt} mode-scene layer-${lay} ${bg.dark?"dark":"light"} ${W===H?"eq":""}`;
+    ad.className=`ad fmt-${fmt} mode-scene layer-${lay} ${bg.dark?"dark":"light"} ${W===H?"eq":""}${wrap}`;
     Object.assign(ad.style,{width:W+"px",height:H+"px",background:lay==="overlay"?"transparent":(r.bgOverride||bg.css)});
     ad.style.setProperty("--u",u+"px");for(const k in R) if(typeof R[k]==="string") ad.style.setProperty("--"+k,R[k]);
     ad.style.setProperty("--hill",HILL);ad.innerHTML=(t.g==="B"&&bg.glow?`<div class="glow" style="background:radial-gradient(ellipse 70% 55% at ${bg.glowAt},${bg.glow},${bg.glow.replace(/[\d.]+\)$/,"0)")} 70%)"></div>`:"")+r.scene;fit();
     const w=r.win;$("meta").textContent=`${state.tpl} · ${state.layout} · ${W}×${H}px`+(w?` · video window ${Math.round(W*w.l/100)},${Math.round(H*w.t/100)} ${Math.round(W*w.w/100)}×${Math.round(H*w.h/100)}px`:"");return; }
-  ad.className=`ad fmt-${fmt} mode-${r.mode} ${r.cols?"cols":""} ${bg.dark?"dark":"light"} ${bg.group==="Tints"?"tinted":""}`;
+  ad.className=`ad fmt-${fmt} mode-${r.mode} ${r.cols?"cols":""} ${bg.dark?"dark":"light"} ${bg.group==="Tints"?"tinted":""}${wrap}`;
   const gs=state.grad;Object.assign(ad.style,{width:W+"px",height:H+"px",background:bg.grad?`${GRAD[bg.grad].base} url('${gradArt(W,H,bg.grad,gs.variation,"soft",gs.style,gs.direction,gs.overlay)}') center/cover`:bg.css});
   ad.style.setProperty("--u",u+"px");
   for(const k in R) if(typeof R[k]==="string") ad.style.setProperty("--"+k,R[k]);
