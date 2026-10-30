@@ -1,5 +1,7 @@
 # FCG Brand Kit
 
+> **Marketing assets follow the FCG Ad Studio (30 Oct 2026).** For posts, ads, blog covers and video scenes, the design bible is `03.Code Projects/content-engine/packs/fcg/creative-direction.md (canonical copy: FCG Marketing SharePoint, Content Engine/01. Brand Foundation/creative-direction.md)`, written from the FCG Ad Studio (https://hostmyclaudehtml.com/p/k5jhbUmT-F). Shared with this file: white, ink `#0F1114`, one orange accent `#F97316`, Inter only. Where ads differ from the live website: the orange ground and orange-filled CTA pills on dark grounds are allowed; accent text on light uses `#EA580C`; soft orange glows and the six generated gradients (Dusk, Moss, Ember, Dawn, Sky, Graphite) are allowed as grounds; monospace is allowed for code inside UI cards. Everything in this file still governs the live website.
+
 **Source:** https://fusionconnectgroup.com/ (live, nginx, uploaded 20 July 2026)
 **Extracted:** 7 September 2026
 **Method:** `designlang` v12.15.0 full extraction, then every token cross-checked against the live page's own inline `<style>` block. Where the two disagree, the live source wins — designlang's heuristics rank CSS frequency, not brand intent.

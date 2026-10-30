@@ -1,5 +1,7 @@
 # FCG Design System
 
+> **SUPERSEDED.** This is the old `hostmyclaudehtml.com` extract, not FCG's design (Title Case, shadcn and `#111827` ink are wrong). Use `02.FCG/03.Brand Assets/05._fcg-reference/FCG-DESIGN.md` for the website and product UI, and the FCG Ad Studio design bible `03.Code Projects/content-engine/packs/fcg/creative-direction.md (canonical copy: FCG Marketing SharePoint, Content Engine/01. Brand Foundation/creative-direction.md)` for marketing assets.
+
 Reproduced from the `hostmyclaudehtml.com` design extract (`design-extract-output/`). Live preview: [components.html](components.html).
 
 **Library:** shadcn/ui (0.65 confidence) · **Material:** flat · **Voice:** neutral, you-only, Title Case, tight
